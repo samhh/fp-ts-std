@@ -2,6 +2,7 @@
  * @since 0.1.0
  */
 
+import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 import { Either } from 'fp-ts/Either';
 import * as E from 'fp-ts/Either';
@@ -30,7 +31,8 @@ export const parse = <E>(f: (e: TypeError) => E) => (x: string): Either<E, URL> 
  *
  * @since 0.1.0
  */
-export const parseO = flow(parse(identity), O.fromEither);
+export const parseO: (href: string) => Option<URL> =
+    flow(parse(identity), O.fromEither);
 
 /**
  * Refine a foreign value to `URL`.

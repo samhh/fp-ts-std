@@ -3,6 +3,7 @@
  */
 
 import { flow, not, Predicate, Refinement } from 'fp-ts/function';
+import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 
 /**
@@ -46,5 +47,6 @@ export const unsafeParseDate = (x: string | number): Date => new Date(x);
  *
  * @since 0.1.0
  */
-export const parseDate = flow(unsafeParseDate, O.fromPredicate(isValid));
+export const parseDate: (ts: string | number) => Option<Date> =
+    flow(unsafeParseDate, O.fromPredicate(isValid));
 

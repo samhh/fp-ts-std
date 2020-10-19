@@ -4,6 +4,7 @@
 
 import { Either } from 'fp-ts/Either';
 import * as E from 'fp-ts/Either';
+import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 import { flow, identity } from 'fp-ts/function';
 
@@ -22,7 +23,8 @@ export const stringify = <E>(f: (e: TypeError) => E) => (x: unknown): Either<E, 
  *
  * @since 0.1.0
  */
-export const stringifyO = flow(stringify(identity), O.fromEither);
+export const stringifyO: (data: unknown) => Option<string> =
+    flow(stringify(identity), O.fromEither);
 
 /**
  * Stringify a primitive value with no possibility of failure.
@@ -47,5 +49,6 @@ export const parse = <E>(f: (e: SyntaxError) => E) => (x: string): Either<E, unk
  *
  * @since 0.1.0
  */
-export const parseO = flow(parse(identity), O.fromEither);
+export const parseO: (stringified: string) => Option<unknown> =
+    flow(parse(identity), O.fromEither);
 
