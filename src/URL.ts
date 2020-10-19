@@ -2,7 +2,6 @@
  * @since 0.1.0
  */
 
-import * as IO from 'fp-ts/IO';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 import { Either } from 'fp-ts/Either';
@@ -60,12 +59,13 @@ export const getParam = (k: string) => (ps: URLSearchParams): Option<string> => 
 );
 
 /**
- * Set a URL parameter in a `URLSearchParams`.
+ * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
  *
  * @since 0.1.0
  */
-export const setParam = (k: string) => (v: string) => (ps: URLSearchParams): IO.IO<void> => pipe(
-    ps.set(k, v),
-    IO.of,
-);
+export const setParam = (k: string) => (v: string) => (x: URLSearchParams): URLSearchParams => {
+    const y = new URLSearchParams(x);
+    y.set(k, v); // eslint-disable-line functional/no-expression-statement
+    return y;
+};
 
