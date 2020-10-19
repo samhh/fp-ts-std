@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { pluckFirst, upsert, getDisorderedEq } from './Array';
+import { pluckFirst, upsert, getDisorderedEq } from '../src/Array';
 import * as Option from 'fp-ts/Option';
 import { contramap as eqContramap, eqNumber } from 'fp-ts/Eq';
 import { contramap as ordContramap, ordNumber } from 'fp-ts/Ord';

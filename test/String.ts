@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { lines, unlines, surround } from './String';
+import { lines, unlines, surround } from '../src/String';
 
 describe('String', () => {
     describe('lines', () => {

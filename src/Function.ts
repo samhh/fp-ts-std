@@ -1,8 +1,14 @@
 /**
+ * @since 0.1.0
+ */
+
+/**
  * Flip the function/argument order of a curried function.
  *
  * Note that due to limitations to the type system, this function won't work
  * correctly for curried functions.
+ *
+ * @since 0.1.0
  */
 export const flip = <
     A extends Array<any>, // eslint-disable-line @typescript-eslint/no-explicit-any

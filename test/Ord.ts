@@ -2,7 +2,7 @@
 
 import fc from 'fast-check';
 import { ordNumber } from 'fp-ts/lib/Ord';
-import { getInvertedOrd } from './Ord';
+import { getInvertedOrd } from '../src/Ord';
 
 describe('Ord', () => {
     describe('getInvertedOrd', () => {

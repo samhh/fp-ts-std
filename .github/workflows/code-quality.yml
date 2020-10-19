@@ -12,4 +12,6 @@ jobs:
               run: yarn lint
             - name: Test
               run: yarn test
+            - name: Docs
+              run: yarn docs
 

@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { stringifyPrimitive } from './JSON';
+import { stringifyPrimitive } from '../src/JSON';
 import fc from 'fast-check';
 
 describe('JSON', () => {

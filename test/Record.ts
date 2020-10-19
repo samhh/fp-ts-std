@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { pick, omit } from './Record';
+import { pick, omit } from '../src/Record';
 
 describe('Record', () => {
     describe('pick', () => {
