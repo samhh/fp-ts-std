@@ -4,6 +4,8 @@ The missing pseudo-standard library for [fp-ts](https://gcanti.github.io/fp-ts/)
 
 Documentation: [samhh.github.io/fp-ts-std](https://samhh.github.io/fp-ts-std/)
 
+For DOM bindings, check out [dom-ts](https://github.com/waynevanson/dom-ts).
+
 ## Installation
 
 The library is available on the npm registry under the same package name: [fp-ts-std](https://www.npmjs.com/package/fp-ts-std)
