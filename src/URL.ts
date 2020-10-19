@@ -54,10 +54,9 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> = (x): x is
  *
  * @since 0.1.0
  */
-export const getParam = (k: string) => (ps: URLSearchParams): IO.IO<Option<string>> => pipe(
+export const getParam = (k: string) => (ps: URLSearchParams): Option<string> => pipe(
     ps.get(k),
     O.fromNullable,
-    IO.of,
 );
 
 /**
