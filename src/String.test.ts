@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { lines } from './String';
+import { lines, surround } from './String';
 
 describe('String', () => {
     describe('lines', () => {
@@ -31,6 +31,26 @@ describe('String', () => {
             expect(f('\r\na')).toEqual(['', 'a']);
             expect(f('a\r\n')).toEqual(['a', '']);
             expect(f('a\r\nb')).toEqual(['a', 'b']);
+        });
+    });
+
+    describe('surround', () => {
+        const f = surround;
+
+        it('surrounds empty with empty', () => {
+            expect(f('')('')).toBe('');
+        });
+
+        it('surrounds empty with non-empty', () => {
+            expect(f('x')('')).toBe('xx');
+        });
+
+        it('surrounds non-empty with empty', () => {
+            expect(f('')('x')).toBe('x');
+        });
+
+        it('surrounds non-empty with non-empty', () => {
+            expect(f('x')('y')).toBe('xyx');
         });
     });
 });

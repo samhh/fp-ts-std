@@ -1,4 +1,4 @@
-import { pipe, Predicate, Refinement, Endomorphism } from 'fp-ts/function';
+import { pipe, Predicate, Refinement, Endomorphism, flow } from 'fp-ts/function';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 
@@ -33,8 +33,7 @@ export const unappend = (end: string) => (val: string): string => val.endsWith(e
     ? val.substring(0, val.lastIndexOf(end))
     : val;
 
-export const surround = (prepended: string) => (appended: string) => (rest: string): string =>
-    prepended + rest + appended;
+export const surround = (x: string): Endomorphism<string> => flow(prepend(x), append(x));
 
 export const unsurround = (start: string) => (end: string): Endomorphism<string> => val =>
     val.startsWith(start) && val.endsWith(end)
