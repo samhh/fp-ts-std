@@ -1,11 +1,11 @@
-/* eslint-disable functional/no-expression-statement */
-
 /**
  * Helpers for debugging applications during development. These should be
  * assumed to be unsafe and shouldn't make their way into production code.
  *
  * @since 0.2.0
  */
+
+/* eslint-disable functional/no-expression-statement */
 
 /**
  * Log the provided string to the console and immediately return the generic
