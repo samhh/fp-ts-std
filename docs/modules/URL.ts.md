@@ -13,29 +13,14 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
-  - [getParam](#getparam)
   - [isURL](#isurl)
-  - [isURLSearchParams](#isurlsearchparams)
   - [parse](#parse)
   - [parseO](#parseo)
-  - [setParam](#setparam)
   - [unsafeParse](#unsafeparse)
 
 ---
 
 # utils
-
-## getParam
-
-Attempt to get a URL parameter from a `URLSearchParams`.
-
-**Signature**
-
-```ts
-export declare const getParam: (k: string) => (ps: URLSearchParams) => Option<string>
-```
-
-Added in v0.1.0
 
 ## isURL
 
@@ -45,18 +30,6 @@ Refine a foreign value to `URL`.
 
 ```ts
 export declare const isURL: Refinement<unknown, URL>
-```
-
-Added in v0.1.0
-
-## isURLSearchParams
-
-Refine a foreign value to `URLSearchParams`.
-
-**Signature**
-
-```ts
-export declare const isURLSearchParams: Refinement<unknown, URLSearchParams>
 ```
 
 Added in v0.1.0
@@ -80,19 +53,7 @@ Safely parse a `URL`, returning an `Option`.
 **Signature**
 
 ```ts
-export declare const parseO: (x: string) => Option<URL>
-```
-
-Added in v0.1.0
-
-## setParam
-
-Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
-
-**Signature**
-
-```ts
-export declare const setParam: (k: string) => (v: string) => (x: URLSearchParams) => URLSearchParams
+export declare const parseO: (x: string) => O.Option<URL>
 ```
 
 Added in v0.1.0

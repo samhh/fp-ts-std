@@ -1,6 +1,6 @@
-import { setParam } from '../src/URL';
+import { setParam } from '../src/URLSearchParams';
 
-describe('URL', () => {
+describe('URLSearchParams', () => {
     describe('setParam', () => {
         const f = setParam('x')('y');
 
