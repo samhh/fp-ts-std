@@ -1,6 +1,6 @@
 ---
 title: String.ts
-nav_order: 11
+nav_order: 12
 parent: Modules
 ---
 
@@ -16,6 +16,7 @@ Added in v0.1.0
   - [append](#append)
   - [concat](#concat)
   - [contains](#contains)
+  - [exec](#exec)
   - [fromNumber](#fromnumber)
   - [isEmpty](#isempty)
   - [isString](#isstring)
@@ -73,6 +74,18 @@ export declare const contains: (substr: string) => Predicate<string>
 ```
 
 Added in v0.1.0
+
+## exec
+
+A functional wrapper around `RegExp.prototype.exec`.
+
+**Signature**
+
+```ts
+export declare const exec: (r: RegExp) => (x: string) => Option<RegExpExecArray>
+```
+
+Added in v0.2.0
 
 ## fromNumber
 

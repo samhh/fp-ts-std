@@ -1,6 +1,6 @@
 ---
 title: Number.ts
-nav_order: 7
+nav_order: 8
 parent: Modules
 ---
 
@@ -15,7 +15,10 @@ Added in v0.1.0
 - [utils](#utils)
   - [add](#add)
   - [decrement](#decrement)
+  - [divide](#divide)
   - [increment](#increment)
+  - [multiply](#multiply)
+  - [subtract](#subtract)
 
 ---
 
@@ -28,7 +31,7 @@ Add two numbers together.
 **Signature**
 
 ```ts
-export declare const add: (x: number) => (y: number) => number
+export declare const add: (x: number) => Endomorphism<number>
 ```
 
 Added in v0.1.0
@@ -45,6 +48,19 @@ export declare const decrement: Endomorphism<number>
 
 Added in v0.1.0
 
+## divide
+
+Divide the second number (the _dividend_) by the first number (the
+_divisor_).
+
+**Signature**
+
+```ts
+export declare const divide: (divisor: number) => Endomorphism<number>
+```
+
+Added in v0.2.0
+
 ## increment
 
 Increment a number.
@@ -56,3 +72,28 @@ export declare const increment: Endomorphism<number>
 ```
 
 Added in v0.1.0
+
+## multiply
+
+Multiply two numbers together.
+
+**Signature**
+
+```ts
+export declare const multiply: (x: number) => Endomorphism<number>
+```
+
+Added in v0.2.0
+
+## subtract
+
+Subtract the first number (the _subtrahend_) from the second number (the
+_minuend_).
+
+**Signature**
+
+```ts
+export declare const subtract: (subtrahend: number) => Endomorphism<number>
+```
+
+Added in v0.2.0

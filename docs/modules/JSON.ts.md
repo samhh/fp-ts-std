@@ -1,6 +1,6 @@
 ---
 title: JSON.ts
-nav_order: 6
+nav_order: 7
 parent: Modules
 ---
 
@@ -42,7 +42,7 @@ Parse a string as JSON, returning an `Option`.
 **Signature**
 
 ```ts
-export declare const parseO: (x: string) => O.Option<unknown>
+export declare const parseO: (stringified: string) => Option<unknown>
 ```
 
 Added in v0.1.0
@@ -66,7 +66,7 @@ Stringify some arbitrary data, returning an `Option`.
 **Signature**
 
 ```ts
-export declare const stringifyO: (x: unknown) => O.Option<string>
+export declare const stringifyO: (data: unknown) => Option<string>
 ```
 
 Added in v0.1.0

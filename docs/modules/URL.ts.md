@@ -1,6 +1,6 @@
 ---
 title: URL.ts
-nav_order: 13
+nav_order: 14
 parent: Modules
 ---
 
@@ -53,7 +53,7 @@ Safely parse a `URL`, returning an `Option`.
 **Signature**
 
 ```ts
-export declare const parseO: (x: string) => O.Option<URL>
+export declare const parseO: (href: string) => Option<URL>
 ```
 
 Added in v0.1.0

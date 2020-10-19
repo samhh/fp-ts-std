@@ -2,6 +2,13 @@
 
 This project adheres to semantic versioning.
 
+## 0.2.0 (2020-10-19)
+
+- Add `Debug` module.
+- Add `URLSearchParams` module.
+- Add more arithmetic functions to the `Number` module.
+- Add `exec` function to the `String` module.
+
 ## 0.1.2 (2020-10-19)
 
 - Fix broken `getParam` type signature. It was incorrectly marked as effectful.

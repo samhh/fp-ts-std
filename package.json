@@ -1,7 +1,7 @@
 {
     "name": "fp-ts-std",
     "description": "The missing pseudo-standard library for fp-ts.",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "license": "AGPL-3.0-only",
     "author": "Sam A. Horvath-Hunt <hello@samhh.com>",
     "repository": {

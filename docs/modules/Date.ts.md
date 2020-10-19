@@ -67,7 +67,7 @@ Safely parse a date.
 **Signature**
 
 ```ts
-export declare const parseDate: (x: string | number) => O.Option<Date>
+export declare const parseDate: (ts: string | number) => Option<Date>
 ```
 
 Added in v0.1.0
