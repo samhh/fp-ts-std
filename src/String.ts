@@ -154,6 +154,14 @@ export const lines = split(/\r\n|\r|\n/);
 export const unlines = join('\n');
 
 /**
+ * A functional wrapper around `RegExp.prototype.exec`.
+ *
+ * @since 0.2.0
+ */
+export const exec = (r: RegExp) => (x: string): Option<RegExpExecArray> =>
+    pipe(r.exec(x), O.fromNullable);
+
+/**
  * A functional wraper around `RegExp.prototype.test`.
  *
  * @since 0.1.0
