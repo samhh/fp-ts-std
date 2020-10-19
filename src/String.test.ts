@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { lines, surround } from './String';
+import { lines, unlines, surround } from './String';
 
 describe('String', () => {
     describe('lines', () => {
@@ -31,6 +31,22 @@ describe('String', () => {
             expect(f('\r\na')).toEqual(['', 'a']);
             expect(f('a\r\n')).toEqual(['a', '']);
             expect(f('a\r\nb')).toEqual(['a', 'b']);
+        });
+    });
+
+    describe('unlines', () => {
+        const f = unlines;
+
+        it('morphs empty array to empty string', () => {
+            expect(f([])).toBe('');
+        });
+
+        it('extracts single string out of array', () => {
+            expect(f(['a'])).toBe('a');
+        });
+
+        it('joins array of strings with newlines', () => {
+            expect(f(['a', 'b', 'c'])).toBe('a\nb\nc');
         });
     });
 

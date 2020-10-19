@@ -1,6 +1,7 @@
 import { pipe, Predicate, Refinement, Endomorphism, flow } from 'fp-ts/function';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
+import { join } from './Array';
 
 export const length = (x: string): number => x.length;
 
@@ -49,7 +50,7 @@ export const split = (on: string | RegExp) => (target: string): Array<string> =>
 // The regex comes from here: https://stackoverflow.com/a/20056634
 export const lines = split(/\r\n|\r|\n/);
 
-export const unlines = split('\n');
+export const unlines = join('\n');
 
 export const test = (r: RegExp): Predicate<string> => x => r.test(x);
 
