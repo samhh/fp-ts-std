@@ -2,6 +2,11 @@
 
 This project adheres to semantic versioning.
 
+## 0.1.2 (2020-10-19)
+
+- Fix broken `getParam` type signature. It was incorrectly marked as effectful.
+- Fix broken `setParam` definition. It previously mistakenly mutated its input.
+
 ## 0.1.1 (2020-10-19)
 
 - Fix broken `unlines` definition.

@@ -32,7 +32,7 @@ Attempt to get a URL parameter from a `URLSearchParams`.
 **Signature**
 
 ```ts
-export declare const getParam: (k: string) => (ps: URLSearchParams) => IO.IO<Option<string>>
+export declare const getParam: (k: string) => (ps: URLSearchParams) => Option<string>
 ```
 
 Added in v0.1.0
@@ -87,12 +87,12 @@ Added in v0.1.0
 
 ## setParam
 
-Set a URL parameter in a `URLSearchParams`.
+Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
 
 **Signature**
 
 ```ts
-export declare const setParam: (k: string) => (v: string) => (ps: URLSearchParams) => IO.IO<void>
+export declare const setParam: (k: string) => (v: string) => (x: URLSearchParams) => URLSearchParams
 ```
 
 Added in v0.1.0
