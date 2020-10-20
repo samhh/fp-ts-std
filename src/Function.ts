@@ -6,7 +6,7 @@
  * Flip the function/argument order of a curried function.
  *
  * Note that due to limitations to the type system, this function won't work
- * correctly for curried functions.
+ * correctly for generic functions.
  *
  * @since 0.1.0
  */
