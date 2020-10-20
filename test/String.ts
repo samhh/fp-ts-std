@@ -1,5 +1,5 @@
 import {
-    lines, unlines, surround, startsWith, endsWith, takeLeft, takeRight, reverse,
+    lines, unlines, surround, unsurround, startsWith, endsWith, takeLeft, takeRight, reverse,
 } from '../src/String';
 import fc from 'fast-check';
 
@@ -68,6 +68,29 @@ describe('String', () => {
 
         it('surrounds non-empty with non-empty', () => {
             expect(f('x')('y')).toBe('xyx');
+        });
+    });
+
+    describe('unsurround', () => {
+        const f = unsurround;
+
+        it('unsurrounds empty from empty', () => {
+            expect(f('')('')).toBe('');
+        });
+
+        it('unsurrounds empty from non-empty', () => {
+            expect(f('x')('')).toBe('');
+        });
+
+        it('unsurrounds non-empty from empty', () => {
+            expect(f('')('x')).toBe('x');
+        });
+
+        it('unsurrounds non-empty from non-empty', () => {
+            expect(f('x')('y')).toBe('y');
+            expect(f('x')('xy')).toBe('xy');
+            expect(f('x')('yx')).toBe('yx');
+            expect(f('x')('xyx')).toBe('y');
         });
     });
 

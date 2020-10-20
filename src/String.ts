@@ -131,9 +131,9 @@ export const surround = (x: string): Endomorphism<string> => flow(prepend(x), ap
  *
  * @since 0.1.0
  */
-export const unsurround = (start: string) => (end: string): Endomorphism<string> => val =>
-    val.startsWith(start) && val.endsWith(end)
-        ? pipe(val, unprepend(start), unappend(end))
+export const unsurround = (x: string): Endomorphism<string> => val =>
+    val.startsWith(x) && val.endsWith(x)
+        ? pipe(val, unprepend(x), unappend(x))
         : val;
 
 /**

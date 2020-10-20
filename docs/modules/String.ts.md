@@ -375,7 +375,7 @@ Remove the start and end of a string, if they both exist.
 **Signature**
 
 ```ts
-export declare const unsurround: (start: string) => (end: string) => Endomorphism<string>
+export declare const unsurround: (x: string) => Endomorphism<string>
 ```
 
 Added in v0.1.0
