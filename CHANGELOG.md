@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## _Unreleased_
+
+- Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
+
 ## 0.3.0 (2020-10-20)
 
 - Add `startsWith`, `endsWith`, `takeLeft`, `takeRight`, and `reverse` functions to the `String` module.

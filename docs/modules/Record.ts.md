@@ -16,7 +16,6 @@ Added in v0.1.0
   - [lookupFlipped](#lookupflipped)
   - [omit](#omit)
   - [pick](#pick)
-  - [unsafeExactKeys](#unsafeexactkeys)
   - [values](#values)
 
 ---
@@ -59,21 +58,6 @@ type.
 
 ```ts
 export declare const pick: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
-```
-
-Added in v0.1.0
-
-## unsafeExactKeys
-
-`Object.keys` returns `string[]` because TypeScript's type system is
-structural / non-exact. This function is technically unsafe for this reason,
-but if used with caution can be helpful for obtaining that same array
-without the key type being widened.
-
-**Signature**
-
-```ts
-export declare const unsafeExactKeys: <A extends string, B>(x: Record<A, B>) => A[]
 ```
 
 Added in v0.1.0

@@ -6,17 +6,6 @@ import { Option } from 'fp-ts/Option';
 import * as R from 'fp-ts/Record';
 
 /**
- * `Object.keys` returns `string[]` because TypeScript's type system is
- * structural / non-exact. This function is technically unsafe for this reason,
- * but if used with caution can be helpful for obtaining that same array
- * without the key type being widened.
- *
- * @since 0.1.0
- */
-export const unsafeExactKeys = <A extends string, B>(x: Record<A, B>): A[] =>
-    Object.keys(x) as A[];
-
-/**
  * Get the values from a `Record`.
  *
  * @since 0.1.0
