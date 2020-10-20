@@ -208,9 +208,9 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [x] sequence - [fp-ts/Array::sequence](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sequence)
 - [x] set - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] slice
-- [ ] sort
-- [ ] sortBy
-- [ ] sortWith
+- [x] sort - [fp-ts/Array::sort](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sort)
+- [x] sortBy - [fp-ts/Array::sort](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sort)
+- [x] sortWith - [fp-ts/Array::sortBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sortBy)
 - [x] split - [fp-ts-std/String::split](https://samhh.github.io/fp-ts-std/modules/String.ts.html#split)/[fp-ts-contrib/RegExp::split](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#split)
 - [ ] splitAt
 - [ ] splitEvery
