@@ -1,4 +1,4 @@
-import { add, multiply, subtract, divide } from '../src/Number';
+import { add, multiply, subtract, divide, increment, decrement } from '../src/Number';
 
 describe('Number', () => {
     describe('add', () => {
@@ -22,6 +22,26 @@ describe('Number', () => {
     describe('divide', () => {
         it('divides the second number by the first', () => {
             expect(divide(5)(15)).toBe(3);
+        });
+    });
+
+    describe('increment', () => {
+        const f = increment;
+
+        it('increments', () => {
+            expect(f(42)).toBe(43);
+            expect(f(-42)).toBe(-41);
+            expect(f(-0.12)).toBe(0.88);
+        });
+    });
+
+    describe('decrement', () => {
+        const f = decrement;
+
+        it('decrements', () => {
+            expect(f(42)).toBe(41);
+            expect(f(-42)).toBe(-43);
+            expect(f(0.12)).toBe(-0.88);
         });
     });
 });
