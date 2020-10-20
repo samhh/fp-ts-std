@@ -25,6 +25,7 @@ Added in v0.1.0
   - [lines](#lines)
   - [match](#match)
   - [prepend](#prepend)
+  - [reverse](#reverse)
   - [split](#split)
   - [startsWith](#startswith)
   - [surround](#surround)
@@ -186,6 +187,26 @@ export declare const prepend: (prepended: string) => (rest: string) => string
 ```
 
 Added in v0.1.0
+
+## reverse
+
+Reverse a string.
+
+**Signature**
+
+```ts
+export declare const reverse: Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { reverse } from 'fp-ts-std/String'
+
+assert.strictEqual(reverse('abc'), 'cba')
+```
+
+Added in v0.3.0
 
 ## split
 

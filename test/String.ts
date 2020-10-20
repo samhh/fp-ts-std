@@ -1,6 +1,8 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { lines, unlines, surround, startsWith, endsWith, takeLeft, takeRight } from '../src/String';
+import {
+    lines, unlines, surround, startsWith, endsWith, takeLeft, takeRight, reverse,
+} from '../src/String';
 import fc from 'fast-check';
 
 describe('String', () => {
@@ -170,6 +172,15 @@ describe('String', () => {
             expect(f(0.1)(x)).toBe('');
             expect(f(0.9)(x)).toBe('');
             expect(f(1.1)(x)).toBe('c');
+        });
+    });
+
+    describe('reverse', () => {
+        const f = reverse;
+
+        it('reverses input string', () => {
+            expect(f('')).toBe('');
+            expect(f('ab c')).toBe('c ba');
         });
     });
 });

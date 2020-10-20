@@ -5,6 +5,7 @@
 import { pipe, Predicate, Refinement, Endomorphism, flow } from 'fp-ts/function';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
+import * as A from 'fp-ts/Array';
 import { join } from './Array';
 
 /**
@@ -181,6 +182,18 @@ export const match = (r: RegExp) => (x: string): Option<RegExpMatchArray> =>
  * @since 0.1.0
  */
 export const split = (on: string | RegExp) => (target: string): Array<string> => target.split(on);
+
+/**
+ * Reverse a string.
+ *
+ * @example
+ * import { reverse } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(reverse('abc'), 'cba');
+ *
+ * @since 0.3.0
+ */
+export const reverse: Endomorphism<string> = flow(split(''), A.reverse, join(''));
 
 // The regex comes from here: https://stackoverflow.com/a/20056634
 /**
