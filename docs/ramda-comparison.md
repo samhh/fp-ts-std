@@ -1,0 +1,270 @@
+---
+title: As Compared to Ramda
+nav_order: 2
+permalink: /ramda
+---
+
+# As Compared to Ramda
+
+fp-ts-std attempts to bridge the gap between [fp-ts](https://gcanti.github.io/fp-ts/modules/), a highly abstract library, and libraries like [Ramda](https://ramdajs.com/), which are focused on providing utility functions. Note also the presence of [fp-ts-ramda](https://github.com/giogonzo/fp-ts-ramda).
+
+Here's the status of all of Ramda's functions being potentially implemented in fp-ts-std. We hope that fp-ts-std's surface area will increase with time, not just with respect to Ramda but also more broadly (the library is only in its infancy):
+
+- [ ] \_\_
+- [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)
+- [ ] addIndex
+- [ ] adjust
+- [x] all - [fp-ts-std/Array::all](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#all)
+- [ ] allPass
+- [x] always - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
+- [ ] and
+- [ ] andThen
+- [x] any - [fp-ts-std/Array::any](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#any)
+- [ ] anyPass
+- [ ] ap
+- [ ] aperture
+- [x] append - [fp-ts/Array::snoc](https://gcanti.github.io/fp-ts/modules/Array.ts.html#snoc)
+- [ ] apply
+- [ ] applySpec
+- [ ] applyTo
+- [ ] ascend
+- [ ] assoc
+- [ ] assocPath
+- [ ] binary
+- [ ] bind
+- [ ] both
+- [ ] call
+- [ ] chain
+- [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
+- [ ] clone
+- [x] comparator - [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
+- [ ] complement
+- [ ] compose
+- [ ] composeK
+- [ ] composeP
+- [ ] composeWith
+- [x] concat - [fp-ts/Array::getMonoid](https://gcanti.github.io/fp-ts/modules/Array.ts.html#getmonoid)/[fp-ts-std/String::concat](https://samhh.github.io/fp-ts-std/modules/String.ts.html#concat)
+- [ ] cond
+- [ ] construct
+- [ ] constructN
+- [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
+- [ ] converge
+- [ ] countBy
+- [ ] curry
+- [ ] curryN
+- [x] dec - [fp-ts-std/Number::decrement](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#decrement)
+- [ ] defaultTo
+- [ ] descend
+- [x] difference - [fp-ts/Array::difference](https://gcanti.github.io/fp-ts/modules/Array.ts.html#difference)
+- [ ] differenceWith
+- [ ] dissoc
+- [ ] dissocPath
+- [x] divide - [fp-ts-std/Number::divide](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#divide)
+- [ ] drop - [fp-ts/Array::dropLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleft)
+- [ ] dropLast - [fp-ts/Array::dropRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropright)
+- [ ] dropLastWhile - [fp-ts/Array::dropLastWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#droplastwhile)
+- [ ] dropRepeats
+- [ ] dropRepeatsWith
+- [ ] dropWhile - [fp-ts/Array::dropLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleftwhile)
+- [ ] either
+- [ ] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)
+- [ ] endsWith - [fp-ts-std/String::endsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#endswith)
+- [ ] eqBy
+- [x] eqProps - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
+- [x] equals - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
+- [ ] evolve
+- [x] F - [fp-ts/function::constFalse](https://gcanti.github.io/fp-ts/modules/function.ts.html#constfalse)
+- [x] filter - [fp-ts/Array::filter](https://gcanti.github.io/fp-ts/modules/Array.ts.html#filter)/[fp-ts/Record::filter](https://gcanti.github.io/fp-ts/modules/Record.ts.html#filter)
+- [x] find - [fp-ts/Array::findFirst](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findfirst)
+- [x] findIndex - [fp-ts/Array::findIndex](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findindex)
+- [x] findLast - [fp-ts/Array::findLast](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlast)
+- [x] findLastIndex - [fp-ts/Array::findLastIndex](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlastindex)
+- [x] flatten - [fp-ts/Array::flatten](https://gcanti.github.io/fp-ts/modules/Array.ts.html#flatten)
+- [x] flip - [fp-ts-std/Function::flip](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#flip)
+- ~~[ ] forEach~~ Use functor `map` instead.
+- ~~[ ] forEachObjIndexed~~ Use functor `map` instead.
+- [x] fromPairs - [fp-ts/Record::fromFoldable](https://gcanti.github.io/fp-ts/modules/Record.ts.html#fromfoldable)
+- [ ] groupBy
+- [ ] groupWith
+- [x] gt - [fp-ts/Ord::gt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#gt)
+- [ ] gte
+- [x] has - [fp-ts/Record::hasOwnProperty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#hasownproperty-function)
+- [ ] hasIn
+- [x] hasPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] head - [fp-ts/Array::head](https://gcanti.github.io/fp-ts/modules/Array.ts.html#head)
+- [x] identical - [fp-ts/Eq::eqStrict](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#eqstrict)
+- [x] identity - [fp-ts/function::identity](https://gcanti.github.io/fp-ts/modules/function.ts.html#identity)
+- [ ] ifElse
+- [x] inc - [fp-ts-std/Number::increment](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#increment)
+- [x] includes - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
+- [ ] indexBy
+- [ ] indexOf
+- [ ] init - [fp-ts/Array::init](https://gcanti.github.io/fp-ts/modules/Array.ts.html#init)
+- [ ] innerJoin
+- [x] insert - [fp-ts/Array::insertAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#insertat)
+- [ ] insertAll
+- [x] intersection - [fp-ts/Array::intersection](https://gcanti.github.io/fp-ts/modules/Array.ts.html#intersection)
+- [ ] intersperse
+- [ ] into
+- [ ] invert
+- [ ] invertObj
+- [ ] invoker
+- [x] is - [io-ts](https://gcanti.github.io/io-ts/)
+- [x] isEmpty - [fp-ts/Array::isEmpty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#isempty)/[fp-ts/Record::isEmpty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#isempty)/[fp-ts-std/String::isEmpty](https://samhh.github.io/fp-ts-std/modules/String.ts.html#isempty)
+- ~~[ ] isNil~~ Prefer `Option` type. Failing that, create `Eq` instances for `null` and `undefined`.
+- [x] join - [fp-ts-std/Array::join](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#join)
+- [ ] juxt
+- [x] keys - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
+- [ ] keysIn
+- [ ] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)
+- [ ] lastIndexOf
+- [x] length - [fp-ts-std/Array::length](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#length)
+- [x] lens - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] lensIndex - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] lensPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] lensProp - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] lift
+- [ ] liftN
+- [x] lt - [fp-ts/Ord::lt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#lt)
+- [ ] lte
+- [x] map - [fp-ts/Array::map](https://gcanti.github.io/fp-ts/modules/Array.ts.html#map)
+- [ ] mapAccum
+- [ ] mapAccumRight
+- [ ] mapObjIndexed
+- [x] match - [fp-ts-std/String::match](https://samhh.github.io/fp-ts-std/modules/String.ts.html#match)
+- [ ] mathMod
+- [x] max - [fp-ts/Ord::max](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#max)
+- [ ] maxBy
+- [ ] mean
+- [ ] median
+- [ ] memoizeWith
+- [ ] merge
+- [ ] mergeAll
+- [ ] mergeDeepLeft
+- [ ] mergeDeepRight
+- [ ] mergeDeepWith
+- [ ] mergeDeepWithKey
+- [ ] mergeLeft
+- [ ] mergeRight
+- [ ] mergeWith
+- [ ] mergeWithKey
+- [x] min - [fp-ts/Ord::min](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#min)
+- [ ] minBy
+- [ ] modulo
+- [ ] move
+- [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)
+- [ ] nAry
+- [ ] negate
+- [ ] none
+- [ ] not
+- [ ] nth - [fp-ts/Array::lookup](https://gcanti.github.io/fp-ts/modules/Array.ts.html#lookup)
+- [ ] nthArg
+- [ ] o
+- [ ] objOf
+- [ ] of
+- [x] omit - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
+- [ ] once
+- [ ] or
+- [ ] otherwise
+- [x] over - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] pair - [fp-ts/function::tuple](https://gcanti.github.io/fp-ts/modules/function.ts.html#tuple)
+- [ ] partial
+- [ ] partialRight
+- [ ] partition
+- [x] path - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] pathEq
+- [ ] pathOr
+- [x] paths - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] pathSatisfies
+- [x] pick - [fp-ts-std/Record::pick](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#pick)
+- [ ] pickAll
+- [ ] pickBy
+- [x] pipe - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow)
+- [ ] pipeK
+- [x] pipeP - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) with [fp-ts/Task](https://gcanti.github.io/fp-ts/modules/Task.ts.html)
+- [ ] pipeWith
+- [ ] pluck
+- [x] prepend - [fp-ts/Array::cons](https://gcanti.github.io/fp-ts/modules/Array.ts.html#cons)
+- ~~[ ] product~~ Use `fold(monoidProduct)` instead.
+- [ ] project
+- [x] prop - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] propEq
+- [ ] propIs
+- [ ] propOr
+- [x] props - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] propSatisfies
+- [x] range - [fp-ts/Array::range](https://gcanti.github.io/fp-ts/modules/Array.ts.html#range)
+- [x] reduce - [fp-ts/Array::reduce](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reduce)
+- [ ] reduceBy
+- [ ] reduced
+- [x] reduceRight - [fp-ts/Array::reduceRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reduceright)
+- [ ] reduceWhile
+- [ ] reject
+- [ ] remove
+- [ ] repeat
+- [ ] replace
+- [x] reverse - [fp-ts/Array::reverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reverse)/[fp-ts-std/String::reverse](https://samhh.github.io/fp-ts-std/modules/String.ts.html#reverse)
+- [x] scan - [fp-ts/Array::scanLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#scanleft)
+- [x] sequence - [fp-ts/Array::sequence](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sequence)
+- [x] set - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] slice
+- [ ] sort
+- [ ] sortBy
+- [ ] sortWith
+- [x] split - [fp-ts-std/String::split](https://samhh.github.io/fp-ts-std/modules/String.ts.html#split)
+- [ ] splitAt
+- [ ] splitEvery
+- [ ] splitWhen
+- [ ] startsWith - [fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)
+- [x] subtract - [fp-ts-std/Number::subtract](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#subtract)
+- ~~[ ] sum~~ Use `fold(monoidSum)` instead.
+- [ ] symmetricDifference
+- [ ] symmetricDifferenceWith
+- [x] T - [fp-ts/function::constTrue](https://gcanti.github.io/fp-ts/modules/function.ts.html#consttrue)
+- [ ] tail - [fp-ts/Array::tail](https://gcanti.github.io/fp-ts/modules/Array.ts.html#tail)
+- [x] take - [fp-ts/Array::takeLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleft)/[fp-ts-std/String::takeLeft](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeleft)
+- [x] takeLast - [fp-ts/Array::takeRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeright)/[fp-ts-std/String::takeLast](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeright)
+- [ ] takeLastWhile
+- [ ] takeWhile - [fp-ts/Array::takeLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleftwhile)
+- [ ] tap
+- [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)
+- [ ] thunkify
+- [ ] times
+- [ ] toLower
+- [x] toPairs - [fp-ts/Record::collect](https://gcanti.github.io/fp-ts/modules/Record.ts.html#collect)
+- [ ] toPairsIn
+- [x] toString - [fp-ts-std/String::fromNumber](https://samhh.github.io/fp-ts-std/modules/String.ts.html#fromnumber)
+- [ ] toUpper
+- [ ] transduce
+- [ ] transpose
+- [x] traverse - [fp-ts/Array::traverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#traverse)
+- [x] trim - [fp-ts-std/String::trim](https://ramdajs.com/docs/#trim)
+- [x] tryCatch - [fp-ts/Either::tryCatch](https://gcanti.github.io/fp-ts/modules/Either.ts.html#trycatch)
+- [ ] type
+- [ ] unapply
+- [ ] unary
+- [ ] uncurryN
+- [ ] unfold
+- [x] union - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
+- [x] unionWith - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
+- [x] uniq - [fp-ts/Array::uniq](https://gcanti.github.io/fp-ts/modules/Array.ts.html#uniq)
+- [ ] uniqBy
+- [ ] uniqWith
+- [ ] unless
+- [ ] unnest
+- [ ] until
+- [ ] update
+- [ ] useWith
+- [x] values - [fp-ts-std/Record::values](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#values)
+- [ ] valuesIn
+- [x] view - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [ ] when
+- [ ] where
+- [ ] whereEq
+- [ ] without
+- [ ] xor
+- [ ] xprod
+- [x] zip - [fp-ts/Array::zip](https://gcanti.github.io/fp-ts/modules/Array.ts.html#zip)
+- [x] zipObj - [fp-ts/Record::fromFoldable](https://gcanti.github.io/fp-ts/modules/Record.ts.html#fromfoldable)
+- [x] zipWith - [fp-ts/Array::zipWith](https://gcanti.github.io/fp-ts/modules/Array.ts.html#zipwith)
+
