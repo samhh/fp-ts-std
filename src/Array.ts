@@ -5,6 +5,8 @@
 import { Predicate, constant, pipe } from 'fp-ts/function';
 import { Eq } from 'fp-ts/Eq';
 import { Ord } from 'fp-ts/Ord';
+import { NonEmptyArray } from 'fp-ts/NonEmptyArray';
+import * as NEA from 'fp-ts/NonEmptyArray';
 import * as A from 'fp-ts/Array';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
@@ -93,11 +95,10 @@ export const pluckFirst = <A>(p: Predicate<A>) => (xs: Array<A>): [Option<A>, Ar
  *
  * @since 0.1.0
  */
-export const upsert = <A>(eqA: Eq<A>) => (x: A) => (ys: Array<A>): Array<A> => pipe(
+export const upsert = <A>(eqA: Eq<A>) => (x: A) => (ys: Array<A>): NonEmptyArray<A> => pipe(
     A.findIndex<A>(y => eqA.equals(x, y))(ys),
-    O.fold(
-        constant(ys.concat(x)),
-        (i) => A.unsafeUpdateAt(i, x, ys),
-    ),
+    O.map((i) => A.unsafeUpdateAt(i, x, ys)),
+    O.chain(NEA.fromArray),
+    O.getOrElse(() => NEA.snoc(ys, x)),
 );
 

@@ -141,7 +141,7 @@ the array is checked is unspecified.
 **Signature**
 
 ```ts
-export declare const upsert: <A>(eqA: Eq<A>) => (x: A) => (ys: A[]) => A[]
+export declare const upsert: <A>(eqA: Eq<A>) => (x: A) => (ys: A[]) => NonEmptyArray<A>
 ```
 
 Added in v0.1.0

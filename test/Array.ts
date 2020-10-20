@@ -5,6 +5,7 @@ import * as Option from 'fp-ts/Option';
 import { contramap as eqContramap, eqNumber } from 'fp-ts/Eq';
 import { contramap as ordContramap, ordNumber } from 'fp-ts/Ord';
 import { Predicate } from 'fp-ts/function';
+import fc from 'fast-check';
 
 describe('Array', () => {
     describe('pluckFirst', () => {
@@ -39,22 +40,30 @@ describe('Array', () => {
         const y: Thing = { id: 2, name: 'y' };
         const z: Thing = { id: 3, name: 'z' };
 
-        const f = upsert(eqThing)(x2);
+        const f = upsert;
+        const g = f(eqThing)(x2);
 
         it('appends non-present item', () => {
-            expect(f([])).toEqual([x2]);
-            expect(f([y, z])).toEqual([y, z, x2]);
+            expect(g([])).toEqual([x2]);
+            expect(g([y, z])).toEqual([y, z, x2]);
         });
 
         it('updates present item in-place', () => {
-            expect(f([x1, y])).toEqual([x2, y]);
-            expect(f([y, x1])).toEqual([y, x2]);
+            expect(g([x1, y])).toEqual([x2, y]);
+            expect(g([y, x1])).toEqual([y, x2]);
         });
 
         it('does not mutate input', () => {
             const xs = [{ ...x1 }];
-            f(xs);
+            g(xs);
             expect(xs).toEqual([{ ...x1 }]);
+        });
+
+        it('always returns a non-empty array', () => {
+            fc.assert(fc.property(
+                fc.array(fc.integer()), fc.integer(),
+                (xs, y) => !!f(eqNumber)(y)(xs).length,
+            ));
         });
     });
 

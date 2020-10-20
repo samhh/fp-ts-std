@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## _Unreleased_
+
+- Upgrade `upsert` function in the `Array` module to return a `NonEmptyArray`.
+
 ## 0.2.0 (2020-10-19)
 
 - Add `Debug` module.
