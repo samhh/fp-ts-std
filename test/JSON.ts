@@ -7,7 +7,7 @@ describe('JSON', () => {
     describe('stringifyPrimitive', () => {
         it('never throws', () => {
             fc.assert(fc.property(
-                fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null), fc.constant(undefined)),
+                fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
                 (x) => { stringifyPrimitive(x); },
             ));
         });

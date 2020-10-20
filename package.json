@@ -24,7 +24,7 @@
         "build": "tsc -p ./tsconfig.build.json",
         "typecheck": "tsc --noEmit",
         "typecheck-dev": "tsc -w --noEmit",
-        "lint": "eslint ./src/ --ext ts",
+        "lint": "eslint ./src/ ./test/ --ext ts",
         "test": "jest",
         "docs": "docs-ts",
         "clean": "rm -rf lib",
