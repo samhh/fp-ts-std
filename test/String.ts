@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statement */
-
 import {
     lines, unlines, surround, startsWith, endsWith, takeLeft, takeRight, reverse,
 } from '../src/String';

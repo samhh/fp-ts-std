@@ -12,7 +12,7 @@ module.exports = {
         project: './tsconfig.json',
     },
     rules: {
-        'functional/no-expression-statement': [2, { ignorePattern: 'suite.run' }],
+        'functional/no-expression-statement': [2, { ignorePattern: '(describe)|(it)|(expect)|(fc\.)' }],
         'functional/prefer-readonly-type': 0,
         'functional/functional-parameters': 0,
     },

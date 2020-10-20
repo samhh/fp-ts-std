@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statement */
-
 import { stringifyPrimitive } from '../src/JSON';
 import fc from 'fast-check';
 

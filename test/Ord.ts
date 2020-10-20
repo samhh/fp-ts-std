@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statement */
-
 import fc from 'fast-check';
 import { ordNumber } from 'fp-ts/lib/Ord';
 import { getInvertedOrd } from '../src/Ord';

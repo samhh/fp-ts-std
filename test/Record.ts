@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statement */
-
 import { pick, omit } from '../src/Record';
 
 describe('Record', () => {

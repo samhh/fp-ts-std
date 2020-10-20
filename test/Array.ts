@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statement */
-
 import { pluckFirst, upsert, getDisorderedEq } from '../src/Array';
 import * as Option from 'fp-ts/Option';
 import { contramap as eqContramap, eqNumber } from 'fp-ts/Eq';
@@ -26,6 +24,7 @@ describe('Array', () => {
 
         it('does not mutate input', () => {
             const xs = [2, 3, 4];
+            // eslint-disable-next-line functional/no-expression-statement
             f(xs);
             expect(xs).toEqual([2, 3, 4]);
         });
@@ -55,6 +54,7 @@ describe('Array', () => {
 
         it('does not mutate input', () => {
             const xs = [{ ...x1 }];
+            // eslint-disable-next-line functional/no-expression-statement
             g(xs);
             expect(xs).toEqual([{ ...x1 }]);
         });
