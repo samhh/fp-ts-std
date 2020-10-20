@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## _Unreleased_
+## 0.3.0 (2020-10-20)
 
 - Add `startsWith`, `endsWith`, `takeLeft`, `takeRight`, and `reverse` functions to the `String` module.
 - Remove unneeded `newtype-ts` peer dependency. This may be added back in the future if and when we are actively utilising it.
