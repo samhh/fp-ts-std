@@ -136,6 +136,36 @@ export const unsurround = (start: string) => (end: string): Endomorphism<string>
         : val;
 
 /**
+ * Keep the specified number of characters from the start of a string.
+ *
+ * If `n` is larger than the available number of characters, the string will
+ * be returned whole.
+ *
+ * If `n` is not a positive number, an empty string will be returned.
+ *
+ * If `n` is a float, it will be rounded down to the nearest integer.
+ *
+ * @since 0.3.0
+ */
+export const takeLeft = (n: number): Endomorphism<string> => x =>
+    x.slice(0, Math.max(0, n));
+
+/**
+ * Keep the specified number of characters from the end of a string.
+ *
+ * If `n` is larger than the available number of characters, the string will
+ * be returned whole.
+ *
+ * If `n` is not a positive number, an empty string will be returned.
+ *
+ * If `n` is a float, it will be rounded down to the nearest integer.
+ *
+ * @since 0.3.0
+ */
+export const takeRight = (n: number): Endomorphism<string> => x =>
+    x.slice(Math.max(0, x.length - Math.floor(n)));
+
+/**
  * Functional wrapper around `String.prototype.match`.
  *
  * @since 0.1.0

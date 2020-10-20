@@ -28,6 +28,8 @@ Added in v0.1.0
   - [split](#split)
   - [startsWith](#startswith)
   - [surround](#surround)
+  - [takeLeft](#takeleft)
+  - [takeRight](#takeright)
   - [test](#test)
   - [trim](#trim)
   - [trimLeft](#trimleft)
@@ -222,6 +224,44 @@ export declare const surround: (x: string) => Endomorphism<string>
 ```
 
 Added in v0.1.0
+
+## takeLeft
+
+Keep the specified number of characters from the start of a string.
+
+If `n` is larger than the available number of characters, the string will
+be returned whole.
+
+If `n` is not a positive number, an empty string will be returned.
+
+If `n` is a float, it will be rounded down to the nearest integer.
+
+**Signature**
+
+```ts
+export declare const takeLeft: (n: number) => Endomorphism<string>
+```
+
+Added in v0.3.0
+
+## takeRight
+
+Keep the specified number of characters from the end of a string.
+
+If `n` is larger than the available number of characters, the string will
+be returned whole.
+
+If `n` is not a positive number, an empty string will be returned.
+
+If `n` is a float, it will be rounded down to the nearest integer.
+
+**Signature**
+
+```ts
+export declare const takeRight: (n: number) => Endomorphism<string>
+```
+
+Added in v0.3.0
 
 ## test
 

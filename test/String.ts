@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { lines, unlines, surround, startsWith, endsWith } from '../src/String';
+import { lines, unlines, surround, startsWith, endsWith, takeLeft, takeRight } from '../src/String';
 import fc from 'fast-check';
 
 describe('String', () => {
@@ -110,6 +110,66 @@ describe('String', () => {
                 fc.string(), fc.string(),
                 (x, y) => f(x)(y + x),
             ));
+        });
+    });
+
+    describe('takeLeft', () => {
+        const f = takeLeft;
+
+        it('takes the specified number of characters from the start', () => {
+            expect(f(2)('abc')).toBe('ab');
+        });
+
+        it('returns empty string for non-positive number', () => {
+            fc.assert(fc.property(
+                fc.integer(0), fc.string(),
+                (n, x) => f(n)(x) === '',
+            ));
+        });
+
+        it('returns whole string for number that\'s too large', () => {
+            fc.assert(fc.property(
+                fc.string(), fc.integer(0, Number.MAX_SAFE_INTEGER),
+                (x, n) => f(x.length + n)(x) === x,
+            ));
+        });
+
+        it('rounds float input down to nearest int', () => {
+            const x = 'abc';
+
+            expect(f(0.1)(x)).toBe('');
+            expect(f(0.9)(x)).toBe('');
+            expect(f(1.1)(x)).toBe('a');
+        });
+    });
+
+    describe('takeRight', () => {
+        const f = takeRight;
+
+        it('takes the specified number of characters from the end', () => {
+            expect(f(2)('abc')).toBe('bc');
+        });
+
+        it('returns empty string for non-positive number', () => {
+            fc.assert(fc.property(
+                fc.integer(0), fc.string(),
+                (n, x) => f(n)(x) === '',
+            ));
+        });
+
+        it('returns whole string for number that\'s too large', () => {
+            fc.assert(fc.property(
+                fc.string(), fc.integer(0, Number.MAX_SAFE_INTEGER),
+                (x, n) => f(x.length + n)(x) === x,
+            ));
+        });
+
+        it('rounds float input down to nearest int', () => {
+            const x = 'abc';
+
+            expect(f(0.1)(x)).toBe('');
+            expect(f(0.9)(x)).toBe('');
+            expect(f(1.1)(x)).toBe('c');
         });
     });
 });
