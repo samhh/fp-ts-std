@@ -14,5 +14,7 @@ fp-ts is listed as a peer dependency.
 
 ## Contributing
 
+Unreleased work is commit to the `develop` branch. `master` is the release branch and whence the documentation is generated.
+
 All modules and exports must be annotated with JSDoc. This information is used to generate documentation. Simple, illustratory tests can also be included and will be checked during docs generation. For more information, see [docs-ts](https://github.com/gcanti/docs-ts).
 
