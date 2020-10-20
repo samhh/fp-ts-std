@@ -12,6 +12,16 @@ The library is available on the npm registry under the same package name: [fp-ts
 
 fp-ts is listed as a peer dependency.
 
+## Ethos
+
+fp-ts-std strives to adhere to the following principles:
+
+- Strict type-safety wherever possible, with risks well documented
+- Everything is curried and data-last
+- Never mutate input data
+- Always document side effects
+- Lean towards Haskell naming conventions and idioms
+
 ## Contributing
 
 Unreleased work is commit to the `develop` branch. `master` is the release branch and whence the documentation is generated.
