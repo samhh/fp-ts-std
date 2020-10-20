@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## _Unreleased_
 
 - Upgrade `upsert` function in the `Array` module to return a `NonEmptyArray`.
+- Remove `undefined` as acceptable input to `stringifyPrimitive` function in the `JSON` module.
 
 ## 0.2.0 (2020-10-19)
 

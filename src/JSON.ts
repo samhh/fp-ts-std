@@ -31,7 +31,7 @@ export const stringifyO: (data: unknown) => Option<string> =
  *
  * @since 0.1.0
  */
-export const stringifyPrimitive = (x: string | number | boolean | null | undefined): string =>
+export const stringifyPrimitive = (x: string | number | boolean | null): string =>
     JSON.stringify(x);
 
 /**
