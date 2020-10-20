@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## _Unreleased_
 
+- Add `startsWith` and `endsWith` functions to the `String` module.
 - Remove unneeded `newtype-ts` peer dependency. This may be added back in the future if and when we are actively utilising it.
 - Upgrade `upsert` function in the `Array` module to return a `NonEmptyArray`.
 - Remove `undefined` as acceptable input to `stringifyPrimitive` function in the `JSON` module.

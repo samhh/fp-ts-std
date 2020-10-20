@@ -40,8 +40,8 @@ export const isEmpty: Predicate<string> = (x) => x === '';
  *
  * @since 0.1.0
  */
-export const contains = (substr: string): Predicate<string> => (target) =>
-    target.includes(substr);
+export const contains = (substring: string): Predicate<string> => (target) =>
+    target.includes(substring);
 
 /**
  * Trim both sides of a string.
@@ -63,6 +63,20 @@ export const trimLeft: Endomorphism<string> = (x) => x.trimLeft();
  * @since 0.1.0
  */
 export const trimRight: Endomorphism<string> = (x) => x.trimRight();
+
+/**
+ * Check if a string starts with the specified substring.
+ *
+ * @since 0.3.0
+ */
+export const startsWith = (substring: string): Predicate<string> => y => y.startsWith(substring);
+
+/**
+ * Check if a string ends with the specified substring.
+ *
+ * @since 0.3.0
+ */
+export const endsWith = (substring: string): Predicate<string> => y => y.endsWith(substring);
 
 /**
  * Concatenate two strings together.

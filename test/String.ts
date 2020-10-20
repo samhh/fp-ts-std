@@ -1,6 +1,7 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { lines, unlines, surround } from '../src/String';
+import { lines, unlines, surround, startsWith, endsWith } from '../src/String';
+import fc from 'fast-check';
 
 describe('String', () => {
     describe('lines', () => {
@@ -67,6 +68,48 @@ describe('String', () => {
 
         it('surrounds non-empty with non-empty', () => {
             expect(f('x')('y')).toBe('xyx');
+        });
+    });
+
+    describe('startsWith', () => {
+        const f = startsWith;
+
+        it('returns true for empty substring', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                x => f('')(x),
+            ));
+        });
+
+        it('checks start of string for substring', () => {
+            expect(f('x')('xyz')).toBe(true);
+            expect(f('a')('xyz')).toBe(false);
+
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => f(x)(x + y),
+            ));
+        });
+    });
+
+    describe('endsWith', () => {
+        const f = endsWith;
+
+        it('returns true for empty substring', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                x => f('')(x),
+            ));
+        });
+
+        it('checks end of string for substring', () => {
+            expect(f('z')('xyz')).toBe(true);
+            expect(f('a')('xyz')).toBe(false);
+
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => f(x)(y + x),
+            ));
         });
     });
 });

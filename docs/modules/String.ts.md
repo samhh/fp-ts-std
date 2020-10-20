@@ -16,6 +16,7 @@ Added in v0.1.0
   - [append](#append)
   - [concat](#concat)
   - [contains](#contains)
+  - [endsWith](#endswith)
   - [exec](#exec)
   - [fromNumber](#fromnumber)
   - [isEmpty](#isempty)
@@ -25,6 +26,7 @@ Added in v0.1.0
   - [match](#match)
   - [prepend](#prepend)
   - [split](#split)
+  - [startsWith](#startswith)
   - [surround](#surround)
   - [test](#test)
   - [trim](#trim)
@@ -70,10 +72,22 @@ Check if a string contains a given substring.
 **Signature**
 
 ```ts
-export declare const contains: (substr: string) => Predicate<string>
+export declare const contains: (substring: string) => Predicate<string>
 ```
 
 Added in v0.1.0
+
+## endsWith
+
+Check if a string ends with the specified substring.
+
+**Signature**
+
+```ts
+export declare const endsWith: (substring: string) => Predicate<string>
+```
+
+Added in v0.3.0
 
 ## exec
 
@@ -183,6 +197,18 @@ export declare const split: (on: string | RegExp) => (target: string) => string[
 ```
 
 Added in v0.1.0
+
+## startsWith
+
+Check if a string starts with the specified substring.
+
+**Signature**
+
+```ts
+export declare const startsWith: (substring: string) => Predicate<string>
+```
+
+Added in v0.3.0
 
 ## surround
 
