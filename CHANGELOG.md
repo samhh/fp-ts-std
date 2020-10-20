@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## _Unreleased_
 
 - Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
-- Rename `not` in `Boolean` module to `complement`.
+- Rename `not` in `Boolean` module to `complement`, and add a new `not` function. This achieves consistency with Haskell and Ramda.
 
 ## 0.3.0 (2020-10-20)
 

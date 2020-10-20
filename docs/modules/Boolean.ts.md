@@ -14,6 +14,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [complement](#complement)
+  - [not](#not)
 
 ---
 
@@ -40,6 +41,18 @@ const isNotFive = complement(isFive)
 
 assert.strictEqual(isFive(5), true)
 assert.strictEqual(isNotFive(5), false)
+```
+
+Added in v0.4.0
+
+## not
+
+Invert a boolean.
+
+**Signature**
+
+```ts
+export declare const not: Endomorphism<boolean>
 ```
 
 Added in v0.4.0

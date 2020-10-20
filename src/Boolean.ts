@@ -2,7 +2,14 @@
  * @since 0.1.0
  */
 
-import { Predicate } from 'fp-ts/function';
+import { Endomorphism, Predicate } from 'fp-ts/function';
+
+/**
+ * Invert a boolean.
+ *
+ * @since 0.4.0
+ */
+export const not: Endomorphism<boolean> = x => !x;
 
 /**
  * Invert a predicate.
