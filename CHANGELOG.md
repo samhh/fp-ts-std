@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## _Unreleased_
 
 - Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
+- Rename `not` in `Boolean` module to `complement`.
 
 ## 0.3.0 (2020-10-20)
 
