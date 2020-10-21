@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## _Unreleased_
 
 - Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
-- Rename `not` in `Boolean` module to `complement`, and add a new `not` function. This achieves consistency with Haskell and Ramda.
+- Remove the `not` function in the `Boolean` module as it's a duplicate of an fp-ts function, and add the `invert` function.
 - Update `unsurround` function in the `String` module to be consistent with the `surround` function.
 
 ## 0.3.0 (2020-10-20)
