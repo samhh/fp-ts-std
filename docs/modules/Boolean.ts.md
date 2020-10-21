@@ -13,7 +13,9 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [allPass](#allpass)
   - [and](#and)
+  - [anyPass](#anypass)
   - [invert](#invert)
   - [or](#or)
   - [xor](#xor)
@@ -21,6 +23,19 @@ Added in v0.1.0
 ---
 
 # utils
+
+## allPass
+
+Given an array of predicates, returns a predicate that returns true if the
+argument passes all of the predicates.
+
+**Signature**
+
+```ts
+export declare const allPass: <A>(fs: Predicate<A>[]) => Predicate<A>
+```
+
+Added in v0.4.0
 
 ## and
 
@@ -31,6 +46,19 @@ logical conjunction.
 
 ```ts
 export declare const and: (x: boolean) => Endomorphism<boolean>
+```
+
+Added in v0.4.0
+
+## anyPass
+
+Given an array of predicates, returns a predicate that returns true if the
+argument passes any of the predicates.
+
+**Signature**
+
+```ts
+export declare const anyPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
 Added in v0.4.0

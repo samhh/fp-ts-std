@@ -2,7 +2,7 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from 'fp-ts/function';
+import { Endomorphism, Predicate } from 'fp-ts/function';
 
 /**
  * Invert a boolean.
@@ -34,4 +34,22 @@ export const or = (x: boolean): Endomorphism<boolean> => y => x || y;
  * @since 0.4.0
  */
 export const xor = (x: boolean): Endomorphism<boolean> => y => (x && !y) || (!x && y);
+
+/**
+ * Given an array of predicates, returns a predicate that returns true if the
+ * argument passes all of the predicates.
+ *
+ * @since 0.4.0
+ */
+export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> => x =>
+    fs.every(f => f(x));
+
+/**
+ * Given an array of predicates, returns a predicate that returns true if the
+ * argument passes any of the predicates.
+ *
+ * @since 0.4.0
+ */
+export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> => x =>
+    fs.some(f => f(x));
 

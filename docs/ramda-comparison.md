@@ -15,12 +15,12 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] addIndex
 - [ ] adjust
 - [x] all - [fp-ts-std/Array::all](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#all)
-- [ ] allPass
+- [x] allPass - [fp-ts-std/Boolean::allPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#allpass)
 - [x] always - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
 - [x] and - [fp-ts-std/Boolean::and](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#and)
 - [ ] andThen
 - [x] any - [fp-ts-std/Array::any](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#any)
-- [ ] anyPass
+- [x] anyPass - [fp-ts-std/Boolean::anyPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#anypass)
 - [ ] ap
 - [ ] aperture
 - [x] append - [fp-ts/Array::snoc](https://gcanti.github.io/fp-ts/modules/Array.ts.html#snoc)

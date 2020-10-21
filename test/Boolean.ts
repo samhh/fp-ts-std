@@ -1,4 +1,5 @@
-import { invert, and, or, xor } from '../src/Boolean';
+import {constFalse, constTrue} from 'fp-ts/lib/function';
+import { invert, and, or, xor, allPass, anyPass } from '../src/Boolean';
 
 describe('Boolean', () => {
     describe('invert', () => {
@@ -49,6 +50,30 @@ describe('Boolean', () => {
         it('returns false for anything else', () => {
             expect(f(true)(true)).toBe(false);
             expect(f(false)(false)).toBe(false);
+        });
+    });
+
+    describe('allPass', () => {
+        const f = allPass;
+
+        it('returns true if all predicates succeed', () => {
+            expect(f([constTrue, constTrue, constTrue])(null)).toBe(true);
+        });
+
+        it('returns false if any predicate fails', () => {
+            expect(f([constTrue, constFalse, constTrue])(null)).toBe(false);
+        });
+    });
+
+    describe('anyPass', () => {
+        const f = anyPass;
+
+        it('returns true if any predicate succeeds', () => {
+            expect(f([constFalse, constTrue, constFalse])(null)).toBe(true);
+        });
+
+        it('returns false if all predicates fail', () => {
+            expect(f([constFalse, constFalse, constFalse])(null)).toBe(false);
         });
     });
 });
