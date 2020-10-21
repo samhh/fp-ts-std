@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Remove the `not` function in the `Boolean` module as it's a duplicate of an fp-ts function.
 - Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
 - Update `unsurround` function in the `String` module to be consistent with the `surround` function.
+- Fix `stringify`/`stringifyO` not adhering to the function signature if supplied `undefined` input.
 
 ## 0.3.0 (2020-10-20)
 

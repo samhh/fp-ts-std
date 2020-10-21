@@ -6,17 +6,20 @@ import { Either } from 'fp-ts/Either';
 import * as E from 'fp-ts/Either';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
-import { flow, identity } from 'fp-ts/function';
+import { flow, identity, pipe } from 'fp-ts/function';
+import { isString } from './String';
 
 /**
  * Stringify some arbitrary data.
  *
  * @since 0.1.0
  */
-export const stringify = <E>(f: (e: TypeError) => E) => (x: unknown): Either<E, string> =>
+export const stringify = <E>(f: (e: TypeError) => E) => (x: unknown): Either<E, string> => pipe(
     // It should only throw some sort of `TypeError`:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
-    E.stringifyJSON(x, (e) => f(e as TypeError));
+    E.stringifyJSON(x, (e) => f(e as TypeError)),
+    E.filterOrElse(isString, () => f(new TypeError('Stringify output not a string'))),
+);
 
 /**
  * Stringify some arbitrary data, returning an `Option`.
