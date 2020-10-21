@@ -4,8 +4,9 @@ This project adheres to semantic versioning.
 
 ## _Unreleased_
 
+- Add the `invert`, `and`, `or`, and `xor` functions to the `Boolean` module.
+- Remove the `not` function in the `Boolean` module as it's a duplicate of an fp-ts function.
 - Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
-- Remove the `not` function in the `Boolean` module as it's a duplicate of an fp-ts function, and add the `invert` function.
 - Update `unsurround` function in the `String` module to be consistent with the `surround` function.
 
 ## 0.3.0 (2020-10-20)
