@@ -12,6 +12,8 @@ The library is available on the npm registry under the same package name: [fp-ts
 
 fp-ts is listed as a peer dependency.
 
+Some of the more commonly needed functions from [fp-ts-contrib](https://gcanti.github.io/fp-ts-contrib/docs/modules) are duplicated here.
+
 ## Ethos
 
 fp-ts-std strives to adhere to the following principles:

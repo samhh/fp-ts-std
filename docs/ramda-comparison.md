@@ -131,7 +131,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] mapAccum
 - [ ] mapAccumRight
 - [ ] mapObjIndexed
-- [x] match - [fp-ts-std/String::match](https://samhh.github.io/fp-ts-std/modules/String.ts.html#match)
+- [x] match - [fp-ts-std/String::match](https://samhh.github.io/fp-ts-std/modules/String.ts.html#match)/[fp-ts-contrib/RegExp::match](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#match)
 - [ ] mathMod
 - [x] max - [fp-ts/Ord::max](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#max)
 - [ ] maxBy
@@ -211,7 +211,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] sort
 - [ ] sortBy
 - [ ] sortWith
-- [x] split - [fp-ts-std/String::split](https://samhh.github.io/fp-ts-std/modules/String.ts.html#split)
+- [x] split - [fp-ts-std/String::split](https://samhh.github.io/fp-ts-std/modules/String.ts.html#split)/[fp-ts-contrib/RegExp::split](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#split)
 - [ ] splitAt
 - [ ] splitEvery
 - [ ] splitWhen
@@ -227,7 +227,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] takeLastWhile
 - [ ] takeWhile - [fp-ts/Array::takeLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleftwhile)
 - [ ] tap
-- [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)
+- [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)/[fp-ts-contrib/RegExp::test](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#test)
 - [ ] thunkify
 - [ ] times
 - [ ] toLower
