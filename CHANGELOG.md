@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## _Unreleased_
+## 0.4.0 (2020-10-21)
 
 - Add the `invert`, `and`, `or`, `xor`, `allPass`, and `anyPass` functions to the `Boolean` module.
 - Remove the `not` function in the `Boolean` module as it's a duplicate of an fp-ts function.
