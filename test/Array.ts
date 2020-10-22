@@ -1,25 +1,125 @@
-import { pluckFirst, upsert, getDisorderedEq } from '../src/Array';
-import * as Option from 'fp-ts/Option';
+import {
+    length, elemFlipped, any, all, join, pluckFirst, upsert, getDisorderedEq,
+} from '../src/Array';
+import * as O from 'fp-ts/Option';
+import * as A from 'fp-ts/Array';
 import { contramap as eqContramap, eqNumber } from 'fp-ts/Eq';
 import { contramap as ordContramap, ordNumber } from 'fp-ts/Ord';
-import { Predicate } from 'fp-ts/function';
+import { flow, Predicate } from 'fp-ts/function';
 import fc from 'fast-check';
+import { fold, monoidSum } from 'fp-ts/Monoid';
+import { split } from '../src/String';
 
 describe('Array', () => {
+    describe('length', () => {
+        const f = length;
+
+        it('returns length of array', () => {
+            expect(f([])).toBe(0);
+            expect(f([1, 2, 3])).toBe(3);
+        });
+
+        it('returned value is always non-negative', () => {
+            fc.assert(fc.property(
+                fc.array(fc.anything()),
+                xs => f(xs) >= 0,
+            ));
+        });
+    });
+
+    describe('elemFlipped', () => {
+        const f = elemFlipped(eqNumber);
+
+        it('finds the element', () => {
+            expect(f([])(0)).toBe(false);
+            expect(f([1, 2, 3])(2)).toBe(true);
+            expect(f([1, 2, 3])(4)).toBe(false);
+        });
+    });
+
+    describe('any', () => {
+        const f = any<number>(n => n === 5);
+
+        it('returns false for empty input array', () => {
+            expect(f([])).toBe(false);
+        });
+
+        it('returns true if any predicate succeeds', () => {
+            expect(f([5])).toBe(true);
+            expect(f([3, 5])).toBe(true);
+            expect(f([5, 3])).toBe(true);
+            expect(f([5, 5])).toBe(true);
+        });
+
+        it('returns false if all predicates fail', () => {
+            expect(f([3])).toBe(false);
+            expect(f([3, 3])).toBe(false);
+        });
+    });
+
+    describe('all', () => {
+        const f = all<number>(n => n === 5);
+
+        it('returns true for empty input array', () => {
+            expect(f([])).toBe(true);
+        });
+
+        it('returns true if all predicates succeed', () => {
+            expect(f([5])).toBe(true);
+            expect(f([5, 5])).toBe(true);
+        });
+
+        it('returns false if any predicates fail', () => {
+            expect(f([3])).toBe(false);
+            expect(f([3, 3])).toBe(false);
+            expect(f([3, 5])).toBe(false);
+            expect(f([5, 3])).toBe(false);
+        });
+    });
+
+    describe('join', () => {
+        const delim = ',';
+        const f = join(delim);
+
+        it('joins', () => {
+            expect(f([])).toBe('');
+            expect(f(['x'])).toBe('x');
+            expect(f(['x', 'yz'])).toBe('x,yz');
+
+            fc.assert(fc.property(
+                fc.array(fc.string()),
+                xs => {
+                    const countDelims = flow(
+                        split(''),
+                        A.filter(c => c === delim),
+                        length,
+                    );
+
+                    const countDelimsA = flow(
+                        A.map(countDelims),
+                        fold(monoidSum),
+                    );
+
+                    return countDelims(f(xs)) === countDelimsA(xs) + Math.max(0, xs.length - 1);
+                },
+            ))
+        });
+    });
+
     describe('pluckFirst', () => {
         const p: Predicate<number> = x => x % 2 === 1;
         const f = pluckFirst(p);
 
         it('finds the item', () => {
-            expect(f([2, 3, 4])).toEqual([Option.some(3), [2, 4]]);
+            expect(f([2, 3, 4])).toEqual([O.some(3), [2, 4]]);
         });
 
         it('does not "find" an incorrect item', () => {
-            expect(f([2, 4, 6])).toEqual([Option.none, [2, 4, 6]]);
+            expect(f([2, 4, 6])).toEqual([O.none, [2, 4, 6]]);
         });
 
         it('removes only the first, left-most match', () => {
-            expect(f([2, 3, 4, 5])).toEqual([Option.some(3), [2, 4, 5]]);
+            expect(f([2, 3, 4, 5])).toEqual([O.some(3), [2, 4, 5]]);
         });
 
         it('does not mutate input', () => {
