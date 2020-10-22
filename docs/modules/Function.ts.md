@@ -14,6 +14,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [flip](#flip)
+  - [withIndex](#withindex)
 
 ---
 
@@ -35,3 +36,29 @@ export declare const flip: <A extends any[], B extends any[], C>(
 ```
 
 Added in v0.1.0
+
+## withIndex
+
+Given a curried function with an iterative callback, this returns a new
+function that behaves identically except that it also supplies an index for
+each iteration of the callback.
+
+**Signature**
+
+```ts
+export declare const withIndex: <A, B, C>(
+  f: (g: (x: A) => B) => (ys: A[]) => C[]
+) => (g: (i: number) => (x: A) => B) => (ys: A[]) => C[]
+```
+
+**Example**
+
+```ts
+import * as A from 'fp-ts/Array'
+import { withIndex } from 'fp-ts-std/Function'
+
+const mapWithIndex = withIndex<number, number, number>(A.map)
+assert.deepStrictEqual(mapWithIndex((i) => (x) => x + i)([1, 2, 3]), [1, 3, 5])
+```
+
+Added in v0.5.0

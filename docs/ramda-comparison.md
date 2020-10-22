@@ -12,7 +12,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 
 - [ ] \_\_
 - [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
-- [ ] addIndex
+- [x] addIndex - [fp-ts-std/Function::withIndex](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#addindex)
 - [x] adjust - [fp-ts/Array::modifyAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#modifyat)
 - [x] all - [fp-ts-std/Array::all](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#all)
 - [x] allPass - [fp-ts-std/Boolean::allPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#allpass)

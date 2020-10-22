@@ -168,6 +168,8 @@ Added in v0.1.0
 
 A functional wrapper around `String.prototype.matchAll`.
 
+If the provided `RegExp` is non-global, the function will return `None`.
+
 **Signature**
 
 ```ts
