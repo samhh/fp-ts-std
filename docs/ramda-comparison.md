@@ -8,36 +8,36 @@ permalink: /ramda
 
 fp-ts-std attempts to bridge the gap between [fp-ts](https://gcanti.github.io/fp-ts/modules/), a highly abstract library, and libraries like [Ramda](https://ramdajs.com/), which are focused on providing utility functions. Note also the presence of [fp-ts-ramda](https://github.com/giogonzo/fp-ts-ramda).
 
-Here's the status of all of Ramda's functions being potentially implemented in fp-ts-std. We hope that fp-ts-std's surface area will increase with time, not just with respect to Ramda but also more broadly (the library is only in its infancy):
+Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potentially implemented in fp-ts-std. We hope that fp-ts-std's surface area will increase with time, not just with respect to Ramda but also more broadly (the library is only in its infancy):
 
 - [ ] \_\_
-- [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)
+- [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] addIndex
-- [ ] adjust
+- [x] adjust - [fp-ts/Array::modifyAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#modifyat)
 - [x] all - [fp-ts-std/Array::all](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#all)
 - [x] allPass - [fp-ts-std/Boolean::allPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#allpass)
 - [x] always - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
-- [x] and - [fp-ts-std/Boolean::and](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#and)
+- [x] and - [fp-ts-std/Boolean::and](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#and)/[fp-ts/Semigroup::semigroupAll](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html#semigroupall)
 - [ ] andThen
 - [x] any - [fp-ts-std/Array::any](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#any)
 - [x] anyPass - [fp-ts-std/Boolean::anyPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#anypass)
-- [ ] ap
+- [x] ap - [fp-ts/Array::ap](https://gcanti.github.io/fp-ts/modules/Array.ts.html#ap)
 - [ ] aperture
 - [x] append - [fp-ts/Array::snoc](https://gcanti.github.io/fp-ts/modules/Array.ts.html#snoc)
 - [ ] apply
 - [ ] applySpec
 - [ ] applyTo
-- [ ] ascend
-- [ ] assoc
-- [ ] assocPath
+- [x] ascend - [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
+- [x] assoc - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] assocPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] binary
 - [ ] bind
 - [ ] both
 - [ ] call
-- [ ] chain
+- [x] chain - [fp-ts/Array::chain](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chain)
 - [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
 - [ ] clone
-- [x] comparator - [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
+- [x] comparator - [fp-ts/Ord::fromCompare](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#fromcompare)
 - [ ] complement
 - [ ] compose
 - [ ] composeK
@@ -47,19 +47,19 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] cond
 - [ ] construct
 - [ ] constructN
-- [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
+- [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)/[fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)
 - [ ] converge
 - [ ] countBy
 - [ ] curry
 - [ ] curryN
-- [x] dec - [fp-ts-std/Number::decrement](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#decrement)
+- [x] dec - [fp-ts-std/Number::decrement](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#decrement)/[fp-ts/function::decrement](https://gcanti.github.io/fp-ts/modules/function.ts.html#decrement]
 - [ ] defaultTo
-- [ ] descend
+- [x] descend - [fp-ts/Ord::ordNumber](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#ordnumber)/[fp-ts/Ord::getDualOrd](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#getdualord)
 - [x] difference - [fp-ts/Array::difference](https://gcanti.github.io/fp-ts/modules/Array.ts.html#difference)
 - [ ] differenceWith
-- [ ] dissoc
+- [x] dissoc - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
 - [ ] dissocPath
-- [x] divide - [fp-ts-std/Number::divide](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#divide)
+- [x] divide - [fp-ts-std/Number::divide](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#divide)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] drop - [fp-ts/Array::dropLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleft)
 - [ ] dropLast - [fp-ts/Array::dropRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropright)
 - [ ] dropLastWhile - [fp-ts/Array::dropLastWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#droplastwhile)
@@ -84,10 +84,10 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - ~~[ ] forEach~~ Use functor `map` instead.
 - ~~[ ] forEachObjIndexed~~ Use functor `map` instead.
 - [x] fromPairs - [fp-ts/Record::fromFoldable](https://gcanti.github.io/fp-ts/modules/Record.ts.html#fromfoldable)
-- [ ] groupBy
-- [ ] groupWith
+- [x] groupBy - [fp-ts/NonEmptyArray::groupBy](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#groupby)
+- [x] groupWith - [fp-ts/NonEmptyArray::group](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#group)
 - [x] gt - [fp-ts/Ord::gt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#gt)
-- [ ] gte
+- [x] gte - [fp-ts/Ord::geq](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#geq)
 - [x] has - [fp-ts/Record::hasOwnProperty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#hasownproperty-function)
 - [ ] hasIn
 - [x] hasPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
@@ -95,10 +95,10 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [x] identical - [fp-ts/Eq::eqStrict](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#eqstrict)
 - [x] identity - [fp-ts/function::identity](https://gcanti.github.io/fp-ts/modules/function.ts.html#identity)
 - [ ] ifElse
-- [x] inc - [fp-ts-std/Number::increment](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#increment)
+- [x] inc - [fp-ts-std/Number::increment](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#increment)/[fp-ts/function::increment](https://gcanti.github.io/fp-ts/modules/function.ts.html#increment]
 - [x] includes - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
-- [ ] indexBy
-- [ ] indexOf
+- [x] indexBy - [fp-ts/NonEmptyArray::groupBy](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#groupby)
+- [x] indexOf - [fp-ts/Array::indexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findindex)
 - [ ] init - [fp-ts/Array::init](https://gcanti.github.io/fp-ts/modules/Array.ts.html#init)
 - [ ] innerJoin
 - [x] insert - [fp-ts/Array::insertAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#insertat)
@@ -117,7 +117,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [x] keys - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [ ] keysIn
 - [ ] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)
-- [ ] lastIndexOf
+- [x] lastIndexOf - [fp-ts/Array::lastIndexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlastindex)
 - [x] length - [fp-ts-std/Array::length](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#length)
 - [x] lens - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensIndex - [monocle-ts](https://gcanti.github.io/monocle-ts/)
@@ -126,7 +126,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] lift
 - [ ] liftN
 - [x] lt - [fp-ts/Ord::lt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#lt)
-- [ ] lte
+- [x] lte - [fp-ts/Ord::leq](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#leq)
 - [x] map - [fp-ts/Array::map](https://gcanti.github.io/fp-ts/modules/Array.ts.html#map)
 - [ ] mapAccum
 - [ ] mapAccumRight
@@ -138,39 +138,39 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] mean
 - [ ] median
 - [ ] memoizeWith
-- [ ] merge
+- [x] merge - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [ ] mergeAll
-- [ ] mergeDeepLeft
-- [ ] mergeDeepRight
-- [ ] mergeDeepWith
-- [ ] mergeDeepWithKey
-- [ ] mergeLeft
-- [ ] mergeRight
-- [ ] mergeWith
+- [x] mergeDeepLeft - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
+- [x] mergeDeepRight - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
+- [x] mergeDeepWith - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
+- [x] mergeDeepWithKey - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
+- [x] mergeLeft - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
+- [x] mergeRight - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
+- [x] mergeWith - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [ ] mergeWithKey
 - [x] min - [fp-ts/Ord::min](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#min)
 - [ ] minBy
 - [ ] modulo
 - [ ] move
-- [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)
+- [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] nAry
-- [ ] negate
+- [x] negate - [fp-ts/Ring::negate](https://gcanti.github.io/fp-ts/modules/Ring.ts.html#negate)
 - [ ] none
-- [ ] not
+- [x] not - [fp-ts-std/Boolean::invert](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#invert)
 - [ ] nth - [fp-ts/Array::lookup](https://gcanti.github.io/fp-ts/modules/Array.ts.html#lookup)
 - [ ] nthArg
 - [ ] o
-- [ ] objOf
-- [ ] of
+- [x] objOf - [fp-ts/Record::singleton](https://gcanti.github.io/fp-ts/modules/Record.ts.html#singleton)
+- [x] of - [fp-ts/Array::of](https://gcanti.github.io/fp-ts/modules/Array.ts.html#of)
 - [x] omit - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
 - [ ] once
-- [x] or - [fp-ts-std/Boolean::or](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#or)
+- [x] or - [fp-ts-std/Boolean::or](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#or)/[fp-ts/Semigroup::semigroupAny](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html#semigroupall)
 - [ ] otherwise
 - [x] over - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] pair - [fp-ts/function::tuple](https://gcanti.github.io/fp-ts/modules/function.ts.html#tuple)
 - [ ] partial
 - [ ] partialRight
-- [ ] partition
+- [x] partition - [fp-ts/Array::partition](https://gcanti.github.io/fp-ts/modules/Array.ts.html#partition)
 - [x] path - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] pathEq
 - [ ] pathOr
@@ -201,7 +201,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] reduceWhile
 - [ ] reject
 - [ ] remove
-- [ ] repeat
+- [x] repeat - [fp-ts/Array::replicate](https://gcanti.github.io/fp-ts/modules/Array.ts.html#replicate)
 - [ ] replace
 - [x] reverse - [fp-ts/Array::reverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reverse)/[fp-ts-std/String::reverse](https://samhh.github.io/fp-ts-std/modules/String.ts.html#reverse)
 - [x] scan - [fp-ts/Array::scanLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#scanleft)
@@ -212,11 +212,11 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [x] sortBy - [fp-ts/Array::sort](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sort)
 - [x] sortWith - [fp-ts/Array::sortBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sortBy)
 - [x] split - [fp-ts-std/String::split](https://samhh.github.io/fp-ts-std/modules/String.ts.html#split)/[fp-ts-contrib/RegExp::split](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#split)
-- [ ] splitAt
-- [ ] splitEvery
+- [x] splitAt - [fp-ts/Array::splitAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#splitat)
+- [x] splitEvery - [fp-ts/Array::chunksOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chunksof)
 - [ ] splitWhen
 - [ ] startsWith - [fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)
-- [x] subtract - [fp-ts-std/Number::subtract](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#subtract)
+- [x] subtract - [fp-ts-std/Number::subtract](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#subtract)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - ~~[ ] sum~~ Use `fold(monoidSum)` instead.
 - [ ] symmetricDifference
 - [ ] symmetricDifferenceWith
@@ -229,7 +229,7 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] tap
 - [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)/[fp-ts-contrib/RegExp::test](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#test)
 - [ ] thunkify
-- [ ] times
+- [x] times - [fp-ts/Array::makeBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#makeby)
 - [ ] toLower
 - [x] toPairs - [fp-ts/Record::collect](https://gcanti.github.io/fp-ts/modules/Record.ts.html#collect)
 - [ ] toPairsIn
@@ -244,16 +244,16 @@ Here's the status of all of Ramda's functions being potentially implemented in f
 - [ ] unapply
 - [ ] unary
 - [ ] uncurryN
-- [ ] unfold
+- [x] unfold - [fp-ts/Array::unfold](https://gcanti.github.io/fp-ts/modules/Array.ts.html#unfold)
 - [x] union - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
 - [x] unionWith - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
 - [x] uniq - [fp-ts/Array::uniq](https://gcanti.github.io/fp-ts/modules/Array.ts.html#uniq)
 - [ ] uniqBy
 - [ ] uniqWith
 - [ ] unless
-- [ ] unnest
+- [x] unnest - [fp-ts/Array::flatten](https://gcanti.github.io/fp-ts/modules/Array.ts.html#flatten)
 - [ ] until
-- [ ] update
+- [x] update - [fp-ts/Array::updateAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#updateat)
 - [ ] useWith
 - [x] values - [fp-ts-std/Record::values](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#values)
 - [ ] valuesIn
