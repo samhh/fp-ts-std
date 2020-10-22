@@ -174,7 +174,6 @@ export const takeRight = (n: number): Endomorphism<string> => x =>
  * @since 0.1.0
  */
 export const match = (r: RegExp) => (x: string): Option<RegExpMatchArray> =>
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
     O.fromNullable(x.match(r));
 
 /**
