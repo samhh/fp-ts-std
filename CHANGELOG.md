@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## _Unreleased_
+
+- Remove `getInvertedOrd` from `Ord` module (removing the `Ord` module entirely) as it's a duplicate of `getDualOrd` in fp-ts.
+
 ## 0.4.0 (2020-10-21)
 
 - Add the `invert`, `and`, `or`, `xor`, `allPass`, and `anyPass` functions to the `Boolean` module.
