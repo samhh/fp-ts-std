@@ -19,18 +19,11 @@ import * as O from 'fp-ts/Option';
 export const length = (xs: Array<unknown>): number => xs.length;
 
 /**
- * Check if an array contains a given item.
+ * Like `fp-ts/Array::elem`, but flipped.
  *
  * @since 0.1.0
  */
-export const contains = A.elem;
-
-/**
- * Like `contains`, but flipped.
- *
- * @since 0.1.0
- */
-export const containsFlipped = <A>(eq: Eq<A>) => (xs: Array<A>): Predicate<A> => y => A.elem(eq)(y)(xs);
+export const elemFlipped = <A>(eq: Eq<A>) => (xs: Array<A>): Predicate<A> => y => A.elem(eq)(y)(xs);
 
 /**
  * Check if a predicate holds true for any array member.

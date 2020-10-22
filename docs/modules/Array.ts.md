@@ -15,8 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [all](#all)
   - [any](#any)
-  - [contains](#contains)
-  - [containsFlipped](#containsflipped)
+  - [elemFlipped](#elemflipped)
   - [getDisorderedEq](#getdisorderedeq)
   - [join](#join)
   - [length](#length)
@@ -51,26 +50,14 @@ export declare const any: <A>(f: Predicate<A>) => Predicate<A[]>
 
 Added in v0.1.0
 
-## contains
+## elemFlipped
 
-Check if an array contains a given item.
-
-**Signature**
-
-```ts
-export declare const contains: <A>(E: Eq<A>) => { (a: A): (as: A[]) => boolean; (a: A, as: A[]): boolean }
-```
-
-Added in v0.1.0
-
-## containsFlipped
-
-Like `contains`, but flipped.
+Like `fp-ts/Array::elem`, but flipped.
 
 **Signature**
 
 ```ts
-export declare const containsFlipped: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
+export declare const elemFlipped: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
 ```
 
 Added in v0.1.0
