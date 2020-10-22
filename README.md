@@ -14,6 +14,14 @@ fp-ts is listed as a peer dependency.
 
 Some of the more commonly needed functions from [fp-ts-contrib](https://gcanti.github.io/fp-ts-contrib/docs/modules) are duplicated here.
 
+## Objectives
+
+fp-ts-std aims to achieve the following objectives:
+
+- Flesh out what fp-ts is missing
+- Fill in the gaps between fp-ts and Ramda
+- Wrap JS APIs to be friendly, so that you never have to interact with `null` or `undefined`, or worry about a function throwing again
+
 ## Ethos
 
 fp-ts-std strives to adhere to the following principles:
