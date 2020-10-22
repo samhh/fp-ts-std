@@ -3,6 +3,7 @@ module.exports = {
     testEnvironment: 'node',
     testRegex: '\/test\/',
     collectCoverage: true,
+    coverageProvider: 'v8',
     coverageThreshold: {
         global: {
             branches: 100,
