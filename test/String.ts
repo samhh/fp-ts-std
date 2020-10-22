@@ -1,7 +1,14 @@
 import {
-    lines, unlines, surround, unsurround, startsWith, endsWith, takeLeft, takeRight, reverse,
+    lines, unlines, surround, unsurround, startsWith, endsWith, takeLeft,
+    takeRight, reverse, match, matchAll, prepend, unprepend, append, unappend,
+    contains, length, fromNumber, isString, isEmpty, trim, trimLeft, trimRight,
+    concat, split, test,
 } from '../src/String';
+import * as O from 'fp-ts/Option';
+import * as NEA from 'fp-ts/NonEmptyArray';
+import { flow } from 'fp-ts/function';
 import fc from 'fast-check';
+import { invert } from '../src/Boolean';
 
 describe('String', () => {
     describe('lines', () => {
@@ -202,6 +209,353 @@ describe('String', () => {
         it('reverses input string', () => {
             expect(f('')).toBe('');
             expect(f('ab c')).toBe('c ba');
+        });
+    });
+
+    describe('contains', () => {
+        const f = contains('abc');
+
+        it('does not detect substring if not all present', () => {
+            expect(f('')).toBe(false);
+            expect(f('ab')).toBe(false);
+            expect(f('bc')).toBe(false);
+            expect(f('ac')).toBe(false);
+        });
+
+        it('does not detect substring of incorrect casing', () => {
+            expect(f('aBc')).toBe(false);
+        });
+
+        it('does not detect substring out of order', () => {
+            expect(f('acb')).toBe(false);
+            expect(f('cba')).toBe(false);
+            expect(f('axbc')).toBe(false);
+        });
+
+        it('detects present substring in-order', () => {
+            expect(f('abc')).toBe(true);
+            expect(f('xabc')).toBe(true);
+            expect(f('abcx')).toBe(true);
+            expect(f('xabcx')).toBe(true);
+        });
+    });
+
+    describe('match', () => {
+        // Jest won't deep match a plain array against RegExpMatchArray as it
+        // includes extra non-enumerable properties
+        const f = flow(match(/^(\d)(\w)$/), O.map(xs => Array.from(xs)));
+
+        it('works', () => {
+            expect(f('2e')).toEqual(O.some(['2e', '2', 'e']));
+            expect(f('foo')).toEqual(O.none);
+        });
+    });
+
+    describe('matchAll', () => {
+        const f = matchAll;
+
+        it('works with global regex', () => {
+            // Jest won't deep match a plain array against RegExpMatchArray as
+            // it includes extra non-enumerable properties
+            const g = flow(f(/t(e)(st(\d?))/g), O.map(NEA.map(xs => Array.from(xs))));
+
+            expect(g('test1test2')).toEqual(O.some([['test1', 'e', 'st1', '1'], ['test2', 'e', 'st2', '2']]));
+            expect(g('foo')).toEqual(O.none);
+        });
+
+        it('does not throw with non-global regex', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                flow(f(/x/), O.isNone),
+            ))
+        });
+    });
+
+    describe('prepend', () => {
+        const f = prepend;
+
+        it('prepends', () => {
+            expect(f('')('')).toBe('');
+            expect(f('x')('')).toBe('x');
+            expect(f('')('x')).toBe('x');
+            expect(f('x')('yz')).toBe('xyz');
+
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => f(x)(y).length === x.length + y.length && f(y)(x).length === x.length + y.length,
+            ))
+        });
+    });
+
+    describe('unprepend', () => {
+        const f = unprepend;
+
+        it('does not unprepend what isn\'t there', () => {
+            expect(f('')('')).toBe('');
+            expect(f('x')('')).toBe('');
+            expect(f('')('x')).toBe('x');
+        });
+
+        it('unprepends if present', () => {
+            expect(f('x')('xy')).toBe('y');
+            expect(f('x')('xx')).toBe('x');
+
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => f(x)(x + y) === y,
+            ))
+        });
+    });
+
+    describe('append', () => {
+        const f = append;
+
+        it('appends', () => {
+            expect(f('')('')).toBe('');
+            expect(f('x')('')).toBe('x');
+            expect(f('')('x')).toBe('x');
+            expect(f('z')('xy')).toBe('xyz');
+
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => f(x)(y).length === x.length + y.length && f(y)(x).length === x.length + y.length,
+            ))
+        });
+    });
+
+    describe('unappend', () => {
+        const f = unappend;
+
+        it('does not unappend what isn\'t there', () => {
+            expect(f('')('')).toBe('');
+            expect(f('x')('')).toBe('');
+            expect(f('')('x')).toBe('x');
+        });
+
+        it('unappends if present', () => {
+            expect(f('y')('xy')).toBe('x');
+            expect(f('x')('xx')).toBe('x');
+
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => f(x)(y + x) === y,
+            ))
+        });
+    });
+
+    describe('length', () => {
+        const f = length;
+
+        it('returns length of string', () => {
+            expect(f('')).toBe(0);
+            expect(f('abc')).toBe(3);
+        });
+
+        it('returned value is always non-negative', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                xs => f(xs) >= 0,
+            ));
+        });
+    });
+
+    describe('fromNumber', () => {
+        const f = fromNumber;
+
+        it('does not modify the number at all', () => {
+            fc.assert(fc.property(
+                fc.oneof(fc.integer(), fc.float()),
+                n => n === Number(f(n)),
+            ));
+        });
+
+        it('always returns a string', () => {
+            fc.assert(fc.property(
+                fc.oneof(fc.integer(), fc.float()),
+                flow(f, isString),
+            ))
+        });
+    });
+
+    describe('isString', () => {
+        const f = isString;
+
+        it('returns true for any string', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                f,
+            ));
+        });
+
+        it('returns false for any other type', () => {
+            fc.assert(fc.property(
+                fc.oneof(fc.integer(), fc.boolean(), fc.constant(null), fc.constant(undefined), fc.object()),
+                flow(f, invert),
+            ))
+        });
+    });
+
+    describe('isEmpty', () => {
+        const f = isEmpty;
+
+        it('returns true if empty', () => {
+            expect(f('')).toBe(true);
+        });
+
+        it('returns false for non-empty', () => {
+            fc.assert(fc.property(
+                fc.string().filter(x => x !== ''),
+                flow(f, invert),
+            ))
+        });
+    });
+
+    describe('trim', () => {
+        const f = trim;
+
+        it('leaves alone that which doesn\'t require trimming', () => {
+            expect(f('a b c')).toBe('a b c');
+        });
+
+        it('trims the left side', () => {
+            expect(f(' a b c')).toBe('a b c');
+            expect(f('  a b c')).toBe('a b c');
+        });
+
+        it('trims the right side', () => {
+            expect(f('a b c ')).toBe('a b c');
+            expect(f('a b c  ')).toBe('a b c');
+        });
+
+        it('trims both sides', () => {
+            expect(f(' a b c ')).toBe('a b c');
+            expect(f('  a b c  ')).toBe('a b c');
+        });
+
+        it('never leaves whitespaces as head or last char', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                flow(f, x => x[0] !== ' ' && x[Math.max(0, x.length - 1)] !== ' '),
+            ));
+        });
+    });
+
+    describe('trimLeft', () => {
+        const f = trimLeft;
+
+        it('leaves alone that which doesn\'t require trimming', () => {
+            expect(f('a b c')).toBe('a b c');
+        });
+
+        it('trims the left side', () => {
+            expect(f(' a b c')).toBe('a b c');
+            expect(f('  a b c')).toBe('a b c');
+        });
+
+        it('does not trim the right side', () => {
+            expect(f('a b c ')).toBe('a b c ');
+            expect(f('a b c  ')).toBe('a b c  ');
+        });
+
+        it('never leaves whitespaces as head char', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                flow(f, x => x[0] !== ' '),
+            ));
+        });
+    });
+
+    describe('trimRight', () => {
+        const f = trimRight;
+
+        it('leaves alone that which doesn\'t require trimming', () => {
+            expect(f('a b c')).toBe('a b c');
+        });
+
+        it('trims the right side', () => {
+            expect(f('a b c ')).toBe('a b c');
+            expect(f('a b c  ')).toBe('a b c');
+        });
+
+        it('does not trim the left side', () => {
+            expect(f(' a b c')).toBe(' a b c');
+            expect(f('  a b c')).toBe('  a b c');
+        });
+
+        it('never leaves whitespaces as last char', () => {
+            fc.assert(fc.property(
+                fc.string(),
+                flow(f, x => x[Math.max(0, x.length - 1)] !== ' '),
+            ));
+        });
+    });
+
+    describe('concat', () => {
+        const f = concat;
+
+        it('concats any two strings', () => {
+            fc.assert(fc.property(
+                fc.string(), fc.string(),
+                (x, y) => {
+                    const z = f(x)(y);
+
+                    return z === x + y && z.length === x.length + y.length && z.startsWith(x) && z.endsWith(y);
+                },
+            ));
+        });
+    });
+
+    describe('split', () => {
+        const g = split;
+
+        describe('splits on regexp', () => {
+            const f = g(/\.\./);
+
+            it('lifts unmodified string which cannot be split', () => {
+                expect(f('.')).toEqual(['.']);
+                expect(f('.x.')).toEqual(['.x.']);
+            });
+
+            it('splits on each recognised', () => {
+                expect(f('a..b')).toEqual(['a', 'b']);
+                expect(f('a..b..')).toEqual(['a', 'b', '']);
+                expect(f('..a..b')).toEqual(['', 'a', 'b']);
+                expect(f('..a..b..')).toEqual(['', 'a', 'b', '']);
+                expect(f('.....')).toEqual(['', '', '.']);
+            });
+        });
+
+        describe('splits on string', () => {
+            const f = g('..');
+
+            it('lifts unmodified string which cannot be split', () => {
+                expect(f('.')).toEqual(['.']);
+                expect(f('.x.')).toEqual(['.x.']);
+            });
+
+            it('splits on each recognised', () => {
+                expect(f('a..b')).toEqual(['a', 'b']);
+                expect(f('a..b..')).toEqual(['a', 'b', '']);
+                expect(f('..a..b')).toEqual(['', 'a', 'b']);
+                expect(f('..a..b..')).toEqual(['', 'a', 'b', '']);
+                expect(f('.....')).toEqual(['', '', '.']);
+
+                fc.assert(fc.property(
+                    fc.string(),
+                    (x) => f(x).length === Array.from(x.matchAll(/\.\./g)).length + 1,
+                ));
+            });
+        });
+    });
+
+    describe('test', () => {
+        const f = test(/x.z/);
+
+        it('works', () => {
+            expect(f('xyz')).toBe(true);
+            expect(f('axyzb')).toBe(true);
+            expect(f('ayz')).toBe(false);
+            expect(f('xya')).toBe(false);
         });
     });
 });
