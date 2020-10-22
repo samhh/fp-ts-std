@@ -3,13 +3,14 @@ module.exports = {
     testEnvironment: 'node',
     testRegex: '\/test\/',
     collectCoverage: true,
+    collectCoverageFrom: ['./src/**/*'],
     coverageProvider: 'v8',
     coverageThreshold: {
         global: {
-            branches: 100,
-            functions: 99,
-            lines: 99,
-            statements: 99,
+            branches: 95,
+            functions: 90,
+            lines: 78,
+            statements: 78,
         },
     },
     globals: {
