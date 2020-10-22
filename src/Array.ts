@@ -48,7 +48,7 @@ export const all = <A>(f: Predicate<A>): Predicate<Array<A>> => xs => xs.every(f
 export const join = (x: string) => (ys: Array<string>): string => ys.join(x);
 
 /**
- * Like `fp-ts/lib/Array::getEq`, but items are not required to be in the same
+ * Like `fp-ts/Array::getEq`, but items are not required to be in the same
  * order to determine equivalence. This function is therefore less efficient,
  * and `getEq` should be preferred on ordered data.
  *
@@ -66,7 +66,7 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
  * Pluck the first item out of an array matching a predicate. Any further
  * matches will be left untouched.
  *
- * This can be thought of as analagous to `fp-ts/lib/Array::findFirst` where
+ * This can be thought of as analagous to `fp-ts/Array::findFirst` where
  * the remaining items, sans the match (if any), are returned as well.
  *
  * @since 0.1.0

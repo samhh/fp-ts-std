@@ -1,4 +1,4 @@
-import {constFalse, constTrue} from 'fp-ts/lib/function';
+import { constFalse, constTrue } from 'fp-ts/function';
 import { invert, and, or, xor, allPass, anyPass } from '../src/Boolean';
 
 describe('Boolean', () => {
