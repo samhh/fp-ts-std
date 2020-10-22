@@ -179,10 +179,12 @@ export const match = (r: RegExp) => (x: string): Option<RegExpMatchArray> =>
 /**
  * A functional wrapper around `String.prototype.matchAll`.
  *
+ * If the provided `RegExp` is non-global, the function will return `None`.
+ *
  * @since 0.5.0
  */
 export const matchAll = (r: RegExp) => (x: string): Option<NonEmptyArray<RegExpMatchArray>> =>
-    NEA.fromArray(Array.from(x.matchAll(r)));
+    pipe(O.tryCatch(() => x.matchAll(r)), O.chain(flow(xs => Array.from(xs), NEA.fromArray)));
 
 /**
  * Split a string into substrings using the specified separator and return them
