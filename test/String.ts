@@ -266,7 +266,7 @@ describe('String', () => {
         it('does not throw with non-global regex', () => {
             fc.assert(fc.property(
                 fc.string(),
-                flow(f(/x/), O.isNone),
+                (x) => { f(/x/)(x); }, // eslint-disable-line functional/no-expression-statement
             ))
         });
     });
