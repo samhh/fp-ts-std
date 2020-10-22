@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## _Unreleased_
 
+- Replace `exec` in the `String` module with `matchAll`.
 - Remove `contains` from the `Array` module as it's a duplicate of `elem` in fp-ts.
 - Rename `containsFlipped` in the `Array` module to `elemFlipped` for consistency with fp-ts.
 - Remove `getInvertedOrd` from `Ord` module (removing the `Ord` module entirely) as it's a duplicate of `getDualOrd` in fp-ts.

@@ -5,6 +5,8 @@
 import { pipe, Predicate, Refinement, Endomorphism, flow } from 'fp-ts/function';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
+import { NonEmptyArray } from 'fp-ts/NonEmptyArray';
+import * as NEA from 'fp-ts/NonEmptyArray';
 import * as A from 'fp-ts/Array';
 import { join } from './Array';
 
@@ -176,6 +178,14 @@ export const match = (r: RegExp) => (x: string): Option<RegExpMatchArray> =>
     O.fromNullable(x.match(r));
 
 /**
+ * A functional wrapper around `String.prototype.matchAll`.
+ *
+ * @since 0.5.0
+ */
+export const matchAll = (r: RegExp) => (x: string): Option<NonEmptyArray<RegExpMatchArray>> =>
+    NEA.fromArray(Array.from(x.matchAll(r)));
+
+/**
  * Split a string into substrings using the specified separator and return them
  * as an array.
  *
@@ -209,14 +219,6 @@ export const lines = split(/\r\n|\r|\n/);
  * @since 0.1.0
  */
 export const unlines = join('\n');
-
-/**
- * A functional wrapper around `RegExp.prototype.exec`.
- *
- * @since 0.2.0
- */
-export const exec = (r: RegExp) => (x: string): Option<RegExpExecArray> =>
-    pipe(r.exec(x), O.fromNullable);
 
 /**
  * A functional wraper around `RegExp.prototype.test`.

@@ -17,13 +17,13 @@ Added in v0.1.0
   - [concat](#concat)
   - [contains](#contains)
   - [endsWith](#endswith)
-  - [exec](#exec)
   - [fromNumber](#fromnumber)
   - [isEmpty](#isempty)
   - [isString](#isstring)
   - [length](#length)
   - [lines](#lines)
   - [match](#match)
+  - [matchAll](#matchall)
   - [prepend](#prepend)
   - [reverse](#reverse)
   - [split](#split)
@@ -91,18 +91,6 @@ export declare const endsWith: (substring: string) => Predicate<string>
 ```
 
 Added in v0.3.0
-
-## exec
-
-A functional wrapper around `RegExp.prototype.exec`.
-
-**Signature**
-
-```ts
-export declare const exec: (r: RegExp) => (x: string) => Option<RegExpExecArray>
-```
-
-Added in v0.2.0
 
 ## fromNumber
 
@@ -175,6 +163,18 @@ export declare const match: (r: RegExp) => (x: string) => Option<RegExpMatchArra
 ```
 
 Added in v0.1.0
+
+## matchAll
+
+A functional wrapper around `String.prototype.matchAll`.
+
+**Signature**
+
+```ts
+export declare const matchAll: (r: RegExp) => (x: string) => Option<NonEmptyArray<RegExpMatchArray>>
+```
+
+Added in v0.5.0
 
 ## prepend
 
