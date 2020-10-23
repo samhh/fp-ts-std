@@ -30,7 +30,7 @@ correctly for generic functions.
 **Signature**
 
 ```ts
-export declare const flip: <A extends any[], B extends any[], C>(
+export declare const flip: <A extends unknown[], B extends unknown[], C>(
   f: (...a: A) => (...b: B) => C
 ) => (...b: B) => (...a: A) => C
 ```

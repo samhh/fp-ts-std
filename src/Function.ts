@@ -11,8 +11,8 @@
  * @since 0.1.0
  */
 export const flip = <
-    A extends Array<any>, // eslint-disable-line @typescript-eslint/no-explicit-any
-    B extends Array<any>, // eslint-disable-line @typescript-eslint/no-explicit-any
+    A extends Array<unknown>,
+    B extends Array<unknown>,
     C,
 // eslint-disable-next-line functional/functional-parameters
 >(f: (...a: A) => (...b: B) => C) => (...b: B) => (...a: A): C => f(...a)(...b);
