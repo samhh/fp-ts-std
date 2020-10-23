@@ -159,7 +159,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [x] not - [fp-ts-std/Boolean::invert](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#invert)
 - [ ] nth - [fp-ts/Array::lookup](https://gcanti.github.io/fp-ts/modules/Array.ts.html#lookup)
 - [ ] nthArg
-- [ ] o
+- ~~[ ] o~~ Use [flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) instead.
 - [x] objOf - [fp-ts/Record::singleton](https://gcanti.github.io/fp-ts/modules/Record.ts.html#singleton)
 - [x] of - [fp-ts/Array::of](https://gcanti.github.io/fp-ts/modules/Array.ts.html#of)
 - [x] omit - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
