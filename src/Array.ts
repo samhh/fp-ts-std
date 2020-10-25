@@ -10,6 +10,7 @@ import * as NEA from 'fp-ts/NonEmptyArray';
 import * as A from 'fp-ts/Array';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
+import { reduceM } from 'fp-ts/Foldable';
 
 /**
  * Get the length of an array.
@@ -93,5 +94,29 @@ export const upsert = <A>(eqA: Eq<A>) => (x: A) => (ys: Array<A>): NonEmptyArray
     O.map((i) => A.unsafeUpdateAt(i, x, ys)),
     O.chain(NEA.fromArray),
     O.getOrElse(() => NEA.snoc(ys, x)),
+);
+
+/**
+ * Insert all the elements of an array into another array at the specified
+ * index. Returns `None` if the index is out of bounds.
+ *
+ * The array of elements to insert must be non-empty.
+ *
+ * @example
+ * import { insertMany } from 'fp-ts-std/Array';
+ * import * as O from 'fp-ts/Option';
+ *
+ * const f = insertMany(1)(['a', 'b']);
+ * assert.deepStrictEqual(f([]), O.none);
+ * assert.deepStrictEqual(f(['x']), O.some(['x', 'a', 'b']));
+ * assert.deepStrictEqual(f(['x', 'y']), O.some(['x', 'a', 'b', 'y']));
+ *
+ * @since 0.5.0
+ */
+export const insertMany = (i: number) => <A>(xs: NonEmptyArray<A>) => (ys: Array<A>): Option<NonEmptyArray<A>> => pipe(
+    xs,
+    A.reverse,
+    reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
+    O.chain(NEA.fromArray),
 );
 

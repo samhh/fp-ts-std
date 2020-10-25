@@ -102,7 +102,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [ ] init - [fp-ts/Array::init](https://gcanti.github.io/fp-ts/modules/Array.ts.html#init)
 - [ ] innerJoin
 - [x] insert - [fp-ts/Array::insertAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#insertat)
-- [ ] insertAll
+- [x] insertAll - [fp-ts-std/Array::insertMany](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#insertmany)
 - [x] intersection - [fp-ts/Array::intersection](https://gcanti.github.io/fp-ts/modules/Array.ts.html#intersection)
 - [ ] intersperse
 - [ ] into

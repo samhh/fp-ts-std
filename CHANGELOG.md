@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## _Unreleased_
 
+- Add `insertMany` function to the `Array` module.
 - Add `withIndex` function to the `Function` module.
 - Add `both` and `either` functions to the `Boolean` module.
 - Replace `exec` in the `String` module with `matchAll`.

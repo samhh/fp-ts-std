@@ -17,6 +17,7 @@ Added in v0.1.0
   - [any](#any)
   - [elemFlipped](#elemflipped)
   - [getDisorderedEq](#getdisorderedeq)
+  - [insertMany](#insertmany)
   - [join](#join)
   - [length](#length)
   - [pluckFirst](#pluckfirst)
@@ -75,6 +76,33 @@ export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<A[]>
 ```
 
 Added in v0.1.0
+
+## insertMany
+
+Insert all the elements of an array into another array at the specified
+index. Returns `None` if the index is out of bounds.
+
+The array of elements to insert must be non-empty.
+
+**Signature**
+
+```ts
+export declare const insertMany: (i: number) => <A>(xs: NonEmptyArray<A>) => (ys: A[]) => Option<NonEmptyArray<A>>
+```
+
+**Example**
+
+```ts
+import { insertMany } from 'fp-ts-std/Array'
+import * as O from 'fp-ts/Option'
+
+const f = insertMany(1)(['a', 'b'])
+assert.deepStrictEqual(f([]), O.none)
+assert.deepStrictEqual(f(['x']), O.some(['x', 'a', 'b']))
+assert.deepStrictEqual(f(['x', 'y']), O.some(['x', 'a', 'b', 'y']))
+```
+
+Added in v0.5.0
 
 ## join
 

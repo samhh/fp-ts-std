@@ -1,14 +1,15 @@
 import {
-    length, elemFlipped, any, all, join, pluckFirst, upsert, getDisorderedEq,
+    length, elemFlipped, any, all, join, pluckFirst, upsert, getDisorderedEq, insertMany,
 } from '../src/Array';
 import * as O from 'fp-ts/Option';
 import * as A from 'fp-ts/Array';
 import { contramap as eqContramap, eqNumber } from 'fp-ts/Eq';
 import { contramap as ordContramap, ordNumber } from 'fp-ts/Ord';
-import { flow, Predicate } from 'fp-ts/function';
+import { flow, pipe, Predicate } from 'fp-ts/function';
 import fc from 'fast-check';
 import { fold, monoidSum } from 'fp-ts/Monoid';
 import { split } from '../src/String';
+import { NonEmptyArray } from 'fp-ts/NonEmptyArray';
 
 describe('Array', () => {
     describe('length', () => {
@@ -188,6 +189,41 @@ describe('Array', () => {
 
         it('disregards initial indices', () => {
             expect(f([y, z], [z, y])).toBe(true);
+        });
+    });
+
+    describe('insertMany', () => {
+        const f = insertMany;
+        const g = f(1)(['a', 'b']);
+
+        it('returns None if index is out of bounds', () => {
+            expect(g([])).toEqual(O.none);
+        });
+
+        it('returns updated array wrapped in Some if index is okay', () => {
+            expect(f(0)(['x'])([])).toEqual(O.some(['x']));
+            expect(g(['x'])).toEqual(O.some(['x', 'a', 'b']));
+            expect(g(['x', 'y'])).toEqual(O.some(['x', 'a', 'b', 'y']));
+
+            fc.assert(fc.property(
+                fc.array(fc.anything(), 1, 5) as fc.Arbitrary<NonEmptyArray<unknown>>, fc.integer(0, 10),
+                (xs, i) => O.isSome(f(i)(xs)(xs)) === i <= xs.length,
+            ));
+
+            fc.assert(fc.property(
+                fc.array(fc.string(), 1, 20),
+                xs => expect(pipe(g(xs), O.map(length))).toEqual(O.some(xs.length + 2)),
+            ));
+        });
+
+        it('does not mutate input', () => {
+            fc.assert(fc.property(
+                fc.array(fc.string(), 2, 2).filter(x => x[1] !== 'b'),
+                xs => {
+                    const y = g(xs);
+                    return O.isSome(y) && y.value[1] !== xs[1];
+                },
+            ))
         });
     });
 });
