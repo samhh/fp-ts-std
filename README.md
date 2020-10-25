@@ -27,10 +27,9 @@ fp-ts-std aims to achieve the following objectives:
 fp-ts-std strives to adhere to the following principles:
 
 - Strict type-safety wherever possible, with risks well documented
-- Everything is curried and data-last
-- Never mutate input data
-- Always document side effects
-- Lean towards Haskell naming conventions and idioms
+- All functions are curried, data-last, and total
+- Never mutate input data, and side effects well documented
+- Lean towards Haskell naming conventions and idioms with an eye to fp-ts norms
 
 ## Contributing
 

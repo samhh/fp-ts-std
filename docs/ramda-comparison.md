@@ -1,10 +1,10 @@
 ---
-title: As Compared to Ramda
+title: As compared to Ramda
 nav_order: 2
 permalink: /ramda
 ---
 
-# As Compared to Ramda
+# As compared to Ramda
 
 fp-ts-std attempts to bridge the gap between [fp-ts](https://gcanti.github.io/fp-ts/modules/), a highly abstract library, and libraries like [Ramda](https://ramdajs.com/), which are focused on providing utility functions. Note also the presence of [fp-ts-ramda](https://github.com/giogonzo/fp-ts-ramda).
 
