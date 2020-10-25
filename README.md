@@ -30,6 +30,7 @@ fp-ts-std strives to adhere to the following principles:
 - All functions are curried, data-last, and total
 - Never mutate input data, and side effects well documented
 - Lean towards Haskell naming conventions and idioms with an eye to fp-ts norms
+- 100% testing coverage
 
 ## Contributing
 
