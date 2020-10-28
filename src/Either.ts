@@ -17,3 +17,15 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
     return x.right;
 };
 
+/**
+ * Unwrap the value from within an `Either`, throwing if `Right`.
+ *
+ * @since 0.5.0
+ */
+export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
+    // eslint-disable-next-line functional/no-conditional-statement, functional/no-throw-statement
+    if (E.isRight(x)) throw 'Unsafe attempt to unwrap Either failed';
+
+    return x.left;
+};
+

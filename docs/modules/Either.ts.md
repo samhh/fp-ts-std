@@ -14,6 +14,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [unsafeUnwrap](#unsafeunwrap)
+  - [unsafeUnwrapLeft](#unsafeunwrapleft)
 
 ---
 
@@ -30,3 +31,15 @@ export declare const unsafeUnwrap: <A>(x: Either<unknown, A>) => A
 ```
 
 Added in v0.1.0
+
+## unsafeUnwrapLeft
+
+Unwrap the value from within an `Either`, throwing if `Right`.
+
+**Signature**
+
+```ts
+export declare const unsafeUnwrapLeft: <E>(x: Either<E, unknown>) => E
+```
+
+Added in v0.5.0

@@ -1,4 +1,4 @@
-import { unsafeUnwrap } from '../src/Either';
+import { unsafeUnwrap, unsafeUnwrapLeft } from '../src/Either';
 import * as E from 'fp-ts/Either';
 
 describe('Either', () => {
@@ -11,6 +11,18 @@ describe('Either', () => {
 
         it('throws Left', () => {
             expect(() => f(E.left(undefined))).toThrow();
+        });
+    });
+
+    describe('unsafeUnwrapLeft', () => {
+        const f = unsafeUnwrapLeft;
+
+        it('unwraps Left', () => {
+            expect(f(E.left(123))).toBe(123);
+        });
+
+        it('throws Right', () => {
+            expect(() => f(E.right(undefined))).toThrow();
         });
     });
 });
