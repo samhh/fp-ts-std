@@ -1,9 +1,12 @@
-import { stringifyPrimitive, stringify, stringifyO, parse, parseO } from '../src/JSON';
+import { stringifyPrimitive, stringify, stringifyO, unstringify, parse, parseO, JSONString } from '../src/JSON';
 import fc from 'fast-check';
 import { constant, constTrue, flow, identity } from 'fp-ts/function';
 import * as E from 'fp-ts/Either';
 import * as O from 'fp-ts/Option';
 import { isString } from '../src/String';
+
+const stringifyPrimitiveUnwrapped = (x: Parameters<typeof stringifyPrimitive>[0]): string =>
+    stringifyPrimitive(x) as unknown as string;
 
 describe('JSON', () => {
     describe('stringifyPrimitive', () => {
@@ -72,6 +75,14 @@ describe('JSON', () => {
         });
     });
 
+    describe('unstringify', () => {
+        const f = (x: string): unknown => unstringify(x as unknown as JSONString);
+
+        it('parses valid underlying JSON', () => {
+            expect(f('{"a":1,"b":["two"]}')).toEqual({ a: 1, b: ['two'] });
+        });
+    });
+
     describe('parse', () => {
         const f = parse;
 
@@ -80,7 +91,7 @@ describe('JSON', () => {
 
             fc.assert(fc.property(
                 fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
-                flow(stringifyPrimitive, f(identity), E.isRight),
+                flow(stringifyPrimitiveUnwrapped, f(identity), E.isRight),
             ));
         });
 
@@ -97,7 +108,7 @@ describe('JSON', () => {
 
             fc.assert(fc.property(
                 fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
-                flow(stringifyPrimitive, f, O.isSome),
+                flow(stringifyPrimitiveUnwrapped, f, O.isSome),
             ));
         });
 

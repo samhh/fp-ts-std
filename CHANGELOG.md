@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## _Unreleased_
 
+- Add `JSONString` newtype to the `JSON` module, and update various functions in this module accordingly. This adds `newtype-ts` and `monocle-ts` as peer dependencies.
 - Add `insertMany` function to the `Array` module.
 - Add `withIndex` function to the `Function` module.
 - Add `both` and `either` functions to the `Boolean` module.
