@@ -217,13 +217,13 @@ describe('Array', () => {
         });
 
         it('does not mutate input', () => {
-            fc.assert(fc.property(
-                fc.array(fc.string(), 2, 2).filter(x => x[1] !== 'b'),
-                xs => {
-                    const y = g(xs);
-                    return O.isSome(y) && y.value[1] !== xs[1];
-                },
-            ))
+            const xs: NonEmptyArray<number> = [1, 2, 3];
+            const ys: NonEmptyArray<number> = [4, 5];
+            const zs = f(1)(ys)(xs);
+
+            expect(xs).toEqual([1, 2, 3]);
+            expect(ys).toEqual([4, 5]);
+            expect(zs).toEqual(O.some([1, 4, 5, 2, 3]));
         });
     });
 });
