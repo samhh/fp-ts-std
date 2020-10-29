@@ -13,11 +13,41 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [elapsed](#elapsed)
   - [sleep](#sleep)
 
 ---
 
 # utils
+
+## elapsed
+
+Calls the callback upon task completion with the number of milliseconds it
+took for the task to complete. The task otherwise operates as per usual.
+
+**Signature**
+
+```ts
+export declare const elapsed: (f: (ms: number) => IO<void>) => <A>(x: Task<A>) => Task<A>
+```
+
+**Example**
+
+```ts
+import { elapsed, sleep } from 'fp-ts-std/Task'
+
+const wait = sleep(10)
+let time: number
+const waitAndTrackElapsed = elapsed((ms) => () => {
+  time = ms
+})(wait)
+
+waitAndTrackElapsed().then(() => {
+  assert.strictEqual(time !== undefined && time > 0, true)
+})
+```
+
+Added in v0.5.0
 
 ## sleep
 

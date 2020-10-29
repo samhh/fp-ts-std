@@ -1,6 +1,10 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { sleep } from '../src/Task';
+import { sleep, elapsed } from '../src/Task';
+import { constant, constVoid, pipe } from 'fp-ts/function';
+import * as T from 'fp-ts/Task';
+import * as IO from 'fp-ts/IO';
+import fc from 'fast-check';
 
 const flushPromises = () => new Promise(setImmediate);
 
@@ -26,6 +30,37 @@ describe('Task', () => {
             expect(spy).toHaveBeenCalled();
 
             jest.useRealTimers();
+        });
+    });
+
+    describe('elapsed', () => {
+        const f = elapsed;
+
+        it('resolves the underlying task like usual', async () => {
+            const x = 'abc';
+
+            const y = await pipe(
+                T.of(x),
+                T.delay(50),
+                f(constant(constVoid)),
+            )();
+
+            expect(x).toBe(y);
+        });
+
+        it('tracks the elapsed time via the callback', async () => {
+            const x = 'abc';
+
+            // eslint-disable-next-line functional/no-let
+            let time = 0;
+
+            await pipe(
+                T.of(x),
+                T.delay(50),
+                f(n => () => { time = n; }),
+            )();
+
+            return time >= 50 && time < 60;
         });
     });
 });

@@ -39,3 +39,30 @@ export const sleep = (ms: number): Task<void> => () => new Promise<void>((resolv
     setTimeout(resolve, Math.floor(ms));
 });
 
+/**
+ * Calls the callback upon task completion with the number of milliseconds it
+ * took for the task to complete. The task otherwise operates as per usual.
+ *
+ * @example
+ * import { elapsed, sleep } from 'fp-ts-std/Task';
+ *
+ * const wait = sleep(10);
+ * let time: number;
+ * const waitAndTrackElapsed = elapsed((ms) => () => { time = ms; })(wait);
+ *
+ * waitAndTrackElapsed().then(() => {
+ *     assert.strictEqual(time !== undefined && time > 0, true);
+ * });
+ *
+ * @since 0.5.0
+ */
+export const elapsed = (f: (ms: number) => IO<void>) => <A>(x: Task<A>): Task<A> => async () => {
+    const start = Date.now();
+    const y = await x();
+    const duration = Date.now() - start;
+    // eslint-disable-next-line functional/no-expression-statement
+    f(duration)();
+
+    return y;
+};
+
