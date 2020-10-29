@@ -8,12 +8,28 @@ import * as R from 'fp-ts/Record';
 /**
  * Get the values from a `Record`.
  *
+ * @example
+ * import { values } from 'fp-ts-std/Record';
+ *
+ * const x = { a: 1, b: 'two' };
+ *
+ * assert.deepStrictEqual(values(x), [1, 'two']);
+ *
  * @since 0.1.0
  */
 export const values = <A>(x: Record<string, A>): Array<A> => Object.values(x);
 
 /**
  * Like `lookup` from fp-ts, but flipped.
+ *
+ * @example
+ * import { lookupFlipped } from 'fp-ts-std/Record';
+ * import * as A from 'fp-ts/Array';
+ *
+ * const x = { a: 1, b: 'two', c: [true] };
+ * const ks = ['a', 'c'];
+ *
+ * assert.deepStrictEqual(A.filterMap(lookupFlipped(x))(ks), [1, [true]]);
  *
  * @since 0.1.0
  */
@@ -23,6 +39,14 @@ export const lookupFlipped = <A>(x: Record<string, A>) => (k: string): Option<A>
 /**
  * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
  * type.
+ *
+ * @example
+ * import { pick } from 'fp-ts-std/Record';
+ *
+ * type MyType = { a: number; b: string; c: Array<boolean> };
+ * const picked = pick<MyType>()(['a', 'c']);
+ *
+ * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
  *
  * @since 0.1.0
  */
@@ -44,6 +68,13 @@ export const pick = <A>() => <K extends keyof A>(ks: K[]) => (x: A): Pick<A, K> 
 /**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
  * type.
+ *
+ * @example
+ * import { omit } from 'fp-ts-std/Record';
+ *
+ * const sansB = omit(['b']);
+ *
+ * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
  *
  * @since 0.1.0
  */
