@@ -10,7 +10,7 @@ For DOM bindings, check out [dom-ts](https://github.com/waynevanson/dom-ts).
 
 The library is available on the npm registry under the same package name: [fp-ts-std](https://www.npmjs.com/package/fp-ts-std)
 
-fp-ts is listed as a peer dependency.
+fp-ts, [newtype-ts](https://gcanti.github.io/newtype-ts/), and [monocle-ts](https://gcanti.github.io/monocle-ts/) are listed as peer dependencies.
 
 Some of the more commonly needed functions from [fp-ts-contrib](https://gcanti.github.io/fp-ts-contrib/docs/modules) are duplicated here.
 
