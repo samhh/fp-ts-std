@@ -11,7 +11,7 @@ jobs:
                   cache-name: cache-yarn
               with:
                   path: ~/.cache/yarn/
-                  key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+                  key: yarn-${{ hashFiles('./yarn.lock') }}
             - name: Setup Node.js
               uses: actions/setup-node@v1
               with:
