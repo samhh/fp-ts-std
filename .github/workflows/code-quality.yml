@@ -5,7 +5,19 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - uses: bahmutov/npm-install@v1
+            - name: Cache Yarn dependencies
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-yarn
+              with:
+                  path: ~/.cache/yarn/
+                  key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+            - name: Setup Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '15.x'
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
             - name: Typecheck
               run: yarn typecheck
             - name: Lint
