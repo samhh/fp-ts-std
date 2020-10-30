@@ -40,3 +40,15 @@ Unreleased work is commit to the `develop` branch. `master` is the release branc
 
 All modules and exports must be annotated with JSDoc. This information is used to generate documentation. Simple, illustratory tests can also be included and will be checked during docs generation. For more information, see [docs-ts](https://github.com/gcanti/docs-ts).
 
+## Publishing
+
+Only the owner of this repository can publish, but this is still useful to document each for my memory, for any contributors, and for anyone who seeks to use this repo as a template for their own library.
+
+Files are built into `lib/`, however we'd prefer if consumers didn't have to import from `<package>/lib/<module>`, so we copy the npm manifest into the aforementioned subdirectory and publish against that. The npm manifest at the root of this repo has `"private": true` set to prevent accidentally publishing with the prefix.
+
+The process for publishing is thus as follows:
+
+1. Increment the version in the npm manifest.
+2. Run `$ yarn prepub`, which handles the npm manifest fiddling described above.
+3. Run `$ yarn publish lib/`, and repeat the version in the npm manifest when prompted.
+
