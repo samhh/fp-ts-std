@@ -4,6 +4,7 @@ module.exports = {
     testRegex: '\/test\/',
     collectCoverage: true,
     collectCoverageFrom: ['./src/**/*'],
+    coveragePathIgnorePatterns: ['index.ts'],
     coverageProvider: 'v8',
     coverageThreshold: {
         global: {
