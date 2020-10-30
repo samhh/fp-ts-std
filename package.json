@@ -16,6 +16,7 @@
         "typescript",
         "fp-ts"
     ],
+    "main": "./index.js",
     "sideEffects": false,
     "scripts": {
         "dev": "tsc -p ./tsconfig.build.json -w",
