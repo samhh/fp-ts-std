@@ -3,8 +3,6 @@
 import { sleep, elapsed } from '../src/Task';
 import { constant, constVoid, pipe } from 'fp-ts/function';
 import * as T from 'fp-ts/Task';
-import * as IO from 'fp-ts/IO';
-import fc from 'fast-check';
 
 const flushPromises = () => new Promise(setImmediate);
 
