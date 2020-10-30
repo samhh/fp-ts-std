@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## _Unreleased_
+
+- Make the `omit` function in the `Record` module more permissive. It will now typecheck if you try to omit keys which aren't present in the target object.
+
 ## 0.5.0 (2020-10-29)
 
 - Add `JSONString` newtype to the `JSON` module, and update various functions in this module accordingly. This adds `newtype-ts` and `monocle-ts` as peer dependencies.

@@ -56,7 +56,7 @@ type.
 ```ts
 export declare const omit: <K extends string>(
   ks: K[]
-) => <V, A extends Record<K, V>>(x: A) => Pick<A, Exclude<keyof A, K>>
+) => <V, A extends Record<K, V>>(x: Partial<A>) => Pick<A, Exclude<keyof A, K>>
 ```
 
 **Example**

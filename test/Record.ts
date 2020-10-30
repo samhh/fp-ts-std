@@ -56,6 +56,13 @@ describe('Record', () => {
 
             expect(omit(['id', 'foo'])(before)).toEqual(after);
         });
+
+        it('typechecks missing keys', () => {
+            const before: Thing = { name: 'Ragnor', id: '789', foo: 'Bar' };
+            const after: Omit<Thing, 'id'> = { name: 'Ragnor', foo: 'Bar' };
+
+            expect(omit(['id', 'bar'])(before)).toEqual(after);
+        });
     });
 });
 

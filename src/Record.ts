@@ -78,7 +78,7 @@ export const pick = <A>() => <K extends keyof A>(ks: K[]) => (x: A): Pick<A, K> 
  *
  * @since 0.1.0
  */
-export const omit = <K extends string>(ks: K[]) => <V, A extends Record<K, V>>(x: A): Omit<A, K> => {
+export const omit = <K extends string>(ks: K[]) => <V, A extends Record<K, V>>(x: Partial<A>): Omit<A, K> => {
     const y = { ...x };
 
     /* eslint-disable */
