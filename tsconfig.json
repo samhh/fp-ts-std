@@ -4,7 +4,7 @@
         "module": "commonjs",
         "lib": ["esnext", "dom"],
         "strict": true,
-        "outDir": "./lib/",
+        "outDir": "./dist/",
         "declaration": true
     },
     "include": ["src/**/*.ts", "test/**/*.ts"]
