@@ -19,6 +19,7 @@ Added in v0.1.0
   - [stringify](#stringify)
   - [stringifyO](#stringifyo)
   - [stringifyPrimitive](#stringifyprimitive)
+  - [unJSONString](#unjsonstring)
   - [unstringify](#unstringify)
 
 ---
@@ -162,6 +163,18 @@ assert.strictEqual(stringifyPrimitive('abc'), '"abc"')
 ```
 
 Added in v0.1.0
+
+## unJSONString
+
+Unwrap a `JSONString` newtype back to its underlying string representation.
+
+**Signature**
+
+```ts
+export declare const unJSONString: (s: JSONString) => string
+```
+
+Added in v0.6.0
 
 ## unstringify
 

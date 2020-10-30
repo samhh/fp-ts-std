@@ -17,7 +17,16 @@ import { isString } from './String';
  */
 export type JSONString = Newtype<{ readonly JSONString: unique symbol }, string>;
 
-const { wrap: mkJSONString, unwrap: unJSONString } = iso<JSONString>();
+const isoJSONString = iso<JSONString>();
+
+const mkJSONString = isoJSONString.wrap;
+
+/**
+ * Unwrap a `JSONString` newtype back to its underlying string representation.
+ *
+ * @since 0.6.0
+ */
+export const unJSONString = isoJSONString.unwrap;
 
 /**
  * Stringify some arbitrary data.
