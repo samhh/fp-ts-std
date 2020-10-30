@@ -29,7 +29,7 @@ fp-ts-std strives to adhere to the following principles:
 - Strict type-safety wherever possible, with risks well documented
 - All functions are curried
 - Functions are data-last as a rule
-- Functions are total unless explicitly prefixed with "unsafe"
+- Functions are total unless explicitly prefixed with "unsafe" (with the exception of the `Debug` module)
 - Impure functions are appropriately signed with the `IO` and `Task` types
 - Lean towards Haskell naming conventions and idioms with an eye to fp-ts norms
 - 100% testing coverage
