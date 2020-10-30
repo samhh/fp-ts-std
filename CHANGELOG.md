@@ -2,9 +2,11 @@
 
 This project adheres to semantic versioning.
 
-## _Unreleased_
+## 0.5.1 (2020-10-30)
 
 - Make the `omit` function in the `Record` module more permissive. It will now typecheck if you try to omit keys which aren't present in the target object.
+- Drop the `lib/` prefix from imports.
+- Add an optional "main" entrypoint which re-exports all modules.
 
 ## 0.5.0 (2020-10-29)
 
