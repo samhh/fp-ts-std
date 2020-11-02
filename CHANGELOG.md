@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.5.2 (2020-11-02)
+
+- Relicense under MIT.
+
 ## 0.5.1 (2020-10-30)
 
 - Make the `omit` function in the `Record` module more permissive. It will now typecheck if you try to omit keys which aren't present in the target object.

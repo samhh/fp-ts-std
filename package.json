@@ -2,7 +2,7 @@
     "private": true,
     "name": "fp-ts-std",
     "description": "The missing pseudo-standard library for fp-ts.",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "license": "MIT",
     "author": "Sam A. Horvath-Hunt <hello@samhh.com>",
     "repository": {
