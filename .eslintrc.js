@@ -16,6 +16,7 @@ module.exports = {
         'functional/prefer-readonly-type': 0,
         'functional/functional-parameters': 0,
         '@typescript-eslint/prefer-regexp-exec': 0,
+        '@typescript-eslint/array-type': [1, { default: 'generic' }],
     },
 };
 

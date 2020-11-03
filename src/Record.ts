@@ -50,7 +50,7 @@ export const lookupFlipped = <A>(x: Record<string, A>) => (k: string): Option<A>
  *
  * @since 0.1.0
  */
-export const pick = <A>() => <K extends keyof A>(ks: K[]) => (x: A): Pick<A, K> => {
+export const pick = <A>() => <K extends keyof A>(ks: Array<K>) => (x: A): Pick<A, K> => {
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
     // it's in a single reused place
@@ -78,7 +78,7 @@ export const pick = <A>() => <K extends keyof A>(ks: K[]) => (x: A): Pick<A, K> 
  *
  * @since 0.1.0
  */
-export const omit = <K extends string>(ks: K[]) => <V, A extends Record<K, V>>(x: Partial<A>): Omit<A, K> => {
+export const omit = <K extends string>(ks: Array<K>) => <V, A extends Record<K, V>>(x: Partial<A>): Omit<A, K> => {
     const y = { ...x };
 
     /* eslint-disable */

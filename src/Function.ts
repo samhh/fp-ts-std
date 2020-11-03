@@ -41,10 +41,10 @@ export const flip = <
  * @since 0.5.0
  */
 export const withIndex:
-    <A, B, C>(f: ((g: (x: A) => B) => (ys: A[]) => C[])) =>
+    <A, B, C>(f: ((g: (x: A) => B) => (ys: Array<A>) => Array<C>)) =>
     (g: (i: number) => (x: A) => B) =>
-    (ys: A[]) =>
-    C[]
+    (ys: Array<A>) =>
+    Array<C>
     = f => g => xs => {
         let i = 0; // eslint-disable-line functional/no-let
         return f(y => g(i++)(y))(xs);
