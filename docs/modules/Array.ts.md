@@ -37,6 +37,19 @@ Check if a predicate holds true for every array member.
 export declare const all: <A>(f: Predicate<A>) => Predicate<A[]>
 ```
 
+**Example**
+
+```ts
+import { all } from 'fp-ts-std/Array'
+import { Predicate } from 'fp-ts/function'
+
+const isFive: Predicate<number> = (n) => n === 5
+const isAllFive = all(isFive)
+
+assert.strictEqual(isAllFive([5, 5, 5]), true)
+assert.strictEqual(isAllFive([5, 4, 5]), false)
+```
+
 Added in v0.1.0
 
 ## any
@@ -47,6 +60,19 @@ Check if a predicate holds true for any array member.
 
 ```ts
 export declare const any: <A>(f: Predicate<A>) => Predicate<A[]>
+```
+
+**Example**
+
+```ts
+import { any } from 'fp-ts-std/Array'
+import { Predicate } from 'fp-ts/function'
+
+const isFive: Predicate<number> = (n) => n === 5
+const isAnyFive = any(isFive)
+
+assert.strictEqual(isAnyFive([3, 5, 7]), true)
+assert.strictEqual(isAnyFive([3, 4, 7]), false)
 ```
 
 Added in v0.1.0
@@ -61,6 +87,18 @@ Like `fp-ts/Array::elem`, but flipped.
 export declare const elemFlipped: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
 ```
 
+**Example**
+
+```ts
+import { elemFlipped } from 'fp-ts-std/Array'
+import { eqString } from 'fp-ts/Eq'
+
+const isLowerVowel = elemFlipped(eqString)(['a', 'e', 'i', 'o', 'u'])
+
+assert.strictEqual(isLowerVowel('a'), true)
+assert.strictEqual(isLowerVowel('b'), false)
+```
+
 Added in v0.1.0
 
 ## getDisorderedEq
@@ -73,6 +111,20 @@ and `getEq` should be preferred on ordered data.
 
 ```ts
 export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<A[]>
+```
+
+**Example**
+
+```ts
+import { getEq } from 'fp-ts/Array'
+import { getDisorderedEq } from 'fp-ts-std/Array'
+import { ordNumber } from 'fp-ts/Ord'
+
+const f = getEq(ordNumber)
+const g = getDisorderedEq(ordNumber)
+
+assert.strictEqual(f.equals([1, 2, 3], [1, 3, 2]), false)
+assert.strictEqual(g.equals([1, 2, 3], [1, 3, 2]), true)
 ```
 
 Added in v0.1.0
@@ -115,6 +167,18 @@ separator.
 export declare const join: (x: string) => (ys: string[]) => string
 ```
 
+**Example**
+
+```ts
+import { join } from 'fp-ts-std/Array'
+
+const commaSepd = join(',')
+
+assert.strictEqual(commaSepd([]), '')
+assert.strictEqual(commaSepd(['a']), 'a')
+assert.strictEqual(commaSepd(['a', 'b', 'c']), 'a,b,c')
+```
+
 Added in v0.1.0
 
 ## length
@@ -125,6 +189,14 @@ Get the length of an array.
 
 ```ts
 export declare const length: (xs: unknown[]) => number
+```
+
+**Example**
+
+```ts
+import { length } from 'fp-ts-std/Array'
+
+assert.strictEqual(length(['a', 'b', 'c']), 3)
 ```
 
 Added in v0.1.0
@@ -143,6 +215,20 @@ the remaining items, sans the match (if any), are returned as well.
 export declare const pluckFirst: <A>(p: Predicate<A>) => (xs: A[]) => [Option<A>, A[]]
 ```
 
+**Example**
+
+```ts
+import { pluckFirst } from 'fp-ts-std/Array'
+import * as O from 'fp-ts/Option'
+import { Predicate } from 'fp-ts/function'
+
+const isOverFive: Predicate<number> = (n) => n > 5
+const pluckFirstOverFive = pluckFirst(isOverFive)
+
+assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5]), [O.none, [1, 3, 5]])
+assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5, 7, 9]), [O.some(7), [1, 3, 5, 9]])
+```
+
 Added in v0.1.0
 
 ## upsert
@@ -157,6 +243,46 @@ the array is checked is unspecified.
 
 ```ts
 export declare const upsert: <A>(eqA: Eq<A>) => (x: A) => (ys: A[]) => NonEmptyArray<A>
+```
+
+**Example**
+
+```ts
+import { upsert } from 'fp-ts-std/Array'
+import { eqString, contramap } from 'fp-ts/Eq'
+
+type Account = {
+  id: string
+  name: string
+}
+
+const eqAccount = contramap<string, Account>((acc) => acc.id)(eqString)
+
+const accounts: Array<Account> = [
+  {
+    id: 'a',
+    name: 'an account',
+  },
+  {
+    id: 'b',
+    name: 'another account',
+  },
+]
+
+const created: Account = {
+  id: 'c',
+  name: 'yet another account',
+}
+
+const updated: Account = {
+  id: 'b',
+  name: 'renamed account name',
+}
+
+const upsertAccount = upsert(eqAccount)
+
+assert.deepStrictEqual(upsertAccount(created)(accounts), [accounts[0], accounts[1], created])
+assert.deepStrictEqual(upsertAccount(updated)(accounts), [accounts[0], updated])
 ```
 
 Added in v0.1.0
