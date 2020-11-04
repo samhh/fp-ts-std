@@ -8,6 +8,12 @@ import * as E from 'fp-ts/Either';
 /**
  * Unwrap the value from within an `Either`, throwing if `Left`.
  *
+ * @example
+ * import { unsafeUnwrap } from 'fp-ts-std/Either';
+ * import * as E from 'fp-ts/Either';
+ *
+ * assert.deepStrictEqual(unsafeUnwrap(E.right(5)), 5);
+ *
  * @since 0.1.0
  */
 export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
@@ -19,6 +25,12 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
 
 /**
  * Unwrap the value from within an `Either`, throwing if `Right`.
+ *
+ * @example
+ * import { unsafeUnwrapLeft } from 'fp-ts-std/Either';
+ * import * as E from 'fp-ts/Either';
+ *
+ * assert.deepStrictEqual(unsafeUnwrapLeft(E.left(5)), 5);
  *
  * @since 0.5.0
  */
