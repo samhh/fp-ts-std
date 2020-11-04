@@ -32,7 +32,8 @@ fp-ts-std strives to adhere to the following principles:
 - Functions are total unless explicitly prefixed with "unsafe" (with the exception of the `Debug` module)
 - Impure functions are appropriately signed with the `IO` and `Task` types
 - Lean towards Haskell naming conventions and idioms with an eye to fp-ts norms
-- 100% testing coverage
+
+Additionally, fp-ts-std enforces 100% testing coverage, and just about everything is documented with examples. (That said, any improvement to the documentation is welcome, either by suggestion or PR!)
 
 ## Contributing
 
