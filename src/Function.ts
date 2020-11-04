@@ -8,6 +8,15 @@
  * Note that due to limitations to the type system, this function won't work
  * correctly for generic functions.
  *
+ * @example
+ * import { flip } from 'fp-ts-std/Function';
+ *
+ * const prepend = (x: string) => (y: string): string => x + y;
+ * const append = flip(prepend);
+ *
+ * assert.strictEqual(prepend('x')('y'), 'xy');
+ * assert.strictEqual(append('x')('y'), 'yx');
+ *
  * @since 0.1.0
  */
 export const flip = <

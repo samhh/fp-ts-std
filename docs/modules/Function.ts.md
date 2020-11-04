@@ -35,6 +35,18 @@ export declare const flip: <A extends unknown[], B extends unknown[], C>(
 ) => (...b: B) => (...a: A) => C
 ```
 
+**Example**
+
+```ts
+import { flip } from 'fp-ts-std/Function'
+
+const prepend = (x: string) => (y: string): string => x + y
+const append = flip(prepend)
+
+assert.strictEqual(prepend('x')('y'), 'xy')
+assert.strictEqual(append('x')('y'), 'yx')
+```
+
 Added in v0.1.0
 
 ## withIndex
