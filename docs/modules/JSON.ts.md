@@ -47,6 +47,22 @@ Parse a string as JSON.
 export declare const parse: <E>(f: (e: SyntaxError) => E) => (x: string) => Either<E, unknown>
 ```
 
+**Example**
+
+```ts
+import { parse } from 'fp-ts-std/JSON'
+import * as E from 'fp-ts/Either'
+import { constant } from 'fp-ts/function'
+
+const f = parse(constant('e'))
+
+const valid = '"abc"'
+const invalid = 'abc'
+
+assert.deepStrictEqual(f(valid), E.right('abc'))
+assert.deepStrictEqual(f(invalid), E.left('e'))
+```
+
 Added in v0.1.0
 
 ## parseO
@@ -57,6 +73,19 @@ Parse a string as JSON, returning an `Option`.
 
 ```ts
 export declare const parseO: (stringified: string) => Option<unknown>
+```
+
+**Example**
+
+```ts
+import { parseO } from 'fp-ts-std/JSON'
+import * as O from 'fp-ts/Option'
+
+const valid = '"abc"'
+const invalid = 'abc'
+
+assert.deepStrictEqual(parseO(valid), O.some('abc'))
+assert.deepStrictEqual(parseO(invalid), O.none)
 ```
 
 Added in v0.1.0
@@ -71,6 +100,22 @@ Stringify some arbitrary data.
 export declare const stringify: <E>(f: (e: TypeError) => E) => (x: unknown) => Either<E, JSONString>
 ```
 
+**Example**
+
+```ts
+import { stringify } from 'fp-ts-std/JSON'
+import * as E from 'fp-ts/Either'
+import { constant } from 'fp-ts/function'
+
+const f = stringify(constant('e'))
+
+const valid = 'abc'
+const invalid = () => {}
+
+assert.deepStrictEqual(f(valid), E.right('"abc"'))
+assert.deepStrictEqual(f(invalid), E.left('e'))
+```
+
 Added in v0.1.0
 
 ## stringifyO
@@ -81,6 +126,19 @@ Stringify some arbitrary data, returning an `Option`.
 
 ```ts
 export declare const stringifyO: (data: unknown) => Option<JSONString>
+```
+
+**Example**
+
+```ts
+import { stringifyO } from 'fp-ts-std/JSON'
+import * as O from 'fp-ts/Option'
+
+const valid = 'abc'
+const invalid = () => {}
+
+assert.deepStrictEqual(stringifyO(valid), O.some('"abc"'))
+assert.deepStrictEqual(stringifyO(invalid), O.none)
 ```
 
 Added in v0.1.0
@@ -95,6 +153,14 @@ Stringify a primitive value with no possibility of failure.
 export declare const stringifyPrimitive: (x: string | number | boolean) => JSONString
 ```
 
+**Example**
+
+```ts
+import { stringifyPrimitive } from 'fp-ts-std/JSON'
+
+assert.strictEqual(stringifyPrimitive('abc'), '"abc"')
+```
+
 Added in v0.1.0
 
 ## unstringify
@@ -106,6 +172,17 @@ with the `JSONString` newtype.
 
 ```ts
 export declare const unstringify: (x: JSONString) => unknown
+```
+
+**Example**
+
+```ts
+import { unstringify, stringifyPrimitive } from 'fp-ts-std/JSON'
+import { flow } from 'fp-ts/function'
+
+const f = flow(stringifyPrimitive, unstringify)
+
+assert.strictEqual(f('abc'), 'abc')
 ```
 
 Added in v0.5.0

@@ -22,6 +22,19 @@ const { wrap: mkJSONString, unwrap: unJSONString } = iso<JSONString>();
 /**
  * Stringify some arbitrary data.
  *
+ * @example
+ * import { stringify } from 'fp-ts-std/JSON';
+ * import * as E from 'fp-ts/Either';
+ * import { constant } from 'fp-ts/function';
+ *
+ * const f = stringify(constant('e'));
+ *
+ * const valid = 'abc';
+ * const invalid = () => {};
+ *
+ * assert.deepStrictEqual(f(valid), E.right('"abc"'));
+ * assert.deepStrictEqual(f(invalid), E.left('e'));
+ *
  * @since 0.1.0
  */
 export const stringify = <E>(f: (e: TypeError) => E) => (x: unknown): Either<E, JSONString> => pipe(
@@ -35,6 +48,16 @@ export const stringify = <E>(f: (e: TypeError) => E) => (x: unknown): Either<E, 
 /**
  * Stringify some arbitrary data, returning an `Option`.
  *
+ * @example
+ * import { stringifyO } from 'fp-ts-std/JSON';
+ * import * as O from 'fp-ts/Option';
+ *
+ * const valid = 'abc';
+ * const invalid = () => {};
+ *
+ * assert.deepStrictEqual(stringifyO(valid), O.some('"abc"'));
+ * assert.deepStrictEqual(stringifyO(invalid), O.none);
+ *
  * @since 0.1.0
  */
 export const stringifyO: (data: unknown) => Option<JSONString> =
@@ -42,6 +65,11 @@ export const stringifyO: (data: unknown) => Option<JSONString> =
 
 /**
  * Stringify a primitive value with no possibility of failure.
+ *
+ * @example
+ * import { stringifyPrimitive } from 'fp-ts-std/JSON';
+ *
+ * assert.strictEqual(stringifyPrimitive('abc'), '"abc"');
  *
  * @since 0.1.0
  */
@@ -52,6 +80,14 @@ export const stringifyPrimitive = (x: string | number | boolean | null): JSONStr
  * Parse a string as JSON. This is safe provided there have been no shenanigans
  * with the `JSONString` newtype.
  *
+ * @example
+ * import { unstringify, stringifyPrimitive } from 'fp-ts-std/JSON';
+ * import { flow } from 'fp-ts/function';
+ *
+ * const f = flow(stringifyPrimitive, unstringify);
+ *
+ * assert.strictEqual(f('abc'), 'abc');
+ *
  * @since 0.5.0
  */
 export const unstringify: (x: JSONString) => unknown =
@@ -59,6 +95,19 @@ export const unstringify: (x: JSONString) => unknown =
 
 /**
  * Parse a string as JSON.
+ *
+ * @example
+ * import { parse } from 'fp-ts-std/JSON';
+ * import * as E from 'fp-ts/Either';
+ * import { constant } from 'fp-ts/function';
+ *
+ * const f = parse(constant('e'));
+ *
+ * const valid = '"abc"';
+ * const invalid = 'abc';
+ *
+ * assert.deepStrictEqual(f(valid), E.right('abc'));
+ * assert.deepStrictEqual(f(invalid), E.left('e'));
  *
  * @since 0.1.0
  */
@@ -69,6 +118,16 @@ export const parse = <E>(f: (e: SyntaxError) => E) => (x: string): Either<E, unk
 
 /**
  * Parse a string as JSON, returning an `Option`.
+ *
+ * @example
+ * import { parseO } from 'fp-ts-std/JSON';
+ * import * as O from 'fp-ts/Option';
+ *
+ * const valid = '"abc"';
+ * const invalid = 'abc';
+ *
+ * assert.deepStrictEqual(parseO(valid), O.some('abc'));
+ * assert.deepStrictEqual(parseO(invalid), O.none);
  *
  * @since 0.1.0
  */
