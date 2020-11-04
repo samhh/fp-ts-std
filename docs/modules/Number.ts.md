@@ -34,6 +34,14 @@ Add two numbers together.
 export declare const add: (x: number) => Endomorphism<number>
 ```
 
+**Example**
+
+```ts
+import { add } from 'fp-ts-std/Number'
+
+assert.strictEqual(add(2)(3), 5)
+```
+
 Added in v0.1.0
 
 ## decrement
@@ -44,6 +52,14 @@ Decrement a number.
 
 ```ts
 export declare const decrement: Endomorphism<number>
+```
+
+**Example**
+
+```ts
+import { decrement } from 'fp-ts-std/Number'
+
+assert.strictEqual(decrement(3), 2)
 ```
 
 Added in v0.1.0
@@ -59,6 +75,15 @@ _divisor_).
 export declare const divide: (divisor: number) => Endomorphism<number>
 ```
 
+**Example**
+
+```ts
+import { divide } from 'fp-ts-std/Number'
+
+assert.strictEqual(divide(2)(4), 2)
+assert.strictEqual(divide(4)(2), 0.5)
+```
+
 Added in v0.2.0
 
 ## increment
@@ -69,6 +94,14 @@ Increment a number.
 
 ```ts
 export declare const increment: Endomorphism<number>
+```
+
+**Example**
+
+```ts
+import { increment } from 'fp-ts-std/Number'
+
+assert.strictEqual(increment(3), 4)
 ```
 
 Added in v0.1.0
@@ -83,6 +116,14 @@ Multiply two numbers together.
 export declare const multiply: (x: number) => Endomorphism<number>
 ```
 
+**Example**
+
+```ts
+import { multiply } from 'fp-ts-std/Number'
+
+assert.strictEqual(multiply(2)(3), 6)
+```
+
 Added in v0.2.0
 
 ## subtract
@@ -94,6 +135,15 @@ _minuend_).
 
 ```ts
 export declare const subtract: (subtrahend: number) => Endomorphism<number>
+```
+
+**Example**
+
+```ts
+import { subtract } from 'fp-ts-std/Number'
+
+assert.strictEqual(subtract(2)(3), 1)
+assert.strictEqual(subtract(3)(2), -1)
 ```
 
 Added in v0.2.0
