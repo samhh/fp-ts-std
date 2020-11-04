@@ -51,7 +51,17 @@ Append one string to another.
 **Signature**
 
 ```ts
-export declare const append: (appended: string) => (rest: string) => string
+export declare const append: (appended: string) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { append } from 'fp-ts-std/String'
+
+const withExt = append('.hs')
+
+assert.strictEqual(withExt('File'), 'File.hs')
 ```
 
 Added in v0.1.0
@@ -66,6 +76,14 @@ Concatenate two strings together.
 export declare const concat: (x: string) => Endomorphism<string>
 ```
 
+**Example**
+
+```ts
+import { concat } from 'fp-ts-std/String'
+
+assert.strictEqual(concat('x')('y'), 'xy')
+```
+
 Added in v0.1.0
 
 ## contains
@@ -76,6 +94,19 @@ Check if a string contains a given substring.
 
 ```ts
 export declare const contains: (substring: string) => Predicate<string>
+```
+
+**Example**
+
+```ts
+import { contains } from 'fp-ts-std/String'
+
+const f = contains('abc')
+
+assert.strictEqual(f('abc'), true)
+assert.strictEqual(f('ABC'), false)
+assert.strictEqual(f('xabcy'), true)
+assert.strictEqual(f('xaycz'), false)
 ```
 
 Added in v0.1.0
@@ -90,6 +121,17 @@ Check if a string ends with the specified substring.
 export declare const endsWith: (substring: string) => Predicate<string>
 ```
 
+**Example**
+
+```ts
+import { endsWith } from 'fp-ts-std/String'
+
+const isHaskell = endsWith('.hs')
+
+assert.strictEqual(isHaskell('File.hs'), true)
+assert.strictEqual(isHaskell('File.rs'), false)
+```
+
 Added in v0.3.0
 
 ## fromNumber
@@ -100,6 +142,14 @@ Convert a number to a string.
 
 ```ts
 export declare const fromNumber: (x: number) => string
+```
+
+**Example**
+
+```ts
+import { fromNumber } from 'fp-ts-std/String'
+
+assert.strictEqual(fromNumber(3), '3')
 ```
 
 Added in v0.1.0
@@ -114,6 +164,15 @@ Check if a string is empty.
 export declare const isEmpty: Predicate<string>
 ```
 
+**Example**
+
+```ts
+import { isEmpty } from 'fp-ts-std/String'
+
+assert.strictEqual(isEmpty(''), true)
+assert.strictEqual(isEmpty(' '), false)
+```
+
 Added in v0.1.0
 
 ## isString
@@ -124,6 +183,15 @@ Refine a foreign value to a string.
 
 ```ts
 export declare const isString: Refinement<unknown, string>
+```
+
+**Example**
+
+```ts
+import { isString } from 'fp-ts-std/String'
+
+assert.strictEqual(isString('3'), true)
+assert.strictEqual(isString(3), false)
 ```
 
 Added in v0.1.0
@@ -138,6 +206,14 @@ Get the length of a string.
 export declare const length: (x: string) => number
 ```
 
+**Example**
+
+```ts
+import { length } from 'fp-ts-std/String'
+
+assert.strictEqual(length('abc'), 3)
+```
+
 Added in v0.1.0
 
 ## lines
@@ -150,6 +226,14 @@ Split a string into substrings using any recognised newline as the separator.
 export declare const lines: (target: string) => string[]
 ```
 
+**Example**
+
+```ts
+import { lines } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(lines('a\nb\nc'), ['a', 'b', 'c'])
+```
+
 Added in v0.1.0
 
 ## match
@@ -160,6 +244,22 @@ Functional wrapper around `String.prototype.match`.
 
 ```ts
 export declare const match: (r: RegExp) => (x: string) => Option<RegExpMatchArray>
+```
+
+**Example**
+
+```ts
+import { match } from 'fp-ts-std/String'
+import * as O from 'fp-ts/Option'
+import { flow } from 'fp-ts/function'
+
+const f = flow(
+  match(/^(\d)(\w)$/),
+  O.map((xs) => Array.from(xs))
+)
+
+assert.deepStrictEqual(f('2e'), O.some(['2e', '2', 'e']))
+assert.deepStrictEqual(f('foo'), O.none)
 ```
 
 Added in v0.1.0
@@ -176,6 +276,25 @@ If the provided `RegExp` is non-global, the function will return `None`.
 export declare const matchAll: (r: RegExp) => (x: string) => Option<NonEmptyArray<RegExpMatchArray>>
 ```
 
+**Example**
+
+```ts
+import { matchAll } from 'fp-ts-std/String'
+import * as O from 'fp-ts/Option'
+import * as NEA from 'fp-ts/NonEmptyArray'
+import { flow } from 'fp-ts/function'
+
+const f = flow(matchAll(/t(e)(st(\d?))/g), O.map(NEA.map((xs) => Array.from(xs))))
+
+assert.deepStrictEqual(
+  f('test1test2'),
+  O.some([
+    ['test1', 'e', 'st1', '1'],
+    ['test2', 'e', 'st2', '2'],
+  ])
+)
+```
+
 Added in v0.5.0
 
 ## prepend
@@ -185,7 +304,17 @@ Prepend one string to another.
 **Signature**
 
 ```ts
-export declare const prepend: (prepended: string) => (rest: string) => string
+export declare const prepend: (prepended: string) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { prepend } from 'fp-ts-std/String'
+
+const prependShell = prepend('$ ')
+
+assert.strictEqual(prependShell('abc'), '$ abc')
 ```
 
 Added in v0.1.0
@@ -221,6 +350,14 @@ as an array.
 export declare const split: (on: string | RegExp) => (target: string) => string[]
 ```
 
+**Example**
+
+```ts
+import { split } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(split(',')('a,b,c'), ['a', 'b', 'c'])
+```
+
 Added in v0.1.0
 
 ## startsWith
@@ -231,6 +368,17 @@ Check if a string starts with the specified substring.
 
 ```ts
 export declare const startsWith: (substring: string) => Predicate<string>
+```
+
+**Example**
+
+```ts
+import { startsWith } from 'fp-ts-std/String'
+
+const isHttps = startsWith('https://')
+
+assert.strictEqual(isHttps('https://samhh.com'), true)
+assert.strictEqual(isHttps('http://samhh.com'), false)
 ```
 
 Added in v0.3.0
@@ -244,6 +392,16 @@ same outer value.
 
 ```ts
 export declare const surround: (x: string) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { surround } from 'fp-ts-std/String'
+
+const quote = surround('"')
+
+assert.strictEqual(quote('abc'), '"abc"')
 ```
 
 Added in v0.1.0
@@ -265,6 +423,14 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const takeLeft: (n: number) => Endomorphism<string>
 ```
 
+**Example**
+
+```ts
+import { takeLeft } from 'fp-ts-std/String'
+
+assert.strictEqual(takeLeft(2)('abc'), 'ab')
+```
+
 Added in v0.3.0
 
 ## takeRight
@@ -284,6 +450,14 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const takeRight: (n: number) => Endomorphism<string>
 ```
 
+**Example**
+
+```ts
+import { takeRight } from 'fp-ts-std/String'
+
+assert.strictEqual(takeRight(2)('abc'), 'bc')
+```
+
 Added in v0.3.0
 
 ## test
@@ -294,6 +468,17 @@ A functional wraper around `RegExp.prototype.test`.
 
 ```ts
 export declare const test: (r: RegExp) => Predicate<string>
+```
+
+**Example**
+
+```ts
+import { test } from 'fp-ts-std/String'
+
+const hasVowel = test(/(a|e|i|o|u)/)
+
+assert.strictEqual(hasVowel('meow'), true)
+assert.strictEqual(hasVowel('grrr'), false)
 ```
 
 Added in v0.1.0
@@ -308,6 +493,14 @@ Trim both sides of a string.
 export declare const trim: Endomorphism<string>
 ```
 
+**Example**
+
+```ts
+import { trim } from 'fp-ts-std/String'
+
+assert.strictEqual(trim(' abc '), 'abc')
+```
+
 Added in v0.1.0
 
 ## trimLeft
@@ -318,6 +511,14 @@ Trim the left side of a string.
 
 ```ts
 export declare const trimLeft: Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { trimLeft } from 'fp-ts-std/String'
+
+assert.strictEqual(trimLeft(' abc '), 'abc ')
 ```
 
 Added in v0.1.0
@@ -332,6 +533,14 @@ Trim the right side of a string.
 export declare const trimRight: Endomorphism<string>
 ```
 
+**Example**
+
+```ts
+import { trimRight } from 'fp-ts-std/String'
+
+assert.strictEqual(trimRight(' abc '), ' abc')
+```
+
 Added in v0.1.0
 
 ## unappend
@@ -342,6 +551,16 @@ Remove the end of a string, if it exists.
 
 ```ts
 export declare const unappend: (end: string) => (val: string) => string
+```
+
+**Example**
+
+```ts
+import { unappend } from 'fp-ts-std/String'
+
+const withoutExt = unappend('.hs')
+
+assert.strictEqual(withoutExt('File.hs'), 'File')
 ```
 
 Added in v0.1.0
@@ -356,6 +575,14 @@ Join newline-separated strings together.
 export declare const unlines: (ys: string[]) => string
 ```
 
+**Example**
+
+```ts
+import { unlines } from 'fp-ts-std/String'
+
+assert.strictEqual(unlines(['a', 'b', 'c']), 'a\nb\nc')
+```
+
 Added in v0.1.0
 
 ## unprepend
@@ -365,7 +592,17 @@ Remove the beginning of a string, if it exists.
 **Signature**
 
 ```ts
-export declare const unprepend: (start: string) => (val: string) => string
+export declare const unprepend: (start: string) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { unprepend } from 'fp-ts-std/String'
+
+const unprependShell = unprepend('$ ')
+
+assert.strictEqual(unprependShell('$ abc'), 'abc')
 ```
 
 Added in v0.1.0
@@ -378,6 +615,16 @@ Remove the start and end of a string, if they both exist.
 
 ```ts
 export declare const unsurround: (x: string) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { unsurround } from 'fp-ts-std/String'
+
+const unquote = unsurround('"')
+
+assert.strictEqual(unquote('"abc"'), 'abc')
 ```
 
 Added in v0.1.0
