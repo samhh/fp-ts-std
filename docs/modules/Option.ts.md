@@ -29,4 +29,13 @@ Unwrap the value from within an `Option`, throwing if `None`.
 export declare const unsafeUnwrap: <A>(x: Option<A>) => A
 ```
 
+**Example**
+
+```ts
+import { unsafeUnwrap } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(unsafeUnwrap(O.some(5)), 5)
+```
+
 Added in v0.1.0
