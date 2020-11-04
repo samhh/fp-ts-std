@@ -145,18 +145,6 @@ export const startsWith = (substring: string): Predicate<string> => y => y.start
 export const endsWith = (substring: string): Predicate<string> => y => y.endsWith(substring);
 
 /**
- * Concatenate two strings together.
- *
- * @example
- * import { concat } from 'fp-ts-std/String';
- *
- * assert.strictEqual(concat('x')('y'), 'xy');
- *
- * @since 0.1.0
- */
-export const concat = (x: string): Endomorphism<string> => (y) => x + y;
-
-/**
  * Prepend one string to another.
  *
  * @example

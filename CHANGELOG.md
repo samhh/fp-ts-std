@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.6.0 (_unreleased_)
 
 - Add `unJSONString` function to the `JSON` module.
+- Remove `concat` function from the `String` module as it's a duplicate of `prepend`.
 
 ## 0.5.2 (2020-11-02)
 

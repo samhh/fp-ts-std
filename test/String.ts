@@ -2,7 +2,7 @@ import {
     lines, unlines, surround, unsurround, startsWith, endsWith, takeLeft,
     takeRight, reverse, match, matchAll, prepend, unprepend, append, unappend,
     contains, length, fromNumber, isString, isEmpty, trim, trimLeft, trimRight,
-    concat, split, test,
+    split, test,
 } from '../src/String';
 import * as O from 'fp-ts/Option';
 import * as NEA from 'fp-ts/NonEmptyArray';
@@ -486,21 +486,6 @@ describe('String', () => {
             fc.assert(fc.property(
                 fc.string(),
                 flow(f, x => x[Math.max(0, x.length - 1)] !== ' '),
-            ));
-        });
-    });
-
-    describe('concat', () => {
-        const f = concat;
-
-        it('concats any two strings', () => {
-            fc.assert(fc.property(
-                fc.string(), fc.string(),
-                (x, y) => {
-                    const z = f(x)(y);
-
-                    return z === x + y && z.length === x.length + y.length && z.startsWith(x) && z.endsWith(y);
-                },
             ));
         });
     });

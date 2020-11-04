@@ -14,7 +14,6 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [append](#append)
-  - [concat](#concat)
   - [contains](#contains)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
@@ -62,26 +61,6 @@ import { append } from 'fp-ts-std/String'
 const withExt = append('.hs')
 
 assert.strictEqual(withExt('File'), 'File.hs')
-```
-
-Added in v0.1.0
-
-## concat
-
-Concatenate two strings together.
-
-**Signature**
-
-```ts
-export declare const concat: (x: string) => Endomorphism<string>
-```
-
-**Example**
-
-```ts
-import { concat } from 'fp-ts-std/String'
-
-assert.strictEqual(concat('x')('y'), 'xy')
 ```
 
 Added in v0.1.0

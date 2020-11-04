@@ -1,5 +1,5 @@
 import { flip, withIndex } from '../src/Function';
-import { concat } from '../src/String';
+import { prepend } from '../src/String';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 import * as A from 'fp-ts/Array';
@@ -8,8 +8,8 @@ import { add } from '../src/Number';
 describe('Function', () => {
     describe('flip', () => {
         it('flips curried arguments', () => {
-            expect(concat('x')('y')).toBe('xy');
-            expect(flip(concat)('x')('y')).toBe('yx');
+            expect(prepend('x')('y')).toBe('xy');
+            expect(flip(prepend)('x')('y')).toBe('yx');
         });
     });
 
