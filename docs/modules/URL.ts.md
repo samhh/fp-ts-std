@@ -32,6 +32,15 @@ Refine a foreign value to `URL`.
 export declare const isURL: Refinement<unknown, URL>
 ```
 
+**Example**
+
+```ts
+import { isURL } from 'fp-ts-std/URL'
+
+assert.strictEqual(isURL(new URL('https://samhh.com')), true)
+assert.strictEqual(isURL({ not: { a: 'url' } }), false)
+```
+
 Added in v0.1.0
 
 ## parse
@@ -42,6 +51,19 @@ Safely parse a `URL`.
 
 ```ts
 export declare const parse: <E>(f: (e: TypeError) => E) => (x: string) => Either<E, URL>
+```
+
+**Example**
+
+```ts
+import { parse } from 'fp-ts-std/URL'
+import * as E from 'fp-ts/Either'
+import { constant } from 'fp-ts/function'
+
+const f = parse(constant('e'))
+
+assert.deepStrictEqual(f('https://samhh.com'), E.right(new URL('https://samhh.com')))
+assert.deepStrictEqual(f('invalid'), E.left('e'))
 ```
 
 Added in v0.1.0
@@ -56,6 +78,16 @@ Safely parse a `URL`, returning an `Option`.
 export declare const parseO: (href: string) => Option<URL>
 ```
 
+**Example**
+
+```ts
+import { parseO } from 'fp-ts-std/URL'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(parseO('https://samhh.com'), O.some(new URL('https://samhh.com')))
+assert.deepStrictEqual(parseO('invalid'), O.none)
+```
+
 Added in v0.1.0
 
 ## unsafeParse
@@ -66,6 +98,14 @@ Unsafely parse a `URL`, throwing on failure.
 
 ```ts
 export declare const unsafeParse: (x: string) => URL
+```
+
+**Example**
+
+```ts
+import { unsafeParse } from 'fp-ts-std/URL'
+
+assert.deepStrictEqual(unsafeParse('https://samhh.com'), new URL('https://samhh.com'))
 ```
 
 Added in v0.1.0
