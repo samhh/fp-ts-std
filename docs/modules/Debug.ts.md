@@ -38,6 +38,22 @@ it has the side effect of outputting the trace message.
 export declare const trace: (msg: string) => <A>(x: A) => A
 ```
 
+**Example**
+
+```ts
+import { trace } from 'fp-ts-std/Debug'
+import { flow } from 'fp-ts/function'
+
+const double = (n: number): number => n * 2
+const toString = (n: number): string => String(n)
+
+// Will log: "my log message"
+const doubledString: (n: number) => string = flow(double, trace('my log message'), toString)
+
+// Actual function/pipeline behaviour is unaffected:
+assert.strictEqual(doubledString(2), '4')
+```
+
 Added in v0.2.0
 
 ## traceWithValue
@@ -48,6 +64,22 @@ Like `trace`, but logs the generic value too.
 
 ```ts
 export declare const traceWithValue: (msg: string) => <A>(x: A) => A
+```
+
+**Example**
+
+```ts
+import { traceWithValue } from 'fp-ts-std/Debug'
+import { flow } from 'fp-ts/function'
+
+const double = (n: number): number => n * 2
+const toString = (n: number): string => String(n)
+
+// Will log: "my log message: <value>"
+const doubledString: (n: number) => string = flow(double, traceWithValue('my log message: '), toString)
+
+// Actual function/pipeline behaviour is unaffected:
+assert.strictEqual(doubledString(2), '4')
 ```
 
 Added in v0.2.0
