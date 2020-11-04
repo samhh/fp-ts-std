@@ -8,6 +8,12 @@ import { getFunctionSemigroup, semigroupAll, semigroupAny } from 'fp-ts/Semigrou
 /**
  * Invert a boolean.
  *
+ * @example
+ * import { invert } from 'fp-ts-std/Boolean';
+ *
+ * assert.strictEqual(invert(true), false);
+ * assert.strictEqual(invert(false), true);
+ *
  * @since 0.4.0
  */
 export const invert: Endomorphism<boolean> = x => !x;
@@ -15,6 +21,12 @@ export const invert: Endomorphism<boolean> = x => !x;
 /**
  * Returns `true` if both arguments are `true`, else `false`. Equivalent to
  * logical conjunction.
+ *
+ * @example
+ * import { and } from 'fp-ts-std/Boolean';
+ *
+ * assert.strictEqual(and(true)(true), true);
+ * assert.strictEqual(and(true)(false), false);
  *
  * @since 0.4.0
  */
@@ -24,6 +36,12 @@ export const and = (x: boolean): Endomorphism<boolean> => y => x && y;
  * Returns `true` if one or both arguments are `true`, else `false`. Equivalent
  * to logical disjunction.
  *
+ * @example
+ * import { or } from 'fp-ts-std/Boolean';
+ *
+ * assert.strictEqual(or(true)(false), true);
+ * assert.strictEqual(or(false)(false), false);
+ *
  * @since 0.4.0
  */
 export const or = (x: boolean): Endomorphism<boolean> => y => x || y;
@@ -31,6 +49,12 @@ export const or = (x: boolean): Endomorphism<boolean> => y => x || y;
 /**
  * Returns `true` if one argument is `true` and the other is `false`, else
  * `false`. Equivalent to exclusive logical disjunction.
+ *
+ * @example
+ * import { xor } from 'fp-ts-std/Boolean';
+ *
+ * assert.strictEqual(xor(true)(false), true);
+ * assert.strictEqual(xor(true)(true), false);
  *
  * @since 0.4.0
  */
@@ -40,6 +64,17 @@ export const xor = (x: boolean): Endomorphism<boolean> => y => (x && !y) || (!x 
  * Given an array of predicates, returns a predicate that returns true if the
  * argument passes all of the predicates.
  *
+ * @example
+ * import { allPass } from 'fp-ts-std/Boolean';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const gt3: Predicate<number> = n => n > 3;
+ * const lt7: Predicate<number> = n => n < 7;
+ * const even: Predicate<number> = n => n % 2 === 0;
+ *
+ * assert.strictEqual(allPass([gt3, lt7, even])(4), true);
+ * assert.strictEqual(allPass([gt3, lt7, even])(5), false);
+ *
  * @since 0.4.0
  */
 export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> => x =>
@@ -48,6 +83,17 @@ export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> => x =>
 /**
  * Given an array of predicates, returns a predicate that returns true if the
  * argument passes any of the predicates.
+ *
+ * @example
+ * import { anyPass } from 'fp-ts-std/Boolean';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const lt3: Predicate<number> = n => n < 3;
+ * const gt7: Predicate<number> = n => n > 7;
+ * const even: Predicate<number> = n => n % 2 === 0;
+ *
+ * assert.strictEqual(anyPass([lt3, gt7, even])(4), true);
+ * assert.strictEqual(anyPass([lt3, gt7, even])(5), false);
  *
  * @since 0.4.0
  */

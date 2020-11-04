@@ -37,6 +37,20 @@ argument passes all of the predicates.
 export declare const allPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
+**Example**
+
+```ts
+import { allPass } from 'fp-ts-std/Boolean'
+import { Predicate } from 'fp-ts/function'
+
+const gt3: Predicate<number> = (n) => n > 3
+const lt7: Predicate<number> = (n) => n < 7
+const even: Predicate<number> = (n) => n % 2 === 0
+
+assert.strictEqual(allPass([gt3, lt7, even])(4), true)
+assert.strictEqual(allPass([gt3, lt7, even])(5), false)
+```
+
 Added in v0.4.0
 
 ## and
@@ -50,6 +64,15 @@ logical conjunction.
 export declare const and: (x: boolean) => Endomorphism<boolean>
 ```
 
+**Example**
+
+```ts
+import { and } from 'fp-ts-std/Boolean'
+
+assert.strictEqual(and(true)(true), true)
+assert.strictEqual(and(true)(false), false)
+```
+
 Added in v0.4.0
 
 ## anyPass
@@ -61,6 +84,20 @@ argument passes any of the predicates.
 
 ```ts
 export declare const anyPass: <A>(fs: Predicate<A>[]) => Predicate<A>
+```
+
+**Example**
+
+```ts
+import { anyPass } from 'fp-ts-std/Boolean'
+import { Predicate } from 'fp-ts/function'
+
+const lt3: Predicate<number> = (n) => n < 3
+const gt7: Predicate<number> = (n) => n > 7
+const even: Predicate<number> = (n) => n % 2 === 0
+
+assert.strictEqual(anyPass([lt3, gt7, even])(4), true)
+assert.strictEqual(anyPass([lt3, gt7, even])(5), false)
 ```
 
 Added in v0.4.0
@@ -129,6 +166,15 @@ Invert a boolean.
 export declare const invert: Endomorphism<boolean>
 ```
 
+**Example**
+
+```ts
+import { invert } from 'fp-ts-std/Boolean'
+
+assert.strictEqual(invert(true), false)
+assert.strictEqual(invert(false), true)
+```
+
 Added in v0.4.0
 
 ## or
@@ -142,6 +188,15 @@ to logical disjunction.
 export declare const or: (x: boolean) => Endomorphism<boolean>
 ```
 
+**Example**
+
+```ts
+import { or } from 'fp-ts-std/Boolean'
+
+assert.strictEqual(or(true)(false), true)
+assert.strictEqual(or(false)(false), false)
+```
+
 Added in v0.4.0
 
 ## xor
@@ -153,6 +208,15 @@ Returns `true` if one argument is `true` and the other is `false`, else
 
 ```ts
 export declare const xor: (x: boolean) => Endomorphism<boolean>
+```
+
+**Example**
+
+```ts
+import { xor } from 'fp-ts-std/Boolean'
+
+assert.strictEqual(xor(true)(false), true)
+assert.strictEqual(xor(true)(true), false)
 ```
 
 Added in v0.4.0
