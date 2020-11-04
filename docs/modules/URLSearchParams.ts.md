@@ -36,6 +36,17 @@ Clone a `URLSearchParams`.
 export declare const clone: (x: URLSearchParams) => URLSearchParams
 ```
 
+**Example**
+
+```ts
+import { clone, fromString } from 'fp-ts-std/URLSearchParams'
+
+const x = fromString('a=b&c=d')
+
+assert.strictEqual(x === clone(x), false)
+assert.deepStrictEqual(x, clone(x))
+```
+
 Added in v0.2.0
 
 ## empty
@@ -46,6 +57,14 @@ An empty `URLSearchParams`.
 
 ```ts
 export declare const empty: URLSearchParams
+```
+
+**Example**
+
+```ts
+import { empty } from 'fp-ts-std/URLSearchParams'
+
+assert.deepStrictEqual(empty, new URLSearchParams())
 ```
 
 Added in v0.2.0
@@ -60,6 +79,16 @@ Parse a `URLSearchParams` from a record.
 export declare const fromRecord: (x: Record<string, string>) => URLSearchParams
 ```
 
+**Example**
+
+```ts
+import { fromRecord } from 'fp-ts-std/URLSearchParams'
+
+const x = { a: 'b', c: 'd' }
+
+assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x))
+```
+
 Added in v0.2.0
 
 ## fromString
@@ -70,6 +99,16 @@ Parse a `URLSearchParams` from a string.
 
 ```ts
 export declare const fromString: (x: string) => URLSearchParams
+```
+
+**Example**
+
+```ts
+import { fromString } from 'fp-ts-std/URLSearchParams'
+
+const x = 'a=b&c=d'
+
+assert.deepStrictEqual(fromString(x), new URLSearchParams(x))
 ```
 
 Added in v0.2.0
@@ -84,6 +123,19 @@ Parse a `URLSearchParams` from an array of tuples.
 export declare const fromTuples: (x: [string, string][]) => URLSearchParams
 ```
 
+**Example**
+
+```ts
+import { fromTuples } from 'fp-ts-std/URLSearchParams'
+
+const x: Array<[string, string]> = [
+  ['a', 'b'],
+  ['c', 'd'],
+]
+
+assert.deepStrictEqual(fromTuples(x), new URLSearchParams(x))
+```
+
 Added in v0.2.0
 
 ## getParam
@@ -94,6 +146,18 @@ Attempt to get a URL parameter from a `URLSearchParams`.
 
 ```ts
 export declare const getParam: (k: string) => (ps: URLSearchParams) => Option<string>
+```
+
+**Example**
+
+```ts
+import { getParam, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d')
+
+assert.deepStrictEqual(getParam('c')(x), O.some('d'))
+assert.deepStrictEqual(getParam('e')(x), O.none)
 ```
 
 Added in v0.1.0
@@ -108,6 +172,17 @@ Refine a foreign value to `URLSearchParams`.
 export declare const isURLSearchParams: Refinement<unknown, URLSearchParams>
 ```
 
+**Example**
+
+```ts
+import { isURLSearchParams, fromString } from 'fp-ts-std/URLSearchParams'
+
+const x = fromString('a=b&c=d')
+
+assert.deepStrictEqual(isURLSearchParams(x), true)
+assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), false)
+```
+
 Added in v0.1.0
 
 ## setParam
@@ -118,6 +193,21 @@ Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
 
 ```ts
 export declare const setParam: (k: string) => (v: string) => (x: URLSearchParams) => URLSearchParams
+```
+
+**Example**
+
+```ts
+import { setParam, getParam, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d')
+const y = setParam('c')('e')(x)
+
+const f = getParam('c')
+
+assert.deepStrictEqual(f(x), O.some('d'))
+assert.deepStrictEqual(f(y), O.some('e'))
 ```
 
 Added in v0.1.0
