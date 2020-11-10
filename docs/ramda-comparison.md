@@ -1,6 +1,6 @@
 ---
 title: As compared to Ramda
-nav_order: 2
+nav_order: 3
 permalink: /ramda
 ---
 
