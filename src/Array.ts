@@ -11,6 +11,7 @@ import * as A from 'fp-ts/Array';
 import { Option } from 'fp-ts/Option';
 import * as O from 'fp-ts/Option';
 import { reduceM } from 'fp-ts/Foldable';
+import { monoidAll, monoidAny } from 'fp-ts/Monoid';
 
 /**
  * Get the length of an array.
@@ -55,7 +56,8 @@ export const elemFlipped = <A>(eq: Eq<A>) => (xs: Array<A>): Predicate<A> => y =
  *
  * @since 0.1.0
  */
-export const any = <A>(f: Predicate<A>): Predicate<Array<A>> => xs => xs.some(f);
+export const any: <A>(f: Predicate<A>) => Predicate<Array<A>> =
+    A.foldMap(monoidAny);
 
 /**
  * Check if a predicate holds true for every array member.
@@ -72,7 +74,8 @@ export const any = <A>(f: Predicate<A>): Predicate<Array<A>> => xs => xs.some(f)
  *
  * @since 0.1.0
  */
-export const all = <A>(f: Predicate<A>): Predicate<Array<A>> => xs => xs.every(f);
+export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> =
+    A.foldMap(monoidAll);
 
 /**
  * Join an array of strings together into a single string using the supplied
