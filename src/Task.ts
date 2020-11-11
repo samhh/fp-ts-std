@@ -2,8 +2,8 @@
  * @since 0.1.0
  */
 
-import { Task } from 'fp-ts/Task';
-import { IO } from 'fp-ts/IO';
+import { Task } from "fp-ts/Task"
+import { IO } from "fp-ts/IO"
 
 /**
  * Wait for the specified number of milliseconds before resolving.
@@ -34,10 +34,11 @@ import { IO } from 'fp-ts/IO';
  *
  * @since 0.1.0
  */
-export const sleep = (ms: number): Task<void> => () => new Promise<void>((resolve) => {
+export const sleep = (ms: number): Task<void> => () =>
+  new Promise<void>(resolve => {
     // eslint-disable-next-line functional/no-expression-statement
-    setTimeout(resolve, Math.floor(ms));
-});
+    setTimeout(resolve, Math.floor(ms))
+  })
 
 /**
  * Calls the callback upon task completion with the number of milliseconds it
@@ -56,13 +57,14 @@ export const sleep = (ms: number): Task<void> => () => new Promise<void>((resolv
  *
  * @since 0.5.0
  */
-export const elapsed = (f: (ms: number) => IO<void>) => <A>(x: Task<A>): Task<A> => async () => {
-    const start = Date.now();
-    const y = await x();
-    const duration = Date.now() - start;
-    // eslint-disable-next-line functional/no-expression-statement
-    f(duration)();
+export const elapsed = (f: (ms: number) => IO<void>) => <A>(
+  x: Task<A>,
+): Task<A> => async () => {
+  const start = Date.now()
+  const y = await x()
+  const duration = Date.now() - start
+  // eslint-disable-next-line functional/no-expression-statement
+  f(duration)()
 
-    return y;
-};
-
+  return y
+}

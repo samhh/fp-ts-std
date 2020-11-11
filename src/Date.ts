@@ -2,9 +2,9 @@
  * @since 0.1.0
  */
 
-import { flow, not, Predicate, Refinement } from 'fp-ts/function';
-import { Option } from 'fp-ts/Option';
-import * as O from 'fp-ts/Option';
+import { flow, not, Predicate, Refinement } from "fp-ts/function"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
 
 /**
  * Get the time in milliseconds from a `Date`.
@@ -18,7 +18,7 @@ import * as O from 'fp-ts/Option';
  *
  * @since 0.1.0
  */
-export const getTime = (x: Date): number => x.getTime();
+export const getTime = (x: Date): number => x.getTime()
 
 /**
  * Returns a date as a string value in ISO format.
@@ -32,7 +32,7 @@ export const getTime = (x: Date): number => x.getTime();
  *
  * @since 0.1.0
  */
-export const toISOString = (x: Date): string => x.toISOString();
+export const toISOString = (x: Date): string => x.toISOString()
 
 /**
  * Check if a foreign value is a `Date`.
@@ -45,7 +45,8 @@ export const toISOString = (x: Date): string => x.toISOString();
  *
  * @since 0.1.0
  */
-export const isDate: Refinement<unknown, Date> = (x): x is Date => x instanceof Date;
+export const isDate: Refinement<unknown, Date> = (x): x is Date =>
+  x instanceof Date
 
 /**
  * Check if a `Date` is actually valid. (We all love JavaScript, don't we?)
@@ -61,7 +62,7 @@ export const isDate: Refinement<unknown, Date> = (x): x is Date => x instanceof 
  *
  * @since 0.1.0
  */
-export const isValid: Predicate<Date> = flow(getTime, not(Number.isNaN));
+export const isValid: Predicate<Date> = flow(getTime, not(Number.isNaN))
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an
@@ -78,7 +79,7 @@ export const isValid: Predicate<Date> = flow(getTime, not(Number.isNaN));
  *
  * @since 0.1.0
  */
-export const unsafeParseDate = (x: string | number): Date => new Date(x);
+export const unsafeParseDate = (x: string | number): Date => new Date(x)
 
 /**
  * Safely parse a date.
@@ -95,6 +96,7 @@ export const unsafeParseDate = (x: string | number): Date => new Date(x);
  *
  * @since 0.1.0
  */
-export const parseDate: (ts: string | number) => Option<Date> =
-    flow(unsafeParseDate, O.fromPredicate(isValid));
-
+export const parseDate: (ts: string | number) => Option<Date> = flow(
+  unsafeParseDate,
+  O.fromPredicate(isValid),
+)

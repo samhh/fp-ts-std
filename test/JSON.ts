@@ -1,120 +1,141 @@
-import { stringifyPrimitive, stringify, stringifyO, unstringify, parse, parseO, JSONString } from '../src/JSON';
-import fc from 'fast-check';
-import { constant, constTrue, flow, identity } from 'fp-ts/function';
-import * as E from 'fp-ts/Either';
-import * as O from 'fp-ts/Option';
-import { isString } from '../src/String';
+import {
+  stringifyPrimitive,
+  stringify,
+  stringifyO,
+  unstringify,
+  parse,
+  parseO,
+  JSONString,
+} from "../src/JSON"
+import fc from "fast-check"
+import { constant, constTrue, flow, identity } from "fp-ts/function"
+import * as E from "fp-ts/Either"
+import * as O from "fp-ts/Option"
+import { isString } from "../src/String"
 
-const stringifyPrimitiveUnwrapped = (x: Parameters<typeof stringifyPrimitive>[0]): string =>
-    stringifyPrimitive(x) as unknown as string;
+const stringifyPrimitiveUnwrapped = (
+  x: Parameters<typeof stringifyPrimitive>[0],
+): string => (stringifyPrimitive(x) as unknown) as string
 
-describe('JSON', () => {
-    describe('stringifyPrimitive', () => {
-        it('never throws', () => {
-            fc.assert(fc.property(
-                fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
-                (x) => { stringifyPrimitive(x); },
-            ));
-        });
-    });
+describe("JSON", () => {
+  describe("stringifyPrimitive", () => {
+    it("never throws", () => {
+      fc.assert(
+        fc.property(
+          fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
+          x => {
+            stringifyPrimitive(x)
+          },
+        ),
+      )
+    })
+  })
 
-    describe('stringify', () => {
-        const f = stringify;
+  describe("stringify", () => {
+    const f = stringify
 
-        it('stringifies primitives', () => {
-            expect(f(identity)('abc')).toEqual(E.right('"abc"'));
-            expect(f(identity)(123)).toEqual(E.right('123'));
-            expect(f(identity)(true)).toEqual(E.right('true'));
-            expect(f(identity)(null)).toEqual(E.right('null'));
-        });
+    it("stringifies primitives", () => {
+      expect(f(identity)("abc")).toEqual(E.right('"abc"'))
+      expect(f(identity)(123)).toEqual(E.right("123"))
+      expect(f(identity)(true)).toEqual(E.right("true"))
+      expect(f(identity)(null)).toEqual(E.right("null"))
+    })
 
-        it('fails when stringification does not return a string', () => {
-            const e = new TypeError('Stringify output not a string');
-            expect(f(identity)(undefined)).toEqual(E.left(e));
+    it("fails when stringification does not return a string", () => {
+      const e = new TypeError("Stringify output not a string")
+      expect(f(identity)(undefined)).toEqual(E.left(e))
 
-            fc.assert(fc.property(
-                fc.anything(),
-                flow(f(identity), E.fold(constTrue, isString))
-            ));
-        });
+      fc.assert(
+        fc.property(
+          fc.anything(),
+          flow(f(identity), E.fold(constTrue, isString)),
+        ),
+      )
+    })
 
-        it('stringifies objects (including arrays)', () => {
-            expect(f(identity)({ a: 1, b: ['two'] })).toEqual(E.right('{"a":1,"b":["two"]}'));
-        });
+    it("stringifies objects (including arrays)", () => {
+      expect(f(identity)({ a: 1, b: ["two"] })).toEqual(
+        E.right('{"a":1,"b":["two"]}'),
+      )
+    })
 
-        it('does not throw what it fails to stringify', () => {
-            expect(f(constant('e'))(identity)).toEqual(E.left('e'));
-        });
-    });
+    it("does not throw what it fails to stringify", () => {
+      expect(f(constant("e"))(identity)).toEqual(E.left("e"))
+    })
+  })
 
-    describe('stringifyO', () => {
-        const f = stringifyO;
+  describe("stringifyO", () => {
+    const f = stringifyO
 
-        it('stringifies primitives', () => {
-            expect(f('abc')).toEqual(O.some('"abc"'));
-            expect(f(123)).toEqual(O.some('123'));
-            expect(f(true)).toEqual(O.some('true'));
-            expect(f(null)).toEqual(O.some('null'));
-        });
+    it("stringifies primitives", () => {
+      expect(f("abc")).toEqual(O.some('"abc"'))
+      expect(f(123)).toEqual(O.some("123"))
+      expect(f(true)).toEqual(O.some("true"))
+      expect(f(null)).toEqual(O.some("null"))
+    })
 
-        it('fails when stringification does not return a string', () => {
-            expect(f(undefined)).toEqual(O.none);
+    it("fails when stringification does not return a string", () => {
+      expect(f(undefined)).toEqual(O.none)
 
-            fc.assert(fc.property(
-                fc.anything(),
-                flow(f, O.fold(constTrue, isString))
-            ));
-        });
+      fc.assert(
+        fc.property(fc.anything(), flow(f, O.fold(constTrue, isString))),
+      )
+    })
 
-        it('stringifies objects (including arrays)', () => {
-            expect(f({ a: 1, b: ['two'] })).toEqual(O.some('{"a":1,"b":["two"]}'));
-        });
+    it("stringifies objects (including arrays)", () => {
+      expect(f({ a: 1, b: ["two"] })).toEqual(O.some('{"a":1,"b":["two"]}'))
+    })
 
-        it('does not throw what it fails to stringify', () => {
-            expect(f(identity)).toEqual(O.none);
-        });
-    });
+    it("does not throw what it fails to stringify", () => {
+      expect(f(identity)).toEqual(O.none)
+    })
+  })
 
-    describe('unstringify', () => {
-        const f = (x: string): unknown => unstringify(x as unknown as JSONString);
+  describe("unstringify", () => {
+    const f = (x: string): unknown => unstringify((x as unknown) as JSONString)
 
-        it('parses valid underlying JSON', () => {
-            expect(f('{"a":1,"b":["two"]}')).toEqual({ a: 1, b: ['two'] });
-        });
-    });
+    it("parses valid underlying JSON", () => {
+      expect(f('{"a":1,"b":["two"]}')).toEqual({ a: 1, b: ["two"] })
+    })
+  })
 
-    describe('parse', () => {
-        const f = parse;
+  describe("parse", () => {
+    const f = parse
 
-        it('parses valid JSON', () => {
-            expect(f(identity)('{"a":1,"b":["two"]}')).toEqual(E.right({ a: 1, b: ['two'] }));
+    it("parses valid JSON", () => {
+      expect(f(identity)('{"a":1,"b":["two"]}')).toEqual(
+        E.right({ a: 1, b: ["two"] }),
+      )
 
-            fc.assert(fc.property(
-                fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
-                flow(stringifyPrimitiveUnwrapped, f(identity), E.isRight),
-            ));
-        });
+      fc.assert(
+        fc.property(
+          fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
+          flow(stringifyPrimitiveUnwrapped, f(identity), E.isRight),
+        ),
+      )
+    })
 
-        it('does not throw what it fails to parse', () => {
-            expect(f(constant('e'))('invalid')).toEqual(E.left('e'));
-        });
-    });
+    it("does not throw what it fails to parse", () => {
+      expect(f(constant("e"))("invalid")).toEqual(E.left("e"))
+    })
+  })
 
-    describe('parseO', () => {
-        const f = parseO;
+  describe("parseO", () => {
+    const f = parseO
 
-        it('parses valid JSON', () => {
-            expect(f('{"a":1,"b":["two"]}')).toEqual(O.some({ a: 1, b: ['two'] }));
+    it("parses valid JSON", () => {
+      expect(f('{"a":1,"b":["two"]}')).toEqual(O.some({ a: 1, b: ["two"] }))
 
-            fc.assert(fc.property(
-                fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
-                flow(stringifyPrimitiveUnwrapped, f, O.isSome),
-            ));
-        });
+      fc.assert(
+        fc.property(
+          fc.oneof(fc.string(), fc.integer(), fc.boolean(), fc.constant(null)),
+          flow(stringifyPrimitiveUnwrapped, f, O.isSome),
+        ),
+      )
+    })
 
-        it('does not throw what it fails to parse', () => {
-            expect(f('invalid')).toEqual(O.none);
-        });
-    });
-});
-
+    it("does not throw what it fails to parse", () => {
+      expect(f("invalid")).toEqual(O.none)
+    })
+  })
+})

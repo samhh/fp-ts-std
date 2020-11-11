@@ -2,8 +2,8 @@
  * @since 0.1.0
  */
 
-import { Option } from 'fp-ts/Option';
-import * as R from 'fp-ts/Record';
+import { Option } from "fp-ts/Option"
+import * as R from "fp-ts/Record"
 
 /**
  * Get the values from a `Record`.
@@ -17,7 +17,7 @@ import * as R from 'fp-ts/Record';
  *
  * @since 0.1.0
  */
-export const values = <A>(x: Record<string, A>): Array<A> => Object.values(x);
+export const values = <A>(x: Record<string, A>): Array<A> => Object.values(x)
 
 /**
  * Like `lookup` from fp-ts, but flipped.
@@ -33,8 +33,9 @@ export const values = <A>(x: Record<string, A>): Array<A> => Object.values(x);
  *
  * @since 0.1.0
  */
-export const lookupFlipped = <A>(x: Record<string, A>) => (k: string): Option<A> =>
-    R.lookup(k)(x);
+export const lookupFlipped = <A>(x: Record<string, A>) => (
+  k: string,
+): Option<A> => R.lookup(k)(x)
 
 /**
  * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
@@ -50,20 +51,22 @@ export const lookupFlipped = <A>(x: Record<string, A>) => (k: string): Option<A>
  *
  * @since 0.1.0
  */
-export const pick = <A>() => <K extends keyof A>(ks: Array<K>) => (x: A): Pick<A, K> => {
-    // I don't believe there's any reasonable way to model this sort of
-    // transformation in the type system without an assertion - at least here
-    // it's in a single reused place
-    const o = {} as Pick<A, K>;
+export const pick = <A>() => <K extends keyof A>(ks: Array<K>) => (
+  x: A,
+): Pick<A, K> => {
+  // I don't believe there's any reasonable way to model this sort of
+  // transformation in the type system without an assertion - at least here
+  // it's in a single reused place
+  const o = {} as Pick<A, K>
 
-    /* eslint-disable */
-    for (const k of ks) {
-        o[k] = x[k];
-    }
-    /* eslint-enable */
+  /* eslint-disable */
+  for (const k of ks) {
+    o[k] = x[k]
+  }
+  /* eslint-enable */
 
-    return o;
-};
+  return o
+}
 
 /**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
@@ -78,15 +81,19 @@ export const pick = <A>() => <K extends keyof A>(ks: Array<K>) => (x: A): Pick<A
  *
  * @since 0.1.0
  */
-export const omit = <K extends string>(ks: Array<K>) => <V, A extends Record<K, V>>(x: Partial<A>): Omit<A, K> => {
-    const y = { ...x };
+export const omit = <K extends string>(ks: Array<K>) => <
+  V,
+  A extends Record<K, V>
+>(
+  x: Partial<A>,
+): Omit<A, K> => {
+  const y = { ...x }
 
-    /* eslint-disable */
-    for (const k of ks) {
-        delete y[k];
-    }
-    /* eslint-enable */
+  /* eslint-disable */
+  for (const k of ks) {
+    delete y[k]
+  }
+  /* eslint-enable */
 
-    return y as Omit<A, K>;
-};
-
+  return y as Omit<A, K>
+}

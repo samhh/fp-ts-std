@@ -52,4 +52,3 @@ The process for publishing is thus as follows:
 1. Increment the version in the npm manifest.
 2. Run `$ yarn prepub`, which handles the npm manifest fiddling described above.
 3. Run `$ yarn publish dist/`, and repeat the version in the npm manifest when prompted.
-

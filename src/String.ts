@@ -2,13 +2,13 @@
  * @since 0.1.0
  */
 
-import { pipe, Predicate, Refinement, Endomorphism, flow } from 'fp-ts/function';
-import { Option } from 'fp-ts/Option';
-import * as O from 'fp-ts/Option';
-import { NonEmptyArray } from 'fp-ts/NonEmptyArray';
-import * as NEA from 'fp-ts/NonEmptyArray';
-import * as A from 'fp-ts/Array';
-import { join } from './Array';
+import { pipe, Predicate, Refinement, Endomorphism, flow } from "fp-ts/function"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import * as NEA from "fp-ts/NonEmptyArray"
+import * as A from "fp-ts/Array"
+import { join } from "./Array"
 
 /**
  * Get the length of a string.
@@ -20,7 +20,7 @@ import { join } from './Array';
  *
  * @since 0.1.0
  */
-export const length = (x: string): number => x.length;
+export const length = (x: string): number => x.length
 
 /**
  * Convert a number to a string.
@@ -32,7 +32,7 @@ export const length = (x: string): number => x.length;
  *
  * @since 0.1.0
  */
-export const fromNumber = (x: number): string => String(x);
+export const fromNumber = (x: number): string => String(x)
 
 /**
  * Refine a foreign value to a string.
@@ -45,7 +45,8 @@ export const fromNumber = (x: number): string => String(x);
  *
  * @since 0.1.0
  */
-export const isString: Refinement<unknown, string> = (x): x is string => typeof x === 'string';
+export const isString: Refinement<unknown, string> = (x): x is string =>
+  typeof x === "string"
 
 /**
  * Check if a string is empty.
@@ -58,7 +59,7 @@ export const isString: Refinement<unknown, string> = (x): x is string => typeof 
  *
  * @since 0.1.0
  */
-export const isEmpty: Predicate<string> = (x) => x === '';
+export const isEmpty: Predicate<string> = x => x === ""
 
 /**
  * Check if a string contains a given substring.
@@ -75,8 +76,8 @@ export const isEmpty: Predicate<string> = (x) => x === '';
  *
  * @since 0.1.0
  */
-export const contains = (substring: string): Predicate<string> => (target) =>
-    target.includes(substring);
+export const contains = (substring: string): Predicate<string> => target =>
+  target.includes(substring)
 
 /**
  * Trim both sides of a string.
@@ -88,7 +89,7 @@ export const contains = (substring: string): Predicate<string> => (target) =>
  *
  * @since 0.1.0
  */
-export const trim: Endomorphism<string> = (x) => x.trim();
+export const trim: Endomorphism<string> = x => x.trim()
 
 /**
  * Trim the left side of a string.
@@ -100,7 +101,7 @@ export const trim: Endomorphism<string> = (x) => x.trim();
  *
  * @since 0.1.0
  */
-export const trimLeft: Endomorphism<string> = (x) => x.trimLeft();
+export const trimLeft: Endomorphism<string> = x => x.trimLeft()
 
 /**
  * Trim the right side of a string.
@@ -112,7 +113,7 @@ export const trimLeft: Endomorphism<string> = (x) => x.trimLeft();
  *
  * @since 0.1.0
  */
-export const trimRight: Endomorphism<string> = (x) => x.trimRight();
+export const trimRight: Endomorphism<string> = x => x.trimRight()
 
 /**
  * Check if a string starts with the specified substring.
@@ -127,7 +128,8 @@ export const trimRight: Endomorphism<string> = (x) => x.trimRight();
  *
  * @since 0.3.0
  */
-export const startsWith = (substring: string): Predicate<string> => y => y.startsWith(substring);
+export const startsWith = (substring: string): Predicate<string> => y =>
+  y.startsWith(substring)
 
 /**
  * Check if a string ends with the specified substring.
@@ -142,7 +144,8 @@ export const startsWith = (substring: string): Predicate<string> => y => y.start
  *
  * @since 0.3.0
  */
-export const endsWith = (substring: string): Predicate<string> => y => y.endsWith(substring);
+export const endsWith = (substring: string): Predicate<string> => y =>
+  y.endsWith(substring)
 
 /**
  * Prepend one string to another.
@@ -156,7 +159,8 @@ export const endsWith = (substring: string): Predicate<string> => y => y.endsWit
  *
  * @since 0.1.0
  */
-export const prepend = (prepended: string): Endomorphism<string> => rest => prepended + rest;
+export const prepend = (prepended: string): Endomorphism<string> => rest =>
+  prepended + rest
 
 /**
  * Remove the beginning of a string, if it exists.
@@ -170,9 +174,8 @@ export const prepend = (prepended: string): Endomorphism<string> => rest => prep
  *
  * @since 0.1.0
  */
-export const unprepend = (start: string): Endomorphism<string> => val => val.startsWith(start)
-    ? val.substring(start.length)
-    : val;
+export const unprepend = (start: string): Endomorphism<string> => val =>
+  val.startsWith(start) ? val.substring(start.length) : val
 
 /**
  * Append one string to another.
@@ -186,7 +189,8 @@ export const unprepend = (start: string): Endomorphism<string> => val => val.sta
  *
  * @since 0.1.0
  */
-export const append = (appended: string): Endomorphism<string> => rest => rest + appended;
+export const append = (appended: string): Endomorphism<string> => rest =>
+  rest + appended
 
 /**
  * Remove the end of a string, if it exists.
@@ -200,9 +204,8 @@ export const append = (appended: string): Endomorphism<string> => rest => rest +
  *
  * @since 0.1.0
  */
-export const unappend = (end: string) => (val: string): string => val.endsWith(end)
-    ? val.substring(0, val.lastIndexOf(end))
-    : val;
+export const unappend = (end: string) => (val: string): string =>
+  val.endsWith(end) ? val.substring(0, val.lastIndexOf(end)) : val
 
 /**
  * Surround a string. Equivalent to calling `prepend` and `append` with the
@@ -217,7 +220,8 @@ export const unappend = (end: string) => (val: string): string => val.endsWith(e
  *
  * @since 0.1.0
  */
-export const surround = (x: string): Endomorphism<string> => flow(prepend(x), append(x));
+export const surround = (x: string): Endomorphism<string> =>
+  flow(prepend(x), append(x))
 
 /**
  * Remove the start and end of a string, if they both exist.
@@ -232,9 +236,9 @@ export const surround = (x: string): Endomorphism<string> => flow(prepend(x), ap
  * @since 0.1.0
  */
 export const unsurround = (x: string): Endomorphism<string> => val =>
-    val.startsWith(x) && val.endsWith(x)
-        ? pipe(val, unprepend(x), unappend(x))
-        : val;
+  val.startsWith(x) && val.endsWith(x)
+    ? pipe(val, unprepend(x), unappend(x))
+    : val
 
 /**
  * Keep the specified number of characters from the start of a string.
@@ -254,7 +258,7 @@ export const unsurround = (x: string): Endomorphism<string> => val =>
  * @since 0.3.0
  */
 export const takeLeft = (n: number): Endomorphism<string> => x =>
-    x.slice(0, Math.max(0, n));
+  x.slice(0, Math.max(0, n))
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -274,7 +278,7 @@ export const takeLeft = (n: number): Endomorphism<string> => x =>
  * @since 0.3.0
  */
 export const takeRight = (n: number): Endomorphism<string> => x =>
-    x.slice(Math.max(0, x.length - Math.floor(n)));
+  x.slice(Math.max(0, x.length - Math.floor(n)))
 
 /**
  * Functional wrapper around `String.prototype.match`.
@@ -292,7 +296,7 @@ export const takeRight = (n: number): Endomorphism<string> => x =>
  * @since 0.1.0
  */
 export const match = (r: RegExp) => (x: string): Option<RegExpMatchArray> =>
-    O.fromNullable(x.match(r));
+  O.fromNullable(x.match(r))
 
 /**
  * A functional wrapper around `String.prototype.matchAll`.
@@ -314,8 +318,13 @@ export const match = (r: RegExp) => (x: string): Option<RegExpMatchArray> =>
  *
  * @since 0.5.0
  */
-export const matchAll = (r: RegExp) => (x: string): Option<NonEmptyArray<RegExpMatchArray>> =>
-    pipe(O.tryCatch(() => x.matchAll(r)), O.chain(flow(xs => Array.from(xs), NEA.fromArray)));
+export const matchAll = (r: RegExp) => (
+  x: string,
+): Option<NonEmptyArray<RegExpMatchArray>> =>
+  pipe(
+    O.tryCatch(() => x.matchAll(r)),
+    O.chain(flow(xs => Array.from(xs), NEA.fromArray)),
+  )
 
 /**
  * Split a string into substrings using the specified separator and return them
@@ -328,7 +337,8 @@ export const matchAll = (r: RegExp) => (x: string): Option<NonEmptyArray<RegExpM
  *
  * @since 0.1.0
  */
-export const split = (on: string | RegExp) => (target: string): Array<string> => target.split(on);
+export const split = (on: string | RegExp) => (target: string): Array<string> =>
+  target.split(on)
 
 /**
  * Reverse a string.
@@ -340,7 +350,11 @@ export const split = (on: string | RegExp) => (target: string): Array<string> =>
  *
  * @since 0.3.0
  */
-export const reverse: Endomorphism<string> = flow(split(''), A.reverse, join(''));
+export const reverse: Endomorphism<string> = flow(
+  split(""),
+  A.reverse,
+  join(""),
+)
 
 // The regex comes from here: https://stackoverflow.com/a/20056634
 /**
@@ -353,7 +367,7 @@ export const reverse: Endomorphism<string> = flow(split(''), A.reverse, join('')
  *
  * @since 0.1.0
  */
-export const lines = split(/\r\n|\r|\n/);
+export const lines = split(/\r\n|\r|\n/)
 
 /**
  * Join newline-separated strings together.
@@ -365,7 +379,7 @@ export const lines = split(/\r\n|\r|\n/);
  *
  * @since 0.1.0
  */
-export const unlines = join('\n');
+export const unlines = join("\n")
 
 /**
  * A functional wraper around `RegExp.prototype.test`.
@@ -380,5 +394,4 @@ export const unlines = join('\n');
  *
  * @since 0.1.0
  */
-export const test = (r: RegExp): Predicate<string> => x => r.test(x);
-
+export const test = (r: RegExp): Predicate<string> => x => r.test(x)

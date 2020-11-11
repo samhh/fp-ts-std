@@ -20,11 +20,13 @@
  * @since 0.1.0
  */
 export const flip = <
-    A extends Array<unknown>,
-    B extends Array<unknown>,
-    C,
-// eslint-disable-next-line functional/functional-parameters
->(f: (...a: A) => (...b: B) => C) => (...b: B) => (...a: A): C => f(...a)(...b);
+  A extends Array<unknown>,
+  B extends Array<unknown>,
+  C
+  // eslint-disable-next-line functional/functional-parameters
+>(
+  f: (...a: A) => (...b: B) => C,
+) => (...b: B) => (...a: A): C => f(...a)(...b)
 
 /**
  * Given a curried function with an iterative callback, this returns a new
@@ -40,13 +42,11 @@ export const flip = <
  *
  * @since 0.5.0
  */
-export const withIndex:
-    <A, B, C>(f: ((g: (x: A) => B) => (ys: Array<A>) => Array<C>)) =>
-    (g: (i: number) => (x: A) => B) =>
-    (ys: Array<A>) =>
-    Array<C>
-    = f => g => xs => {
-        let i = 0; // eslint-disable-line functional/no-let
-        return f(y => g(i++)(y))(xs);
-    };
-
+export const withIndex: <A, B, C>(
+  f: (g: (x: A) => B) => (ys: Array<A>) => Array<C>,
+) => (
+  g: (i: number) => (x: A) => B,
+) => (ys: Array<A>) => Array<C> = f => g => xs => {
+  let i = 0 // eslint-disable-line functional/no-let
+  return f(y => g(i++)(y))(xs)
+}

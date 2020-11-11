@@ -2,9 +2,9 @@
  * @since 0.2.0
  */
 
-import { Option } from 'fp-ts/Option';
-import * as O from 'fp-ts/Option';
-import { pipe, Refinement } from 'fp-ts/function';
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { pipe, Refinement } from "fp-ts/function"
 
 /**
  * An empty `URLSearchParams`.
@@ -16,7 +16,7 @@ import { pipe, Refinement } from 'fp-ts/function';
  *
  * @since 0.2.0
  */
-export const empty: URLSearchParams = new URLSearchParams();
+export const empty: URLSearchParams = new URLSearchParams()
 
 /**
  * Parse a `URLSearchParams` from a string.
@@ -30,7 +30,7 @@ export const empty: URLSearchParams = new URLSearchParams();
  *
  * @since 0.2.0
  */
-export const fromString = (x: string): URLSearchParams => new URLSearchParams(x);
+export const fromString = (x: string): URLSearchParams => new URLSearchParams(x)
 
 /**
  * Parse a `URLSearchParams` from a record.
@@ -44,7 +44,8 @@ export const fromString = (x: string): URLSearchParams => new URLSearchParams(x)
  *
  * @since 0.2.0
  */
-export const fromRecord = (x: Record<string, string>): URLSearchParams => new URLSearchParams(x);
+export const fromRecord = (x: Record<string, string>): URLSearchParams =>
+  new URLSearchParams(x)
 
 /**
  * Parse a `URLSearchParams` from an array of tuples.
@@ -58,7 +59,8 @@ export const fromRecord = (x: Record<string, string>): URLSearchParams => new UR
  *
  * @since 0.2.0
  */
-export const fromTuples = (x: Array<[string, string]>): URLSearchParams => new URLSearchParams(x);
+export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
+  new URLSearchParams(x)
 
 /**
  * Clone a `URLSearchParams`.
@@ -73,7 +75,8 @@ export const fromTuples = (x: Array<[string, string]>): URLSearchParams => new U
  *
  * @since 0.2.0
  */
-export const clone = (x: URLSearchParams): URLSearchParams => new URLSearchParams(x);
+export const clone = (x: URLSearchParams): URLSearchParams =>
+  new URLSearchParams(x)
 
 /**
  * Refine a foreign value to `URLSearchParams`.
@@ -88,8 +91,9 @@ export const clone = (x: URLSearchParams): URLSearchParams => new URLSearchParam
  *
  * @since 0.1.0
  */
-export const isURLSearchParams: Refinement<unknown, URLSearchParams> = (x): x is URLSearchParams =>
-    x instanceof URLSearchParams;
+export const isURLSearchParams: Refinement<unknown, URLSearchParams> = (
+  x,
+): x is URLSearchParams => x instanceof URLSearchParams
 
 /**
  * Attempt to get a URL parameter from a `URLSearchParams`.
@@ -105,10 +109,8 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> = (x): x is
  *
  * @since 0.1.0
  */
-export const getParam = (k: string) => (ps: URLSearchParams): Option<string> => pipe(
-    ps.get(k),
-    O.fromNullable,
-);
+export const getParam = (k: string) => (ps: URLSearchParams): Option<string> =>
+  pipe(ps.get(k), O.fromNullable)
 
 /**
  * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
@@ -127,9 +129,10 @@ export const getParam = (k: string) => (ps: URLSearchParams): Option<string> => 
  *
  * @since 0.1.0
  */
-export const setParam = (k: string) => (v: string) => (x: URLSearchParams): URLSearchParams => {
-    const y = new URLSearchParams(x);
-    y.set(k, v); // eslint-disable-line functional/no-expression-statement
-    return y;
-};
-
+export const setParam = (k: string) => (v: string) => (
+  x: URLSearchParams,
+): URLSearchParams => {
+  const y = new URLSearchParams(x)
+  y.set(k, v) // eslint-disable-line functional/no-expression-statement
+  return y
+}

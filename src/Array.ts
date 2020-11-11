@@ -2,16 +2,16 @@
  * @since 0.1.0
  */
 
-import { Predicate, constant, pipe } from 'fp-ts/function';
-import { Eq } from 'fp-ts/Eq';
-import { Ord } from 'fp-ts/Ord';
-import { NonEmptyArray } from 'fp-ts/NonEmptyArray';
-import * as NEA from 'fp-ts/NonEmptyArray';
-import * as A from 'fp-ts/Array';
-import { Option } from 'fp-ts/Option';
-import * as O from 'fp-ts/Option';
-import { reduceM } from 'fp-ts/Foldable';
-import { monoidAll, monoidAny } from 'fp-ts/Monoid';
+import { Predicate, constant, pipe } from "fp-ts/function"
+import { Eq } from "fp-ts/Eq"
+import { Ord } from "fp-ts/Ord"
+import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import * as NEA from "fp-ts/NonEmptyArray"
+import * as A from "fp-ts/Array"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { reduceM } from "fp-ts/Foldable"
+import { monoidAll, monoidAny } from "fp-ts/Monoid"
 
 /**
  * Get the length of an array.
@@ -23,7 +23,7 @@ import { monoidAll, monoidAny } from 'fp-ts/Monoid';
  *
  * @since 0.1.0
  */
-export const length = (xs: Array<unknown>): number => xs.length;
+export const length = (xs: Array<unknown>): number => xs.length
 
 /**
  * Like `fp-ts/Array::elem`, but flipped.
@@ -39,7 +39,9 @@ export const length = (xs: Array<unknown>): number => xs.length;
  *
  * @since 0.1.0
  */
-export const elemFlipped = <A>(eq: Eq<A>) => (xs: Array<A>): Predicate<A> => y => A.elem(eq)(y)(xs);
+export const elemFlipped = <A>(eq: Eq<A>) => (
+  xs: Array<A>,
+): Predicate<A> => y => A.elem(eq)(y)(xs)
 
 /**
  * Check if a predicate holds true for any array member.
@@ -56,8 +58,9 @@ export const elemFlipped = <A>(eq: Eq<A>) => (xs: Array<A>): Predicate<A> => y =
  *
  * @since 0.1.0
  */
-export const any: <A>(f: Predicate<A>) => Predicate<Array<A>> =
-    A.foldMap(monoidAny);
+export const any: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
+  monoidAny,
+)
 
 /**
  * Check if a predicate holds true for every array member.
@@ -74,8 +77,9 @@ export const any: <A>(f: Predicate<A>) => Predicate<Array<A>> =
  *
  * @since 0.1.0
  */
-export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> =
-    A.foldMap(monoidAll);
+export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
+  monoidAll,
+)
 
 /**
  * Join an array of strings together into a single string using the supplied
@@ -92,7 +96,7 @@ export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> =
  *
  * @since 0.1.0
  */
-export const join = (x: string) => (ys: Array<string>): string => ys.join(x);
+export const join = (x: string) => (ys: Array<string>): string => ys.join(x)
 
 /**
  * Like `fp-ts/Array::getEq`, but items are not required to be in the same
@@ -113,12 +117,12 @@ export const join = (x: string) => (ys: Array<string>): string => ys.join(x);
  * @since 0.1.0
  */
 export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
-    equals: (xs: Array<A>, ys: Array<A>) => {
-        const sort = A.sort(ordA);
+  equals: (xs: Array<A>, ys: Array<A>) => {
+    const sort = A.sort(ordA)
 
-        return A.getEq(ordA).equals(sort(xs), sort(ys));
-    },
-});
+    return A.getEq(ordA).equals(sort(xs), sort(ys))
+  },
+})
 
 /**
  * Pluck the first item out of an array matching a predicate. Any further
@@ -140,13 +144,16 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
  *
  * @since 0.1.0
  */
-export const pluckFirst = <A>(p: Predicate<A>) => (xs: Array<A>): [Option<A>, Array<A>] => pipe(
+export const pluckFirst = <A>(p: Predicate<A>) => (
+  xs: Array<A>,
+): [Option<A>, Array<A>] =>
+  pipe(
     A.findIndex(p)(xs),
-    O.fold(
-	constant([O.none, xs]),
-	(i) => [O.some(xs[i]), A.unsafeDeleteAt(i, xs)],
-    ),
-);
+    O.fold(constant([O.none, xs]), i => [
+      O.some(xs[i]),
+      A.unsafeDeleteAt(i, xs),
+    ]),
+  )
 
 /**
  * Update an item in an array or, if it's not present yet, insert it.
@@ -191,12 +198,15 @@ export const pluckFirst = <A>(p: Predicate<A>) => (xs: Array<A>): [Option<A>, Ar
  *
  * @since 0.1.0
  */
-export const upsert = <A>(eqA: Eq<A>) => (x: A) => (ys: Array<A>): NonEmptyArray<A> => pipe(
+export const upsert = <A>(eqA: Eq<A>) => (x: A) => (
+  ys: Array<A>,
+): NonEmptyArray<A> =>
+  pipe(
     A.findIndex<A>(y => eqA.equals(x, y))(ys),
-    O.map((i) => A.unsafeUpdateAt(i, x, ys)),
+    O.map(i => A.unsafeUpdateAt(i, x, ys)),
     O.chain(NEA.fromArray),
     O.getOrElse(() => NEA.snoc(ys, x)),
-);
+  )
 
 /**
  * Insert all the elements of an array into another array at the specified
@@ -215,10 +225,12 @@ export const upsert = <A>(eqA: Eq<A>) => (x: A) => (ys: Array<A>): NonEmptyArray
  *
  * @since 0.5.0
  */
-export const insertMany = (i: number) => <A>(xs: NonEmptyArray<A>) => (ys: Array<A>): Option<NonEmptyArray<A>> => pipe(
+export const insertMany = (i: number) => <A>(xs: NonEmptyArray<A>) => (
+  ys: Array<A>,
+): Option<NonEmptyArray<A>> =>
+  pipe(
     xs,
     A.reverse,
     reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
     O.chain(NEA.fromArray),
-);
-
+  )
