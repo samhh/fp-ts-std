@@ -24,10 +24,11 @@ import {
   trimRight,
   split,
   test,
+  dropLeftWhile,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { flow } from "fp-ts/function"
+import { constFalse, constTrue, flow } from "fp-ts/function"
 import fc from "fast-check"
 import { invert } from "../src/Boolean"
 
@@ -585,6 +586,22 @@ describe("String", () => {
       expect(f("axyzb")).toBe(true)
       expect(f("ayz")).toBe(false)
       expect(f("xya")).toBe(false)
+    })
+  })
+
+  describe("dropLeftWhile", () => {
+    const f = dropLeftWhile
+
+    it("returns identity on constFalse", () => {
+      fc.assert(fc.property(fc.string(), x => f(constFalse)(x) === x))
+    })
+
+    it("returns empty on constTrue", () => {
+      fc.assert(fc.property(fc.string(), x => f(constTrue)(x) === ""))
+    })
+
+    it("drops until a match", () => {
+      expect(f(x => x !== "d")("abcdef")).toBe("def")
     })
   })
 })

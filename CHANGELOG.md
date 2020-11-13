@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.6.0 (_unreleased_)
 
 - Add `dropRepeats` function to the `Array` module.
+- Add `dropLeftWhile` function to the `String` module.
 - Add `unJSONString` function to the `JSON` module.
 - Remove `concat` function from the `String` module as it's a duplicate of `prepend`.
 

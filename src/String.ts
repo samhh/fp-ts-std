@@ -395,3 +395,19 @@ export const unlines = join("\n")
  * @since 0.1.0
  */
 export const test = (r: RegExp): Predicate<string> => x => r.test(x)
+
+/**
+ * Remove the longest initial substring for which all characters satisfy the
+ * specified predicate, creating a new string.
+ *
+ * @example
+ * import { dropLeftWhile } from 'fp-ts-std/String';
+ *
+ * const dropFilename = dropLeftWhile(x => x !== '.');
+ *
+ * assert.strictEqual(dropFilename('File.hs'), '.hs')
+ *
+ * @since 0.6.0
+ */
+export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
+  flow(split(""), A.dropLeftWhile(f), join(""))

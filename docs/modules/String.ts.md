@@ -15,6 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [append](#append)
   - [contains](#contains)
+  - [dropLeftWhile](#dropleftwhile)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
   - [isEmpty](#isempty)
@@ -89,6 +90,29 @@ assert.strictEqual(f('xaycz'), false)
 ```
 
 Added in v0.1.0
+
+## dropLeftWhile
+
+Remove the longest initial substring for which all characters satisfy the
+specified predicate, creating a new string.
+
+**Signature**
+
+```ts
+export declare const dropLeftWhile: (f: Predicate<string>) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { dropLeftWhile } from 'fp-ts-std/String'
+
+const dropFilename = dropLeftWhile((x) => x !== '.')
+
+assert.strictEqual(dropFilename('File.hs'), '.hs')
+```
+
+Added in v0.6.0
 
 ## endsWith
 
