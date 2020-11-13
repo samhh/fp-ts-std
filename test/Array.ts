@@ -8,6 +8,7 @@ import {
   upsert,
   getDisorderedEq,
   insertMany,
+  dropRepeats,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -234,6 +235,32 @@ describe("Array", () => {
       expect(xs).toEqual([1, 2, 3])
       expect(ys).toEqual([4, 5])
       expect(zs).toEqual(O.some([1, 4, 5, 2, 3]))
+    })
+  })
+
+  describe("dropRepeats", () => {
+    const f = dropRepeats(eqNumber)
+
+    it("removes consecutive duplicates if any", () => {
+      expect(f([])).toEqual([])
+      expect(f([1, 2, 3])).toEqual([1, 2, 3])
+      expect(f([1, 2, 2, 3, 2, 4, 4])).toEqual([1, 2, 3, 2, 4])
+    })
+
+    it("never returns a larger array", () => {
+      fc.assert(
+        fc.property(fc.array(fc.integer()), xs => f(xs).length <= xs.length),
+      )
+    })
+
+    it("never introduces new elements", () => {
+      const g = A.uniq(eqNumber)
+
+      fc.assert(
+        fc.property(fc.array(fc.integer()), xs =>
+          pipe(xs, f, g, all(elemFlipped(eqNumber)(g(xs)))),
+        ),
+      )
     })
   })
 })

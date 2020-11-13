@@ -15,6 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [all](#all)
   - [any](#any)
+  - [dropRepeats](#droprepeats)
   - [elemFlipped](#elemflipped)
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
@@ -76,6 +77,28 @@ assert.strictEqual(isAnyFive([3, 4, 7]), false)
 ```
 
 Added in v0.1.0
+
+## dropRepeats
+
+Filter a list, removing any elements that repeat that directly preceding
+them.
+
+**Signature**
+
+```ts
+export declare const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<A[]>
+```
+
+**Example**
+
+```ts
+import { dropRepeats } from 'fp-ts-std/Array'
+import { eqNumber } from 'fp-ts/Eq'
+
+assert.deepStrictEqual(dropRepeats(eqNumber)([1, 2, 2, 3, 2, 4, 4]), [1, 2, 3, 2, 4])
+```
+
+Added in v0.6.0
 
 ## elemFlipped
 

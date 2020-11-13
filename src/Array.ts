@@ -2,7 +2,7 @@
  * @since 0.1.0
  */
 
-import { Predicate, constant, pipe } from "fp-ts/function"
+import { Predicate, constant, pipe, flow, Endomorphism } from "fp-ts/function"
 import { Eq } from "fp-ts/Eq"
 import { Ord } from "fp-ts/Ord"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
@@ -233,4 +233,22 @@ export const insertMany = (i: number) => <A>(xs: NonEmptyArray<A>) => (
     A.reverse,
     reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
     O.chain(NEA.fromArray),
+  )
+
+/**
+ * Filter a list, removing any elements that repeat that directly preceding
+ * them.
+ *
+ * @example
+ * import { dropRepeats } from 'fp-ts-std/Array';
+ * import { eqNumber } from 'fp-ts/Eq'
+ *
+ * assert.deepStrictEqual(dropRepeats(eqNumber)([1, 2, 2, 3, 2, 4, 4]), [1, 2, 3, 2, 4]);
+ *
+ * @since 0.6.0
+ */
+export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
+  pipe(
+    xs,
+    A.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
   )

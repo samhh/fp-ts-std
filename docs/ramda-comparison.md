@@ -63,8 +63,8 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [ ] drop - [fp-ts/Array::dropLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleft)
 - [ ] dropLast - [fp-ts/Array::dropRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropright)
 - [ ] dropLastWhile - [fp-ts/Array::dropLastWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#droplastwhile)
-- [ ] dropRepeats
-- [ ] dropRepeatsWith
+- [x] dropRepeats - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
+- [x] dropRepeatsWith - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [ ] dropWhile - [fp-ts/Array::dropLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleftwhile)
 - [ ] either
 - [ ] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)
