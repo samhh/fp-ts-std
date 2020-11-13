@@ -53,10 +53,10 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [ ] curry
 - [ ] curryN
 - [x] dec - [fp-ts-std/Number::decrement](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#decrement)/[fp-ts/function::decrement](https://gcanti.github.io/fp-ts/modules/function.ts.html#decrement]
-- [ ] defaultTo
+- [x] defaultTo - [fp-ts/Option::getOrElse](https://gcanti.github.io/fp-ts/modules/Option.ts.html#getorelse)
 - [x] descend - [fp-ts/Ord::ordNumber](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#ordnumber)/[fp-ts/Ord::getDualOrd](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#getdualord)
 - [x] difference - [fp-ts/Array::difference](https://gcanti.github.io/fp-ts/modules/Array.ts.html#difference)
-- [ ] differenceWith
+- [x] differenceWith - [fp-ts/Array::difference](https://gcanti.github.io/fp-ts/modules/Array.ts.html#difference)
 - [x] dissoc - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
 - [ ] dissocPath
 - [x] divide - [fp-ts-std/Number::divide](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#divide)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
