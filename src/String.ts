@@ -417,6 +417,27 @@ export const test = (r: RegExp): Predicate<string> => x => r.test(x)
 export const dropLeft = (n: number): Endomorphism<string> => x => x.substring(n)
 
 /**
+ * Drop a number of characters from the end of a string, returning a new
+ * string.
+ *
+ * If `n` is larger than the available number of characters, an empty string
+ * will be returned.
+ *
+ * If `n` is not a positive number, the string will be returned whole.
+ *
+ * If `n` is a float, it will be rounded down to the nearest integer.
+ *
+ * @example
+ * import { dropRight } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(dropRight(2)('abc'), 'a');
+ *
+ * @since 0.3.0
+ */
+export const dropRight = (n: number): Endomorphism<string> => x =>
+  x.substring(0, x.length - Math.floor(n))
+
+/**
  * Remove the longest initial substring for which all characters satisfy the
  * specified predicate, creating a new string.
  *

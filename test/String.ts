@@ -26,6 +26,7 @@ import {
   test,
   dropLeftWhile,
   dropLeft,
+  dropRight,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -632,6 +633,35 @@ describe("String", () => {
 
     it("drops until a match", () => {
       expect(f(x => x !== "d")("abcdef")).toBe("def")
+    })
+  })
+
+  describe("dropRight", () => {
+    const f = dropRight
+
+    it("returns identity for non-positive number", () => {
+      expect(f(-1)("abc")).toBe("abc")
+
+      fc.assert(
+        fc.property(fc.string(), fc.integer(0), (x, n) => f(n)(x) === x),
+      )
+    })
+
+    it("rounds float down to nearest integer", () => {
+      expect(f(0.99)("abc")).toBe("abc")
+      expect(f(1.01)("abc")).toBe("ab")
+    })
+
+    it("drops specified number of characters", () => {
+      expect(f(2)("abc")).toBe("a")
+
+      fc.assert(
+        fc.property(
+          fc.string(),
+          fc.integer(0, Number.MAX_SAFE_INTEGER),
+          (x, n) => f(n)(x).length === Math.max(0, x.length - n),
+        ),
+      )
     })
   })
 })

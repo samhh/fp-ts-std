@@ -17,6 +17,7 @@ Added in v0.1.0
   - [contains](#contains)
   - [dropLeft](#dropleft)
   - [dropLeftWhile](#dropleftwhile)
+  - [dropRight](#dropright)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
   - [isEmpty](#isempty)
@@ -142,6 +143,34 @@ assert.strictEqual(dropFilename('File.hs'), '.hs')
 ```
 
 Added in v0.6.0
+
+## dropRight
+
+Drop a number of characters from the end of a string, returning a new
+string.
+
+If `n` is larger than the available number of characters, an empty string
+will be returned.
+
+If `n` is not a positive number, the string will be returned whole.
+
+If `n` is a float, it will be rounded down to the nearest integer.
+
+**Signature**
+
+```ts
+export declare const dropRight: (n: number) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { dropRight } from 'fp-ts-std/String'
+
+assert.strictEqual(dropRight(2)('abc'), 'a')
+```
+
+Added in v0.3.0
 
 ## endsWith
 
