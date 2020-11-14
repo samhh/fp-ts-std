@@ -60,7 +60,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [x] dissoc - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
 - [ ] dissocPath
 - [x] divide - [fp-ts-std/Number::divide](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#divide)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
-- [ ] drop - [fp-ts/Array::dropLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleft)
+- [x] drop - [fp-ts/Array::dropLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleft)/[fp-ts-std/String::dropLeft](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropleft)
 - [ ] dropLast - [fp-ts/Array::dropRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropright)
 - [ ] dropLastWhile - [fp-ts/Array::dropLastWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#droplastwhile)
 - [x] dropRepeats - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)

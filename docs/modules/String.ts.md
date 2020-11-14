@@ -15,6 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [append](#append)
   - [contains](#contains)
+  - [dropLeft](#dropleft)
   - [dropLeftWhile](#dropleftwhile)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
@@ -90,6 +91,34 @@ assert.strictEqual(f('xaycz'), false)
 ```
 
 Added in v0.1.0
+
+## dropLeft
+
+Drop a number of characters from the start of a string, returning a new
+string.
+
+If `n` is larger than the available number of characters, an empty string
+will be returned.
+
+If `n` is not a positive number, the string will be returned whole.
+
+If `n` is a float, it will be rounded down to the nearest integer.
+
+**Signature**
+
+```ts
+export declare const dropLeft: (n: number) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { dropLeft } from 'fp-ts-std/String'
+
+assert.strictEqual(dropLeft(2)('abc'), 'c')
+```
+
+Added in v0.6.0
 
 ## dropLeftWhile
 
