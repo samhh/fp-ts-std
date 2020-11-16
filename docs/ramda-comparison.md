@@ -69,7 +69,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [ ] either
 - [ ] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)
 - [ ] endsWith - [fp-ts-std/String::endsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#endswith)
-- [ ] eqBy
+- [x] eqBy - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
 - [x] eqProps - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
 - [x] equals - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
 - [ ] evolve
