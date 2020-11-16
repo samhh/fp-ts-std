@@ -11,6 +11,18 @@ import * as A from "fp-ts/Array"
 import { join } from "./Array"
 
 /**
+ * An empty string.
+ *
+ * @example
+ * import { empty } from 'fp-ts-std/String'
+ *
+ * assert.strictEqual(empty, '')
+ *
+ * @since 0.6.0
+ */
+export const empty = ""
+
+/**
  * Get the length of a string.
  *
  * @example

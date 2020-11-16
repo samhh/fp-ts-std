@@ -18,6 +18,7 @@ Added in v0.1.0
   - [dropLeft](#dropleft)
   - [dropLeftWhile](#dropleftwhile)
   - [dropRight](#dropright)
+  - [empty](#empty)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
   - [isEmpty](#isempty)
@@ -171,6 +172,26 @@ assert.strictEqual(dropRight(2)('abc'), 'a')
 ```
 
 Added in v0.3.0
+
+## empty
+
+An empty string.
+
+**Signature**
+
+```ts
+export declare const empty: ''
+```
+
+**Example**
+
+```ts
+import { empty } from 'fp-ts-std/String'
+
+assert.strictEqual(empty, '')
+```
+
+Added in v0.6.0
 
 ## endsWith
 
