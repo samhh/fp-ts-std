@@ -62,7 +62,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [x] divide - [fp-ts-std/Number::divide](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#divide)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [x] drop - [fp-ts/Array::dropLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleft)/[fp-ts-std/String::dropLeft](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropleft)
 - [x] dropLast - [fp-ts/Array::dropRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropright)/[fp-ts-std/String::dropRight](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropright)
-- [ ] dropLastWhile - [fp-ts/Array::dropLastWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#droplastwhile)
+- [ ] dropLastWhile
 - [x] dropRepeats - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropRepeatsWith - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropWhile - [fp-ts/Array::dropLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleftwhile)/[fp-ts-std/String::dropLeftWhile](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropleftwhile)
