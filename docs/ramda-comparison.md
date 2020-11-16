@@ -66,7 +66,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [x] dropRepeats - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropRepeatsWith - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropWhile - [fp-ts/Array::dropLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleftwhile)/[fp-ts-std/String::dropLeftWhile](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropleftwhile)
-- [ ] either
+- [x] either - [fp-ts/Option::alt](https://gcanti.github.io/fp-ts/modules/Option.ts.html#alt)
 - [x] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)/[fp-ts/Option::empty]/[fp-ts-std/String::empty](https://samhh.github.io/fp-ts-std/modules/String.ts.html#empty)
 - [ ] endsWith - [fp-ts-std/String::endsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#endswith)
 - [x] eqBy - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
