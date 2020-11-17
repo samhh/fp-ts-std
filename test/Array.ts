@@ -9,6 +9,7 @@ import {
   getDisorderedEq,
   insertMany,
   dropRepeats,
+  endsWith,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -259,6 +260,25 @@ describe("Array", () => {
       fc.assert(
         fc.property(fc.array(fc.integer()), xs =>
           pipe(xs, f, g, all(elemFlipped(eqNumber)(g(xs)))),
+        ),
+      )
+    })
+  })
+
+  describe("endsWith", () => {
+    const f = endsWith(eqNumber)
+
+    it("returns true for empty subarray", () => {
+      fc.assert(fc.property(fc.array(fc.integer()), xs => f([])(xs)))
+    })
+
+    it("checks end of array for subarray", () => {
+      expect(f([3])([1, 2, 3])).toBe(true)
+      expect(f([1])([1, 2, 3])).toBe(false)
+
+      fc.assert(
+        fc.property(fc.array(fc.integer()), fc.array(fc.integer()), (xs, ys) =>
+          f(xs)(ys.concat(xs)),
         ),
       )
     })

@@ -252,3 +252,22 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
     xs,
     A.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
   )
+
+/**
+ * Check if an array ends with the specified subarray.
+ *
+ * @example
+ * import { endsWith } from 'fp-ts-std/Array';
+ * import { eqString } from 'fp-ts/Eq'
+ *
+ * const endsXyz = endsWith(eqString)(['x', 'y', 'z']);
+ *
+ * assert.strictEqual(endsXyz(['a', 'x', 'y', 'z']), true);
+ * assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false);
+ *
+ * @since 0.6.0
+ */
+export const endsWith = <A>(eq: Eq<A>) => (
+  end: Array<A>,
+): Predicate<Array<A>> => xs =>
+  A.getEq(eq).equals(end, A.takeRight(end.length)(xs))

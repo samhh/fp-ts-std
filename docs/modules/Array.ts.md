@@ -17,6 +17,7 @@ Added in v0.1.0
   - [any](#any)
   - [dropRepeats](#droprepeats)
   - [elemFlipped](#elemflipped)
+  - [endsWith](#endswith)
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
   - [join](#join)
@@ -123,6 +124,30 @@ assert.strictEqual(isLowerVowel('b'), false)
 ```
 
 Added in v0.1.0
+
+## endsWith
+
+Check if an array ends with the specified subarray.
+
+**Signature**
+
+```ts
+export declare const endsWith: <A>(eq: Eq<A>) => (end: A[]) => Predicate<A[]>
+```
+
+**Example**
+
+```ts
+import { endsWith } from 'fp-ts-std/Array'
+import { eqString } from 'fp-ts/Eq'
+
+const endsXyz = endsWith(eqString)(['x', 'y', 'z'])
+
+assert.strictEqual(endsXyz(['a', 'x', 'y', 'z']), true)
+assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false)
+```
+
+Added in v0.6.0
 
 ## getDisorderedEq
 
