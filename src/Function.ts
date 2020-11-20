@@ -70,3 +70,25 @@ export const withIndex: <A, B, C>(
 export const unary = <A extends Array<unknown>, B>(f: (...xs: A) => B) => (
   xs: A,
 ): B => f(...xs)
+
+/**
+ * Apply a function, taking the data first. This can be thought of as ordinary
+ * function application, but flipped.
+ *
+ * This is useful for applying functions point-free.
+ *
+ * @example
+ * import { applyTo } from 'fp-ts-std/Function';
+ * import { add, multiply } from 'fp-ts-std/Number';
+ * import * as A from 'fp-ts/Array';
+ * import { pipe, Endomorphism } from 'fp-ts/function';
+ *
+ * const calc: Array<Endomorphism<number>> = [add(1), multiply(2)];
+ *
+ * const output = pipe(calc, A.map(applyTo(5)));
+ *
+ * assert.deepStrictEqual(output, [6, 10]);
+ *
+ * @since 0.6.0
+ */
+export const applyTo = <A>(x: A) => <B>(f: (x: A) => B): B => f(x)

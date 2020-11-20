@@ -13,6 +13,7 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [applyTo](#applyto)
   - [flip](#flip)
   - [unary](#unary)
   - [withIndex](#withindex)
@@ -20,6 +21,36 @@ Added in v0.1.0
 ---
 
 # utils
+
+## applyTo
+
+Apply a function, taking the data first. This can be thought of as ordinary
+function application, but flipped.
+
+This is useful for applying functions point-free.
+
+**Signature**
+
+```ts
+export declare const applyTo: <A>(x: A) => <B>(f: (x: A) => B) => B
+```
+
+**Example**
+
+```ts
+import { applyTo } from 'fp-ts-std/Function'
+import { add, multiply } from 'fp-ts-std/Number'
+import * as A from 'fp-ts/Array'
+import { pipe, Endomorphism } from 'fp-ts/function'
+
+const calc: Array<Endomorphism<number>> = [add(1), multiply(2)]
+
+const output = pipe(calc, A.map(applyTo(5)))
+
+assert.deepStrictEqual(output, [6, 10])
+```
+
+Added in v0.6.0
 
 ## flip
 

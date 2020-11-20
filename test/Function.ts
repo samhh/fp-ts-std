@@ -1,9 +1,10 @@
-import { flip, withIndex, unary } from "../src/Function"
+import { flip, withIndex, unary, applyTo } from "../src/Function"
 import { prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add } from "../src/Number"
+import { Endomorphism } from "fp-ts/function"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -37,6 +38,16 @@ describe("Function", () => {
       // @ts-expect-error ensure it doesn't work without our unary helper
       expect(Math.max(xs)).toBeNaN()
       expect(f(xs)).toBe(3)
+    })
+  })
+
+  describe("applyTo", () => {
+    const f = applyTo
+
+    it("applies the function", () => {
+      const g: Endomorphism<number> = n => n * 2
+
+      expect(f(5)(g)).toBe(g(5))
     })
   })
 })

@@ -28,7 +28,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] append - [fp-ts/Array::snoc](https://gcanti.github.io/fp-ts/modules/Array.ts.html#snoc)
 - [x] apply - [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary)
 - [ ] applySpec
-- [ ] applyTo
+- [x] applyTo - [fp-ts-std/Function::applyTo](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#applyto)
 - [x] ascend - [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
 - [x] assoc - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] assocPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
