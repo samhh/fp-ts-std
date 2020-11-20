@@ -464,3 +464,17 @@ export const dropRight = (n: number): Endomorphism<string> => x =>
  */
 export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
   flow(split(""), A.dropLeftWhile(f), join(""))
+
+/**
+ * Get the first character in a string, or `None` if the string is empty.
+ *
+ * @example
+ * import { head } from 'fp-ts-std/String';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(head('abc'), O.some('a'));
+ * assert.deepStrictEqual(head(''), O.none);
+ *
+ * @since 0.6.0
+ */
+export const head = (x: string): Option<string> => O.fromNullable(x[0])

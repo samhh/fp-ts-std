@@ -93,7 +93,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] has - [fp-ts/Record::hasOwnProperty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#hasownproperty-function)
 - [x] hasIn - [fp-ts/Record::hasOwnProperty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#hasownproperty-function)
 - [x] hasPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] head - [fp-ts/Array::head](https://gcanti.github.io/fp-ts/modules/Array.ts.html#head)
+- [x] head - [fp-ts/Array::head](https://gcanti.github.io/fp-ts/modules/Array.ts.html#head) / [fp-ts-std/String::head](https://samhh.github.io/fp-ts-std/modules/String.ts.html#head)
 - [x] identical - [fp-ts/Eq::eqStrict](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#eqstrict)
 - [x] identity - [fp-ts/function::identity](https://gcanti.github.io/fp-ts/modules/function.ts.html#identity)
 - [ ] ifElse

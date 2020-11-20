@@ -27,6 +27,7 @@ import {
   dropLeftWhile,
   dropLeft,
   dropRight,
+  head,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -661,6 +662,20 @@ describe("String", () => {
           fc.integer(0, Number.MAX_SAFE_INTEGER),
           (x, n) => f(n)(x).length === Math.max(0, x.length - n),
         ),
+      )
+    })
+  })
+
+  describe("head", () => {
+    const f = head
+
+    it("returns None for empty string", () => {
+      expect(f("")).toEqual(O.none)
+    })
+
+    it("returns first character of non-empty string", () => {
+      fc.assert(
+        fc.property(fc.string(1, 100), x => expect(f(x)).toEqual(O.some(x[0]))),
       )
     })
   })
