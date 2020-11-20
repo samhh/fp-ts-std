@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `dropLeft`, `dropLeftWhile`, `dropRight`, `head`, and `tail` functions to the `String` module.
 - Add `empty` constant to the `String` module.
 - Add `unJSONString` function to the `JSON` module.
+- Add `unary` function to the `Function` module.
 - Remove `concat` function from the `String` module as it's a duplicate of `prepend`.
 
 ## 0.5.2 (2020-11-02)

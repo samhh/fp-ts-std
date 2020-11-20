@@ -14,6 +14,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [flip](#flip)
+  - [unary](#unary)
   - [withIndex](#withindex)
 
 ---
@@ -48,6 +49,32 @@ assert.strictEqual(append('x')('y'), 'yx')
 ```
 
 Added in v0.1.0
+
+## unary
+
+Converts a variadic function to a unary function.
+
+Whilst this isn't very useful for functions that ought to be curried,
+it is helpful for functions which take an indefinite number of arguments
+instead of more appropriately an array.
+
+**Signature**
+
+```ts
+export declare const unary: <A extends unknown[], B>(f: (...xs: A) => B) => (xs: A) => B
+```
+
+**Example**
+
+```ts
+import { unary } from 'fp-ts-std/Function'
+
+const max = unary(Math.max)
+
+assert.strictEqual(max([1, 3, 2]), 3)
+```
+
+Added in v0.6.0
 
 ## withIndex
 

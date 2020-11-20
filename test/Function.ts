@@ -1,4 +1,4 @@
-import { flip, withIndex } from "../src/Function"
+import { flip, withIndex, unary } from "../src/Function"
 import { prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
@@ -25,6 +25,18 @@ describe("Function", () => {
       expect(
         h(i => x => (i % 2 === 0 ? O.some(x) : O.none))([1, 2, 3]),
       ).toEqual([1, 3])
+    })
+  })
+
+  describe("unary", () => {
+    const f = unary(Math.max)
+
+    it("spreads the array input over the function", () => {
+      const xs = [1, 3, 2]
+
+      // @ts-expect-error ensure it doesn't work without our unary helper
+      expect(Math.max(xs)).toBeNaN()
+      expect(f(xs)).toBe(3)
     })
   })
 })

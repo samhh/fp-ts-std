@@ -50,3 +50,23 @@ export const withIndex: <A, B, C>(
   let i = 0 // eslint-disable-line functional/no-let
   return f(y => g(i++)(y))(xs)
 }
+
+/**
+ * Converts a variadic function to a unary function.
+ *
+ * Whilst this isn't very useful for functions that ought to be curried,
+ * it is helpful for functions which take an indefinite number of arguments
+ * instead of more appropriately an array.
+ *
+ * @example
+ * import { unary } from 'fp-ts-std/Function';
+ *
+ * const max = unary(Math.max);
+ *
+ * assert.strictEqual(max([1, 3, 2]), 3);
+ *
+ * @since 0.6.0
+ */
+export const unary = <A extends Array<unknown>, B>(f: (...xs: A) => B) => (
+  xs: A,
+): B => f(...xs)
