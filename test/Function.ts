@@ -6,6 +6,7 @@ import {
   guard,
   ifElse,
   unless,
+  until,
 } from "../src/Function"
 import { prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -13,7 +14,6 @@ import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
 import { constant, constFalse, constTrue, Endomorphism } from "fp-ts/function"
-import fc from "fast-check"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -108,6 +108,18 @@ describe("Function", () => {
 
     it("applies function to input if predicate fails", () => {
       expect(f(constFalse)(5)).toBe(10)
+    })
+  })
+
+  describe("until", () => {
+    const f = until<number>(n => n > 5)(n => n * 2)
+
+    it("never applies function if predicate already holds", () => {
+      expect(f(7)).toBe(7)
+    })
+
+    it("applies function until predicate holds", () => {
+      expect(f(1)).toBe(8)
     })
   })
 })

@@ -19,6 +19,7 @@ Added in v0.1.0
   - [ifElse](#ifelse)
   - [unary](#unary)
   - [unless](#unless)
+  - [until](#until)
   - [withIndex](#withindex)
 
 ---
@@ -175,6 +176,32 @@ const ensureEven = unless(isEven)(increment)
 
 assert.strictEqual(ensureEven(1), 2)
 assert.strictEqual(ensureEven(2), 2)
+```
+
+Added in v0.6.0
+
+## until
+
+Yields the result of applying the morphism to the input until the predicate
+holds.
+
+**Signature**
+
+```ts
+export declare const until: <A>(f: Predicate<A>) => (g: Endomorphism<A>) => Endomorphism<A>
+```
+
+**Example**
+
+```ts
+import { until } from 'fp-ts-std/Function'
+import { increment } from 'fp-ts-std/Number'
+import { Predicate } from 'fp-ts/function'
+
+const isOver100: Predicate<number> = (n) => n > 100
+const doubleUntilOver100 = until(isOver100)((n) => n * 2)
+
+assert.strictEqual(doubleUntilOver100(1), 128)
 ```
 
 Added in v0.6.0

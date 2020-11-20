@@ -158,3 +158,26 @@ export const ifElse = <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (
 export const unless = <A>(f: Predicate<A>) => (
   onFalse: Endomorphism<A>,
 ): Endomorphism<A> => x => (f(x) ? x : onFalse(x))
+
+/**
+ * Yields the result of applying the morphism to the input until the predicate
+ * holds.
+ *
+ * @example
+ * import { until } from 'fp-ts-std/Function';
+ * import { increment } from 'fp-ts-std/Number';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isOver100: Predicate<number> = n => n > 100;
+ * const doubleUntilOver100 = until(isOver100)(n => n * 2);
+ *
+ * assert.strictEqual(doubleUntilOver100(1), 128);
+ *
+ * @since 0.6.0
+ */
+export const until = <A>(f: Predicate<A>) => (
+  g: Endomorphism<A>,
+): Endomorphism<A> => {
+  const h: Endomorphism<A> = x => (f(x) ? x : h(g(x)))
+  return h
+}

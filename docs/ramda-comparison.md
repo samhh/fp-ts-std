@@ -254,7 +254,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] uniqWith
 - [x] unless - [fp-ts-std/Function::unless](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unless)
 - [x] unnest - [fp-ts/Array::flatten](https://gcanti.github.io/fp-ts/modules/Array.ts.html#flatten)
-- [ ] until
+- [x] until - [fp-ts-std/Function::until](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#until)
 - [x] update - [fp-ts/Array::updateAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#updateat)
 - [ ] useWith
 - [x] values - [fp-ts-std/Record::values](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#values)
