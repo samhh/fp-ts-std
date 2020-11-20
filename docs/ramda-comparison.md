@@ -46,7 +46,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] composeP
 - [ ] composeWith
 - [x] concat - [fp-ts/Array::getMonoid](https://gcanti.github.io/fp-ts/modules/Array.ts.html#getmonoid)/[fp-ts-std/String::concat](https://samhh.github.io/fp-ts-std/modules/String.ts.html#concat)
-- [ ] cond
+- [x] cond - [fp-ts-std/Function::guard](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#guard)
 - [ ] construct
 - [ ] constructN
 - [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)/[fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)

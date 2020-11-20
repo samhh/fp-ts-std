@@ -15,6 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [applyTo](#applyto)
   - [flip](#flip)
+  - [guard](#guard)
   - [unary](#unary)
   - [withIndex](#withindex)
 
@@ -80,6 +81,22 @@ assert.strictEqual(append('x')('y'), 'yx')
 ```
 
 Added in v0.1.0
+
+## guard
+
+Given an array of predicates and morphisms, returns the first morphism output
+for which the paired predicate succeeded. If all predicates fail, the
+fallback value is returned.
+
+This is analagous to Haskell's guards.
+
+**Signature**
+
+```ts
+export declare const guard: <A, B>(branches: [Predicate<A>, (x: A) => B][]) => (fallback: Lazy<B>) => (input: A) => B
+```
+
+Added in v0.6.0
 
 ## unary
 

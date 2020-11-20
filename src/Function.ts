@@ -2,6 +2,11 @@
  * @since 0.1.0
  */
 
+import * as O from "fp-ts/Option"
+import * as A from "fp-ts/Array"
+import { flow, Lazy, pipe, Predicate } from "fp-ts/function"
+import { fold, getFunctionMonoid } from "fp-ts/Monoid"
+
 /**
  * Flip the function/argument order of a curried function.
  *
@@ -92,3 +97,23 @@ export const unary = <A extends Array<unknown>, B>(f: (...xs: A) => B) => (
  * @since 0.6.0
  */
 export const applyTo = <A>(x: A) => <B>(f: (x: A) => B): B => f(x)
+
+/**
+ * Given an array of predicates and morphisms, returns the first morphism output
+ * for which the paired predicate succeeded. If all predicates fail, the
+ * fallback value is returned.
+ *
+ * This is analagous to Haskell's guards.
+ *
+ * @since 0.6.0
+ */
+export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
+  fallback: Lazy<B>,
+) => (input: A): B =>
+  pipe(
+    branches,
+    A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
+    fold(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
+    applyTo(input),
+    O.getOrElse(fallback),
+  )

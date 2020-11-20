@@ -1,10 +1,10 @@
-import { flip, withIndex, unary, applyTo } from "../src/Function"
+import { flip, withIndex, unary, applyTo, guard } from "../src/Function"
 import { prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add } from "../src/Number"
-import { Endomorphism } from "fp-ts/function"
+import { constant, constFalse, constTrue, Endomorphism } from "fp-ts/function"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -48,6 +48,32 @@ describe("Function", () => {
       const g: Endomorphism<number> = n => n * 2
 
       expect(f(5)(g)).toBe(g(5))
+    })
+  })
+
+  describe("guard", () => {
+    const f = guard
+
+    it("returns fallback if all predicates fail", () => {
+      expect(f<number, string>([])(constant("fallback"))(123)).toBe("fallback")
+
+      expect(
+        f<number, string>([
+          [constFalse, constant("x")],
+          [constFalse, constant("y")],
+          [constFalse, constant("z")],
+        ])(constant("fallback"))(123),
+      ).toBe("fallback")
+    })
+
+    it("returns the morphism output from the first successful predicate", () => {
+      expect(
+        f<number, string>([
+          [n => n === 122, constant("x")],
+          [n => n === 123, constant("y")],
+          [n => n === 123, constant("z")],
+        ])(constant("fallback"))(123),
+      ).toBe("y")
     })
   })
 })
