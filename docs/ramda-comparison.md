@@ -96,7 +96,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] head - [fp-ts/Array::head](https://gcanti.github.io/fp-ts/modules/Array.ts.html#head) / [fp-ts-std/String::head](https://samhh.github.io/fp-ts-std/modules/String.ts.html#head)
 - [x] identical - [fp-ts/Eq::eqStrict](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#eqstrict)
 - [x] identity - [fp-ts/function::identity](https://gcanti.github.io/fp-ts/modules/function.ts.html#identity)
-- [ ] ifElse
+- [x] ifElse - [fp-ts-std/Function::ifElse](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#ifelse)
 - [x] inc - [fp-ts-std/Number::increment](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#increment)/[fp-ts/function::increment](https://gcanti.github.io/fp-ts/modules/function.ts.html#increment]
 - [x] includes - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
 - [x] indexBy - [fp-ts/NonEmptyArray::groupBy](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#groupby)

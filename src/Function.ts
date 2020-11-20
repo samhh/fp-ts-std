@@ -117,3 +117,24 @@ export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
     applyTo(input),
     O.getOrElse(fallback),
   )
+
+/**
+ * Creates a function that processes the first morphism if the predicate
+ * succeeds, else the second morphism.
+ *
+ * @example
+ * import { ifElse } from 'fp-ts-std/Function';
+ * import { increment, decrement } from 'fp-ts-std/Number';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isPositive: Predicate<number> = n => n > 0;
+ * const normalise = ifElse(decrement)(increment)(isPositive);
+ *
+ * assert.strictEqual(normalise(-3), -2);
+ * assert.strictEqual(normalise(3), 2);
+ *
+ * @since 0.6.0
+ */
+export const ifElse = <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (
+  f: Predicate<A>,
+) => (x: A): B => (f(x) ? onTrue(x) : onFalse(x))

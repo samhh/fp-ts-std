@@ -1,4 +1,4 @@
-import { flip, withIndex, unary, applyTo, guard } from "../src/Function"
+import { flip, withIndex, unary, applyTo, guard, ifElse } from "../src/Function"
 import { prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
@@ -74,6 +74,19 @@ describe("Function", () => {
           [n => n === 123, constant("z")],
         ])(constant("fallback"))(123),
       ).toBe("y")
+    })
+  })
+
+  describe("ifElse", () => {
+    const f = ifElse
+    const g = f(constant(1))(constant(2))
+
+    it("applies first function if predicate succeeds", () => {
+      expect(g(constTrue)(null)).toBe(1)
+    })
+
+    it("applies second function if predicate fails", () => {
+      expect(g(constFalse)(null)).toBe(2)
     })
   })
 })

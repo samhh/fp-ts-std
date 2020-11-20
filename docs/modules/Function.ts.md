@@ -16,6 +16,7 @@ Added in v0.1.0
   - [applyTo](#applyto)
   - [flip](#flip)
   - [guard](#guard)
+  - [ifElse](#ifelse)
   - [unary](#unary)
   - [withIndex](#withindex)
 
@@ -94,6 +95,33 @@ This is analagous to Haskell's guards.
 
 ```ts
 export declare const guard: <A, B>(branches: [Predicate<A>, (x: A) => B][]) => (fallback: Lazy<B>) => (input: A) => B
+```
+
+Added in v0.6.0
+
+## ifElse
+
+Creates a function that processes the first morphism if the predicate
+succeeds, else the second morphism.
+
+**Signature**
+
+```ts
+export declare const ifElse: <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (f: Predicate<A>) => (x: A) => B
+```
+
+**Example**
+
+```ts
+import { ifElse } from 'fp-ts-std/Function'
+import { increment, decrement } from 'fp-ts-std/Number'
+import { Predicate } from 'fp-ts/function'
+
+const isPositive: Predicate<number> = (n) => n > 0
+const normalise = ifElse(decrement)(increment)(isPositive)
+
+assert.strictEqual(normalise(-3), -2)
+assert.strictEqual(normalise(3), 2)
 ```
 
 Added in v0.6.0
