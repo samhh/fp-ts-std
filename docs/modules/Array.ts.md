@@ -24,6 +24,7 @@ Added in v0.1.0
   - [join](#join)
   - [length](#length)
   - [pluckFirst](#pluckfirst)
+  - [product](#product)
   - [sum](#sum)
   - [upsert](#upsert)
   - [without](#without)
@@ -310,6 +311,28 @@ assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5, 7, 9]), [O.some(7), [1, 3, 5
 ```
 
 Added in v0.1.0
+
+## product
+
+Multiplies together all the numbers in the input array.
+
+**Signature**
+
+```ts
+export declare const product: (as: readonly number[]) => number
+```
+
+**Example**
+
+```ts
+import { product } from 'fp-ts-std/Array'
+
+assert.strictEqual(product([]), 1)
+assert.strictEqual(product([5]), 5)
+assert.strictEqual(product([4, 2, 3]), 24)
+```
+
+Added in v0.6.0
 
 ## sum
 

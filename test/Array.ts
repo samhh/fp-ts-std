@@ -13,6 +13,7 @@ import {
   without,
   cartesian,
   sum,
+  product,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -348,6 +349,27 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.integer()),
           xs => f(xs) === xs.reduce((acc, val) => acc + val, 0),
+        ),
+      )
+    })
+  })
+
+  describe("product", () => {
+    const f = product
+
+    it("returns multiplication identity (one) for empty input", () => {
+      expect(f([])).toBe(1)
+    })
+
+    it("calculates product of non-empty input", () => {
+      expect(f([4, 2, 3])).toBe(24)
+      expect(f([5])).toBe(5)
+      expect(f([1.5, -5])).toBe(-7.5)
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.integer()),
+          xs => f(xs) === xs.reduce((acc, val) => acc * val, 1),
         ),
       )
     })

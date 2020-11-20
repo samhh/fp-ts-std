@@ -4,7 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.6.0 (_unreleased_)
 
-- Add `dropRepeats`, `endsWith`, `without`, `cartesian`, and `sum` functions to the `Array` module.
+- Add `dropRepeats`, `endsWith`, `without`, `cartesian`, `sum`, and `product` functions to the `Array` module.
 - Add `dropLeft`, `dropLeftWhile`, `dropRight`, `head`, and `tail` functions to the `String` module.
 - Add `empty` constant to the `String` module.
 - Add `unJSONString` function to the `JSON` module.

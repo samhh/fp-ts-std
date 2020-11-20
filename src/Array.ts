@@ -11,7 +11,13 @@ import * as A from "fp-ts/Array"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { reduceM } from "fp-ts/Foldable"
-import { fold, monoidAll, monoidAny, monoidSum } from "fp-ts/Monoid"
+import {
+  fold,
+  monoidAll,
+  monoidAny,
+  monoidProduct,
+  monoidSum,
+} from "fp-ts/Monoid"
 
 /**
  * Get the length of an array.
@@ -333,3 +339,17 @@ export const cartesian = <A>(xs: Array<A>) => <B>(
  * @since 0.6.0
  */
 export const sum = fold(monoidSum)
+
+/**
+ * Multiplies together all the numbers in the input array.
+ *
+ * @example
+ * import { product } from 'fp-ts-std/Array';
+ *
+ * assert.strictEqual(product([]), 1);
+ * assert.strictEqual(product([5]), 5);
+ * assert.strictEqual(product([4, 2, 3]), 24);
+ *
+ * @since 0.6.0
+ */
+export const product = fold(monoidProduct)
