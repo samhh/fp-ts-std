@@ -1,10 +1,19 @@
-import { flip, withIndex, unary, applyTo, guard, ifElse } from "../src/Function"
+import {
+  flip,
+  withIndex,
+  unary,
+  applyTo,
+  guard,
+  ifElse,
+  unless,
+} from "../src/Function"
 import { prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
-import { add } from "../src/Number"
+import { add, multiply } from "../src/Number"
 import { constant, constFalse, constTrue, Endomorphism } from "fp-ts/function"
+import fc from "fast-check"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -87,6 +96,18 @@ describe("Function", () => {
 
     it("applies second function if predicate fails", () => {
       expect(g(constFalse)(null)).toBe(2)
+    })
+  })
+
+  describe("unless", () => {
+    const f = flip(unless)(multiply(2))
+
+    it("returns identity on input if predicate succeeds", () => {
+      expect(f(constTrue)(5)).toBe(5)
+    })
+
+    it("applies function to input if predicate fails", () => {
+      expect(f(constFalse)(5)).toBe(10)
     })
   })
 })

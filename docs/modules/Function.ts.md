@@ -18,6 +18,7 @@ Added in v0.1.0
   - [guard](#guard)
   - [ifElse](#ifelse)
   - [unary](#unary)
+  - [unless](#unless)
   - [withIndex](#withindex)
 
 ---
@@ -148,6 +149,32 @@ import { unary } from 'fp-ts-std/Function'
 const max = unary(Math.max)
 
 assert.strictEqual(max([1, 3, 2]), 3)
+```
+
+Added in v0.6.0
+
+## unless
+
+Runs the provided morphism on the input value if the predicate fails.
+
+**Signature**
+
+```ts
+export declare const unless: <A>(f: Predicate<A>) => (onFalse: Endomorphism<A>) => Endomorphism<A>
+```
+
+**Example**
+
+```ts
+import { unless } from 'fp-ts-std/Function'
+import { increment } from 'fp-ts-std/Number'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+const ensureEven = unless(isEven)(increment)
+
+assert.strictEqual(ensureEven(1), 2)
+assert.strictEqual(ensureEven(2), 2)
 ```
 
 Added in v0.6.0

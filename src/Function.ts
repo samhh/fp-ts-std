@@ -4,7 +4,7 @@
 
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
-import { flow, Lazy, pipe, Predicate } from "fp-ts/function"
+import { Endomorphism, flow, Lazy, pipe, Predicate } from "fp-ts/function"
 import { fold, getFunctionMonoid } from "fp-ts/Monoid"
 
 /**
@@ -138,3 +138,23 @@ export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
 export const ifElse = <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (
   f: Predicate<A>,
 ) => (x: A): B => (f(x) ? onTrue(x) : onFalse(x))
+
+/**
+ * Runs the provided morphism on the input value if the predicate fails.
+ *
+ * @example
+ * import { unless } from 'fp-ts-std/Function';
+ * import { increment } from 'fp-ts-std/Number';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isEven: Predicate<number> = n => n % 2 === 0;
+ * const ensureEven = unless(isEven)(increment);
+ *
+ * assert.strictEqual(ensureEven(1), 2);
+ * assert.strictEqual(ensureEven(2), 2);
+ *
+ * @since 0.6.0
+ */
+export const unless = <A>(f: Predicate<A>) => (
+  onFalse: Endomorphism<A>,
+): Endomorphism<A> => x => (f(x) ? x : onFalse(x))

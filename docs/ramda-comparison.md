@@ -252,7 +252,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] uniq - [fp-ts/Array::uniq](https://gcanti.github.io/fp-ts/modules/Array.ts.html#uniq)
 - [ ] uniqBy
 - [ ] uniqWith
-- [ ] unless
+- [x] unless - [fp-ts-std/Function::unless](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unless)
 - [x] unnest - [fp-ts/Array::flatten](https://gcanti.github.io/fp-ts/modules/Array.ts.html#flatten)
 - [ ] until
 - [x] update - [fp-ts/Array::updateAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#updateat)
