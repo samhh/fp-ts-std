@@ -219,7 +219,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] splitWhen
 - [ ] startsWith - [fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)
 - [x] subtract - [fp-ts-std/Number::subtract](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#subtract)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
-- ~~[ ] sum~~ Use `fold(monoidSum)` instead.
+- [x] sum - [fp-ts-std/Array::sum](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#sum)
 - [ ] symmetricDifference
 - [ ] symmetricDifferenceWith
 - [x] T - [fp-ts/function::constTrue](https://gcanti.github.io/fp-ts/modules/function.ts.html#consttrue)

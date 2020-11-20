@@ -24,6 +24,7 @@ Added in v0.1.0
   - [join](#join)
   - [length](#length)
   - [pluckFirst](#pluckfirst)
+  - [sum](#sum)
   - [upsert](#upsert)
   - [without](#without)
 
@@ -309,6 +310,27 @@ assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5, 7, 9]), [O.some(7), [1, 3, 5
 ```
 
 Added in v0.1.0
+
+## sum
+
+Adds together all the numbers in the input array.
+
+**Signature**
+
+```ts
+export declare const sum: (as: readonly number[]) => number
+```
+
+**Example**
+
+```ts
+import { sum } from 'fp-ts-std/Array'
+
+assert.strictEqual(sum([]), 0)
+assert.strictEqual(sum([25, 3, 10]), 38)
+```
+
+Added in v0.6.0
 
 ## upsert
 

@@ -12,6 +12,7 @@ import {
   endsWith,
   without,
   cartesian,
+  sum,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -326,6 +327,27 @@ describe("Array", () => {
           fc.array(fc.anything()),
           fc.array(fc.anything()),
           (xs, ys) => f(xs)(ys).length === xs.length * ys.length,
+        ),
+      )
+    })
+  })
+
+  describe("sum", () => {
+    const f = sum
+
+    it("returns addition identity (zero) for empty input", () => {
+      expect(f([])).toBe(0)
+    })
+
+    it("sums non-empty input", () => {
+      expect(f([25, 3, 10])).toBe(38)
+      expect(f([-3, 2])).toBe(-1)
+      expect(f([2.5, 3.2])).toBe(5.7)
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.integer()),
+          xs => f(xs) === xs.reduce((acc, val) => acc + val, 0),
         ),
       )
     })
