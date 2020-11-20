@@ -15,6 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [all](#all)
   - [any](#any)
+  - [aperture](#aperture)
   - [cartesian](#cartesian)
   - [dropRepeats](#droprepeats)
   - [elemFlipped](#elemflipped)
@@ -82,6 +83,41 @@ assert.strictEqual(isAnyFive([3, 4, 7]), false)
 ```
 
 Added in v0.1.0
+
+## aperture
+
+Returns an array of tuples of the specified length occupied by consecutive
+elements.
+
+If `n` is not a positive number, an empty array is returned.
+
+If `n` is greater than the length of the array, an empty array is returned.
+
+**Signature**
+
+```ts
+export declare const aperture: (n: number) => <A>(xs: A[]) => A[][]
+```
+
+**Example**
+
+```ts
+import { aperture } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual(aperture(1)([1, 2, 3, 4]), [[1], [2], [3], [4]])
+assert.deepStrictEqual(aperture(2)([1, 2, 3, 4]), [
+  [1, 2],
+  [2, 3],
+  [3, 4],
+])
+assert.deepStrictEqual(aperture(3)([1, 2, 3, 4]), [
+  [1, 2, 3],
+  [2, 3, 4],
+])
+assert.deepStrictEqual(aperture(4)([1, 2, 3, 4]), [[1, 2, 3, 4]])
+```
+
+Added in v0.7.0
 
 ## cartesian
 

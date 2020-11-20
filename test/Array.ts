@@ -14,6 +14,7 @@ import {
   cartesian,
   sum,
   product,
+  aperture,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -370,6 +371,59 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.integer()),
           xs => f(xs) === xs.reduce((acc, val) => acc * val, 1),
+        ),
+      )
+    })
+  })
+
+  describe("aperture", () => {
+    const f = aperture
+
+    it("returns empty array for empty array input", () => {
+      expect(f(0)([])).toEqual([])
+
+      fc.assert(fc.property(fc.integer(0, 100), n => !f(n)([]).length))
+    })
+
+    it("returns empty array for non-positive input number", () => {
+      fc.assert(
+        fc.property(
+          fc.integer(0),
+          fc.array(fc.anything()),
+          (n, xs) => !f(n)(xs).length,
+        ),
+      )
+    })
+
+    it("returns empty array for tuple length larger than input array length", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything()),
+          xs => !f(xs.length + 1)(xs).length,
+        ),
+      )
+    })
+
+    it("returns array of tuples of consecutive items", () => {
+      expect(f(1)([1, 2, 3, 4])).toEqual([[1], [2], [3], [4]])
+      expect(f(2)([1, 2, 3, 4])).toEqual([
+        [1, 2],
+        [2, 3],
+        [3, 4],
+      ])
+      expect(f(3)([1, 2, 3, 4])).toEqual([
+        [1, 2, 3],
+        [2, 3, 4],
+      ])
+      expect(f(4)([1, 2, 3, 4])).toEqual([[1, 2, 3, 4]])
+    })
+
+    it("output length is input length - n + 1", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything()),
+          fc.integer(1, 100),
+          (xs, n) => f(n)(xs).length === Math.max(0, xs.length - n + 1),
         ),
       )
     })

@@ -24,7 +24,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] any - [fp-ts-std/Array::any](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#any)
 - [x] anyPass - [fp-ts-std/Boolean::anyPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#anypass)
 - [x] ap - [fp-ts/Array::ap](https://gcanti.github.io/fp-ts/modules/Array.ts.html#ap)
-- [ ] aperture
+- [x] aperture - [fp-ts-std/Array::aperture](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#aperture)
 - [x] append - [fp-ts/Array::snoc](https://gcanti.github.io/fp-ts/modules/Array.ts.html#snoc)
 - [x] apply - [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary)
 - [ ] applySpec

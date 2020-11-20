@@ -353,3 +353,28 @@ export const sum = fold(monoidSum)
  * @since 0.6.0
  */
 export const product = fold(monoidProduct)
+
+/**
+ * Returns an array of tuples of the specified length occupied by consecutive
+ * elements.
+ *
+ * If `n` is not a positive number, an empty array is returned.
+ *
+ * If `n` is greater than the length of the array, an empty array is returned.
+ *
+ * @example
+ * import { aperture } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual(aperture(1)([1, 2, 3, 4]), [[1], [2], [3], [4]]);
+ * assert.deepStrictEqual(aperture(2)([1, 2, 3, 4]), [[1, 2], [2, 3], [3, 4]]);
+ * assert.deepStrictEqual(aperture(3)([1, 2, 3, 4]), [[1, 2, 3], [2, 3, 4]]);
+ * assert.deepStrictEqual(aperture(4)([1, 2, 3, 4]), [[1, 2, 3, 4]]);
+ *
+ * @since 0.7.0
+ */
+export const aperture = (n: number) => <A>(xs: Array<A>): Array<Array<A>> => {
+  const go = (i: number) => (ys: Array<Array<A>>): Array<Array<A>> =>
+    i + n > xs.length ? ys : go(i + 1)(A.snoc(ys, xs.slice(i, n + i)))
+
+  return n < 1 ? [] : go(0)([])
+}
