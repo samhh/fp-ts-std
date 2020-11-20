@@ -6,6 +6,7 @@ import {
   guard,
   ifElse,
   unless,
+  when,
   until,
 } from "../src/Function"
 import { prepend } from "../src/String"
@@ -108,6 +109,18 @@ describe("Function", () => {
 
     it("applies function to input if predicate fails", () => {
       expect(f(constFalse)(5)).toBe(10)
+    })
+  })
+
+  describe("when", () => {
+    const f = flip(when)(multiply(2))
+
+    it("applies function to input if predicate succeeds", () => {
+      expect(f(constTrue)(5)).toBe(10)
+    })
+
+    it("returns identity on input if predicate fails", () => {
+      expect(f(constFalse)(5)).toBe(5)
     })
   })
 

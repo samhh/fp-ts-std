@@ -20,6 +20,7 @@ Added in v0.1.0
   - [unary](#unary)
   - [unless](#unless)
   - [until](#until)
+  - [when](#when)
   - [withIndex](#withindex)
 
 ---
@@ -202,6 +203,32 @@ const isOver100: Predicate<number> = (n) => n > 100
 const doubleUntilOver100 = until(isOver100)((n) => n * 2)
 
 assert.strictEqual(doubleUntilOver100(1), 128)
+```
+
+Added in v0.6.0
+
+## when
+
+Runs the provided morphism on the input value if the predicate holds.
+
+**Signature**
+
+```ts
+export declare const when: <A>(f: Predicate<A>) => (g: Endomorphism<A>) => Endomorphism<A>
+```
+
+**Example**
+
+```ts
+import { when } from 'fp-ts-std/Function'
+import { increment } from 'fp-ts-std/Number'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+const ensureOdd = when(isEven)(increment)
+
+assert.strictEqual(ensureOdd(1), 1)
+assert.strictEqual(ensureOdd(2), 3)
 ```
 
 Added in v0.6.0

@@ -260,7 +260,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] values - [fp-ts-std/Record::values](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#values)
 - [ ] valuesIn
 - [x] view - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] when
+- [x] when - [fp-ts-std/Function::when](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#when)
 - [x] where - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
 - [x] whereEq - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
 - [x] without - [fp-ts-std/Array::without](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#without)
