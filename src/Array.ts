@@ -292,3 +292,31 @@ export const endsWith = <A>(eq: Eq<A>) => (
 export const without = <A>(eq: Eq<A>) => (
   xs: Array<A>,
 ): Endomorphism<Array<A>> => flow(A.filter(y => !A.elem(eq)(y)(xs)))
+
+/**
+ * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
+ * of two arrays. In other words, returns an array containing tuples of every
+ * possible ordered combination of the two input arrays.
+ *
+ * @example
+ * import { cartesian } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual(
+ *     cartesian([1, 2])(['a', 'b', 'c']),
+ *     [[1, 'a'], [1, 'b'], [1, 'c'], [2, 'a'], [2, 'b'], [2, 'c']],
+ * );
+ *
+ * @since 0.6.0
+ */
+export const cartesian = <A>(xs: Array<A>) => <B>(
+  ys: Array<B>,
+): Array<[A, B]> =>
+  pipe(
+    xs,
+    A.chain(x =>
+      pipe(
+        ys,
+        A.map(y => [x, y]),
+      ),
+    ),
+  )

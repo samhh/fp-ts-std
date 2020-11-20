@@ -15,6 +15,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [all](#all)
   - [any](#any)
+  - [cartesian](#cartesian)
   - [dropRepeats](#droprepeats)
   - [elemFlipped](#elemflipped)
   - [endsWith](#endswith)
@@ -79,6 +80,35 @@ assert.strictEqual(isAnyFive([3, 4, 7]), false)
 ```
 
 Added in v0.1.0
+
+## cartesian
+
+Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
+of two arrays. In other words, returns an array containing tuples of every
+possible ordered combination of the two input arrays.
+
+**Signature**
+
+```ts
+export declare const cartesian: <A>(xs: A[]) => <B>(ys: B[]) => [A, B][]
+```
+
+**Example**
+
+```ts
+import { cartesian } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual(cartesian([1, 2])(['a', 'b', 'c']), [
+  [1, 'a'],
+  [1, 'b'],
+  [1, 'c'],
+  [2, 'a'],
+  [2, 'b'],
+  [2, 'c'],
+])
+```
+
+Added in v0.6.0
 
 ## dropRepeats
 

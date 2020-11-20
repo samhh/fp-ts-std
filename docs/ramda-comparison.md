@@ -265,7 +265,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] whereEq - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
 - [x] without - [fp-ts-std/Array::without](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#without)
 - [x] xor - [fp-ts-std/Boolean::xor](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#xor)
-- [ ] xprod
+- [x] xprod - [fp-ts-std/Array::cartesian](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#cartesian)
 - [x] zip - [fp-ts/Array::zip](https://gcanti.github.io/fp-ts/modules/Array.ts.html#zip)
 - [x] zipObj - [fp-ts/Record::fromFoldable](https://gcanti.github.io/fp-ts/modules/Record.ts.html#fromfoldable)
 - [x] zipWith - [fp-ts/Array::zipWith](https://gcanti.github.io/fp-ts/modules/Array.ts.html#zipwith)

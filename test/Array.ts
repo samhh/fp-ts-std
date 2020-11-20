@@ -11,6 +11,7 @@ import {
   dropRepeats,
   endsWith,
   without,
+  cartesian,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -300,6 +301,31 @@ describe("Array", () => {
       fc.assert(
         fc.property(fc.array(fc.integer()), xs =>
           expect(f(xs)(xs)).toEqual(A.empty),
+        ),
+      )
+    })
+  })
+
+  describe("cartesian", () => {
+    const f = cartesian
+
+    it("returns the Cartesian product", () => {
+      expect(f([1, 2])(["a", "b", "c"])).toEqual([
+        [1, "a"],
+        [1, "b"],
+        [1, "c"],
+        [2, "a"],
+        [2, "b"],
+        [2, "c"],
+      ])
+    })
+
+    it("output array length is the product of input array lengths", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything()),
+          fc.array(fc.anything()),
+          (xs, ys) => f(xs)(ys).length === xs.length * ys.length,
         ),
       )
     })
