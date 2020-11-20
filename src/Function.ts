@@ -105,6 +105,21 @@ export const applyTo = <A>(x: A) => <B>(f: (x: A) => B): B => f(x)
  *
  * This is analagous to Haskell's guards.
  *
+ * @example
+ * import { guard } from 'fp-ts-std/Function';
+ * import { constant } from 'fp-ts/function';
+ *
+ * const numSize = guard<number, string>([
+ *     [n => n > 100, n => `${n} is large!`],
+ *     [n => n > 50, n => `${n} is medium.`],
+ *     [n => n > 0, n => `${n} is small...`],
+ * ])(constant('Not a positive number.'));
+ *
+ * assert.strictEqual(numSize(101), '101 is large!');
+ * assert.strictEqual(numSize(99), '99 is medium.');
+ * assert.strictEqual(numSize(5), '5 is small...');
+ * assert.strictEqual(numSize(-3), 'Not a positive number.');
+ *
  * @since 0.6.0
  */
 export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
