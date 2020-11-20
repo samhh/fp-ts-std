@@ -8,7 +8,9 @@ permalink: /ramda
 
 fp-ts-std attempts to bridge the gap between [fp-ts](https://gcanti.github.io/fp-ts/modules/), a highly abstract library, and libraries like [Ramda](https://ramdajs.com/), which are focused on providing utility functions. Note also the presence of [fp-ts-ramda](https://github.com/giogonzo/fp-ts-ramda).
 
-Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potentially implemented in fp-ts-std. We hope that fp-ts-std's surface area will increase with time, not just with respect to Ramda but also more broadly (the library is only in its infancy):
+Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potentially implemented in fp-ts-std. We hope that fp-ts-std's surface area will increase with time, not just with respect to Ramda but also more broadly (the library is only in its infancy).
+
+Note that some functions are not one-to-one replacements, but rather bequeath a better pattern in code. For example, the Ramda function [hasIn](https://ramdajs.com/docs/#hasIn) is distinct from [has](https://ramdajs.com/docs/#has) only insofar as it checks the input object's prototype for the specified key, too. Prototypal code isn't functional and not something this library intends to support; instead, look for functional alternatives.
 
 - [ ] \_\_
 - [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
@@ -89,7 +91,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 - [x] gt - [fp-ts/Ord::gt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#gt)
 - [x] gte - [fp-ts/Ord::geq](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#geq)
 - [x] has - [fp-ts/Record::hasOwnProperty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#hasownproperty-function)
-- [ ] hasIn
+- [x] hasIn - [fp-ts/Record::hasOwnProperty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#hasownproperty-function)
 - [x] hasPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] head - [fp-ts/Array::head](https://gcanti.github.io/fp-ts/modules/Array.ts.html#head)
 - [x] identical - [fp-ts/Eq::eqStrict](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#eqstrict)
