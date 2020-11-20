@@ -28,10 +28,11 @@ import {
   dropLeft,
   dropRight,
   head,
+  tail,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { constFalse, constTrue, flow } from "fp-ts/function"
+import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
 import { invert } from "../src/Boolean"
 
@@ -676,6 +677,36 @@ describe("String", () => {
     it("returns first character of non-empty string", () => {
       fc.assert(
         fc.property(fc.string(1, 100), x => expect(f(x)).toEqual(O.some(x[0]))),
+      )
+    })
+  })
+
+  describe("tail", () => {
+    const f = tail
+
+    it("returns None for empty string", () => {
+      expect(f("")).toEqual(O.none)
+    })
+
+    it("returns empty string for string with one character", () => {
+      fc.assert(
+        fc.property(fc.string(1, 1), x => expect(f(x)).toEqual(O.some(""))),
+      )
+    })
+
+    it("returns string with all but first character for length >= 2", () => {
+      expect(f("xy")).toEqual(O.some("y"))
+      expect(f("xyz")).toEqual(O.some("yz"))
+    })
+
+    it("returns string one character smaller", () => {
+      fc.assert(
+        fc.property(fc.string(1, 100), x =>
+          pipe(
+            f(x),
+            O.exists(y => y.length === x.length - 1),
+          ),
+        ),
       )
     })
   })

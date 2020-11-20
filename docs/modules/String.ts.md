@@ -33,6 +33,7 @@ Added in v0.1.0
   - [split](#split)
   - [startsWith](#startswith)
   - [surround](#surround)
+  - [tail](#tail)
   - [takeLeft](#takeleft)
   - [takeRight](#takeright)
   - [test](#test)
@@ -510,6 +511,30 @@ assert.strictEqual(quote('abc'), '"abc"')
 ```
 
 Added in v0.1.0
+
+## tail
+
+Get all but the first character of a string, or `None` if the string is empty.
+
+**Signature**
+
+```ts
+export declare const tail: (x: string) => Option<string>
+```
+
+**Example**
+
+```ts
+import { tail } from 'fp-ts-std/String'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(tail(''), O.none)
+assert.deepStrictEqual(tail('a'), O.some(''))
+assert.deepStrictEqual(tail('ab'), O.some('b'))
+assert.deepStrictEqual(tail('abc'), O.some('bc'))
+```
+
+Added in v0.6.0
 
 ## takeLeft
 

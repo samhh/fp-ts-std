@@ -2,7 +2,14 @@
  * @since 0.1.0
  */
 
-import { pipe, Predicate, Refinement, Endomorphism, flow } from "fp-ts/function"
+import {
+  pipe,
+  Predicate,
+  Refinement,
+  Endomorphism,
+  flow,
+  not,
+} from "fp-ts/function"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
@@ -478,3 +485,22 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  * @since 0.6.0
  */
 export const head = (x: string): Option<string> => O.fromNullable(x[0])
+
+/**
+ * Get all but the first character of a string, or `None` if the string is empty.
+ *
+ * @example
+ * import { tail } from 'fp-ts-std/String';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(tail(''), O.none);
+ * assert.deepStrictEqual(tail('a'), O.some(''));
+ * assert.deepStrictEqual(tail('ab'), O.some('b'));
+ * assert.deepStrictEqual(tail('abc'), O.some('bc'));
+ *
+ * @since 0.6.0
+ */
+export const tail: (x: string) => Option<string> = flow(
+  O.fromPredicate(not(isEmpty)),
+  O.map(y => y.slice(1)),
+)

@@ -223,7 +223,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] symmetricDifference
 - [ ] symmetricDifferenceWith
 - [x] T - [fp-ts/function::constTrue](https://gcanti.github.io/fp-ts/modules/function.ts.html#consttrue)
-- [ ] tail - [fp-ts/Array::tail](https://gcanti.github.io/fp-ts/modules/Array.ts.html#tail)
+- [x] tail - [fp-ts/Array::tail](https://gcanti.github.io/fp-ts/modules/Array.ts.html#tail)/[fp-ts-std/String::tail](https://samhh.github.io/fp-ts/modules/String.ts.html#tail)
 - [x] take - [fp-ts/Array::takeLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleft)/[fp-ts-std/String::takeLeft](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeleft)
 - [x] takeLast - [fp-ts/Array::takeRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeright)/[fp-ts-std/String::takeLast](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeright)
 - [ ] takeLastWhile
