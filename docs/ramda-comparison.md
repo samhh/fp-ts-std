@@ -34,7 +34,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] assocPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] binary
 - [ ] bind
-- [ ] both
+- [x] both - [fp-ts-std/Boolean::both](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#both)/[fp-ts/Option::apFirst](https://gcanti.github.io/fp-ts/modules/Option.ts.html#apfirst)
 - [ ] call
 - [x] chain - [fp-ts/Array::chain](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chain)
 - [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
