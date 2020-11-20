@@ -34,7 +34,8 @@ export const invert: Endomorphism<boolean> = x => !x
  *
  * @since 0.4.0
  */
-export const and = (x: boolean): Endomorphism<boolean> => y => x && y
+export const and = (x: boolean): Endomorphism<boolean> => y =>
+  semigroupAll.concat(x, y)
 
 /**
  * Returns `true` if one or both arguments are `true`, else `false`. Equivalent
@@ -48,7 +49,8 @@ export const and = (x: boolean): Endomorphism<boolean> => y => x && y
  *
  * @since 0.4.0
  */
-export const or = (x: boolean): Endomorphism<boolean> => y => x || y
+export const or = (x: boolean): Endomorphism<boolean> => y =>
+  semigroupAny.concat(x, y)
 
 /**
  * Returns `true` if one argument is `true` and the other is `false`, else
