@@ -113,24 +113,24 @@ export const applyTo = <A>(x: A) => <B>(f: (x: A) => B): B => f(x)
  *     [n => n > 100, n => `${n} is large!`],
  *     [n => n > 50, n => `${n} is medium.`],
  *     [n => n > 0, n => `${n} is small...`],
- * ])(constant('Not a positive number.'));
+ * ])(n => `${n} is not a positive number.`);
  *
  * assert.strictEqual(numSize(101), '101 is large!');
  * assert.strictEqual(numSize(99), '99 is medium.');
  * assert.strictEqual(numSize(5), '5 is small...');
- * assert.strictEqual(numSize(-3), 'Not a positive number.');
+ * assert.strictEqual(numSize(-3), '-3 is not a positive number.');
  *
  * @since 0.6.0
  */
 export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
-  fallback: Lazy<B>,
+  fallback: (x: A) => B,
 ) => (input: A): B =>
   pipe(
     branches,
     A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
     fold(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
     applyTo(input),
-    O.getOrElse(fallback),
+    O.getOrElse(() => fallback(input)),
   )
 
 /**

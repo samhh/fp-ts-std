@@ -97,7 +97,9 @@ This is analagous to Haskell's guards.
 **Signature**
 
 ```ts
-export declare const guard: <A, B>(branches: [Predicate<A>, (x: A) => B][]) => (fallback: Lazy<B>) => (input: A) => B
+export declare const guard: <A, B>(
+  branches: [Predicate<A>, (x: A) => B][]
+) => (fallback: (x: A) => B) => (input: A) => B
 ```
 
 **Example**
@@ -110,12 +112,12 @@ const numSize = guard<number, string>([
   [(n) => n > 100, (n) => `${n} is large!`],
   [(n) => n > 50, (n) => `${n} is medium.`],
   [(n) => n > 0, (n) => `${n} is small...`],
-])(constant('Not a positive number.'))
+])((n) => `${n} is not a positive number.`)
 
 assert.strictEqual(numSize(101), '101 is large!')
 assert.strictEqual(numSize(99), '99 is medium.')
 assert.strictEqual(numSize(5), '5 is small...')
-assert.strictEqual(numSize(-3), 'Not a positive number.')
+assert.strictEqual(numSize(-3), '-3 is not a positive number.')
 ```
 
 Added in v0.6.0

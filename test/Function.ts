@@ -9,7 +9,7 @@ import {
   when,
   until,
 } from "../src/Function"
-import { prepend } from "../src/String"
+import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -72,8 +72,8 @@ describe("Function", () => {
           [constFalse, constant("x")],
           [constFalse, constant("y")],
           [constFalse, constant("z")],
-        ])(constant("fallback"))(123),
-      ).toBe("fallback")
+        ])(fromNumber)(123),
+      ).toBe("123")
     })
 
     it("returns the morphism output from the first successful predicate", () => {
