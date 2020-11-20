@@ -177,7 +177,7 @@ export const unless = <A>(f: Predicate<A>) => (
  */
 export const when: <A>(
   f: Predicate<A>,
-) => (g: Endomorphism<A>) => Endomorphism<A> = flow(not, unless)
+) => (onTrue: Endomorphism<A>) => Endomorphism<A> = flow(not, unless)
 
 /**
  * Yields the result of applying the morphism to the input until the predicate

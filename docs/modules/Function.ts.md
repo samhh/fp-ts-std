@@ -214,7 +214,7 @@ Runs the provided morphism on the input value if the predicate holds.
 **Signature**
 
 ```ts
-export declare const when: <A>(f: Predicate<A>) => (g: Endomorphism<A>) => Endomorphism<A>
+export declare const when: <A>(f: Predicate<A>) => (onTrue: Endomorphism<A>) => Endomorphism<A>
 ```
 
 **Example**
