@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.6.0 (_unreleased_)
+## 0.6.0 (2020-11-20)
 
 - Add `dropRepeats`, `endsWith`, `without`, `cartesian`, `sum`, and `product` functions to the `Array` module.
 - Add `dropLeft`, `dropLeftWhile`, `dropRight`, `head`, and `tail` functions to the `String` module.
