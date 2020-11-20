@@ -261,8 +261,8 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] valuesIn
 - [x] view - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] when
-- [ ] where
-- [ ] whereEq
+- [x] where - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
+- [x] whereEq - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
 - [ ] without
 - [x] xor - [fp-ts-std/Boolean::xor](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#xor)
 - [ ] xprod
