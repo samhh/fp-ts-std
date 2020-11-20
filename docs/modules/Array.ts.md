@@ -24,6 +24,7 @@ Added in v0.1.0
   - [length](#length)
   - [pluckFirst](#pluckfirst)
   - [upsert](#upsert)
+  - [without](#without)
 
 ---
 
@@ -334,3 +335,30 @@ assert.deepStrictEqual(upsertAccount(updated)(accounts), [accounts[0], updated])
 ```
 
 Added in v0.1.0
+
+## without
+
+Returns a new array without the values present in the first input array.
+
+**Signature**
+
+```ts
+export declare const without: <A>(eq: Eq<A>) => (xs: A[]) => Endomorphism<A[]>
+```
+
+**Example**
+
+```ts
+import { without } from 'fp-ts-std/Array'
+import { eqNumber } from 'fp-ts/Eq'
+
+const withoutFourOrFive = without(eqNumber)([4, 5])
+
+assert.deepStrictEqual(withoutFourOrFive([3, 4]), [3])
+assert.deepStrictEqual(withoutFourOrFive([4, 5]), [])
+assert.deepStrictEqual(withoutFourOrFive([4, 5, 6]), [6])
+assert.deepStrictEqual(withoutFourOrFive([3, 4, 5, 6]), [3, 6])
+assert.deepStrictEqual(withoutFourOrFive([4, 3, 4, 5, 6, 5]), [3, 6])
+```
+
+Added in v0.6.0

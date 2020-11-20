@@ -10,6 +10,7 @@ import {
   insertMany,
   dropRepeats,
   endsWith,
+  without,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -279,6 +280,26 @@ describe("Array", () => {
       fc.assert(
         fc.property(fc.array(fc.integer()), fc.array(fc.integer()), (xs, ys) =>
           f(xs)(ys.concat(xs)),
+        ),
+      )
+    })
+  })
+
+  describe("without", () => {
+    const f = without(eqNumber)
+
+    it("removes numbers present in first input array", () => {
+      const g = f([4, 5])
+
+      expect(g([3, 4])).toEqual([3])
+      expect(g([4, 5])).toEqual([])
+      expect(g([4, 5, 6])).toEqual([6])
+      expect(g([3, 4, 5, 6])).toEqual([3, 6])
+      expect(g([4, 3, 4, 5, 6, 5])).toEqual([3, 6])
+
+      fc.assert(
+        fc.property(fc.array(fc.integer()), xs =>
+          expect(f(xs)(xs)).toEqual(A.empty),
         ),
       )
     })

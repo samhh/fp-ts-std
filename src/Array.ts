@@ -271,3 +271,24 @@ export const endsWith = <A>(eq: Eq<A>) => (
   end: Array<A>,
 ): Predicate<Array<A>> => xs =>
   A.getEq(eq).equals(end, A.takeRight(end.length)(xs))
+
+/**
+ * Returns a new array without the values present in the first input array.
+ *
+ * @example
+ * import { without } from 'fp-ts-std/Array';
+ * import { eqNumber } from 'fp-ts/Eq';
+ *
+ * const withoutFourOrFive = without(eqNumber)([4, 5]);
+ *
+ * assert.deepStrictEqual(withoutFourOrFive([3, 4]), [3]);
+ * assert.deepStrictEqual(withoutFourOrFive([4, 5]), []);
+ * assert.deepStrictEqual(withoutFourOrFive([4, 5, 6]), [6]);
+ * assert.deepStrictEqual(withoutFourOrFive([3, 4, 5, 6]), [3, 6]);
+ * assert.deepStrictEqual(withoutFourOrFive([4, 3, 4, 5, 6, 5]), [3, 6]);
+ *
+ * @since 0.6.0
+ */
+export const without = <A>(eq: Eq<A>) => (
+  xs: Array<A>,
+): Endomorphism<Array<A>> => flow(A.filter(y => !A.elem(eq)(y)(xs)))
