@@ -484,7 +484,10 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  *
  * @since 0.6.0
  */
-export const head = (x: string): Option<string> => O.fromNullable(x[0])
+export const head: (x: string) => Option<string> = flow(
+  O.fromPredicate(not(isEmpty)),
+  O.map(takeLeft(1)),
+)
 
 /**
  * Get all but the first character of a string, or `None` if the string is empty.
@@ -502,7 +505,7 @@ export const head = (x: string): Option<string> => O.fromNullable(x[0])
  */
 export const tail: (x: string) => Option<string> = flow(
   O.fromPredicate(not(isEmpty)),
-  O.map(y => y.slice(1)),
+  O.map(dropLeft(1)),
 )
 
 /**
@@ -517,8 +520,10 @@ export const tail: (x: string) => Option<string> = flow(
  *
  * @since 0.7.0
  */
-export const last = (x: string): Option<string> =>
-  O.fromNullable(x[x.length - 1])
+export const last: (x: string) => Option<string> = flow(
+  O.fromPredicate(not(isEmpty)),
+  O.map(takeRight(1)),
+)
 
 /**
  * Get all but the last character of a string, or `None` if the string is empty.
@@ -536,5 +541,5 @@ export const last = (x: string): Option<string> =>
  */
 export const init: (x: string) => Option<string> = flow(
   O.fromPredicate(not(isEmpty)),
-  O.map(y => y.slice(0, y.length - 1)),
+  O.map(dropRight(1)),
 )
