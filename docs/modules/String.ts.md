@@ -28,6 +28,7 @@ Added in v0.1.0
   - [last](#last)
   - [length](#length)
   - [lines](#lines)
+  - [lookup](#lookup)
   - [match](#match)
   - [matchAll](#matchall)
   - [prepend](#prepend)
@@ -390,6 +391,28 @@ assert.deepStrictEqual(lines('a\nb\nc'), ['a', 'b', 'c'])
 ```
 
 Added in v0.1.0
+
+## lookup
+
+Attempt to access the character at the specified index of a string.
+
+**Signature**
+
+```ts
+export declare const lookup: (i: number) => (x: string) => Option<string>
+```
+
+**Example**
+
+```ts
+import { lookup } from 'fp-ts-std/String'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(lookup(0)(''), O.none)
+assert.deepStrictEqual(lookup(0)('abc'), O.some('a'))
+```
+
+Added in v0.7.0
 
 ## match
 

@@ -32,6 +32,7 @@ import {
   last,
   init,
   slice,
+  lookup,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -767,6 +768,28 @@ describe("String", () => {
       fc.assert(
         fc.property(fc.string(), fc.integer(), fc.integer(), (x, start, end) =>
           expect(f(start)(end)(x)).toEqual(x.slice(start, end)),
+        ),
+      )
+    })
+  })
+
+  describe("lookup", () => {
+    const f = lookup
+
+    it("returns None if index out of bounds", () => {
+      expect(f(1)("a")).toEqual(O.none)
+
+      fc.assert(
+        fc.property(fc.string(), x => expect(f(x.length)(x)).toEqual(O.none)),
+      )
+    })
+
+    it("returns character if in bounds", () => {
+      expect(f(1)("abc")).toEqual(O.some("b"))
+
+      fc.assert(
+        fc.property(fc.string(1, 100), x =>
+          expect(f(0)(x)).toEqual(O.some(x[0])),
         ),
       )
     })

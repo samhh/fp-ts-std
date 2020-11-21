@@ -159,7 +159,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] negate - [fp-ts/Ring::negate](https://gcanti.github.io/fp-ts/modules/Ring.ts.html#negate)
 - [x] none - [fp-ts-std/Array::none](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#none)
 - [x] not - [fp-ts-std/Boolean::invert](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#invert)
-- [ ] nth - [fp-ts/Array::lookup](https://gcanti.github.io/fp-ts/modules/Array.ts.html#lookup)
+- [x] nth - [fp-ts/Array::lookup](https://gcanti.github.io/fp-ts/modules/Array.ts.html#lookup)/[fp-ts-std/String::lookup](https://samhh.github.io/fp-ts-std/modules/String.ts.html#lookup)
 - ~~[ ] nthArg~~ Use curried functions and [constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant) instead.
 - ~~[ ] o~~ Use [flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) instead.
 - [x] objOf - [fp-ts/Record::singleton](https://gcanti.github.io/fp-ts/modules/Record.ts.html#singleton)

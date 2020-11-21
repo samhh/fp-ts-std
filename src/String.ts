@@ -565,3 +565,18 @@ export const init: (x: string) => Option<string> = flow(
   O.fromPredicate(not(isEmpty)),
   O.map(dropRight(1)),
 )
+
+/**
+ * Attempt to access the character at the specified index of a string.
+ *
+ * @example
+ * import { lookup } from 'fp-ts-std/String';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(lookup(0)(''), O.none);
+ * assert.deepStrictEqual(lookup(0)('abc'), O.some('a'));
+ *
+ * @since 0.7.0
+ */
+export const lookup = (i: number) => (x: string): Option<string> =>
+  O.fromNullable(x[i])
