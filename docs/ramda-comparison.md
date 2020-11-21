@@ -157,7 +157,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] nAry
 - [x] negate - [fp-ts/Ring::negate](https://gcanti.github.io/fp-ts/modules/Ring.ts.html#negate)
-- [ ] none
+- [x] none - [fp-ts-std/Array::none](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#none)
 - [x] not - [fp-ts-std/Boolean::invert](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#invert)
 - [ ] nth - [fp-ts/Array::lookup](https://gcanti.github.io/fp-ts/modules/Array.ts.html#lookup)
 - ~~[ ] nthArg~~ Use curried functions and [constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant) instead.

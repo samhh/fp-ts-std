@@ -24,6 +24,7 @@ Added in v0.1.0
   - [insertMany](#insertmany)
   - [join](#join)
   - [length](#length)
+  - [none](#none)
   - [pluckFirst](#pluckfirst)
   - [product](#product)
   - [reject](#reject)
@@ -319,6 +320,27 @@ assert.strictEqual(length(['a', 'b', 'c']), 3)
 ```
 
 Added in v0.1.0
+
+## none
+
+Check if a predicate does not hold for any array member.
+
+import { none } from 'fp-ts-std/Array';
+import { Predicate } from 'fp-ts/function';
+
+const isFive: Predicate<number> = n => n === 5;
+const noneAreFive = none(isFive);
+
+assert.strictEqual(noneAreFive([4, 4, 4]), true);
+assert.strictEqual(noneAreFive([4, 5, 4]), false);
+
+**Signature**
+
+```ts
+export declare const none: <A>(f: Predicate<A>) => Predicate<A[]>
+```
+
+Added in v0.7.0
 
 ## pluckFirst
 

@@ -3,6 +3,7 @@ import {
   elemFlipped,
   any,
   all,
+  none,
   join,
   pluckFirst,
   upsert,
@@ -89,6 +90,24 @@ describe("Array", () => {
       expect(f([3, 3])).toBe(false)
       expect(f([3, 5])).toBe(false)
       expect(f([5, 3])).toBe(false)
+    })
+  })
+
+  describe("none", () => {
+    const f = none<number>(n => n === 5)
+
+    it("returns true for empty input array", () => {
+      expect(f([])).toBe(true)
+    })
+
+    it("returns true if all predicates fail", () => {
+      expect(f([4])).toBe(true)
+      expect(f([4, 6])).toBe(true)
+    })
+
+    it("returns false if any predicates succeed", () => {
+      expect(f([5])).toBe(false)
+      expect(f([4, 5])).toBe(false)
     })
   })
 

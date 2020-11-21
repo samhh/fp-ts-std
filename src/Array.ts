@@ -95,6 +95,22 @@ export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
 )
 
 /**
+ * Check if a predicate does not hold for any array member.
+ *
+ * import { none } from 'fp-ts-std/Array';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isFive: Predicate<number> = n => n === 5;
+ * const noneAreFive = none(isFive);
+ *
+ * assert.strictEqual(noneAreFive([4, 4, 4]), true);
+ * assert.strictEqual(noneAreFive([4, 5, 4]), false);
+ *
+ * @since 0.7.0
+ */
+export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(not, all)
+
+/**
  * Join an array of strings together into a single string using the supplied
  * separator.
  *
