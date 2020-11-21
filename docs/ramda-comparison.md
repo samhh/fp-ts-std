@@ -228,7 +228,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] takeLast - [fp-ts/Array::takeRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeright)/[fp-ts-std/String::takeLast](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeright)
 - [ ] takeLastWhile
 - [ ] takeWhile - [fp-ts/Array::takeLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleftwhile)
-- [ ] tap
+- [x] tap - [fp-ts-std/IO::tap](https://samhh.github.io/fp-ts-std/modules/IO.ts.html#tap)
 - [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)/[fp-ts-contrib/RegExp::test](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#test)
 - [x] thunkify - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
 - [x] times - [fp-ts/Array::makeBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#makeby)
