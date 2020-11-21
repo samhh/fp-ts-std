@@ -260,6 +260,28 @@ export const unsurround = (x: string): Endomorphism<string> => val =>
     : val
 
 /**
+ * Returns the substring between the start index (inclusive) and the end index
+ * (exclusive).
+ *
+ * This is merely a functional wrapper around `String.prototype.slice`.
+ *
+ * @example
+ * import { slice } from 'fp-ts-std/String';
+ *
+ * const x = 'abcd';
+ *
+ * assert.deepStrictEqual(slice(1)(3)(x), 'bc');
+ * assert.deepStrictEqual(slice(1)(Infinity)(x), 'bcd');
+ * assert.deepStrictEqual(slice(0)(-1)(x), 'abc');
+ * assert.deepStrictEqual(slice(-3)(-1)(x), 'bc');
+ *
+ * @since 0.7.0
+ */
+export const slice = (start: number) => (
+  end: number,
+): Endomorphism<string> => x => x.slice(start, end)
+
+/**
  * Keep the specified number of characters from the start of a string.
  *
  * If `n` is larger than the available number of characters, the string will
@@ -276,8 +298,8 @@ export const unsurround = (x: string): Endomorphism<string> => val =>
  *
  * @since 0.3.0
  */
-export const takeLeft = (n: number): Endomorphism<string> => x =>
-  x.slice(0, Math.max(0, n))
+export const takeLeft = (n: number): Endomorphism<string> =>
+  slice(0)(Math.max(0, n))
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -297,7 +319,7 @@ export const takeLeft = (n: number): Endomorphism<string> => x =>
  * @since 0.3.0
  */
 export const takeRight = (n: number): Endomorphism<string> => x =>
-  x.slice(Math.max(0, x.length - Math.floor(n)))
+  slice(Math.max(0, x.length - Math.floor(n)))(Infinity)(x)
 
 /**
  * Functional wrapper around `String.prototype.match`.
@@ -543,25 +565,3 @@ export const init: (x: string) => Option<string> = flow(
   O.fromPredicate(not(isEmpty)),
   O.map(dropRight(1)),
 )
-
-/**
- * Returns the substring between the start index (inclusive) and the end index
- * (exclusive).
- *
- * This is merely a functional wrapper around `String.prototype.slice`.
- *
- * @example
- * import { slice } from 'fp-ts-std/String';
- *
- * const x = 'abcd';
- *
- * assert.deepStrictEqual(slice(1)(3)(x), 'bc');
- * assert.deepStrictEqual(slice(1)(Infinity)(x), 'bcd');
- * assert.deepStrictEqual(slice(0)(-1)(x), 'abc');
- * assert.deepStrictEqual(slice(-3)(-1)(x), 'bc');
- *
- * @since 0.7.0
- */
-export const slice = (start: number) => (
-  end: number,
-): Endomorphism<string> => x => x.slice(start, end)

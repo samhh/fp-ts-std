@@ -374,7 +374,7 @@ export const product = fold(monoidProduct)
  */
 export const aperture = (n: number) => <A>(xs: Array<A>): Array<Array<A>> => {
   const go = (i: number) => (ys: Array<Array<A>>): Array<Array<A>> =>
-    i + n > xs.length ? ys : go(i + 1)(A.snoc(ys, xs.slice(i, n + i)))
+    i + n > xs.length ? ys : go(i + 1)(A.snoc(ys, slice(i)(n + i)(xs)))
 
   return n < 1 ? [] : go(0)([])
 }
