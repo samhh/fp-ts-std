@@ -24,6 +24,7 @@ Added in v0.1.0
   - [head](#head)
   - [isEmpty](#isempty)
   - [isString](#isstring)
+  - [last](#last)
   - [length](#length)
   - [lines](#lines)
   - [match](#match)
@@ -301,6 +302,28 @@ assert.strictEqual(isString(3), false)
 ```
 
 Added in v0.1.0
+
+## last
+
+Get the last character in a string, or `None` if the string is empty.
+
+**Signature**
+
+```ts
+export declare const last: (x: string) => Option<string>
+```
+
+**Example**
+
+```ts
+import { last } from 'fp-ts-std/String'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(last('abc'), O.some('c'))
+assert.deepStrictEqual(last(''), O.none)
+```
+
+Added in v0.7.0
 
 ## length
 

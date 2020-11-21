@@ -29,6 +29,7 @@ import {
   dropRight,
   head,
   tail,
+  last,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -706,6 +707,22 @@ describe("String", () => {
             f(x),
             O.exists(y => y.length === x.length - 1),
           ),
+        ),
+      )
+    })
+  })
+
+  describe("last", () => {
+    const f = last
+
+    it("returns None for empty string", () => {
+      expect(f("")).toEqual(O.none)
+    })
+
+    it("returns last character of non-empty string", () => {
+      fc.assert(
+        fc.property(fc.string(1, 100), x =>
+          expect(f(x)).toEqual(O.some(x[x.length - 1])),
         ),
       )
     })

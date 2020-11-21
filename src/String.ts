@@ -504,3 +504,18 @@ export const tail: (x: string) => Option<string> = flow(
   O.fromPredicate(not(isEmpty)),
   O.map(y => y.slice(1)),
 )
+
+/**
+ * Get the last character in a string, or `None` if the string is empty.
+ *
+ * @example
+ * import { last } from 'fp-ts-std/String';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(last('abc'), O.some('c'));
+ * assert.deepStrictEqual(last(''), O.none);
+ *
+ * @since 0.7.0
+ */
+export const last = (x: string): Option<string> =>
+  O.fromNullable(x[x.length - 1])

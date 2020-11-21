@@ -118,7 +118,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] juxt
 - [x] keys - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [x] keysIn - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
-- [ ] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)
+- [x] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)/[fp-ts-std/String::last](https://samhh.github.io/fp-ts-std/modules/String.ts.html#last)
 - [x] lastIndexOf - [fp-ts/Array::lastIndexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlastindex)
 - [x] length - [fp-ts-std/Array::length](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#length)
 - [x] lens - [monocle-ts](https://gcanti.github.io/monocle-ts/)
