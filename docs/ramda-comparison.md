@@ -40,7 +40,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
 - [ ] clone
 - [x] comparator - [fp-ts/Ord::fromCompare](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#fromcompare)
-- [ ] complement
+- [x] complement - [fp-ts/function::not](https://gcanti.github.io/fp-ts/modules/function.ts.html#not)
 - [ ] compose
 - [ ] composeK
 - [ ] composeP
