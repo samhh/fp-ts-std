@@ -16,6 +16,7 @@ Added in v0.1.0
   - [lookupFlipped](#lookupflipped)
   - [omit](#omit)
   - [pick](#pick)
+  - [reject](#reject)
   - [values](#values)
 
 ---
@@ -94,6 +95,31 @@ assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] 
 ```
 
 Added in v0.1.0
+
+## reject
+
+Filters out key/value pairs in the record for which the predicate upon the
+value holds. This can be thought of as the inverse of ordinary record
+filtering.
+
+**Signature**
+
+```ts
+export declare const reject: <A>(f: Predicate<A>) => Endomorphism<Record<string, A>>
+```
+
+**Example**
+
+```ts
+import { reject } from 'fp-ts-std/Record'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+
+assert.deepStrictEqual(reject(isEven)({ a: 1, b: 2, c: 3, d: 4 }), { a: 1, c: 3 })
+```
+
+Added in v0.7.0
 
 ## values
 

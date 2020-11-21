@@ -2,6 +2,7 @@
  * @since 0.1.0
  */
 
+import { Endomorphism, not, Predicate } from "fp-ts/function"
 import { Option } from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 
@@ -97,3 +98,21 @@ export const omit = <K extends string>(ks: Array<K>) => <
 
   return y as Omit<A, K>
 }
+
+/**
+ * Filters out key/value pairs in the record for which the predicate upon the
+ * value holds. This can be thought of as the inverse of ordinary record
+ * filtering.
+ *
+ * @example
+ * import { reject } from 'fp-ts-std/Record';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isEven: Predicate<number> = n => n % 2 === 0;
+ *
+ * assert.deepStrictEqual(reject(isEven)({ a: 1, b: 2, c: 3, d: 4 }), { a: 1, c: 3 });
+ *
+ * @since 0.7.0
+ */
+export const reject = <A>(f: Predicate<A>): Endomorphism<Record<string, A>> =>
+  R.filter(not(f))

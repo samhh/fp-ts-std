@@ -1,6 +1,8 @@
-import { values, lookupFlipped, pick, omit } from "../src/Record"
+import { values, lookupFlipped, pick, omit, reject } from "../src/Record"
 import * as O from "fp-ts/Option"
+import * as R from "fp-ts/Record"
 import fc from "fast-check"
+import { pipe, Predicate } from "fp-ts/function"
 
 describe("Record", () => {
   describe("values", () => {
@@ -59,6 +61,25 @@ describe("Record", () => {
       const after: Omit<Thing, "id"> = { name: "Ragnor", foo: "Bar" }
 
       expect(omit(["id", "bar"])(before)).toEqual(after)
+    })
+  })
+
+  describe("reject", () => {
+    const p: Predicate<number> = n => n % 2 === 0
+    const f = reject(p)
+
+    it("filters out items for which the predicate holds", () => {
+      expect(f({ a: 1, b: 2, c: 3, d: 4 })).toEqual({ a: 1, c: 3 })
+    })
+
+    it("is the inverse of filter", () => {
+      fc.assert(
+        fc.property(
+          fc.dictionary(fc.string(), fc.integer()),
+          xs =>
+            pipe(xs, R.filter(p), R.size) + pipe(xs, f, R.size) === R.size(xs),
+        ),
+      )
     })
   })
 })
