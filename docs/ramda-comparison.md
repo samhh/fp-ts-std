@@ -117,7 +117,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] join - [fp-ts-std/Array::join](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#join)
 - [ ] juxt
 - [x] keys - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
-- [ ] keysIn
+- [x] keysIn - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [ ] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)
 - [x] lastIndexOf - [fp-ts/Array::lastIndexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlastindex)
 - [x] length - [fp-ts-std/Array::length](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#length)
@@ -258,7 +258,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] update - [fp-ts/Array::updateAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#updateat)
 - [ ] useWith
 - [x] values - [fp-ts-std/Record::values](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#values)
-- [ ] valuesIn
+- [x] valuesIn - [fp-ts-std/Record::values](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#values)
 - [x] view - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] when - [fp-ts-std/Function::when](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#when)
 - [x] where - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
