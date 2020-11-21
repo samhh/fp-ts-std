@@ -4,7 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.7.0 (_Unreleased_)
 
-- Add `aperture` function to the `Array` module.
+- Add `aperture` and `slice` functions to the `Array` module.
 - Add `last` and `init` functions to the `String` module.
 - Add `construct` function to the `Function` module.
 - Provide the input value to the fallback function of `guard`.

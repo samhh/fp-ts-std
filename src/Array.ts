@@ -378,3 +378,25 @@ export const aperture = (n: number) => <A>(xs: Array<A>): Array<Array<A>> => {
 
   return n < 1 ? [] : go(0)([])
 }
+
+/**
+ * Returns the elements of the array between the start index (inclusive) and the
+ * end index (exclusive).
+ *
+ * This is merely a functional wrapper around `Array.prototype.slice`.
+ *
+ * @example
+ * import { slice } from 'fp-ts-std/Array';
+ *
+ * const xs = ['a', 'b', 'c', 'd'];
+ *
+ * assert.deepStrictEqual(slice(1)(3)(xs), ['b', 'c']);
+ * assert.deepStrictEqual(slice(1)(Infinity)(xs), ['b', 'c', 'd']);
+ * assert.deepStrictEqual(slice(0)(-1)(xs), ['a', 'b', 'c']);
+ * assert.deepStrictEqual(slice(-3)(-1)(xs), ['b', 'c']);
+ *
+ * @since 0.7.0
+ */
+export const slice = (start: number) => (end: number) => <A>(
+  xs: Array<A>,
+): Array<A> => xs.slice(start, end)

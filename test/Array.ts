@@ -15,6 +15,7 @@ import {
   sum,
   product,
   aperture,
+  slice,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -424,6 +425,22 @@ describe("Array", () => {
           fc.array(fc.anything()),
           fc.integer(1, 100),
           (xs, n) => f(n)(xs).length === Math.max(0, xs.length - n + 1),
+        ),
+      )
+    })
+  })
+
+  describe("slice", () => {
+    const f = slice
+
+    it("behaves identically to Array.prototype.slice", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything()),
+          fc.integer(),
+          fc.integer(),
+          (xs, start, end) =>
+            expect(f(start)(end)(xs)).toEqual(xs.slice(start, end)),
         ),
       )
     })

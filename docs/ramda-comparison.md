@@ -209,7 +209,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] scan - [fp-ts/Array::scanLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#scanleft)
 - [x] sequence - [fp-ts/Array::sequence](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sequence)
 - [x] set - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] slice
+- [ ] slice - [fp-ts-std/Array::slice](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#slice)
 - [x] sort - [fp-ts/Array::sort](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sort)
 - [x] sortBy - [fp-ts/Array::sort](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sort)
 - [x] sortWith - [fp-ts/Array::sortBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sortBy)
