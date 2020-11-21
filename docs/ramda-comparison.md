@@ -250,8 +250,8 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] union - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
 - [x] unionWith - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
 - [x] uniq - [fp-ts/Array::uniq](https://gcanti.github.io/fp-ts/modules/Array.ts.html#uniq)
-- [ ] uniqBy
-- [ ] uniqWith
+- [x] uniqBy - [fp-ts/Array::uniq](https://gcanti.github.io/fp-ts/modules/Array.ts.html#uniq)
+- [x] uniqWith - [fp-ts/Array::uniq](https://gcanti.github.io/fp-ts/modules/Array.ts.html#uniq)
 - [x] unless - [fp-ts-std/Function::unless](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unless)
 - [x] unnest - [fp-ts/Array::flatten](https://gcanti.github.io/fp-ts/modules/Array.ts.html#flatten)
 - [x] until - [fp-ts-std/Function::until](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#until)
