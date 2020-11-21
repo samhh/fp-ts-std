@@ -26,6 +26,7 @@ Added in v0.1.0
   - [length](#length)
   - [pluckFirst](#pluckfirst)
   - [product](#product)
+  - [reject](#reject)
   - [slice](#slice)
   - [sum](#sum)
   - [upsert](#upsert)
@@ -370,6 +371,30 @@ assert.strictEqual(product([4, 2, 3]), 24)
 ```
 
 Added in v0.6.0
+
+## reject
+
+Filters out items in the array for which the predicate holds. This can be
+thought of as the inverse of ordinary array filtering.
+
+**Signature**
+
+```ts
+export declare const reject: <A>(f: Predicate<A>) => Endomorphism<A[]>
+```
+
+**Example**
+
+```ts
+import { reject } from 'fp-ts-std/Array'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+
+assert.deepStrictEqual(reject(isEven)([1, 2, 3, 4]), [1, 3])
+```
+
+Added in v0.7.0
 
 ## slice
 

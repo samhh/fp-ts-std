@@ -2,7 +2,14 @@
  * @since 0.1.0
  */
 
-import { Predicate, constant, pipe, flow, Endomorphism } from "fp-ts/function"
+import {
+  Predicate,
+  constant,
+  pipe,
+  flow,
+  Endomorphism,
+  not,
+} from "fp-ts/function"
 import { Eq } from "fp-ts/Eq"
 import { Ord } from "fp-ts/Ord"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
@@ -400,3 +407,20 @@ export const aperture = (n: number) => <A>(xs: Array<A>): Array<Array<A>> => {
 export const slice = (start: number) => (end: number) => <A>(
   xs: Array<A>,
 ): Array<A> => xs.slice(start, end)
+
+/**
+ * Filters out items in the array for which the predicate holds. This can be
+ * thought of as the inverse of ordinary array filtering.
+ *
+ * @example
+ * import { reject } from 'fp-ts-std/Array';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isEven: Predicate<number> = n => n % 2 === 0;
+ *
+ * assert.deepStrictEqual(reject(isEven)([1, 2, 3, 4]), [1, 3]);
+ *
+ * @since 0.7.0
+ */
+export const reject = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
+  A.filter(not(f))

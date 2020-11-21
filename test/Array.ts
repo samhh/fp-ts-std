@@ -16,6 +16,7 @@ import {
   product,
   aperture,
   slice,
+  reject,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -441,6 +442,24 @@ describe("Array", () => {
           fc.integer(),
           (xs, start, end) =>
             expect(f(start)(end)(xs)).toEqual(xs.slice(start, end)),
+        ),
+      )
+    })
+  })
+
+  describe("reject", () => {
+    const p: Predicate<number> = n => n % 2 === 0
+    const f = reject(p)
+
+    it("filters out items for which the predicate holds", () => {
+      expect(f([1, 2, 3, 4])).toEqual([1, 3])
+    })
+
+    it("is the inverse of filter", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.integer()),
+          xs => A.filter(p)(xs).length + f(xs).length === xs.length,
         ),
       )
     })
