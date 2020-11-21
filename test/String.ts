@@ -30,6 +30,7 @@ import {
   head,
   tail,
   last,
+  init,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -723,6 +724,36 @@ describe("String", () => {
       fc.assert(
         fc.property(fc.string(1, 100), x =>
           expect(f(x)).toEqual(O.some(x[x.length - 1])),
+        ),
+      )
+    })
+  })
+
+  describe("init", () => {
+    const f = init
+
+    it("returns None for empty string", () => {
+      expect(f("")).toEqual(O.none)
+    })
+
+    it("returns empty string for string with one character", () => {
+      fc.assert(
+        fc.property(fc.string(1, 1), x => expect(f(x)).toEqual(O.some(""))),
+      )
+    })
+
+    it("returns string with all but last character for length >= 2", () => {
+      expect(f("xy")).toEqual(O.some("x"))
+      expect(f("xyz")).toEqual(O.some("xy"))
+    })
+
+    it("returns string one character smaller", () => {
+      fc.assert(
+        fc.property(fc.string(1, 100), x =>
+          pipe(
+            f(x),
+            O.exists(y => y.length === x.length - 1),
+          ),
         ),
       )
     })

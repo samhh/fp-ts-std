@@ -22,6 +22,7 @@ Added in v0.1.0
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
   - [head](#head)
+  - [init](#init)
   - [isEmpty](#isempty)
   - [isString](#isstring)
   - [last](#last)
@@ -260,6 +261,30 @@ assert.deepStrictEqual(head(''), O.none)
 ```
 
 Added in v0.6.0
+
+## init
+
+Get all but the last character of a string, or `None` if the string is empty.
+
+**Signature**
+
+```ts
+export declare const init: (x: string) => Option<string>
+```
+
+**Example**
+
+```ts
+import { init } from 'fp-ts-std/String'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(init(''), O.none)
+assert.deepStrictEqual(init('a'), O.some(''))
+assert.deepStrictEqual(init('ab'), O.some('a'))
+assert.deepStrictEqual(init('abc'), O.some('ab'))
+```
+
+Added in v0.7.0
 
 ## isEmpty
 

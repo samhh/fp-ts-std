@@ -101,7 +101,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] includes - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
 - [x] indexBy - [fp-ts/NonEmptyArray::groupBy](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#groupby)
 - [x] indexOf - [fp-ts/Array::indexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findindex)
-- [ ] init - [fp-ts/Array::init](https://gcanti.github.io/fp-ts/modules/Array.ts.html#init)
+- [x] init - [fp-ts/Array::init](https://gcanti.github.io/fp-ts/modules/Array.ts.html#init)/[fp-ts-std/String::init](https://samhh.github.io/fp-ts/modules/String.ts.html#init)
 - [ ] innerJoin
 - [x] insert - [fp-ts/Array::insertAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#insertat)
 - [x] insertAll - [fp-ts-std/Array::insertMany](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#insertmany)
