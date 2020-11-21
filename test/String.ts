@@ -31,6 +31,7 @@ import {
   tail,
   last,
   init,
+  slice,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -754,6 +755,18 @@ describe("String", () => {
             f(x),
             O.exists(y => y.length === x.length - 1),
           ),
+        ),
+      )
+    })
+  })
+
+  describe("slice", () => {
+    const f = slice
+
+    it("behaves identically to String.prototype.slice", () => {
+      fc.assert(
+        fc.property(fc.string(), fc.integer(), fc.integer(), (x, start, end) =>
+          expect(f(start)(end)(x)).toEqual(x.slice(start, end)),
         ),
       )
     })

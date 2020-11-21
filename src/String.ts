@@ -543,3 +543,25 @@ export const init: (x: string) => Option<string> = flow(
   O.fromPredicate(not(isEmpty)),
   O.map(dropRight(1)),
 )
+
+/**
+ * Returns the substring between the start index (inclusive) and the end index
+ * (exclusive).
+ *
+ * This is merely a functional wrapper around `String.prototype.slice`.
+ *
+ * @example
+ * import { slice } from 'fp-ts-std/String';
+ *
+ * const x = 'abcd';
+ *
+ * assert.deepStrictEqual(slice(1)(3)(x), 'bc');
+ * assert.deepStrictEqual(slice(1)(Infinity)(x), 'bcd');
+ * assert.deepStrictEqual(slice(0)(-1)(x), 'abc');
+ * assert.deepStrictEqual(slice(-3)(-1)(x), 'bc');
+ *
+ * @since 0.7.0
+ */
+export const slice = (start: number) => (
+  end: number,
+): Endomorphism<string> => x => x.slice(start, end)
