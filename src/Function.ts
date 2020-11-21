@@ -4,7 +4,7 @@
 
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
-import { Endomorphism, flow, Lazy, not, pipe, Predicate } from "fp-ts/function"
+import { Endomorphism, flow, not, pipe, Predicate } from "fp-ts/function"
 import { fold, getFunctionMonoid } from "fp-ts/Monoid"
 
 /**
@@ -216,3 +216,21 @@ export const until = <A>(f: Predicate<A>) => (
   const h: Endomorphism<A> = x => (f(x) ? x : h(g(x)))
   return h
 }
+
+/**
+ * Wraps a constructor function for functional invocation.
+ *
+ * @example
+ * import { construct } from 'fp-ts-std/Function';
+ *
+ * const mkURL = construct(URL);
+ *
+ * const xs: [string, string] = ['/x/y/z.html', 'https://samhh.com'];
+ *
+ * assert.deepStrictEqual(mkURL(xs), new URL(...xs));
+ *
+ * @since 0.7.0
+ */
+export const construct = <A extends Array<unknown>, B>(
+  x: new (...xs: A) => B,
+) => (xs: A): B => new x(...xs)

@@ -14,6 +14,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [applyTo](#applyto)
+  - [construct](#construct)
   - [flip](#flip)
   - [guard](#guard)
   - [ifElse](#ifelse)
@@ -56,6 +57,30 @@ assert.deepStrictEqual(output, [6, 10])
 ```
 
 Added in v0.6.0
+
+## construct
+
+Wraps a constructor function for functional invocation.
+
+**Signature**
+
+```ts
+export declare const construct: <A extends unknown[], B>(x: new (...xs: A) => B) => (xs: A) => B
+```
+
+**Example**
+
+```ts
+import { construct } from 'fp-ts-std/Function'
+
+const mkURL = construct(URL)
+
+const xs: [string, string] = ['/x/y/z.html', 'https://samhh.com']
+
+assert.deepStrictEqual(mkURL(xs), new URL(...xs))
+```
+
+Added in v0.7.0
 
 ## flip
 

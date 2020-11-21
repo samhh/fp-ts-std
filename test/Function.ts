@@ -8,6 +8,7 @@ import {
   unless,
   when,
   until,
+  construct,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -133,6 +134,24 @@ describe("Function", () => {
 
     it("applies function until predicate holds", () => {
       expect(f(1)).toBe(8)
+    })
+  })
+
+  describe("construct", () => {
+    const f = construct
+
+    // eslint-disable-next-line functional/no-class
+    class X {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      constructor(public x: number, public y: string) {}
+    }
+
+    it("instantiates and passes on constructor arguments", () => {
+      const xs: [number, string] = [123, "xyz"]
+
+      expect(f(X)(xs)).toEqual(new X(...xs))
+      expect(f(X)(xs).x).toBe(123)
+      expect(f(X)(xs).y).toBe("xyz")
     })
   })
 })
