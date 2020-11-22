@@ -185,7 +185,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] pipeK
 - [x] pipeP - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) with [fp-ts/Task](https://gcanti.github.io/fp-ts/modules/Task.ts.html)
 - [x] pipeWith - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) w/ monads
-- [ ] pluck
+- [x] pluck - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] prepend - [fp-ts/Array::cons](https://gcanti.github.io/fp-ts/modules/Array.ts.html#cons)
 - [x] product - [fp-ts-std/Array::product](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#product)
 - [ ] project
