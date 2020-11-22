@@ -191,7 +191,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] project
 - [x] prop - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] propEq
-- [ ] propIs
+- [x] propIs - [io-ts](https://gcanti.github.io/io-ts/) & [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] propOr
 - [x] props - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [ ] propSatisfies
