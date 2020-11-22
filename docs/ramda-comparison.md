@@ -194,7 +194,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] propIs - [io-ts](https://gcanti.github.io/io-ts/) & [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] propOr - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] props - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] propSatisfies
+- [x] propSatisfies - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] range - [fp-ts/Array::range](https://gcanti.github.io/fp-ts/modules/Array.ts.html#range)
 - [x] reduce - [fp-ts/Array::reduce](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reduce)
 - [ ] reduceBy
