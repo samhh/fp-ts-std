@@ -29,6 +29,7 @@ Added in v0.1.0
   - [product](#product)
   - [reject](#reject)
   - [slice](#slice)
+  - [startsWith](#startswith)
   - [sum](#sum)
   - [upsert](#upsert)
   - [without](#without)
@@ -442,6 +443,30 @@ assert.deepStrictEqual(slice(1)(3)(xs), ['b', 'c'])
 assert.deepStrictEqual(slice(1)(Infinity)(xs), ['b', 'c', 'd'])
 assert.deepStrictEqual(slice(0)(-1)(xs), ['a', 'b', 'c'])
 assert.deepStrictEqual(slice(-3)(-1)(xs), ['b', 'c'])
+```
+
+Added in v0.7.0
+
+## startsWith
+
+Check if an array starts with the specified subarray.
+
+**Signature**
+
+```ts
+export declare const startsWith: <A>(eq: Eq<A>) => (start: A[]) => Predicate<A[]>
+```
+
+**Example**
+
+```ts
+import { startsWith } from 'fp-ts-std/Array'
+import { eqString } from 'fp-ts/Eq'
+
+const startsXyz = startsWith(eqString)(['x', 'y', 'z'])
+
+assert.strictEqual(startsXyz(['x', 'y', 'z', 'a']), true)
+assert.strictEqual(startsXyz(['a', 'x', 'y', 'z']), false)
 ```
 
 Added in v0.7.0

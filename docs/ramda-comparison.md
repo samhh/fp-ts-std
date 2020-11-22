@@ -217,7 +217,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] splitAt - [fp-ts/Array::splitAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#splitat)
 - [x] splitEvery - [fp-ts/Array::chunksOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chunksof)
 - [x] splitWhen - [fp-ts/Array:spanLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#spanleft)
-- [ ] startsWith - [fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)
+- [x] startsWith - [fp-ts-std/Array::startsWith](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#startswith)/[fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)
 - [x] subtract - [fp-ts-std/Number::subtract](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#subtract)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [x] sum - [fp-ts-std/Array::sum](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#sum)
 - [ ] symmetricDifference

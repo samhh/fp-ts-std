@@ -10,6 +10,7 @@ import {
   getDisorderedEq,
   insertMany,
   dropRepeats,
+  startsWith,
   endsWith,
   without,
   cartesian,
@@ -286,6 +287,25 @@ describe("Array", () => {
       fc.assert(
         fc.property(fc.array(fc.integer()), xs =>
           pipe(xs, f, g, all(elemFlipped(eqNumber)(g(xs)))),
+        ),
+      )
+    })
+  })
+
+  describe("startsWith", () => {
+    const f = startsWith(eqNumber)
+
+    it("returns true for empty subarray", () => {
+      fc.assert(fc.property(fc.array(fc.integer()), xs => f([])(xs)))
+    })
+
+    it("checks start of array for subarray", () => {
+      expect(f([1])([1, 2, 3])).toBe(true)
+      expect(f([3])([1, 2, 3])).toBe(false)
+
+      fc.assert(
+        fc.property(fc.array(fc.integer()), fc.array(fc.integer()), (xs, ys) =>
+          f(xs)(xs.concat(ys)),
         ),
       )
     })

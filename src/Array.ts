@@ -283,6 +283,25 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
   )
 
 /**
+ * Check if an array starts with the specified subarray.
+ *
+ * @example
+ * import { startsWith } from 'fp-ts-std/Array';
+ * import { eqString } from 'fp-ts/Eq'
+ *
+ * const startsXyz = startsWith(eqString)(['x', 'y', 'z']);
+ *
+ * assert.strictEqual(startsXyz(['x', 'y', 'z', 'a']), true);
+ * assert.strictEqual(startsXyz(['a', 'x', 'y', 'z']), false);
+ *
+ * @since 0.7.0
+ */
+export const startsWith = <A>(eq: Eq<A>) => (
+  start: Array<A>,
+): Predicate<Array<A>> =>
+  flow(A.takeLeft(start.length), xs => A.getEq(eq).equals(xs, start))
+
+/**
  * Check if an array ends with the specified subarray.
  *
  * @example
@@ -298,8 +317,8 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
  */
 export const endsWith = <A>(eq: Eq<A>) => (
   end: Array<A>,
-): Predicate<Array<A>> => xs =>
-  A.getEq(eq).equals(end, A.takeRight(end.length)(xs))
+): Predicate<Array<A>> =>
+  flow(A.takeRight(end.length), xs => A.getEq(eq).equals(xs, end))
 
 /**
  * Returns a new array without the values present in the first input array.

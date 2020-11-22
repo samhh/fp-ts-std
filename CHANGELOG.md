@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## 0.7.0 (_Unreleased_)
 
 - Add `IO` module with `tap` function.
-- Add `aperture`, `slice`, `reject`, and `none` functions to the `Array` module.
+- Add `aperture`, `slice`, `reject`, `none`, and `startsWith` functions to the `Array` module.
 - Add `reject` function to the `Record` module.
 - Add `last`, `init`, `slice`, `lookup`, `toUpper`, and `toLower` functions to the `String` module.
 - Add `isValid` function to the `Number` module.
