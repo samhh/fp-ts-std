@@ -13,11 +13,38 @@ Added in v0.7.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [once](#once)
   - [tap](#tap)
 
 ---
 
 # utils
+
+## once
+
+Given a function, returns a new function that always returns the output
+value of its first invocation.
+
+**Signature**
+
+```ts
+export declare const once: <A, B>(f: (x: A) => B) => (x: A) => IO<B>
+```
+
+**Example**
+
+```ts
+import { once } from 'fp-ts-std/IO'
+import * as IO from 'fp-ts/IO'
+import { add } from 'fp-ts-std/Number'
+
+const f = once(add(5))
+
+assert.strictEqual(f(2)(), 7)
+assert.strictEqual(f(3)(), 7)
+```
+
+Added in v0.7.0
 
 ## tap
 

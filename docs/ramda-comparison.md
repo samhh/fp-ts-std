@@ -165,7 +165,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] objOf - [fp-ts/Record::singleton](https://gcanti.github.io/fp-ts/modules/Record.ts.html#singleton)
 - [x] of - [fp-ts/Array::of](https://gcanti.github.io/fp-ts/modules/Array.ts.html#of)
 - [x] omit - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
-- [ ] once
+- [x] once - [fp-ts-std/IO::once](https://samhh.github.io/fp-ts-std/modules/IO.ts.html#once)
 - [x] or - [fp-ts-std/Boolean::or](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#or)/[fp-ts/Semigroup::semigroupAny](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html#semigroupall)
 - [ ] otherwise
 - [x] over - [monocle-ts](https://gcanti.github.io/monocle-ts/)

@@ -36,3 +36,31 @@ export const tap = <A>(f: (x: A) => IO<void>) => (x: A): IO<A> => {
 
   return IO.of(x)
 }
+
+/**
+ * Given a function, returns a new function that always returns the output
+ * value of its first invocation.
+ *
+ * @example
+ * import { once } from 'fp-ts-std/IO';
+ * import * as IO from 'fp-ts/IO';
+ * import { add } from 'fp-ts-std/Number';
+ *
+ * const f = once(add(5))
+ *
+ * assert.strictEqual(f(2)(), 7);
+ * assert.strictEqual(f(3)(), 7);
+ *
+ * @since 0.7.0
+ */
+export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
+  const uncalled = Symbol()
+  let val: typeof uncalled | B = uncalled // eslint-disable-line functional/no-let
+
+  return x => {
+    // eslint-disable-next-line functional/no-conditional-statement
+    if (val === uncalled) val = f(x) // eslint-disable-line functional/no-expression-statement
+
+    return IO.of(val)
+  }
+}
