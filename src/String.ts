@@ -580,3 +580,27 @@ export const init: (x: string) => Option<string> = flow(
  */
 export const lookup = (i: number) => (x: string): Option<string> =>
   O.fromNullable(x[i])
+
+/**
+ * Converts all the alphabetic characters in a string to uppercase.
+ *
+ * @example
+ * import { toUpper } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(toUpper('Hello!'), 'HELLO!');
+ *
+ * @since 0.7.0
+ */
+export const toUpper: Endomorphism<string> = x => x.toUpperCase()
+
+/**
+ * Converts all the alphabetic characters in a string to lowercase.
+ *
+ * @example
+ * import { toLower } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(toLower('Hello!'), 'hello!');
+ *
+ * @since 0.7.0
+ */
+export const toLower: Endomorphism<string> = x => x.toLowerCase()

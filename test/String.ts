@@ -33,6 +33,8 @@ import {
   init,
   slice,
   lookup,
+  toUpper,
+  toLower,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -792,6 +794,22 @@ describe("String", () => {
           expect(f(0)(x)).toEqual(O.some(x[0])),
         ),
       )
+    })
+  })
+
+  describe("toUpper", () => {
+    const f = toUpper
+
+    it("converts alphabetic characters to uppercase", () => {
+      expect(f("Hello!")).toBe("HELLO!")
+    })
+  })
+
+  describe("toLower", () => {
+    const f = toLower
+
+    it("converts alphabetic characters to lowercase", () => {
+      expect(f("Hello!")).toBe("hello!")
     })
   })
 })

@@ -232,11 +232,11 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)/[fp-ts-contrib/RegExp::test](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#test)
 - [x] thunkify - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
 - [x] times - [fp-ts/Array::makeBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#makeby)
-- [ ] toLower
+- [x] toLower - [fp-ts-std/String::toLower](https://samhh.github.io/fp-ts-std/modules/String.ts.html#tolower)
 - [x] toPairs - [fp-ts/Record::collect](https://gcanti.github.io/fp-ts/modules/Record.ts.html#collect)
 - [x] toPairsIn - [fp-ts/Record::collect](https://gcanti.github.io/fp-ts/modules/Record.ts.html#collect)
 - [x] toString - [fp-ts-std/String::fromNumber](https://samhh.github.io/fp-ts-std/modules/String.ts.html#fromnumber)
-- [ ] toUpper
+- [x] toUpper - [fp-ts-std/String::toUpper](https://samhh.github.io/fp-ts-std/modules/String.ts.html#toupper)
 - [ ] transduce
 - [ ] transpose
 - [x] traverse - [fp-ts/Array::traverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#traverse)
