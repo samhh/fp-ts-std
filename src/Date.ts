@@ -2,7 +2,8 @@
  * @since 0.1.0
  */
 
-import { flow, not, Predicate, Refinement } from "fp-ts/function"
+import { flow, Predicate, Refinement } from "fp-ts/function"
+import { isValid as isValidNum } from "./Number"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 
@@ -62,7 +63,7 @@ export const isDate: Refinement<unknown, Date> = (x): x is Date =>
  *
  * @since 0.1.0
  */
-export const isValid: Predicate<Date> = flow(getTime, not(Number.isNaN))
+export const isValid: Predicate<Date> = flow(getTime, isValidNum)
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an

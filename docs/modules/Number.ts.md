@@ -17,6 +17,7 @@ Added in v0.1.0
   - [decrement](#decrement)
   - [divide](#divide)
   - [increment](#increment)
+  - [isValid](#isvalid)
   - [multiply](#multiply)
   - [subtract](#subtract)
 
@@ -105,6 +106,31 @@ assert.strictEqual(increment(3), 4)
 ```
 
 Added in v0.1.0
+
+## isValid
+
+Check if a number is actually valid. Specifically, all this function is
+doing is checking whether or not the number is `NaN`.
+
+**Signature**
+
+```ts
+export declare const isValid: Predicate<number>
+```
+
+**Example**
+
+```ts
+import { isValid } from 'fp-ts-std/Number'
+
+const valid = 123
+const invalid = NaN
+
+assert.strictEqual(isValid(valid), true)
+assert.strictEqual(isValid(invalid), false)
+```
+
+Added in v0.7.0
 
 ## multiply
 

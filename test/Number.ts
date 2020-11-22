@@ -5,7 +5,9 @@ import {
   divide,
   increment,
   decrement,
+  isValid,
 } from "../src/Number"
+import fc from "fast-check"
 
 describe("Number", () => {
   describe("add", () => {
@@ -49,6 +51,18 @@ describe("Number", () => {
       expect(f(42)).toBe(41)
       expect(f(-42)).toBe(-43)
       expect(f(0.12)).toBe(-0.88)
+    })
+  })
+
+  describe("isValid", () => {
+    const f = isValid
+
+    it("returns false for NaN", () => {
+      expect(f(NaN)).toBe(false)
+    })
+
+    it("returns true for any other number", () => {
+      fc.assert(fc.property(fc.integer(), f))
     })
   })
 })

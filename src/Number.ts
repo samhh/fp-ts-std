@@ -2,7 +2,24 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from "fp-ts/function"
+import { Endomorphism, not, Predicate } from "fp-ts/function"
+
+/**
+ * Check if a number is actually valid. Specifically, all this function is
+ * doing is checking whether or not the number is `NaN`.
+ *
+ * @example
+ * import { isValid } from 'fp-ts-std/Number';
+ *
+ * const valid = 123;
+ * const invalid = NaN;
+ *
+ * assert.strictEqual(isValid(valid), true);
+ * assert.strictEqual(isValid(invalid), false);
+ *
+ * @since 0.7.0
+ */
+export const isValid: Predicate<number> = not(Number.isNaN)
 
 /**
  * Increment a number.

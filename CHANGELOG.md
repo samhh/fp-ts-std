@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `aperture`, `slice`, `reject`, and `none` functions to the `Array` module.
 - Add `reject` function to the `Record` module.
 - Add `last`, `init`, `slice`, and `lookup` functions to the `String` module.
+- Add `isValid` function to the `Number` module.
 - Add `construct` function to the `Function` module.
 - Provide the input value to the fallback function of `guard`.
 
