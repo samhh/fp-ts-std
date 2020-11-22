@@ -3,9 +3,11 @@
  */
 
 import * as O from "fp-ts/Option"
+import * as M from "fp-ts/Map"
 import * as A from "fp-ts/Array"
 import { Endomorphism, flow, not, pipe, Predicate } from "fp-ts/function"
 import { fold, getFunctionMonoid } from "fp-ts/Monoid"
+import { Eq } from "fp-ts/Eq"
 
 /**
  * Flip the function/argument order of a curried function.
@@ -234,3 +236,46 @@ export const until = <A>(f: Predicate<A>) => (
 export const construct = <A extends Array<unknown>, B>(
   x: new (...xs: A) => B,
 ) => (xs: A): B => new x(...xs)
+
+/**
+ * Given a function and an `Eq` instance for determining input equivalence,
+ * returns a new function that caches the result of applying an input to said
+ * function. If the cache hits, the cached value is returned and the function
+ * is not called again. Useful for expensive computations.
+ *
+ * Provided the input function is pure, this function is too.
+ *
+ * The cache is implemented as a simple `Map`. There is no mechanism by which
+ * cache entries can be cleared from memory.
+ *
+ * @example
+ * import { memoize } from 'fp-ts-std/Function';
+ * import { add } from 'fp-ts-std/Number';
+ * import { eqNumber } from 'fp-ts/Eq';
+ *
+ * let runs = 0;
+ * const f = memoize(eqNumber)<number>(n => {
+ *     runs++;
+ *     return add(5)(n);
+ * });
+ *
+ * assert.strictEqual(runs, 0);
+ * assert.strictEqual(f(2), 7);
+ * assert.strictEqual(runs, 1);
+ * assert.strictEqual(f(2), 7);
+ * assert.strictEqual(runs, 1);
+ *
+ * @since 0.7.0
+ */
+export const memoize = <A>(eq: Eq<A>) => <B>(f: (x: A) => B): ((x: A) => B) => {
+  const cache = new Map<A, B>()
+
+  return k => {
+    const cached = M.lookup(eq)(k)(cache)
+    if (O.isSome(cached)) return cached.value // eslint-disable-line functional/no-conditional-statement
+
+    const val = f(k)
+    cache.set(k, val) // eslint-disable-line functional/no-expression-statement
+    return val
+  }
+}

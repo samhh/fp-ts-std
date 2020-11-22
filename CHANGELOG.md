@@ -9,7 +9,7 @@ This project adheres to semantic versioning.
 - Add `reject` function to the `Record` module.
 - Add `last`, `init`, `slice`, `lookup`, `toUpper`, and `toLower` functions to the `String` module.
 - Add `isValid` function to the `Number` module.
-- Add `construct` function to the `Function` module.
+- Add `construct` and `memoize` functions to the `Function` module.
 - Provide the input value to the fallback function of `guard`.
 
 ## 0.6.0 (2020-11-20)

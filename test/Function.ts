@@ -9,6 +9,7 @@ import {
   when,
   until,
   construct,
+  memoize,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -16,6 +17,8 @@ import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
 import { constant, constFalse, constTrue, Endomorphism } from "fp-ts/function"
+import { eqNumber } from "fp-ts/Eq"
+import fc from "fast-check"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -152,6 +155,48 @@ describe("Function", () => {
       expect(f(X)(xs)).toEqual(new X(...xs))
       expect(f(X)(xs).x).toBe(123)
       expect(f(X)(xs).y).toBe("xyz")
+    })
+  })
+
+  describe("memoize", () => {
+    const f = memoize
+
+    it("always returns the same output provided same input", () => {
+      const g = f(eqNumber)(add(5))
+
+      expect(g(2)).toBe(7)
+      expect(g(3)).toBe(8)
+      expect(g(2)).toBe(7)
+
+      fc.assert(fc.property(fc.integer(), n => g(n) === n + 5))
+    })
+
+    it("does not call function more than once per input", () => {
+      let runs = 0 // eslint-disable-line functional/no-let
+      const g = f(eqNumber)<number>(n => {
+        runs++ // eslint-disable-line functional/no-expression-statement
+        return add(5)(n)
+      })
+
+      expect(runs).toBe(0)
+      expect(g(2)).toBe(7)
+      expect(runs).toBe(1)
+      expect(g(3)).toBe(8)
+      expect(runs).toBe(2)
+      expect(g(2)).toBe(7)
+      expect(runs).toBe(2)
+    })
+
+    it("does not cross-pollute", () => {
+      const g = f(eqNumber)(add(5))
+      const h = f(eqNumber)(add(15))
+
+      expect(g(2)).toBe(7)
+      expect(h(2)).toBe(17)
+      expect(g(3)).toBe(8)
+      expect(h(3)).toBe(18)
+      expect(g(2)).toBe(7)
+      expect(h(2)).toBe(17)
     })
   })
 })

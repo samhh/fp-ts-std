@@ -139,7 +139,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] maxBy
 - [ ] mean
 - [ ] median
-- [ ] memoizeWith
+- [x] memoizeWith - [fp-ts-std/Function::memoize](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#memoize)
 - [x] merge - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [ ] mergeAll
 - [x] mergeDeepLeft - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
