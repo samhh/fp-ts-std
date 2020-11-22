@@ -234,7 +234,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] times - [fp-ts/Array::makeBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#makeby)
 - [ ] toLower
 - [x] toPairs - [fp-ts/Record::collect](https://gcanti.github.io/fp-ts/modules/Record.ts.html#collect)
-- [ ] toPairsIn
+- [x] toPairsIn - [fp-ts/Record::collect](https://gcanti.github.io/fp-ts/modules/Record.ts.html#collect)
 - [x] toString - [fp-ts-std/String::fromNumber](https://samhh.github.io/fp-ts-std/modules/String.ts.html#fromnumber)
 - [ ] toUpper
 - [ ] transduce
