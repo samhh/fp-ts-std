@@ -174,10 +174,10 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] partialRight
 - [x] partition - [fp-ts/Array::partition](https://gcanti.github.io/fp-ts/modules/Array.ts.html#partition)
 - [x] path - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] pathEq
-- [ ] pathOr
+- [x] pathEq - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] pathOr - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] paths - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] pathSatisfies
+- [x] pathSatisfies - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] pick - [fp-ts-std/Record::pick](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#pick)
 - [ ] pickAll
 - [x] pickBy - [fp-ts/Record::filterWithIndex](https://gcanti.github.io/fp-ts/modules/Record.ts.html#filterwithindex)
