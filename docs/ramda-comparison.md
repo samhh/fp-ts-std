@@ -167,7 +167,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] omit - [fp-ts-std/Record::omit](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#omit)
 - [x] once - [fp-ts-std/IO::once](https://samhh.github.io/fp-ts-std/modules/IO.ts.html#once)
 - [x] or - [fp-ts-std/Boolean::or](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#or)/[fp-ts/Semigroup::semigroupAny](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html#semigroupall)
-- [ ] otherwise
+- [x] otherwise - [fp-ts/Either::getOrElse](https://gcanti.github.io/fp-ts/modules/Either.ts.html#getorelse) w/ [fp-ts/TaskEither](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html)
 - [x] over - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] pair - [fp-ts/function::tuple](https://gcanti.github.io/fp-ts/modules/function.ts.html#tuple)
 - ~~[ ] partial~~ Use currying instead.
