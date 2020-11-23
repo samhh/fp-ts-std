@@ -20,7 +20,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] allPass - [fp-ts-std/Boolean::allPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#allpass)
 - [x] always - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
 - [x] and - [fp-ts-std/Boolean::and](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#and)/[fp-ts/Semigroup::semigroupAll](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html#semigroupall)
-- ~~[ ] andThen~~ Use [Task](https://gcanti.github.io/fp-ts/modules/Task.ts.html)s instead of promises.
+- [x] andThen - [fp-ts/Task::map](https://gcanti.github.io/fp-ts/modules/Task.ts.html#map)
 - [x] any - [fp-ts-std/Array::any](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#any)
 - [x] anyPass - [fp-ts-std/Boolean::anyPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#anypass)
 - [x] ap - [fp-ts/Array::ap](https://gcanti.github.io/fp-ts/modules/Array.ts.html#ap)
