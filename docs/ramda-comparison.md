@@ -170,8 +170,8 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] otherwise
 - [x] over - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] pair - [fp-ts/function::tuple](https://gcanti.github.io/fp-ts/modules/function.ts.html#tuple)
-- [ ] partial
-- [ ] partialRight
+- ~~[ ] partial~~ Use currying instead.
+- ~~[ ] partialRight~~ Use currying and potentially [fp-ts-std/Function::flip](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#flip) instead.
 - [x] partition - [fp-ts/Array::partition](https://gcanti.github.io/fp-ts/modules/Array.ts.html#partition)
 - [x] path - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] pathEq - [monocle-ts](https://gcanti.github.io/monocle-ts/)
