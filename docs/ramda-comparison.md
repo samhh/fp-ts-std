@@ -180,7 +180,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] pathSatisfies
 - [x] pick - [fp-ts-std/Record::pick](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#pick)
 - [ ] pickAll
-- [ ] pickBy
+- [x] pickBy - [fp-ts/Record::filterWithIndex](https://gcanti.github.io/fp-ts/modules/Record.ts.html#filterwithindex)
 - [x] pipe - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow)
 - [ ] pipeK
 - [x] pipeP - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) with [fp-ts/Task](https://gcanti.github.io/fp-ts/modules/Task.ts.html)
