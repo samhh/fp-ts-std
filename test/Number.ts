@@ -6,6 +6,7 @@ import {
   increment,
   decrement,
   isValid,
+  rem,
 } from "../src/Number"
 import fc from "fast-check"
 
@@ -63,6 +64,16 @@ describe("Number", () => {
 
     it("returns true for any other number", () => {
       fc.assert(fc.property(fc.integer(), f))
+    })
+  })
+
+  describe("rem", () => {
+    const f = rem
+
+    it("calculates the remainder", () => {
+      expect(f(2)(5.5)).toBe(1.5)
+      expect(f(-4)(2)).toBe(2)
+      expect(f(5)(-12)).toBe(-2)
     })
   })
 })

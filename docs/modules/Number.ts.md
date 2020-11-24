@@ -19,6 +19,7 @@ Added in v0.1.0
   - [increment](#increment)
   - [isValid](#isvalid)
   - [multiply](#multiply)
+  - [rem](#rem)
   - [subtract](#subtract)
 
 ---
@@ -151,6 +152,28 @@ assert.strictEqual(multiply(2)(3), 6)
 ```
 
 Added in v0.2.0
+
+## rem
+
+Calculates the remainder.
+
+**Signature**
+
+```ts
+export declare const rem: (divisor: number) => Endomorphism<number>
+```
+
+**Example**
+
+```ts
+import { rem } from 'fp-ts-std/Number'
+
+assert.strictEqual(rem(2)(5.5), 1.5)
+assert.strictEqual(rem(-4)(2), 2)
+assert.strictEqual(rem(5)(-12), -2)
+```
+
+Added in v0.7.0
 
 ## subtract
 

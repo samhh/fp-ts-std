@@ -152,7 +152,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] mergeWithKey
 - [x] min - [fp-ts/Ord::min](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#min)
 - [ ] minBy
-- [ ] modulo
+- [x] modulo - [fp-ts-std/Number::rem](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#rem)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] move
 - [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] nAry

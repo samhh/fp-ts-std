@@ -98,3 +98,18 @@ export const subtract = (subtrahend: number): Endomorphism<number> => minuend =>
  */
 export const divide = (divisor: number): Endomorphism<number> => dividend =>
   dividend / divisor
+
+/**
+ * Calculates the remainder.
+ *
+ * @example
+ * import { rem } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(rem(2)(5.5), 1.5);
+ * assert.strictEqual(rem(-4)(2), 2);
+ * assert.strictEqual(rem(5)(-12), -2);
+ *
+ * @since 0.7.0
+ */
+export const rem = (divisor: number): Endomorphism<number> => dividend =>
+  dividend % divisor
