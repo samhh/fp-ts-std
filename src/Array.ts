@@ -25,6 +25,7 @@ import {
   monoidProduct,
   monoidSum,
 } from "fp-ts/Monoid"
+import { flip } from "./Function"
 
 /**
  * Get the length of an array.
@@ -459,3 +460,56 @@ export const slice = (start: number) => (end: number) => <A>(
  */
 export const reject = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
   A.filter(not(f))
+
+/**
+ * Move an item at index `from` to index `to`. See also `moveTo`.
+ *
+ * If either index is out of bounds, `None` is returned.
+ *
+ * If both indices are the same, the array is returned unchanged.
+ *
+ * @example
+ * import { moveFrom } from 'fp-ts-std/Array';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(moveFrom(0)(1)(['a', 'b', 'c']), O.some(['b', 'a', 'c']));
+ * assert.deepStrictEqual(moveFrom(1)(1)(['a', 'b', 'c']), O.some(['a', 'b', 'c']));
+ * assert.deepStrictEqual(moveFrom(0)(0)([]), O.none);
+ * assert.deepStrictEqual(moveFrom(0)(1)(['a']), O.none);
+ * assert.deepStrictEqual(moveFrom(1)(0)(['a']), O.none);
+ *
+ * @since 0.7.0
+ */
+export const moveFrom = (from: number) => (to: number) => <A>(
+  xs: Array<A>,
+): Option<Array<A>> =>
+  from >= xs.length || to >= xs.length
+    ? O.none
+    : from === to
+    ? O.some(xs)
+    : pipe(
+        xs,
+        A.lookup(from),
+        O.chain(x => pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x)))),
+      )
+
+/**
+ * Move an item at index `from` to index `to`. See also `moveFrom`.
+ *
+ * If either index is out of bounds, `None` is returned.
+ *
+ * If both indices are the same, the array is returned unchanged.
+ *
+ * @example
+ * import { moveTo } from 'fp-ts-std/Array';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(moveTo(1)(0)(['a', 'b', 'c']), O.some(['b', 'a', 'c']));
+ * assert.deepStrictEqual(moveTo(1)(1)(['a', 'b', 'c']), O.some(['a', 'b', 'c']));
+ * assert.deepStrictEqual(moveTo(0)(0)([]), O.none);
+ * assert.deepStrictEqual(moveTo(0)(1)(['a']), O.none);
+ * assert.deepStrictEqual(moveTo(1)(0)(['a']), O.none);
+ *
+ * @since 0.7.0
+ */
+export const moveTo = flip(moveFrom)

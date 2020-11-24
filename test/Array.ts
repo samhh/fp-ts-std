@@ -19,6 +19,8 @@ import {
   aperture,
   slice,
   reject,
+  moveFrom,
+  moveTo,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -133,7 +135,7 @@ describe("Array", () => {
 
           return (
             countDelims(f(xs)) ===
-            countDelimsA(xs) + max(ordNumber)(0, xs.length - 1)
+            countDelimsA(xs) + max(ordNumber)(0, length(xs) - 1)
           )
         }),
       )
@@ -245,13 +247,13 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything(), 1, 5) as fc.Arbitrary<NonEmptyArray<unknown>>,
           fc.integer(0, 10),
-          (xs, i) => O.isSome(f(i)(xs)(xs)) === i <= xs.length,
+          (xs, i) => O.isSome(f(i)(xs)(xs)) === i <= length(xs),
         ),
       )
 
       fc.assert(
         fc.property(fc.array(fc.string(), 1, 20), xs =>
-          expect(pipe(g(xs), O.map(length))).toEqual(O.some(xs.length + 2)),
+          expect(pipe(g(xs), O.map(length))).toEqual(O.some(length(xs) + 2)),
         ),
       )
     })
@@ -278,7 +280,7 @@ describe("Array", () => {
 
     it("never returns a larger array", () => {
       fc.assert(
-        fc.property(fc.array(fc.integer()), xs => f(xs).length <= xs.length),
+        fc.property(fc.array(fc.integer()), xs => f(xs).length <= length(xs)),
       )
     })
 
@@ -370,7 +372,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything()),
           fc.array(fc.anything()),
-          (xs, ys) => f(xs)(ys).length === xs.length * ys.length,
+          (xs, ys) => f(xs)(ys).length === length(xs) * ys.length,
         ),
       )
     })
@@ -441,7 +443,7 @@ describe("Array", () => {
       fc.assert(
         fc.property(
           fc.array(fc.anything()),
-          xs => !f(xs.length + 1)(xs).length,
+          xs => !f(length(xs) + 1)(xs).length,
         ),
       )
     })
@@ -465,7 +467,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything()),
           fc.integer(1, 100),
-          (xs, n) => f(n)(xs).length === max(ordNumber)(0, xs.length - n + 1),
+          (xs, n) => f(n)(xs).length === max(ordNumber)(0, length(xs) - n + 1),
         ),
       )
     })
@@ -499,7 +501,161 @@ describe("Array", () => {
       fc.assert(
         fc.property(
           fc.array(fc.integer()),
-          xs => A.filter(p)(xs).length + f(xs).length === xs.length,
+          xs => A.filter(p)(xs).length + f(xs).length === length(xs),
+        ),
+      )
+    })
+  })
+
+  describe("moveFrom", () => {
+    const f = moveFrom
+
+    it("returns unmodified array provided same indices (in bounds)", () => {
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), 1, n),
+          fc.integer(0, n - 1),
+          (xs, i) => i >= length(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
+        ),
+      )
+    })
+
+    it("returns None if source is out of bounds", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(length(xs))(0)(xs)).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("returns None if target is out of bounds", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(0)(length(xs))(xs)).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("moves source to target", () => {
+      expect(f(0)(1)(["a", "b", "c"])).toEqual(O.some(["b", "a", "c"]))
+      expect(f(1)(0)(["a", "b", "c"])).toEqual(O.some(["b", "a", "c"]))
+
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), n, n),
+          fc.integer(0, n - 1),
+          fc.integer(0, n - 1),
+          (xs, i, j) => O.isSome(f(i)(j)(xs)),
+        ),
+      )
+    })
+
+    it("returns the same array size", () => {
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), n, n),
+          fc.integer(0, n - 1),
+          fc.integer(0, n - 1),
+          (xs, i, j) =>
+            pipe(
+              f(i)(j)(xs),
+              O.exists(ys => length(ys) === n),
+            ),
+        ),
+      )
+    })
+
+    it("sibling indices are interchangeable", () => {
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), n, n),
+          fc.integer(0, n - 2),
+          (xs, i) => expect(f(i)(i + 1)(xs)).toEqual(f(i + 1)(i)(xs)),
+        ),
+      )
+    })
+  })
+
+  describe("moveTo", () => {
+    const f = moveTo
+
+    it("returns unmodified array provided same indices (in bounds)", () => {
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), 1, n),
+          fc.integer(0, n - 1),
+          (xs, i) => i >= length(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
+        ),
+      )
+    })
+
+    it("returns None if source is out of bounds", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(0)(length(xs))(xs)).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("returns None if target is out of bounds", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(length(xs))(0)(xs)).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("moves source to target", () => {
+      expect(f(0)(1)(["a", "b", "c"])).toEqual(O.some(["b", "a", "c"]))
+      expect(f(1)(0)(["a", "b", "c"])).toEqual(O.some(["b", "a", "c"]))
+
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), n, n),
+          fc.integer(0, n - 1),
+          fc.integer(0, n - 1),
+          (xs, i, j) => O.isSome(f(i)(j)(xs)),
+        ),
+      )
+    })
+
+    it("returns the same array size", () => {
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), n, n),
+          fc.integer(0, n - 1),
+          fc.integer(0, n - 1),
+          (xs, i, j) =>
+            pipe(
+              f(i)(j)(xs),
+              O.exists(ys => length(ys) === n),
+            ),
+        ),
+      )
+    })
+
+    it("sibling indices are interchangeable", () => {
+      const n = 10
+
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), n, n),
+          fc.integer(0, n - 2),
+          (xs, i) => expect(f(i)(i + 1)(xs)).toEqual(f(i + 1)(i)(xs)),
         ),
       )
     })
