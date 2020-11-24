@@ -151,7 +151,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] mergeWith - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [ ] mergeWithKey
 - [x] min - [fp-ts/Ord::min](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#min)
-- [ ] minBy
+- [x] minBy - [fp-ts/Ord::min](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#min) w/ [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
 - [x] modulo - [fp-ts-std/Number::rem](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#rem)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [ ] move
 - [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
