@@ -23,7 +23,7 @@ import {
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { contramap as eqContramap, eqNumber } from "fp-ts/Eq"
-import { contramap as ordContramap, ordNumber } from "fp-ts/Ord"
+import { contramap as ordContramap, max, ordNumber } from "fp-ts/Ord"
 import { flow, pipe, Predicate } from "fp-ts/function"
 import fc from "fast-check"
 import { fold, monoidSum } from "fp-ts/Monoid"
@@ -132,7 +132,8 @@ describe("Array", () => {
           const countDelimsA = flow(A.map(countDelims), fold(monoidSum))
 
           return (
-            countDelims(f(xs)) === countDelimsA(xs) + Math.max(0, xs.length - 1)
+            countDelims(f(xs)) ===
+            countDelimsA(xs) + max(ordNumber)(0, xs.length - 1)
           )
         }),
       )
@@ -464,7 +465,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything()),
           fc.integer(1, 100),
-          (xs, n) => f(n)(xs).length === Math.max(0, xs.length - n + 1),
+          (xs, n) => f(n)(xs).length === max(ordNumber)(0, xs.length - n + 1),
         ),
       )
     })

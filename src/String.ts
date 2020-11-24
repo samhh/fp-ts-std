@@ -16,6 +16,7 @@ import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
 import { join } from "./Array"
+import { max, ordNumber } from "fp-ts/Ord"
 
 /**
  * An empty string.
@@ -299,7 +300,7 @@ export const slice = (start: number) => (
  * @since 0.3.0
  */
 export const takeLeft = (n: number): Endomorphism<string> =>
-  slice(0)(Math.max(0, n))
+  slice(0)(max(ordNumber)(0, n))
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -319,7 +320,7 @@ export const takeLeft = (n: number): Endomorphism<string> =>
  * @since 0.3.0
  */
 export const takeRight = (n: number): Endomorphism<string> => x =>
-  slice(Math.max(0, x.length - Math.floor(n)))(Infinity)(x)
+  slice(max(ordNumber)(0, x.length - Math.floor(n)))(Infinity)(x)
 
 /**
  * Functional wrapper around `String.prototype.match`.
