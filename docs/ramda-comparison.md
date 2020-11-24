@@ -134,7 +134,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] mapAccumRight
 - [ ] mapObjIndexed
 - [x] match - [fp-ts-std/String::match](https://samhh.github.io/fp-ts-std/modules/String.ts.html#match)/[fp-ts-contrib/RegExp::match](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#match)
-- [ ] mathMod
+- [x] mathMod - [fp-ts-std/Number::mod](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#mod)
 - [x] max - [fp-ts/Ord::max](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#max)
 - [ ] maxBy
 - [ ] mean

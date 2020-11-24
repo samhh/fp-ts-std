@@ -18,6 +18,7 @@ Added in v0.1.0
   - [divide](#divide)
   - [increment](#increment)
   - [isValid](#isvalid)
+  - [mod](#mod)
   - [multiply](#multiply)
   - [rem](#rem)
   - [subtract](#subtract)
@@ -133,6 +134,28 @@ assert.strictEqual(isValid(invalid), false)
 
 Added in v0.7.0
 
+## mod
+
+Calculate the modulus. See also `rem`.
+
+**Signature**
+
+```ts
+export declare const mod: (divisor: number) => Endomorphism<number>
+```
+
+**Example**
+
+```ts
+import { mod } from 'fp-ts-std/Number'
+
+assert.strictEqual(mod(2)(5.5), 1.5)
+assert.strictEqual(mod(-4)(2), -2)
+assert.strictEqual(mod(5)(-12), 3)
+```
+
+Added in v0.7.0
+
 ## multiply
 
 Multiply two numbers together.
@@ -155,7 +178,7 @@ Added in v0.2.0
 
 ## rem
 
-Calculates the remainder.
+Calculates the remainder. See also `mod`.
 
 **Signature**
 

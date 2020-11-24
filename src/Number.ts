@@ -100,7 +100,7 @@ export const divide = (divisor: number): Endomorphism<number> => dividend =>
   dividend / divisor
 
 /**
- * Calculates the remainder.
+ * Calculates the remainder. See also `mod`.
  *
  * @example
  * import { rem } from 'fp-ts-std/Number';
@@ -113,3 +113,18 @@ export const divide = (divisor: number): Endomorphism<number> => dividend =>
  */
 export const rem = (divisor: number): Endomorphism<number> => dividend =>
   dividend % divisor
+
+/**
+ * Calculate the modulus. See also `rem`.
+ *
+ * @example
+ * import { mod } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(mod(2)(5.5), 1.5);
+ * assert.strictEqual(mod(-4)(2), -2);
+ * assert.strictEqual(mod(5)(-12), 3);
+ *
+ * @since 0.7.0
+ */
+export const mod = (divisor: number): Endomorphism<number> => dividend =>
+  ((dividend % divisor) + divisor) % divisor
