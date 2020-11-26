@@ -28,22 +28,24 @@ took for the task to complete. The task otherwise operates as per usual.
 **Signature**
 
 ```ts
-export declare const elapsed: (f: (ms: number) => IO<void>) => <A>(x: Task<A>) => Task<A>
+export declare const elapsed: (f: (n: Milliseconds) => IO<void>) => <A>(x: Task<A>) => Task<A>
 ```
 
 **Example**
 
 ```ts
 import { elapsed, sleep } from 'fp-ts-std/Task'
+import * as D from 'fp-ts-std/Date'
+import { gt } from 'fp-ts/Ord'
 
-const wait = sleep(10)
-let time: number
+const wait = sleep(D.mkMilliseconds(10))
+let time: D.Milliseconds
 const waitAndTrackElapsed = elapsed((ms) => () => {
   time = ms
 })(wait)
 
 waitAndTrackElapsed().then(() => {
-  assert.strictEqual(time !== undefined && time > 0, true)
+  assert.strictEqual(time !== undefined && gt(D.ordMilliseconds)(time, D.mkMilliseconds(0)), true)
 })
 ```
 
@@ -59,13 +61,14 @@ resolves with void. Can also be useful with async/await (`await sleep(n)()`).
 **Signature**
 
 ```ts
-export declare const sleep: (ms: number) => Task<void>
+export declare const sleep: (n: Milliseconds) => Task<void>
 ```
 
 **Example**
 
 ```ts
 import { sleep } from 'fp-ts-std/Task'
+import { mkMilliseconds } from 'fp-ts-std/Date'
 import { sequenceT } from 'fp-ts/Apply'
 import { pipe } from 'fp-ts/function'
 import { Task } from 'fp-ts/Task'
@@ -80,7 +83,7 @@ const append = (msg: string): Task<void> =>
 
 const instant1 = append('a')
 const delayed = pipe(
-  sleep(10),
+  sleep(mkMilliseconds(10)),
   T.chain(() => append('b'))
 )
 const instant2 = append('c')

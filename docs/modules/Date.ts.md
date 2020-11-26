@@ -13,16 +13,60 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [Milliseconds (type alias)](#milliseconds-type-alias)
+  - [fieldMilliseconds](#fieldmilliseconds)
+  - [fromMilliseconds](#frommilliseconds)
   - [getTime](#gettime)
   - [isDate](#isdate)
   - [isValid](#isvalid)
+  - [isoMilliseconds](#isomilliseconds)
+  - [mkMilliseconds](#mkmilliseconds)
+  - [now](#now)
+  - [ordMilliseconds](#ordmilliseconds)
   - [parseDate](#parsedate)
   - [toISOString](#toisostring)
+  - [unMilliseconds](#unmilliseconds)
   - [unsafeParseDate](#unsafeparsedate)
 
 ---
 
 # utils
+
+## Milliseconds (type alias)
+
+Newtype representing milliseconds.
+
+**Signature**
+
+```ts
+export type Milliseconds = Newtype<{ readonly Milliseconds: unique symbol }, number>
+```
+
+Added in v0.7.0
+
+## fieldMilliseconds
+
+`Field` instance for `Milliseconds`, enabling arithmetic over the type.
+
+**Signature**
+
+```ts
+export declare const fieldMilliseconds: Field<Milliseconds>
+```
+
+Added in v0.7.0
+
+## fromMilliseconds
+
+Get a `Date` from `Milliseconds`.
+
+**Signature**
+
+```ts
+export declare const fromMilliseconds: (x: Milliseconds) => Date
+```
+
+Added in v0.7.0
 
 ## getTime
 
@@ -31,7 +75,7 @@ Get the time in milliseconds from a `Date`.
 **Signature**
 
 ```ts
-export declare const getTime: (x: Date) => number
+export declare const getTime: (x: Date) => Milliseconds
 ```
 
 **Example**
@@ -91,6 +135,56 @@ assert.strictEqual(isValid(invalid), false)
 
 Added in v0.1.0
 
+## isoMilliseconds
+
+`Iso` instance for `Milliseconds`, enabling the use of lenses over the
+newtype pertaining to its isomorphic nature.
+
+**Signature**
+
+```ts
+export declare const isoMilliseconds: Iso<Milliseconds, number>
+```
+
+Added in v0.7.0
+
+## mkMilliseconds
+
+Lift a number to the `Milliseconds` newtype.
+
+**Signature**
+
+```ts
+export declare const mkMilliseconds: (a: number) => Milliseconds
+```
+
+Added in v0.7.0
+
+## now
+
+Get the time since the Unix Epoch in `Milliseconds` from a `Date`.
+
+**Signature**
+
+```ts
+export declare const now: IO<Milliseconds>
+```
+
+Added in v0.7.0
+
+## ordMilliseconds
+
+`Ord` instance for `Milliseconds`, enabling comparison between different
+instances of the type.
+
+**Signature**
+
+```ts
+export declare const ordMilliseconds: Ord<Milliseconds>
+```
+
+Added in v0.7.0
+
 ## parseDate
 
 Safely parse a date.
@@ -137,6 +231,18 @@ assert.strictEqual(toISOString(d), d.toISOString())
 ```
 
 Added in v0.1.0
+
+## unMilliseconds
+
+Unwrap a `Milliseconds` newtype back to its underlying number representation.
+
+**Signature**
+
+```ts
+export declare const unMilliseconds: (s: Milliseconds) => number
+```
+
+Added in v0.7.0
 
 ## unsafeParseDate
 

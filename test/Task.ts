@@ -3,6 +3,7 @@
 import { sleep, elapsed } from "../src/Task"
 import { constant, constVoid, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
+import { mkMilliseconds, unMilliseconds } from "../src/Date"
 
 const flushPromises = () => new Promise(setImmediate)
 
@@ -13,7 +14,7 @@ describe("Task", () => {
 
       const spy = jest.fn()
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      sleep(1000)().then(spy)
+      sleep(mkMilliseconds(1000))().then(spy)
 
       expect(spy).not.toHaveBeenCalled()
 
@@ -52,7 +53,7 @@ describe("Task", () => {
         T.of(x),
         T.delay(50),
         f(n => () => {
-          time = n
+          time = unMilliseconds(n)
         }),
       )()
 

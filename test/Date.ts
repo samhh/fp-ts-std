@@ -5,6 +5,10 @@ import {
   isValid,
   unsafeParseDate,
   parseDate,
+  fromMilliseconds,
+  now,
+  mkMilliseconds,
+  unMilliseconds,
 } from "../src/Date"
 import fc from "fast-check"
 import { not } from "fp-ts/function"
@@ -15,9 +19,9 @@ describe("Date", () => {
     const f = getTime
 
     it("wraps prototype method", () => {
-      const d = new Date()
-
-      expect(f(d)).toBe(d.getTime())
+      fc.assert(
+        fc.property(fc.date(), d => unMilliseconds(f(d)) === d.getTime()),
+      )
     })
   })
 
@@ -94,6 +98,32 @@ describe("Date", () => {
       expect(f("1-")).toEqual(O.some(new Date("2001-01-01")))
       expect(f("2020")).toEqual(O.some(new Date("2020-01-01")))
       expect(f("February 3, 4567")).toEqual(O.some(new Date("4567-02-03")))
+    })
+  })
+
+  describe("fromMilliseconds", () => {
+    const f = fromMilliseconds
+
+    it("creates date using underlying number", () => {
+      expect(f(mkMilliseconds(1606400902794)).toISOString()).toBe(
+        "2020-11-26T14:28:22.794Z",
+      )
+
+      fc.assert(
+        fc.property(fc.integer(0, new Date("2050-01-01").getTime()), n =>
+          expect(f(mkMilliseconds(n)).toISOString()).toBe(
+            new Date(n).toISOString(),
+          ),
+        ),
+      )
+    })
+  })
+
+  describe("now", () => {
+    const f = now
+
+    it("wraps prototype method", () => {
+      expect(unMilliseconds(f())).toBe(Date.now())
     })
   })
 })
