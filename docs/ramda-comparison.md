@@ -32,7 +32,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] ascend - [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
 - [x] assoc - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] assocPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] binary
+- ~~[ ] binary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
 - ~~[ ] bind~~ - Do not use `this`.
 - [x] both - [fp-ts-std/Boolean::both](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#both)/[fp-ts/Option::apFirst](https://gcanti.github.io/fp-ts/modules/Option.ts.html#apfirst)
 - [ ] call
@@ -244,7 +244,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] tryCatch - [fp-ts/Either::tryCatch](https://gcanti.github.io/fp-ts/modules/Either.ts.html#trycatch)
 - [ ] type
 - [ ] unapply
-- [ ] unary
+- ~~[ ] unary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
 - [ ] uncurryN
 - [x] unfold - [fp-ts/Array::unfold](https://gcanti.github.io/fp-ts/modules/Array.ts.html#unfold)
 - [x] union - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
