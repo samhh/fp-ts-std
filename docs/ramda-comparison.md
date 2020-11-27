@@ -155,7 +155,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] modulo - [fp-ts-std/Number::rem](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#rem)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [x] move - [fp-ts-std/Array::moveFrom](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#movefrom)/[fp-ts/Array::rotate](https://gcanti.github.io/fp-ts/modules/Array.ts.html#rotate)
 - [x] multiply - [fp-ts-std/Number::multiply](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#multiply)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
-- [ ] nAry
+- ~~[ ] nAry~~ Use curried functions and avoid `undefined`.
 - [x] negate - [fp-ts/Ring::negate](https://gcanti.github.io/fp-ts/modules/Ring.ts.html#negate)
 - [x] none - [fp-ts-std/Array::none](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#none)
 - [x] not - [fp-ts-std/Boolean::invert](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#invert)
