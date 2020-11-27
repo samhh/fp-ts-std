@@ -243,7 +243,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] trim - [fp-ts-std/String::trim](https://ramdajs.com/docs/#trim)
 - [x] tryCatch - [fp-ts/Either::tryCatch](https://gcanti.github.io/fp-ts/modules/Either.ts.html#trycatch)
 - [x] type - [io-ts](https://gcanti.github.io/io-ts/)
-- [ ] unapply
+- ~~[ ] unapply~~ Use currying or tuples instead.
 - ~~[ ] unary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
 - [x] uncurryN - [fp-ts-std/Function::uncurry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry2) through [fp-ts-std/Function::uncurry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry5)
 - [x] unfold - [fp-ts/Array::unfold](https://gcanti.github.io/fp-ts/modules/Array.ts.html#unfold)
