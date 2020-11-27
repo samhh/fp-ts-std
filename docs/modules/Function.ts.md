@@ -20,6 +20,10 @@ Added in v0.1.0
   - [ifElse](#ifelse)
   - [memoize](#memoize)
   - [unary](#unary)
+  - [uncurry2](#uncurry2)
+  - [uncurry3](#uncurry3)
+  - [uncurry4](#uncurry4)
+  - [uncurry5](#uncurry5)
   - [unless](#unless)
   - [until](#until)
   - [when](#when)
@@ -240,6 +244,99 @@ assert.strictEqual(max([1, 3, 2]), 3)
 ```
 
 Added in v0.6.0
+
+## uncurry2
+
+Uncurry a binary function.
+
+**Signature**
+
+```ts
+export declare const uncurry2: <A, B, C>(f: (a: A) => (b: B) => C) => ([a, b]: [A, B]) => C
+```
+
+**Example**
+
+```ts
+import { uncurry2 } from 'fp-ts-std/Function'
+import { Endomorphism } from 'fp-ts/function'
+
+const concat2 = (a: string): Endomorphism<string> => (b) => a + b
+assert.strictEqual(uncurry2(concat2)(['a', 'b']), concat2('a')('b'))
+```
+
+Added in v0.7.0
+
+## uncurry3
+
+Uncurry a ternary function.
+
+**Signature**
+
+```ts
+export declare const uncurry3: <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) => ([a, b, c]: [A, B, C]) => D
+```
+
+**Example**
+
+```ts
+import { uncurry3 } from 'fp-ts-std/Function'
+import { Endomorphism } from 'fp-ts/function'
+
+const concat3 = (a: string) => (b: string): Endomorphism<string> => (c) => a + b + c
+assert.strictEqual(uncurry3(concat3)(['a', 'b', 'c']), concat3('a')('b')('c'))
+```
+
+Added in v0.7.0
+
+## uncurry4
+
+Uncurry a quaternary function.
+
+**Signature**
+
+```ts
+export declare const uncurry4: <A, B, C, D, E>(
+  f: (a: A) => (b: B) => (c: C) => (d: D) => E
+) => ([a, b, c, d]: [A, B, C, D]) => E
+```
+
+**Example**
+
+```ts
+import { uncurry4 } from 'fp-ts-std/Function'
+import { Endomorphism } from 'fp-ts/function'
+
+const concat4 = (a: string) => (b: string) => (c: string): Endomorphism<string> => (d) => a + b + c + d
+assert.strictEqual(uncurry4(concat4)(['a', 'b', 'c', 'd']), concat4('a')('b')('c')('d'))
+```
+
+Added in v0.7.0
+
+## uncurry5
+
+Uncurry a quinary function.
+
+**Signature**
+
+```ts
+export declare const uncurry5: <A, B, C, D, E, F>(
+  f: (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
+) => ([a, b, c, d, e]: [A, B, C, D, E]) => F
+```
+
+**Example**
+
+```ts
+import { uncurry5 } from 'fp-ts-std/Function'
+import { Endomorphism } from 'fp-ts/function'
+
+const concat5 = (a: string) => (b: string) => (c: string) => (d: string): Endomorphism<string> => (e) =>
+  a + b + c + d + e
+assert.strictEqual(uncurry5(concat5)(['a', 'b', 'c', 'd', 'e']), concat5('a')('b')('c')('d')('e'))
+```
+
+Added in v0.7.0
 
 ## unless
 

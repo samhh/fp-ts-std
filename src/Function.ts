@@ -279,3 +279,74 @@ export const memoize = <A>(eq: Eq<A>) => <B>(f: (x: A) => B): ((x: A) => B) => {
     return val
   }
 }
+
+/**
+ * Uncurry a binary function.
+ *
+ * @example
+ * import { uncurry2 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat2 = (a: string): Endomorphism<string> => b =>
+ *      a + b;
+ * assert.strictEqual(uncurry2(concat2)(['a', 'b']), concat2('a')('b'));
+ *
+ * @since 0.7.0
+ */
+export const uncurry2 = <A, B, C>(f: (a: A) => (b: B) => C) => ([a, b]: [
+  A,
+  B,
+]): C => f(a)(b)
+
+/**
+ * Uncurry a ternary function.
+ *
+ * @example
+ * import { uncurry3 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat3 = (a: string) => (b: string): Endomorphism<string> => c =>
+ *      a + b + c;
+ * assert.strictEqual(uncurry3(concat3)(['a', 'b', 'c']), concat3('a')('b')('c'));
+ *
+ * @since 0.7.0
+ */
+export const uncurry3 = <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) => ([
+  a,
+  b,
+  c,
+]: [A, B, C]): D => f(a)(b)(c)
+
+/**
+ * Uncurry a quaternary function.
+ *
+ * @example
+ * import { uncurry4 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat4 = (a: string) => (b: string) => (c: string): Endomorphism<string> => d =>
+ *      a + b + c + d;
+ * assert.strictEqual(uncurry4(concat4)(['a', 'b', 'c', 'd']), concat4('a')('b')('c')('d'));
+ *
+ * @since 0.7.0
+ */
+export const uncurry4 = <A, B, C, D, E>(
+  f: (a: A) => (b: B) => (c: C) => (d: D) => E,
+) => ([a, b, c, d]: [A, B, C, D]): E => f(a)(b)(c)(d)
+
+/**
+ * Uncurry a quinary function.
+ *
+ * @example
+ * import { uncurry5 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat5 = (a: string) => (b: string) => (c: string) => (d: string): Endomorphism<string> => e =>
+ *      a + b + c + d + e;
+ * assert.strictEqual(uncurry5(concat5)(['a', 'b', 'c', 'd', 'e']), concat5('a')('b')('c')('d')('e'));
+ *
+ * @since 0.7.0
+ */
+export const uncurry5 = <A, B, C, D, E, F>(
+  f: (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F,
+) => ([a, b, c, d, e]: [A, B, C, D, E]): F => f(a)(b)(c)(d)(e)

@@ -10,6 +10,10 @@ import {
   until,
   construct,
   memoize,
+  uncurry2,
+  uncurry3,
+  uncurry4,
+  uncurry5,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -197,6 +201,46 @@ describe("Function", () => {
       expect(h(3)).toBe(18)
       expect(g(2)).toBe(7)
       expect(h(2)).toBe(17)
+    })
+  })
+
+  describe("uncurry2", () => {
+    const f = uncurry2
+    const g = (a: string): Endomorphism<string> => b => a + b
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)(["a", "b"])).toBe(g("a")("b"))
+    })
+  })
+
+  describe("uncurry3", () => {
+    const f = uncurry3
+    const g = (a: string) => (b: string): Endomorphism<string> => c => a + b + c
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)(["a", "b", "c"])).toBe(g("a")("b")("c"))
+    })
+  })
+
+  describe("uncurry4", () => {
+    const f = uncurry4
+    const g = (a: string) => (b: string) => (
+      c: string,
+    ): Endomorphism<string> => d => a + b + c + d
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)(["a", "b", "c", "d"])).toBe(g("a")("b")("c")("d"))
+    })
+  })
+
+  describe("uncurry5", () => {
+    const f = uncurry5
+    const g = (a: string) => (b: string) => (c: string) => (
+      d: string,
+    ): Endomorphism<string> => e => a + b + c + d + e
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)(["a", "b", "c", "d", "e"])).toBe(g("a")("b")("c")("d")("e"))
     })
   })
 })

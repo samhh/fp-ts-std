@@ -245,7 +245,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] type
 - [ ] unapply
 - ~~[ ] unary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
-- [ ] uncurryN
+- [x] uncurryN - [fp-ts-std/Function::uncurry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry2)/[fp-ts-std/Function::uncurry3](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry3)/[fp-ts-std/Function::uncurry4](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry4)/[fp-ts-std/Function::uncurry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry5)
 - [x] unfold - [fp-ts/Array::unfold](https://gcanti.github.io/fp-ts/modules/Array.ts.html#unfold)
 - [x] union - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
 - [x] unionWith - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
