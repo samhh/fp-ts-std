@@ -11,7 +11,7 @@ import {
   not,
 } from "fp-ts/function"
 import { Eq } from "fp-ts/Eq"
-import { Ord } from "fp-ts/Ord"
+import { Ord, ordNumber } from "fp-ts/Ord"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
@@ -409,6 +409,25 @@ export const product: (xs: Array<number>) => number = fold(monoidProduct)
  * @since 0.7.0
  */
 export const mean = (xs: NonEmptyArray<number>): number => sum(xs) / xs.length
+
+/**
+ * Calculate the median of an array of numbers.
+ *
+ * @example
+ * import { median } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual(median([2, 9, 7]), 7);
+ * assert.deepStrictEqual(median([7, 2, 10, 9]), 8);
+ *
+ * @since 0.7.0
+ */
+export const median: (xs: NonEmptyArray<number>) => number = flow(
+  NEA.sort(ordNumber),
+  xs => {
+    const i = xs.length / 2
+    return i % 1 === 0 ? (xs[i - 1] + xs[i]) / 2 : xs[Math.floor(i)]
+  },
+)
 
 /**
  * Returns an array of tuples of the specified length occupied by consecutive

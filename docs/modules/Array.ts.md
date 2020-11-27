@@ -27,6 +27,7 @@ Added in v0.1.0
   - [join](#join)
   - [length](#length)
   - [mean](#mean)
+  - [median](#median)
   - [moveFrom](#movefrom)
   - [moveTo](#moveto)
   - [none](#none)
@@ -392,6 +393,27 @@ export declare const mean: (xs: NonEmptyArray<number>) => number
 import { mean } from 'fp-ts-std/Array'
 
 assert.deepStrictEqual(mean([2, 7, 9]), 6)
+```
+
+Added in v0.7.0
+
+## median
+
+Calculate the median of an array of numbers.
+
+**Signature**
+
+```ts
+export declare const median: (xs: NonEmptyArray<number>) => number
+```
+
+**Example**
+
+```ts
+import { median } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual(median([2, 9, 7]), 7)
+assert.deepStrictEqual(median([7, 2, 10, 9]), 8)
 ```
 
 Added in v0.7.0

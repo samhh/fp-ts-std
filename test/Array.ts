@@ -24,6 +24,7 @@ import {
   countBy,
   dropRightWhile,
   mean,
+  median,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -737,6 +738,23 @@ describe("Array", () => {
 
     it("calculates the mean", () => {
       expect(f([2, 7, 9])).toBe(6)
+
+      fc.assert(
+        fc.property(
+          fc.integer(1, 50),
+          fc.integer(),
+          (x, y) => f(A.replicate(x, y) as NonEmptyArray<number>) === y,
+        ),
+      )
+    })
+  })
+
+  describe("median", () => {
+    const f = median
+
+    it("calculates the median", () => {
+      expect(f([2, 9, 7])).toBe(7)
+      expect(f([7, 2, 10, 9])).toBe(8)
 
       fc.assert(
         fc.property(
