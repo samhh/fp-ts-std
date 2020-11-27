@@ -123,7 +123,12 @@ describe("Date", () => {
     const f = now
 
     it("wraps prototype method", () => {
-      expect(unMilliseconds(f())).toBe(Date.now())
+      const a = Date.now()
+      const b = unMilliseconds(f())
+      const c = Date.now()
+
+      expect(b).toBeGreaterThanOrEqual(a)
+      expect(b).toBeLessThanOrEqual(c)
     })
   })
 })
