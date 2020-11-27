@@ -19,6 +19,7 @@ Added in v0.1.0
   - [cartesian](#cartesian)
   - [countBy](#countby)
   - [dropRepeats](#droprepeats)
+  - [dropRightWhile](#droprightwhile)
   - [elemFlipped](#elemflipped)
   - [endsWith](#endswith)
   - [getDisorderedEq](#getdisorderedeq)
@@ -200,6 +201,31 @@ assert.deepStrictEqual(dropRepeats(eqNumber)([1, 2, 2, 3, 2, 4, 4]), [1, 2, 3, 2
 ```
 
 Added in v0.6.0
+
+## dropRightWhile
+
+Remove the longest initial subarray from the end of the input array for
+which all elements satisfy the specified predicate, creating a new array.
+
+**Signature**
+
+```ts
+export declare const dropRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
+```
+
+**Example**
+
+```ts
+import { dropRightWhile } from 'fp-ts-std/Array'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+const dropRightEvens = dropRightWhile(isEven)
+
+assert.deepStrictEqual(dropRightEvens([6, 7, 3, 4, 2]), [6, 7, 3])
+```
+
+Added in v0.7.0
 
 ## elemFlipped
 

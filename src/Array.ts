@@ -533,3 +533,21 @@ export const countBy = <A>(f: (x: A) => string) => (
   xs: Array<A>,
 ): Record<string, number> =>
   R.fromFoldableMap(monoidSum, A.array)(xs, x => [f(x), 1])
+
+/**
+ * Remove the longest initial subarray from the end of the input array for
+ * which all elements satisfy the specified predicate, creating a new array.
+ *
+ * @example
+ * import { dropRightWhile } from 'fp-ts-std/Array';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isEven: Predicate<number> = n => n % 2 === 0;
+ * const dropRightEvens = dropRightWhile(isEven);
+ *
+ * assert.deepStrictEqual(dropRightEvens([6, 7, 3, 4, 2]), [6, 7, 3]);
+ *
+ * @since 0.7.0
+ */
+export const dropRightWhile = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
+  flow(A.reverse, A.dropLeftWhile(f), A.reverse)

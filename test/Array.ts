@@ -22,12 +22,21 @@ import {
   moveFrom,
   moveTo,
   countBy,
+  dropRightWhile,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { contramap as eqContramap, eqNumber } from "fp-ts/Eq"
 import { contramap as ordContramap, max, ordNumber } from "fp-ts/Ord"
-import { constant, flow, identity, pipe, Predicate } from "fp-ts/function"
+import {
+  constant,
+  constFalse,
+  constTrue,
+  flow,
+  identity,
+  pipe,
+  Predicate,
+} from "fp-ts/function"
 import fc from "fast-check"
 import { fold, monoidSum } from "fp-ts/Monoid"
 import { split } from "../src/String"
@@ -689,6 +698,34 @@ describe("Array", () => {
             values,
             all(n => n > 0),
           ),
+        ),
+      )
+    })
+  })
+
+  describe("dropRightWhile", () => {
+    const f = dropRightWhile
+
+    it("removes elements from the right until predicate fails", () => {
+      expect(f<string>(x => x === "a")(["a", "a", "b", "a", "a"])).toEqual([
+        "a",
+        "a",
+        "b",
+      ])
+    })
+
+    it("constTrue returns empty array", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(constTrue)(xs)).toEqual([]),
+        ),
+      )
+    })
+
+    it("constFalse returns original array", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(constFalse)(xs)).toEqual(xs),
         ),
       )
     })
