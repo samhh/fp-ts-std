@@ -12,6 +12,7 @@ This project adheres to semantic versioning.
 - Add `construct`, `memoize`, `curry2` through `curry5`, `curry2T` through `curry5T`, and `uncurry2` through `uncurry5` functions to the `Function` module.
 - Add `Milliseconds` newtype to the `Date` module, and update the `Date` and `Task` modules to universally utilise it.
 - Provide the input value to the fallback function of `guard`.
+- Loosen the input type of `sum` and `product` such that it needn't be readonly.
 
 ## 0.6.0 (2020-11-20)
 

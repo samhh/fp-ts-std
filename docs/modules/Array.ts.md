@@ -440,7 +440,7 @@ Multiplies together all the numbers in the input array.
 **Signature**
 
 ```ts
-export declare const product: (as: readonly number[]) => number
+export declare const product: (xs: number[]) => number
 ```
 
 **Example**
@@ -538,7 +538,7 @@ Adds together all the numbers in the input array.
 **Signature**
 
 ```ts
-export declare const sum: (as: readonly number[]) => number
+export declare const sum: (xs: number[]) => number
 ```
 
 **Example**

@@ -381,7 +381,7 @@ export const cartesian = <A>(xs: Array<A>) => <B>(
  *
  * @since 0.6.0
  */
-export const sum = fold(monoidSum)
+export const sum: (xs: Array<number>) => number = fold(monoidSum)
 
 /**
  * Multiplies together all the numbers in the input array.
@@ -395,7 +395,7 @@ export const sum = fold(monoidSum)
  *
  * @since 0.6.0
  */
-export const product = fold(monoidProduct)
+export const product: (xs: Array<number>) => number = fold(monoidProduct)
 
 /**
  * Returns an array of tuples of the specified length occupied by consecutive
