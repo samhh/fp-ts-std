@@ -10,6 +10,14 @@ import {
   until,
   construct,
   memoize,
+  curry2,
+  curry2T,
+  curry3,
+  curry3T,
+  curry4,
+  curry4T,
+  curry5,
+  curry5T,
   uncurry2,
   uncurry3,
   uncurry4,
@@ -201,6 +209,87 @@ describe("Function", () => {
       expect(h(3)).toBe(18)
       expect(g(2)).toBe(7)
       expect(h(2)).toBe(17)
+    })
+  })
+
+  describe("curry2", () => {
+    const f = curry2
+    const g = (a: string, b: string): string => a + b
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")).toBe(g("a", "b"))
+    })
+  })
+
+  describe("curry2T", () => {
+    const f = curry2T
+    const g = ([a, b]: [string, string]): string => a + b
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")).toBe(g(["a", "b"]))
+    })
+  })
+
+  describe("curry3", () => {
+    const f = curry3
+    const g = (a: string, b: string, c: string): string => a + b + c
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")("c")).toBe(g("a", "b", "c"))
+    })
+  })
+
+  describe("curry3T", () => {
+    const f = curry3T
+    const g = ([a, b, c]: [string, string, string]): string => a + b + c
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")("c")).toBe(g(["a", "b", "c"]))
+    })
+  })
+
+  describe("curry4", () => {
+    const f = curry4
+    const g = (a: string, b: string, c: string, d: string): string =>
+      a + b + c + d
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")("c")("d")).toBe(g("a", "b", "c", "d"))
+    })
+  })
+
+  describe("curry4T", () => {
+    const f = curry4T
+    const g = ([a, b, c, d]: [string, string, string, string]): string =>
+      a + b + c + d
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")("c")("d")).toBe(g(["a", "b", "c", "d"]))
+    })
+  })
+
+  describe("curry5", () => {
+    const f = curry5
+    const g = (a: string, b: string, c: string, d: string, e: string): string =>
+      a + b + c + d + e
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")("c")("d")("e")).toBe(g("a", "b", "c", "d", "e"))
+    })
+  })
+
+  describe("curry5T", () => {
+    const f = curry5T
+    const g = ([a, b, c, d, e]: [
+      string,
+      string,
+      string,
+      string,
+      string,
+    ]): string => a + b + c + d + e
+
+    it("applies the function with the arguments in the same order", () => {
+      expect(f(g)("a")("b")("c")("d")("e")).toBe(g(["a", "b", "c", "d", "e"]))
     })
   })
 

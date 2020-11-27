@@ -52,8 +52,8 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)/[fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)
 - [ ] converge
 - [ ] countBy
-- [ ] curry
-- [ ] curryN
+- [x] curry - [fp-ts-std/Function::curry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2) through [fp-ts-std/Function::curry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5)
+- [x] curryN - [fp-ts-std/Function::curry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2) through [fp-ts-std/Function::curry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5)
 - [x] dec - [fp-ts-std/Number::decrement](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#decrement)/[fp-ts/function::decrement](https://gcanti.github.io/fp-ts/modules/function.ts.html#decrement]
 - [x] defaultTo - [fp-ts/Option::getOrElse](https://gcanti.github.io/fp-ts/modules/Option.ts.html#getorelse)
 - [x] descend - [fp-ts/Ord::ordNumber](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#ordnumber)/[fp-ts/Ord::getDualOrd](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#getdualord)
@@ -245,7 +245,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] type
 - [ ] unapply
 - ~~[ ] unary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
-- [x] uncurryN - [fp-ts-std/Function::uncurry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry2)/[fp-ts-std/Function::uncurry3](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry3)/[fp-ts-std/Function::uncurry4](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry4)/[fp-ts-std/Function::uncurry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry5)
+- [x] uncurryN - [fp-ts-std/Function::uncurry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry2) through [fp-ts-std/Function::uncurry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#uncurry5)
 - [x] unfold - [fp-ts/Array::unfold](https://gcanti.github.io/fp-ts/modules/Array.ts.html#unfold)
 - [x] union - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)
 - [x] unionWith - [fp-ts/Array::union](https://gcanti.github.io/fp-ts/modules/Array.ts.html#union)

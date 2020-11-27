@@ -283,6 +283,141 @@ export const memoize = <A>(eq: Eq<A>) => <B>(f: (x: A) => B): ((x: A) => B) => {
 }
 
 /**
+ * Curry a function with binary tuple input.
+ *
+ * @example
+ * import { curry2T } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat2 = ([a, b]: [string, string]): string =>
+ *      a + b;
+ * assert.strictEqual(curry2T(concat2)('a')('b'), concat2(['a', 'b']));
+ *
+ * @since 0.7.0
+ */
+export const curry2T = <A, B, C>(f: (xs: [A, B]) => C) => (a: A) => (b: B): C =>
+  f([a, b])
+
+/**
+ * Curry a function with binary input.
+ *
+ * @example
+ * import { curry2 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat2 = (a: string, b: string): string =>
+ *      a + b;
+ * assert.strictEqual(curry2(concat2)('a')('b'), concat2('a', 'b'));
+ *
+ * @since 0.7.0
+ */
+export const curry2: <A, B, C>(
+  f: (a: A, b: B) => C,
+) => (a: A) => (b: B) => C = flow(unary, curry2T)
+
+/**
+ * Curry a function with ternary tuple input.
+ *
+ * @example
+ * import { curry3T } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat3 = ([a, b, c]: [string, string, string]): string =>
+ *      a + b + c;
+ * assert.strictEqual(curry3T(concat3)('a')('b')('c'), concat3(['a', 'b', 'c']));
+ *
+ * @since 0.7.0
+ */
+export const curry3T = <A, B, C, D>(f: (xs: [A, B, C]) => D) => (a: A) => (
+  b: B,
+) => (c: C): D => f([a, b, c])
+
+/**
+ * Curry a function with ternary input.
+ *
+ * @example
+ * import { curry3 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat3 = (a: string, b: string, c: string): string =>
+ *      a + b + c;
+ * assert.strictEqual(curry3(concat3)('a')('b')('c'), concat3('a', 'b', 'c'));
+ *
+ * @since 0.7.0
+ */
+export const curry3: <A, B, C, D>(
+  f: (a: A, b: B, c: C) => D,
+) => (a: A) => (b: B) => (c: C) => D = flow(unary, curry3T)
+
+/**
+ * Curry a function with quaternary tuple input.
+ *
+ * @example
+ * import { curry4T } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat4 = ([a, b, c, d]: [string, string, string, string]): string =>
+ *      a + b + c + d;
+ * assert.strictEqual(curry4T(concat4)('a')('b')('c')('d'), concat4(['a', 'b', 'c', 'd']));
+ *
+ * @since 0.7.0
+ */
+export const curry4T = <A, B, C, D, E>(f: (xs: [A, B, C, D]) => E) => (
+  a: A,
+) => (b: B) => (c: C) => (d: D): E => f([a, b, c, d])
+
+/**
+ * Curry a function with quaternary input.
+ *
+ * @example
+ * import { curry4 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat4 = (a: string, b: string, c: string, d: string): string =>
+ *      a + b + c + d;
+ * assert.strictEqual(curry4(concat4)('a')('b')('c')('d'), concat4('a', 'b', 'c', 'd'));
+ *
+ * @since 0.7.0
+ */
+export const curry4: <A, B, C, D, E>(
+  f: (a: A, b: B, c: C, d: D) => E,
+) => (a: A) => (b: B) => (c: C) => (d: D) => E = flow(unary, curry4T)
+
+/**
+ * Curry a function with quinary tuple input.
+ *
+ * @example
+ * import { curry5T } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat5 = ([a, b, c, d, e]: [string, string, string, string, string]): string =>
+ *      a + b + c + d + e;
+ * assert.strictEqual(curry5T(concat5)('a')('b')('c')('d')('e'), concat5(['a', 'b', 'c', 'd', 'e']));
+ *
+ * @since 0.7.0
+ */
+export const curry5T = <A, B, C, D, E, F>(f: (xs: [A, B, C, D, E]) => F) => (
+  a: A,
+) => (b: B) => (c: C) => (d: D) => (e: E): F => f([a, b, c, d, e])
+
+/**
+ * Curry a function with quinary input.
+ *
+ * @example
+ * import { curry5 } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/function';
+ *
+ * const concat5 = (a: string, b: string, c: string, d: string, e: string): string =>
+ *      a + b + c + d + e;
+ * assert.strictEqual(curry5(concat5)('a')('b')('c')('d')('e'), concat5('a', 'b', 'c', 'd', 'e'));
+ *
+ * @since 0.7.0
+ */
+export const curry5: <A, B, C, D, E, F>(
+  f: (a: A, b: B, c: C, d: D, e: E) => F,
+) => (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F = flow(unary, curry5T)
+
+/**
  * Uncurry a binary function.
  *
  * @example
