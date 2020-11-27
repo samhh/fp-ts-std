@@ -23,6 +23,7 @@ import {
   moveTo,
   countBy,
   dropRightWhile,
+  mean,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -726,6 +727,22 @@ describe("Array", () => {
       fc.assert(
         fc.property(fc.array(fc.anything()), xs =>
           expect(f(constFalse)(xs)).toEqual(xs),
+        ),
+      )
+    })
+  })
+
+  describe("mean", () => {
+    const f = mean
+
+    it("calculates the mean", () => {
+      expect(f([2, 7, 9])).toBe(6)
+
+      fc.assert(
+        fc.property(
+          fc.integer(1, 50),
+          fc.integer(),
+          (x, y) => f(A.replicate(x, y) as NonEmptyArray<number>) === y,
         ),
       )
     })

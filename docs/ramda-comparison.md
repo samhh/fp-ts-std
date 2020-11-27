@@ -137,7 +137,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] mathMod - [fp-ts-std/Number::mod](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#mod)
 - [x] max - [fp-ts/Ord::max](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#max)
 - [x] maxBy - [fp-ts/Ord::max](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#max) w/ [fp-ts/Ord::contramap](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap)
-- [ ] mean
+- [x] mean - [fp-ts-std/Array::mean](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#mean)
 - [ ] median
 - [x] memoizeWith - [fp-ts-std/Function::memoize](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#memoize)
 - [x] merge - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)

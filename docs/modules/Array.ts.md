@@ -26,6 +26,7 @@ Added in v0.1.0
   - [insertMany](#insertmany)
   - [join](#join)
   - [length](#length)
+  - [mean](#mean)
   - [moveFrom](#movefrom)
   - [moveTo](#moveto)
   - [none](#none)
@@ -374,6 +375,26 @@ assert.strictEqual(length(['a', 'b', 'c']), 3)
 ```
 
 Added in v0.1.0
+
+## mean
+
+Calculate the mean of an array of numbers.
+
+**Signature**
+
+```ts
+export declare const mean: (xs: NonEmptyArray<number>) => number
+```
+
+**Example**
+
+```ts
+import { mean } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual(mean([2, 7, 9]), 6)
+```
+
+Added in v0.7.0
 
 ## moveFrom
 

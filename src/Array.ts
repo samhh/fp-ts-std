@@ -399,6 +399,18 @@ export const sum: (xs: Array<number>) => number = fold(monoidSum)
 export const product: (xs: Array<number>) => number = fold(monoidProduct)
 
 /**
+ * Calculate the mean of an array of numbers.
+ *
+ * @example
+ * import { mean } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual(mean([2, 7, 9]), 6);
+ *
+ * @since 0.7.0
+ */
+export const mean = (xs: NonEmptyArray<number>): number => sum(xs) / xs.length
+
+/**
  * Returns an array of tuples of the specified length occupied by consecutive
  * elements.
  *
