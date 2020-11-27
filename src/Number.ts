@@ -128,3 +128,16 @@ export const rem = (divisor: number): Endomorphism<number> => dividend =>
  */
 export const mod = (divisor: number): Endomorphism<number> => dividend =>
   ((dividend % divisor) + divisor) % divisor
+
+/**
+ * Unary negation.
+ *
+ * @example
+ * import { negate } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(negate(42), -42);
+ * assert.strictEqual(negate(-42), 42);
+ *
+ * @since 0.7.0
+ */
+export const negate: Endomorphism<number> = n => -n

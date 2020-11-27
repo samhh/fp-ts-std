@@ -8,6 +8,7 @@ import {
   isValid,
   rem,
   mod,
+  negate,
 } from "../src/Number"
 import fc from "fast-check"
 
@@ -85,6 +86,19 @@ describe("Number", () => {
       expect(f(2)(5.5)).toBe(1.5)
       expect(f(-4)(2)).toBe(-2)
       expect(f(5)(-12)).toBe(3)
+    })
+  })
+
+  describe("negate", () => {
+    const f = negate
+
+    it("negates", () => {
+      expect(f(42)).toBe(-42)
+      expect(f(-42)).toBe(42)
+    })
+
+    it("is reversible", () => {
+      fc.assert(fc.property(fc.integer(), n => f(f(n)) === n))
     })
   })
 })

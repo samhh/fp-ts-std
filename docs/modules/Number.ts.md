@@ -20,6 +20,7 @@ Added in v0.1.0
   - [isValid](#isvalid)
   - [mod](#mod)
   - [multiply](#multiply)
+  - [negate](#negate)
   - [rem](#rem)
   - [subtract](#subtract)
 
@@ -175,6 +176,27 @@ assert.strictEqual(multiply(2)(3), 6)
 ```
 
 Added in v0.2.0
+
+## negate
+
+Unary negation.
+
+**Signature**
+
+```ts
+export declare const negate: Endomorphism<number>
+```
+
+**Example**
+
+```ts
+import { negate } from 'fp-ts-std/Number'
+
+assert.strictEqual(negate(42), -42)
+assert.strictEqual(negate(-42), 42)
+```
+
+Added in v0.7.0
 
 ## rem
 
