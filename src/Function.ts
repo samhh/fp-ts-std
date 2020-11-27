@@ -1,4 +1,9 @@
 /**
+ * Note that some limitations exist in the type system pertaining to
+ * polymorphic (generic) functions which could impact the usage of any of the
+ * functions here. All of these functions will work provided monomorphic
+ * (non-generic) input functions.
+ *
  * @since 0.1.0
  */
 
@@ -11,9 +16,6 @@ import { Eq } from "fp-ts/Eq"
 
 /**
  * Flip the function/argument order of a curried function.
- *
- * Note that due to limitations to the type system, this function won't work
- * correctly for generic functions.
  *
  * @example
  * import { flip } from 'fp-ts-std/Function';
