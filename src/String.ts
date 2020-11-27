@@ -15,7 +15,7 @@ import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
-import { join } from "./Array"
+import { join, dropRightWhile as dropRightWhileArr } from "./Array"
 import { max, ordNumber } from "fp-ts/Ord"
 
 /**
@@ -495,6 +495,24 @@ export const dropRight = (n: number): Endomorphism<string> => x =>
 export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
   flow(split(""), A.dropLeftWhile(f), join(""))
 
+/**
+ * Remove the longest initial substring from the end of the input string for
+ * which all characters satisfy the specified predicate, creating a new string.
+ *
+ * @example
+ * import { dropRightWhile } from 'fp-ts-std/String';
+ * import { elemFlipped } from 'fp-ts-std/Array';
+ * import { eqString } from 'fp-ts/Eq';
+ *
+ * const isVowel = elemFlipped(eqString)(['a', 'e', 'i', 'o', 'u']);
+ * const dropRightVowels = dropRightWhile(isVowel);
+ *
+ * assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell');
+ *
+ * @since 0.7.0
+ */
+export const dropRightWhile = (f: Predicate<string>): Endomorphism<string> =>
+  flow(split(""), dropRightWhileArr(f), join(""))
 /**
  * Get the first character in a string, or `None` if the string is empty.
  *

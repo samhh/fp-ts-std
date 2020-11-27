@@ -35,6 +35,7 @@ import {
   lookup,
   toUpper,
   toLower,
+  dropRightWhile,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -814,6 +815,26 @@ describe("String", () => {
 
     it("converts alphabetic characters to lowercase", () => {
       expect(f("Hello!")).toBe("hello!")
+    })
+  })
+
+  describe("dropRightWhile", () => {
+    const f = dropRightWhile
+
+    it("removes chars from the right until predicate fails", () => {
+      expect(f(x => x === "a")("aabaa")).toEqual("aab")
+    })
+
+    it("constTrue returns empty string", () => {
+      fc.assert(
+        fc.property(fc.string(), x => expect(f(constTrue)(x)).toEqual("")),
+      )
+    })
+
+    it("constFalse returns original string", () => {
+      fc.assert(
+        fc.property(fc.string(), x => expect(f(constFalse)(x)).toEqual(x)),
+      )
     })
   })
 })

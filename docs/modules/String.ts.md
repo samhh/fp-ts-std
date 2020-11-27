@@ -18,6 +18,7 @@ Added in v0.1.0
   - [dropLeft](#dropleft)
   - [dropLeftWhile](#dropleftwhile)
   - [dropRight](#dropright)
+  - [dropRightWhile](#droprightwhile)
   - [empty](#empty)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
@@ -180,6 +181,32 @@ assert.strictEqual(dropRight(2)('abc'), 'a')
 ```
 
 Added in v0.3.0
+
+## dropRightWhile
+
+Remove the longest initial substring from the end of the input string for
+which all characters satisfy the specified predicate, creating a new string.
+
+**Signature**
+
+```ts
+export declare const dropRightWhile: (f: Predicate<string>) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { dropRightWhile } from 'fp-ts-std/String'
+import { elemFlipped } from 'fp-ts-std/Array'
+import { eqString } from 'fp-ts/Eq'
+
+const isVowel = elemFlipped(eqString)(['a', 'e', 'i', 'o', 'u'])
+const dropRightVowels = dropRightWhile(isVowel)
+
+assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
+```
+
+Added in v0.7.0
 
 ## empty
 
