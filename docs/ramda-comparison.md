@@ -51,7 +51,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] constructN
 - [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)/[fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)
 - [ ] converge
-- [ ] countBy
+- [x] countBy - [fp-ts-std/Array::countBy](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#countby)
 - [x] curry - [fp-ts-std/Function::curry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2) through [fp-ts-std/Function::curry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5)
 - [x] curryN - [fp-ts-std/Function::curry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2) through [fp-ts-std/Function::curry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5)
 - [x] dec - [fp-ts-std/Number::decrement](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#decrement)/[fp-ts/function::decrement](https://gcanti.github.io/fp-ts/modules/function.ts.html#decrement]

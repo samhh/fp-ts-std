@@ -15,6 +15,7 @@ import { Ord } from "fp-ts/Ord"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
+import * as R from "fp-ts/Record"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { reduceM } from "fp-ts/Foldable"
@@ -513,3 +514,22 @@ export const moveFrom = (from: number) => (to: number) => <A>(
  * @since 0.7.0
  */
 export const moveTo = flip(moveFrom)
+
+/**
+ * Map each item of an array to a key, and count how many map to each key.
+ *
+ * @example
+ * import { countBy } from 'fp-ts-std/Array';
+ * import { toLower } from 'fp-ts-std/String';
+ *
+ * const f = countBy(toLower);
+ * const xs = ['A', 'b', 'C', 'a', 'e', 'A'];
+ *
+ * assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 });
+ *
+ * @since 0.7.0
+ */
+export const countBy = <A>(f: (x: A) => string) => (
+  xs: Array<A>,
+): Record<string, number> =>
+  R.fromFoldableMap(monoidSum, A.array)(xs, x => [f(x), 1])

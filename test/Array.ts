@@ -21,16 +21,18 @@ import {
   reject,
   moveFrom,
   moveTo,
+  countBy,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { contramap as eqContramap, eqNumber } from "fp-ts/Eq"
 import { contramap as ordContramap, max, ordNumber } from "fp-ts/Ord"
-import { flow, pipe, Predicate } from "fp-ts/function"
+import { constant, flow, identity, pipe, Predicate } from "fp-ts/function"
 import fc from "fast-check"
 import { fold, monoidSum } from "fp-ts/Monoid"
 import { split } from "../src/String"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import { values } from "../src/Record"
 
 describe("Array", () => {
   describe("length", () => {
@@ -656,6 +658,37 @@ describe("Array", () => {
           fc.array(fc.anything(), n, n),
           fc.integer(0, n - 2),
           (xs, i) => expect(f(i)(i + 1)(xs)).toEqual(f(i + 1)(i)(xs)),
+        ),
+      )
+    })
+  })
+
+  describe("countBy", () => {
+    const f = countBy
+
+    it("gets key from input function and counts", () => {
+      expect(f(constant("x"))(["a", "b", "c"])).toEqual({ x: 3 })
+      expect(f<string>(identity)(["a", "b", "c"])).toEqual({ a: 1, b: 1, c: 1 })
+    })
+
+    it("counts the same summed number as the length of the array", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.string()),
+          xs => pipe(xs, f(identity), values, sum) === xs.length,
+        ),
+      )
+    })
+
+    it("all numbers are above zero", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.string()),
+          flow(
+            f(identity),
+            values,
+            all(n => n > 0),
+          ),
         ),
       )
     })

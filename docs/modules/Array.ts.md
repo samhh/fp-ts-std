@@ -17,6 +17,7 @@ Added in v0.1.0
   - [any](#any)
   - [aperture](#aperture)
   - [cartesian](#cartesian)
+  - [countBy](#countby)
   - [dropRepeats](#droprepeats)
   - [elemFlipped](#elemflipped)
   - [endsWith](#endswith)
@@ -153,6 +154,30 @@ assert.deepStrictEqual(cartesian([1, 2])(['a', 'b', 'c']), [
 ```
 
 Added in v0.6.0
+
+## countBy
+
+Map each item of an array to a key, and count how many map to each key.
+
+**Signature**
+
+```ts
+export declare const countBy: <A>(f: (x: A) => string) => (xs: A[]) => Record<string, number>
+```
+
+**Example**
+
+```ts
+import { countBy } from 'fp-ts-std/Array'
+import { toLower } from 'fp-ts-std/String'
+
+const f = countBy(toLower)
+const xs = ['A', 'b', 'C', 'a', 'e', 'A']
+
+assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 })
+```
+
+Added in v0.7.0
 
 ## dropRepeats
 
