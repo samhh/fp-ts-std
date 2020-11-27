@@ -12,7 +12,7 @@ Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potent
 
 Note that some functions are not one-to-one replacements, but rather bequeath a better pattern in code. For example, the Ramda function [hasIn](https://ramdajs.com/docs/#hasIn) is distinct from [has](https://ramdajs.com/docs/#has) only insofar as it checks the input object's prototype for the specified key, too. Prototypal code isn't functional and not something this library intends to support; instead, look for functional alternatives.
 
-- [ ] \_\_
+- ~~[ ] \_\_~~ Use currying and potentially [fp-ts-std/Function::flip](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#flip) instead.
 - [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [x] addIndex - [fp-ts-std/Function::withIndex](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#addindex)
 - [x] adjust - [fp-ts/Array::modifyAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#modifyat)
