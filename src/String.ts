@@ -439,6 +439,27 @@ export const unlines = join("\n")
 export const test = (r: RegExp): Predicate<string> => x => r.test(x)
 
 /**
+ * Apply an endomorphism upon an array of strings (characters) against a string.
+ * This is useful as it allows you to run many polymorphic functions targeting
+ * arrays against strings without having to rewrite them.
+ *
+ * The name "under" is borrowed from newtypes, and expresses the notion that
+ * a string can be thought of merely as an array of characters.
+ *
+ * @example
+ * import { under } from 'fp-ts-std/String';
+ * import * as A from 'fp-ts/Array';
+ *
+ * const filterOutX = under(A.filter(x => x !== "x"));
+ *
+ * assert.strictEqual(filterOutX("axbxc"), "abc");
+ *
+ * @since 0.7.0
+ */
+export const under = (f: Endomorphism<Array<string>>): Endomorphism<string> =>
+  flow(split(""), f, join(""))
+
+/**
  * Drop a number of characters from the start of a string, returning a new
  * string.
  *

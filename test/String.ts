@@ -36,9 +36,11 @@ import {
   toUpper,
   toLower,
   dropRightWhile,
+  under,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
+import * as A from "fp-ts/Array"
 import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
 import { invert } from "../src/Boolean"
@@ -835,6 +837,15 @@ describe("String", () => {
       fc.assert(
         fc.property(fc.string(), x => expect(f(constFalse)(x)).toEqual(x)),
       )
+    })
+  })
+
+  describe("under", () => {
+    const f = under
+
+    it("applies function to string", () => {
+      expect(f(A.map(toUpper))("Hello!")).toBe("HELLO!")
+      expect(f(A.filter(x => x !== "x"))("axbxc")).toBe("abc")
     })
   })
 })

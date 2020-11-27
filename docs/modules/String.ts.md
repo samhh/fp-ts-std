@@ -48,6 +48,7 @@ Added in v0.1.0
   - [trimLeft](#trimleft)
   - [trimRight](#trimright)
   - [unappend](#unappend)
+  - [under](#under)
   - [unlines](#unlines)
   - [unprepend](#unprepend)
   - [unsurround](#unsurround)
@@ -863,6 +864,34 @@ assert.strictEqual(withoutExt('File.hs'), 'File')
 ```
 
 Added in v0.1.0
+
+## under
+
+Apply an endomorphism upon an array of strings (characters) against a string.
+This is useful as it allows you to run many polymorphic functions targeting
+arrays against strings without having to rewrite them.
+
+The name "under" is borrowed from newtypes, and expresses the notion that
+a string can be thought of merely as an array of characters.
+
+**Signature**
+
+```ts
+export declare const under: (f: Endomorphism<string[]>) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { under } from 'fp-ts-std/String'
+import * as A from 'fp-ts/Array'
+
+const filterOutX = under(A.filter((x) => x !== 'x'))
+
+assert.strictEqual(filterOutX('axbxc'), 'abc')
+```
+
+Added in v0.7.0
 
 ## unlines
 
