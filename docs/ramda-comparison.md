@@ -182,7 +182,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] pickAll
 - [x] pickBy - [fp-ts/Record::filterWithIndex](https://gcanti.github.io/fp-ts/modules/Record.ts.html#filterwithindex)
 - [x] pipe - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow)
-- [ ] pipeK
+- [x] pipeK - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) with "K"-appended fp-ts functions such as [fp-ts/TaskEither::chainEitherK](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html#chaineitherk)
 - [x] pipeP - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) with [fp-ts/Task](https://gcanti.github.io/fp-ts/modules/Task.ts.html)
 - [x] pipeWith - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow) w/ monads
 - [x] pluck - [monocle-ts](https://gcanti.github.io/monocle-ts/)
