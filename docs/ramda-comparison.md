@@ -44,7 +44,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] compose
 - [ ] composeK
 - [ ] composeP
-- [ ] composeWith
+- ~~[ ] composeWith~~ Utilise functors like [fp-ts/Option](https://gcanti.github.io/fp-ts/modules/Option.ts.html) instead.
 - [x] concat - [fp-ts/Array::getMonoid](https://gcanti.github.io/fp-ts/modules/Array.ts.html#getmonoid)/[fp-ts-std/String::concat](https://samhh.github.io/fp-ts-std/modules/String.ts.html#concat)
 - [x] cond - [fp-ts-std/Function::guard](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#guard)
 - [x] construct - [fp-ts-std/Function::construct](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#construct)
