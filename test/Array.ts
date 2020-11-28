@@ -25,6 +25,7 @@ import {
   dropRightWhile,
   mean,
   median,
+  dropAt,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -763,6 +764,40 @@ describe("Array", () => {
           (x, y) => f(A.replicate(x, y) as NonEmptyArray<number>) === y,
         ),
       )
+    })
+  })
+
+  describe("dropAt", () => {
+    const f = dropAt
+    const xs = ["a", "b", "c", "d", "e", "f", "g"]
+
+    it("removes elements from index", () => {
+      expect(f(2)(3)(xs)).toEqual(O.some(["a", "b", "f", "g"]))
+    })
+
+    it("removes everything from the index if count is too large", () => {
+      expect(f(2)(Infinity)(xs)).toEqual(O.some(["a", "b"]))
+    })
+
+    it("rounds down both input numbers", () => {
+      expect(f(1)(5)(xs)).toEqual(O.some(["a", "g"]))
+      expect(f(1.9)(5.9)(xs)).toEqual(O.some(["a", "g"]))
+    })
+
+    it("returns None if index out of bounds", () => {
+      expect(f(-1)(1)(xs)).toEqual(O.none)
+      expect(f(xs.length)(1)(xs)).toEqual(O.none)
+    })
+
+    it("returns input array if count is not positive", () => {
+      expect(f(2)(-1)(xs)).toEqual(O.some(xs))
+      expect(f(2)(0)(xs)).toEqual(O.some(xs))
+    })
+
+    it("does not mutate input", () => {
+      const ys = [1, 2, 3]
+      expect(f(1)(1)(ys)).toEqual(O.some([1, 3]))
+      expect(ys).toEqual([1, 2, 3])
     })
   })
 })

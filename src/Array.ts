@@ -18,6 +18,7 @@ import * as A from "fp-ts/Array"
 import * as R from "fp-ts/Record"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
+import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
 import {
   fold,
@@ -582,3 +583,49 @@ export const countBy = <A>(f: (x: A) => string) => (
  */
 export const dropRightWhile = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
   flow(A.reverse, A.dropLeftWhile(f), A.reverse)
+
+/**
+ * Drop a number of elements from the specified index an array, returning a
+ * new array.
+ *
+ * If `i` is out of bounds, `None` will be returned.
+ *
+ * If `i` is a float, it will be rounded down to the nearest integer.
+ *
+ * If `n` is larger than the available number of elements from the provided
+ * index, only the elements prior to said index will be returned.
+ *
+ * If `n` is not a positive number, the array will be returned whole.
+ *
+ * If `n` is a float, it will be rounded down to the nearest integer.
+ *
+ * @example
+ * import { dropAt } from 'fp-ts-std/Array';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(dropAt(2)(0)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'c', 'd', 'e', 'f', 'g']));
+ * assert.deepStrictEqual(dropAt(2)(3)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'f', 'g']));
+ * assert.deepStrictEqual(dropAt(2)(Infinity)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b']));
+ *
+ * @since 0.3.0
+ */
+
+export const dropAt = (i: number) => (n: number) => <A>(
+  xs: Array<A>,
+): Option<Array<A>> =>
+  pipe(
+    A.isOutOfBound(i, xs),
+    B.fold(
+      () =>
+        pipe(
+          A.copy(xs),
+          ys => {
+            // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
+            ys.splice(i, n)
+            return ys
+          },
+          O.some,
+        ),
+      constant(O.none),
+    ),
+  )

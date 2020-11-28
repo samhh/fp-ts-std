@@ -202,7 +202,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] reduceRight - [fp-ts/Array::reduceRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reduceright)
 - [ ] reduceWhile
 - [x] reject - [fp-ts-std/Array::reject](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#reject)/[fp-ts-std/Record::reject](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#reject)
-- [ ] remove
+- [x] remove - [fp-ts-std/Array::dropAt](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#dropat)
 - [x] repeat - [fp-ts/Array::replicate](https://gcanti.github.io/fp-ts/modules/Array.ts.html#replicate)
 - [x] replace - [fp-ts-std/String::replace](https://samhh.github.io/fp-ts-std/modules/String.ts.html#replace)
 - [x] reverse - [fp-ts/Array::reverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reverse)/[fp-ts-std/String::reverse](https://samhh.github.io/fp-ts-std/modules/String.ts.html#reverse)

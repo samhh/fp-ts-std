@@ -18,6 +18,7 @@ Added in v0.1.0
   - [aperture](#aperture)
   - [cartesian](#cartesian)
   - [countBy](#countby)
+  - [dropAt](#dropat)
   - [dropRepeats](#droprepeats)
   - [dropRightWhile](#droprightwhile)
   - [elemFlipped](#elemflipped)
@@ -181,6 +182,41 @@ assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 })
 ```
 
 Added in v0.7.0
+
+## dropAt
+
+Drop a number of elements from the specified index an array, returning a
+new array.
+
+If `i` is out of bounds, `None` will be returned.
+
+If `i` is a float, it will be rounded down to the nearest integer.
+
+If `n` is larger than the available number of elements from the provided
+index, only the elements prior to said index will be returned.
+
+If `n` is not a positive number, the array will be returned whole.
+
+If `n` is a float, it will be rounded down to the nearest integer.
+
+**Signature**
+
+```ts
+export declare const dropAt: (i: number) => (n: number) => <A>(xs: A[]) => Option<A[]>
+```
+
+**Example**
+
+```ts
+import { dropAt } from 'fp-ts-std/Array'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(dropAt(2)(0)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'c', 'd', 'e', 'f', 'g']))
+assert.deepStrictEqual(dropAt(2)(3)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'f', 'g']))
+assert.deepStrictEqual(dropAt(2)(Infinity)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b']))
+```
+
+Added in v0.3.0
 
 ## dropRepeats
 
