@@ -629,3 +629,28 @@ export const dropAt = (i: number) => (n: number) => <A>(
       constant(O.none),
     ),
   )
+
+/**
+ * Tranposes the rows and columns of a 2D list. If some of the rows are shorter
+ * than the following rows, their elements are skipped.
+ *
+ * @example
+ * import { transpose } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual(transpose([[1, 2, 3], [4, 5, 6]]), [[1, 4], [2, 5], [3, 6]]);
+ * assert.deepStrictEqual(transpose([[1, 4], [2, 5], [3, 6]]), [[1, 2, 3], [4, 5, 6]]);
+ * assert.deepStrictEqual(transpose([[10, 11], [20], [], [30, 31,32]]), [[10, 20, 30], [11, 31], [32]]);
+ *
+ * @since 0.7.0
+ */
+export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
+  /* eslint-disable functional/no-conditional-statement */
+  if (A.isEmpty(xs)) return []
+  if (A.isEmpty(xs[0])) return transpose(A.dropLeft(1)(xs))
+  /* eslint-enable functional/no-conditional-statement */
+
+  const [[y, ...ys], ...yss] = xs
+  const zs = [y, ...A.filterMap(A.head)(yss)]
+  const zss = [ys, ...A.map(A.dropLeft(1))(yss)]
+  return [zs, ...transpose(zss)]
+}

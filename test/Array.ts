@@ -26,6 +26,7 @@ import {
   mean,
   median,
   dropAt,
+  transpose,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -798,6 +799,51 @@ describe("Array", () => {
       const ys = [1, 2, 3]
       expect(f(1)(1)(ys)).toEqual(O.some([1, 3]))
       expect(ys).toEqual([1, 2, 3])
+    })
+  })
+
+  describe("transpose", () => {
+    const f = transpose
+
+    it("transposes equal length arrays", () => {
+      expect(
+        f([
+          [1, 2, 3],
+          [4, 5, 6],
+        ]),
+      ).toEqual([
+        [1, 4],
+        [2, 5],
+        [3, 6],
+      ])
+
+      expect(
+        f([
+          [1, 4],
+          [2, 5],
+          [3, 6],
+        ]),
+      ).toEqual([
+        [1, 2, 3],
+        [4, 5, 6],
+      ])
+    })
+
+    it("transposes unequal length arrays", () => {
+      expect(f([[10, 11], [20], [], [30, 31, 32]])).toEqual([
+        [10, 20, 30],
+        [11, 31],
+        [32],
+      ])
+    })
+
+    it("maintains same flattened size", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.array(fc.anything())),
+          xs => length(A.flatten(xs)) === length(A.flatten(f(xs))),
+        ),
+      )
     })
   })
 })

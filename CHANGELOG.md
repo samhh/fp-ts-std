@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## 0.7.0 (_Unreleased_)
 
 - Add `IO` module with `tap` and `once` functions.
-- Add `aperture`, `slice`, `reject`, `none`, `startsWith`, `moveFrom`, `moveTo`, `countBy`, `dropRightWhile`, `mean`, `median`, and `dropAt` functions to the `Array` module.
+- Add `aperture`, `slice`, `reject`, `none`, `startsWith`, `moveFrom`, `moveTo`, `countBy`, `dropRightWhile`, `mean`, `median`, `dropAt`, and `transpose` functions to the `Array` module.
 - Add `reject` and `merge` functions to the `Record` module.
 - Add `last`, `init`, `slice`, `lookup`, `toUpper`, `toLower`, `dropRightWhile`, `under`, `replace`, and `replaceAll` functions to the `String` module.
 - Add `isValid`, `rem`, `mod`, and `negate` functions to the `Number` module.

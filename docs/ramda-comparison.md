@@ -238,7 +238,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] toString - [fp-ts-std/String::fromNumber](https://samhh.github.io/fp-ts-std/modules/String.ts.html#fromnumber)
 - [x] toUpper - [fp-ts-std/String::toUpper](https://samhh.github.io/fp-ts-std/modules/String.ts.html#toupper)
 - [ ] transduce
-- [ ] transpose
+- [x] transpose - [fp-ts-std/Array::transpose](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#transpose)
 - [x] traverse - [fp-ts/Array::traverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#traverse)
 - [x] trim - [fp-ts-std/String::trim](https://ramdajs.com/docs/#trim)
 - [x] tryCatch - [fp-ts/Either::tryCatch](https://gcanti.github.io/fp-ts/modules/Either.ts.html#trycatch)

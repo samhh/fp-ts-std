@@ -38,6 +38,7 @@ Added in v0.1.0
   - [slice](#slice)
   - [startsWith](#startswith)
   - [sum](#sum)
+  - [transpose](#transpose)
   - [upsert](#upsert)
   - [without](#without)
 
@@ -681,6 +682,49 @@ assert.strictEqual(sum([25, 3, 10]), 38)
 ```
 
 Added in v0.6.0
+
+## transpose
+
+Tranposes the rows and columns of a 2D list. If some of the rows are shorter
+than the following rows, their elements are skipped.
+
+**Signature**
+
+```ts
+export declare const transpose: <A>(xs: A[][]) => A[][]
+```
+
+**Example**
+
+```ts
+import { transpose } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual(
+  transpose([
+    [1, 2, 3],
+    [4, 5, 6],
+  ]),
+  [
+    [1, 4],
+    [2, 5],
+    [3, 6],
+  ]
+)
+assert.deepStrictEqual(
+  transpose([
+    [1, 4],
+    [2, 5],
+    [3, 6],
+  ]),
+  [
+    [1, 2, 3],
+    [4, 5, 6],
+  ]
+)
+assert.deepStrictEqual(transpose([[10, 11], [20], [], [30, 31, 32]]), [[10, 20, 30], [11, 31], [32]])
+```
+
+Added in v0.7.0
 
 ## upsert
 
