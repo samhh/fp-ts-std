@@ -106,7 +106,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] insert - [fp-ts/Array::insertAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#insertat)
 - [x] insertAll - [fp-ts-std/Array::insertMany](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#insertmany)
 - [x] intersection - [fp-ts/Array::intersection](https://gcanti.github.io/fp-ts/modules/Array.ts.html#intersection)
-- [ ] intersperse
+- [x] intersperse - [fp-ts/Array::intersperse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#intersperse)
 - [ ] into
 - [ ] invert
 - [ ] invertObj
