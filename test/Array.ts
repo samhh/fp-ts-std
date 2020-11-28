@@ -1,7 +1,6 @@
 import {
   length,
   elemFlipped,
-  any,
   none,
   join,
   pluckFirst,
@@ -67,26 +66,6 @@ describe("Array", () => {
       expect(f([])(0)).toBe(false)
       expect(f([1, 2, 3])(2)).toBe(true)
       expect(f([1, 2, 3])(4)).toBe(false)
-    })
-  })
-
-  describe("any", () => {
-    const f = any<number>(n => n === 5)
-
-    it("returns false for empty input array", () => {
-      expect(f([])).toBe(false)
-    })
-
-    it("returns true if any predicate succeeds", () => {
-      expect(f([5])).toBe(true)
-      expect(f([3, 5])).toBe(true)
-      expect(f([5, 3])).toBe(true)
-      expect(f([5, 5])).toBe(true)
-    })
-
-    it("returns false if all predicates fail", () => {
-      expect(f([3])).toBe(false)
-      expect(f([3, 3])).toBe(false)
     })
   })
 

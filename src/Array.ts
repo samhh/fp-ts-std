@@ -20,7 +20,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
-import { fold, monoidAny, monoidProduct, monoidSum } from "fp-ts/Monoid"
+import { fold, monoidProduct, monoidSum } from "fp-ts/Monoid"
 import { flip } from "./Function"
 
 /**
@@ -52,25 +52,6 @@ export const length = (xs: Array<unknown>): number => xs.length
 export const elemFlipped = <A>(eq: Eq<A>) => (
   xs: Array<A>,
 ): Predicate<A> => y => A.elem(eq)(y)(xs)
-
-/**
- * Check if a predicate holds true for any array member.
- *
- * @example
- * import { any } from 'fp-ts-std/Array';
- * import { Predicate } from 'fp-ts/function';
- *
- * const isFive: Predicate<number> = n => n === 5;
- * const isAnyFive = any(isFive);
- *
- * assert.strictEqual(isAnyFive([3, 5, 7]), true);
- * assert.strictEqual(isAnyFive([3, 4, 7]), false);
- *
- * @since 0.1.0
- */
-export const any: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
-  monoidAny,
-)
 
 /**
  * Check if a predicate does not hold for any array member.

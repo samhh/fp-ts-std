@@ -13,7 +13,6 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
-  - [any](#any)
   - [aperture](#aperture)
   - [cartesian](#cartesian)
   - [countBy](#countby)
@@ -44,31 +43,6 @@ Added in v0.1.0
 ---
 
 # utils
-
-## any
-
-Check if a predicate holds true for any array member.
-
-**Signature**
-
-```ts
-export declare const any: <A>(f: Predicate<A>) => Predicate<A[]>
-```
-
-**Example**
-
-```ts
-import { any } from 'fp-ts-std/Array'
-import { Predicate } from 'fp-ts/function'
-
-const isFive: Predicate<number> = (n) => n === 5
-const isAnyFive = any(isFive)
-
-assert.strictEqual(isAnyFive([3, 5, 7]), true)
-assert.strictEqual(isAnyFive([3, 4, 7]), false)
-```
-
-Added in v0.1.0
 
 ## aperture
 
