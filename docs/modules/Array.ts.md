@@ -13,7 +13,6 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
-  - [all](#all)
   - [any](#any)
   - [aperture](#aperture)
   - [cartesian](#cartesian)
@@ -45,31 +44,6 @@ Added in v0.1.0
 ---
 
 # utils
-
-## all
-
-Check if a predicate holds true for every array member.
-
-**Signature**
-
-```ts
-export declare const all: <A>(f: Predicate<A>) => Predicate<A[]>
-```
-
-**Example**
-
-```ts
-import { all } from 'fp-ts-std/Array'
-import { Predicate } from 'fp-ts/function'
-
-const isFive: Predicate<number> = (n) => n === 5
-const isAllFive = all(isFive)
-
-assert.strictEqual(isAllFive([5, 5, 5]), true)
-assert.strictEqual(isAllFive([5, 4, 5]), false)
-```
-
-Added in v0.1.0
 
 ## any
 

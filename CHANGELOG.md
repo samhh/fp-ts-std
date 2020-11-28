@@ -11,6 +11,7 @@ This project adheres to semantic versioning.
 - Add `isValid`, `rem`, `mod`, and `negate` functions to the `Number` module.
 - Add `construct`, `memoize`, `curry2` through `curry5`, `curry2T` through `curry5T`, and `uncurry2` through `uncurry5` functions to the `Function` module.
 - Add `Milliseconds` newtype to the `Date` module, and update the `Date` and `Task` modules to universally utilise it.
+- Remove `all` from the `Array` module as it's superceded by [fp-ts/Array::every](https://gcanti.github.io/fp-ts/modules/Array.ts.html#every).
 - Provide the input value to the fallback function of `guard`.
 - Loosen the input type of `sum` and `product` such that it needn't be readonly.
 

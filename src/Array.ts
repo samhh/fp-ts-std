@@ -20,13 +20,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
-import {
-  fold,
-  monoidAll,
-  monoidAny,
-  monoidProduct,
-  monoidSum,
-} from "fp-ts/Monoid"
+import { fold, monoidAny, monoidProduct, monoidSum } from "fp-ts/Monoid"
 import { flip } from "./Function"
 
 /**
@@ -79,25 +73,6 @@ export const any: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
 )
 
 /**
- * Check if a predicate holds true for every array member.
- *
- * @example
- * import { all } from 'fp-ts-std/Array';
- * import { Predicate } from 'fp-ts/function';
- *
- * const isFive: Predicate<number> = n => n === 5;
- * const isAllFive = all(isFive);
- *
- * assert.strictEqual(isAllFive([5, 5, 5]), true);
- * assert.strictEqual(isAllFive([5, 4, 5]), false);
- *
- * @since 0.1.0
- */
-export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
-  monoidAll,
-)
-
-/**
  * Check if a predicate does not hold for any array member.
  *
  * import { none } from 'fp-ts-std/Array';
@@ -111,7 +86,10 @@ export const all: <A>(f: Predicate<A>) => Predicate<Array<A>> = A.foldMap(
  *
  * @since 0.7.0
  */
-export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(not, all)
+export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(
+  not,
+  A.every,
+)
 
 /**
  * Join an array of strings together into a single string using the supplied

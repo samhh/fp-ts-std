@@ -2,7 +2,6 @@ import {
   length,
   elemFlipped,
   any,
-  all,
   none,
   join,
   pluckFirst,
@@ -88,26 +87,6 @@ describe("Array", () => {
     it("returns false if all predicates fail", () => {
       expect(f([3])).toBe(false)
       expect(f([3, 3])).toBe(false)
-    })
-  })
-
-  describe("all", () => {
-    const f = all<number>(n => n === 5)
-
-    it("returns true for empty input array", () => {
-      expect(f([])).toBe(true)
-    })
-
-    it("returns true if all predicates succeed", () => {
-      expect(f([5])).toBe(true)
-      expect(f([5, 5])).toBe(true)
-    })
-
-    it("returns false if any predicates fail", () => {
-      expect(f([3])).toBe(false)
-      expect(f([3, 3])).toBe(false)
-      expect(f([3, 5])).toBe(false)
-      expect(f([5, 3])).toBe(false)
     })
   })
 
@@ -304,7 +283,7 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(fc.array(fc.integer()), xs =>
-          pipe(xs, f, g, all(elemFlipped(eqNumber)(g(xs)))),
+          pipe(xs, f, g, A.every(elemFlipped(eqNumber)(g(xs)))),
         ),
       )
     })
@@ -700,7 +679,7 @@ describe("Array", () => {
           flow(
             f(identity),
             values,
-            all(n => n > 0),
+            A.every(n => n > 0),
           ),
         ),
       )
