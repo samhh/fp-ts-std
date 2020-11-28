@@ -48,7 +48,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] concat - [fp-ts/Array::getMonoid](https://gcanti.github.io/fp-ts/modules/Array.ts.html#getmonoid)/[fp-ts-std/String::concat](https://samhh.github.io/fp-ts-std/modules/String.ts.html#concat)
 - [x] cond - [fp-ts-std/Function::guard](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#guard)
 - [x] construct - [fp-ts-std/Function::construct](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#construct)
-- [ ] constructN
+- [x] constructN - [fp-ts-std/Function::construct](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#construct) w/ [fp-ts-std/Function::curry2T](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2t) through [fp-ts-std/Function::curry5T](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5t)
 - [x] contains - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)/[fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)
 - [ ] converge
 - [x] countBy - [fp-ts-std/Array::countBy](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#countby)
