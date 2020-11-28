@@ -456,6 +456,39 @@ export const unlines = join("\n")
 export const test = (r: RegExp): Predicate<string> => x => r.test(x)
 
 /**
+ * Replace the first occurrence of a matched substring with a replacement.
+ *
+ * @example
+ * import { replace } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(replace('foo')('bar')('foo foo foo'), 'bar foo foo');
+ * assert.strictEqual(replace(/foo/)('bar')('foo foo foo'), 'bar foo foo');
+ * assert.strictEqual(replace(/foo/g)('bar')('foo foo foo'), 'bar bar bar');
+ *
+ * @since 0.7.0
+ */
+export const replace = (r: RegExp | string) => (
+  s: string,
+): Endomorphism<string> => x => x.replace(r, s)
+
+/**
+ * Replace every occurrence of a matched substring with a replacement.
+ *
+ * To use a `RegExp` (with a global flag) instead of a string to match, use
+ * `replace` instead.
+ *
+ * @example
+ * import { replaceAll } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(replaceAll('foo')('bar')('foo foo foo'), 'bar bar bar');
+ *
+ * @since 0.7.0
+ */
+export const replaceAll = (r: string) => (
+  s: string,
+): Endomorphism<string> => x => x.replaceAll(r, s)
+
+/**
  * Drop a number of characters from the start of a string, returning a new
  * string.
  *
