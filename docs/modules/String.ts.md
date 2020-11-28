@@ -722,7 +722,7 @@ Added in v0.3.0
 
 ## test
 
-A functional wraper around `RegExp.prototype.test`.
+A functional wrapper around `RegExp.prototype.test`.
 
 **Signature**
 

@@ -441,7 +441,7 @@ export const lines = split(/\r\n|\r|\n/)
 export const unlines = join("\n")
 
 /**
- * A functional wraper around `RegExp.prototype.test`.
+ * A functional wrapper around `RegExp.prototype.test`.
  *
  * @example
  * import { test } from 'fp-ts-std/String';
