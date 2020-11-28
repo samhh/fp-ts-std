@@ -13,6 +13,8 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [invertAll](#invertall)
+  - [invertLast](#invertlast)
   - [lookupFlipped](#lookupflipped)
   - [merge](#merge)
   - [omit](#omit)
@@ -23,6 +25,52 @@ Added in v0.1.0
 ---
 
 # utils
+
+## invertAll
+
+Invert a record, collecting values with duplicate keys in an array. Should
+you only care about the last item or are not worried about the risk of
+duplicate keys, see instead `invertLast`.
+
+**Signature**
+
+```ts
+export declare const invertAll: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, string[]>
+```
+
+**Example**
+
+```ts
+import { invertAll } from 'fp-ts-std/Record'
+import { fromNumber } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(invertAll(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': ['a'], '2': ['b', 'c'], '3': ['d'] })
+```
+
+Added in v0.7.0
+
+## invertLast
+
+Invert a record, keeping only the last value should the same key be
+encountered more than once. If you'd like to keep the values that would be
+lost, see instead `invertAll`.
+
+**Signature**
+
+```ts
+export declare const invertLast: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, string>
+```
+
+**Example**
+
+```ts
+import { invertLast } from 'fp-ts-std/Record'
+import { fromNumber } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(invertLast(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': 'a', '2': 'c', '3': 'd' })
+```
+
+Added in v0.7.0
 
 ## lookupFlipped
 

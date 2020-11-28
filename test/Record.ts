@@ -1,8 +1,20 @@
-import { values, lookupFlipped, pick, omit, reject, merge } from "../src/Record"
+import {
+  values,
+  lookupFlipped,
+  pick,
+  omit,
+  reject,
+  merge,
+  invertLast,
+  invertAll,
+} from "../src/Record"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
+import * as A from "fp-ts/Array"
 import fc from "fast-check"
-import { pipe, Predicate } from "fp-ts/function"
+import { flow, pipe, Predicate } from "fp-ts/function"
+import { fromNumber } from "../src/String"
+import { eqNumber, eqString } from "fp-ts/lib/Eq"
 
 describe("Record", () => {
   describe("values", () => {
@@ -92,6 +104,86 @@ describe("Record", () => {
         b: "two",
         c: true,
       })
+    })
+  })
+
+  describe("invertLast", () => {
+    const f = invertLast
+
+    it("inverts", () => {
+      expect(f(fromNumber)({ a: 1, b: 2, c: 3 })).toEqual({
+        "1": "a",
+        "2": "b",
+        "3": "c",
+      })
+    })
+
+    it("keeps the last value for duplicate key", () => {
+      expect(f(fromNumber)({ a: 1, b: 2, c: 2, d: 3 })).toEqual({
+        "1": "a",
+        "2": "c",
+        "3": "d",
+      })
+    })
+
+    it("has every unique transformed value as a key", () => {
+      const g = fromNumber
+      const h: (x: Record<string, number>) => Array<string> = flow(
+        values,
+        A.uniq(eqNumber),
+        A.map(g),
+      )
+
+      fc.assert(
+        fc.property(fc.dictionary(fc.string(), fc.integer()), x =>
+          pipe(x, f(g), R.keys, ks =>
+            pipe(
+              h(x),
+              A.every(k => A.elem(eqString)(k)(ks)),
+            ),
+          ),
+        ),
+      )
+    })
+  })
+
+  describe("invertAll", () => {
+    const f = invertAll
+
+    it("inverts", () => {
+      expect(f(fromNumber)({ a: 1, b: 2, c: 3 })).toEqual({
+        "1": ["a"],
+        "2": ["b"],
+        "3": ["c"],
+      })
+    })
+
+    it("keeps the all values for duplicate key", () => {
+      expect(f(fromNumber)({ a: 1, b: 2, c: 2, d: 3 })).toEqual({
+        "1": ["a"],
+        "2": ["b", "c"],
+        "3": ["d"],
+      })
+    })
+
+    it("has every unique transformed value as a key", () => {
+      const g = fromNumber
+      const h: (x: Record<string, number>) => Array<string> = flow(
+        values,
+        A.uniq(eqNumber),
+        A.map(g),
+      )
+
+      fc.assert(
+        fc.property(fc.dictionary(fc.string(), fc.integer()), x =>
+          pipe(x, f(g), R.keys, ks =>
+            pipe(
+              h(x),
+              A.every(k => A.elem(eqString)(k)(ks)),
+            ),
+          ),
+        ),
+      )
     })
   })
 })

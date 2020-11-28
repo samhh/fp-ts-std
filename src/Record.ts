@@ -2,9 +2,12 @@
  * @since 0.1.0
  */
 
-import { Endomorphism, not, Predicate } from "fp-ts/function"
+import { Endomorphism, flow, not, pipe, Predicate } from "fp-ts/function"
 import { Option } from "fp-ts/Option"
 import * as R from "fp-ts/Record"
+import * as A from "fp-ts/Array"
+import * as T from "fp-ts/Tuple"
+import { getLastSemigroup } from "fp-ts/Semigroup"
 
 /**
  * Get the values from a `Record`.
@@ -129,3 +132,47 @@ export const reject = <A>(f: Predicate<A>): Endomorphism<Record<string, A>> =>
  * @since 0.7.0
  */
 export const merge = <A>(x: A) => <B>(y: B): A & B => ({ ...x, ...y })
+
+/**
+ * Invert a record, keeping only the last value should the same key be
+ * encountered more than once. If you'd like to keep the values that would be
+ * lost, see instead `invertAll`.
+ *
+ * @example
+ * import { invertLast } from 'fp-ts-std/Record';
+ * import { fromNumber } from 'fp-ts-std/String';
+ *
+ * assert.deepStrictEqual(invertLast(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': 'a', '2': 'c', '3': 'd' });
+ *
+ * @since 0.7.0
+ */
+export const invertLast = <A>(
+  f: (x: A) => string,
+): ((x: Record<string, A>) => Record<string, string>) =>
+  flow(
+    R.toArray,
+    A.map(flow(T.mapLeft(f), T.swap)),
+    R.fromFoldable(getLastSemigroup<string>(), A.array),
+  )
+
+/**
+ * Invert a record, collecting values with duplicate keys in an array. Should
+ * you only care about the last item or are not worried about the risk of
+ * duplicate keys, see instead `invertLast`.
+ *
+ * @example
+ * import { invertAll } from 'fp-ts-std/Record';
+ * import { fromNumber } from 'fp-ts-std/String';
+ *
+ * assert.deepStrictEqual(invertAll(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': ['a'], '2': ['b', 'c'], '3': ['d'] });
+ *
+ * @since 0.7.0
+ */
+export const invertAll = <A>(
+  f: (x: A) => string,
+): ((x: Record<string, A>) => Record<string, Array<string>>) =>
+  flow(
+    R.toArray,
+    A.map(flow(T.bimap(f, A.of), T.swap)),
+    R.fromFoldable(A.getMonoid<string>(), A.array),
+  )
