@@ -141,7 +141,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] median - [fp-ts-std/Array::median](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#median)
 - [x] memoizeWith - [fp-ts-std/Function::memoize](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#memoize)
 - [x] merge - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
-- [ ] mergeAll
+- [x] mergeAll - [fp-ts-std/Record::merge](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#merge)/[fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [x] mergeDeepLeft - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [x] mergeDeepRight - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)
 - [x] mergeDeepWith - [fp-ts/Record::getMonoid](https://gcanti.github.io/fp-ts/modules/Record.ts.html#getmonoid)

@@ -1,4 +1,4 @@
-import { values, lookupFlipped, pick, omit, reject } from "../src/Record"
+import { values, lookupFlipped, pick, omit, reject, merge } from "../src/Record"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import fc from "fast-check"
@@ -80,6 +80,18 @@ describe("Record", () => {
             pipe(xs, R.filter(p), R.size) + pipe(xs, f, R.size) === R.size(xs),
         ),
       )
+    })
+  })
+
+  describe("merge", () => {
+    const f = merge
+
+    it("merges, prioritising the second input", () => {
+      expect(f({ a: 1, b: 2 })({ b: "two", c: true })).toEqual({
+        a: 1,
+        b: "two",
+        c: true,
+      })
     })
   })
 })

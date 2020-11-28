@@ -14,6 +14,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [lookupFlipped](#lookupflipped)
+  - [merge](#merge)
   - [omit](#omit)
   - [pick](#pick)
   - [reject](#reject)
@@ -46,6 +47,27 @@ assert.deepStrictEqual(A.filterMap(lookupFlipped(x))(ks), [1, [true]])
 ```
 
 Added in v0.1.0
+
+## merge
+
+Merge two records together. For merging many identical records, instead
+consider defining a semigroup.
+
+**Signature**
+
+```ts
+export declare const merge: <A>(x: A) => <B>(y: B) => A & B
+```
+
+**Example**
+
+```ts
+import { merge } from 'fp-ts-std/Record'
+
+assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true })
+```
+
+Added in v0.7.0
 
 ## omit
 
