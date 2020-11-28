@@ -383,6 +383,27 @@ export const split = (on: string | RegExp) => (target: string): Array<string> =>
   target.split(on)
 
 /**
+ * Apply an endomorphism upon an array of strings (characters) against a string.
+ * This is useful as it allows you to run many polymorphic functions targeting
+ * arrays against strings without having to rewrite them.
+ *
+ * The name "under" is borrowed from newtypes, and expresses the notion that
+ * a string can be thought of merely as an array of characters.
+ *
+ * @example
+ * import { under } from 'fp-ts-std/String';
+ * import * as A from 'fp-ts/Array';
+ *
+ * const filterOutX = under(A.filter(x => x !== "x"));
+ *
+ * assert.strictEqual(filterOutX("axbxc"), "abc");
+ *
+ * @since 0.7.0
+ */
+export const under = (f: Endomorphism<Array<string>>): Endomorphism<string> =>
+  flow(split(""), f, join(""))
+
+/**
  * Reverse a string.
  *
  * @example
@@ -392,11 +413,7 @@ export const split = (on: string | RegExp) => (target: string): Array<string> =>
  *
  * @since 0.3.0
  */
-export const reverse: Endomorphism<string> = flow(
-  split(""),
-  A.reverse,
-  join(""),
-)
+export const reverse: Endomorphism<string> = under(A.reverse)
 
 // The regex comes from here: https://stackoverflow.com/a/20056634
 /**
@@ -437,27 +454,6 @@ export const unlines = join("\n")
  * @since 0.1.0
  */
 export const test = (r: RegExp): Predicate<string> => x => r.test(x)
-
-/**
- * Apply an endomorphism upon an array of strings (characters) against a string.
- * This is useful as it allows you to run many polymorphic functions targeting
- * arrays against strings without having to rewrite them.
- *
- * The name "under" is borrowed from newtypes, and expresses the notion that
- * a string can be thought of merely as an array of characters.
- *
- * @example
- * import { under } from 'fp-ts-std/String';
- * import * as A from 'fp-ts/Array';
- *
- * const filterOutX = under(A.filter(x => x !== "x"));
- *
- * assert.strictEqual(filterOutX("axbxc"), "abc");
- *
- * @since 0.7.0
- */
-export const under = (f: Endomorphism<Array<string>>): Endomorphism<string> =>
-  flow(split(""), f, join(""))
 
 /**
  * Drop a number of characters from the start of a string, returning a new
@@ -513,8 +509,9 @@ export const dropRight = (n: number): Endomorphism<string> => x =>
  *
  * @since 0.6.0
  */
-export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
-  flow(split(""), A.dropLeftWhile(f), join(""))
+export const dropLeftWhile: (
+  f: Predicate<string>,
+) => Endomorphism<string> = flow(A.dropLeftWhile, under)
 
 /**
  * Remove the longest initial substring from the end of the input string for
@@ -532,8 +529,10 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  *
  * @since 0.7.0
  */
-export const dropRightWhile = (f: Predicate<string>): Endomorphism<string> =>
-  flow(split(""), dropRightWhileArr(f), join(""))
+export const dropRightWhile: (
+  f: Predicate<string>,
+) => Endomorphism<string> = flow(dropRightWhileArr, under)
+
 /**
  * Get the first character in a string, or `None` if the string is empty.
  *
