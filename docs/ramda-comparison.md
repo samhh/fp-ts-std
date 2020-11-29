@@ -130,9 +130,9 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] lt - [fp-ts/Ord::lt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#lt)
 - [x] lte - [fp-ts/Ord::leq](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#leq)
 - [x] map - [fp-ts/Array::map](https://gcanti.github.io/fp-ts/modules/Array.ts.html#map)
-- [ ] mapAccum
-- [ ] mapAccumRight
-- [ ] mapObjIndexed
+- [x] mapAccum - [fp-ts/Array::scanLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#scanleft)
+- [x] mapAccumRight - [fp-ts/Array::scanRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#scanright)
+- [x] mapObjIndexed - [fp-ts/Record::mapWithIndex](https://gcanti.github.io/fp-ts/modules/Record.ts.html#mapwithindex)
 - [x] match - [fp-ts-std/String::match](https://samhh.github.io/fp-ts-std/modules/String.ts.html#match)/[fp-ts-contrib/RegExp::match](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#match)
 - [x] mathMod - [fp-ts-std/Number::mod](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#mod)
 - [x] max - [fp-ts/Ord::max](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#max)
