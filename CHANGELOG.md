@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.7.0 (_Unreleased_)
+## 0.7.0 (2020-11-29)
 
 - Add `IO` module with `tap` and `once` functions.
 - Add `aperture`, `slice`, `reject`, `none`, `startsWith`, `moveFrom`, `moveTo`, `countBy`, `dropRightWhile`, `mean`, `median`, `dropAt`, `transpose`, `takeRightWhile`, and `symmetricDifference` functions to the `Array` module.
