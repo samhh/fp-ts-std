@@ -27,6 +27,7 @@ import {
   transpose,
   takeRightWhile,
   symmetricDifference,
+  reduceWhile,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -46,6 +47,7 @@ import { fold, monoidSum } from "fp-ts/Monoid"
 import { split } from "../src/String"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import { values } from "../src/Record"
+import { add } from "../src/Number"
 
 describe("Array", () => {
   describe("length", () => {
@@ -879,6 +881,22 @@ describe("Array", () => {
           expect(f([])(xs)).toEqual(xs),
         ),
       )
+    })
+  })
+
+  describe("reduceWhile", () => {
+    const f = reduceWhile
+
+    it("reduces until predicate fails", () => {
+      expect(f<number>(n => n !== 0)(add)(0)([1, 2, 0, 4, 5])).toBe(3)
+    })
+
+    it("reduces like normal with constTrue", () => {
+      expect(f<number>(constTrue)(add)(0)([1, 2, 3, 4])).toBe(10)
+    })
+
+    it("returns initial value with constFalse", () => {
+      expect(f<number>(constFalse)(add)(0)([1, 2, 3, 4])).toBe(0)
     })
   })
 })

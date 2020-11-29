@@ -32,6 +32,7 @@ Added in v0.1.0
   - [none](#none)
   - [pluckFirst](#pluckfirst)
   - [product](#product)
+  - [reduceWhile](#reducewhile)
   - [reject](#reject)
   - [slice](#slice)
   - [startsWith](#startswith)
@@ -535,6 +536,33 @@ assert.strictEqual(product([4, 2, 3]), 24)
 ```
 
 Added in v0.6.0
+
+## reduceWhile
+
+Like ordinary array reduction, however this also takes a predicate that is
+evaluated before each step. If the predicate doesn't hold, the reduction
+short-circuits and returns the current accumulator value.
+
+**Signature**
+
+```ts
+export declare const reduceWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => (y: B) => B) => (x: B) => (ys: A[]) => B
+```
+
+**Example**
+
+```ts
+import { reduceWhile } from 'fp-ts-std/Array'
+import { add } from 'fp-ts-std/Number'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+const reduceUntilOdd = reduceWhile(isEven)
+
+assert.strictEqual(reduceUntilOdd(add)(0)([2, 4, 6, 9, 10]), 12)
+```
+
+Added in v0.8.0
 
 ## reject
 

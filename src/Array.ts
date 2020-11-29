@@ -650,3 +650,36 @@ export const symmetricDifference = <A>(eq: Eq<A>) => (
   xs: Array<A>,
 ): Endomorphism<Array<A>> => ys =>
   A.getMonoid<A>().concat(A.difference(eq)(ys)(xs), A.difference(eq)(xs)(ys))
+
+/**
+ * Like ordinary array reduction, however this also takes a predicate that is
+ * evaluated before each step. If the predicate doesn't hold, the reduction
+ * short-circuits and returns the current accumulator value.
+ *
+ * @example
+ * import { reduceWhile } from 'fp-ts-std/Array';
+ * import { add } from 'fp-ts-std/Number';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isEven: Predicate<number> = n => n % 2 === 0;
+ * const reduceUntilOdd = reduceWhile(isEven);
+ *
+ * assert.strictEqual(reduceUntilOdd(add)(0)([2, 4, 6, 9, 10]), 12);
+ *
+ * @since 0.8.0
+ */
+export const reduceWhile = <A>(p: Predicate<A>) => <B>(
+  f: (x: A) => (y: B) => B,
+) => (x: B) => (ys: Array<A>): B => {
+  const go = (vals: Array<A>) => (acc: B): B =>
+    pipe(
+      NEA.fromArray(vals),
+      O.filter(flow(NEA.head, p)),
+      O.fold(
+        constant(acc),
+        flow(NEA.uncons, ([z, zs]) => go(zs)(f(z)(acc))),
+      ),
+    )
+
+  return go(ys)(x)
+}

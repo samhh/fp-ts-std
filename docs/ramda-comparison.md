@@ -200,7 +200,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] reduceBy - [fp-ts/Record::fromFoldableMap](https://gcanti.github.io/fp-ts/modules/Record.ts.html#fromfoldablemap)
 - ~~[ ] reduced~~ Use less generalised functions or recursion instead.
 - [x] reduceRight - [fp-ts/Array::reduceRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reduceright)
-- [ ] reduceWhile
+- [x] reduceWhile - [fp-ts-std/Array::reduceWhile](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#reducewhile)
 - [x] reject - [fp-ts-std/Array::reject](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#reject)/[fp-ts-std/Record::reject](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#reject)
 - [x] remove - [fp-ts-std/Array::dropAt](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#dropat)
 - [x] repeat - [fp-ts/Array::replicate](https://gcanti.github.io/fp-ts/modules/Array.ts.html#replicate)

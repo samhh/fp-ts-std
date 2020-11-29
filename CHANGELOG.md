@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.8.0 (_Unreleased_)
+
+- Add `reduceWhile` function to the `Array` module.
+
 ## 0.7.0 (2020-11-29)
 
 - Add `IO` module with `tap` and `once` functions.
