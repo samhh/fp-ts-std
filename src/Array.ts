@@ -631,3 +631,22 @@ export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
  */
 export const takeRightWhile = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
   flow(A.reverse, A.takeLeftWhile(f), A.reverse)
+
+/**
+ * Creates an array of all values which are present in one of the two input
+ * arrays, but not both. The order is determined by the input arrays and
+ * duplicate values present only in one input array are maintained.
+ *
+ * @example
+ * import { symmetricDifference } from 'fp-ts-std/Array';
+ * import { eqNumber } from 'fp-ts/Eq';
+ *
+ * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 2, 3, 4])([3, 4, 5, 6]), [1, 2, 5, 6]);
+ * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 7, 7, 4, 3])([3, 4, 9, 6]), [1, 7, 7, 9, 6]);
+ *
+ * @since 0.7.0
+ */
+export const symmetricDifference = <A>(eq: Eq<A>) => (
+  xs: Array<A>,
+): Endomorphism<Array<A>> => ys =>
+  A.getMonoid<A>().concat(A.difference(eq)(ys)(xs), A.difference(eq)(xs)(ys))

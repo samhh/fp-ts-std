@@ -220,8 +220,8 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] startsWith - [fp-ts-std/Array::startsWith](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#startswith)/[fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)
 - [x] subtract - [fp-ts-std/Number::subtract](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#subtract)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
 - [x] sum - [fp-ts-std/Array::sum](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#sum)
-- [ ] symmetricDifference
-- [ ] symmetricDifferenceWith
+- [x] symmetricDifference - [fp-ts-std/Array::symmetricDifference](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#symmetricdifference)
+- [x] symmetricDifferenceWith - [fp-ts-std/Array::symmetricDifference](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#symmetricdifference)
 - [x] T - [fp-ts/function::constTrue](https://gcanti.github.io/fp-ts/modules/function.ts.html#consttrue)
 - [x] tail - [fp-ts/Array::tail](https://gcanti.github.io/fp-ts/modules/Array.ts.html#tail)/[fp-ts-std/String::tail](https://samhh.github.io/fp-ts/modules/String.ts.html#tail)
 - [x] take - [fp-ts/Array::takeLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleft)/[fp-ts-std/String::takeLeft](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeleft)

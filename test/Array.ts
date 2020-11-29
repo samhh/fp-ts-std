@@ -26,6 +26,7 @@ import {
   dropAt,
   transpose,
   takeRightWhile,
+  symmetricDifference,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -841,6 +842,41 @@ describe("Array", () => {
       fc.assert(
         fc.property(fc.array(fc.anything()), xs =>
           expect(f(constFalse)(xs)).toEqual([]),
+        ),
+      )
+    })
+  })
+
+  describe("symmetricDifference", () => {
+    const f = symmetricDifference(eqNumber)
+
+    it("returns unique values from both arrays", () => {
+      expect(f([1, 2, 3, 4])([3, 4, 5, 6])).toEqual([1, 2, 5, 6])
+      expect(f([1, 2, 3, 4, 3])([4, 3, 4, 5, 6])).toEqual([1, 2, 5, 6])
+    })
+
+    it("returns the items ordered by input array order", () => {
+      expect(f([1, 7, 4, 3])([3, 4, 9, 6])).toEqual([1, 7, 9, 6])
+    })
+
+    it("keeps duplicates", () => {
+      expect(f([1, 7, 7, 4, 3])([3, 4, 9, 6])).toEqual([1, 7, 7, 9, 6])
+    })
+
+    it("two empty inputs gives empty output", () => {
+      expect(f([])([])).toEqual([])
+    })
+
+    it("one empty input returns other input whole", () => {
+      fc.assert(
+        fc.property(fc.array(fc.integer()), xs =>
+          expect(f(xs)([])).toEqual(xs),
+        ),
+      )
+
+      fc.assert(
+        fc.property(fc.array(fc.integer()), xs =>
+          expect(f([])(xs)).toEqual(xs),
         ),
       )
     })
