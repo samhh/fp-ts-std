@@ -25,6 +25,7 @@ import {
   median,
   dropAt,
   transpose,
+  takeRightWhile,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -813,6 +814,33 @@ describe("Array", () => {
             A.flatten,
             A.every(x => x !== undefined),
           ),
+        ),
+      )
+    })
+  })
+
+  describe("takeRightWhile", () => {
+    const f = takeRightWhile
+
+    it("takes elements from the right until predicate fails", () => {
+      expect(f<string>(x => x !== "c")(["a", "b", "c", "d", "e"])).toEqual([
+        "d",
+        "e",
+      ])
+    })
+
+    it("constTrue returns original array", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(constTrue)(xs)).toEqual(xs),
+        ),
+      )
+    })
+
+    it("constFalse returns empty array", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs =>
+          expect(f(constFalse)(xs)).toEqual([]),
         ),
       )
     })

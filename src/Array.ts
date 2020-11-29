@@ -613,3 +613,21 @@ export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
   const zss = [ys, ...A.map(A.dropLeft(1))(yss)]
   return [zs, ...transpose(zss)]
 }
+
+/**
+ * Calculate the longest initial subarray from the end of the input array for
+ * which all elements satisfy the specified predicate, creating a new array.
+ *
+ * @example
+ * import { takeRightWhile } from 'fp-ts-std/Array';
+ * import { Predicate } from 'fp-ts/function';
+ *
+ * const isEven: Predicate<number> = n => n % 2 === 0;
+ * const takeRightEvens = takeRightWhile(isEven);
+ *
+ * assert.deepStrictEqual(takeRightEvens([6, 7, 3, 4, 2]), [4, 2]);
+ *
+ * @since 0.7.0
+ */
+export const takeRightWhile = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
+  flow(A.reverse, A.takeLeftWhile(f), A.reverse)

@@ -36,6 +36,7 @@ Added in v0.1.0
   - [slice](#slice)
   - [startsWith](#startswith)
   - [sum](#sum)
+  - [takeRightWhile](#takerightwhile)
   - [transpose](#transpose)
   - [upsert](#upsert)
   - [without](#without)
@@ -630,6 +631,31 @@ assert.strictEqual(sum([25, 3, 10]), 38)
 ```
 
 Added in v0.6.0
+
+## takeRightWhile
+
+Calculate the longest initial subarray from the end of the input array for
+which all elements satisfy the specified predicate, creating a new array.
+
+**Signature**
+
+```ts
+export declare const takeRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
+```
+
+**Example**
+
+```ts
+import { takeRightWhile } from 'fp-ts-std/Array'
+import { Predicate } from 'fp-ts/function'
+
+const isEven: Predicate<number> = (n) => n % 2 === 0
+const takeRightEvens = takeRightWhile(isEven)
+
+assert.deepStrictEqual(takeRightEvens([6, 7, 3, 4, 2]), [4, 2])
+```
+
+Added in v0.7.0
 
 ## transpose
 
