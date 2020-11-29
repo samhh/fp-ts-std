@@ -803,5 +803,18 @@ describe("Array", () => {
         ),
       )
     })
+
+    it("does not mistakenly pass along undefined values", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.array(fc.anything().filter(x => x !== undefined))),
+          flow(
+            f,
+            A.flatten,
+            A.every(x => x !== undefined),
+          ),
+        ),
+      )
+    })
   })
 })
