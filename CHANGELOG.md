@@ -15,6 +15,7 @@ This project adheres to semantic versioning.
 - Remove `any` from the `Array` module as it's superceded by [fp-ts/Array::some](https://gcanti.github.io/fp-ts/modules/Array.ts.html#some).
 - Provide the input value to the fallback function of `guard`.
 - Loosen the input type of `sum` and `product` such that it needn't be readonly.
+- Bump minimum supported fp-ts version to 2.9.0.
 
 ## 0.6.0 (2020-11-20)
 
