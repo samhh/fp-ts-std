@@ -28,6 +28,7 @@ import {
   takeRightWhile,
   symmetricDifference,
   reduceWhile,
+  reduceRightWhile,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -889,6 +890,22 @@ describe("Array", () => {
 
     it("reduces until predicate fails", () => {
       expect(f<number>(n => n !== 0)(add)(0)([1, 2, 0, 4, 5])).toBe(3)
+    })
+
+    it("reduces like normal with constTrue", () => {
+      expect(f<number>(constTrue)(add)(0)([1, 2, 3, 4])).toBe(10)
+    })
+
+    it("returns initial value with constFalse", () => {
+      expect(f<number>(constFalse)(add)(0)([1, 2, 3, 4])).toBe(0)
+    })
+  })
+
+  describe("reduceRightWhile", () => {
+    const f = reduceRightWhile
+
+    it("reduces from the right until predicate fails", () => {
+      expect(f<number>(n => n !== 0)(add)(0)([1, 2, 0, 4, 5])).toBe(9)
     })
 
     it("reduces like normal with constTrue", () => {
