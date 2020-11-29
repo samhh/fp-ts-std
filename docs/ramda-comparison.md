@@ -8,7 +8,7 @@ permalink: /ramda
 
 fp-ts-std attempts to bridge the gap between [fp-ts](https://gcanti.github.io/fp-ts/modules/), a highly abstract library, and libraries like [Ramda](https://ramdajs.com/), which are focused on providing utility functions.
 
-Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potentially implemented in fp-ts-std. We hope that fp-ts-std's surface area will increase with time, not just with respect to Ramda but also more broadly (the library is only in its infancy).
+Here's the status of all of Ramda's functions (as of Ramda v0.27.0) being potentially implemented in fp-ts-std.
 
 Note that some functions are not one-to-one replacements, but rather bequeath a better pattern in code. For example, the Ramda function [hasIn](https://ramdajs.com/docs/#hasIn) is distinct from [has](https://ramdajs.com/docs/#has) only insofar as it checks the input object's prototype for the specified key, too. Prototypal code isn't functional and not something this library intends to support; instead, look for functional alternatives.
 
