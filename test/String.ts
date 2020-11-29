@@ -40,6 +40,7 @@ import {
   replace,
   replaceAll,
   takeLeftWhile,
+  takeRightWhile,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -881,6 +882,27 @@ describe("String", () => {
 
     it("takes all chars until a predicate fails", () => {
       expect(f(x => x !== "c")("abcd")).toEqual("ab")
+    })
+
+    it("empty string returns empty string regardless of predicate", () => {
+      expect(f(constTrue)("")).toBe("")
+      expect(f(constFalse)("")).toBe("")
+    })
+
+    it("returns input string on constTrue", () => {
+      fc.assert(fc.property(fc.string(), x => f(constTrue)(x) === x))
+    })
+
+    it("returns empty string on constFalse", () => {
+      fc.assert(fc.property(fc.string(), x => f(constFalse)(x) === ""))
+    })
+  })
+
+  describe("takeRightWhile", () => {
+    const f = takeRightWhile
+
+    it("takes all chars from the end until a predicate fails", () => {
+      expect(f(x => x !== "b")("abcd")).toEqual("cd")
     })
 
     it("empty string returns empty string regardless of predicate", () => {

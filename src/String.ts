@@ -15,7 +15,11 @@ import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
-import { join, dropRightWhile as dropRightWhileArr } from "./Array"
+import {
+  join,
+  dropRightWhile as dropRightWhileArr,
+  takeRightWhile as takeRightWhileArr,
+} from "./Array"
 import { max, ordNumber } from "fp-ts/Ord"
 
 /**
@@ -692,3 +696,19 @@ export const toLower: Endomorphism<string> = x => x.toLowerCase()
 export const takeLeftWhile: (
   f: Predicate<string>,
 ) => Endomorphism<string> = flow(f => A.takeLeftWhile(f), under)
+
+/**
+ * Calculate the longest initial substring from the end of the input string
+ * for which all characters satisfy the specified predicate, creating a new
+ * string.
+ *
+ * @example
+ * import { takeRightWhile } from 'fp-ts-std/String';
+ *
+ * assert.deepStrictEqual(takeRightWhile(x => x !== 'b')('abcd'), 'cd');
+ *
+ * @since 0.7.0
+ */
+export const takeRightWhile: (
+  f: Predicate<string>,
+) => Endomorphism<string> = flow(takeRightWhileArr, under)

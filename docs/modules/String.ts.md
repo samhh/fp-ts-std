@@ -44,6 +44,7 @@ Added in v0.1.0
   - [takeLeft](#takeleft)
   - [takeLeftWhile](#takeleftwhile)
   - [takeRight](#takeright)
+  - [takeRightWhile](#takerightwhile)
   - [test](#test)
   - [toLower](#tolower)
   - [toUpper](#toupper)
@@ -788,6 +789,28 @@ assert.strictEqual(takeRight(2)('abc'), 'bc')
 ```
 
 Added in v0.3.0
+
+## takeRightWhile
+
+Calculate the longest initial substring from the end of the input string
+for which all characters satisfy the specified predicate, creating a new
+string.
+
+**Signature**
+
+```ts
+export declare const takeRightWhile: (f: Predicate<string>) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { takeRightWhile } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(takeRightWhile((x) => x !== 'b')('abcd'), 'cd')
+```
+
+Added in v0.7.0
 
 ## test
 
