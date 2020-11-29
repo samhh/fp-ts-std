@@ -39,6 +39,7 @@ import {
   under,
   replace,
   replaceAll,
+  takeLeftWhile,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -872,6 +873,27 @@ describe("String", () => {
 
     it("replaces all matches", () => {
       expect(f("x")("y")("xyzxyz")).toBe("yyzyyz")
+    })
+  })
+
+  describe("takeLeftWhile", () => {
+    const f = takeLeftWhile
+
+    it("takes all chars until a predicate fails", () => {
+      expect(f(x => x !== "c")("abcd")).toEqual("ab")
+    })
+
+    it("empty string returns empty string regardless of predicate", () => {
+      expect(f(constTrue)("")).toBe("")
+      expect(f(constFalse)("")).toBe("")
+    })
+
+    it("returns input string on constTrue", () => {
+      fc.assert(fc.property(fc.string(), x => f(constTrue)(x) === x))
+    })
+
+    it("returns empty string on constFalse", () => {
+      fc.assert(fc.property(fc.string(), x => f(constFalse)(x) === ""))
     })
   })
 })

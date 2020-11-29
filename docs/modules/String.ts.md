@@ -42,6 +42,7 @@ Added in v0.1.0
   - [surround](#surround)
   - [tail](#tail)
   - [takeLeft](#takeleft)
+  - [takeLeftWhile](#takeleftwhile)
   - [takeRight](#takeright)
   - [test](#test)
   - [toLower](#tolower)
@@ -739,6 +740,27 @@ assert.strictEqual(takeLeft(2)('abc'), 'ab')
 ```
 
 Added in v0.3.0
+
+## takeLeftWhile
+
+Calculate the longest initial substring for which all characters satisfy the
+specified predicate, creating a new string.
+
+**Signature**
+
+```ts
+export declare const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string>
+```
+
+**Example**
+
+```ts
+import { takeLeftWhile } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(takeLeftWhile((x) => x !== 'c')('abcd'), 'ab')
+```
+
+Added in v0.7.0
 
 ## takeRight
 

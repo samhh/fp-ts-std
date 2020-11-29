@@ -7,7 +7,7 @@ This project adheres to semantic versioning.
 - Add `IO` module with `tap` and `once` functions.
 - Add `aperture`, `slice`, `reject`, `none`, `startsWith`, `moveFrom`, `moveTo`, `countBy`, `dropRightWhile`, `mean`, `median`, `dropAt`, and `transpose` functions to the `Array` module.
 - Add `reject`, `merge`, `invertLast`, and `invertAll` functions to the `Record` module.
-- Add `last`, `init`, `slice`, `lookup`, `toUpper`, `toLower`, `dropRightWhile`, `under`, `replace`, and `replaceAll` functions to the `String` module.
+- Add `last`, `init`, `slice`, `lookup`, `toUpper`, `toLower`, `dropRightWhile`, `under`, `replace`, `replaceAll`, and `takeLeftWhile` functions to the `String` module.
 - Add `isValid`, `rem`, `mod`, and `negate` functions to the `Number` module.
 - Add `construct`, `memoize`, `curry2` through `curry5`, `curry2T` through `curry5T`, and `uncurry2` through `uncurry5` functions to the `Function` module.
 - Add `Milliseconds` newtype to the `Date` module, and update the `Date` and `Task` modules to universally utilise it.

@@ -227,7 +227,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] take - [fp-ts/Array::takeLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleft)/[fp-ts-std/String::takeLeft](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeleft)
 - [x] takeLast - [fp-ts/Array::takeRight](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeright)/[fp-ts-std/String::takeLast](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeright)
 - [ ] takeLastWhile
-- [ ] takeWhile - [fp-ts/Array::takeLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleftwhile)
+- [x] takeWhile - [fp-ts/Array::takeLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#takeleftwhile)/[fp-ts-std/String::takeLeftWhile](https://samhh.github.io/fp-ts-std/modules/String.ts.html#takeleftwhile)
 - [x] tap - [fp-ts-std/IO::tap](https://samhh.github.io/fp-ts-std/modules/IO.ts.html#tap)
 - [x] test - [fp-ts-std/String::test](https://samhh.github.io/fp-ts-std/modules/String.ts.html#test)/[fp-ts-contrib/RegExp::test](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#test)
 - [x] thunkify - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)

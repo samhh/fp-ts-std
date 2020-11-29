@@ -676,3 +676,19 @@ export const toUpper: Endomorphism<string> = x => x.toUpperCase()
  * @since 0.7.0
  */
 export const toLower: Endomorphism<string> = x => x.toLowerCase()
+
+/**
+ * Calculate the longest initial substring for which all characters satisfy the
+ * specified predicate, creating a new string.
+ *
+ * @example
+ * import { takeLeftWhile } from 'fp-ts-std/String';
+ *
+ * assert.deepStrictEqual(takeLeftWhile(x => x !== 'c')('abcd'), 'ab');
+ *
+ * @since 0.7.0
+ */
+// The pointful first function is needed to typecheck for some reason
+export const takeLeftWhile: (
+  f: Predicate<string>,
+) => Endomorphism<string> = flow(f => A.takeLeftWhile(f), under)
