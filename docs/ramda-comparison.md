@@ -33,9 +33,9 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] assoc - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] assocPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - ~~[ ] binary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
-- ~~[ ] bind~~ - Do not use `this`.
+- ~~[ ] bind~~ Do not use `this`.
 - [x] both - [fp-ts-std/Boolean::both](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#both)/[fp-ts/Option::apFirst](https://gcanti.github.io/fp-ts/modules/Option.ts.html#apfirst)
-- [ ] call
+- ~~[ ] call~~ Use currying.
 - [x] chain - [fp-ts/Array::chain](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chain)
 - [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
 - [ ] clone
