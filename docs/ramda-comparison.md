@@ -38,7 +38,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - ~~[ ] call~~ Use currying.
 - [x] chain - [fp-ts/Array::chain](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chain)
 - [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
-- [ ] clone
+- ~~[ ] clone~~ Avoid mutation.
 - [x] comparator - [fp-ts/Ord::fromCompare](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#fromcompare)
 - [x] complement - [fp-ts/function::not](https://gcanti.github.io/fp-ts/modules/function.ts.html#not)
 - [ ] compose
