@@ -125,8 +125,8 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] lensIndex - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensProp - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [ ] lift
-- [ ] liftN
+- [x] lift - [fp-ts/Array::ap](https://gcanti.github.io/fp-ts/modules/Array.ts.html#ap)
+- [x] liftN - [fp-ts/Array::ap](https://gcanti.github.io/fp-ts/modules/Array.ts.html#ap)
 - [x] lt - [fp-ts/Ord::lt](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#lt)
 - [x] lte - [fp-ts/Ord::leq](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#leq)
 - [x] map - [fp-ts/Array::map](https://gcanti.github.io/fp-ts/modules/Array.ts.html#map)
