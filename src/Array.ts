@@ -670,7 +670,7 @@ export const symmetricDifference = <A>(eq: Eq<A>) => (
  */
 export const reduceWhile = <A>(p: Predicate<A>) => <B>(
   f: (x: A) => (y: B) => B,
-): (x: B) => (ys: Array<A>) => B => {
+): ((x: B) => (ys: Array<A>) => B) => {
   const go = (acc: B) => (ys: Array<A>): B =>
     pipe(
       NEA.fromArray(ys),
