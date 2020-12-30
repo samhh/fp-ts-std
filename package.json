@@ -27,7 +27,8 @@
     "fmt": "prettier --write .",
     "fmt-check": "prettier --check .",
     "test": "jest",
-    "docs": "docs-ts && tshm-docs-ts ./docs/modules/*",
+    "docs": "docs-ts",
+    "postdocs": "tshm-docs-ts ./docs/modules/*",
     "prepub": "rm -rf dist && mkdir -p dist && cp ./README.md ./dist/ && cat ./package.json | grep -v '\"private\":' > ./dist/package.json && yarn run build"
   },
   "devDependencies": {
