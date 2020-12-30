@@ -63,6 +63,10 @@ If `n` is greater than the length of the array, an empty array is returned.
 export declare const aperture: (n: number) => <A>(xs: A[]) => A[][]
 ```
 
+```hs
+aperture :: forall a. number -> Array a -> Array (Array a)
+```
+
 **Example**
 
 ```ts
@@ -95,6 +99,10 @@ possible ordered combination of the two input arrays.
 export declare const cartesian: <A>(xs: A[]) => <B>(ys: B[]) => [A, B][]
 ```
 
+```hs
+cartesian :: forall a b. Array a -> Array b -> Array [a, b]
+```
+
 **Example**
 
 ```ts
@@ -120,6 +128,10 @@ Map each item of an array to a key, and count how many map to each key.
 
 ```ts
 export declare const countBy: <A>(f: (x: A) => string) => (xs: A[]) => Record<string, number>
+```
+
+```hs
+countBy :: forall a. (a -> string) -> Array a -> Record string number
 ```
 
 **Example**
@@ -158,6 +170,10 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const dropAt: (i: number) => (n: number) => <A>(xs: A[]) => Option<A[]>
 ```
 
+```hs
+dropAt :: forall a. number -> number -> Array a -> Option (Array a)
+```
+
 **Example**
 
 ```ts
@@ -182,6 +198,10 @@ them.
 export declare const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<A[]>
 ```
 
+```hs
+dropRepeats :: forall a. Eq a -> Endomorphism (Array a)
+```
+
 **Example**
 
 ```ts
@@ -202,6 +222,10 @@ which all elements satisfy the specified predicate, creating a new array.
 
 ```ts
 export declare const dropRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
+```
+
+```hs
+dropRightWhile :: forall a. Predicate a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -228,6 +252,10 @@ Like `fp-ts/Array::elem`, but flipped.
 export declare const elemFlipped: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
 ```
 
+```hs
+elemFlipped :: forall a. Eq a -> Array a -> Predicate a
+```
+
 **Example**
 
 ```ts
@@ -250,6 +278,10 @@ Check if an array ends with the specified subarray.
 
 ```ts
 export declare const endsWith: <A>(eq: Eq<A>) => (end: A[]) => Predicate<A[]>
+```
+
+```hs
+endsWith :: forall a. Eq a -> Array a -> Predicate (Array a)
 ```
 
 **Example**
@@ -276,6 +308,10 @@ and `getEq` should be preferred on ordered data.
 
 ```ts
 export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<A[]>
+```
+
+```hs
+getDisorderedEq :: forall a. Ord a -> Eq (Array a)
 ```
 
 **Example**
@@ -307,6 +343,10 @@ The array of elements to insert must be non-empty.
 export declare const insertMany: (i: number) => <A>(xs: NonEmptyArray<A>) => (ys: A[]) => Option<NonEmptyArray<A>>
 ```
 
+```hs
+insertMany :: forall a. number -> NonEmptyArray a -> Array a -> Option (NonEmptyArray a)
+```
+
 **Example**
 
 ```ts
@@ -330,6 +370,10 @@ separator.
 
 ```ts
 export declare const join: (x: string) => (ys: string[]) => string
+```
+
+```hs
+join :: string -> Array string -> string
 ```
 
 **Example**
@@ -356,6 +400,10 @@ Get the length of an array.
 export declare const length: (xs: unknown[]) => number
 ```
 
+```hs
+length :: Array unknown -> number
+```
+
 **Example**
 
 ```ts
@@ -376,6 +424,10 @@ Calculate the mean of an array of numbers.
 export declare const mean: (xs: NonEmptyArray<number>) => number
 ```
 
+```hs
+mean :: NonEmptyArray number -> number
+```
+
 **Example**
 
 ```ts
@@ -394,6 +446,10 @@ Calculate the median of an array of numbers.
 
 ```ts
 export declare const median: (xs: NonEmptyArray<number>) => number
+```
+
+```hs
+median :: NonEmptyArray number -> number
 ```
 
 **Example**
@@ -419,6 +475,10 @@ If both indices are the same, the array is returned unchanged.
 
 ```ts
 export declare const moveFrom: (from: number) => (to: number) => <A>(xs: A[]) => Option<A[]>
+```
+
+```hs
+moveFrom :: forall a. number -> number -> Array a -> Option (Array a)
 ```
 
 **Example**
@@ -448,6 +508,10 @@ If both indices are the same, the array is returned unchanged.
 
 ```ts
 export declare const moveTo: (to: number) => (from: number) => <A>(xs: A[]) => Option<A[]>
+```
+
+```hs
+moveTo :: forall a. number -> number -> Array a -> Option (Array a)
 ```
 
 **Example**
@@ -484,6 +548,10 @@ assert.strictEqual(noneAreFive([4, 5, 4]), false);
 export declare const none: <A>(f: Predicate<A>) => Predicate<A[]>
 ```
 
+```hs
+none :: forall a. Predicate a -> Predicate (Array a)
+```
+
 Added in v0.7.0
 
 ## pluckFirst
@@ -498,6 +566,10 @@ the remaining items, sans the match (if any), are returned as well.
 
 ```ts
 export declare const pluckFirst: <A>(p: Predicate<A>) => (xs: A[]) => [Option<A>, A[]]
+```
+
+```hs
+pluckFirst :: forall a. Predicate a -> Array a -> [Option a, Array a]
 ```
 
 **Example**
@@ -526,6 +598,10 @@ Multiplies together all the numbers in the input array.
 export declare const product: (xs: number[]) => number
 ```
 
+```hs
+product :: Array number -> number
+```
+
 **Example**
 
 ```ts
@@ -548,6 +624,10 @@ short-circuits and returns the current accumulator value.
 
 ```ts
 export declare const reduceRightWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => (y: B) => B) => (x: B) => (ys: A[]) => B
+```
+
+```hs
+reduceRightWhile :: forall a b. Predicate a -> (a -> b -> b) -> b -> Array a -> b
 ```
 
 **Example**
@@ -577,6 +657,10 @@ short-circuits and returns the current accumulator value.
 export declare const reduceWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => (y: B) => B) => (x: B) => (ys: A[]) => B
 ```
 
+```hs
+reduceWhile :: forall a b. Predicate a -> (a -> b -> b) -> b -> Array a -> b
+```
+
 **Example**
 
 ```ts
@@ -601,6 +685,10 @@ thought of as the inverse of ordinary array filtering.
 
 ```ts
 export declare const reject: <A>(f: Predicate<A>) => Endomorphism<A[]>
+```
+
+```hs
+reject :: forall a. Predicate a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -629,6 +717,10 @@ This is merely a functional wrapper around `Array.prototype.slice`.
 export declare const slice: (start: number) => (end: number) => <A>(xs: A[]) => A[]
 ```
 
+```hs
+slice :: forall a. number -> number -> Array a -> Array a
+```
+
 **Example**
 
 ```ts
@@ -652,6 +744,10 @@ Check if an array starts with the specified subarray.
 
 ```ts
 export declare const startsWith: <A>(eq: Eq<A>) => (start: A[]) => Predicate<A[]>
+```
+
+```hs
+startsWith :: forall a. Eq a -> Array a -> Predicate (Array a)
 ```
 
 **Example**
@@ -678,6 +774,10 @@ Adds together all the numbers in the input array.
 export declare const sum: (xs: number[]) => number
 ```
 
+```hs
+sum :: Array number -> number
+```
+
 **Example**
 
 ```ts
@@ -699,6 +799,10 @@ duplicate values present only in one input array are maintained.
 
 ```ts
 export declare const symmetricDifference: <A>(eq: Eq<A>) => (xs: A[]) => Endomorphism<A[]>
+```
+
+```hs
+symmetricDifference :: forall a. Eq a -> Array a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -724,6 +828,10 @@ which all elements satisfy the specified predicate, creating a new array.
 export declare const takeRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
 ```
 
+```hs
+takeRightWhile :: forall a. Predicate a -> Endomorphism (Array a)
+```
+
 **Example**
 
 ```ts
@@ -747,6 +855,10 @@ than the following rows, their elements are skipped.
 
 ```ts
 export declare const transpose: <A>(xs: A[][]) => A[][]
+```
+
+```hs
+transpose :: forall a. Array (Array a) -> Array (Array a)
 ```
 
 **Example**
@@ -793,6 +905,10 @@ the array is checked is unspecified.
 
 ```ts
 export declare const upsert: <A>(eqA: Eq<A>) => (x: A) => (ys: A[]) => NonEmptyArray<A>
+```
+
+```hs
+upsert :: forall a. Eq a -> a -> Array a -> NonEmptyArray a
 ```
 
 **Example**
@@ -845,6 +961,10 @@ Returns a new array without the values present in the first input array.
 
 ```ts
 export declare const without: <A>(eq: Eq<A>) => (xs: A[]) => Endomorphism<A[]>
+```
+
+```hs
+without :: forall a. Eq a -> Array a -> Endomorphism (Array a)
 ```
 
 **Example**

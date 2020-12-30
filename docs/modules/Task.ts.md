@@ -31,6 +31,10 @@ took for the task to complete. The task otherwise operates as per usual.
 export declare const elapsed: (f: (n: Milliseconds) => IO<void>) => <A>(x: Task<A>) => Task<A>
 ```
 
+```hs
+elapsed :: forall a. (Milliseconds -> IO void) -> Task a -> Task a
+```
+
 **Example**
 
 ```ts
@@ -62,6 +66,10 @@ resolves with void. Can also be useful with async/await (`await sleep(n)()`).
 
 ```ts
 export declare const sleep: (n: Milliseconds) => Task<void>
+```
+
+```hs
+sleep :: Milliseconds -> Task void
 ```
 
 **Example**

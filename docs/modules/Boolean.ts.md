@@ -37,6 +37,10 @@ argument passes all of the predicates.
 export declare const allPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
+```hs
+allPass :: forall a. Array (Predicate a) -> Predicate a
+```
+
 **Example**
 
 ```ts
@@ -64,6 +68,10 @@ logical conjunction.
 export declare const and: (x: boolean) => Endomorphism<boolean>
 ```
 
+```hs
+and :: boolean -> Endomorphism boolean
+```
+
 **Example**
 
 ```ts
@@ -84,6 +92,10 @@ argument passes any of the predicates.
 
 ```ts
 export declare const anyPass: <A>(fs: Predicate<A>[]) => Predicate<A>
+```
+
+```hs
+anyPass :: forall a. Array (Predicate a) -> Predicate a
 ```
 
 **Example**
@@ -110,6 +122,10 @@ Combine two predicates under conjunction.
 
 ```ts
 export declare const both: <A>(f: Predicate<A>) => Endomorphism<Predicate<A>>
+```
+
+```hs
+both :: forall a. Predicate a -> Endomorphism (Predicate a)
 ```
 
 **Example**
@@ -139,6 +155,10 @@ Combine two predicates under disjunction.
 export declare const either: <A>(f: Predicate<A>) => Endomorphism<Predicate<A>>
 ```
 
+```hs
+either :: forall a. Predicate a -> Endomorphism (Predicate a)
+```
+
 **Example**
 
 ```ts
@@ -166,6 +186,10 @@ Invert a boolean.
 export declare const invert: Endomorphism<boolean>
 ```
 
+```hs
+invert :: Endomorphism boolean
+```
+
 **Example**
 
 ```ts
@@ -188,6 +212,10 @@ to logical disjunction.
 export declare const or: (x: boolean) => Endomorphism<boolean>
 ```
 
+```hs
+or :: boolean -> Endomorphism boolean
+```
+
 **Example**
 
 ```ts
@@ -208,6 +236,10 @@ Returns `true` if one argument is `true` and the other is `false`, else
 
 ```ts
 export declare const xor: (x: boolean) => Endomorphism<boolean>
+```
+
+```hs
+xor :: boolean -> Endomorphism boolean
 ```
 
 **Example**

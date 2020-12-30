@@ -38,6 +38,10 @@ it has the side effect of outputting the trace message.
 export declare const trace: (msg: string) => <A>(x: A) => A
 ```
 
+```hs
+trace :: forall a. string -> a -> a
+```
+
 **Example**
 
 ```ts
@@ -64,6 +68,10 @@ Like `trace`, but logs the generic value too.
 
 ```ts
 export declare const traceWithValue: (msg: string) => <A>(x: A) => A
+```
+
+```hs
+traceWithValue :: forall a. string -> a -> a
 ```
 
 **Example**

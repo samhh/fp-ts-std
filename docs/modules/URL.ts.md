@@ -32,6 +32,10 @@ Refine a foreign value to `URL`.
 export declare const isURL: Refinement<unknown, URL>
 ```
 
+```hs
+isURL :: Refinement unknown URL
+```
+
 **Example**
 
 ```ts
@@ -51,6 +55,10 @@ Safely parse a `URL`.
 
 ```ts
 export declare const parse: <E>(f: (e: TypeError) => E) => (x: string) => Either<E, URL>
+```
+
+```hs
+parse :: forall e. (TypeError -> e) -> string -> Either e URL
 ```
 
 **Example**
@@ -78,6 +86,10 @@ Safely parse a `URL`, returning an `Option`.
 export declare const parseO: (href: string) => Option<URL>
 ```
 
+```hs
+parseO :: string -> Option URL
+```
+
 **Example**
 
 ```ts
@@ -98,6 +110,10 @@ Unsafely parse a `URL`, throwing on failure.
 
 ```ts
 export declare const unsafeParse: (x: string) => URL
+```
+
+```hs
+unsafeParse :: string -> URL
 ```
 
 **Example**

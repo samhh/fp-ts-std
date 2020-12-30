@@ -31,6 +31,10 @@ value of its first invocation.
 export declare const once: <A, B>(f: (x: A) => B) => (x: A) => IO<B>
 ```
 
+```hs
+once :: forall a b. (a -> b) -> a -> IO b
+```
+
 **Example**
 
 ```ts
@@ -55,6 +59,10 @@ value.
 
 ```ts
 export declare const tap: <A>(f: (x: A) => IO<void>) => (x: A) => IO<A>
+```
+
+```hs
+tap :: forall a. (a -> IO void) -> a -> IO a
 ```
 
 **Example**

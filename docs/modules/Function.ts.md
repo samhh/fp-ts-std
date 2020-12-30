@@ -59,6 +59,10 @@ This is useful for applying functions point-free.
 export declare const applyTo: <A>(x: A) => <B>(f: (x: A) => B) => B
 ```
 
+```hs
+applyTo :: forall a b. a -> (a -> b) -> b
+```
+
 **Example**
 
 ```ts
@@ -86,6 +90,10 @@ Wraps a constructor function for functional invocation.
 export declare const construct: <A extends unknown[], B>(x: new (...xs: A) => B) => (xs: A) => B
 ```
 
+```hs
+construct :: forall a b. a extends Array unknown => (...a -> b) -> a -> b
+```
+
 **Example**
 
 ```ts
@@ -110,6 +118,10 @@ Curry a function with binary input.
 export declare const curry2: <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B) => C
 ```
 
+```hs
+curry2 :: forall a b c. ((a, b) -> c) -> a -> b -> c
+```
+
 **Example**
 
 ```ts
@@ -130,6 +142,10 @@ Curry a function with binary tuple input.
 
 ```ts
 export declare const curry2T: <A, B, C>(f: (xs: [A, B]) => C) => (a: A) => (b: B) => C
+```
+
+```hs
+curry2T :: forall a b c. ([a, b] -> c) -> a -> b -> c
 ```
 
 **Example**
@@ -154,6 +170,10 @@ Curry a function with ternary input.
 export declare const curry3: <A, B, C, D>(f: (a: A, b: B, c: C) => D) => (a: A) => (b: B) => (c: C) => D
 ```
 
+```hs
+curry3 :: forall a b c d. ((a, b, c) -> d) -> a -> b -> c -> d
+```
+
 **Example**
 
 ```ts
@@ -174,6 +194,10 @@ Curry a function with ternary tuple input.
 
 ```ts
 export declare const curry3T: <A, B, C, D>(f: (xs: [A, B, C]) => D) => (a: A) => (b: B) => (c: C) => D
+```
+
+```hs
+curry3T :: forall a b c d. ([a, b, c] -> d) -> a -> b -> c -> d
 ```
 
 **Example**
@@ -200,6 +224,10 @@ export declare const curry4: <A, B, C, D, E>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => E
 ```
 
+```hs
+curry4 :: forall a b c d e. ((a, b, c, d) -> e) -> a -> b -> c -> d -> e
+```
+
 **Example**
 
 ```ts
@@ -220,6 +248,10 @@ Curry a function with quaternary tuple input.
 
 ```ts
 export declare const curry4T: <A, B, C, D, E>(f: (xs: [A, B, C, D]) => E) => (a: A) => (b: B) => (c: C) => (d: D) => E
+```
+
+```hs
+curry4T :: forall a b c d e. ([a, b, c, d] -> e) -> a -> b -> c -> d -> e
 ```
 
 **Example**
@@ -246,6 +278,10 @@ export declare const curry5: <A, B, C, D, E, F>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
 ```
 
+```hs
+curry5 :: forall a b c d e f. ((a, b, c, d, e) -> f) -> a -> b -> c -> d -> e -> f
+```
+
 **Example**
 
 ```ts
@@ -270,6 +306,10 @@ export declare const curry5T: <A, B, C, D, E, F>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
 ```
 
+```hs
+curry5T :: forall a b c d e f. ([a, b, c, d, e] -> f) -> a -> b -> c -> d -> e -> f
+```
+
 **Example**
 
 ```ts
@@ -292,6 +332,10 @@ Flip the function/argument order of a curried function.
 export declare const flip: <A extends unknown[], B extends unknown[], C>(
   f: (...a: A) => (...b: B) => C
 ) => (...b: B) => (...a: A) => C
+```
+
+```hs
+flip :: forall a b c. a extends Array unknown, b extends Array unknown => (...a -> ...b -> c) -> ...b -> ...a -> c
 ```
 
 **Example**
@@ -324,6 +368,10 @@ export declare const guard: <A, B>(
 ) => (fallback: (x: A) => B) => (input: A) => B
 ```
 
+```hs
+guard :: forall a b. Array [(Predicate a), (a -> b)] -> (a -> b) -> a -> b
+```
+
 **Example**
 
 ```ts
@@ -353,6 +401,10 @@ succeeds, else the second morphism.
 
 ```ts
 export declare const ifElse: <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (f: Predicate<A>) => (x: A) => B
+```
+
+```hs
+ifElse :: forall a b. (a -> b) -> (a -> b) -> Predicate a -> a -> b
 ```
 
 **Example**
@@ -389,6 +441,10 @@ cache entries can be cleared from memory.
 export declare const memoize: <A>(eq: Eq<A>) => <B>(f: (x: A) => B) => (x: A) => B
 ```
 
+```hs
+memoize :: forall a b. Eq a -> (a -> b) -> a -> b
+```
+
 **Example**
 
 ```ts
@@ -423,6 +479,10 @@ instead of more appropriately an array.
 
 ```ts
 export declare const unary: <A extends unknown[], B>(f: (...xs: A) => B) => (xs: A) => B
+```
+
+```hs
+unary :: forall a b. a extends Array unknown => (...a -> b) -> a -> b
 ```
 
 **Example**
@@ -540,6 +600,10 @@ Runs the provided morphism on the input value if the predicate fails.
 export declare const unless: <A>(f: Predicate<A>) => (onFalse: Endomorphism<A>) => Endomorphism<A>
 ```
 
+```hs
+unless :: forall a. Predicate a -> Endomorphism a -> Endomorphism a
+```
+
 **Example**
 
 ```ts
@@ -567,6 +631,10 @@ holds.
 export declare const until: <A>(f: Predicate<A>) => (g: Endomorphism<A>) => Endomorphism<A>
 ```
 
+```hs
+until :: forall a. Predicate a -> Endomorphism a -> Endomorphism a
+```
+
 **Example**
 
 ```ts
@@ -590,6 +658,10 @@ Runs the provided morphism on the input value if the predicate holds.
 
 ```ts
 export declare const when: <A>(f: Predicate<A>) => (onTrue: Endomorphism<A>) => Endomorphism<A>
+```
+
+```hs
+when :: forall a. Predicate a -> Endomorphism a -> Endomorphism a
 ```
 
 **Example**
@@ -620,6 +692,10 @@ each iteration of the callback.
 export declare const withIndex: <A, B, C>(
   f: (g: (x: A) => B) => (ys: A[]) => C[]
 ) => (g: (i: number) => (x: A) => B) => (ys: A[]) => C[]
+```
+
+```hs
+withIndex :: forall a b c. ((a -> b) -> Array a -> Array c) -> (number -> a -> b) -> Array a -> Array c
 ```
 
 **Example**

@@ -38,6 +38,10 @@ Add two numbers together.
 export declare const add: (x: number) => Endomorphism<number>
 ```
 
+```hs
+add :: number -> Endomorphism number
+```
+
 **Example**
 
 ```ts
@@ -56,6 +60,10 @@ Decrement a number.
 
 ```ts
 export declare const decrement: Endomorphism<number>
+```
+
+```hs
+decrement :: Endomorphism number
 ```
 
 **Example**
@@ -79,6 +87,10 @@ _divisor_).
 export declare const divide: (divisor: number) => Endomorphism<number>
 ```
 
+```hs
+divide :: number -> Endomorphism number
+```
+
 **Example**
 
 ```ts
@@ -100,6 +112,10 @@ Increment a number.
 export declare const increment: Endomorphism<number>
 ```
 
+```hs
+increment :: Endomorphism number
+```
+
 **Example**
 
 ```ts
@@ -119,6 +135,10 @@ doing is checking whether or not the number is `NaN`.
 
 ```ts
 export declare const isValid: Predicate<number>
+```
+
+```hs
+isValid :: Predicate number
 ```
 
 **Example**
@@ -145,6 +165,10 @@ Calculate the modulus. See also `rem`.
 export declare const mod: (divisor: number) => Endomorphism<number>
 ```
 
+```hs
+mod :: number -> Endomorphism number
+```
+
 **Example**
 
 ```ts
@@ -167,6 +191,10 @@ Multiply two numbers together.
 export declare const multiply: (x: number) => Endomorphism<number>
 ```
 
+```hs
+multiply :: number -> Endomorphism number
+```
+
 **Example**
 
 ```ts
@@ -185,6 +213,10 @@ Unary negation.
 
 ```ts
 export declare const negate: Endomorphism<number>
+```
+
+```hs
+negate :: Endomorphism number
 ```
 
 **Example**
@@ -208,6 +240,10 @@ Calculates the remainder. See also `mod`.
 export declare const rem: (divisor: number) => Endomorphism<number>
 ```
 
+```hs
+rem :: number -> Endomorphism number
+```
+
 **Example**
 
 ```ts
@@ -229,6 +265,10 @@ _minuend_).
 
 ```ts
 export declare const subtract: (subtrahend: number) => Endomorphism<number>
+```
+
+```hs
+subtract :: number -> Endomorphism number
 ```
 
 **Example**

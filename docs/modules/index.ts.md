@@ -41,6 +41,10 @@ Added in v0.5.1
 export declare const array: typeof array
 ```
 
+```hs
+array :: typeof array
+```
+
 Added in v0.5.1
 
 ## boolean
@@ -49,6 +53,10 @@ Added in v0.5.1
 
 ```ts
 export declare const boolean: typeof boolean
+```
+
+```hs
+boolean :: typeof boolean
 ```
 
 Added in v0.5.1
@@ -61,6 +69,10 @@ Added in v0.5.1
 export declare const date: typeof date
 ```
 
+```hs
+date :: typeof date
+```
+
 Added in v0.5.1
 
 ## either
@@ -69,6 +81,10 @@ Added in v0.5.1
 
 ```ts
 export declare const either: typeof either
+```
+
+```hs
+either :: typeof either
 ```
 
 Added in v0.5.1
@@ -91,6 +107,10 @@ Added in v0.5.1
 export declare const json: typeof json
 ```
 
+```hs
+json :: typeof json
+```
+
 Added in v0.5.1
 
 ## number
@@ -99,6 +119,10 @@ Added in v0.5.1
 
 ```ts
 export declare const number: typeof number
+```
+
+```hs
+number :: typeof number
 ```
 
 Added in v0.5.1
@@ -111,6 +135,10 @@ Added in v0.5.1
 export declare const option: typeof option
 ```
 
+```hs
+option :: typeof option
+```
+
 Added in v0.5.1
 
 ## record
@@ -119,6 +147,10 @@ Added in v0.5.1
 
 ```ts
 export declare const record: typeof record
+```
+
+```hs
+record :: typeof record
 ```
 
 Added in v0.5.1
@@ -131,6 +163,10 @@ Added in v0.5.1
 export declare const string: typeof string
 ```
 
+```hs
+string :: typeof string
+```
+
 Added in v0.5.1
 
 ## task
@@ -139,6 +175,10 @@ Added in v0.5.1
 
 ```ts
 export declare const task: typeof task
+```
+
+```hs
+task :: typeof task
 ```
 
 Added in v0.5.1
@@ -151,6 +191,10 @@ Added in v0.5.1
 export declare const url: typeof url
 ```
 
+```hs
+url :: typeof url
+```
+
 Added in v0.5.1
 
 ## urlSearchParams
@@ -159,6 +203,10 @@ Added in v0.5.1
 
 ```ts
 export declare const urlSearchParams: typeof urlSearchParams
+```
+
+```hs
+urlSearchParams :: typeof urlSearchParams
 ```
 
 Added in v0.5.1

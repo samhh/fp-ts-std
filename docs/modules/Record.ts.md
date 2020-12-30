@@ -38,6 +38,10 @@ duplicate keys, see instead `invertLast`.
 export declare const invertAll: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, string[]>
 ```
 
+```hs
+invertAll :: forall a. (a -> string) -> Record string a -> Record string (Array string)
+```
+
 **Example**
 
 ```ts
@@ -61,6 +65,10 @@ lost, see instead `invertAll`.
 export declare const invertLast: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, string>
 ```
 
+```hs
+invertLast :: forall a. (a -> string) -> Record string a -> Record string string
+```
+
 **Example**
 
 ```ts
@@ -80,6 +88,10 @@ Like `lookup` from fp-ts, but flipped.
 
 ```ts
 export declare const lookupFlipped: <A>(x: Record<string, A>) => (k: string) => Option<A>
+```
+
+```hs
+lookupFlipped :: forall a. Record string a -> string -> Option a
 ```
 
 **Example**
@@ -107,6 +119,10 @@ consider defining a semigroup.
 export declare const merge: <A>(x: A) => <B>(y: B) => A & B
 ```
 
+```hs
+merge :: forall a b. a -> b -> a & b
+```
+
 **Example**
 
 ```ts
@@ -130,6 +146,10 @@ export declare const omit: <K extends string>(
 ) => <V, A extends Record<K, V>>(x: Partial<A>) => Pick<A, Exclude<keyof A, K>>
 ```
 
+```hs
+omit :: forall k v a. k extends string, a extends Record k v => Array k -> Partial a -> Pick a (Exclude keyof a k)
+```
+
 **Example**
 
 ```ts
@@ -151,6 +171,10 @@ type.
 
 ```ts
 export declare const pick: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+```
+
+```hs
+pick :: forall a k. k extends keyof a => () -> Array k -> a -> Pick a k
 ```
 
 **Example**
@@ -178,6 +202,10 @@ filtering.
 export declare const reject: <A>(f: Predicate<A>) => Endomorphism<Record<string, A>>
 ```
 
+```hs
+reject :: forall a. Predicate a -> Endomorphism (Record string a)
+```
+
 **Example**
 
 ```ts
@@ -199,6 +227,10 @@ Get the values from a `Record`.
 
 ```ts
 export declare const values: <A>(x: Record<string, A>) => A[]
+```
+
+```hs
+values :: forall a. Record string a -> Array a
 ```
 
 **Example**

@@ -42,6 +42,10 @@ Newtype representing milliseconds.
 export type Milliseconds = Newtype<{ readonly Milliseconds: unique symbol }, number>
 ```
 
+```hs
+newtype Milliseconds = number
+```
+
 Added in v0.7.0
 
 ## fieldMilliseconds
@@ -52,6 +56,10 @@ Added in v0.7.0
 
 ```ts
 export declare const fieldMilliseconds: Field<Milliseconds>
+```
+
+```hs
+fieldMilliseconds :: Field Milliseconds
 ```
 
 Added in v0.7.0
@@ -66,6 +74,10 @@ Get a `Date` from `Milliseconds`.
 export declare const fromMilliseconds: (x: Milliseconds) => Date
 ```
 
+```hs
+fromMilliseconds :: Milliseconds -> Date
+```
+
 Added in v0.7.0
 
 ## getTime
@@ -76,6 +88,10 @@ Get the time in milliseconds from a `Date`.
 
 ```ts
 export declare const getTime: (x: Date) => Milliseconds
+```
+
+```hs
+getTime :: Date -> Milliseconds
 ```
 
 **Example**
@@ -100,6 +116,10 @@ Check if a foreign value is a `Date`.
 export declare const isDate: Refinement<unknown, Date>
 ```
 
+```hs
+isDate :: Refinement unknown Date
+```
+
 **Example**
 
 ```ts
@@ -119,6 +139,10 @@ Check if a `Date` is actually valid. (We all love JavaScript, don't we?)
 
 ```ts
 export declare const isValid: Predicate<Date>
+```
+
+```hs
+isValid :: Predicate Date
 ```
 
 **Example**
@@ -146,6 +170,10 @@ newtype pertaining to its isomorphic nature.
 export declare const isoMilliseconds: Iso<Milliseconds, number>
 ```
 
+```hs
+isoMilliseconds :: Iso Milliseconds number
+```
+
 Added in v0.7.0
 
 ## mkMilliseconds
@@ -158,6 +186,10 @@ Lift a number to the `Milliseconds` newtype.
 export declare const mkMilliseconds: (a: number) => Milliseconds
 ```
 
+```hs
+mkMilliseconds :: number -> Milliseconds
+```
+
 Added in v0.7.0
 
 ## now
@@ -168,6 +200,10 @@ Get the time since the Unix Epoch in `Milliseconds` from a `Date`.
 
 ```ts
 export declare const now: IO<Milliseconds>
+```
+
+```hs
+now :: IO Milliseconds
 ```
 
 Added in v0.7.0
@@ -183,6 +219,10 @@ instances of the type.
 export declare const ordMilliseconds: Ord<Milliseconds>
 ```
 
+```hs
+ordMilliseconds :: Ord Milliseconds
+```
+
 Added in v0.7.0
 
 ## parseDate
@@ -193,6 +233,10 @@ Safely parse a date.
 
 ```ts
 export declare const parseDate: (ts: string | number) => Option<Date>
+```
+
+```hs
+parseDate :: string | number -> Option Date
 ```
 
 **Example**
@@ -220,6 +264,10 @@ Returns a date as a string value in ISO format.
 export declare const toISOString: (x: Date) => string
 ```
 
+```hs
+toISOString :: Date -> string
+```
+
 **Example**
 
 ```ts
@@ -242,6 +290,10 @@ Unwrap a `Milliseconds` newtype back to its underlying number representation.
 export declare const unMilliseconds: (s: Milliseconds) => number
 ```
 
+```hs
+unMilliseconds :: Milliseconds -> number
+```
+
 Added in v0.7.0
 
 ## unsafeParseDate
@@ -253,6 +305,10 @@ invalid `Date` being returned.
 
 ```ts
 export declare const unsafeParseDate: (x: string | number) => Date
+```
+
+```hs
+unsafeParseDate :: string | number -> Date
 ```
 
 **Example**

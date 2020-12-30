@@ -36,6 +36,10 @@ Clone a `URLSearchParams`.
 export declare const clone: (x: URLSearchParams) => URLSearchParams
 ```
 
+```hs
+clone :: URLSearchParams -> URLSearchParams
+```
+
 **Example**
 
 ```ts
@@ -59,6 +63,10 @@ An empty `URLSearchParams`.
 export declare const empty: URLSearchParams
 ```
 
+```hs
+empty :: URLSearchParams
+```
+
 **Example**
 
 ```ts
@@ -77,6 +85,10 @@ Parse a `URLSearchParams` from a record.
 
 ```ts
 export declare const fromRecord: (x: Record<string, string>) => URLSearchParams
+```
+
+```hs
+fromRecord :: Record string string -> URLSearchParams
 ```
 
 **Example**
@@ -101,6 +113,10 @@ Parse a `URLSearchParams` from a string.
 export declare const fromString: (x: string) => URLSearchParams
 ```
 
+```hs
+fromString :: string -> URLSearchParams
+```
+
 **Example**
 
 ```ts
@@ -121,6 +137,10 @@ Parse a `URLSearchParams` from an array of tuples.
 
 ```ts
 export declare const fromTuples: (x: [string, string][]) => URLSearchParams
+```
+
+```hs
+fromTuples :: Array [string, string] -> URLSearchParams
 ```
 
 **Example**
@@ -148,6 +168,10 @@ Attempt to get a URL parameter from a `URLSearchParams`.
 export declare const getParam: (k: string) => (ps: URLSearchParams) => Option<string>
 ```
 
+```hs
+getParam :: string -> URLSearchParams -> Option string
+```
+
 **Example**
 
 ```ts
@@ -172,6 +196,10 @@ Refine a foreign value to `URLSearchParams`.
 export declare const isURLSearchParams: Refinement<unknown, URLSearchParams>
 ```
 
+```hs
+isURLSearchParams :: Refinement unknown URLSearchParams
+```
+
 **Example**
 
 ```ts
@@ -193,6 +221,10 @@ Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
 
 ```ts
 export declare const setParam: (k: string) => (v: string) => (x: URLSearchParams) => URLSearchParams
+```
+
+```hs
+setParam :: string -> string -> URLSearchParams -> URLSearchParams
 ```
 
 **Example**

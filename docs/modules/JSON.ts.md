@@ -36,6 +36,10 @@ Newtype representing stringified JSON.
 export type JSONString = Newtype<{ readonly JSONString: unique symbol }, string>
 ```
 
+```hs
+newtype JSONString = string
+```
+
 Added in v0.5.0
 
 ## parse
@@ -46,6 +50,10 @@ Parse a string as JSON.
 
 ```ts
 export declare const parse: <E>(f: (e: SyntaxError) => E) => (x: string) => Either<E, unknown>
+```
+
+```hs
+parse :: forall e. (SyntaxError -> e) -> string -> Either e unknown
 ```
 
 **Example**
@@ -76,6 +84,10 @@ Parse a string as JSON, returning an `Option`.
 export declare const parseO: (stringified: string) => Option<unknown>
 ```
 
+```hs
+parseO :: string -> Option unknown
+```
+
 **Example**
 
 ```ts
@@ -99,6 +111,10 @@ Stringify some arbitrary data.
 
 ```ts
 export declare const stringify: <E>(f: (e: TypeError) => E) => (x: unknown) => Either<E, JSONString>
+```
+
+```hs
+stringify :: forall e. (TypeError -> e) -> unknown -> Either e JSONString
 ```
 
 **Example**
@@ -129,6 +145,10 @@ Stringify some arbitrary data, returning an `Option`.
 export declare const stringifyO: (data: unknown) => Option<JSONString>
 ```
 
+```hs
+stringifyO :: unknown -> Option JSONString
+```
+
 **Example**
 
 ```ts
@@ -154,6 +174,10 @@ Stringify a primitive value with no possibility of failure.
 export declare const stringifyPrimitive: (x: string | number | boolean) => JSONString
 ```
 
+```hs
+stringifyPrimitive :: string | number | boolean -> JSONString
+```
+
 **Example**
 
 ```ts
@@ -174,6 +198,10 @@ Unwrap a `JSONString` newtype back to its underlying string representation.
 export declare const unJSONString: (s: JSONString) => string
 ```
 
+```hs
+unJSONString :: JSONString -> string
+```
+
 Added in v0.6.0
 
 ## unstringify
@@ -185,6 +213,10 @@ with the `JSONString` newtype.
 
 ```ts
 export declare const unstringify: (x: JSONString) => unknown
+```
+
+```hs
+unstringify :: JSONString -> unknown
 ```
 
 **Example**

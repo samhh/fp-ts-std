@@ -29,6 +29,10 @@ Unwrap the value from within an `Option`, throwing if `None`.
 export declare const unsafeUnwrap: <A>(x: Option<A>) => A
 ```
 
+```hs
+unsafeUnwrap :: forall a. Option a -> a
+```
+
 **Example**
 
 ```ts

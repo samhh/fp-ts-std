@@ -30,6 +30,10 @@ Unwrap the value from within an `Either`, throwing if `Left`.
 export declare const unsafeUnwrap: <A>(x: Either<unknown, A>) => A
 ```
 
+```hs
+unsafeUnwrap :: forall a. Either unknown a -> a
+```
+
 **Example**
 
 ```ts
@@ -49,6 +53,10 @@ Unwrap the value from within an `Either`, throwing if `Right`.
 
 ```ts
 export declare const unsafeUnwrapLeft: <E>(x: Either<E, unknown>) => E
+```
+
+```hs
+unsafeUnwrapLeft :: forall e. Either e unknown -> e
 ```
 
 **Example**
