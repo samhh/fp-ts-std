@@ -31,7 +31,7 @@ export declare const unsafeUnwrap: <A>(x: Either<unknown, A>) => A
 ```
 
 ```hs
-unsafeUnwrap :: forall a. Either unknown a -> a
+unsafeUnwrap :: Either unknown a -> a
 ```
 
 **Example**
@@ -56,7 +56,7 @@ export declare const unsafeUnwrapLeft: <E>(x: Either<E, unknown>) => E
 ```
 
 ```hs
-unsafeUnwrapLeft :: forall e. Either e unknown -> e
+unsafeUnwrapLeft :: Either e unknown -> e
 ```
 
 **Example**

@@ -32,7 +32,7 @@ export declare const elapsed: (f: (n: Milliseconds) => IO<void>) => <A>(x: Task<
 ```
 
 ```hs
-elapsed :: forall a. (Milliseconds -> IO void) -> Task a -> Task a
+elapsed :: (Milliseconds -> IO void) -> Task a -> Task a
 ```
 
 **Example**

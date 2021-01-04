@@ -53,7 +53,7 @@ export declare const parse: <E>(f: (e: SyntaxError) => E) => (x: string) => Eith
 ```
 
 ```hs
-parse :: forall e. (SyntaxError -> e) -> string -> Either e unknown
+parse :: (SyntaxError -> e) -> string -> Either e unknown
 ```
 
 **Example**
@@ -114,7 +114,7 @@ export declare const stringify: <E>(f: (e: TypeError) => E) => (x: unknown) => E
 ```
 
 ```hs
-stringify :: forall e. (TypeError -> e) -> unknown -> Either e JSONString
+stringify :: (TypeError -> e) -> unknown -> Either e JSONString
 ```
 
 **Example**

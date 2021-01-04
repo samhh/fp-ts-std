@@ -39,7 +39,7 @@ export declare const trace: (msg: string) => <A>(x: A) => A
 ```
 
 ```hs
-trace :: forall a. string -> a -> a
+trace :: string -> a -> a
 ```
 
 **Example**
@@ -71,7 +71,7 @@ export declare const traceWithValue: (msg: string) => <A>(x: A) => A
 ```
 
 ```hs
-traceWithValue :: forall a. string -> a -> a
+traceWithValue :: string -> a -> a
 ```
 
 **Example**

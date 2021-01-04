@@ -60,7 +60,7 @@ export declare const applyTo: <A>(x: A) => <B>(f: (x: A) => B) => B
 ```
 
 ```hs
-applyTo :: forall a b. a -> (a -> b) -> b
+applyTo :: a -> (a -> b) -> b
 ```
 
 **Example**
@@ -91,7 +91,7 @@ export declare const construct: <A extends unknown[], B>(x: new (...xs: A) => B)
 ```
 
 ```hs
-construct :: forall a b. a extends (Array unknown) => (...a -> b) -> a -> b
+construct :: a extends (Array unknown) => (...a -> b) -> a -> b
 ```
 
 **Example**
@@ -119,7 +119,7 @@ export declare const curry2: <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B)
 ```
 
 ```hs
-curry2 :: forall a b c. ((a, b) -> c) -> a -> b -> c
+curry2 :: ((a, b) -> c) -> a -> b -> c
 ```
 
 **Example**
@@ -145,7 +145,7 @@ export declare const curry2T: <A, B, C>(f: (xs: [A, B]) => C) => (a: A) => (b: B
 ```
 
 ```hs
-curry2T :: forall a b c. ([a, b] -> c) -> a -> b -> c
+curry2T :: ([a, b] -> c) -> a -> b -> c
 ```
 
 **Example**
@@ -171,7 +171,7 @@ export declare const curry3: <A, B, C, D>(f: (a: A, b: B, c: C) => D) => (a: A) 
 ```
 
 ```hs
-curry3 :: forall a b c d. ((a, b, c) -> d) -> a -> b -> c -> d
+curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
 ```
 
 **Example**
@@ -197,7 +197,7 @@ export declare const curry3T: <A, B, C, D>(f: (xs: [A, B, C]) => D) => (a: A) =>
 ```
 
 ```hs
-curry3T :: forall a b c d. ([a, b, c] -> d) -> a -> b -> c -> d
+curry3T :: ([a, b, c] -> d) -> a -> b -> c -> d
 ```
 
 **Example**
@@ -225,7 +225,7 @@ export declare const curry4: <A, B, C, D, E>(
 ```
 
 ```hs
-curry4 :: forall a b c d e. ((a, b, c, d) -> e) -> a -> b -> c -> d -> e
+curry4 :: ((a, b, c, d) -> e) -> a -> b -> c -> d -> e
 ```
 
 **Example**
@@ -251,7 +251,7 @@ export declare const curry4T: <A, B, C, D, E>(f: (xs: [A, B, C, D]) => E) => (a:
 ```
 
 ```hs
-curry4T :: forall a b c d e. ([a, b, c, d] -> e) -> a -> b -> c -> d -> e
+curry4T :: ([a, b, c, d] -> e) -> a -> b -> c -> d -> e
 ```
 
 **Example**
@@ -279,7 +279,7 @@ export declare const curry5: <A, B, C, D, E, F>(
 ```
 
 ```hs
-curry5 :: forall a b c d e f. ((a, b, c, d, e) -> f) -> a -> b -> c -> d -> e -> f
+curry5 :: ((a, b, c, d, e) -> f) -> a -> b -> c -> d -> e -> f
 ```
 
 **Example**
@@ -307,7 +307,7 @@ export declare const curry5T: <A, B, C, D, E, F>(
 ```
 
 ```hs
-curry5T :: forall a b c d e f. ([a, b, c, d, e] -> f) -> a -> b -> c -> d -> e -> f
+curry5T :: ([a, b, c, d, e] -> f) -> a -> b -> c -> d -> e -> f
 ```
 
 **Example**
@@ -335,7 +335,7 @@ export declare const flip: <A extends unknown[], B extends unknown[], C>(
 ```
 
 ```hs
-flip :: forall a b c. a extends (Array unknown), b extends (Array unknown) => (...a -> ...b -> c) -> ...b -> ...a -> c
+flip :: a extends (Array unknown), b extends (Array unknown) => (...a -> ...b -> c) -> ...b -> ...a -> c
 ```
 
 **Example**
@@ -369,7 +369,7 @@ export declare const guard: <A, B>(
 ```
 
 ```hs
-guard :: forall a b. Array [(Predicate a), a -> b] -> (a -> b) -> a -> b
+guard :: Array [(Predicate a), a -> b] -> (a -> b) -> a -> b
 ```
 
 **Example**
@@ -404,7 +404,7 @@ export declare const ifElse: <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => 
 ```
 
 ```hs
-ifElse :: forall a b. (a -> b) -> (a -> b) -> Predicate a -> a -> b
+ifElse :: (a -> b) -> (a -> b) -> Predicate a -> a -> b
 ```
 
 **Example**
@@ -442,7 +442,7 @@ export declare const memoize: <A>(eq: Eq<A>) => <B>(f: (x: A) => B) => (x: A) =>
 ```
 
 ```hs
-memoize :: forall a b. Eq a -> (a -> b) -> a -> b
+memoize :: Eq a -> (a -> b) -> a -> b
 ```
 
 **Example**
@@ -482,7 +482,7 @@ export declare const unary: <A extends unknown[], B>(f: (...xs: A) => B) => (xs:
 ```
 
 ```hs
-unary :: forall a b. a extends (Array unknown) => (...a -> b) -> a -> b
+unary :: a extends (Array unknown) => (...a -> b) -> a -> b
 ```
 
 **Example**
@@ -601,7 +601,7 @@ export declare const unless: <A>(f: Predicate<A>) => (onFalse: Endomorphism<A>) 
 ```
 
 ```hs
-unless :: forall a. Predicate a -> Endomorphism a -> Endomorphism a
+unless :: Predicate a -> Endomorphism a -> Endomorphism a
 ```
 
 **Example**
@@ -632,7 +632,7 @@ export declare const until: <A>(f: Predicate<A>) => (g: Endomorphism<A>) => Endo
 ```
 
 ```hs
-until :: forall a. Predicate a -> Endomorphism a -> Endomorphism a
+until :: Predicate a -> Endomorphism a -> Endomorphism a
 ```
 
 **Example**
@@ -661,7 +661,7 @@ export declare const when: <A>(f: Predicate<A>) => (onTrue: Endomorphism<A>) => 
 ```
 
 ```hs
-when :: forall a. Predicate a -> Endomorphism a -> Endomorphism a
+when :: Predicate a -> Endomorphism a -> Endomorphism a
 ```
 
 **Example**
@@ -695,7 +695,7 @@ export declare const withIndex: <A, B, C>(
 ```
 
 ```hs
-withIndex :: forall a b c. ((a -> b) -> Array a -> Array c) -> (number -> a -> b) -> Array a -> Array c
+withIndex :: ((a -> b) -> Array a -> Array c) -> (number -> a -> b) -> Array a -> Array c
 ```
 
 **Example**

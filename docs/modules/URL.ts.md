@@ -58,7 +58,7 @@ export declare const parse: <E>(f: (e: TypeError) => E) => (x: string) => Either
 ```
 
 ```hs
-parse :: forall e. (TypeError -> e) -> string -> Either e URL
+parse :: (TypeError -> e) -> string -> Either e URL
 ```
 
 **Example**

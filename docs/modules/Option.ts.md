@@ -30,7 +30,7 @@ export declare const unsafeUnwrap: <A>(x: Option<A>) => A
 ```
 
 ```hs
-unsafeUnwrap :: forall a. Option a -> a
+unsafeUnwrap :: Option a -> a
 ```
 
 **Example**

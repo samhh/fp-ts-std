@@ -64,7 +64,7 @@ export declare const aperture: (n: number) => <A>(xs: A[]) => A[][]
 ```
 
 ```hs
-aperture :: forall a. number -> Array a -> Array (Array a)
+aperture :: number -> Array a -> Array (Array a)
 ```
 
 **Example**
@@ -100,7 +100,7 @@ export declare const cartesian: <A>(xs: A[]) => <B>(ys: B[]) => [A, B][]
 ```
 
 ```hs
-cartesian :: forall a b. Array a -> Array b -> Array [a, b]
+cartesian :: Array a -> Array b -> Array [a, b]
 ```
 
 **Example**
@@ -131,7 +131,7 @@ export declare const countBy: <A>(f: (x: A) => string) => (xs: A[]) => Record<st
 ```
 
 ```hs
-countBy :: forall a. (a -> string) -> Array a -> Record string number
+countBy :: (a -> string) -> Array a -> Record string number
 ```
 
 **Example**
@@ -171,7 +171,7 @@ export declare const dropAt: (i: number) => (n: number) => <A>(xs: A[]) => Optio
 ```
 
 ```hs
-dropAt :: forall a. number -> number -> Array a -> Option (Array a)
+dropAt :: number -> number -> Array a -> Option (Array a)
 ```
 
 **Example**
@@ -199,7 +199,7 @@ export declare const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<A[]>
 ```
 
 ```hs
-dropRepeats :: forall a. Eq a -> Endomorphism (Array a)
+dropRepeats :: Eq a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -225,7 +225,7 @@ export declare const dropRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
 ```
 
 ```hs
-dropRightWhile :: forall a. Predicate a -> Endomorphism (Array a)
+dropRightWhile :: Predicate a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -253,7 +253,7 @@ export declare const elemFlipped: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
 ```
 
 ```hs
-elemFlipped :: forall a. Eq a -> Array a -> Predicate a
+elemFlipped :: Eq a -> Array a -> Predicate a
 ```
 
 **Example**
@@ -281,7 +281,7 @@ export declare const endsWith: <A>(eq: Eq<A>) => (end: A[]) => Predicate<A[]>
 ```
 
 ```hs
-endsWith :: forall a. Eq a -> Array a -> Predicate (Array a)
+endsWith :: Eq a -> Array a -> Predicate (Array a)
 ```
 
 **Example**
@@ -311,7 +311,7 @@ export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<A[]>
 ```
 
 ```hs
-getDisorderedEq :: forall a. Ord a -> Eq (Array a)
+getDisorderedEq :: Ord a -> Eq (Array a)
 ```
 
 **Example**
@@ -344,7 +344,7 @@ export declare const insertMany: (i: number) => <A>(xs: NonEmptyArray<A>) => (ys
 ```
 
 ```hs
-insertMany :: forall a. number -> NonEmptyArray a -> Array a -> Option (NonEmptyArray a)
+insertMany :: number -> NonEmptyArray a -> Array a -> Option (NonEmptyArray a)
 ```
 
 **Example**
@@ -478,7 +478,7 @@ export declare const moveFrom: (from: number) => (to: number) => <A>(xs: A[]) =>
 ```
 
 ```hs
-moveFrom :: forall a. number -> number -> Array a -> Option (Array a)
+moveFrom :: number -> number -> Array a -> Option (Array a)
 ```
 
 **Example**
@@ -511,7 +511,7 @@ export declare const moveTo: (to: number) => (from: number) => <A>(xs: A[]) => O
 ```
 
 ```hs
-moveTo :: forall a. number -> number -> Array a -> Option (Array a)
+moveTo :: number -> number -> Array a -> Option (Array a)
 ```
 
 **Example**
@@ -549,7 +549,7 @@ export declare const none: <A>(f: Predicate<A>) => Predicate<A[]>
 ```
 
 ```hs
-none :: forall a. Predicate a -> Predicate (Array a)
+none :: Predicate a -> Predicate (Array a)
 ```
 
 Added in v0.7.0
@@ -569,7 +569,7 @@ export declare const pluckFirst: <A>(p: Predicate<A>) => (xs: A[]) => [Option<A>
 ```
 
 ```hs
-pluckFirst :: forall a. Predicate a -> Array a -> [Option a, Array a]
+pluckFirst :: Predicate a -> Array a -> [Option a, Array a]
 ```
 
 **Example**
@@ -627,7 +627,7 @@ export declare const reduceRightWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => 
 ```
 
 ```hs
-reduceRightWhile :: forall a b. Predicate a -> (a -> b -> b) -> b -> Array a -> b
+reduceRightWhile :: Predicate a -> (a -> b -> b) -> b -> Array a -> b
 ```
 
 **Example**
@@ -658,7 +658,7 @@ export declare const reduceWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => (y: B
 ```
 
 ```hs
-reduceWhile :: forall a b. Predicate a -> (a -> b -> b) -> b -> Array a -> b
+reduceWhile :: Predicate a -> (a -> b -> b) -> b -> Array a -> b
 ```
 
 **Example**
@@ -688,7 +688,7 @@ export declare const reject: <A>(f: Predicate<A>) => Endomorphism<A[]>
 ```
 
 ```hs
-reject :: forall a. Predicate a -> Endomorphism (Array a)
+reject :: Predicate a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -718,7 +718,7 @@ export declare const slice: (start: number) => (end: number) => <A>(xs: A[]) => 
 ```
 
 ```hs
-slice :: forall a. number -> number -> Array a -> Array a
+slice :: number -> number -> Array a -> Array a
 ```
 
 **Example**
@@ -747,7 +747,7 @@ export declare const startsWith: <A>(eq: Eq<A>) => (start: A[]) => Predicate<A[]
 ```
 
 ```hs
-startsWith :: forall a. Eq a -> Array a -> Predicate (Array a)
+startsWith :: Eq a -> Array a -> Predicate (Array a)
 ```
 
 **Example**
@@ -802,7 +802,7 @@ export declare const symmetricDifference: <A>(eq: Eq<A>) => (xs: A[]) => Endomor
 ```
 
 ```hs
-symmetricDifference :: forall a. Eq a -> Array a -> Endomorphism (Array a)
+symmetricDifference :: Eq a -> Array a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -829,7 +829,7 @@ export declare const takeRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
 ```
 
 ```hs
-takeRightWhile :: forall a. Predicate a -> Endomorphism (Array a)
+takeRightWhile :: Predicate a -> Endomorphism (Array a)
 ```
 
 **Example**
@@ -858,7 +858,7 @@ export declare const transpose: <A>(xs: A[][]) => A[][]
 ```
 
 ```hs
-transpose :: forall a. Array (Array a) -> Array (Array a)
+transpose :: Array (Array a) -> Array (Array a)
 ```
 
 **Example**
@@ -908,7 +908,7 @@ export declare const upsert: <A>(eqA: Eq<A>) => (x: A) => (ys: A[]) => NonEmptyA
 ```
 
 ```hs
-upsert :: forall a. Eq a -> a -> Array a -> NonEmptyArray a
+upsert :: Eq a -> a -> Array a -> NonEmptyArray a
 ```
 
 **Example**
@@ -964,7 +964,7 @@ export declare const without: <A>(eq: Eq<A>) => (xs: A[]) => Endomorphism<A[]>
 ```
 
 ```hs
-without :: forall a. Eq a -> Array a -> Endomorphism (Array a)
+without :: Eq a -> Array a -> Endomorphism (Array a)
 ```
 
 **Example**

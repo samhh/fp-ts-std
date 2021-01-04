@@ -38,7 +38,7 @@ export declare const allPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
 ```hs
-allPass :: forall a. Array (Predicate a) -> Predicate a
+allPass :: Array (Predicate a) -> Predicate a
 ```
 
 **Example**
@@ -95,7 +95,7 @@ export declare const anyPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
 ```hs
-anyPass :: forall a. Array (Predicate a) -> Predicate a
+anyPass :: Array (Predicate a) -> Predicate a
 ```
 
 **Example**
@@ -125,7 +125,7 @@ export declare const both: <A>(f: Predicate<A>) => Endomorphism<Predicate<A>>
 ```
 
 ```hs
-both :: forall a. Predicate a -> Endomorphism (Predicate a)
+both :: Predicate a -> Endomorphism (Predicate a)
 ```
 
 **Example**
@@ -156,7 +156,7 @@ export declare const either: <A>(f: Predicate<A>) => Endomorphism<Predicate<A>>
 ```
 
 ```hs
-either :: forall a. Predicate a -> Endomorphism (Predicate a)
+either :: Predicate a -> Endomorphism (Predicate a)
 ```
 
 **Example**

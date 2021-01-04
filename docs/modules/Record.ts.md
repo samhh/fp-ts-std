@@ -39,7 +39,7 @@ export declare const invertAll: <A>(f: (x: A) => string) => (x: Record<string, A
 ```
 
 ```hs
-invertAll :: forall a. (a -> string) -> Record string a -> Record string (Array string)
+invertAll :: (a -> string) -> Record string a -> Record string (Array string)
 ```
 
 **Example**
@@ -66,7 +66,7 @@ export declare const invertLast: <A>(f: (x: A) => string) => (x: Record<string, 
 ```
 
 ```hs
-invertLast :: forall a. (a -> string) -> Record string a -> Record string string
+invertLast :: (a -> string) -> Record string a -> Record string string
 ```
 
 **Example**
@@ -91,7 +91,7 @@ export declare const lookupFlipped: <A>(x: Record<string, A>) => (k: string) => 
 ```
 
 ```hs
-lookupFlipped :: forall a. Record string a -> string -> Option a
+lookupFlipped :: Record string a -> string -> Option a
 ```
 
 **Example**
@@ -120,7 +120,7 @@ export declare const merge: <A>(x: A) => <B>(y: B) => A & B
 ```
 
 ```hs
-merge :: forall a b. a -> b -> a & b
+merge :: a -> b -> a & b
 ```
 
 **Example**
@@ -147,7 +147,7 @@ export declare const omit: <K extends string>(
 ```
 
 ```hs
-omit :: forall k v a. k extends string, a extends (Record k v) => Array k -> Partial a -> Pick a (Exclude (keyof a) k)
+omit :: k extends string, a extends (Record k v) => Array k -> Partial a -> Pick a (Exclude (keyof a) k)
 ```
 
 **Example**
@@ -174,7 +174,7 @@ export declare const pick: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pi
 ```
 
 ```hs
-pick :: forall a k. k extends (keyof a) => () -> Array k -> a -> Pick a k
+pick :: k extends (keyof a) => () -> Array k -> a -> Pick a k
 ```
 
 **Example**
@@ -203,7 +203,7 @@ export declare const reject: <A>(f: Predicate<A>) => Endomorphism<Record<string,
 ```
 
 ```hs
-reject :: forall a. Predicate a -> Endomorphism (Record string a)
+reject :: Predicate a -> Endomorphism (Record string a)
 ```
 
 **Example**
@@ -230,7 +230,7 @@ export declare const values: <A>(x: Record<string, A>) => A[]
 ```
 
 ```hs
-values :: forall a. Record string a -> Array a
+values :: Record string a -> Array a
 ```
 
 **Example**
