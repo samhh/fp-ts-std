@@ -91,7 +91,7 @@ export declare const construct: <A extends unknown[], B>(x: new (...xs: A) => B)
 ```
 
 ```hs
-construct :: forall a b. a extends Array unknown => (...a -> b) -> a -> b
+construct :: forall a b. a extends (Array unknown) => (...a -> b) -> a -> b
 ```
 
 **Example**
@@ -335,7 +335,7 @@ export declare const flip: <A extends unknown[], B extends unknown[], C>(
 ```
 
 ```hs
-flip :: forall a b c. a extends Array unknown, b extends Array unknown => (...a -> ...b -> c) -> ...b -> ...a -> c
+flip :: forall a b c. a extends (Array unknown), b extends (Array unknown) => (...a -> ...b -> c) -> ...b -> ...a -> c
 ```
 
 **Example**
@@ -369,7 +369,7 @@ export declare const guard: <A, B>(
 ```
 
 ```hs
-guard :: forall a b. Array [(Predicate a), (a -> b)] -> (a -> b) -> a -> b
+guard :: forall a b. Array [(Predicate a), a -> b] -> (a -> b) -> a -> b
 ```
 
 **Example**
@@ -482,7 +482,7 @@ export declare const unary: <A extends unknown[], B>(f: (...xs: A) => B) => (xs:
 ```
 
 ```hs
-unary :: forall a b. a extends Array unknown => (...a -> b) -> a -> b
+unary :: forall a b. a extends (Array unknown) => (...a -> b) -> a -> b
 ```
 
 **Example**

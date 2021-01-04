@@ -147,7 +147,7 @@ export declare const omit: <K extends string>(
 ```
 
 ```hs
-omit :: forall k v a. k extends string, a extends Record k v => Array k -> Partial a -> Pick a (Exclude keyof a k)
+omit :: forall k v a. k extends string, a extends (Record k v) => Array k -> Partial a -> Pick a (Exclude (keyof a) k)
 ```
 
 **Example**
@@ -174,7 +174,7 @@ export declare const pick: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pi
 ```
 
 ```hs
-pick :: forall a k. k extends keyof a => () -> Array k -> a -> Pick a k
+pick :: forall a k. k extends (keyof a) => () -> Array k -> a -> Pick a k
 ```
 
 **Example**
