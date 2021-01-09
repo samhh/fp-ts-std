@@ -507,6 +507,10 @@ Uncurry a binary function.
 export declare const uncurry2: <A, B, C>(f: (a: A) => (b: B) => C) => ([a, b]: [A, B]) => C
 ```
 
+```hs
+uncurry2 :: (a -> b -> c) -> [a, b] -> c
+```
+
 **Example**
 
 ```ts
@@ -527,6 +531,10 @@ Uncurry a ternary function.
 
 ```ts
 export declare const uncurry3: <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) => ([a, b, c]: [A, B, C]) => D
+```
+
+```hs
+uncurry3 :: (a -> b -> c -> d) -> [a, b, c] -> d
 ```
 
 **Example**
@@ -553,6 +561,10 @@ export declare const uncurry4: <A, B, C, D, E>(
 ) => ([a, b, c, d]: [A, B, C, D]) => E
 ```
 
+```hs
+uncurry4 :: (a -> b -> c -> d -> e) -> [a, b, c, d] -> e
+```
+
 **Example**
 
 ```ts
@@ -575,6 +587,10 @@ Uncurry a quinary function.
 export declare const uncurry5: <A, B, C, D, E, F>(
   f: (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
 ) => ([a, b, c, d, e]: [A, B, C, D, E]) => F
+```
+
+```hs
+uncurry5 :: (a -> b -> c -> d -> e -> f) -> [a, b, c, d, e] -> f
 ```
 
 **Example**

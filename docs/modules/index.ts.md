@@ -97,6 +97,10 @@ Added in v0.5.1
 export declare const function: typeof function_
 ```
 
+```hs
+function :: typeof function_
+```
+
 Added in v0.5.1
 
 ## json
