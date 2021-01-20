@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.8.0 (_Unreleased_)
+## 0.8.0 (2021-01-20)
 
 - Add `reduceWhile` and `reduceRightWhile` functions to the `Array` module.
 - Add missing re-exports to index module (`Debug`, `IO`).
