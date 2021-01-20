@@ -7,16 +7,18 @@
 import * as array from "./Array"
 import * as boolean from "./Boolean"
 import * as date from "./Date"
+import * as debug from "./Debug"
 import * as either from "./Either"
 import * as function_ from "./Function"
+import * as io from "./IO"
 import * as json from "./JSON"
 import * as number from "./Number"
 import * as option from "./Option"
 import * as record from "./Record"
 import * as string from "./String"
 import * as task from "./Task"
-import * as urlSearchParams from "./URLSearchParams"
 import * as url from "./URL"
+import * as urlSearchParams from "./URLSearchParams"
 
 export {
   /**
@@ -32,6 +34,10 @@ export {
    */
   date,
   /**
+   * @since 0.8.0
+   */
+  debug,
+  /**
    * @since 0.5.1
    */
   either,
@@ -39,6 +45,10 @@ export {
    * @since 0.5.1
    */
   function_ as function,
+  /**
+   * @since 0.8.0
+   */
+  io,
   /**
    * @since 0.5.1
    */
@@ -66,9 +76,9 @@ export {
   /**
    * @since 0.5.1
    */
-  urlSearchParams,
+  url,
   /**
    * @since 0.5.1
    */
-  url,
+  urlSearchParams,
 }

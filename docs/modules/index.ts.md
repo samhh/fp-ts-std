@@ -18,8 +18,10 @@ Added in v0.5.1
   - [array](#array)
   - [boolean](#boolean)
   - [date](#date)
+  - [debug](#debug)
   - [either](#either)
   - [function](#function)
+  - [io](#io)
   - [json](#json)
   - [number](#number)
   - [option](#option)
@@ -75,6 +77,20 @@ date :: typeof date
 
 Added in v0.5.1
 
+## debug
+
+**Signature**
+
+```ts
+export declare const debug: typeof debug
+```
+
+```hs
+debug :: typeof debug
+```
+
+Added in v0.8.0
+
 ## either
 
 **Signature**
@@ -102,6 +118,20 @@ function :: typeof function_
 ```
 
 Added in v0.5.1
+
+## io
+
+**Signature**
+
+```ts
+export declare const io: typeof io
+```
+
+```hs
+io :: typeof io
+```
+
+Added in v0.8.0
 
 ## json
 
