@@ -44,16 +44,17 @@ Added in v0.5.0
 
 ## parse
 
-Parse a string as JSON.
+Parse a string as JSON. The `Json` type on the right side comes from `fp-ts`
+and is a union of all possible parsed types.
 
 **Signature**
 
 ```ts
-export declare const parse: <E>(f: (e: SyntaxError) => E) => (x: string) => Either<E, unknown>
+export declare const parse: <E>(f: (e: SyntaxError) => E) => (x: string) => Either<E, Json>
 ```
 
 ```hs
-parse :: (SyntaxError -> e) -> string -> Either e unknown
+parse :: (SyntaxError -> e) -> string -> Either e Json
 ```
 
 **Example**

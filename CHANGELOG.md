@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.9.0 (_Unreleased_)
 
 - Add `minimum` and `maximum` functions to the `Array` module.
+- Narrow the return type of `parse`.
 
 ## 0.8.0 (2021-01-20)
 

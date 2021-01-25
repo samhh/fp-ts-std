@@ -3,7 +3,7 @@
  */
 
 import { Newtype, iso } from "newtype-ts"
-import { Either } from "fp-ts/Either"
+import { Either, Json } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
@@ -113,7 +113,8 @@ export const unstringify: (x: JSONString) => unknown = flow(
 )
 
 /**
- * Parse a string as JSON.
+ * Parse a string as JSON. The `Json` type on the right side comes from `fp-ts`
+ * and is a union of all possible parsed types.
  *
  * @example
  * import { parse } from 'fp-ts-std/JSON';
@@ -132,7 +133,7 @@ export const unstringify: (x: JSONString) => unknown = flow(
  */
 export const parse = <E>(f: (e: SyntaxError) => E) => (
   x: string,
-): Either<E, unknown> =>
+): Either<E, Json> =>
   // It should only throw some sort of `SyntaxError`:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
   E.parseJSON(x, e => f(e as SyntaxError))
