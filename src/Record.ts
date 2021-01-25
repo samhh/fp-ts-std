@@ -2,7 +2,7 @@
  * @since 0.1.0
  */
 
-import { Endomorphism, flow, not, pipe, Predicate } from "fp-ts/function"
+import { Endomorphism, flow, not, Predicate } from "fp-ts/function"
 import { Option } from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
