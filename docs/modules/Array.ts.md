@@ -25,8 +25,10 @@ Added in v0.1.0
   - [insertMany](#insertmany)
   - [join](#join)
   - [length](#length)
+  - [maximum](#maximum)
   - [mean](#mean)
   - [median](#median)
+  - [minimum](#minimum)
   - [moveFrom](#movefrom)
   - [moveTo](#moveto)
   - [none](#none)
@@ -414,6 +416,31 @@ assert.strictEqual(length(['a', 'b', 'c']), 3)
 
 Added in v0.1.0
 
+## maximum
+
+Obtain the maximum value from a non-empty array.
+
+**Signature**
+
+```ts
+export declare const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A
+```
+
+```hs
+maximum :: Ord a -> NonEmptyArray a -> a
+```
+
+**Example**
+
+```ts
+import { maximum } from 'fp-ts-std/Array'
+import { ordNumber } from 'fp-ts/Ord'
+
+assert.strictEqual(maximum(ordNumber)([2, 3, 1, 5, 4]), 5)
+```
+
+Added in v0.9.0
+
 ## mean
 
 Calculate the mean of an array of numbers.
@@ -462,6 +489,31 @@ assert.deepStrictEqual(median([7, 2, 10, 9]), 8)
 ```
 
 Added in v0.7.0
+
+## minimum
+
+Obtain the minimum value from a non-empty array.
+
+**Signature**
+
+```ts
+export declare const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A
+```
+
+```hs
+minimum :: Ord a -> NonEmptyArray a -> a
+```
+
+**Example**
+
+```ts
+import { minimum } from 'fp-ts-std/Array'
+import { ordNumber } from 'fp-ts/Ord'
+
+assert.strictEqual(minimum(ordNumber)([2, 3, 1, 5, 4]), 1)
+```
+
+Added in v0.9.0
 
 ## moveFrom
 

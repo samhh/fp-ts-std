@@ -21,6 +21,7 @@ import * as O from "fp-ts/Option"
 import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
 import { fold, monoidProduct, monoidSum } from "fp-ts/Monoid"
+import { getJoinSemigroup, getMeetSemigroup } from "fp-ts/Semigroup"
 import { flip } from "./Function"
 
 /**
@@ -704,3 +705,35 @@ export const reduceWhile = <A>(p: Predicate<A>) => <B>(
 export const reduceRightWhile = <A>(p: Predicate<A>) => <B>(
   f: (x: A) => (y: B) => B,
 ) => (x: B): ((ys: Array<A>) => B) => flow(A.reverse, reduceWhile(p)(f)(x))
+
+/**
+ * Obtain the minimum value from a non-empty array.
+ *
+ * @example
+ * import { minimum } from 'fp-ts-std/Array';
+ * import { ordNumber } from 'fp-ts/Ord';
+ *
+ * assert.strictEqual(minimum(ordNumber)([2, 3, 1, 5, 4]), 1);
+ *
+ * @since 0.9.0
+ */
+export const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
+  getMeetSemigroup,
+  NEA.fold,
+)
+
+/**
+ * Obtain the maximum value from a non-empty array.
+ *
+ * @example
+ * import { maximum } from 'fp-ts-std/Array';
+ * import { ordNumber } from 'fp-ts/Ord';
+ *
+ * assert.strictEqual(maximum(ordNumber)([2, 3, 1, 5, 4]), 5);
+ *
+ * @since 0.9.0
+ */
+export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
+  getJoinSemigroup,
+  NEA.fold,
+)

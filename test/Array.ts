@@ -29,6 +29,8 @@ import {
   symmetricDifference,
   reduceWhile,
   reduceRightWhile,
+  minimum,
+  maximum,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -914,6 +916,44 @@ describe("Array", () => {
 
     it("returns initial value with constFalse", () => {
       expect(f<number>(constFalse)(add)(0)([1, 2, 3, 4])).toBe(0)
+    })
+  })
+
+  describe("minimum", () => {
+    const f = minimum(ordNumber)
+
+    it("returns identity on singleton non-empty array", () => {
+      fc.assert(fc.property(fc.integer(), n => f([n]) === n))
+    })
+
+    it("returns the smallest value", () => {
+      expect(f([3, 1, 2])).toBe(1)
+
+      fc.assert(
+        fc.property(
+          fc.integer(),
+          n => f([n, n + 1]) === n && f([n + 1, n]) === n,
+        ),
+      )
+    })
+  })
+
+  describe("maximum", () => {
+    const f = maximum(ordNumber)
+
+    it("returns identity on singleton non-empty array", () => {
+      fc.assert(fc.property(fc.integer(), n => f([n]) === n))
+    })
+
+    it("returns the largest value", () => {
+      expect(f([1, 3, 2])).toBe(3)
+
+      fc.assert(
+        fc.property(
+          fc.integer(),
+          n => f([n, n + 1]) === n + 1 && f([n + 1, n]) === n + 1,
+        ),
+      )
     })
   })
 })
