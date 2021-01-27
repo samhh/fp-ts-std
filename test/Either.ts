@@ -10,7 +10,7 @@ describe("Either", () => {
     })
 
     it("throws Left", () => {
-      expect(() => f(E.left(undefined))).toThrow()
+      expect(() => f(E.left("l"))).toThrow("l")
     })
   })
 
@@ -22,7 +22,7 @@ describe("Either", () => {
     })
 
     it("throws Right", () => {
-      expect(() => f(E.right(undefined))).toThrow()
+      expect(() => f(E.right("r"))).toThrow("r")
     })
   })
 })

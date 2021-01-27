@@ -22,7 +22,8 @@ Added in v0.1.0
 
 ## unsafeUnwrap
 
-Unwrap the value from within an `Either`, throwing if `Left`.
+Unwrap the value from within an `Either`, throwing the inner value of `Left`
+if `Left`.
 
 **Signature**
 
@@ -47,7 +48,8 @@ Added in v0.1.0
 
 ## unsafeUnwrapLeft
 
-Unwrap the value from within an `Either`, throwing if `Right`.
+Unwrap the value from within an `Either`, throwing the inner value of `Right`
+if `Right`.
 
 **Signature**
 

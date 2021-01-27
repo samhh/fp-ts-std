@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `minimum` and `maximum` functions to the `Array` module.
 - Narrow the return type of `parse`.
+- Throw the value that does exist in the `Either` in `unsafeUnwrap` and `unsafeUnwrapLeft`.
 
 ## 0.8.0 (2021-01-20)
 
