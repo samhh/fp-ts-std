@@ -31,6 +31,7 @@ import {
   reduceRightWhile,
   minimum,
   maximum,
+  concat,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -953,6 +954,26 @@ describe("Array", () => {
           fc.integer(),
           n => f([n, n + 1]) === n + 1 && f([n + 1, n]) === n + 1,
         ),
+      )
+    })
+  })
+
+  describe("concat", () => {
+    const f = concat
+
+    it("concats", () => {
+      expect(f([1, 2])([3])).toEqual([1, 2, 3])
+      expect(f([1, [2]])([3])).toEqual([1, [2], 3])
+    })
+
+    it("obeys monoidal identity law", () => {
+      expect(f(A.empty)(A.empty)).toEqual(A.empty)
+
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs => {
+          expect(f<unknown>(A.empty)(xs)).toEqual(xs)
+          expect(f<unknown>(xs)(A.empty)).toEqual(xs)
+        }),
       )
     })
   })
