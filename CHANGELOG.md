@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.9.0 (_Unreleased_)
 
+- Add `Env` module with `getParam` and `getParamNonEmpty` functions.
 - Add `minimum`, `maximum`, and `concat` functions to the `Array` module.
 - Narrow the return type of `parse`.
 - Throw the value that does exist in the `Either` in `unsafeUnwrap` and `unsafeUnwrapLeft`.
