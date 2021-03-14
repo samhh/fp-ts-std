@@ -172,11 +172,11 @@ Stringify a primitive value with no possibility of failure.
 **Signature**
 
 ```ts
-export declare const stringifyPrimitive: (x: string | number | boolean) => JSONString
+export declare const stringifyPrimitive: (x: string | number | boolean | null) => JSONString
 ```
 
 ```hs
-stringifyPrimitive :: string | number | boolean -> JSONString
+stringifyPrimitive :: string | number | boolean | null -> JSONString
 ```
 
 **Example**

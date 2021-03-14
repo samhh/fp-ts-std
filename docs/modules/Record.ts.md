@@ -35,7 +35,7 @@ duplicate keys, see instead `invertLast`.
 **Signature**
 
 ```ts
-export declare const invertAll: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, string[]>
+export declare const invertAll: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, Array<string>>
 ```
 
 ```hs

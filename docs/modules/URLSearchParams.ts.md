@@ -136,7 +136,7 @@ Parse a `URLSearchParams` from an array of tuples.
 **Signature**
 
 ```ts
-export declare const fromTuples: (x: [string, string][]) => URLSearchParams
+export declare const fromTuples: (x: Array<[string, string]>) => URLSearchParams
 ```
 
 ```hs

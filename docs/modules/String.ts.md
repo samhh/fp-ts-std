@@ -618,11 +618,11 @@ Replace the first occurrence of a matched substring with a replacement.
 **Signature**
 
 ```ts
-export declare const replace: (r: string | RegExp) => (s: string) => Endomorphism<string>
+export declare const replace: (r: RegExp | string) => (s: string) => Endomorphism<string>
 ```
 
 ```hs
-replace :: string | RegExp -> string -> Endomorphism string
+replace :: RegExp | string -> string -> Endomorphism string
 ```
 
 **Example**
@@ -728,7 +728,7 @@ as an array.
 **Signature**
 
 ```ts
-export declare const split: (on: string | RegExp) => (target: string) => string[]
+export declare const split: (on: string | RegExp) => (target: string) => Array<string>
 ```
 
 ```hs
@@ -1125,7 +1125,7 @@ a string can be thought of merely as an array of characters.
 **Signature**
 
 ```ts
-export declare const under: (f: Endomorphism<string[]>) => Endomorphism<string>
+export declare const under: (f: Endomorphism<Array<string>>) => Endomorphism<string>
 ```
 
 ```hs

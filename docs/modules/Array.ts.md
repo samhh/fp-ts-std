@@ -397,7 +397,7 @@ separator.
 **Signature**
 
 ```ts
-export declare const join: (x: string) => (ys: string[]) => string
+export declare const join: (x: string) => (ys: Array<string>) => string
 ```
 
 ```hs
@@ -425,7 +425,7 @@ Get the length of an array.
 **Signature**
 
 ```ts
-export declare const length: (xs: unknown[]) => number
+export declare const length: (xs: Array<unknown>) => number
 ```
 
 ```hs
@@ -673,7 +673,7 @@ Multiplies together all the numbers in the input array.
 **Signature**
 
 ```ts
-export declare const product: (xs: number[]) => number
+export declare const product: (xs: Array<number>) => number
 ```
 
 ```hs
@@ -849,7 +849,7 @@ Adds together all the numbers in the input array.
 **Signature**
 
 ```ts
-export declare const sum: (xs: number[]) => number
+export declare const sum: (xs: Array<number>) => number
 ```
 
 ```hs
