@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.9.0 (_Unreleased_)
+## 0.9.0 (2021-03-15)
 
 - Add `Env` module with `getParam` and `getParamNonEmpty` functions.
 - Add `minimum`, `maximum`, and `concat` functions to the `Array` module.
