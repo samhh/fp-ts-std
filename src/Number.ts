@@ -2,7 +2,8 @@
  * @since 0.1.0
  */
 
-import { Endomorphism, not, Predicate } from "fp-ts/function"
+import { Endomorphism, not, Predicate, flow, pipe } from "fp-ts/function"
+import { Option, fromPredicate } from "fp-ts/Option"
 
 /**
  * Check if a number is actually valid. Specifically, all this function is
@@ -20,6 +21,56 @@ import { Endomorphism, not, Predicate } from "fp-ts/function"
  * @since 0.7.0
  */
 export const isValid: Predicate<number> = not(Number.isNaN)
+
+/**
+ * Convert a string to a number.
+ *
+ * @example
+ * import { fromStringWithRadix } from 'fp-ts-std/Number';
+ * import { some, none } from 'fp-ts/Option'
+ *
+ * assert.deepStrictEqual(fromStringWithRadix(16)('0xF'), some(15));
+ * assert.deepStrictEqual(fromStringWithRadix(16)('xyz'), none);
+ *
+ * @since 0.1.0
+ */
+export const fromStringWithRadix = (radix: number) => (
+  string: string,
+): Option<number> =>
+  pipe(Number.parseInt(string, radix), fromPredicate(isValid))
+
+/**
+ * Convert a string to a number.
+ *
+ * @example
+ * import { fromString } from 'fp-ts-std/Number';
+ * import { some, none } from 'fp-ts/Option'
+ *
+ * assert.deepStrictEqual(fromString('3'), some(3));
+ * assert.deepStrictEqual(fromString('abc'), none);
+ *
+ * @since 0.1.0
+ */
+export const fromString: (
+  string: string,
+) => Option<number> = fromStringWithRadix(10)
+
+/**
+ * Convert a string to a floating point number.
+ *
+ * @example
+ * import { floatFromString } from 'fp-ts-std/Number';
+ * import { some, none } from 'fp-ts/Option'
+ *
+ * assert.deepStrictEqual(floatFromString('3.3'), some(3.3));
+ * assert.deepStrictEqual(floatFromString('abc'), none);
+ *
+ * @since 0.1.0
+ */
+export const floatFromString: (x: string) => Option<number> = flow(
+  Number.parseFloat,
+  fromPredicate(isValid),
+)
 
 /**
  * Increment a number.

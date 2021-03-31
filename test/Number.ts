@@ -9,8 +9,13 @@ import {
   rem,
   mod,
   negate,
+  fromString,
+  floatFromString,
+  fromStringWithRadix,
 } from "../src/Number"
+import { fromNumber } from "../src/String"
 import fc from "fast-check"
+import * as O from "fp-ts/Option"
 
 describe("Number", () => {
   describe("add", () => {
@@ -66,6 +71,52 @@ describe("Number", () => {
 
     it("returns true for any other number", () => {
       fc.assert(fc.property(fc.integer(), f))
+    })
+  })
+
+  describe("fromStringWithRadix", () => {
+    const f = fromStringWithRadix
+
+    it("returns none for non-number", () => {
+      expect(f(16)("xyz")).toBe(O.none)
+    })
+
+    it("returns some for integer", () => {
+      expect(f(16)("0xF")).toStrictEqual(O.some(15))
+    })
+  })
+
+  describe("fromString", () => {
+    const f = fromString
+
+    it("returns none for non-number", () => {
+      expect(f("abc")).toBe(O.none)
+    })
+
+    it("returns some for integer", () => {
+      expect(f("3")).toStrictEqual(O.some(3))
+      fc.assert(
+        fc.property(fc.integer(), x =>
+          expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
+        ),
+      )
+    })
+  })
+
+  describe("floatFromString", () => {
+    const f = floatFromString
+
+    it("returns none for non-number", () => {
+      expect(f("abc")).toBe(O.none)
+    })
+
+    it("returns some for floating point number", () => {
+      expect(f("3.3")).toStrictEqual(O.some(3.3))
+      fc.assert(
+        fc.property(fc.float(), x =>
+          expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
+        ),
+      )
     })
   })
 
