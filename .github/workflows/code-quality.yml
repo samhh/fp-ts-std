@@ -1,5 +1,5 @@
 name: on-push
-on: [push]
+on: [push, pull_request]
 jobs:
   code-quality:
     runs-on: ubuntu-latest
