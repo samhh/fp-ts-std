@@ -16,6 +16,9 @@ Added in v0.1.0
   - [add](#add)
   - [decrement](#decrement)
   - [divide](#divide)
+  - [floatFromString](#floatfromstring)
+  - [fromString](#fromstring)
+  - [fromStringWithRadix](#fromstringwithradix)
   - [increment](#increment)
   - [isValid](#isvalid)
   - [mod](#mod)
@@ -101,6 +104,84 @@ assert.strictEqual(divide(4)(2), 0.5)
 ```
 
 Added in v0.2.0
+
+## floatFromString
+
+Convert a string to a floating point number.
+
+**Signature**
+
+```ts
+export declare const floatFromString: (x: string) => Option<number>
+```
+
+```hs
+floatFromString :: string -> Option number
+```
+
+**Example**
+
+```ts
+import { floatFromString } from 'fp-ts-std/Number'
+import { some, none } from 'fp-ts/Option'
+
+assert.deepStrictEqual(floatFromString('3.3'), some(3.3))
+assert.deepStrictEqual(floatFromString('abc'), none)
+```
+
+Added in v0.1.0
+
+## fromString
+
+Convert a string to a number.
+
+**Signature**
+
+```ts
+export declare const fromString: (string: string) => Option<number>
+```
+
+```hs
+fromString :: string -> Option number
+```
+
+**Example**
+
+```ts
+import { fromString } from 'fp-ts-std/Number'
+import { some, none } from 'fp-ts/Option'
+
+assert.deepStrictEqual(fromString('3'), some(3))
+assert.deepStrictEqual(fromString('abc'), none)
+```
+
+Added in v0.1.0
+
+## fromStringWithRadix
+
+Convert a string to a number.
+
+**Signature**
+
+```ts
+export declare const fromStringWithRadix: (radix: number) => (string: string) => Option<number>
+```
+
+```hs
+fromStringWithRadix :: number -> string -> Option number
+```
+
+**Example**
+
+```ts
+import { fromStringWithRadix } from 'fp-ts-std/Number'
+import { some, none } from 'fp-ts/Option'
+
+assert.deepStrictEqual(fromStringWithRadix(16)('0xF'), some(15))
+assert.deepStrictEqual(fromStringWithRadix(16)('xyz'), none)
+```
+
+Added in v0.1.0
 
 ## increment
 
