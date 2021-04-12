@@ -15,6 +15,8 @@ import * as json from "./JSON"
 import * as number from "./Number"
 import * as option from "./Option"
 import * as record from "./Record"
+import * as readonlyArray from "./ReadonlyArray"
+import * as readonlyRecord from "./ReadonlyRecord"
 import * as string from "./String"
 import * as task from "./Task"
 import * as url from "./URL"
@@ -65,6 +67,14 @@ export {
    * @since 0.5.1
    */
   record,
+  /**
+   * @since 0.10.0
+   */
+  readonlyArray,
+  /**
+   * @since 0.10.0
+   */
+  readonlyRecord,
   /**
    * @since 0.5.1
    */
