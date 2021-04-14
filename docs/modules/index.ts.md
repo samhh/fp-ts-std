@@ -25,6 +25,8 @@ Added in v0.5.1
   - [json](#json)
   - [number](#number)
   - [option](#option)
+  - [readonlyArray](#readonlyarray)
+  - [readonlyRecord](#readonlyrecord)
   - [record](#record)
   - [string](#string)
   - [task](#task)
@@ -174,6 +176,34 @@ option :: typeof option
 ```
 
 Added in v0.5.1
+
+## readonlyArray
+
+**Signature**
+
+```ts
+export declare const readonlyArray: typeof readonlyArray
+```
+
+```hs
+readonlyArray :: typeof readonlyArray
+```
+
+Added in v0.10.0
+
+## readonlyRecord
+
+**Signature**
+
+```ts
+export declare const readonlyRecord: typeof readonlyRecord
+```
+
+```hs
+readonlyRecord :: typeof readonlyRecord
+```
+
+Added in v0.10.0
 
 ## record
 
