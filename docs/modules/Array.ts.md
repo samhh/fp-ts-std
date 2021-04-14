@@ -25,7 +25,6 @@ Added in v0.1.0
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
   - [join](#join)
-  - [length](#length)
   - [maximum](#maximum)
   - [mean](#mean)
   - [median](#median)
@@ -414,30 +413,6 @@ const commaSepd = join(',')
 assert.strictEqual(commaSepd([]), '')
 assert.strictEqual(commaSepd(['a']), 'a')
 assert.strictEqual(commaSepd(['a', 'b', 'c']), 'a,b,c')
-```
-
-Added in v0.1.0
-
-## length
-
-Get the length of an array.
-
-**Signature**
-
-```ts
-export declare const length: (xs: Array<unknown>) => number
-```
-
-```hs
-length :: Array unknown -> number
-```
-
-**Example**
-
-```ts
-import { length } from 'fp-ts-std/Array'
-
-assert.strictEqual(length(['a', 'b', 'c']), 3)
 ```
 
 Added in v0.1.0

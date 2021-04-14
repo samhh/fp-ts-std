@@ -26,18 +26,6 @@ import { max, min } from "fp-ts/Semigroup"
 import { flip } from "./Function"
 
 /**
- * Get the length of an array.
- *
- * @example
- * import { length } from 'fp-ts-std/Array';
- *
- * assert.strictEqual(length(['a', 'b', 'c']), 3);
- *
- * @since 0.1.0
- */
-export const length = (xs: Array<unknown>): number => xs.length
-
-/**
  * Like `fp-ts/Array::elem`, but flipped.
  *
  * @example

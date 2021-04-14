@@ -7,6 +7,7 @@ This project adheres to semantic versioning.
 - Add `ReadonlyArray` and `ReadonlyRecord` modules.
 - Add `fromString`, `fromStringWithRadix`, and `floatFromString` functions to the `Number` module.
 - Remove `empty`, `isEmpty`, and `length` from the `String` module as they're superceded by the new [fp-ts/string](https://gcanti.github.io/fp-ts/modules/string.ts.html) module.
+- Remove `length` from the `Array` module as it's superceded by [fp-ts/Array::size](https://gcanti.github.io/fp-ts/modules/Array.ts.html#size).
 
 ## 0.9.0 (2021-03-15)
 

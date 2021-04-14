@@ -1,5 +1,4 @@
 import {
-  length,
   elemFlipped,
   none,
   join,
@@ -55,19 +54,6 @@ import { values } from "../src/Record"
 import { add } from "../src/Number"
 
 describe("Array", () => {
-  describe("length", () => {
-    const f = length
-
-    it("returns length of array", () => {
-      expect(f([])).toBe(0)
-      expect(f([1, 2, 3])).toBe(3)
-    })
-
-    it("returned value is always non-negative", () => {
-      fc.assert(fc.property(fc.array(fc.anything()), xs => f(xs) >= 0))
-    })
-  })
-
   describe("elemFlipped", () => {
     const f = elemFlipped(N.Eq)
 
@@ -110,14 +96,14 @@ describe("Array", () => {
           const countDelims = flow(
             split(""),
             A.filter(c => c === delim),
-            length,
+            A.size,
           )
 
           const countDelimsA = flow(A.map(countDelims), concatAll(N.MonoidSum))
 
           return (
             countDelims(f(xs)) ===
-            countDelimsA(xs) + max(N.Ord)(0, length(xs) - 1)
+            countDelimsA(xs) + max(N.Ord)(0, A.size(xs) - 1)
           )
         }),
       )
@@ -229,13 +215,13 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything(), 1, 5) as fc.Arbitrary<NonEmptyArray<unknown>>,
           fc.integer(0, 10),
-          (xs, i) => O.isSome(f(i)(xs)(xs)) === i <= length(xs),
+          (xs, i) => O.isSome(f(i)(xs)(xs)) === i <= A.size(xs),
         ),
       )
 
       fc.assert(
         fc.property(fc.array(fc.string(), 1, 20), xs =>
-          expect(pipe(g(xs), O.map(length))).toEqual(O.some(length(xs) + 2)),
+          expect(pipe(g(xs), O.map(A.size))).toEqual(O.some(A.size(xs) + 2)),
         ),
       )
     })
@@ -262,7 +248,7 @@ describe("Array", () => {
 
     it("never returns a larger array", () => {
       fc.assert(
-        fc.property(fc.array(fc.integer()), xs => f(xs).length <= length(xs)),
+        fc.property(fc.array(fc.integer()), xs => f(xs).length <= A.size(xs)),
       )
     })
 
@@ -349,12 +335,12 @@ describe("Array", () => {
       ])
     })
 
-    it("output array length is the product of input array lengths", () => {
+    it("output array A.size is the product of input array A.sizes", () => {
       fc.assert(
         fc.property(
           fc.array(fc.anything()),
           fc.array(fc.anything()),
-          (xs, ys) => f(xs)(ys).length === length(xs) * ys.length,
+          (xs, ys) => f(xs)(ys).length === A.size(xs) * ys.length,
         ),
       )
     })
@@ -421,11 +407,11 @@ describe("Array", () => {
       )
     })
 
-    it("returns empty array for tuple length larger than input array length", () => {
+    it("returns empty array for tuple A.size larger than input array A.size", () => {
       fc.assert(
         fc.property(
           fc.array(fc.anything()),
-          xs => !f(length(xs) + 1)(xs).length,
+          xs => !f(A.size(xs) + 1)(xs).length,
         ),
       )
     })
@@ -444,12 +430,12 @@ describe("Array", () => {
       expect(f(4)([1, 2, 3, 4])).toEqual([[1, 2, 3, 4]])
     })
 
-    it("output length is input length - n + 1", () => {
+    it("output A.size is input A.size - n + 1", () => {
       fc.assert(
         fc.property(
           fc.array(fc.anything()),
           fc.integer(1, 100),
-          (xs, n) => f(n)(xs).length === max(N.Ord)(0, length(xs) - n + 1),
+          (xs, n) => f(n)(xs).length === max(N.Ord)(0, A.size(xs) - n + 1),
         ),
       )
     })
@@ -483,7 +469,7 @@ describe("Array", () => {
       fc.assert(
         fc.property(
           fc.array(fc.integer()),
-          xs => A.filter(p)(xs).length + f(xs).length === length(xs),
+          xs => A.filter(p)(xs).length + f(xs).length === A.size(xs),
         ),
       )
     })
@@ -499,7 +485,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything(), 1, n),
           fc.integer(0, n - 1),
-          (xs, i) => i >= length(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
+          (xs, i) => i >= A.size(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
         ),
       )
     })
@@ -507,7 +493,7 @@ describe("Array", () => {
     it("returns None if source is out of bounds", () => {
       fc.assert(
         fc.property(fc.array(fc.anything()), xs =>
-          expect(f(length(xs))(0)(xs)).toEqual(O.none),
+          expect(f(A.size(xs))(0)(xs)).toEqual(O.none),
         ),
       )
     })
@@ -515,7 +501,7 @@ describe("Array", () => {
     it("returns None if target is out of bounds", () => {
       fc.assert(
         fc.property(fc.array(fc.anything()), xs =>
-          expect(f(0)(length(xs))(xs)).toEqual(O.none),
+          expect(f(0)(A.size(xs))(xs)).toEqual(O.none),
         ),
       )
     })
@@ -547,7 +533,7 @@ describe("Array", () => {
           (xs, i, j) =>
             pipe(
               f(i)(j)(xs),
-              O.exists(ys => length(ys) === n),
+              O.exists(ys => A.size(ys) === n),
             ),
         ),
       )
@@ -576,7 +562,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything(), 1, n),
           fc.integer(0, n - 1),
-          (xs, i) => i >= length(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
+          (xs, i) => i >= A.size(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
         ),
       )
     })
@@ -584,7 +570,7 @@ describe("Array", () => {
     it("returns None if source is out of bounds", () => {
       fc.assert(
         fc.property(fc.array(fc.anything()), xs =>
-          expect(f(0)(length(xs))(xs)).toEqual(O.none),
+          expect(f(0)(A.size(xs))(xs)).toEqual(O.none),
         ),
       )
     })
@@ -592,7 +578,7 @@ describe("Array", () => {
     it("returns None if target is out of bounds", () => {
       fc.assert(
         fc.property(fc.array(fc.anything()), xs =>
-          expect(f(length(xs))(0)(xs)).toEqual(O.none),
+          expect(f(A.size(xs))(0)(xs)).toEqual(O.none),
         ),
       )
     })
@@ -624,7 +610,7 @@ describe("Array", () => {
           (xs, i, j) =>
             pipe(
               f(i)(j)(xs),
-              O.exists(ys => length(ys) === n),
+              O.exists(ys => A.size(ys) === n),
             ),
         ),
       )
@@ -651,7 +637,7 @@ describe("Array", () => {
       expect(f<string>(identity)(["a", "b", "c"])).toEqual({ a: 1, b: 1, c: 1 })
     })
 
-    it("counts the same summed number as the length of the array", () => {
+    it("counts the same summed number as the A.size of the array", () => {
       fc.assert(
         fc.property(
           fc.array(fc.string()),
@@ -772,7 +758,7 @@ describe("Array", () => {
   describe("transpose", () => {
     const f = transpose
 
-    it("transposes equal length arrays", () => {
+    it("transposes equal A.size arrays", () => {
       expect(
         f([
           [1, 2, 3],
@@ -796,7 +782,7 @@ describe("Array", () => {
       ])
     })
 
-    it("transposes unequal length arrays", () => {
+    it("transposes unequal A.size arrays", () => {
       expect(f([[10, 11], [20], [], [30, 31, 32]])).toEqual([
         [10, 20, 30],
         [11, 31],
@@ -808,7 +794,7 @@ describe("Array", () => {
       fc.assert(
         fc.property(
           fc.array(fc.array(fc.anything())),
-          xs => length(A.flatten(xs)) === length(A.flatten(f(xs))),
+          xs => A.size(A.flatten(xs)) === A.size(A.flatten(f(xs))),
         ),
       )
     })
