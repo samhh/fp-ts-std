@@ -6,6 +6,8 @@ parent: Modules
 
 ## Either overview
 
+Utility functions to accommodate `fp-ts/Either`.
+
 Added in v0.1.0
 
 ---

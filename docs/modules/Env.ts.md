@@ -6,6 +6,9 @@ parent: Modules
 
 ## Env overview
 
+Helpers for working with the environment in Node.js (located at
+`process.env`).
+
 Added in v0.9.0
 
 ---

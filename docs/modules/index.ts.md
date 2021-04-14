@@ -39,6 +39,8 @@ Added in v0.5.1
 
 ## array
 
+A re-export of the `fp-ts-std/Array` module.
+
 **Signature**
 
 ```ts
@@ -52,6 +54,8 @@ array :: typeof array
 Added in v0.5.1
 
 ## boolean
+
+A re-export of the `fp-ts-std/Boolean` module.
 
 **Signature**
 
@@ -67,6 +71,8 @@ Added in v0.5.1
 
 ## date
 
+A re-export of the `fp-ts-std/Date` module.
+
 **Signature**
 
 ```ts
@@ -80,6 +86,8 @@ date :: typeof date
 Added in v0.5.1
 
 ## debug
+
+A re-export of the `fp-ts-std/Debug` module.
 
 **Signature**
 
@@ -95,6 +103,8 @@ Added in v0.8.0
 
 ## either
 
+A re-export of the `fp-ts-std/Either` module.
+
 **Signature**
 
 ```ts
@@ -108,6 +118,8 @@ either :: typeof either
 Added in v0.5.1
 
 ## function
+
+A re-export of the `fp-ts-std/Function` module.
 
 **Signature**
 
@@ -123,6 +135,8 @@ Added in v0.5.1
 
 ## io
 
+A re-export of the `fp-ts-std/IO` module.
+
 **Signature**
 
 ```ts
@@ -136,6 +150,8 @@ io :: typeof io
 Added in v0.8.0
 
 ## json
+
+A re-export of the `fp-ts-std/JSON` module.
 
 **Signature**
 
@@ -151,6 +167,8 @@ Added in v0.5.1
 
 ## number
 
+A re-export of the `fp-ts-std/Number` module.
+
 **Signature**
 
 ```ts
@@ -164,6 +182,8 @@ number :: typeof number
 Added in v0.5.1
 
 ## option
+
+A re-export of the `fp-ts-std/Option` module.
 
 **Signature**
 
@@ -179,6 +199,8 @@ Added in v0.5.1
 
 ## readonlyArray
 
+A re-export of the `fp-ts-std/ReadonlyArray` module.
+
 **Signature**
 
 ```ts
@@ -192,6 +214,8 @@ readonlyArray :: typeof readonlyArray
 Added in v0.10.0
 
 ## readonlyRecord
+
+A re-export of the `fp-ts-std/ReadonlyRecord` module.
 
 **Signature**
 
@@ -207,6 +231,8 @@ Added in v0.10.0
 
 ## record
 
+A re-export of the `fp-ts-std/Record` module.
+
 **Signature**
 
 ```ts
@@ -220,6 +246,8 @@ record :: typeof record
 Added in v0.5.1
 
 ## string
+
+A re-export of the `fp-ts-std/String` module.
 
 **Signature**
 
@@ -235,6 +263,8 @@ Added in v0.5.1
 
 ## task
 
+A re-export of the `fp-ts-std/Task` module.
+
 **Signature**
 
 ```ts
@@ -249,6 +279,8 @@ Added in v0.5.1
 
 ## url
 
+A re-export of the `fp-ts-std/URL` module.
+
 **Signature**
 
 ```ts
@@ -262,6 +294,8 @@ url :: typeof url
 Added in v0.5.1
 
 ## urlSearchParams
+
+A re-export of the `fp-ts-std/URLSearchParams` module.
 
 **Signature**
 

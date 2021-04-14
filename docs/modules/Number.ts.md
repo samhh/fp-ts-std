@@ -6,6 +6,8 @@ parent: Modules
 
 ## Number overview
 
+Various functions to aid in working with numbers.
+
 Added in v0.1.0
 
 ---

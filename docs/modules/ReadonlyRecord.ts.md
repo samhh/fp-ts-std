@@ -6,6 +6,9 @@ parent: Modules
 
 ## ReadonlyRecord overview
 
+Various functions to aid in working with readonly `Record`s and more broadly
+readonly objects.
+
 Added in v0.10.0
 
 ---

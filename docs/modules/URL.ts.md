@@ -6,6 +6,8 @@ parent: Modules
 
 ## URL overview
 
+Various functions to aid in working with JavaScript's `URL` interface.
+
 Added in v0.1.0
 
 ---

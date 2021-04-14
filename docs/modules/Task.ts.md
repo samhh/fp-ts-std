@@ -6,6 +6,8 @@ parent: Modules
 
 ## Task overview
 
+Utility functions to accommodate `fp-ts/Task`.
+
 Added in v0.1.0
 
 ---

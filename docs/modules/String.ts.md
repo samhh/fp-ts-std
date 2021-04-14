@@ -6,6 +6,8 @@ parent: Modules
 
 ## String overview
 
+Various functions to aid in working with strings.
+
 Added in v0.1.0
 
 ---

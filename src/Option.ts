@@ -1,4 +1,6 @@
 /**
+ * Utility functions to accommodate `fp-ts/Option`.
+ *
  * @since 0.1.0
  */
 

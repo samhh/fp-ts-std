@@ -1,4 +1,7 @@
 /*
+ * Various functions to aid in working with readonly `Record`s and more broadly
+ * readonly objects.
+ *
  * @since 0.10.0
  */
 import { Endomorphism, flow, not, Predicate } from "fp-ts/function"

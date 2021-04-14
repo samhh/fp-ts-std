@@ -1,4 +1,6 @@
 /**
+ * Utility functions to accommodate `fp-ts/Either`.
+ *
  * @since 0.1.0
  */
 

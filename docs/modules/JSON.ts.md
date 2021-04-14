@@ -6,6 +6,8 @@ parent: Modules
 
 ## JSON overview
 
+Various functions to aid in working with JSON.
+
 Added in v0.1.0
 
 ---

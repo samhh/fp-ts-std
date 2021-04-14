@@ -6,6 +6,8 @@ parent: Modules
 
 ## IO overview
 
+Utility functions to accommodate `fp-ts/IO`.
+
 Added in v0.7.0
 
 ---

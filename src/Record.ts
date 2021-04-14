@@ -1,4 +1,6 @@
 /**
+ * Various functions to aid in working with `Record`s and more broadly objects.
+ *
  * @since 0.1.0
  */
 

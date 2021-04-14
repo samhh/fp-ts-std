@@ -6,6 +6,8 @@ parent: Modules
 
 ## Date overview
 
+Various functions to aid in working with JavaScript's `Date` object.
+
 Added in v0.1.0
 
 ---

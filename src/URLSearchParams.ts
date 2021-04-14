@@ -1,4 +1,7 @@
 /**
+ * Various functions to aid in working with JavaScript's `URLSearchParams`
+ * interface.
+ *
  * @since 0.2.0
  */
 

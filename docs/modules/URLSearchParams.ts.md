@@ -6,6 +6,9 @@ parent: Modules
 
 ## URLSearchParams overview
 
+Various functions to aid in working with JavaScript's `URLSearchParams`
+interface.
+
 Added in v0.2.0
 
 ---

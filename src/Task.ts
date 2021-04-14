@@ -1,4 +1,6 @@
 /**
+ * Utility functions to accommodate `fp-ts/Task`.
+ *
  * @since 0.1.0
  */
 

@@ -6,6 +6,8 @@ parent: Modules
 
 ## Record overview
 
+Various functions to aid in working with `Record`s and more broadly objects.
+
 Added in v0.1.0
 
 ---

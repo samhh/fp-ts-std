@@ -1,4 +1,7 @@
 /**
+ * Helpers for working with the environment in Node.js (located at
+ * `process.env`).
+ *
  * @since 0.9.0
  */
 

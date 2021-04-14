@@ -1,4 +1,6 @@
 /**
+ * Various functions to aid in working with JavaScript's `Date` object.
+ *
  * @since 0.1.0
  */
 

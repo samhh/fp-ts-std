@@ -1,4 +1,6 @@
 /**
+ * Various functions to aid in working with booleans and predicates.
+ *
  * @since 0.1.0
  */
 

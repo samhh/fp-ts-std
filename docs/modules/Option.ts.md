@@ -6,6 +6,8 @@ parent: Modules
 
 ## Option overview
 
+Utility functions to accommodate `fp-ts/Option`.
+
 Added in v0.1.0
 
 ---

@@ -1,4 +1,6 @@
 /**
+ * Utility functions to accommodate `fp-ts/IO`.
+ *
  * @since 0.7.0
  */
 

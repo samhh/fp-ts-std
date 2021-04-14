@@ -6,6 +6,8 @@ parent: Modules
 
 ## Boolean overview
 
+Various functions to aid in working with booleans and predicates.
+
 Added in v0.1.0
 
 ---

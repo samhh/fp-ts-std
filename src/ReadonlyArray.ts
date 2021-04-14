@@ -1,4 +1,6 @@
 /**
+ * Various functions to aid in working with readonly arrays.
+ *
  * @since 0.10.0
  */
 

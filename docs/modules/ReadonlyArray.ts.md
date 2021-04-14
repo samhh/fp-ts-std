@@ -6,6 +6,8 @@ parent: Modules
 
 ## ReadonlyArray overview
 
+Various functions to aid in working with readonly arrays.
+
 Added in v0.10.0
 
 ---
