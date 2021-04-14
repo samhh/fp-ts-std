@@ -14,7 +14,8 @@ import * as RA from "fp-ts/ReadonlyArray"
 import fc from "fast-check"
 import { flow, pipe, Predicate } from "fp-ts/function"
 import { fromNumber } from "../src/String"
-import { eqNumber, eqString } from "fp-ts/lib/Eq"
+import * as N from "fp-ts/number"
+import * as S from "fp-ts/string"
 
 describe("Record", () => {
   describe("values", () => {
@@ -131,14 +132,14 @@ describe("Record", () => {
       const g = fromNumber
       const h: (
         x: RR.ReadonlyRecord<string, number>,
-      ) => ReadonlyArray<string> = flow(values, RA.uniq(eqNumber), RA.map(g))
+      ) => ReadonlyArray<string> = flow(values, RA.uniq(N.Eq), RA.map(g))
 
       fc.assert(
         fc.property(fc.dictionary(fc.string(), fc.integer()), x =>
           pipe(x, f(g), RR.keys, ks =>
             pipe(
               h(x),
-              RA.every(k => RA.elem(eqString)(k)(ks)),
+              RA.every(k => RA.elem(S.Eq)(k)(ks)),
             ),
           ),
         ),
@@ -169,14 +170,14 @@ describe("Record", () => {
       const g = fromNumber
       const h: (
         x: RR.ReadonlyRecord<string, number>,
-      ) => ReadonlyArray<string> = flow(values, RA.uniq(eqNumber), RA.map(g))
+      ) => ReadonlyArray<string> = flow(values, RA.uniq(N.Eq), RA.map(g))
 
       fc.assert(
         fc.property(fc.dictionary(fc.string(), fc.integer()), x =>
           pipe(x, f(g), RR.keys, ks =>
             pipe(
               h(x),
-              RA.every(k => RA.elem(eqString)(k)(ks)),
+              RA.every(k => RA.elem(S.Eq)(k)(ks)),
             ),
           ),
         ),

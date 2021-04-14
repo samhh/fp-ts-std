@@ -48,7 +48,8 @@ import * as A from "fp-ts/Array"
 import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
 import { invert } from "../src/Boolean"
-import { max, ordNumber } from "fp-ts/Ord"
+import { max } from "fp-ts/Ord"
+import * as N from "fp-ts/number"
 
 describe("String", () => {
   describe("lines", () => {
@@ -491,10 +492,7 @@ describe("String", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          flow(
-            f,
-            x => x[0] !== " " && x[max(ordNumber)(0, x.length - 1)] !== " ",
-          ),
+          flow(f, x => x[0] !== " " && x[max(N.Ord)(0, x.length - 1)] !== " "),
         ),
       )
     })
@@ -548,7 +546,7 @@ describe("String", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          flow(f, x => x[max(ordNumber)(0, x.length - 1)] !== " "),
+          flow(f, x => x[max(N.Ord)(0, x.length - 1)] !== " "),
         ),
       )
     })
@@ -633,7 +631,7 @@ describe("String", () => {
         fc.property(
           fc.string(),
           fc.integer(0, Number.MAX_SAFE_INTEGER),
-          (x, n) => f(n)(x).length === max(ordNumber)(0, x.length - n),
+          (x, n) => f(n)(x).length === max(N.Ord)(0, x.length - n),
         ),
       )
     })
@@ -678,7 +676,7 @@ describe("String", () => {
         fc.property(
           fc.string(),
           fc.integer(0, Number.MAX_SAFE_INTEGER),
-          (x, n) => f(n)(x).length === max(ordNumber)(0, x.length - n),
+          (x, n) => f(n)(x).length === max(N.Ord)(0, x.length - n),
         ),
       )
     })

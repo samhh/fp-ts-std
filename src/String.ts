@@ -20,7 +20,8 @@ import {
   dropRightWhile as dropRightWhileArr,
   takeRightWhile as takeRightWhileArr,
 } from "./Array"
-import { max, ordNumber } from "fp-ts/Ord"
+import { max } from "fp-ts/Ord"
+import { Ord as ordNumber } from "fp-ts/number"
 
 /**
  * An empty string.

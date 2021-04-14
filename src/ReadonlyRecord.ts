@@ -6,7 +6,7 @@ import { Option } from "fp-ts/Option"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as RT from "fp-ts/ReadonlyTuple"
-import { getLastSemigroup } from "fp-ts/Semigroup"
+import { last } from "fp-ts/Semigroup"
 
 /**
  * Get the values from a `Record`.
@@ -152,8 +152,8 @@ export const invertLast = <A>(
 ): ((x: RR.ReadonlyRecord<string, A>) => RR.ReadonlyRecord<string, string>) =>
   flow(
     RR.toReadonlyArray,
-    RA.map(flow(RT.mapLeft(f), RT.swap)),
-    RR.fromFoldable(getLastSemigroup<string>(), RA.Foldable),
+    RA.map(flow(RT.mapSnd(f), RT.swap)),
+    RR.fromFoldable(last<string>(), RA.Foldable),
   )
 
 /**

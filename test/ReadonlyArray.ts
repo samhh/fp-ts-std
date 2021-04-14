@@ -35,8 +35,9 @@ import {
 } from "../src/ReadonlyArray"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
-import { contramap as eqContramap, eqNumber } from "fp-ts/Eq"
-import { contramap as ordContramap, max, ordNumber } from "fp-ts/Ord"
+import * as N from "fp-ts/number"
+import { contramap as eqContramap } from "fp-ts/Eq"
+import { contramap as ordContramap, max } from "fp-ts/Ord"
 import {
   constant,
   constFalse,
@@ -47,7 +48,7 @@ import {
   Predicate,
 } from "fp-ts/function"
 import fc from "fast-check"
-import { fold, monoidSum } from "fp-ts/Monoid"
+import { concatAll } from "fp-ts/Monoid"
 import { split } from "../src/String"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import { values } from "../src/Record"
@@ -69,7 +70,7 @@ describe("Array", () => {
   })
 
   describe("elemFlipped", () => {
-    const f = elemFlipped(eqNumber)
+    const f = elemFlipped(N.Eq)
 
     it("finds the element", () => {
       expect(f([])(0)).toBe(false)
@@ -113,11 +114,11 @@ describe("Array", () => {
             length,
           )
 
-          const countDelimsA = flow(A.map(countDelims), fold(monoidSum))
+          const countDelimsA = flow(A.map(countDelims), concatAll(N.MonoidSum))
 
           return (
             countDelims(f(xs)) ===
-            countDelimsA(xs) + max(ordNumber)(0, length(xs) - 1)
+            countDelimsA(xs) + max(N.Ord)(0, length(xs) - 1)
           )
         }),
       )
@@ -150,7 +151,7 @@ describe("Array", () => {
 
   describe("upsert", () => {
     type Thing = { id: number; name: string }
-    const eqThing = eqContramap<number, Thing>(x => x.id)(eqNumber)
+    const eqThing = eqContramap<number, Thing>(x => x.id)(N.Eq)
 
     const x1: Thing = { id: 1, name: "x" }
     const x2: Thing = { id: 1, name: "x2" }
@@ -182,7 +183,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.integer()),
           fc.integer(),
-          (xs, y) => !!f(eqNumber)(y)(xs).length,
+          (xs, y) => !!f(N.Eq)(y)(xs).length,
         ),
       )
     })
@@ -190,7 +191,7 @@ describe("Array", () => {
 
   describe("getDisorderedEq", () => {
     type Thing = { id: number; name: string }
-    const ordThing = ordContramap<number, Thing>(x => x.id)(ordNumber)
+    const ordThing = ordContramap<number, Thing>(x => x.id)(N.Ord)
 
     const y: Thing = { id: 1, name: "x" }
     const z: Thing = { id: 2, name: "y" }
@@ -252,7 +253,7 @@ describe("Array", () => {
   })
 
   describe("dropRepeats", () => {
-    const f = dropRepeats(eqNumber)
+    const f = dropRepeats(N.Eq)
 
     it("removes consecutive duplicates if any", () => {
       expect(f([])).toEqual([])
@@ -267,18 +268,18 @@ describe("Array", () => {
     })
 
     it("never introduces new elements", () => {
-      const g = A.uniq(eqNumber)
+      const g = A.uniq(N.Eq)
 
       fc.assert(
         fc.property(fc.array(fc.integer()), xs =>
-          pipe(xs, f, g, A.every(elemFlipped(eqNumber)(g(xs)))),
+          pipe(xs, f, g, A.every(elemFlipped(N.Eq)(g(xs)))),
         ),
       )
     })
   })
 
   describe("startsWith", () => {
-    const f = startsWith(eqNumber)
+    const f = startsWith(N.Eq)
 
     it("returns true for empty subarray", () => {
       fc.assert(fc.property(fc.array(fc.integer()), xs => f([])(xs)))
@@ -297,7 +298,7 @@ describe("Array", () => {
   })
 
   describe("endsWith", () => {
-    const f = endsWith(eqNumber)
+    const f = endsWith(N.Eq)
 
     it("returns true for empty subarray", () => {
       fc.assert(fc.property(fc.array(fc.integer()), xs => f([])(xs)))
@@ -316,7 +317,7 @@ describe("Array", () => {
   })
 
   describe("without", () => {
-    const f = without(eqNumber)
+    const f = without(N.Eq)
 
     it("removes numbers present in first input array", () => {
       const g = f([4, 5])
@@ -449,7 +450,7 @@ describe("Array", () => {
         fc.property(
           fc.array(fc.anything()),
           fc.integer(1, 100),
-          (xs, n) => f(n)(xs).length === max(ordNumber)(0, length(xs) - n + 1),
+          (xs, n) => f(n)(xs).length === max(N.Ord)(0, length(xs) - n + 1),
         ),
       )
     })
@@ -855,7 +856,7 @@ describe("Array", () => {
   })
 
   describe("symmetricDifference", () => {
-    const f = symmetricDifference(eqNumber)
+    const f = symmetricDifference(N.Eq)
 
     it("returns unique values from both arrays", () => {
       expect(f([1, 2, 3, 4])([3, 4, 5, 6])).toEqual([1, 2, 5, 6])
@@ -922,7 +923,7 @@ describe("Array", () => {
   })
 
   describe("minimum", () => {
-    const f = minimum(ordNumber)
+    const f = minimum(N.Ord)
 
     it("returns identity on singleton non-empty array", () => {
       fc.assert(fc.property(fc.integer(), n => f([n]) === n))
@@ -941,7 +942,7 @@ describe("Array", () => {
   })
 
   describe("maximum", () => {
-    const f = maximum(ordNumber)
+    const f = maximum(N.Ord)
 
     it("returns identity on singleton non-empty array", () => {
       fc.assert(fc.property(fc.integer(), n => f([n]) === n))

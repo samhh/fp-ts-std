@@ -2,12 +2,12 @@
  * @since 0.1.0
  */
 
-import { Endomorphism, Predicate } from "fp-ts/function"
 import {
-  getFunctionSemigroup,
-  semigroupAll,
-  semigroupAny,
-} from "fp-ts/Semigroup"
+  Endomorphism,
+  Predicate,
+  getSemigroup as getFunctionSemigroup,
+} from "fp-ts/function"
+import { SemigroupAll, SemigroupAny } from "fp-ts/boolean"
 
 /**
  * Invert a boolean.
@@ -35,7 +35,7 @@ export const invert: Endomorphism<boolean> = x => !x
  * @since 0.4.0
  */
 export const and = (x: boolean): Endomorphism<boolean> => y =>
-  semigroupAll.concat(x, y)
+  SemigroupAll.concat(x, y)
 
 /**
  * Returns `true` if one or both arguments are `true`, else `false`. Equivalent
@@ -50,7 +50,7 @@ export const and = (x: boolean): Endomorphism<boolean> => y =>
  * @since 0.4.0
  */
 export const or = (x: boolean): Endomorphism<boolean> => y =>
-  semigroupAny.concat(x, y)
+  SemigroupAny.concat(x, y)
 
 /**
  * Returns `true` if one argument is `true` and the other is `false`, else
@@ -125,7 +125,7 @@ export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> => x =>
  * @since 0.5.0
  */
 export const both = <A>(f: Predicate<A>): Endomorphism<Predicate<A>> => g =>
-  getFunctionSemigroup(semigroupAll)<A>().concat(f, g)
+  getFunctionSemigroup(SemigroupAll)<A>().concat(f, g)
 
 /**
  * Combine two predicates under disjunction.
@@ -145,4 +145,4 @@ export const both = <A>(f: Predicate<A>): Endomorphism<Predicate<A>> => g =>
  * @since 0.5.0
  */
 export const either = <A>(f: Predicate<A>): Endomorphism<Predicate<A>> => g =>
-  getFunctionSemigroup(semigroupAny)<A>().concat(f, g)
+  getFunctionSemigroup(SemigroupAny)<A>().concat(f, g)

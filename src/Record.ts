@@ -7,7 +7,7 @@ import { Option } from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
 import * as T from "fp-ts/Tuple"
-import { getLastSemigroup } from "fp-ts/Semigroup"
+import { last } from "fp-ts/Semigroup"
 
 /**
  * Get the values from a `Record`.
@@ -151,8 +151,8 @@ export const invertLast = <A>(
 ): ((x: Record<string, A>) => Record<string, string>) =>
   flow(
     R.toArray,
-    A.map(flow(T.mapLeft(f), T.swap)),
-    R.fromFoldable(getLastSemigroup<string>(), A.array),
+    A.map(flow(T.mapSnd(f), T.swap)),
+    R.fromFoldable(last<string>(), A.Foldable),
   )
 
 /**
@@ -174,5 +174,5 @@ export const invertAll = <A>(
   flow(
     R.toArray,
     A.map(flow(T.bimap(f, A.of), T.swap)),
-    R.fromFoldable(A.getMonoid<string>(), A.array),
+    R.fromFoldable(A.getMonoid<string>(), A.Foldable),
   )

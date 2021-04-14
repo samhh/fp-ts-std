@@ -14,7 +14,8 @@ import * as A from "fp-ts/Array"
 import fc from "fast-check"
 import { flow, pipe, Predicate } from "fp-ts/function"
 import { fromNumber } from "../src/String"
-import { eqNumber, eqString } from "fp-ts/lib/Eq"
+import * as N from "fp-ts/number"
+import * as S from "fp-ts/string"
 
 describe("Record", () => {
   describe("values", () => {
@@ -130,7 +131,7 @@ describe("Record", () => {
       const g = fromNumber
       const h: (x: Record<string, number>) => Array<string> = flow(
         values,
-        A.uniq(eqNumber),
+        A.uniq(N.Eq),
         A.map(g),
       )
 
@@ -139,7 +140,7 @@ describe("Record", () => {
           pipe(x, f(g), R.keys, ks =>
             pipe(
               h(x),
-              A.every(k => A.elem(eqString)(k)(ks)),
+              A.every(k => A.elem(S.Eq)(k)(ks)),
             ),
           ),
         ),
@@ -170,7 +171,7 @@ describe("Record", () => {
       const g = fromNumber
       const h: (x: Record<string, number>) => Array<string> = flow(
         values,
-        A.uniq(eqNumber),
+        A.uniq(N.Eq),
         A.map(g),
       )
 
@@ -179,7 +180,7 @@ describe("Record", () => {
           pipe(x, f(g), R.keys, ks =>
             pipe(
               h(x),
-              A.every(k => A.elem(eqString)(k)(ks)),
+              A.every(k => A.elem(S.Eq)(k)(ks)),
             ),
           ),
         ),

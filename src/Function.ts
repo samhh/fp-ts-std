@@ -10,8 +10,15 @@
 import * as O from "fp-ts/Option"
 import * as M from "fp-ts/Map"
 import * as A from "fp-ts/Array"
-import { Endomorphism, flow, not, pipe, Predicate } from "fp-ts/function"
-import { fold, getFunctionMonoid } from "fp-ts/Monoid"
+import {
+  Endomorphism,
+  flow,
+  not,
+  pipe,
+  Predicate,
+  getMonoid as getFunctionMonoid,
+} from "fp-ts/function"
+import { concatAll } from "fp-ts/Monoid"
 import { Eq } from "fp-ts/Eq"
 
 /**
@@ -132,7 +139,7 @@ export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
   pipe(
     branches,
     A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
-    fold(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
+    concatAll(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
     applyTo(input),
     O.getOrElse(() => fallback(input)),
   )

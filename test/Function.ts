@@ -29,7 +29,7 @@ import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
 import { constant, constFalse, constTrue, Endomorphism } from "fp-ts/function"
-import { eqNumber } from "fp-ts/Eq"
+import * as N from "fp-ts/number"
 import fc from "fast-check"
 
 describe("Function", () => {
@@ -174,7 +174,7 @@ describe("Function", () => {
     const f = memoize
 
     it("always returns the same output provided same input", () => {
-      const g = f(eqNumber)(add(5))
+      const g = f(N.Eq)(add(5))
 
       expect(g(2)).toBe(7)
       expect(g(3)).toBe(8)
@@ -185,7 +185,7 @@ describe("Function", () => {
 
     it("does not call function more than once per input", () => {
       let runs = 0 // eslint-disable-line functional/no-let
-      const g = f(eqNumber)<number>(n => {
+      const g = f(N.Eq)<number>(n => {
         runs++ // eslint-disable-line functional/no-expression-statement
         return add(5)(n)
       })
@@ -200,8 +200,8 @@ describe("Function", () => {
     })
 
     it("does not cross-pollute", () => {
-      const g = f(eqNumber)(add(5))
-      const h = f(eqNumber)(add(15))
+      const g = f(N.Eq)(add(5))
+      const h = f(N.Eq)(add(15))
 
       expect(g(2)).toBe(7)
       expect(h(2)).toBe(17)

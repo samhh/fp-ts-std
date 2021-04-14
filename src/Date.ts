@@ -5,13 +5,12 @@
 import { Newtype, iso, getField, getOrd } from "newtype-ts"
 import { flow, pipe, Predicate, Refinement } from "fp-ts/function"
 import { isValid as isValidNum } from "./Number"
-import { fieldNumber } from "fp-ts/Field"
+import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/number"
 import { now as nownum } from "fp-ts/Date"
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { ordNumber } from "fp-ts/Ord"
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an

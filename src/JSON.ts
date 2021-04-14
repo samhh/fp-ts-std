@@ -140,7 +140,10 @@ export const parse = <E>(f: (e: SyntaxError) => E) => (
 ): Either<E, Json> =>
   // It should only throw some sort of `SyntaxError`:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-  E.parseJSON(x, e => f(e as SyntaxError))
+  E.tryCatch(
+    () => JSON.parse(x) as Json,
+    e => f(e as SyntaxError),
+  )
 
 /**
  * Parse a string as JSON, returning an `Option`.

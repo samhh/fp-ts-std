@@ -11,7 +11,8 @@ import {
   not,
 } from "fp-ts/function"
 import { Eq } from "fp-ts/Eq"
-import { Ord, ordNumber } from "fp-ts/Ord"
+import { Ord } from "fp-ts/Ord"
+import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/number"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import * as NEA from "fp-ts/ReadonlyNonEmptyArray"
 import { copy } from "fp-ts/Array"
@@ -21,8 +22,8 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
-import { fold, monoidProduct, monoidSum } from "fp-ts/Monoid"
-import { getJoinSemigroup, getMeetSemigroup } from "fp-ts/Semigroup"
+import { concatAll } from "fp-ts/Monoid"
+import { max, min } from "fp-ts/Semigroup"
 import { flip } from "./Function"
 
 /**
@@ -199,7 +200,7 @@ export const upsert = <A>(eqA: Eq<A>) => (x: A) => (
     RA.findIndex<A>(y => eqA.equals(x, y))(ys),
     O.map(i => RA.unsafeUpdateAt(i, x, ys)),
     O.chain(NEA.fromReadonlyArray),
-    O.getOrElse(() => NEA.snoc(ys, x)),
+    O.getOrElse(() => RA.append(x)(ys)),
   )
 
 /**
@@ -347,7 +348,7 @@ export const cartesian = <A>(xs: ReadonlyArray<A>) => <B>(
  *
  * @since 0.10.0
  */
-export const sum: (xs: ReadonlyArray<number>) => number = fold(monoidSum)
+export const sum: (xs: ReadonlyArray<number>) => number = concatAll(MonoidSum)
 
 /**
  * Multiplies together all the numbers in the input array.
@@ -361,8 +362,8 @@ export const sum: (xs: ReadonlyArray<number>) => number = fold(monoidSum)
  *
  * @since 0.10.0
  */
-export const product: (xs: ReadonlyArray<number>) => number = fold(
-  monoidProduct,
+export const product: (xs: ReadonlyArray<number>) => number = concatAll(
+  MonoidProduct,
 )
 
 /**
@@ -421,7 +422,7 @@ export const aperture = (n: number) => <A>(
   const go = (i: number) => (
     ys: ReadonlyArray<ReadonlyArray<A>>,
   ): ReadonlyArray<ReadonlyArray<A>> =>
-    i + n > xs.length ? ys : go(i + 1)(RA.snoc(ys, slice(i)(n + i)(xs)))
+    i + n > xs.length ? ys : go(i + 1)(RA.append(slice(i)(n + i)(xs))(ys))
 
   return n < 1 ? [] : go(0)([])
 }
@@ -535,7 +536,7 @@ export const moveTo = flip(moveFrom)
 export const countBy = <A>(f: (x: A) => string) => (
   xs: ReadonlyArray<A>,
 ): Record<string, number> =>
-  R.fromFoldableMap(monoidSum, RA.Foldable)(xs, x => [f(x), 1])
+  R.fromFoldableMap(MonoidSum, RA.Foldable)(xs, x => [f(x), 1])
 
 /**
  * Remove the longest initial subarray from the end of the input array for
@@ -695,7 +696,7 @@ export const reduceWhile = <A>(p: Predicate<A>) => <B>(
       O.filter(flow(NEA.head, p)),
       O.fold(
         constant(acc),
-        flow(NEA.uncons, ([z, zs]) => go(f(z)(acc))(zs)),
+        flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
       ),
     )
 
@@ -737,7 +738,7 @@ export const reduceRightWhile = <A>(p: Predicate<A>) => <B>(
  */
 export const minimum: <A>(
   ord: Ord<A>,
-) => (xs: ReadonlyNonEmptyArray<A>) => A = flow(getMeetSemigroup, NEA.fold)
+) => (xs: ReadonlyNonEmptyArray<A>) => A = flow(min, NEA.concatAll)
 
 /**
  * Obtain the maximum value from a non-empty array.
@@ -752,7 +753,7 @@ export const minimum: <A>(
  */
 export const maximum: <A>(
   ord: Ord<A>,
-) => (xs: ReadonlyNonEmptyArray<A>) => A = flow(getJoinSemigroup, NEA.fold)
+) => (xs: ReadonlyNonEmptyArray<A>) => A = flow(max, NEA.concatAll)
 
 /**
  * Append two arrays in terms of a semigroup. In effect, a functional wrapper
