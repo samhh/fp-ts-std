@@ -46,6 +46,7 @@ export const elemFlipped = <A>(eq: Eq<A>) => (
 /**
  * Check if a predicate does not hold for any array member.
  *
+ * @example
  * import { none } from 'fp-ts-std/Array';
  * import { Predicate } from 'fp-ts/function';
  *
