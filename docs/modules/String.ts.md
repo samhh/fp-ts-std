@@ -19,15 +19,12 @@ Added in v0.1.0
   - [dropLeftWhile](#dropleftwhile)
   - [dropRight](#dropright)
   - [dropRightWhile](#droprightwhile)
-  - [empty](#empty)
   - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
   - [head](#head)
   - [init](#init)
-  - [isEmpty](#isempty)
   - [isString](#isstring)
   - [last](#last)
-  - [length](#length)
   - [lines](#lines)
   - [lookup](#lookup)
   - [match](#match)
@@ -237,30 +234,6 @@ assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
 
 Added in v0.7.0
 
-## empty
-
-An empty string.
-
-**Signature**
-
-```ts
-export declare const empty: ''
-```
-
-```hs
-empty :: ""
-```
-
-**Example**
-
-```ts
-import { empty } from 'fp-ts-std/String'
-
-assert.strictEqual(empty, '')
-```
-
-Added in v0.6.0
-
 ## endsWith
 
 Check if a string ends with the specified substring.
@@ -366,31 +339,6 @@ assert.deepStrictEqual(init('abc'), O.some('ab'))
 
 Added in v0.7.0
 
-## isEmpty
-
-Check if a string is empty.
-
-**Signature**
-
-```ts
-export declare const isEmpty: Predicate<string>
-```
-
-```hs
-isEmpty :: Predicate string
-```
-
-**Example**
-
-```ts
-import { isEmpty } from 'fp-ts-std/String'
-
-assert.strictEqual(isEmpty(''), true)
-assert.strictEqual(isEmpty(' '), false)
-```
-
-Added in v0.1.0
-
 ## isString
 
 Refine a foreign value to a string.
@@ -441,30 +389,6 @@ assert.deepStrictEqual(last(''), O.none)
 ```
 
 Added in v0.7.0
-
-## length
-
-Get the length of a string.
-
-**Signature**
-
-```ts
-export declare const length: (x: string) => number
-```
-
-```hs
-length :: string -> number
-```
-
-**Example**
-
-```ts
-import { length } from 'fp-ts-std/String'
-
-assert.strictEqual(length('abc'), 3)
-```
-
-Added in v0.1.0
 
 ## lines
 

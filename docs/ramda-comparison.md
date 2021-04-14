@@ -69,7 +69,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] dropRepeatsWith - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropWhile - [fp-ts/Array::dropLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleftwhile)/[fp-ts-std/String::dropLeftWhile](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropleftwhile)
 - [x] either - [fp-ts-std/Boolean::either](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#either)/[fp-ts/Option::alt](https://gcanti.github.io/fp-ts/modules/Option.ts.html#alt)
-- [x] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)/[fp-ts/Option::empty]/[fp-ts-std/String::empty](https://samhh.github.io/fp-ts-std/modules/String.ts.html#empty)
+- [x] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)/[fp-ts/Option::empty]/[fp-ts/string::empty](https://gcanti.github.io/fp-ts/modules/string.ts.html#empty)
 - [x] endsWith - [fp-ts-std/Array::endsWith](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#endswith)/[fp-ts-std/String::endsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#endswith)
 - [x] eqBy - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
 - [x] eqProps - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
@@ -112,7 +112,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] invertObj - [fp-ts-std/Record::invertLast](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#invertlast)
 - [ ] invoker
 - [x] is - [io-ts](https://gcanti.github.io/io-ts/)
-- [x] isEmpty - [fp-ts/Array::isEmpty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#isempty)/[fp-ts/Record::isEmpty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#isempty)/[fp-ts-std/String::isEmpty](https://samhh.github.io/fp-ts-std/modules/String.ts.html#isempty)
+- [x] isEmpty - [fp-ts/Array::isEmpty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#isempty)/[fp-ts/Record::isEmpty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#isempty)/[fp-ts/string::isEmpty](https://gcanti.github.io/fp-ts/modules/string.ts.html#isempty)
 - ~~[ ] isNil~~ Prefer `Option` type. Failing that, create `Eq` instances for `null` and `undefined`.
 - [x] join - [fp-ts-std/Array::join](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#join)
 - [ ] juxt
@@ -120,7 +120,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] keysIn - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [x] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)/[fp-ts-std/String::last](https://samhh.github.io/fp-ts-std/modules/String.ts.html#last)
 - [x] lastIndexOf - [fp-ts/Array::lastIndexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlastindex)
-- [x] length - [fp-ts-std/Array::length](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#length)
+- [x] length - [fp-ts/Array::size](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#size)
 - [x] lens - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensIndex - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)

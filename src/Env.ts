@@ -7,7 +7,7 @@ import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import * as S from "./String"
+import * as S from "fp-ts/string"
 
 /**
  * Attempt to get an environment parameter.

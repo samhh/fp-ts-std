@@ -15,10 +15,8 @@ import {
   append,
   unappend,
   contains,
-  length,
   fromNumber,
   isString,
-  isEmpty,
   trim,
   trimLeft,
   trimRight,
@@ -394,19 +392,6 @@ describe("String", () => {
     })
   })
 
-  describe("length", () => {
-    const f = length
-
-    it("returns length of string", () => {
-      expect(f("")).toBe(0)
-      expect(f("abc")).toBe(3)
-    })
-
-    it("returned value is always non-negative", () => {
-      fc.assert(fc.property(fc.string(), xs => f(xs) >= 0))
-    })
-  })
-
   describe("fromNumber", () => {
     const f = fromNumber
 
@@ -443,23 +428,6 @@ describe("String", () => {
             fc.constant(undefined),
             fc.object(),
           ),
-          flow(f, invert),
-        ),
-      )
-    })
-  })
-
-  describe("isEmpty", () => {
-    const f = isEmpty
-
-    it("returns true if empty", () => {
-      expect(f("")).toBe(true)
-    })
-
-    it("returns false for non-empty", () => {
-      fc.assert(
-        fc.property(
-          fc.string().filter(x => x !== ""),
           flow(f, invert),
         ),
       )

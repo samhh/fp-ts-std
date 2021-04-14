@@ -15,6 +15,7 @@ import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
+import * as S from "fp-ts/string"
 import {
   join,
   dropRightWhile as dropRightWhileArr,
@@ -22,30 +23,6 @@ import {
 } from "./Array"
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
-
-/**
- * An empty string.
- *
- * @example
- * import { empty } from 'fp-ts-std/String'
- *
- * assert.strictEqual(empty, '')
- *
- * @since 0.6.0
- */
-export const empty = ""
-
-/**
- * Get the length of a string.
- *
- * @example
- * import { length } from 'fp-ts-std/String';
- *
- * assert.strictEqual(length('abc'), 3);
- *
- * @since 0.1.0
- */
-export const length = (x: string): number => x.length
 
 /**
  * Convert a number to a string.
@@ -72,19 +49,6 @@ export const fromNumber = (x: number): string => String(x)
  */
 export const isString: Refinement<unknown, string> = (x): x is string =>
   typeof x === "string"
-
-/**
- * Check if a string is empty.
- *
- * @example
- * import { isEmpty } from 'fp-ts-std/String';
- *
- * assert.strictEqual(isEmpty(''), true);
- * assert.strictEqual(isEmpty(' '), false);
- *
- * @since 0.1.0
- */
-export const isEmpty: Predicate<string> = x => x === ""
 
 /**
  * Check if a string contains a given substring.
@@ -584,7 +548,7 @@ export const dropRightWhile: (
  * @since 0.6.0
  */
 export const head: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(isEmpty)),
+  O.fromPredicate(not(S.isEmpty)),
   O.map(takeLeft(1)),
 )
 
@@ -603,7 +567,7 @@ export const head: (x: string) => Option<string> = flow(
  * @since 0.6.0
  */
 export const tail: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(isEmpty)),
+  O.fromPredicate(not(S.isEmpty)),
   O.map(dropLeft(1)),
 )
 
@@ -620,7 +584,7 @@ export const tail: (x: string) => Option<string> = flow(
  * @since 0.7.0
  */
 export const last: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(isEmpty)),
+  O.fromPredicate(not(S.isEmpty)),
   O.map(takeRight(1)),
 )
 
@@ -639,7 +603,7 @@ export const last: (x: string) => Option<string> = flow(
  * @since 0.7.0
  */
 export const init: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(isEmpty)),
+  O.fromPredicate(not(S.isEmpty)),
   O.map(dropRight(1)),
 )
 
