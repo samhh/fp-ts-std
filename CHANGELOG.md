@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.10.0 (_Unreleased_)
+## 0.10.0 (2021-04-16)
 
 - Add `ReadonlyArray` and `ReadonlyRecord` modules.
 - Add `fromString`, `fromStringWithRadix`, and `floatFromString` functions to the `Number` module.
