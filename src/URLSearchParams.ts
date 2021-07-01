@@ -112,8 +112,10 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> = (
  *
  * @since 0.1.0
  */
-export const getParam = (k: string) => (ps: URLSearchParams): Option<string> =>
-  pipe(ps.get(k), O.fromNullable)
+export const getParam =
+  (k: string) =>
+  (ps: URLSearchParams): Option<string> =>
+    pipe(ps.get(k), O.fromNullable)
 
 /**
  * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
@@ -132,10 +134,11 @@ export const getParam = (k: string) => (ps: URLSearchParams): Option<string> =>
  *
  * @since 0.1.0
  */
-export const setParam = (k: string) => (v: string) => (
-  x: URLSearchParams,
-): URLSearchParams => {
-  const y = new URLSearchParams(x)
-  y.set(k, v) // eslint-disable-line functional/no-expression-statement
-  return y
-}
+export const setParam =
+  (k: string) =>
+  (v: string) =>
+  (x: URLSearchParams): URLSearchParams => {
+    const y = new URLSearchParams(x)
+    y.set(k, v) // eslint-disable-line functional/no-expression-statement
+    return y
+  }

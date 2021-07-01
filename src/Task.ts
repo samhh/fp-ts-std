@@ -38,11 +38,13 @@ import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
  *
  * @since 0.1.0
  */
-export const sleep = (n: Milliseconds): Task<void> => () =>
-  new Promise<void>(resolve => {
-    // eslint-disable-next-line functional/no-expression-statement
-    setTimeout(resolve, Math.floor(unMilliseconds(n)))
-  })
+export const sleep =
+  (n: Milliseconds): Task<void> =>
+  () =>
+    new Promise<void>(resolve => {
+      // eslint-disable-next-line functional/no-expression-statement
+      setTimeout(resolve, Math.floor(unMilliseconds(n)))
+    })
 
 /**
  * Calls the callback upon task completion with the number of milliseconds it
@@ -63,14 +65,15 @@ export const sleep = (n: Milliseconds): Task<void> => () =>
  *
  * @since 0.5.0
  */
-export const elapsed = (f: (n: Milliseconds) => IO<void>) => <A>(
-  x: Task<A>,
-): Task<A> => async () => {
-  const start = now()
-  const y = await x()
-  const duration = fieldMilliseconds.sub(now(), start)
-  // eslint-disable-next-line functional/no-expression-statement
-  f(duration)()
+export const elapsed =
+  (f: (n: Milliseconds) => IO<void>) =>
+  <A>(x: Task<A>): Task<A> =>
+  async () => {
+    const start = now()
+    const y = await x()
+    const duration = fieldMilliseconds.sub(now(), start)
+    // eslint-disable-next-line functional/no-expression-statement
+    f(duration)()
 
-  return y
-}
+    return y
+  }

@@ -49,21 +49,21 @@ export const unJSONString = isoJSONString.unwrap
  *
  * @since 0.1.0
  */
-export const stringify = <E>(f: (e: TypeError) => E) => (
-  x: unknown,
-): Either<E, JSONString> =>
-  pipe(
-    // It should only throw some sort of `TypeError`:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
-    E.tryCatch(
-      () => JSON.stringify(x),
-      e => f(e as TypeError),
-    ),
-    E.filterOrElse(isString, () =>
-      f(new TypeError("Stringify output not a string")),
-    ),
-    E.map(mkJSONString),
-  )
+export const stringify =
+  <E>(f: (e: TypeError) => E) =>
+  (x: unknown): Either<E, JSONString> =>
+    pipe(
+      // It should only throw some sort of `TypeError`:
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+      E.tryCatch(
+        () => JSON.stringify(x),
+        e => f(e as TypeError),
+      ),
+      E.filterOrElse(isString, () =>
+        f(new TypeError("Stringify output not a string")),
+      ),
+      E.map(mkJSONString),
+    )
 
 /**
  * Stringify some arbitrary data, returning an `Option`.
@@ -137,15 +137,15 @@ export const unstringify: (x: JSONString) => unknown = flow(
  *
  * @since 0.1.0
  */
-export const parse = <E>(f: (e: SyntaxError) => E) => (
-  x: string,
-): Either<E, Json> =>
-  // It should only throw some sort of `SyntaxError`:
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-  E.tryCatch(
-    () => JSON.parse(x) as Json,
-    e => f(e as SyntaxError),
-  )
+export const parse =
+  <E>(f: (e: SyntaxError) => E) =>
+  (x: string): Either<E, Json> =>
+    // It should only throw some sort of `SyntaxError`:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+    E.tryCatch(
+      () => JSON.parse(x) as Json,
+      e => f(e as SyntaxError),
+    )
 
 /**
  * Parse a string as JSON, returning an `Option`.

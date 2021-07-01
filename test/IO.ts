@@ -12,9 +12,11 @@ describe("IO", () => {
 
     it("performs the side effect", () => {
       let x = false // eslint-disable-line functional/no-let
-      const g = (y: boolean): IO<void> => () => {
-        x = y // eslint-disable-line functional/no-expression-statement
-      }
+      const g =
+        (y: boolean): IO<void> =>
+        () => {
+          x = y // eslint-disable-line functional/no-expression-statement
+        }
 
       expect(x).toBe(false)
       f(g)(true)() // eslint-disable-line functional/no-expression-statement

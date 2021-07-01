@@ -15,7 +15,7 @@ import { isString } from "../src/String"
 
 const stringifyPrimitiveUnwrapped = (
   x: Parameters<typeof stringifyPrimitive>[0],
-): string => (stringifyPrimitive(x) as unknown) as string
+): string => stringifyPrimitive(x) as unknown as string
 
 describe("JSON", () => {
   describe("stringifyPrimitive", () => {
@@ -92,7 +92,7 @@ describe("JSON", () => {
   })
 
   describe("unstringify", () => {
-    const f = (x: string): unknown => unstringify((x as unknown) as JSONString)
+    const f = (x: string): unknown => unstringify(x as unknown as JSONString)
 
     it("parses valid underlying JSON", () => {
       expect(f('{"a":1,"b":["two"]}')).toEqual({ a: 1, b: ["two"] })

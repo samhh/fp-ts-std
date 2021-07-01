@@ -32,12 +32,14 @@ type IO<A> = IO.IO<A>
  *
  * @since 0.7.0
  */
-export const tap = <A>(f: (x: A) => IO<void>) => (x: A): IO<A> => {
-  // eslint-disable-next-line functional/no-expression-statement
-  f(x)()
+export const tap =
+  <A>(f: (x: A) => IO<void>) =>
+  (x: A): IO<A> => {
+    // eslint-disable-next-line functional/no-expression-statement
+    f(x)()
 
-  return IO.of(x)
-}
+    return IO.of(x)
+  }
 
 /**
  * Given a function, returns a new function that always returns the output

@@ -343,7 +343,10 @@ flip :: a extends (Array unknown), b extends (Array unknown) => (...a -> ...b ->
 ```ts
 import { flip } from 'fp-ts-std/Function'
 
-const prepend = (x: string) => (y: string): string => x + y
+const prepend =
+  (x: string) =>
+  (y: string): string =>
+    x + y
 const append = flip(prepend)
 
 assert.strictEqual(prepend('x')('y'), 'xy')
@@ -517,7 +520,10 @@ uncurry2 :: (a -> b -> c) -> [a, b] -> c
 import { uncurry2 } from 'fp-ts-std/Function'
 import { Endomorphism } from 'fp-ts/function'
 
-const concat2 = (a: string): Endomorphism<string> => (b) => a + b
+const concat2 =
+  (a: string): Endomorphism<string> =>
+  (b) =>
+    a + b
 assert.strictEqual(uncurry2(concat2)(['a', 'b']), concat2('a')('b'))
 ```
 
@@ -543,7 +549,11 @@ uncurry3 :: (a -> b -> c -> d) -> [a, b, c] -> d
 import { uncurry3 } from 'fp-ts-std/Function'
 import { Endomorphism } from 'fp-ts/function'
 
-const concat3 = (a: string) => (b: string): Endomorphism<string> => (c) => a + b + c
+const concat3 =
+  (a: string) =>
+  (b: string): Endomorphism<string> =>
+  (c) =>
+    a + b + c
 assert.strictEqual(uncurry3(concat3)(['a', 'b', 'c']), concat3('a')('b')('c'))
 ```
 
@@ -571,7 +581,12 @@ uncurry4 :: (a -> b -> c -> d -> e) -> [a, b, c, d] -> e
 import { uncurry4 } from 'fp-ts-std/Function'
 import { Endomorphism } from 'fp-ts/function'
 
-const concat4 = (a: string) => (b: string) => (c: string): Endomorphism<string> => (d) => a + b + c + d
+const concat4 =
+  (a: string) =>
+  (b: string) =>
+  (c: string): Endomorphism<string> =>
+  (d) =>
+    a + b + c + d
 assert.strictEqual(uncurry4(concat4)(['a', 'b', 'c', 'd']), concat4('a')('b')('c')('d'))
 ```
 
@@ -599,8 +614,13 @@ uncurry5 :: (a -> b -> c -> d -> e -> f) -> [a, b, c, d, e] -> f
 import { uncurry5 } from 'fp-ts-std/Function'
 import { Endomorphism } from 'fp-ts/function'
 
-const concat5 = (a: string) => (b: string) => (c: string) => (d: string): Endomorphism<string> => (e) =>
-  a + b + c + d + e
+const concat5 =
+  (a: string) =>
+  (b: string) =>
+  (c: string) =>
+  (d: string): Endomorphism<string> =>
+  (e) =>
+    a + b + c + d + e
 assert.strictEqual(uncurry5(concat5)(['a', 'b', 'c', 'd', 'e']), concat5('a')('b')('c')('d')('e'))
 ```
 

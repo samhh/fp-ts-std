@@ -39,9 +39,10 @@ export const values = <A>(x: Record<string, A>): Array<A> => Object.values(x)
  *
  * @since 0.1.0
  */
-export const lookupFlipped = <A>(x: Record<string, A>) => (
-  k: string,
-): Option<A> => R.lookup(k)(x)
+export const lookupFlipped =
+  <A>(x: Record<string, A>) =>
+  (k: string): Option<A> =>
+    R.lookup(k)(x)
 
 /**
  * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
@@ -57,22 +58,23 @@ export const lookupFlipped = <A>(x: Record<string, A>) => (
  *
  * @since 0.1.0
  */
-export const pick = <A>() => <K extends keyof A>(ks: Array<K>) => (
-  x: A,
-): Pick<A, K> => {
-  // I don't believe there's any reasonable way to model this sort of
-  // transformation in the type system without an assertion - at least here
-  // it's in a single reused place
-  const o = {} as Pick<A, K>
+export const pick =
+  <A>() =>
+  <K extends keyof A>(ks: Array<K>) =>
+  (x: A): Pick<A, K> => {
+    // I don't believe there's any reasonable way to model this sort of
+    // transformation in the type system without an assertion - at least here
+    // it's in a single reused place
+    const o = {} as Pick<A, K>
 
-  /* eslint-disable */
-  for (const k of ks) {
-    o[k] = x[k]
+    /* eslint-disable */
+    for (const k of ks) {
+      o[k] = x[k]
+    }
+    /* eslint-enable */
+
+    return o
   }
-  /* eslint-enable */
-
-  return o
-}
 
 /**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
@@ -87,22 +89,19 @@ export const pick = <A>() => <K extends keyof A>(ks: Array<K>) => (
  *
  * @since 0.1.0
  */
-export const omit = <K extends string>(ks: Array<K>) => <
-  V,
-  A extends Record<K, V>
->(
-  x: Partial<A>,
-): Omit<A, K> => {
-  const y = { ...x }
+export const omit =
+  <K extends string>(ks: Array<K>) =>
+  <V, A extends Record<K, V>>(x: Partial<A>): Omit<A, K> => {
+    const y = { ...x }
 
-  /* eslint-disable */
-  for (const k of ks) {
-    delete y[k]
+    /* eslint-disable */
+    for (const k of ks) {
+      delete y[k]
+    }
+    /* eslint-enable */
+
+    return y as Omit<A, K>
   }
-  /* eslint-enable */
-
-  return y as Omit<A, K>
-}
 
 /**
  * Filters out key/value pairs in the record for which the predicate upon the
@@ -133,7 +132,9 @@ export const reject = <A>(f: Predicate<A>): Endomorphism<Record<string, A>> =>
  *
  * @since 0.7.0
  */
-export const merge = <A>(x: A) => <B>(y: B): A & B => ({ ...x, ...y })
+export const merge =
+  <A>(x: A) =>
+  <B>(y: B): A & B => ({ ...x, ...y })
 
 /**
  * Invert a record, keeping only the last value should the same key be

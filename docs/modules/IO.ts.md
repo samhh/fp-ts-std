@@ -75,9 +75,11 @@ import * as IO from 'fp-ts/IO'
 import { flow } from 'fp-ts/function'
 
 let x = 0
-const mutate = (y: number): IO.IO<void> => () => {
-  x = y
-}
+const mutate =
+  (y: number): IO.IO<void> =>
+  () => {
+    x = y
+  }
 
 const double = (n: number): number => n * 2
 const toString = (n: number): string => String(n)

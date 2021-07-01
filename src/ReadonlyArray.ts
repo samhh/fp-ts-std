@@ -54,9 +54,11 @@ export const length = (xs: ReadonlyArray<unknown>): number => xs.length
  *
  * @since 0.10.0
  */
-export const elemFlipped = <A>(eq: Eq<A>) => (
-  xs: ReadonlyArray<A>,
-): Predicate<A> => y => RA.elem(eq)(y)(xs)
+export const elemFlipped =
+  <A>(eq: Eq<A>) =>
+  (xs: ReadonlyArray<A>): Predicate<A> =>
+  y =>
+    RA.elem(eq)(y)(xs)
 
 /**
  * Check if a predicate does not hold for any array member.
@@ -92,8 +94,10 @@ export const none: <A>(f: Predicate<A>) => Predicate<ReadonlyArray<A>> = flow(
  *
  * @since 0.10.0
  */
-export const join = (x: string) => (ys: ReadonlyArray<string>): string =>
-  ys.join(x)
+export const join =
+  (x: string) =>
+  (ys: ReadonlyArray<string>): string =>
+    ys.join(x)
 
 /**
  * Like `fp-ts/Array::getEq`, but items are not required to be in the same
@@ -141,16 +145,16 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<ReadonlyArray<A>> => ({
  *
  * @since 0.10.0
  */
-export const pluckFirst = <A>(p: Predicate<A>) => (
-  xs: ReadonlyArray<A>,
-): [Option<A>, ReadonlyArray<A>] =>
-  pipe(
-    RA.findIndex(p)(xs),
-    O.fold(constant([O.none, xs]), i => [
-      O.some(xs[i]),
-      RA.unsafeDeleteAt(i, xs),
-    ]),
-  )
+export const pluckFirst =
+  <A>(p: Predicate<A>) =>
+  (xs: ReadonlyArray<A>): [Option<A>, ReadonlyArray<A>] =>
+    pipe(
+      RA.findIndex(p)(xs),
+      O.fold(constant([O.none, xs]), i => [
+        O.some(xs[i]),
+        RA.unsafeDeleteAt(i, xs),
+      ]),
+    )
 
 /**
  * Update an item in an array or, if it's not present yet, insert it.
@@ -195,15 +199,16 @@ export const pluckFirst = <A>(p: Predicate<A>) => (
  *
  * @since 0.10.0
  */
-export const upsert = <A>(eqA: Eq<A>) => (x: A) => (
-  ys: ReadonlyArray<A>,
-): ReadonlyNonEmptyArray<A> =>
-  pipe(
-    RA.findIndex<A>(y => eqA.equals(x, y))(ys),
-    O.map(i => RA.unsafeUpdateAt(i, x, ys)),
-    O.chain(NEA.fromReadonlyArray),
-    O.getOrElse(() => RA.append(x)(ys)),
-  )
+export const upsert =
+  <A>(eqA: Eq<A>) =>
+  (x: A) =>
+  (ys: ReadonlyArray<A>): ReadonlyNonEmptyArray<A> =>
+    pipe(
+      RA.findIndex<A>(y => eqA.equals(x, y))(ys),
+      O.map(i => RA.unsafeUpdateAt(i, x, ys)),
+      O.chain(NEA.fromReadonlyArray),
+      O.getOrElse(() => RA.append(x)(ys)),
+    )
 
 /**
  * Insert all the elements of an array into another array at the specified
@@ -222,15 +227,16 @@ export const upsert = <A>(eqA: Eq<A>) => (x: A) => (
  *
  * @since 0.5.0
  */
-export const insertMany = (i: number) => <A>(xs: ReadonlyNonEmptyArray<A>) => (
-  ys: ReadonlyArray<A>,
-): Option<ReadonlyNonEmptyArray<A>> =>
-  pipe(
-    xs,
-    RA.reverse,
-    reduceM(O.Monad, RA.Foldable)(ys, (zs, x) => pipe(zs, RA.insertAt(i, x))),
-    O.chain(NEA.fromReadonlyArray),
-  )
+export const insertMany =
+  (i: number) =>
+  <A>(xs: ReadonlyNonEmptyArray<A>) =>
+  (ys: ReadonlyArray<A>): Option<ReadonlyNonEmptyArray<A>> =>
+    pipe(
+      xs,
+      RA.reverse,
+      reduceM(O.Monad, RA.Foldable)(ys, (zs, x) => pipe(zs, RA.insertAt(i, x))),
+      O.chain(NEA.fromReadonlyArray),
+    )
 
 /**
  * Filter a list, removing any elements that repeat that directly preceding
@@ -244,13 +250,12 @@ export const insertMany = (i: number) => <A>(xs: ReadonlyNonEmptyArray<A>) => (
  *
  * @since 0.10.0
  */
-export const dropRepeats: <A>(
-  eq: Eq<A>,
-) => Endomorphism<ReadonlyArray<A>> = eq => xs =>
-  pipe(
-    xs,
-    RA.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
-  )
+export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<ReadonlyArray<A>> =
+  eq => xs =>
+    pipe(
+      xs,
+      RA.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
+    )
 
 /**
  * Check if an array starts with the specified subarray.
@@ -266,10 +271,10 @@ export const dropRepeats: <A>(
  *
  * @since 0.10.0
  */
-export const startsWith = <A>(eq: Eq<A>) => (
-  start: ReadonlyArray<A>,
-): Predicate<ReadonlyArray<A>> =>
-  flow(RA.takeLeft(start.length), xs => RA.getEq(eq).equals(xs, start))
+export const startsWith =
+  <A>(eq: Eq<A>) =>
+  (start: ReadonlyArray<A>): Predicate<ReadonlyArray<A>> =>
+    flow(RA.takeLeft(start.length), xs => RA.getEq(eq).equals(xs, start))
 
 /**
  * Check if an array ends with the specified subarray.
@@ -285,10 +290,10 @@ export const startsWith = <A>(eq: Eq<A>) => (
  *
  * @since 0.10.0
  */
-export const endsWith = <A>(eq: Eq<A>) => (
-  end: ReadonlyArray<A>,
-): Predicate<ReadonlyArray<A>> =>
-  flow(RA.takeRight(end.length), xs => RA.getEq(eq).equals(xs, end))
+export const endsWith =
+  <A>(eq: Eq<A>) =>
+  (end: ReadonlyArray<A>): Predicate<ReadonlyArray<A>> =>
+    flow(RA.takeRight(end.length), xs => RA.getEq(eq).equals(xs, end))
 
 /**
  * Returns a new array without the values present in the first input array.
@@ -307,9 +312,10 @@ export const endsWith = <A>(eq: Eq<A>) => (
  *
  * @since 0.10.0
  */
-export const without = <A>(eq: Eq<A>) => (
-  xs: ReadonlyArray<A>,
-): Endomorphism<ReadonlyArray<A>> => flow(RA.filter(y => !RA.elem(eq)(y)(xs)))
+export const without =
+  <A>(eq: Eq<A>) =>
+  (xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
+    flow(RA.filter(y => !RA.elem(eq)(y)(xs)))
 
 /**
  * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
@@ -326,18 +332,18 @@ export const without = <A>(eq: Eq<A>) => (
  *
  * @since 0.10.0
  */
-export const cartesian = <A>(xs: ReadonlyArray<A>) => <B>(
-  ys: ReadonlyArray<B>,
-): ReadonlyArray<[A, B]> =>
-  pipe(
-    xs,
-    RA.chain(x =>
-      pipe(
-        ys,
-        RA.map(y => [x, y]),
+export const cartesian =
+  <A>(xs: ReadonlyArray<A>) =>
+  <B>(ys: ReadonlyArray<B>): ReadonlyArray<[A, B]> =>
+    pipe(
+      xs,
+      RA.chain(x =>
+        pipe(
+          ys,
+          RA.map(y => [x, y]),
+        ),
       ),
-    ),
-  )
+    )
 
 /**
  * Adds together all the numbers in the input array.
@@ -364,9 +370,8 @@ export const sum: (xs: ReadonlyArray<number>) => number = concatAll(MonoidSum)
  *
  * @since 0.10.0
  */
-export const product: (xs: ReadonlyArray<number>) => number = concatAll(
-  MonoidProduct,
-)
+export const product: (xs: ReadonlyArray<number>) => number =
+  concatAll(MonoidProduct)
 
 /**
  * Calculate the mean of an array of numbers.
@@ -418,16 +423,16 @@ export const median: (xs: ReadonlyNonEmptyArray<number>) => number = flow(
  *
  * @since 0.10.0
  */
-export const aperture = (n: number) => <A>(
-  xs: ReadonlyArray<A>,
-): ReadonlyArray<ReadonlyArray<A>> => {
-  const go = (i: number) => (
-    ys: ReadonlyArray<ReadonlyArray<A>>,
-  ): ReadonlyArray<ReadonlyArray<A>> =>
-    i + n > xs.length ? ys : go(i + 1)(RA.append(slice(i)(n + i)(xs))(ys))
+export const aperture =
+  (n: number) =>
+  <A>(xs: ReadonlyArray<A>): ReadonlyArray<ReadonlyArray<A>> => {
+    const go =
+      (i: number) =>
+      (ys: ReadonlyArray<ReadonlyArray<A>>): ReadonlyArray<ReadonlyArray<A>> =>
+        i + n > xs.length ? ys : go(i + 1)(RA.append(slice(i)(n + i)(xs))(ys))
 
-  return n < 1 ? [] : go(0)([])
-}
+    return n < 1 ? [] : go(0)([])
+  }
 
 /**
  * Returns the elements of the array between the start index (inclusive) and the
@@ -447,9 +452,11 @@ export const aperture = (n: number) => <A>(
  *
  * @since 0.10.0
  */
-export const slice = (start: number) => (end: number) => <A>(
-  xs: ReadonlyArray<A>,
-): ReadonlyArray<A> => xs.slice(start, end)
+export const slice =
+  (start: number) =>
+  (end: number) =>
+  <A>(xs: ReadonlyArray<A>): ReadonlyArray<A> =>
+    xs.slice(start, end)
 
 /**
  * Filters out items in the array for which the predicate holds. This can be
@@ -487,18 +494,21 @@ export const reject = <A>(f: Predicate<A>): Endomorphism<ReadonlyArray<A>> =>
  *
  * @since 0.10.0
  */
-export const moveFrom = (from: number) => (to: number) => <A>(
-  xs: ReadonlyArray<A>,
-): Option<ReadonlyArray<A>> =>
-  from >= xs.length || to >= xs.length
-    ? O.none
-    : from === to
-    ? O.some(xs)
-    : pipe(
-        xs,
-        RA.lookup(from),
-        O.chain(x => pipe(RA.deleteAt(from)(xs), O.chain(RA.insertAt(to, x)))),
-      )
+export const moveFrom =
+  (from: number) =>
+  (to: number) =>
+  <A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
+    from >= xs.length || to >= xs.length
+      ? O.none
+      : from === to
+      ? O.some(xs)
+      : pipe(
+          xs,
+          RA.lookup(from),
+          O.chain(x =>
+            pipe(RA.deleteAt(from)(xs), O.chain(RA.insertAt(to, x))),
+          ),
+        )
 
 /**
  * Move an item at index `from` to index `to`. See also `moveFrom`.
@@ -535,10 +545,10 @@ export const moveTo = flip(moveFrom)
  *
  * @since 0.10.0
  */
-export const countBy = <A>(f: (x: A) => string) => (
-  xs: ReadonlyArray<A>,
-): Record<string, number> =>
-  R.fromFoldableMap(MonoidSum, RA.Foldable)(xs, x => [f(x), 1])
+export const countBy =
+  <A>(f: (x: A) => string) =>
+  (xs: ReadonlyArray<A>): Record<string, number> =>
+    R.fromFoldableMap(MonoidSum, RA.Foldable)(xs, x => [f(x), 1])
 
 /**
  * Remove the longest initial subarray from the end of the input array for
@@ -586,25 +596,26 @@ export const dropRightWhile = <A>(
  * @since 0.10.0
  */
 
-export const dropAt = (i: number) => (n: number) => <A>(
-  xs: ReadonlyArray<A>,
-): Option<ReadonlyArray<A>> =>
-  pipe(
-    RA.isOutOfBound(i, xs),
-    B.fold(
-      () =>
-        pipe(
-          copy(Array.from(xs)),
-          ys => {
-            // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
-            ys.splice(i, n)
-            return ys
-          },
-          O.some,
-        ),
-      constant(O.none),
-    ),
-  )
+export const dropAt =
+  (i: number) =>
+  (n: number) =>
+  <A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
+    pipe(
+      RA.isOutOfBound(i, xs),
+      B.fold(
+        () =>
+          pipe(
+            copy(Array.from(xs)),
+            ys => {
+              // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
+              ys.splice(i, n)
+              return ys
+            },
+            O.some,
+          ),
+        constant(O.none),
+      ),
+    )
 
 /**
  * Tranposes the rows and columns of a 2D list. If some of the rows are shorter
@@ -667,10 +678,14 @@ export const takeRightWhile = <A>(
  *
  * @since 0.10.0
  */
-export const symmetricDifference = <A>(eq: Eq<A>) => (
-  xs: ReadonlyArray<A>,
-): Endomorphism<ReadonlyArray<A>> => ys =>
-  RA.getMonoid<A>().concat(RA.difference(eq)(ys)(xs), RA.difference(eq)(xs)(ys))
+export const symmetricDifference =
+  <A>(eq: Eq<A>) =>
+  (xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
+  ys =>
+    RA.getMonoid<A>().concat(
+      RA.difference(eq)(ys)(xs),
+      RA.difference(eq)(xs)(ys),
+    )
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -689,21 +704,23 @@ export const symmetricDifference = <A>(eq: Eq<A>) => (
  *
  * @since 0.10.0
  */
-export const reduceWhile = <A>(p: Predicate<A>) => <B>(
-  f: (x: A) => (y: B) => B,
-): ((x: B) => (ys: ReadonlyArray<A>) => B) => {
-  const go = (acc: B) => (ys: ReadonlyArray<A>): B =>
-    pipe(
-      NEA.fromReadonlyArray(ys),
-      O.filter(flow(NEA.head, p)),
-      O.fold(
-        constant(acc),
-        flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
-      ),
-    )
+export const reduceWhile =
+  <A>(p: Predicate<A>) =>
+  <B>(f: (x: A) => (y: B) => B): ((x: B) => (ys: ReadonlyArray<A>) => B) => {
+    const go =
+      (acc: B) =>
+      (ys: ReadonlyArray<A>): B =>
+        pipe(
+          NEA.fromReadonlyArray(ys),
+          O.filter(flow(NEA.head, p)),
+          O.fold(
+            constant(acc),
+            flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
+          ),
+        )
 
-  return go
-}
+    return go
+  }
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -722,10 +739,11 @@ export const reduceWhile = <A>(p: Predicate<A>) => <B>(
  *
  * @since 0.10.0
  */
-export const reduceRightWhile = <A>(p: Predicate<A>) => <B>(
-  f: (x: A) => (y: B) => B,
-) => (x: B): ((ys: ReadonlyArray<A>) => B) =>
-  flow(RA.reverse, reduceWhile(p)(f)(x))
+export const reduceRightWhile =
+  <A>(p: Predicate<A>) =>
+  <B>(f: (x: A) => (y: B) => B) =>
+  (x: B): ((ys: ReadonlyArray<A>) => B) =>
+    flow(RA.reverse, reduceWhile(p)(f)(x))
 
 /**
  * Obtain the minimum value from a non-empty array.
@@ -738,9 +756,8 @@ export const reduceRightWhile = <A>(p: Predicate<A>) => <B>(
  *
  * @since 0.10.0
  */
-export const minimum: <A>(
-  ord: Ord<A>,
-) => (xs: ReadonlyNonEmptyArray<A>) => A = flow(min, NEA.concatAll)
+export const minimum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
+  flow(min, NEA.concatAll)
 
 /**
  * Obtain the maximum value from a non-empty array.
@@ -753,9 +770,8 @@ export const minimum: <A>(
  *
  * @since 0.10.0
  */
-export const maximum: <A>(
-  ord: Ord<A>,
-) => (xs: ReadonlyNonEmptyArray<A>) => A = flow(max, NEA.concatAll)
+export const maximum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
+  flow(max, NEA.concatAll)
 
 /**
  * Append two arrays in terms of a semigroup. In effect, a functional wrapper
@@ -768,6 +784,7 @@ export const maximum: <A>(
  *
  * @since 0.10.0
  */
-export const concat = <A>(
-  xs: ReadonlyArray<A>,
-): Endomorphism<ReadonlyArray<A>> => ys => RA.getMonoid<A>().concat(xs, ys)
+export const concat =
+  <A>(xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
+  ys =>
+    RA.getMonoid<A>().concat(xs, ys)

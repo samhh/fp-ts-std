@@ -35,14 +35,18 @@ import { Eq } from "fp-ts/Eq"
  *
  * @since 0.1.0
  */
-export const flip = <
-  A extends Array<unknown>,
-  B extends Array<unknown>,
-  C
-  // eslint-disable-next-line functional/functional-parameters
->(
-  f: (...a: A) => (...b: B) => C,
-) => (...b: B) => (...a: A): C => f(...a)(...b)
+export const flip =
+  <
+    A extends Array<unknown>,
+    B extends Array<unknown>,
+    C,
+    // eslint-disable-next-line functional/functional-parameters
+  >(
+    f: (...a: A) => (...b: B) => C,
+  ) =>
+  (...b: B) =>
+  (...a: A): C =>
+    f(...a)(...b)
 
 /**
  * Given a curried function with an iterative callback, this returns a new
@@ -60,12 +64,11 @@ export const flip = <
  */
 export const withIndex: <A, B, C>(
   f: (g: (x: A) => B) => (ys: Array<A>) => Array<C>,
-) => (
-  g: (i: number) => (x: A) => B,
-) => (ys: Array<A>) => Array<C> = f => g => xs => {
-  let i = 0 // eslint-disable-line functional/no-let
-  return f(y => g(i++)(y))(xs)
-}
+) => (g: (i: number) => (x: A) => B) => (ys: Array<A>) => Array<C> =
+  f => g => xs => {
+    let i = 0 // eslint-disable-line functional/no-let
+    return f(y => g(i++)(y))(xs)
+  }
 
 /**
  * Converts a variadic function to a unary function.
@@ -83,9 +86,10 @@ export const withIndex: <A, B, C>(
  *
  * @since 0.6.0
  */
-export const unary = <A extends Array<unknown>, B>(f: (...xs: A) => B) => (
-  xs: A,
-): B => f(...xs)
+export const unary =
+  <A extends Array<unknown>, B>(f: (...xs: A) => B) =>
+  (xs: A): B =>
+    f(...xs)
 
 /**
  * Apply a function, taking the data first. This can be thought of as ordinary
@@ -107,7 +111,10 @@ export const unary = <A extends Array<unknown>, B>(f: (...xs: A) => B) => (
  *
  * @since 0.6.0
  */
-export const applyTo = <A>(x: A) => <B>(f: (x: A) => B): B => f(x)
+export const applyTo =
+  <A>(x: A) =>
+  <B>(f: (x: A) => B): B =>
+    f(x)
 
 /**
  * Given an array of predicates and morphisms, returns the first morphism output
@@ -133,16 +140,17 @@ export const applyTo = <A>(x: A) => <B>(f: (x: A) => B): B => f(x)
  *
  * @since 0.6.0
  */
-export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
-  fallback: (x: A) => B,
-) => (input: A): B =>
-  pipe(
-    branches,
-    A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
-    concatAll(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
-    applyTo(input),
-    O.getOrElse(() => fallback(input)),
-  )
+export const guard =
+  <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) =>
+  (fallback: (x: A) => B) =>
+  (input: A): B =>
+    pipe(
+      branches,
+      A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
+      concatAll(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
+      applyTo(input),
+      O.getOrElse(() => fallback(input)),
+    )
 
 /**
  * Creates a function that processes the first morphism if the predicate
@@ -161,9 +169,12 @@ export const guard = <A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) => (
  *
  * @since 0.6.0
  */
-export const ifElse = <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (
-  f: Predicate<A>,
-) => (x: A): B => (f(x) ? onTrue(x) : onFalse(x))
+export const ifElse =
+  <A, B>(onTrue: (x: A) => B) =>
+  (onFalse: (x: A) => B) =>
+  (f: Predicate<A>) =>
+  (x: A): B =>
+    f(x) ? onTrue(x) : onFalse(x)
 
 /**
  * Runs the provided morphism on the input value if the predicate fails.
@@ -181,9 +192,11 @@ export const ifElse = <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (
  *
  * @since 0.6.0
  */
-export const unless = <A>(f: Predicate<A>) => (
-  onFalse: Endomorphism<A>,
-): Endomorphism<A> => x => (f(x) ? x : onFalse(x))
+export const unless =
+  <A>(f: Predicate<A>) =>
+  (onFalse: Endomorphism<A>): Endomorphism<A> =>
+  x =>
+    f(x) ? x : onFalse(x)
 
 /**
  * Runs the provided morphism on the input value if the predicate holds.
@@ -221,12 +234,12 @@ export const when: <A>(
  *
  * @since 0.6.0
  */
-export const until = <A>(f: Predicate<A>) => (
-  g: Endomorphism<A>,
-): Endomorphism<A> => {
-  const h: Endomorphism<A> = x => (f(x) ? x : h(g(x)))
-  return h
-}
+export const until =
+  <A>(f: Predicate<A>) =>
+  (g: Endomorphism<A>): Endomorphism<A> => {
+    const h: Endomorphism<A> = x => (f(x) ? x : h(g(x)))
+    return h
+  }
 
 /**
  * Wraps a constructor function for functional invocation.
@@ -242,9 +255,10 @@ export const until = <A>(f: Predicate<A>) => (
  *
  * @since 0.7.0
  */
-export const construct = <A extends Array<unknown>, B>(
-  x: new (...xs: A) => B,
-) => (xs: A): B => new x(...xs)
+export const construct =
+  <A extends Array<unknown>, B>(x: new (...xs: A) => B) =>
+  (xs: A): B =>
+    new x(...xs)
 
 /**
  * Given a function and an `Eq` instance for determining input equivalence,
@@ -276,18 +290,20 @@ export const construct = <A extends Array<unknown>, B>(
  *
  * @since 0.7.0
  */
-export const memoize = <A>(eq: Eq<A>) => <B>(f: (x: A) => B): ((x: A) => B) => {
-  const cache = new Map<A, B>()
+export const memoize =
+  <A>(eq: Eq<A>) =>
+  <B>(f: (x: A) => B): ((x: A) => B) => {
+    const cache = new Map<A, B>()
 
-  return k => {
-    const cached = M.lookup(eq)(k)(cache)
-    if (O.isSome(cached)) return cached.value // eslint-disable-line functional/no-conditional-statement
+    return k => {
+      const cached = M.lookup(eq)(k)(cache)
+      if (O.isSome(cached)) return cached.value // eslint-disable-line functional/no-conditional-statement
 
-    const val = f(k)
-    cache.set(k, val) // eslint-disable-line functional/no-expression-statement
-    return val
+      const val = f(k)
+      cache.set(k, val) // eslint-disable-line functional/no-expression-statement
+      return val
+    }
   }
-}
 
 /**
  * Curry a function with binary tuple input.
@@ -302,8 +318,11 @@ export const memoize = <A>(eq: Eq<A>) => <B>(f: (x: A) => B): ((x: A) => B) => {
  *
  * @since 0.7.0
  */
-export const curry2T = <A, B, C>(f: (xs: [A, B]) => C) => (a: A) => (b: B): C =>
-  f([a, b])
+export const curry2T =
+  <A, B, C>(f: (xs: [A, B]) => C) =>
+  (a: A) =>
+  (b: B): C =>
+    f([a, b])
 
 /**
  * Curry a function with binary input.
@@ -318,9 +337,8 @@ export const curry2T = <A, B, C>(f: (xs: [A, B]) => C) => (a: A) => (b: B): C =>
  *
  * @since 0.7.0
  */
-export const curry2: <A, B, C>(
-  f: (a: A, b: B) => C,
-) => (a: A) => (b: B) => C = flow(unary, curry2T)
+export const curry2: <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B) => C =
+  flow(unary, curry2T)
 
 /**
  * Curry a function with ternary tuple input.
@@ -335,9 +353,12 @@ export const curry2: <A, B, C>(
  *
  * @since 0.7.0
  */
-export const curry3T = <A, B, C, D>(f: (xs: [A, B, C]) => D) => (a: A) => (
-  b: B,
-) => (c: C): D => f([a, b, c])
+export const curry3T =
+  <A, B, C, D>(f: (xs: [A, B, C]) => D) =>
+  (a: A) =>
+  (b: B) =>
+  (c: C): D =>
+    f([a, b, c])
 
 /**
  * Curry a function with ternary input.
@@ -369,9 +390,13 @@ export const curry3: <A, B, C, D>(
  *
  * @since 0.7.0
  */
-export const curry4T = <A, B, C, D, E>(f: (xs: [A, B, C, D]) => E) => (
-  a: A,
-) => (b: B) => (c: C) => (d: D): E => f([a, b, c, d])
+export const curry4T =
+  <A, B, C, D, E>(f: (xs: [A, B, C, D]) => E) =>
+  (a: A) =>
+  (b: B) =>
+  (c: C) =>
+  (d: D): E =>
+    f([a, b, c, d])
 
 /**
  * Curry a function with quaternary input.
@@ -403,9 +428,14 @@ export const curry4: <A, B, C, D, E>(
  *
  * @since 0.7.0
  */
-export const curry5T = <A, B, C, D, E, F>(f: (xs: [A, B, C, D, E]) => F) => (
-  a: A,
-) => (b: B) => (c: C) => (d: D) => (e: E): F => f([a, b, c, d, e])
+export const curry5T =
+  <A, B, C, D, E, F>(f: (xs: [A, B, C, D, E]) => F) =>
+  (a: A) =>
+  (b: B) =>
+  (c: C) =>
+  (d: D) =>
+  (e: E): F =>
+    f([a, b, c, d, e])
 
 /**
  * Curry a function with quinary input.
@@ -437,10 +467,10 @@ export const curry5: <A, B, C, D, E, F>(
  *
  * @since 0.7.0
  */
-export const uncurry2 = <A, B, C>(f: (a: A) => (b: B) => C) => ([a, b]: [
-  A,
-  B,
-]): C => f(a)(b)
+export const uncurry2 =
+  <A, B, C>(f: (a: A) => (b: B) => C) =>
+  ([a, b]: [A, B]): C =>
+    f(a)(b)
 
 /**
  * Uncurry a ternary function.
@@ -455,11 +485,10 @@ export const uncurry2 = <A, B, C>(f: (a: A) => (b: B) => C) => ([a, b]: [
  *
  * @since 0.7.0
  */
-export const uncurry3 = <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) => ([
-  a,
-  b,
-  c,
-]: [A, B, C]): D => f(a)(b)(c)
+export const uncurry3 =
+  <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) =>
+  ([a, b, c]: [A, B, C]): D =>
+    f(a)(b)(c)
 
 /**
  * Uncurry a quaternary function.
@@ -474,9 +503,10 @@ export const uncurry3 = <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) => ([
  *
  * @since 0.7.0
  */
-export const uncurry4 = <A, B, C, D, E>(
-  f: (a: A) => (b: B) => (c: C) => (d: D) => E,
-) => ([a, b, c, d]: [A, B, C, D]): E => f(a)(b)(c)(d)
+export const uncurry4 =
+  <A, B, C, D, E>(f: (a: A) => (b: B) => (c: C) => (d: D) => E) =>
+  ([a, b, c, d]: [A, B, C, D]): E =>
+    f(a)(b)(c)(d)
 
 /**
  * Uncurry a quinary function.
@@ -491,6 +521,7 @@ export const uncurry4 = <A, B, C, D, E>(
  *
  * @since 0.7.0
  */
-export const uncurry5 = <A, B, C, D, E, F>(
-  f: (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F,
-) => ([a, b, c, d, e]: [A, B, C, D, E]): F => f(a)(b)(c)(d)(e)
+export const uncurry5 =
+  <A, B, C, D, E, F>(f: (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F) =>
+  ([a, b, c, d, e]: [A, B, C, D, E]): F =>
+    f(a)(b)(c)(d)(e)

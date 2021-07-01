@@ -41,9 +41,11 @@ import { flip } from "./Function"
  *
  * @since 0.1.0
  */
-export const elemFlipped = <A>(eq: Eq<A>) => (
-  xs: Array<A>,
-): Predicate<A> => y => A.elem(eq)(y)(xs)
+export const elemFlipped =
+  <A>(eq: Eq<A>) =>
+  (xs: Array<A>): Predicate<A> =>
+  y =>
+    A.elem(eq)(y)(xs)
 
 /**
  * Check if a predicate does not hold for any array member.
@@ -80,7 +82,10 @@ export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(
  *
  * @since 0.1.0
  */
-export const join = (x: string) => (ys: Array<string>): string => ys.join(x)
+export const join =
+  (x: string) =>
+  (ys: Array<string>): string =>
+    ys.join(x)
 
 /**
  * Like `fp-ts/Array::getEq`, but items are not required to be in the same
@@ -128,16 +133,16 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
  *
  * @since 0.1.0
  */
-export const pluckFirst = <A>(p: Predicate<A>) => (
-  xs: Array<A>,
-): [Option<A>, Array<A>] =>
-  pipe(
-    A.findIndex(p)(xs),
-    O.fold(constant([O.none, xs]), i => [
-      O.some(xs[i]),
-      A.unsafeDeleteAt(i, xs),
-    ]),
-  )
+export const pluckFirst =
+  <A>(p: Predicate<A>) =>
+  (xs: Array<A>): [Option<A>, Array<A>] =>
+    pipe(
+      A.findIndex(p)(xs),
+      O.fold(constant([O.none, xs]), i => [
+        O.some(xs[i]),
+        A.unsafeDeleteAt(i, xs),
+      ]),
+    )
 
 /**
  * Update an item in an array or, if it's not present yet, insert it.
@@ -182,15 +187,16 @@ export const pluckFirst = <A>(p: Predicate<A>) => (
  *
  * @since 0.1.0
  */
-export const upsert = <A>(eqA: Eq<A>) => (x: A) => (
-  ys: Array<A>,
-): NonEmptyArray<A> =>
-  pipe(
-    A.findIndex<A>(y => eqA.equals(x, y))(ys),
-    O.map(i => A.unsafeUpdateAt(i, x, ys)),
-    O.chain(NEA.fromArray),
-    O.getOrElse(() => A.append(x)(ys)),
-  )
+export const upsert =
+  <A>(eqA: Eq<A>) =>
+  (x: A) =>
+  (ys: Array<A>): NonEmptyArray<A> =>
+    pipe(
+      A.findIndex<A>(y => eqA.equals(x, y))(ys),
+      O.map(i => A.unsafeUpdateAt(i, x, ys)),
+      O.chain(NEA.fromArray),
+      O.getOrElse(() => A.append(x)(ys)),
+    )
 
 /**
  * Insert all the elements of an array into another array at the specified
@@ -209,15 +215,16 @@ export const upsert = <A>(eqA: Eq<A>) => (x: A) => (
  *
  * @since 0.5.0
  */
-export const insertMany = (i: number) => <A>(xs: NonEmptyArray<A>) => (
-  ys: Array<A>,
-): Option<NonEmptyArray<A>> =>
-  pipe(
-    xs,
-    A.reverse,
-    reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
-    O.chain(NEA.fromArray),
-  )
+export const insertMany =
+  (i: number) =>
+  <A>(xs: NonEmptyArray<A>) =>
+  (ys: Array<A>): Option<NonEmptyArray<A>> =>
+    pipe(
+      xs,
+      A.reverse,
+      reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
+      O.chain(NEA.fromArray),
+    )
 
 /**
  * Filter a list, removing any elements that repeat that directly preceding
@@ -251,10 +258,10 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
  *
  * @since 0.7.0
  */
-export const startsWith = <A>(eq: Eq<A>) => (
-  start: Array<A>,
-): Predicate<Array<A>> =>
-  flow(A.takeLeft(start.length), xs => A.getEq(eq).equals(xs, start))
+export const startsWith =
+  <A>(eq: Eq<A>) =>
+  (start: Array<A>): Predicate<Array<A>> =>
+    flow(A.takeLeft(start.length), xs => A.getEq(eq).equals(xs, start))
 
 /**
  * Check if an array ends with the specified subarray.
@@ -270,10 +277,10 @@ export const startsWith = <A>(eq: Eq<A>) => (
  *
  * @since 0.6.0
  */
-export const endsWith = <A>(eq: Eq<A>) => (
-  end: Array<A>,
-): Predicate<Array<A>> =>
-  flow(A.takeRight(end.length), xs => A.getEq(eq).equals(xs, end))
+export const endsWith =
+  <A>(eq: Eq<A>) =>
+  (end: Array<A>): Predicate<Array<A>> =>
+    flow(A.takeRight(end.length), xs => A.getEq(eq).equals(xs, end))
 
 /**
  * Returns a new array without the values present in the first input array.
@@ -292,9 +299,10 @@ export const endsWith = <A>(eq: Eq<A>) => (
  *
  * @since 0.6.0
  */
-export const without = <A>(eq: Eq<A>) => (
-  xs: Array<A>,
-): Endomorphism<Array<A>> => flow(A.filter(y => !A.elem(eq)(y)(xs)))
+export const without =
+  <A>(eq: Eq<A>) =>
+  (xs: Array<A>): Endomorphism<Array<A>> =>
+    flow(A.filter(y => !A.elem(eq)(y)(xs)))
 
 /**
  * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
@@ -311,18 +319,18 @@ export const without = <A>(eq: Eq<A>) => (
  *
  * @since 0.6.0
  */
-export const cartesian = <A>(xs: Array<A>) => <B>(
-  ys: Array<B>,
-): Array<[A, B]> =>
-  pipe(
-    xs,
-    A.chain(x =>
-      pipe(
-        ys,
-        A.map(y => [x, y]),
+export const cartesian =
+  <A>(xs: Array<A>) =>
+  <B>(ys: Array<B>): Array<[A, B]> =>
+    pipe(
+      xs,
+      A.chain(x =>
+        pipe(
+          ys,
+          A.map(y => [x, y]),
+        ),
       ),
-    ),
-  )
+    )
 
 /**
  * Adds together all the numbers in the input array.
@@ -400,12 +408,16 @@ export const median: (xs: NonEmptyArray<number>) => number = flow(
  *
  * @since 0.7.0
  */
-export const aperture = (n: number) => <A>(xs: Array<A>): Array<Array<A>> => {
-  const go = (i: number) => (ys: Array<Array<A>>): Array<Array<A>> =>
-    i + n > xs.length ? ys : go(i + 1)(A.append(slice(i)(n + i)(xs))(ys))
+export const aperture =
+  (n: number) =>
+  <A>(xs: Array<A>): Array<Array<A>> => {
+    const go =
+      (i: number) =>
+      (ys: Array<Array<A>>): Array<Array<A>> =>
+        i + n > xs.length ? ys : go(i + 1)(A.append(slice(i)(n + i)(xs))(ys))
 
-  return n < 1 ? [] : go(0)([])
-}
+    return n < 1 ? [] : go(0)([])
+  }
 
 /**
  * Returns the elements of the array between the start index (inclusive) and the
@@ -425,9 +437,11 @@ export const aperture = (n: number) => <A>(xs: Array<A>): Array<Array<A>> => {
  *
  * @since 0.7.0
  */
-export const slice = (start: number) => (end: number) => <A>(
-  xs: Array<A>,
-): Array<A> => xs.slice(start, end)
+export const slice =
+  (start: number) =>
+  (end: number) =>
+  <A>(xs: Array<A>): Array<A> =>
+    xs.slice(start, end)
 
 /**
  * Filters out items in the array for which the predicate holds. This can be
@@ -465,18 +479,19 @@ export const reject = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
  *
  * @since 0.7.0
  */
-export const moveFrom = (from: number) => (to: number) => <A>(
-  xs: Array<A>,
-): Option<Array<A>> =>
-  from >= xs.length || to >= xs.length
-    ? O.none
-    : from === to
-    ? O.some(xs)
-    : pipe(
-        xs,
-        A.lookup(from),
-        O.chain(x => pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x)))),
-      )
+export const moveFrom =
+  (from: number) =>
+  (to: number) =>
+  <A>(xs: Array<A>): Option<Array<A>> =>
+    from >= xs.length || to >= xs.length
+      ? O.none
+      : from === to
+      ? O.some(xs)
+      : pipe(
+          xs,
+          A.lookup(from),
+          O.chain(x => pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x)))),
+        )
 
 /**
  * Move an item at index `from` to index `to`. See also `moveFrom`.
@@ -513,10 +528,10 @@ export const moveTo = flip(moveFrom)
  *
  * @since 0.7.0
  */
-export const countBy = <A>(f: (x: A) => string) => (
-  xs: Array<A>,
-): Record<string, number> =>
-  R.fromFoldableMap(MonoidSum, A.Foldable)(xs, x => [f(x), 1])
+export const countBy =
+  <A>(f: (x: A) => string) =>
+  (xs: Array<A>): Record<string, number> =>
+    R.fromFoldableMap(MonoidSum, A.Foldable)(xs, x => [f(x), 1])
 
 /**
  * Remove the longest initial subarray from the end of the input array for
@@ -562,25 +577,26 @@ export const dropRightWhile = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
  * @since 0.3.0
  */
 
-export const dropAt = (i: number) => (n: number) => <A>(
-  xs: Array<A>,
-): Option<Array<A>> =>
-  pipe(
-    A.isOutOfBound(i, xs),
-    B.fold(
-      () =>
-        pipe(
-          A.copy(xs),
-          ys => {
-            // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
-            ys.splice(i, n)
-            return ys
-          },
-          O.some,
-        ),
-      constant(O.none),
-    ),
-  )
+export const dropAt =
+  (i: number) =>
+  (n: number) =>
+  <A>(xs: Array<A>): Option<Array<A>> =>
+    pipe(
+      A.isOutOfBound(i, xs),
+      B.fold(
+        () =>
+          pipe(
+            A.copy(xs),
+            ys => {
+              // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
+              ys.splice(i, n)
+              return ys
+            },
+            O.some,
+          ),
+        constant(O.none),
+      ),
+    )
 
 /**
  * Tranposes the rows and columns of a 2D list. If some of the rows are shorter
@@ -639,10 +655,11 @@ export const takeRightWhile = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
  *
  * @since 0.7.0
  */
-export const symmetricDifference = <A>(eq: Eq<A>) => (
-  xs: Array<A>,
-): Endomorphism<Array<A>> => ys =>
-  A.getMonoid<A>().concat(A.difference(eq)(ys)(xs), A.difference(eq)(xs)(ys))
+export const symmetricDifference =
+  <A>(eq: Eq<A>) =>
+  (xs: Array<A>): Endomorphism<Array<A>> =>
+  ys =>
+    A.getMonoid<A>().concat(A.difference(eq)(ys)(xs), A.difference(eq)(xs)(ys))
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -661,21 +678,23 @@ export const symmetricDifference = <A>(eq: Eq<A>) => (
  *
  * @since 0.8.0
  */
-export const reduceWhile = <A>(p: Predicate<A>) => <B>(
-  f: (x: A) => (y: B) => B,
-): ((x: B) => (ys: Array<A>) => B) => {
-  const go = (acc: B) => (ys: Array<A>): B =>
-    pipe(
-      NEA.fromArray(ys),
-      O.filter(flow(NEA.head, p)),
-      O.fold(
-        constant(acc),
-        flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
-      ),
-    )
+export const reduceWhile =
+  <A>(p: Predicate<A>) =>
+  <B>(f: (x: A) => (y: B) => B): ((x: B) => (ys: Array<A>) => B) => {
+    const go =
+      (acc: B) =>
+      (ys: Array<A>): B =>
+        pipe(
+          NEA.fromArray(ys),
+          O.filter(flow(NEA.head, p)),
+          O.fold(
+            constant(acc),
+            flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
+          ),
+        )
 
-  return go
-}
+    return go
+  }
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -694,9 +713,11 @@ export const reduceWhile = <A>(p: Predicate<A>) => <B>(
  *
  * @since 0.8.0
  */
-export const reduceRightWhile = <A>(p: Predicate<A>) => <B>(
-  f: (x: A) => (y: B) => B,
-) => (x: B): ((ys: Array<A>) => B) => flow(A.reverse, reduceWhile(p)(f)(x))
+export const reduceRightWhile =
+  <A>(p: Predicate<A>) =>
+  <B>(f: (x: A) => (y: B) => B) =>
+  (x: B): ((ys: Array<A>) => B) =>
+    flow(A.reverse, reduceWhile(p)(f)(x))
 
 /**
  * Obtain the minimum value from a non-empty array.
@@ -741,5 +762,7 @@ export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
  *
  * @since 0.9.0
  */
-export const concat = <A>(xs: Array<A>): Endomorphism<Array<A>> => ys =>
-  A.getMonoid<A>().concat(xs, ys)
+export const concat =
+  <A>(xs: Array<A>): Endomorphism<Array<A>> =>
+  ys =>
+    A.getMonoid<A>().concat(xs, ys)

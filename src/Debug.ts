@@ -31,10 +31,12 @@
  *
  * @since 0.2.0
  */
-export const trace = (msg: string) => <A>(x: A): A => {
-  console.log(msg)
-  return x
-}
+export const trace =
+  (msg: string) =>
+  <A>(x: A): A => {
+    console.log(msg)
+    return x
+  }
 
 /**
  * Like `trace`, but logs the generic value too.
@@ -55,7 +57,9 @@ export const trace = (msg: string) => <A>(x: A): A => {
  *
  * @since 0.2.0
  */
-export const traceWithValue = (msg: string) => <A>(x: A): A => {
-  console.log(msg, x)
-  return x
-}
+export const traceWithValue =
+  (msg: string) =>
+  <A>(x: A): A => {
+    console.log(msg, x)
+    return x
+  }

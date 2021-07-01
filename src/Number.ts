@@ -36,10 +36,10 @@ export const isValid: Predicate<number> = not(Number.isNaN)
  *
  * @since 0.1.0
  */
-export const fromStringWithRadix = (radix: number) => (
-  string: string,
-): Option<number> =>
-  pipe(Number.parseInt(string, radix), fromPredicate(isValid))
+export const fromStringWithRadix =
+  (radix: number) =>
+  (string: string): Option<number> =>
+    pipe(Number.parseInt(string, radix), fromPredicate(isValid))
 
 /**
  * Convert a string to a number.
@@ -53,9 +53,8 @@ export const fromStringWithRadix = (radix: number) => (
  *
  * @since 0.1.0
  */
-export const fromString: (
-  string: string,
-) => Option<number> = fromStringWithRadix(10)
+export const fromString: (string: string) => Option<number> =
+  fromStringWithRadix(10)
 
 /**
  * Convert a string to a floating point number.
@@ -108,7 +107,10 @@ export const decrement: Endomorphism<number> = x => x - 1
  *
  * @since 0.1.0
  */
-export const add = (x: number): Endomorphism<number> => y => x + y
+export const add =
+  (x: number): Endomorphism<number> =>
+  y =>
+    x + y
 
 /**
  * Multiply two numbers together.
@@ -120,7 +122,10 @@ export const add = (x: number): Endomorphism<number> => y => x + y
  *
  * @since 0.2.0
  */
-export const multiply = (x: number): Endomorphism<number> => y => x * y
+export const multiply =
+  (x: number): Endomorphism<number> =>
+  y =>
+    x * y
 
 /**
  * Subtract the first number (the _subtrahend_) from the second number (the
@@ -134,8 +139,10 @@ export const multiply = (x: number): Endomorphism<number> => y => x * y
  *
  * @since 0.2.0
  */
-export const subtract = (subtrahend: number): Endomorphism<number> => minuend =>
-  minuend - subtrahend
+export const subtract =
+  (subtrahend: number): Endomorphism<number> =>
+  minuend =>
+    minuend - subtrahend
 
 /**
  * Divide the second number (the _dividend_) by the first number (the
@@ -149,8 +156,10 @@ export const subtract = (subtrahend: number): Endomorphism<number> => minuend =>
  *
  * @since 0.2.0
  */
-export const divide = (divisor: number): Endomorphism<number> => dividend =>
-  dividend / divisor
+export const divide =
+  (divisor: number): Endomorphism<number> =>
+  dividend =>
+    dividend / divisor
 
 /**
  * Calculates the remainder. See also `mod`.
@@ -164,8 +173,10 @@ export const divide = (divisor: number): Endomorphism<number> => dividend =>
  *
  * @since 0.7.0
  */
-export const rem = (divisor: number): Endomorphism<number> => dividend =>
-  dividend % divisor
+export const rem =
+  (divisor: number): Endomorphism<number> =>
+  dividend =>
+    dividend % divisor
 
 /**
  * Calculate the modulus. See also `rem`.
@@ -179,8 +190,10 @@ export const rem = (divisor: number): Endomorphism<number> => dividend =>
  *
  * @since 0.7.0
  */
-export const mod = (divisor: number): Endomorphism<number> => dividend =>
-  ((dividend % divisor) + divisor) % divisor
+export const mod =
+  (divisor: number): Endomorphism<number> =>
+  dividend =>
+    ((dividend % divisor) + divisor) % divisor
 
 /**
  * Unary negation.

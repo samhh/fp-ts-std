@@ -49,9 +49,9 @@ describe("Function", () => {
       expect(f(i => () => i)([1, 2, 3])).toEqual([0, 1, 2])
       expect(f(add)([1, 2, 3])).toEqual([1, 3, 5])
       expect(g(i => () => i % 2 === 0)([1, 2, 3])).toEqual([1, 3])
-      expect(
-        h(i => x => (i % 2 === 0 ? O.some(x) : O.none))([1, 2, 3]),
-      ).toEqual([1, 3])
+      expect(h(i => x => i % 2 === 0 ? O.some(x) : O.none)([1, 2, 3])).toEqual([
+        1, 3,
+      ])
     })
   })
 
@@ -295,7 +295,10 @@ describe("Function", () => {
 
   describe("uncurry2", () => {
     const f = uncurry2
-    const g = (a: string): Endomorphism<string> => b => a + b
+    const g =
+      (a: string): Endomorphism<string> =>
+      b =>
+        a + b
 
     it("applies the function with the arguments in the same order", () => {
       expect(f(g)(["a", "b"])).toBe(g("a")("b"))
@@ -304,7 +307,11 @@ describe("Function", () => {
 
   describe("uncurry3", () => {
     const f = uncurry3
-    const g = (a: string) => (b: string): Endomorphism<string> => c => a + b + c
+    const g =
+      (a: string) =>
+      (b: string): Endomorphism<string> =>
+      c =>
+        a + b + c
 
     it("applies the function with the arguments in the same order", () => {
       expect(f(g)(["a", "b", "c"])).toBe(g("a")("b")("c"))
@@ -313,9 +320,12 @@ describe("Function", () => {
 
   describe("uncurry4", () => {
     const f = uncurry4
-    const g = (a: string) => (b: string) => (
-      c: string,
-    ): Endomorphism<string> => d => a + b + c + d
+    const g =
+      (a: string) =>
+      (b: string) =>
+      (c: string): Endomorphism<string> =>
+      d =>
+        a + b + c + d
 
     it("applies the function with the arguments in the same order", () => {
       expect(f(g)(["a", "b", "c", "d"])).toBe(g("a")("b")("c")("d"))
@@ -324,9 +334,13 @@ describe("Function", () => {
 
   describe("uncurry5", () => {
     const f = uncurry5
-    const g = (a: string) => (b: string) => (c: string) => (
-      d: string,
-    ): Endomorphism<string> => e => a + b + c + d + e
+    const g =
+      (a: string) =>
+      (b: string) =>
+      (c: string) =>
+      (d: string): Endomorphism<string> =>
+      e =>
+        a + b + c + d + e
 
     it("applies the function with the arguments in the same order", () => {
       expect(f(g)(["a", "b", "c", "d", "e"])).toBe(g("a")("b")("c")("d")("e"))

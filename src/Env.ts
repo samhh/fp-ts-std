@@ -25,8 +25,10 @@ import * as S from "fp-ts/string"
  *
  * @since 0.9.0
  */
-export const getParam = (k: string): IO<Option<string>> => () =>
-  pipe(process.env[k], O.fromNullable)
+export const getParam =
+  (k: string): IO<Option<string>> =>
+  () =>
+    pipe(process.env[k], O.fromNullable)
 
 /**
  * Attempt to get an environment parameter, filtering out empty strings.

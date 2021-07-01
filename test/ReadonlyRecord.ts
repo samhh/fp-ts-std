@@ -130,9 +130,8 @@ describe("Record", () => {
 
     it("has every unique transformed value as a key", () => {
       const g = fromNumber
-      const h: (
-        x: RR.ReadonlyRecord<string, number>,
-      ) => ReadonlyArray<string> = flow(values, RA.uniq(N.Eq), RA.map(g))
+      const h: (x: RR.ReadonlyRecord<string, number>) => ReadonlyArray<string> =
+        flow(values, RA.uniq(N.Eq), RA.map(g))
 
       fc.assert(
         fc.property(fc.dictionary(fc.string(), fc.integer()), x =>
@@ -168,9 +167,8 @@ describe("Record", () => {
 
     it("has every unique transformed value as a key", () => {
       const g = fromNumber
-      const h: (
-        x: RR.ReadonlyRecord<string, number>,
-      ) => ReadonlyArray<string> = flow(values, RA.uniq(N.Eq), RA.map(g))
+      const h: (x: RR.ReadonlyRecord<string, number>) => ReadonlyArray<string> =
+        flow(values, RA.uniq(N.Eq), RA.map(g))
 
       fc.assert(
         fc.property(fc.dictionary(fc.string(), fc.integer()), x =>
