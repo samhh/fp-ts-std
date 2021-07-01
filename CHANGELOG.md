@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.10.1 (2021-07-01)
+
+- Widen the type of the first parameter in `replaceAll`.
+
 ## 0.10.0 (2021-04-16)
 
 - Add `ReadonlyArray` and `ReadonlyRecord` modules.
