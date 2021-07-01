@@ -455,7 +455,7 @@ export const replace = (r: RegExp | string) => (
  *
  * @since 0.7.0
  */
-export const replaceAll = (r: string) => (
+export const replaceAll = (r: string | RegExp) => (
   s: string,
 ): Endomorphism<string> => x => x.replaceAll(r, s)
 
