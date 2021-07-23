@@ -713,3 +713,17 @@ export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
  */
 export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
   flow(takeRightWhileArr, under)
+
+/**
+ * Partition a string into parts at an index.
+ * Resulting parts can then be handled using fp-ts/Tuple.
+ *
+ * @example
+ *
+ * import { partitionAtIndex } from 'fp-ts-std/String';
+ *
+ * assert.deepStrictEqual(partitionAtIndex(1)("abc"), ["a", "bc"]);
+ */
+export const partitionAtIndex = (index: number) => (str: string) =>
+    [slice(0)(index)(str), slice(index)(Infinity)(str)]
+
