@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.11.0 (_Unreleased_)
+
+- Add `splitAt` function to the `String` module
+
 ## 0.10.1 (2021-07-01)
 
 - Widen the type of the first parameter in `replaceAll`.

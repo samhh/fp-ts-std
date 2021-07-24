@@ -887,19 +887,26 @@ describe("String", () => {
   })
 
   describe("splitAt", () => {
-
     it('"joining" results in the same string', () => {
-      fc.assert(fc.property(fc.integer(), fc.string(), (index, str) =>
-        splitAt(index)(str).join("") === str
-      ))
+      fc.assert(
+        fc.property(
+          fc.integer(),
+          fc.string(),
+          (index, str) => splitAt(index)(str).join("") === str,
+        ),
+      )
     })
 
     it("first and last elements are the same as splits at index", () => {
-      fc.assert(fc.property(fc.integer(), fc.string(), (index, str) => {
-         const tuple = splitAt(index)(str);
-         return tuple[0] === slice(0)(index)(str) && tuple[1] === slice(index)(Infinity)(str);
-      }))
-
+      fc.assert(
+        fc.property(fc.integer(), fc.string(), (index, str) => {
+          const tuple = splitAt(index)(str)
+          return (
+            tuple[0] === slice(0)(index)(str) &&
+            tuple[1] === slice(index)(Infinity)(str)
+          )
+        }),
+      )
+    })
   })
 })
-});

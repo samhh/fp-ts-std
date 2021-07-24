@@ -214,7 +214,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] sortBy - [fp-ts/Array::sort](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sort)
 - [x] sortWith - [fp-ts/Array::sortBy](https://gcanti.github.io/fp-ts/modules/Array.ts.html#sortBy)
 - [x] split - [fp-ts-std/String::split](https://samhh.github.io/fp-ts-std/modules/String.ts.html#split)/[fp-ts-contrib/RegExp::split](https://gcanti.github.io/fp-ts-contrib/modules/RegExp.ts.html#split)
-- [x] splitAt - [fp-ts/Array::splitAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#splitat)
+- [x] splitAt - [fp-ts/Array::splitAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#splitat)/[fp-ts-std/String::splitAt](https://samhh.github.io/fp-ts-std/modules/String.ts.html#splitat)
 - [x] splitEvery - [fp-ts/Array::chunksOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chunksof)
 - [x] splitWhen - [fp-ts/Array:spanLeft](https://gcanti.github.io/fp-ts/modules/Array.ts.html#spanleft)
 - [x] startsWith - [fp-ts-std/Array::startsWith](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#startswith)/[fp-ts-std/String::startsWith](https://samhh.github.io/fp-ts-std/modules/String.ts.html#startswith)

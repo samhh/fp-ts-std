@@ -37,6 +37,7 @@ Added in v0.1.0
   - [reverse](#reverse)
   - [slice](#slice)
   - [split](#split)
+  - [splitAt](#splitat)
   - [startsWith](#startswith)
   - [surround](#surround)
   - [tail](#tail)
@@ -670,6 +671,31 @@ assert.deepStrictEqual(split(',')('a,b,c'), ['a', 'b', 'c'])
 ```
 
 Added in v0.1.0
+
+## splitAt
+
+Partition a string into parts at an index.
+Resulting parts can then be handled using fp-ts/Tuple.
+
+**Signature**
+
+```ts
+export declare const splitAt: (index: number) => (str: string) => [string, string]
+```
+
+```hs
+splitAt :: number -> string -> [string, string]
+```
+
+**Example**
+
+```ts
+import { splitAt } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(splitAt(1)('abc'), ['a', 'bc'])
+```
+
+Added in v0.11.0
 
 ## startsWith
 

@@ -723,7 +723,10 @@ export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  * import { splitAt } from 'fp-ts-std/String';
  *
  * assert.deepStrictEqual(splitAt(1)("abc"), ["a", "bc"]);
+ *
+ * @since 0.11.0
  */
-export const splitAt = (index: number) => (str: string) =>
+export const splitAt =
+  (index: number) =>
+  (str: string): [string, string] =>
     [slice(0)(index)(str), slice(index)(Infinity)(str)]
-
