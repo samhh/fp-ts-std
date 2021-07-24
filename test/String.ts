@@ -39,7 +39,7 @@ import {
   replaceAll,
   takeLeftWhile,
   takeRightWhile,
-  partitionAtIndex
+  splitAt,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -886,19 +886,20 @@ describe("String", () => {
     })
   })
 
-  describe("partitionAtIndex", () => {
+  describe("splitAt", () => {
 
     it('"joining" results in the same string', () => {
       fc.assert(fc.property(fc.integer(), fc.string(), (index, str) =>
-        partitionAtIndex(index)(str).join("") === str
+        splitAt(index)(str).join("") === str
       ))
     })
 
     it("first and last elements are the same as splits at index", () => {
       fc.assert(fc.property(fc.integer(), fc.string(), (index, str) => {
-         const tuple = partitionAtIndex(index)(str);
+         const tuple = splitAt(index)(str);
          return tuple[0] === slice(0)(index)(str) && tuple[1] === slice(index)(Infinity)(str);
       }))
 
   })
 })
+});
