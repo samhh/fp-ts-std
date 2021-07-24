@@ -32,18 +32,6 @@ import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 
 /**
- * Get the length of an array.
- *
- * @example
- * import { length } from 'fp-ts-std/ReadonlyArray';
- *
- * assert.strictEqual(length(['a', 'b', 'c']), 3);
- *
- * @since 0.10.0
- */
-export const length = (xs: ReadonlyArray<unknown>): number => xs.length
-
-/**
  * Like `fp-ts/Array::elem`, but flipped.
  *
  * @example

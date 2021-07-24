@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `splitAt` function to the `String` module
 - Add `zipAll` function to the `Array` and `ReadonlyArray` modules
+- Remove `length` from the `ReadonlyArray` module as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).
 
 ## 0.10.1 (2021-07-01)
 
