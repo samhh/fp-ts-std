@@ -525,3 +525,93 @@ export const uncurry5 =
   <A, B, C, D, E, F>(f: (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F) =>
   ([a, b, c, d, e]: [A, B, C, D, E]): F =>
     f(a)(b)(c)(d)(e)
+
+/**
+ * Fork an input across a series of functions, collecting the results in a
+ * tuple.
+ *
+ * @example
+ * import { fork } from 'fp-ts-std/Function';
+ * import { add } from 'fp-ts-std/Number';
+ * import * as S from 'fp-ts-std/String';
+ *
+ * const add1 = add(1);
+ * const add2 = add(2);
+ *
+ * assert.deepStrictEqual(fork([add1, S.fromNumber, add2])(0), [1, '0', 2]);
+ *
+ * @since 0.11.0
+ */
+// Don't use a type alias for any of this as it worsens the docs output
+export function fork<A, B, C>(fs: [(x: A) => B, (x: A) => C]): (x: A) => [B, C]
+export function fork<A, B, C, D>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D],
+): (x: A) => [B, C, D]
+export function fork<A, B, C, D, E>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E],
+): (x: A) => [B, C, D, E]
+export function fork<A, B, C, D, E, F>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E, (x: A) => F],
+): (x: A) => [B, C, D, E, F]
+export function fork<A, B, C, D, E, F, G>(
+  fs: [
+    (x: A) => B,
+    (x: A) => C,
+    (x: A) => D,
+    (x: A) => E,
+    (x: A) => F,
+    (x: A) => G,
+  ],
+): (x: A) => [B, C, D, E, F, G]
+export function fork<A, B, C, D, E, F, G, H>(
+  fs: [
+    (x: A) => B,
+    (x: A) => C,
+    (x: A) => D,
+    (x: A) => E,
+    (x: A) => F,
+    (x: A) => G,
+    (x: A) => H,
+  ],
+): (x: A) => [B, C, D, E, F, G, H]
+export function fork<A, B, C, D, E, F, G, H, I>(
+  fs: [
+    (x: A) => B,
+    (x: A) => C,
+    (x: A) => D,
+    (x: A) => E,
+    (x: A) => F,
+    (x: A) => G,
+    (x: A) => H,
+    (x: A) => I,
+  ],
+): (x: A) => [B, C, D, E, F, G, H, I]
+export function fork<A, B, C, D, E, F, G, H, I, J>(
+  fs: [
+    (x: A) => B,
+    (x: A) => C,
+    (x: A) => D,
+    (x: A) => E,
+    (x: A) => F,
+    (x: A) => G,
+    (x: A) => H,
+    (x: A) => I,
+    (x: A) => J,
+  ],
+): (x: A) => [B, C, D, E, F, G, H, I, J]
+export function fork<A, B, C, D, E, F, G, H, I, J>(
+  fs: [
+    (x: A) => B,
+    (x: A) => C,
+    ((x: A) => D)?,
+    ((x: A) => E)?,
+    ((x: A) => F)?,
+    ((x: A) => G)?,
+    ((x: A) => H)?,
+    ((x: A) => I)?,
+    ((x: A) => J)?,
+  ],
+): unknown {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return (x: A): unknown => fs.map(f => f!(x))
+}

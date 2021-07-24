@@ -22,15 +22,23 @@ import {
   uncurry3,
   uncurry4,
   uncurry5,
+  fork,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
-import { constant, constFalse, constTrue, Endomorphism } from "fp-ts/function"
+import {
+  constant,
+  constFalse,
+  constTrue,
+  Endomorphism,
+  identity,
+} from "fp-ts/function"
 import * as N from "fp-ts/number"
 import fc from "fast-check"
+import * as S from "../src/String"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -344,6 +352,27 @@ describe("Function", () => {
 
     it("applies the function with the arguments in the same order", () => {
       expect(f(g)(["a", "b", "c", "d", "e"])).toBe(g("a")("b")("c")("d")("e"))
+    })
+  })
+
+  describe("fork", () => {
+    const f = fork
+
+    it("calls all provided functions and returns their outputs in order", () => {
+      fc.assert(
+        fc.property(fc.string(), x =>
+          expect(
+            fork([
+              S.append("!"),
+              identity,
+              S.append("?"),
+              A.of,
+              S.prepend("."),
+            ])(x),
+          ).toEqual([x + "!", x, x + "?", [x], "." + x]),
+        ),
+      )
+      expect(f)
     })
   })
 })

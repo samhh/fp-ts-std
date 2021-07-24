@@ -29,6 +29,7 @@ Added in v0.1.0
   - [curry5](#curry5)
   - [curry5T](#curry5t)
   - [flip](#flip)
+  - [fork](#fork)
   - [guard](#guard)
   - [ifElse](#ifelse)
   - [memoize](#memoize)
@@ -354,6 +355,61 @@ assert.strictEqual(append('x')('y'), 'yx')
 ```
 
 Added in v0.1.0
+
+## fork
+
+Fork an input across a series of functions, collecting the results in a
+tuple.
+
+**Signature**
+
+```ts
+export declare function fork<A, B, C>(fs: [(x: A) => B, (x: A) => C]): (x: A) => [B, C]
+export declare function fork<A, B, C, D>(fs: [(x: A) => B, (x: A) => C, (x: A) => D]): (x: A) => [B, C, D]
+export declare function fork<A, B, C, D, E>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E]
+): (x: A) => [B, C, D, E]
+export declare function fork<A, B, C, D, E, F>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E, (x: A) => F]
+): (x: A) => [B, C, D, E, F]
+export declare function fork<A, B, C, D, E, F, G>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E, (x: A) => F, (x: A) => G]
+): (x: A) => [B, C, D, E, F, G]
+export declare function fork<A, B, C, D, E, F, G, H>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E, (x: A) => F, (x: A) => G, (x: A) => H]
+): (x: A) => [B, C, D, E, F, G, H]
+export declare function fork<A, B, C, D, E, F, G, H, I>(
+  fs: [(x: A) => B, (x: A) => C, (x: A) => D, (x: A) => E, (x: A) => F, (x: A) => G, (x: A) => H, (x: A) => I]
+): (x: A) => [B, C, D, E, F, G, H, I]
+export declare function fork<A, B, C, D, E, F, G, H, I, J>(
+  fs: [
+    (x: A) => B,
+    (x: A) => C,
+    (x: A) => D,
+    (x: A) => E,
+    (x: A) => F,
+    (x: A) => G,
+    (x: A) => H,
+    (x: A) => I,
+    (x: A) => J
+  ]
+): (x: A) => [B, C, D, E, F, G, H, I, J]
+```
+
+**Example**
+
+```ts
+import { fork } from 'fp-ts-std/Function'
+import { add } from 'fp-ts-std/Number'
+import * as S from 'fp-ts-std/String'
+
+const add1 = add(1)
+const add2 = add(2)
+
+assert.deepStrictEqual(fork([add1, S.fromNumber, add2])(0), [1, '0', 2])
+```
+
+Added in v0.11.0
 
 ## guard
 
