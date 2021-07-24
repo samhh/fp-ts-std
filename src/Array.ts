@@ -14,6 +14,7 @@ import {
 } from "fp-ts/function"
 import { Eq } from "fp-ts/Eq"
 import { Ord } from "fp-ts/Ord"
+import { match as orderingMatch } from "fp-ts/Ordering"
 import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/number"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -26,6 +27,8 @@ import { reduceM } from "fp-ts/Foldable"
 import { concatAll } from "fp-ts/Monoid"
 import { max, min } from "fp-ts/Semigroup"
 import { flip } from "./Function"
+import { These } from "fp-ts/These"
+import * as T from "fp-ts/These"
 
 /**
  * Like `fp-ts/Array::elem`, but flipped.
@@ -766,3 +769,37 @@ export const concat =
   <A>(xs: Array<A>): Endomorphism<Array<A>> =>
   ys =>
     A.getMonoid<A>().concat(xs, ys)
+
+/**
+ * Greedy zip, preserving all items and expressing the possibility of unequal
+ * input sizes via the `These` type.
+ *
+ * @example
+ * import { zipAll } from 'fp-ts-std/Array';
+ * import * as T from 'fp-ts/These'
+ *
+ * assert.deepStrictEqual(zipAll([3, 4, 5, 6])([1, 2]), [T.both(1, 3), T.both(2, 4), T.right(5), T.right(6)])
+ *
+ * @since 0.11.0
+ */
+export const zipAll =
+  <A>(xs: Array<A>) =>
+  <B>(ys: Array<B>): Array<These<B, A>> => {
+    const zs = A.zip(ys, xs)
+    const getRem = slice(A.size(zs))(Infinity)
+
+    const rest = pipe(
+      ordNumber.compare(A.size(ys), A.size(xs)),
+      orderingMatch<Array<These<B, A>>>(
+        () => pipe(xs, getRem, A.map(T.right)),
+        constant(A.empty),
+        () => pipe(ys, getRem, A.map(T.left)),
+      ),
+    )
+
+    return pipe(
+      zs,
+      A.map(([za, zb]) => T.both(za, zb)),
+      flip(concat)(rest),
+    )
+  }

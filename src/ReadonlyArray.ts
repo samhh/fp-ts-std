@@ -14,6 +14,7 @@ import {
 } from "fp-ts/function"
 import { Eq } from "fp-ts/Eq"
 import { Ord } from "fp-ts/Ord"
+import { match as orderingMatch } from "fp-ts/Ordering"
 import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/number"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import * as NEA from "fp-ts/ReadonlyNonEmptyArray"
@@ -27,6 +28,8 @@ import { reduceM } from "fp-ts/Foldable"
 import { concatAll } from "fp-ts/Monoid"
 import { max, min } from "fp-ts/Semigroup"
 import { flip } from "./Function"
+import { These } from "fp-ts/These"
+import * as T from "fp-ts/These"
 
 /**
  * Get the length of an array.
@@ -788,3 +791,37 @@ export const concat =
   <A>(xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
   ys =>
     RA.getMonoid<A>().concat(xs, ys)
+
+/**
+ * Greedy zip, preserving all items and expressing the possibility of unequal
+ * input sizes via the `These` type.
+ *
+ * @example
+ * import { zipAll } from 'fp-ts-std/ReadonlyArray';
+ * import * as T from 'fp-ts/These'
+ *
+ * assert.deepStrictEqual(zipAll([3, 4, 5, 6])([1, 2]), [T.both(1, 3), T.both(2, 4), T.right(5), T.right(6)])
+ *
+ * @since 0.11.0
+ */
+export const zipAll =
+  <A>(xs: ReadonlyArray<A>) =>
+  <B>(ys: ReadonlyArray<B>): ReadonlyArray<These<B, A>> => {
+    const zs = RA.zip(ys, xs)
+    const getRem = slice(RA.size(zs))(Infinity)
+
+    const rest = pipe(
+      ordNumber.compare(RA.size(ys), RA.size(xs)),
+      orderingMatch<ReadonlyArray<These<B, A>>>(
+        () => pipe(xs, getRem, RA.map(T.right)),
+        constant(RA.empty),
+        () => pipe(ys, getRem, RA.map(T.left)),
+      ),
+    )
+
+    return pipe(
+      zs,
+      RA.map(([za, zb]) => T.both(za, zb)),
+      flip(concat)(rest),
+    )
+  }

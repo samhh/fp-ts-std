@@ -31,6 +31,7 @@ import {
   minimum,
   maximum,
   concat,
+  zipAll,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -52,6 +53,7 @@ import { split } from "../src/String"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import { values } from "../src/Record"
 import { add } from "../src/Number"
+import * as T from "fp-ts/These"
 
 describe("Array", () => {
   describe("elemFlipped", () => {
@@ -961,6 +963,58 @@ describe("Array", () => {
           expect(f<unknown>(A.empty)(xs)).toEqual(xs)
           expect(f<unknown>(xs)(A.empty)).toEqual(xs)
         }),
+      )
+    })
+  })
+
+  describe("zipAll", () => {
+    const f = zipAll
+
+    it("equal length inputs is equivalent to normal zip mapped to These", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs => {
+          const ys = A.reverse(xs)
+          expect(f(xs)(ys)).toEqual(
+            pipe(
+              A.zip(xs)(ys),
+              A.map(([x, y]) => T.both(x, y)),
+            ),
+          )
+        }),
+      )
+    })
+
+    it("extra items on second input are This", () => {
+      const xs = [5, 6]
+      const ys = [1, 2, 3, 4]
+
+      expect(f(xs)(ys)).toEqual([
+        T.both(1, 5),
+        T.both(2, 6),
+        T.left(3),
+        T.left(4),
+      ])
+    })
+
+    it("extra items on first input are That", () => {
+      const xs = [3, 4, 5, 6]
+      const ys = [1, 2]
+
+      expect(f(xs)(ys)).toEqual([
+        T.both(1, 3),
+        T.both(2, 4),
+        T.right(5),
+        T.right(6),
+      ])
+    })
+
+    it("output length is equal to largest input length", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything()),
+          fc.array(fc.anything()),
+          (xs, ys) => A.size(f(xs)(ys)) === max(N.Ord)(A.size(xs), A.size(ys)),
+        ),
       )
     })
   })

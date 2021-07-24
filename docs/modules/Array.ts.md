@@ -47,6 +47,7 @@ Added in v0.1.0
   - [transpose](#transpose)
   - [upsert](#upsert)
   - [without](#without)
+  - [zipAll](#zipall)
 
 ---
 
@@ -1042,3 +1043,29 @@ assert.deepStrictEqual(withoutFourOrFive([4, 3, 4, 5, 6, 5]), [3, 6])
 ```
 
 Added in v0.6.0
+
+## zipAll
+
+Greedy zip, preserving all items and expressing the possibility of unequal
+input sizes via the `These` type.
+
+**Signature**
+
+```ts
+export declare const zipAll: <A>(xs: A[]) => <B>(ys: B[]) => These<B, A>[]
+```
+
+```hs
+zipAll :: Array a -> Array b -> Array (These b a)
+```
+
+**Example**
+
+```ts
+import { zipAll } from 'fp-ts-std/Array'
+import * as T from 'fp-ts/These'
+
+assert.deepStrictEqual(zipAll([3, 4, 5, 6])([1, 2]), [T.both(1, 3), T.both(2, 4), T.right(5), T.right(6)])
+```
+
+Added in v0.11.0

@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.11.0 (_Unreleased_)
 
 - Add `splitAt` function to the `String` module
+- Add `zipAll` function to the `Array` and `ReadonlyArray` modules
 
 ## 0.10.1 (2021-07-01)
 
