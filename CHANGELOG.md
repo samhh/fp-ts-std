@@ -12,6 +12,7 @@ This project adheres to semantic versioning.
 - Remove `split` from the `String` module as it's superceded by [fp-ts/string::split](https://gcanti.github.io/fp-ts/modules/string.ts.html#split).
 - Remove `replace` from the `String` module as it's superceded by [fp-ts/string::replace](https://gcanti.github.io/fp-ts/modules/string.ts.html#replace).
 - Remove `isString` from the `String` module as it's superceded by [fp-ts/string::isString](https://gcanti.github.io/fp-ts/modules/string.ts.html#isstring).
+- Remove `contains` from the `String` module as it's superceded by [fp-ts/string::includes](https://gcanti.github.io/fp-ts/modules/string.ts.html#includes).
 - Remove `applyTo` from the `Function` module as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply).
 - Remove `concat` from the `Array` and `ReadonlyArray` modules as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).
 - Remove `length` from the `ReadonlyArray` module as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).

@@ -34,26 +34,6 @@ import { Ord as ordNumber } from "fp-ts/number"
 export const fromNumber = (x: number): string => String(x)
 
 /**
- * Check if a string contains a given substring.
- *
- * @example
- * import { contains } from 'fp-ts-std/String';
- *
- * const f = contains('abc');
- *
- * assert.strictEqual(f('abc'), true);
- * assert.strictEqual(f('ABC'), false);
- * assert.strictEqual(f('xabcy'), true);
- * assert.strictEqual(f('xaycz'), false);
- *
- * @since 0.1.0
- */
-export const contains =
-  (substring: string): Predicate<string> =>
-  target =>
-    target.includes(substring)
-
-/**
  * Check if a string starts with the specified substring.
  *
  * @example

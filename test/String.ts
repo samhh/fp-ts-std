@@ -14,7 +14,6 @@ import {
   unprepend,
   append,
   unappend,
-  contains,
   fromNumber,
   test,
   dropLeftWhile,
@@ -235,34 +234,6 @@ describe("String", () => {
     it("reverses input string", () => {
       expect(f("")).toBe("")
       expect(f("ab c")).toBe("c ba")
-    })
-  })
-
-  describe("contains", () => {
-    const f = contains("abc")
-
-    it("does not detect substring if not all present", () => {
-      expect(f("")).toBe(false)
-      expect(f("ab")).toBe(false)
-      expect(f("bc")).toBe(false)
-      expect(f("ac")).toBe(false)
-    })
-
-    it("does not detect substring of incorrect casing", () => {
-      expect(f("aBc")).toBe(false)
-    })
-
-    it("does not detect substring out of order", () => {
-      expect(f("acb")).toBe(false)
-      expect(f("cba")).toBe(false)
-      expect(f("axbc")).toBe(false)
-    })
-
-    it("detects present substring in-order", () => {
-      expect(f("abc")).toBe(true)
-      expect(f("xabc")).toBe(true)
-      expect(f("abcx")).toBe(true)
-      expect(f("xabcx")).toBe(true)
     })
   })
 

@@ -16,7 +16,6 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [append](#append)
-  - [contains](#contains)
   - [dropLeft](#dropleft)
   - [dropLeftWhile](#dropleftwhile)
   - [dropRight](#dropright)
@@ -77,35 +76,6 @@ import { append } from 'fp-ts-std/String'
 const withExt = append('.hs')
 
 assert.strictEqual(withExt('File'), 'File.hs')
-```
-
-Added in v0.1.0
-
-## contains
-
-Check if a string contains a given substring.
-
-**Signature**
-
-```ts
-export declare const contains: (substring: string) => Predicate<string>
-```
-
-```hs
-contains :: string -> Predicate string
-```
-
-**Example**
-
-```ts
-import { contains } from 'fp-ts-std/String'
-
-const f = contains('abc')
-
-assert.strictEqual(f('abc'), true)
-assert.strictEqual(f('ABC'), false)
-assert.strictEqual(f('xabcy'), true)
-assert.strictEqual(f('xaycz'), false)
 ```
 
 Added in v0.1.0
