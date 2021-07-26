@@ -195,7 +195,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] propOr - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] props - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] propSatisfies - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [x] range - [fp-ts/Array::range](https://gcanti.github.io/fp-ts/modules/Array.ts.html#range)
+- [x] range - [fp-ts/NonEmptyArray::range](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#range)
 - [x] reduce - [fp-ts/Array::reduce](https://gcanti.github.io/fp-ts/modules/Array.ts.html#reduce)
 - [x] reduceBy - [fp-ts/Record::fromFoldableMap](https://gcanti.github.io/fp-ts/modules/Record.ts.html#fromfoldablemap)
 - ~~[ ] reduced~~ Use less generalised functions or recursion instead.
