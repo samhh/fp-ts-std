@@ -11,7 +11,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Json } from "fp-ts/Json"
 import { flow, identity, pipe } from "fp-ts/function"
-import { isString } from "./String"
+import { isString } from "fp-ts/string"
 
 /**
  * Newtype representing stringified JSON.

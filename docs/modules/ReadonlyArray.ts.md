@@ -17,7 +17,6 @@ Added in v0.10.0
 - [utils](#utils)
   - [aperture](#aperture)
   - [cartesian](#cartesian)
-  - [concat](#concat)
   - [countBy](#countby)
   - [dropAt](#dropat)
   - [dropRepeats](#droprepeats)
@@ -121,31 +120,6 @@ assert.deepStrictEqual(cartesian([1, 2])(['a', 'b', 'c']), [
   [2, 'b'],
   [2, 'c'],
 ])
-```
-
-Added in v0.10.0
-
-## concat
-
-Append two arrays in terms of a semigroup. In effect, a functional wrapper
-around `Array.prototype.concat`.
-
-**Signature**
-
-```ts
-export declare const concat: <A>(xs: readonly A[]) => Endomorphism<readonly A[]>
-```
-
-```hs
-concat :: Array a -> Endomorphism (Array a)
-```
-
-**Example**
-
-```ts
-import { concat } from 'fp-ts-std/ReadonlyArray'
-
-assert.deepStrictEqual(concat([1, 2])([3, 4]), [1, 2, 3, 4])
 ```
 
 Added in v0.10.0

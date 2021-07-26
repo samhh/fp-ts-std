@@ -25,7 +25,6 @@ Added in v0.1.0
   - [fromNumber](#fromnumber)
   - [head](#head)
   - [init](#init)
-  - [isString](#isstring)
   - [last](#last)
   - [lines](#lines)
   - [lookup](#lookup)
@@ -341,31 +340,6 @@ assert.deepStrictEqual(init('abc'), O.some('ab'))
 ```
 
 Added in v0.7.0
-
-## isString
-
-Refine a foreign value to a string.
-
-**Signature**
-
-```ts
-export declare const isString: Refinement<unknown, string>
-```
-
-```hs
-isString :: Refinement unknown string
-```
-
-**Example**
-
-```ts
-import { isString } from 'fp-ts-std/String'
-
-assert.strictEqual(isString('3'), true)
-assert.strictEqual(isString(3), false)
-```
-
-Added in v0.1.0
 
 ## last
 

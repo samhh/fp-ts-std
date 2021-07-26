@@ -18,7 +18,6 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
-  - [applyTo](#applyto)
   - [construct](#construct)
   - [curry2](#curry2)
   - [curry2T](#curry2t)
@@ -46,41 +45,6 @@ Added in v0.1.0
 ---
 
 # utils
-
-## applyTo
-
-Apply a function, taking the data first. This can be thought of as ordinary
-function application, but flipped.
-
-This is useful for applying functions point-free.
-
-**Signature**
-
-```ts
-export declare const applyTo: <A>(x: A) => <B>(f: (x: A) => B) => B
-```
-
-```hs
-applyTo :: a -> (a -> b) -> b
-```
-
-**Example**
-
-```ts
-import { applyTo } from 'fp-ts-std/Function'
-import { add, multiply } from 'fp-ts-std/Number'
-import * as A from 'fp-ts/Array'
-import { pipe } from 'fp-ts/function'
-import { Endomorphism } from 'fp-ts/Endomorphism'
-
-const calc: Array<Endomorphism<number>> = [add(1), multiply(2)]
-
-const output = pipe(calc, A.map(applyTo(5)))
-
-assert.deepStrictEqual(output, [6, 10])
-```
-
-Added in v0.6.0
 
 ## construct
 

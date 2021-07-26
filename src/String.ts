@@ -5,7 +5,6 @@
  */
 
 import { pipe, flow } from "fp-ts/function"
-import { Refinement } from "fp-ts/Refinement"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
@@ -33,20 +32,6 @@ import { Ord as ordNumber } from "fp-ts/number"
  * @since 0.1.0
  */
 export const fromNumber = (x: number): string => String(x)
-
-/**
- * Refine a foreign value to a string.
- *
- * @example
- * import { isString } from 'fp-ts-std/String';
- *
- * assert.strictEqual(isString('3'), true);
- * assert.strictEqual(isString(3), false);
- *
- * @since 0.1.0
- */
-export const isString: Refinement<unknown, string> = (x): x is string =>
-  typeof x === "string"
 
 /**
  * Check if a string contains a given substring.

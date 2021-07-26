@@ -16,7 +16,6 @@ import {
   unappend,
   contains,
   fromNumber,
-  isString,
   trim,
   trimLeft,
   trimRight,
@@ -46,9 +45,9 @@ import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
 import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
-import { invert } from "../src/Boolean"
 import { max } from "fp-ts/Ord"
 import * as N from "fp-ts/number"
+import { isString } from "fp-ts/string"
 
 describe("String", () => {
   describe("lines", () => {
@@ -408,29 +407,6 @@ describe("String", () => {
     it("always returns a string", () => {
       fc.assert(
         fc.property(fc.oneof(fc.integer(), fc.float()), flow(f, isString)),
-      )
-    })
-  })
-
-  describe("isString", () => {
-    const f = isString
-
-    it("returns true for any string", () => {
-      fc.assert(fc.property(fc.string(), f))
-    })
-
-    it("returns false for any other type", () => {
-      fc.assert(
-        fc.property(
-          fc.oneof(
-            fc.integer(),
-            fc.boolean(),
-            fc.constant(null),
-            fc.constant(undefined),
-            fc.object(),
-          ),
-          flow(f, invert),
-        ),
       )
     })
   })
