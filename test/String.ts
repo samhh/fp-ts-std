@@ -16,9 +16,6 @@ import {
   unappend,
   contains,
   fromNumber,
-  trim,
-  trimLeft,
-  trimRight,
   split,
   test,
   dropLeftWhile,
@@ -407,92 +404,6 @@ describe("String", () => {
     it("always returns a string", () => {
       fc.assert(
         fc.property(fc.oneof(fc.integer(), fc.float()), flow(f, isString)),
-      )
-    })
-  })
-
-  describe("trim", () => {
-    const f = trim
-
-    it("leaves alone that which doesn't require trimming", () => {
-      expect(f("a b c")).toBe("a b c")
-    })
-
-    it("trims the left side", () => {
-      expect(f(" a b c")).toBe("a b c")
-      expect(f("  a b c")).toBe("a b c")
-    })
-
-    it("trims the right side", () => {
-      expect(f("a b c ")).toBe("a b c")
-      expect(f("a b c  ")).toBe("a b c")
-    })
-
-    it("trims both sides", () => {
-      expect(f(" a b c ")).toBe("a b c")
-      expect(f("  a b c  ")).toBe("a b c")
-    })
-
-    it("never leaves whitespaces as head or last char", () => {
-      fc.assert(
-        fc.property(
-          fc.string(),
-          flow(f, x => x[0] !== " " && x[max(N.Ord)(0, x.length - 1)] !== " "),
-        ),
-      )
-    })
-  })
-
-  describe("trimLeft", () => {
-    const f = trimLeft
-
-    it("leaves alone that which doesn't require trimming", () => {
-      expect(f("a b c")).toBe("a b c")
-    })
-
-    it("trims the left side", () => {
-      expect(f(" a b c")).toBe("a b c")
-      expect(f("  a b c")).toBe("a b c")
-    })
-
-    it("does not trim the right side", () => {
-      expect(f("a b c ")).toBe("a b c ")
-      expect(f("a b c  ")).toBe("a b c  ")
-    })
-
-    it("never leaves whitespaces as head char", () => {
-      fc.assert(
-        fc.property(
-          fc.string(),
-          flow(f, x => x[0] !== " "),
-        ),
-      )
-    })
-  })
-
-  describe("trimRight", () => {
-    const f = trimRight
-
-    it("leaves alone that which doesn't require trimming", () => {
-      expect(f("a b c")).toBe("a b c")
-    })
-
-    it("trims the right side", () => {
-      expect(f("a b c ")).toBe("a b c")
-      expect(f("a b c  ")).toBe("a b c")
-    })
-
-    it("does not trim the left side", () => {
-      expect(f(" a b c")).toBe(" a b c")
-      expect(f("  a b c")).toBe("  a b c")
-    })
-
-    it("never leaves whitespaces as last char", () => {
-      fc.assert(
-        fc.property(
-          fc.string(),
-          flow(f, x => x[max(N.Ord)(0, x.length - 1)] !== " "),
-        ),
       )
     })
   })

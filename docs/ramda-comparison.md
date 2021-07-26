@@ -240,7 +240,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [ ] transduce
 - [x] transpose - [fp-ts-std/Array::transpose](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#transpose)
 - [x] traverse - [fp-ts/Array::traverse](https://gcanti.github.io/fp-ts/modules/Array.ts.html#traverse)
-- [x] trim - [fp-ts-std/String::trim](https://ramdajs.com/docs/#trim)
+- [x] trim - [fp-ts/string::trim](https://gcanti.github.io/fp-ts/modules/string.ts.html#trim)
 - [x] tryCatch - [fp-ts/Either::tryCatch](https://gcanti.github.io/fp-ts/modules/Either.ts.html#trycatch)
 - [x] type - [io-ts](https://gcanti.github.io/io-ts/)
 - ~~[ ] unapply~~ Use currying or tuples instead.

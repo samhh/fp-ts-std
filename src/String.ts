@@ -54,42 +54,6 @@ export const contains =
     target.includes(substring)
 
 /**
- * Trim both sides of a string.
- *
- * @example
- * import { trim } from 'fp-ts-std/String';
- *
- * assert.strictEqual(trim(' abc '), 'abc');
- *
- * @since 0.1.0
- */
-export const trim: Endomorphism<string> = x => x.trim()
-
-/**
- * Trim the left side of a string.
- *
- * @example
- * import { trimLeft } from 'fp-ts-std/String';
- *
- * assert.strictEqual(trimLeft(' abc '), 'abc ');
- *
- * @since 0.1.0
- */
-export const trimLeft: Endomorphism<string> = x => x.trimLeft()
-
-/**
- * Trim the right side of a string.
- *
- * @example
- * import { trimRight } from 'fp-ts-std/String';
- *
- * assert.strictEqual(trimRight(' abc '), ' abc');
- *
- * @since 0.1.0
- */
-export const trimRight: Endomorphism<string> = x => x.trimRight()
-
-/**
  * Check if a string starts with the specified substring.
  *
  * @example
