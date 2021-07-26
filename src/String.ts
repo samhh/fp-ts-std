@@ -500,30 +500,6 @@ export const lookup =
     O.fromNullable(x[i])
 
 /**
- * Converts all the alphabetic characters in a string to uppercase.
- *
- * @example
- * import { toUpper } from 'fp-ts-std/String';
- *
- * assert.strictEqual(toUpper('Hello!'), 'HELLO!');
- *
- * @since 0.7.0
- */
-export const toUpper: Endomorphism<string> = x => x.toUpperCase()
-
-/**
- * Converts all the alphabetic characters in a string to lowercase.
- *
- * @example
- * import { toLower } from 'fp-ts-std/String';
- *
- * assert.strictEqual(toLower('Hello!'), 'hello!');
- *
- * @since 0.7.0
- */
-export const toLower: Endomorphism<string> = x => x.toLowerCase()
-
-/**
  * Calculate the longest initial substring for which all characters satisfy the
  * specified predicate, creating a new string.
  *

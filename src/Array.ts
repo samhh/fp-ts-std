@@ -517,9 +517,9 @@ export const moveTo = flip(moveFrom)
  *
  * @example
  * import { countBy } from 'fp-ts-std/Array';
- * import { toLower } from 'fp-ts-std/String';
+ * import * as S from 'fp-ts/string';
  *
- * const f = countBy(toLower);
+ * const f = countBy(S.toLowerCase);
  * const xs = ['A', 'b', 'C', 'a', 'e', 'A'];
  *
  * assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 });

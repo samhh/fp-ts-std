@@ -22,8 +22,6 @@ import {
   last,
   init,
   lookup,
-  toUpper,
-  toLower,
   dropRightWhile,
   under,
   replaceAll,
@@ -541,22 +539,6 @@ describe("String", () => {
     })
   })
 
-  describe("toUpper", () => {
-    const f = toUpper
-
-    it("converts alphabetic characters to uppercase", () => {
-      expect(f("Hello!")).toBe("HELLO!")
-    })
-  })
-
-  describe("toLower", () => {
-    const f = toLower
-
-    it("converts alphabetic characters to lowercase", () => {
-      expect(f("Hello!")).toBe("hello!")
-    })
-  })
-
   describe("dropRightWhile", () => {
     const f = dropRightWhile
 
@@ -581,7 +563,7 @@ describe("String", () => {
     const f = under
 
     it("applies function to string", () => {
-      expect(f(RA.map(toUpper))("Hello!")).toBe("HELLO!")
+      expect(f(RA.map(S.toUpperCase))("Hello!")).toBe("HELLO!")
       expect(f(RA.filter(x => x !== "x"))("axbxc")).toBe("abc")
     })
   })

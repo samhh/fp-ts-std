@@ -39,8 +39,6 @@ Added in v0.1.0
   - [takeRight](#takeright)
   - [takeRightWhile](#takerightwhile)
   - [test](#test)
-  - [toLower](#tolower)
-  - [toUpper](#toupper)
   - [unappend](#unappend)
   - [under](#under)
   - [unlines](#unlines)
@@ -717,54 +715,6 @@ assert.strictEqual(hasVowel('grrr'), false)
 ```
 
 Added in v0.1.0
-
-## toLower
-
-Converts all the alphabetic characters in a string to lowercase.
-
-**Signature**
-
-```ts
-export declare const toLower: Endomorphism<string>
-```
-
-```hs
-toLower :: Endomorphism string
-```
-
-**Example**
-
-```ts
-import { toLower } from 'fp-ts-std/String'
-
-assert.strictEqual(toLower('Hello!'), 'hello!')
-```
-
-Added in v0.7.0
-
-## toUpper
-
-Converts all the alphabetic characters in a string to uppercase.
-
-**Signature**
-
-```ts
-export declare const toUpper: Endomorphism<string>
-```
-
-```hs
-toUpper :: Endomorphism string
-```
-
-**Example**
-
-```ts
-import { toUpper } from 'fp-ts-std/String'
-
-assert.strictEqual(toUpper('Hello!'), 'HELLO!')
-```
-
-Added in v0.7.0
 
 ## unappend
 
