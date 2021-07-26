@@ -11,7 +11,7 @@ import {
   unMilliseconds,
 } from "../src/Date"
 import fc from "fast-check"
-import { not } from "fp-ts/function"
+import { not } from "fp-ts/Predicate"
 import * as O from "fp-ts/Option"
 
 // Beware timezone differences on different machines - don't hardcode any

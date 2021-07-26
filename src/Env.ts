@@ -5,7 +5,8 @@
  * @since 0.9.0
  */
 
-import { pipe, not, flow } from "fp-ts/function"
+import { pipe, flow } from "fp-ts/function"
+import { not } from "fp-ts/Predicate"
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
