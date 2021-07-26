@@ -48,7 +48,7 @@ import {
 import { Predicate } from "fp-ts/Predicate"
 import fc from "fast-check"
 import { concatAll } from "fp-ts/Monoid"
-import { split } from "../src/String"
+import { split } from "fp-ts/string"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import { values } from "../src/Record"
 import { add } from "../src/Number"

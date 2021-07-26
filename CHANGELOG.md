@@ -7,10 +7,12 @@ This project adheres to semantic versioning.
 - Add `splitAt` function to the `String` module.
 - Add `zipAll` function to the `Array` and `ReadonlyArray` modules.
 - Add `fork` function to the `Function` module.
-- Remove `trim`, `trimLeft`, and `trimRight` from the `String` module as they're superceded by [fp-ts/string::trim](https://gcanti.github.io/fp-ts/modules/string.ts.html#trim), [fp-ts/string::trimLeft](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimleft), and [fp-ts/string::trimRight](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimright) respectively
-- Remove `replace` from the `String` module as it's superceded by [fp-ts/string::replace](https://gcanti.github.io/fp-ts/modules/string.ts.html#replace)
-- Remove `isString` from the `String` module as it's superceded by [fp-ts/string::isString](https://gcanti.github.io/fp-ts/modules/string.ts.html#isstring)
-- Remove `applyTo` from the `Function` module as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply)
+- A few function signatures now use readonly arrays as opposed to regular arrays as a result of the following supercessions.
+- Remove `trim`, `trimLeft`, and `trimRight` from the `String` module as they're superceded by [fp-ts/string::trim](https://gcanti.github.io/fp-ts/modules/string.ts.html#trim), [fp-ts/string::trimLeft](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimleft), and [fp-ts/string::trimRight](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimright) respectively.
+- Remove `split` from the `String` module as it's superceded by [fp-ts/string::split](https://gcanti.github.io/fp-ts/modules/string.ts.html#split).
+- Remove `replace` from the `String` module as it's superceded by [fp-ts/string::replace](https://gcanti.github.io/fp-ts/modules/string.ts.html#replace).
+- Remove `isString` from the `String` module as it's superceded by [fp-ts/string::isString](https://gcanti.github.io/fp-ts/modules/string.ts.html#isstring).
+- Remove `applyTo` from the `Function` module as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply).
 - Remove `concat` from the `Array` and `ReadonlyArray` modules as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).
 - Remove `length` from the `ReadonlyArray` module as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).
 - Bump minimum supported fp-ts version to 2.11.0.

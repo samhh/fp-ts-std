@@ -11,13 +11,13 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
-import * as A from "fp-ts/Array"
+import * as RA from "fp-ts/ReadonlyArray"
 import * as S from "fp-ts/string"
 import {
   join,
-  dropRightWhile as dropRightWhileArr,
-  takeRightWhile as takeRightWhileArr,
-} from "./Array"
+  dropRightWhile as dropRightWhileRA,
+  takeRightWhile as takeRightWhileRA,
+} from "./ReadonlyArray"
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
 
@@ -307,22 +307,6 @@ export const matchAll =
     )
 
 /**
- * Split a string into substrings using the specified separator and return them
- * as an array.
- *
- * @example
- * import { split } from 'fp-ts-std/String';
- *
- * assert.deepStrictEqual(split(',')('a,b,c'), ['a', 'b', 'c']);
- *
- * @since 0.1.0
- */
-export const split =
-  (on: string | RegExp) =>
-  (target: string): Array<string> =>
-    target.split(on)
-
-/**
  * Apply an endomorphism upon an array of strings (characters) against a string.
  * This is useful as it allows you to run many polymorphic functions targeting
  * arrays against strings without having to rewrite them.
@@ -332,16 +316,24 @@ export const split =
  *
  * @example
  * import { under } from 'fp-ts-std/String';
- * import * as A from 'fp-ts/Array';
+ * import * as RA from 'fp-ts/ReadonlyArray';
  *
- * const filterOutX = under(A.filter(x => x !== "x"));
+ * const filterOutX = under(RA.filter(x => x !== "x"));
  *
  * assert.strictEqual(filterOutX("axbxc"), "abc");
  *
  * @since 0.7.0
  */
-export const under = (f: Endomorphism<Array<string>>): Endomorphism<string> =>
-  flow(split(""), f, join(""))
+export const under = (
+  f: Endomorphism<ReadonlyArray<string>>,
+): Endomorphism<string> =>
+  flow(
+    S.split(""),
+    xs => xs,
+    f,
+    xs => xs,
+    join(""),
+  )
 
 /**
  * Reverse a string.
@@ -353,7 +345,7 @@ export const under = (f: Endomorphism<Array<string>>): Endomorphism<string> =>
  *
  * @since 0.3.0
  */
-export const reverse: Endomorphism<string> = under(A.reverse)
+export const reverse: Endomorphism<string> = under(RA.reverse)
 
 // The regex comes from here: https://stackoverflow.com/a/20056634
 /**
@@ -366,7 +358,7 @@ export const reverse: Endomorphism<string> = under(A.reverse)
  *
  * @since 0.1.0
  */
-export const lines = split(/\r\n|\r|\n/)
+export const lines = S.split(/\r\n|\r|\n/)
 
 /**
  * Join newline-separated strings together.
@@ -477,7 +469,7 @@ export const dropRight =
  * @since 0.6.0
  */
 export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
-  pipe(A.dropLeftWhile(f), under)
+  pipe(RA.dropLeftWhile(f), under)
 
 /**
  * Remove the longest initial substring from the end of the input string for
@@ -496,7 +488,7 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  * @since 0.7.0
  */
 export const dropRightWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(dropRightWhileArr, under)
+  flow(dropRightWhileRA, under)
 
 /**
  * Get the first character in a string, or `None` if the string is empty.
@@ -624,7 +616,7 @@ export const toLower: Endomorphism<string> = x => x.toLowerCase()
  */
 // The pointful first function is needed to typecheck for some reason
 export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(f => A.takeLeftWhile(f), under)
+  flow(f => RA.takeLeftWhile(f), under)
 
 /**
  * Calculate the longest initial substring from the end of the input string
@@ -639,7 +631,7 @@ export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
  * @since 0.7.0
  */
 export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(takeRightWhileArr, under)
+  flow(takeRightWhileRA, under)
 
 /**
  * Partition a string into parts at an index.

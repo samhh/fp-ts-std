@@ -34,7 +34,6 @@ Added in v0.1.0
   - [replaceAll](#replaceall)
   - [reverse](#reverse)
   - [slice](#slice)
-  - [split](#split)
   - [splitAt](#splitat)
   - [startsWith](#startswith)
   - [surround](#surround)
@@ -370,11 +369,11 @@ Split a string into substrings using any recognised newline as the separator.
 **Signature**
 
 ```ts
-export declare const lines: (target: string) => string[]
+export declare const lines: (s: string) => ReadonlyNonEmptyArray<string>
 ```
 
 ```hs
-lines :: string -> Array string
+lines :: string -> ReadonlyNonEmptyArray string
 ```
 
 **Example**
@@ -590,31 +589,6 @@ assert.deepStrictEqual(slice(-3)(-1)(x), 'bc')
 ```
 
 Added in v0.7.0
-
-## split
-
-Split a string into substrings using the specified separator and return them
-as an array.
-
-**Signature**
-
-```ts
-export declare const split: (on: string | RegExp) => (target: string) => Array<string>
-```
-
-```hs
-split :: string | RegExp -> string -> Array string
-```
-
-**Example**
-
-```ts
-import { split } from 'fp-ts-std/String'
-
-assert.deepStrictEqual(split(',')('a,b,c'), ['a', 'b', 'c'])
-```
-
-Added in v0.1.0
 
 ## splitAt
 
@@ -949,20 +923,20 @@ a string can be thought of merely as an array of characters.
 **Signature**
 
 ```ts
-export declare const under: (f: Endomorphism<Array<string>>) => Endomorphism<string>
+export declare const under: (f: Endomorphism<ReadonlyArray<string>>) => Endomorphism<string>
 ```
 
 ```hs
-under :: Endomorphism (Array string) -> Endomorphism string
+under :: Endomorphism (ReadonlyArray string) -> Endomorphism string
 ```
 
 **Example**
 
 ```ts
 import { under } from 'fp-ts-std/String'
-import * as A from 'fp-ts/Array'
+import * as RA from 'fp-ts/ReadonlyArray'
 
-const filterOutX = under(A.filter((x) => x !== 'x'))
+const filterOutX = under(RA.filter((x) => x !== 'x'))
 
 assert.strictEqual(filterOutX('axbxc'), 'abc')
 ```
@@ -976,7 +950,7 @@ Join newline-separated strings together.
 **Signature**
 
 ```ts
-export declare const unlines: (ys: string[]) => string
+export declare const unlines: (ys: readonly string[]) => string
 ```
 
 ```hs

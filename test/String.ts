@@ -16,7 +16,6 @@ import {
   unappend,
   contains,
   fromNumber,
-  split,
   test,
   dropLeftWhile,
   dropLeft,
@@ -38,7 +37,7 @@ import {
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
-import * as A from "fp-ts/Array"
+import * as RA from "fp-ts/ReadonlyArray"
 import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
 import { max } from "fp-ts/Ord"
@@ -407,51 +406,6 @@ describe("String", () => {
     })
   })
 
-  describe("split", () => {
-    const g = split
-
-    describe("splits on regexp", () => {
-      const f = g(/\.\./)
-
-      it("lifts unmodified string which cannot be split", () => {
-        expect(f(".")).toEqual(["."])
-        expect(f(".x.")).toEqual([".x."])
-      })
-
-      it("splits on each recognised", () => {
-        expect(f("a..b")).toEqual(["a", "b"])
-        expect(f("a..b..")).toEqual(["a", "b", ""])
-        expect(f("..a..b")).toEqual(["", "a", "b"])
-        expect(f("..a..b..")).toEqual(["", "a", "b", ""])
-        expect(f(".....")).toEqual(["", "", "."])
-      })
-    })
-
-    describe("splits on string", () => {
-      const f = g("..")
-
-      it("lifts unmodified string which cannot be split", () => {
-        expect(f(".")).toEqual(["."])
-        expect(f(".x.")).toEqual([".x."])
-      })
-
-      it("splits on each recognised", () => {
-        expect(f("a..b")).toEqual(["a", "b"])
-        expect(f("a..b..")).toEqual(["a", "b", ""])
-        expect(f("..a..b")).toEqual(["", "a", "b"])
-        expect(f("..a..b..")).toEqual(["", "a", "b", ""])
-        expect(f(".....")).toEqual(["", "", "."])
-
-        fc.assert(
-          fc.property(
-            fc.string(),
-            x => f(x).length === Array.from(x.matchAll(/\.\./g)).length + 1,
-          ),
-        )
-      })
-    })
-  })
-
   describe("test", () => {
     const f = test(/x.z/)
 
@@ -701,8 +655,8 @@ describe("String", () => {
     const f = under
 
     it("applies function to string", () => {
-      expect(f(A.map(toUpper))("Hello!")).toBe("HELLO!")
-      expect(f(A.filter(x => x !== "x"))("axbxc")).toBe("abc")
+      expect(f(RA.map(toUpper))("Hello!")).toBe("HELLO!")
+      expect(f(RA.filter(x => x !== "x"))("axbxc")).toBe("abc")
     })
   })
 

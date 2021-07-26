@@ -33,6 +33,7 @@ import {
   zipAll,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
+import * as RA from "fp-ts/ReadonlyArray"
 import * as A from "fp-ts/Array"
 import { contramap as eqContramap } from "fp-ts/Eq"
 import * as N from "fp-ts/number"
@@ -48,7 +49,7 @@ import {
 import { Predicate } from "fp-ts/Predicate"
 import fc from "fast-check"
 import { concatAll } from "fp-ts/Monoid"
-import { split } from "../src/String"
+import { split } from "fp-ts/string"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import { values } from "../src/Record"
 import { add } from "../src/Number"
@@ -96,11 +97,11 @@ describe("Array", () => {
         fc.property(fc.array(fc.string()), xs => {
           const countDelims = flow(
             split(""),
-            A.filter(c => c === delim),
-            A.size,
+            RA.filter(c => c === delim),
+            RA.size,
           )
 
-          const countDelimsA = flow(A.map(countDelims), concatAll(N.MonoidSum))
+          const countDelimsA = flow(RA.map(countDelims), concatAll(N.MonoidSum))
 
           return (
             countDelims(f(xs)) ===
