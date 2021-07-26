@@ -750,22 +750,6 @@ export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
 )
 
 /**
- * Append two arrays in terms of a semigroup. In effect, a functional wrapper
- * around `Array.prototype.concat`.
- *
- * @example
- * import { concat } from 'fp-ts-std/Array';
- *
- * assert.deepStrictEqual(concat([1, 2])([3, 4]), [1, 2, 3, 4]);
- *
- * @since 0.9.0
- */
-export const concat =
-  <A>(xs: Array<A>): Endomorphism<Array<A>> =>
-  ys =>
-    A.getMonoid<A>().concat(xs, ys)
-
-/**
  * Greedy zip, preserving all items and expressing the possibility of unequal
  * input sizes via the `These` type.
  *
@@ -795,6 +779,6 @@ export const zipAll =
     return pipe(
       zs,
       A.map(([za, zb]) => T.both(za, zb)),
-      flip(concat)(rest),
+      A.concat(rest),
     )
   }

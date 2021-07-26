@@ -760,22 +760,6 @@ export const maximum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
   flow(max, NEA.concatAll)
 
 /**
- * Append two arrays in terms of a semigroup. In effect, a functional wrapper
- * around `Array.prototype.concat`.
- *
- * @example
- * import { concat } from 'fp-ts-std/ReadonlyArray';
- *
- * assert.deepStrictEqual(concat([1, 2])([3, 4]), [1, 2, 3, 4]);
- *
- * @since 0.10.0
- */
-export const concat =
-  <A>(xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
-  ys =>
-    RA.getMonoid<A>().concat(xs, ys)
-
-/**
  * Greedy zip, preserving all items and expressing the possibility of unequal
  * input sizes via the `These` type.
  *
@@ -805,6 +789,6 @@ export const zipAll =
     return pipe(
       zs,
       RA.map(([za, zb]) => T.both(za, zb)),
-      flip(concat)(rest),
+      RA.concat(rest),
     )
   }

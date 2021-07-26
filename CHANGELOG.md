@@ -4,9 +4,10 @@ This project adheres to semantic versioning.
 
 ## 0.11.0 (_Unreleased_)
 
-- Add `splitAt` function to the `String` module
-- Add `zipAll` function to the `Array` and `ReadonlyArray` modules
-- Add `fork` function to the `Function` module
+- Add `splitAt` function to the `String` module.
+- Add `zipAll` function to the `Array` and `ReadonlyArray` modules.
+- Add `fork` function to the `Function` module.
+- Remove `concat` from the `Array` and `ReadonlyArray` modules as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).
 - Remove `length` from the `ReadonlyArray` module as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).
 - Bump minimum supported fp-ts version to 2.11.0.
 
