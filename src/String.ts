@@ -543,8 +543,8 @@ export const dropRight =
  *
  * @since 0.6.0
  */
-export const dropLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(A.dropLeftWhile, under)
+export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
+  pipe(A.dropLeftWhile(f), under)
 
 /**
  * Remove the longest initial substring from the end of the input string for
