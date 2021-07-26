@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `zipAll` function to the `Array` and `ReadonlyArray` modules.
 - Add `fork` function to the `Function` module.
 - Remove `trim`, `trimLeft`, and `trimRight` from the `String` module as they're superceded by [fp-ts/string::trim](https://gcanti.github.io/fp-ts/modules/string.ts.html#trim), [fp-ts/string::trimLeft](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimleft), and [fp-ts/string::trimRight](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimright) respectively
+- Remove `replace` from the `String` module as it's superceded by [fp-ts/string::replace](https://gcanti.github.io/fp-ts/modules/string.ts.html#replace)
 - Remove `isString` from the `String` module as it's superceded by [fp-ts/string::isString](https://gcanti.github.io/fp-ts/modules/string.ts.html#isstring)
 - Remove `applyTo` from the `Function` module as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply)
 - Remove `concat` from the `Array` and `ReadonlyArray` modules as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).

@@ -31,7 +31,6 @@ import {
   toLower,
   dropRightWhile,
   under,
-  replace,
   replaceAll,
   takeLeftWhile,
   takeRightWhile,
@@ -704,22 +703,6 @@ describe("String", () => {
     it("applies function to string", () => {
       expect(f(A.map(toUpper))("Hello!")).toBe("HELLO!")
       expect(f(A.filter(x => x !== "x"))("axbxc")).toBe("abc")
-    })
-  })
-
-  describe("replace", () => {
-    const f = replace
-
-    it("replaces first match with string", () => {
-      expect(f("x")("y")("xyzxyz")).toBe("yyzxyz")
-    })
-
-    it("replaces first match with non-global regex", () => {
-      expect(f(/x/)("y")("xyzxyz")).toBe("yyzxyz")
-    })
-
-    it("replaces all matches with global-regex", () => {
-      expect(f(/x/g)("y")("xyzxyz")).toBe("yyzyyz")
     })
   })
 

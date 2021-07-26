@@ -31,7 +31,6 @@ Added in v0.1.0
   - [match](#match)
   - [matchAll](#matchall)
   - [prepend](#prepend)
-  - [replace](#replace)
   - [replaceAll](#replaceall)
   - [reverse](#reverse)
   - [slice](#slice)
@@ -508,32 +507,6 @@ assert.strictEqual(prependShell('abc'), '$ abc')
 ```
 
 Added in v0.1.0
-
-## replace
-
-Replace the first occurrence of a matched substring with a replacement.
-
-**Signature**
-
-```ts
-export declare const replace: (r: RegExp | string) => (s: string) => Endomorphism<string>
-```
-
-```hs
-replace :: RegExp | string -> string -> Endomorphism string
-```
-
-**Example**
-
-```ts
-import { replace } from 'fp-ts-std/String'
-
-assert.strictEqual(replace('foo')('bar')('foo foo foo'), 'bar foo foo')
-assert.strictEqual(replace(/foo/)('bar')('foo foo foo'), 'bar foo foo')
-assert.strictEqual(replace(/foo/g)('bar')('foo foo foo'), 'bar bar bar')
-```
-
-Added in v0.7.0
 
 ## replaceAll
 
