@@ -20,7 +20,6 @@ Added in v0.1.0
   - [dropLeftWhile](#dropleftwhile)
   - [dropRight](#dropright)
   - [dropRightWhile](#droprightwhile)
-  - [endsWith](#endswith)
   - [fromNumber](#fromnumber)
   - [head](#head)
   - [init](#init)
@@ -34,7 +33,6 @@ Added in v0.1.0
   - [reverse](#reverse)
   - [slice](#slice)
   - [splitAt](#splitat)
-  - [startsWith](#startswith)
   - [surround](#surround)
   - [tail](#tail)
   - [takeLeft](#takeleft)
@@ -200,33 +198,6 @@ assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
 ```
 
 Added in v0.7.0
-
-## endsWith
-
-Check if a string ends with the specified substring.
-
-**Signature**
-
-```ts
-export declare const endsWith: (substring: string) => Predicate<string>
-```
-
-```hs
-endsWith :: string -> Predicate string
-```
-
-**Example**
-
-```ts
-import { endsWith } from 'fp-ts-std/String'
-
-const isHaskell = endsWith('.hs')
-
-assert.strictEqual(isHaskell('File.hs'), true)
-assert.strictEqual(isHaskell('File.rs'), false)
-```
-
-Added in v0.3.0
 
 ## fromNumber
 
@@ -584,33 +555,6 @@ assert.deepStrictEqual(splitAt(1)('abc'), ['a', 'bc'])
 ```
 
 Added in v0.11.0
-
-## startsWith
-
-Check if a string starts with the specified substring.
-
-**Signature**
-
-```ts
-export declare const startsWith: (substring: string) => Predicate<string>
-```
-
-```hs
-startsWith :: string -> Predicate string
-```
-
-**Example**
-
-```ts
-import { startsWith } from 'fp-ts-std/String'
-
-const isHttps = startsWith('https://')
-
-assert.strictEqual(isHttps('https://samhh.com'), true)
-assert.strictEqual(isHttps('http://samhh.com'), false)
-```
-
-Added in v0.3.0
 
 ## surround
 

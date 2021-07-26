@@ -3,8 +3,6 @@ import {
   unlines,
   surround,
   unsurround,
-  startsWith,
-  endsWith,
   takeLeft,
   takeRight,
   reverse,
@@ -131,36 +129,6 @@ describe("String", () => {
       expect(f("x")("xy")).toBe("xy")
       expect(f("x")("yx")).toBe("yx")
       expect(f("x")("xyx")).toBe("y")
-    })
-  })
-
-  describe("startsWith", () => {
-    const f = startsWith
-
-    it("returns true for empty substring", () => {
-      fc.assert(fc.property(fc.string(), x => f("")(x)))
-    })
-
-    it("checks start of string for substring", () => {
-      expect(f("x")("xyz")).toBe(true)
-      expect(f("a")("xyz")).toBe(false)
-
-      fc.assert(fc.property(fc.string(), fc.string(), (x, y) => f(x)(x + y)))
-    })
-  })
-
-  describe("endsWith", () => {
-    const f = endsWith
-
-    it("returns true for empty substring", () => {
-      fc.assert(fc.property(fc.string(), x => f("")(x)))
-    })
-
-    it("checks end of string for substring", () => {
-      expect(f("z")("xyz")).toBe(true)
-      expect(f("a")("xyz")).toBe(false)
-
-      fc.assert(fc.property(fc.string(), fc.string(), (x, y) => f(x)(y + x)))
     })
   })
 

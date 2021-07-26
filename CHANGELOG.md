@@ -9,6 +9,7 @@ This project adheres to semantic versioning.
 - Add `fork` function to the `Function` module.
 - A few function signatures now use readonly arrays as opposed to regular arrays as a result of the following supercessions.
 - Remove `trim`, `trimLeft`, and `trimRight` from the `String` module as they're superceded by [fp-ts/string::trim](https://gcanti.github.io/fp-ts/modules/string.ts.html#trim), [fp-ts/string::trimLeft](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimleft), and [fp-ts/string::trimRight](https://gcanti.github.io/fp-ts/modules/string.ts.html#trimright) respectively.
+- Remove `startsWith` and `endsWith` from the `String` module as they're superceded by [fp-ts/string::startsWith](https://gcanti.github.io/fp-ts/modules/string.ts.html#startswith), [fp-ts/string::endsWith](https://gcanti.github.io/fp-ts/modules/string.ts.html#endswith) respectively.
 - Remove `split` from the `String` module as it's superceded by [fp-ts/string::split](https://gcanti.github.io/fp-ts/modules/string.ts.html#split).
 - Remove `replace` from the `String` module as it's superceded by [fp-ts/string::replace](https://gcanti.github.io/fp-ts/modules/string.ts.html#replace).
 - Remove `isString` from the `String` module as it's superceded by [fp-ts/string::isString](https://gcanti.github.io/fp-ts/modules/string.ts.html#isstring).

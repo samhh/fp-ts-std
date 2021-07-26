@@ -34,42 +34,6 @@ import { Ord as ordNumber } from "fp-ts/number"
 export const fromNumber = (x: number): string => String(x)
 
 /**
- * Check if a string starts with the specified substring.
- *
- * @example
- * import { startsWith } from 'fp-ts-std/String';
- *
- * const isHttps = startsWith('https://');
- *
- * assert.strictEqual(isHttps('https://samhh.com'), true);
- * assert.strictEqual(isHttps('http://samhh.com'), false);
- *
- * @since 0.3.0
- */
-export const startsWith =
-  (substring: string): Predicate<string> =>
-  y =>
-    y.startsWith(substring)
-
-/**
- * Check if a string ends with the specified substring.
- *
- * @example
- * import { endsWith } from 'fp-ts-std/String';
- *
- * const isHaskell = endsWith('.hs');
- *
- * assert.strictEqual(isHaskell('File.hs'), true);
- * assert.strictEqual(isHaskell('File.rs'), false);
- *
- * @since 0.3.0
- */
-export const endsWith =
-  (substring: string): Predicate<string> =>
-  y =>
-    y.endsWith(substring)
-
-/**
  * Prepend one string to another.
  *
  * @example
