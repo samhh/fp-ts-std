@@ -4,11 +4,8 @@
  * @since 0.1.0
  */
 
-import {
-  Endomorphism,
-  Predicate,
-  getSemigroup as getFunctionSemigroup,
-} from "fp-ts/function"
+import { Predicate, getSemigroup as getFunctionSemigroup } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { SemigroupAll, SemigroupAny } from "fp-ts/boolean"
 
 /**

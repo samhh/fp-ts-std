@@ -70,7 +70,8 @@ applyTo :: a -> (a -> b) -> b
 import { applyTo } from 'fp-ts-std/Function'
 import { add, multiply } from 'fp-ts-std/Number'
 import * as A from 'fp-ts/Array'
-import { pipe, Endomorphism } from 'fp-ts/function'
+import { pipe } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const calc: Array<Endomorphism<number>> = [add(1), multiply(2)]
 
@@ -127,7 +128,7 @@ curry2 :: ((a, b) -> c) -> a -> b -> c
 
 ```ts
 import { curry2 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat2 = (a: string, b: string): string => a + b
 assert.strictEqual(curry2(concat2)('a')('b'), concat2('a', 'b'))
@@ -153,7 +154,7 @@ curry2T :: ([a, b] -> c) -> a -> b -> c
 
 ```ts
 import { curry2T } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat2 = ([a, b]: [string, string]): string => a + b
 assert.strictEqual(curry2T(concat2)('a')('b'), concat2(['a', 'b']))
@@ -179,7 +180,7 @@ curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
 
 ```ts
 import { curry3 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat3 = (a: string, b: string, c: string): string => a + b + c
 assert.strictEqual(curry3(concat3)('a')('b')('c'), concat3('a', 'b', 'c'))
@@ -205,7 +206,7 @@ curry3T :: ([a, b, c] -> d) -> a -> b -> c -> d
 
 ```ts
 import { curry3T } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat3 = ([a, b, c]: [string, string, string]): string => a + b + c
 assert.strictEqual(curry3T(concat3)('a')('b')('c'), concat3(['a', 'b', 'c']))
@@ -233,7 +234,7 @@ curry4 :: ((a, b, c, d) -> e) -> a -> b -> c -> d -> e
 
 ```ts
 import { curry4 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat4 = (a: string, b: string, c: string, d: string): string => a + b + c + d
 assert.strictEqual(curry4(concat4)('a')('b')('c')('d'), concat4('a', 'b', 'c', 'd'))
@@ -259,7 +260,7 @@ curry4T :: ([a, b, c, d] -> e) -> a -> b -> c -> d -> e
 
 ```ts
 import { curry4T } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat4 = ([a, b, c, d]: [string, string, string, string]): string => a + b + c + d
 assert.strictEqual(curry4T(concat4)('a')('b')('c')('d'), concat4(['a', 'b', 'c', 'd']))
@@ -287,7 +288,7 @@ curry5 :: ((a, b, c, d, e) -> f) -> a -> b -> c -> d -> e -> f
 
 ```ts
 import { curry5 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat5 = (a: string, b: string, c: string, d: string, e: string): string => a + b + c + d + e
 assert.strictEqual(curry5(concat5)('a')('b')('c')('d')('e'), concat5('a', 'b', 'c', 'd', 'e'))
@@ -315,7 +316,7 @@ curry5T :: ([a, b, c, d, e] -> f) -> a -> b -> c -> d -> e -> f
 
 ```ts
 import { curry5T } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat5 = ([a, b, c, d, e]: [string, string, string, string, string]): string => a + b + c + d + e
 assert.strictEqual(curry5T(concat5)('a')('b')('c')('d')('e'), concat5(['a', 'b', 'c', 'd', 'e']))
@@ -574,7 +575,7 @@ uncurry2 :: (a -> b -> c) -> [a, b] -> c
 
 ```ts
 import { uncurry2 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat2 =
   (a: string): Endomorphism<string> =>
@@ -603,7 +604,7 @@ uncurry3 :: (a -> b -> c -> d) -> [a, b, c] -> d
 
 ```ts
 import { uncurry3 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat3 =
   (a: string) =>
@@ -635,7 +636,7 @@ uncurry4 :: (a -> b -> c -> d -> e) -> [a, b, c, d] -> e
 
 ```ts
 import { uncurry4 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat4 =
   (a: string) =>
@@ -668,7 +669,7 @@ uncurry5 :: (a -> b -> c -> d -> e -> f) -> [a, b, c, d, e] -> f
 
 ```ts
 import { uncurry5 } from 'fp-ts-std/Function'
-import { Endomorphism } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
 
 const concat5 =
   (a: string) =>

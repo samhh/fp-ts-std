@@ -4,7 +4,8 @@
  * @since 0.1.0
  */
 
-import { Endomorphism, not, Predicate, flow, pipe } from "fp-ts/function"
+import { not, Predicate, flow, pipe } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option, fromPredicate } from "fp-ts/Option"
 
 /**

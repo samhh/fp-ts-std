@@ -4,14 +4,8 @@
  * @since 0.1.0
  */
 
-import {
-  pipe,
-  Predicate,
-  Refinement,
-  Endomorphism,
-  flow,
-  not,
-} from "fp-ts/function"
+import { pipe, Predicate, Refinement, flow, not } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"

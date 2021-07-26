@@ -11,13 +11,13 @@ import * as O from "fp-ts/Option"
 import * as M from "fp-ts/Map"
 import * as A from "fp-ts/Array"
 import {
-  Endomorphism,
   flow,
   not,
   pipe,
   Predicate,
   getMonoid as getFunctionMonoid,
 } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { concatAll } from "fp-ts/Monoid"
 import { Eq } from "fp-ts/Eq"
 
@@ -101,7 +101,8 @@ export const unary =
  * import { applyTo } from 'fp-ts-std/Function';
  * import { add, multiply } from 'fp-ts-std/Number';
  * import * as A from 'fp-ts/Array';
- * import { pipe, Endomorphism } from 'fp-ts/function';
+ * import { pipe } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const calc: Array<Endomorphism<number>> = [add(1), multiply(2)];
  *
@@ -310,7 +311,7 @@ export const memoize =
  *
  * @example
  * import { curry2T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat2 = ([a, b]: [string, string]): string =>
  *      a + b;
@@ -329,7 +330,7 @@ export const curry2T =
  *
  * @example
  * import { curry2 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat2 = (a: string, b: string): string =>
  *      a + b;
@@ -345,7 +346,7 @@ export const curry2: <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B) => C =
  *
  * @example
  * import { curry3T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat3 = ([a, b, c]: [string, string, string]): string =>
  *      a + b + c;
@@ -365,7 +366,7 @@ export const curry3T =
  *
  * @example
  * import { curry3 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat3 = (a: string, b: string, c: string): string =>
  *      a + b + c;
@@ -382,7 +383,7 @@ export const curry3: <A, B, C, D>(
  *
  * @example
  * import { curry4T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat4 = ([a, b, c, d]: [string, string, string, string]): string =>
  *      a + b + c + d;
@@ -403,7 +404,7 @@ export const curry4T =
  *
  * @example
  * import { curry4 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat4 = (a: string, b: string, c: string, d: string): string =>
  *      a + b + c + d;
@@ -420,7 +421,7 @@ export const curry4: <A, B, C, D, E>(
  *
  * @example
  * import { curry5T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat5 = ([a, b, c, d, e]: [string, string, string, string, string]): string =>
  *      a + b + c + d + e;
@@ -442,7 +443,7 @@ export const curry5T =
  *
  * @example
  * import { curry5 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat5 = (a: string, b: string, c: string, d: string, e: string): string =>
  *      a + b + c + d + e;
@@ -459,7 +460,7 @@ export const curry5: <A, B, C, D, E, F>(
  *
  * @example
  * import { uncurry2 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat2 = (a: string): Endomorphism<string> => b =>
  *      a + b;
@@ -477,7 +478,7 @@ export const uncurry2 =
  *
  * @example
  * import { uncurry3 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat3 = (a: string) => (b: string): Endomorphism<string> => c =>
  *      a + b + c;
@@ -495,7 +496,7 @@ export const uncurry3 =
  *
  * @example
  * import { uncurry4 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat4 = (a: string) => (b: string) => (c: string): Endomorphism<string> => d =>
  *      a + b + c + d;
@@ -513,7 +514,7 @@ export const uncurry4 =
  *
  * @example
  * import { uncurry5 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
  *
  * const concat5 = (a: string) => (b: string) => (c: string) => (d: string): Endomorphism<string> => e =>
  *      a + b + c + d + e;

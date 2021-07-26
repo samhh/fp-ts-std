@@ -4,7 +4,8 @@
  *
  * @since 0.10.0
  */
-import { Endomorphism, flow, not, Predicate } from "fp-ts/function"
+import { flow, not, Predicate } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"

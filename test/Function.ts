@@ -29,13 +29,8 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
-import {
-  constant,
-  constFalse,
-  constTrue,
-  Endomorphism,
-  identity,
-} from "fp-ts/function"
+import { constant, constFalse, constTrue, identity } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import * as N from "fp-ts/number"
 import fc from "fast-check"
 import * as S from "../src/String"

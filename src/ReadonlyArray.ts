@@ -4,14 +4,8 @@
  * @since 0.10.0
  */
 
-import {
-  Predicate,
-  constant,
-  pipe,
-  flow,
-  Endomorphism,
-  not,
-} from "fp-ts/function"
+import { Predicate, constant, pipe, flow, not } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { Eq } from "fp-ts/Eq"
 import { Ord } from "fp-ts/Ord"
 import { match as orderingMatch } from "fp-ts/Ordering"
