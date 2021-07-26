@@ -14,6 +14,7 @@ import { flow, pipe, getMonoid as getFunctionMonoid } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { concatAll } from "fp-ts/Monoid"
+import { first } from "fp-ts/Semigroup"
 import { Eq } from "fp-ts/Eq"
 
 /**
@@ -143,7 +144,7 @@ export const guard =
     pipe(
       branches,
       A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
-      concatAll(getFunctionMonoid(O.getFirstMonoid<B>())<A>()),
+      concatAll(getFunctionMonoid(O.getMonoid<B>(first()))<A>()),
       applyTo(input),
       O.getOrElse(() => fallback(input)),
     )
