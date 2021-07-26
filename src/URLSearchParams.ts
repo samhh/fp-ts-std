@@ -7,7 +7,8 @@
 
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { pipe, Refinement } from "fp-ts/function"
+import { pipe } from "fp-ts/function"
+import { Refinement } from "fp-ts/Refinement"
 
 /**
  * An empty `URLSearchParams`.

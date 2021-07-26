@@ -8,7 +8,8 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { flow, identity, pipe, Refinement } from "fp-ts/function"
+import { flow, identity, pipe } from "fp-ts/function"
+import { Refinement } from "fp-ts/Refinement"
 
 /**
  * Unsafely parse a `URL`, throwing on failure.

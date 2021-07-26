@@ -5,7 +5,8 @@
  */
 
 import { Newtype, iso, getField, getOrd } from "newtype-ts"
-import { flow, pipe, Refinement } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
+import { Refinement } from "fp-ts/Refinement"
 import { Predicate } from "fp-ts/Predicate"
 import { isValid as isValidNum } from "./Number"
 import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/number"

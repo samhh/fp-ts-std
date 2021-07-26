@@ -19,7 +19,7 @@ It can be used interchangeably absolutely anywhere with `string`. This is in con
 
 ### Predicate
 
-From [fp-ts/Predicate::Predicate](https://gcanti.github.io/fp-ts/modules/function.ts.html#predicate-interface), the `Predicate` type alias expresses a very common use case - a function that takes a value and returns a boolean having performed a check on said value.
+From [fp-ts/Predicate::Predicate](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#predicate-interface), the `Predicate` type alias expresses a very common use case - a function that takes a value and returns a boolean having performed a check on said value.
 
 ```typescript
 type Predicate<A> = (a: A) => boolean;
@@ -27,7 +27,7 @@ type Predicate<A> = (a: A) => boolean;
 
 ### Refinement
 
-From [fp-ts/function::Refinement](https://gcanti.github.io/fp-ts/modules/function.ts.html#refinement-interface), the `Refinement` type alias is very similar to `Predicate`, but with one key difference - the returned boolean also acts as a _type guard_ on the function's input. If you're unfamiliar with type guards, check out the [TypeScript handbook](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards).
+From [fp-ts/Refinement::Refinement](https://gcanti.github.io/fp-ts/modules/Refinement.ts.html#refinement-interface), the `Refinement` type alias is very similar to `Predicate`, but with one key difference - the returned boolean also acts as a _type guard_ on the function's input. If you're unfamiliar with type guards, check out the [TypeScript handbook](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards).
 
 ```typescript
 type Refinement<A, B> = (a: A) => a is B;
@@ -47,7 +47,7 @@ const isString: Refinement<unknown, string> = (x): x is string => typeof x === '
 
 ### Endomorphism
 
-From [fp-ts/Endomorphism::Endomorphism](https://gcanti.github.io/fp-ts/modules/function.ts.html#endomorphism-interface), the `Endomorphism` type alias isn't nearly as scary as it sounds. Here's the type:
+From [fp-ts/Endomorphism::Endomorphism](https://gcanti.github.io/fp-ts/modules/Endomorphism.ts.html#endomorphism-interface), the `Endomorphism` type alias isn't nearly as scary as it sounds. Here's the type:
 
 ```typescript
 type Endomorphism<A> = (a: A) => A;
