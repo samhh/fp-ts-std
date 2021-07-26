@@ -5,8 +5,8 @@
  */
 
 import { pipe, flow } from "fp-ts/function"
-import { Refinement, not } from "fp-ts/Refinement"
-import { Predicate } from "fp-ts/Predicate"
+import { Refinement } from "fp-ts/Refinement"
+import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
