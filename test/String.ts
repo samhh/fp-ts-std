@@ -21,7 +21,6 @@ import {
   tail,
   last,
   init,
-  slice,
   lookup,
   toUpper,
   toLower,
@@ -39,7 +38,7 @@ import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
 import { max } from "fp-ts/Ord"
 import * as N from "fp-ts/number"
-import { isString } from "fp-ts/string"
+import * as S from "fp-ts/string"
 
 describe("String", () => {
   describe("lines", () => {
@@ -340,7 +339,7 @@ describe("String", () => {
 
     it("always returns a string", () => {
       fc.assert(
-        fc.property(fc.oneof(fc.integer(), fc.float()), flow(f, isString)),
+        fc.property(fc.oneof(fc.integer(), fc.float()), flow(f, S.isString)),
       )
     })
   })
@@ -520,18 +519,6 @@ describe("String", () => {
     })
   })
 
-  describe("slice", () => {
-    const f = slice
-
-    it("behaves identically to String.prototype.slice", () => {
-      fc.assert(
-        fc.property(fc.string(), fc.integer(), fc.integer(), (x, start, end) =>
-          expect(f(start)(end)(x)).toEqual(x.slice(start, end)),
-        ),
-      )
-    })
-  })
-
   describe("lookup", () => {
     const f = lookup
 
@@ -665,8 +652,8 @@ describe("String", () => {
         fc.property(fc.integer(), fc.string(), (index, str) => {
           const tuple = splitAt(index)(str)
           return (
-            tuple[0] === slice(0)(index)(str) &&
-            tuple[1] === slice(index)(Infinity)(str)
+            tuple[0] === S.slice(0, index)(str) &&
+            tuple[1] === S.slice(index, Infinity)(str)
           )
         }),
       )

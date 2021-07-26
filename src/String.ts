@@ -137,30 +137,6 @@ export const unsurround =
       : val
 
 /**
- * Returns the substring between the start index (inclusive) and the end index
- * (exclusive).
- *
- * This is merely a functional wrapper around `String.prototype.slice`.
- *
- * @example
- * import { slice } from 'fp-ts-std/String';
- *
- * const x = 'abcd';
- *
- * assert.deepStrictEqual(slice(1)(3)(x), 'bc');
- * assert.deepStrictEqual(slice(1)(Infinity)(x), 'bcd');
- * assert.deepStrictEqual(slice(0)(-1)(x), 'abc');
- * assert.deepStrictEqual(slice(-3)(-1)(x), 'bc');
- *
- * @since 0.7.0
- */
-export const slice =
-  (start: number) =>
-  (end: number): Endomorphism<string> =>
-  x =>
-    x.slice(start, end)
-
-/**
  * Keep the specified number of characters from the start of a string.
  *
  * If `n` is larger than the available number of characters, the string will
@@ -178,7 +154,7 @@ export const slice =
  * @since 0.3.0
  */
 export const takeLeft = (n: number): Endomorphism<string> =>
-  slice(0)(max(ordNumber)(0, n))
+  S.slice(0, max(ordNumber)(0, n))
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -200,7 +176,7 @@ export const takeLeft = (n: number): Endomorphism<string> =>
 export const takeRight =
   (n: number): Endomorphism<string> =>
   x =>
-    slice(max(ordNumber)(0, x.length - Math.floor(n)))(Infinity)(x)
+    S.slice(max(ordNumber)(0, x.length - Math.floor(n)), Infinity)(x)
 
 /**
  * Functional wrapper around `String.prototype.match`.
@@ -592,4 +568,4 @@ export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
 export const splitAt =
   (index: number) =>
   (str: string): [string, string] =>
-    [slice(0)(index)(str), slice(index)(Infinity)(str)]
+    [S.slice(0, index)(str), S.slice(index, Infinity)(str)]

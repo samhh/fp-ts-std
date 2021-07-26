@@ -31,7 +31,6 @@ Added in v0.1.0
   - [prepend](#prepend)
   - [replaceAll](#replaceall)
   - [reverse](#reverse)
-  - [slice](#slice)
   - [splitAt](#splitat)
   - [surround](#surround)
   - [tail](#tail)
@@ -498,38 +497,6 @@ assert.strictEqual(reverse('abc'), 'cba')
 ```
 
 Added in v0.3.0
-
-## slice
-
-Returns the substring between the start index (inclusive) and the end index
-(exclusive).
-
-This is merely a functional wrapper around `String.prototype.slice`.
-
-**Signature**
-
-```ts
-export declare const slice: (start: number) => (end: number) => Endomorphism<string>
-```
-
-```hs
-slice :: number -> number -> Endomorphism string
-```
-
-**Example**
-
-```ts
-import { slice } from 'fp-ts-std/String'
-
-const x = 'abcd'
-
-assert.deepStrictEqual(slice(1)(3)(x), 'bc')
-assert.deepStrictEqual(slice(1)(Infinity)(x), 'bcd')
-assert.deepStrictEqual(slice(0)(-1)(x), 'abc')
-assert.deepStrictEqual(slice(-3)(-1)(x), 'bc')
-```
-
-Added in v0.7.0
 
 ## splitAt
 
