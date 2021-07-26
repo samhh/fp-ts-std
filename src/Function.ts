@@ -10,7 +10,12 @@
 import * as O from "fp-ts/Option"
 import * as M from "fp-ts/Map"
 import * as A from "fp-ts/Array"
-import { flow, pipe, getMonoid as getFunctionMonoid } from "fp-ts/function"
+import {
+  flow,
+  pipe,
+  getMonoid as getFunctionMonoid,
+  apply,
+} from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { concatAll } from "fp-ts/Monoid"
@@ -88,32 +93,6 @@ export const unary =
     f(...xs)
 
 /**
- * Apply a function, taking the data first. This can be thought of as ordinary
- * function application, but flipped.
- *
- * This is useful for applying functions point-free.
- *
- * @example
- * import { applyTo } from 'fp-ts-std/Function';
- * import { add, multiply } from 'fp-ts-std/Number';
- * import * as A from 'fp-ts/Array';
- * import { pipe } from 'fp-ts/function';
- * import { Endomorphism } from 'fp-ts/Endomorphism'
- *
- * const calc: Array<Endomorphism<number>> = [add(1), multiply(2)];
- *
- * const output = pipe(calc, A.map(applyTo(5)));
- *
- * assert.deepStrictEqual(output, [6, 10]);
- *
- * @since 0.6.0
- */
-export const applyTo =
-  <A>(x: A) =>
-  <B>(f: (x: A) => B): B =>
-    f(x)
-
-/**
  * Given an array of predicates and morphisms, returns the first morphism output
  * for which the paired predicate succeeded. If all predicates fail, the
  * fallback value is returned.
@@ -145,7 +124,7 @@ export const guard =
       branches,
       A.map(([f, g]) => flow(O.fromPredicate(f), O.map(g))),
       concatAll(getFunctionMonoid(O.getMonoid<B>(first()))<A>()),
-      applyTo(input),
+      apply(input),
       O.getOrElse(() => fallback(input)),
     )
 

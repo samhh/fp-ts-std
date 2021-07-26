@@ -2,7 +2,6 @@ import {
   flip,
   withIndex,
   unary,
-  applyTo,
   guard,
   ifElse,
   unless,
@@ -67,16 +66,6 @@ describe("Function", () => {
       // @ts-expect-error ensure it doesn't work without our unary helper
       expect(Math.max(xs)).toBeNaN()
       expect(f(xs)).toBe(3)
-    })
-  })
-
-  describe("applyTo", () => {
-    const f = applyTo
-
-    it("applies the function", () => {
-      const g: Endomorphism<number> = n => n * 2
-
-      expect(f(5)(g)).toBe(g(5))
     })
   })
 
