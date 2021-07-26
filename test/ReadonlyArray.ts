@@ -45,8 +45,8 @@ import {
   flow,
   identity,
   pipe,
-  Predicate,
 } from "fp-ts/function"
+import { Predicate } from "fp-ts/Predicate"
 import fc from "fast-check"
 import { concatAll } from "fp-ts/Monoid"
 import { split } from "../src/String"

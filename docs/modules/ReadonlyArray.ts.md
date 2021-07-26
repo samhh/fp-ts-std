@@ -262,7 +262,7 @@ dropRightWhile :: Predicate a -> Endomorphism (Array a)
 
 ```ts
 import { dropRightWhile } from 'fp-ts-std/ReadonlyArray'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 const dropRightEvens = dropRightWhile(isEven)
@@ -592,7 +592,7 @@ Added in v0.10.0
 Check if a predicate does not hold for any array member.
 
 import { none } from 'fp-ts-std/ReadonlyArray';
-import { Predicate } from 'fp-ts/function';
+import { Predicate } from 'fp-ts/Predicate';
 
 const isFive: Predicate<number> = n => n === 5;
 const noneAreFive = none(isFive);
@@ -635,7 +635,7 @@ pluckFirst :: Predicate a -> Array a -> [Option a, Array a]
 ```ts
 import { pluckFirst } from 'fp-ts-std/ReadonlyArray'
 import * as O from 'fp-ts/Option'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isOverFive: Predicate<number> = (n) => n > 5
 const pluckFirstOverFive = pluckFirst(isOverFive)
@@ -695,7 +695,7 @@ reduceRightWhile :: Predicate a -> (a -> b -> b) -> b -> Array a -> b
 ```ts
 import { reduceRightWhile } from 'fp-ts-std/ReadonlyArray'
 import { add } from 'fp-ts-std/Number'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 const reduceRightUntilOdd = reduceRightWhile(isEven)
@@ -728,7 +728,7 @@ reduceWhile :: Predicate a -> (a -> b -> b) -> b -> Array a -> b
 ```ts
 import { reduceWhile } from 'fp-ts-std/ReadonlyArray'
 import { add } from 'fp-ts-std/Number'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 const reduceUntilOdd = reduceWhile(isEven)
@@ -757,7 +757,7 @@ reject :: Predicate a -> Endomorphism (Array a)
 
 ```ts
 import { reject } from 'fp-ts-std/ReadonlyArray'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 
@@ -898,7 +898,7 @@ takeRightWhile :: Predicate a -> Endomorphism (Array a)
 
 ```ts
 import { takeRightWhile } from 'fp-ts-std/ReadonlyArray'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 const takeRightEvens = takeRightWhile(isEven)

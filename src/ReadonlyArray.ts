@@ -4,7 +4,8 @@
  * @since 0.10.0
  */
 
-import { Predicate, constant, pipe, flow, not } from "fp-ts/function"
+import { constant, pipe, flow, not } from "fp-ts/function"
+import { Predicate } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Eq } from "fp-ts/Eq"
 import { Ord } from "fp-ts/Ord"
@@ -49,7 +50,7 @@ export const elemFlipped =
  * Check if a predicate does not hold for any array member.
  *
  * import { none } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isFive: Predicate<number> = n => n === 5;
  * const noneAreFive = none(isFive);
@@ -120,7 +121,7 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<ReadonlyArray<A>> => ({
  * @example
  * import { pluckFirst } from 'fp-ts-std/ReadonlyArray';
  * import * as O from 'fp-ts/Option';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isOverFive: Predicate<number> = n => n > 5;
  * const pluckFirstOverFive = pluckFirst(isOverFive);
@@ -449,7 +450,7 @@ export const slice =
  *
  * @example
  * import { reject } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  *
@@ -541,7 +542,7 @@ export const countBy =
  *
  * @example
  * import { dropRightWhile } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  * const dropRightEvens = dropRightWhile(isEven);
@@ -635,7 +636,7 @@ export const transpose = <A>(
  *
  * @example
  * import { takeRightWhile } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  * const takeRightEvens = takeRightWhile(isEven);
@@ -680,7 +681,7 @@ export const symmetricDifference =
  * @example
  * import { reduceWhile } from 'fp-ts-std/ReadonlyArray';
  * import { add } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  * const reduceUntilOdd = reduceWhile(isEven);
@@ -715,7 +716,7 @@ export const reduceWhile =
  * @example
  * import { reduceRightWhile } from 'fp-ts-std/ReadonlyArray';
  * import { add } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  * const reduceRightUntilOdd = reduceRightWhile(isEven);

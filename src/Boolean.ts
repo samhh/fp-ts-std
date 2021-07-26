@@ -4,7 +4,8 @@
  * @since 0.1.0
  */
 
-import { Predicate, getSemigroup as getFunctionSemigroup } from "fp-ts/function"
+import { getSemigroup as getFunctionSemigroup } from "fp-ts/function"
+import { Predicate } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { SemigroupAll, SemigroupAny } from "fp-ts/boolean"
 
@@ -78,7 +79,7 @@ export const xor =
  *
  * @example
  * import { allPass } from 'fp-ts-std/Boolean';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const gt3: Predicate<number> = n => n > 3;
  * const lt7: Predicate<number> = n => n < 7;
@@ -100,7 +101,7 @@ export const allPass =
  *
  * @example
  * import { anyPass } from 'fp-ts-std/Boolean';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const lt3: Predicate<number> = n => n < 3;
  * const gt7: Predicate<number> = n => n > 7;
@@ -121,7 +122,7 @@ export const anyPass =
  *
  * @example
  * import { both } from 'fp-ts-std/Boolean';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const gt5: Predicate<number> = x => x > 5;
  * const lt10: Predicate<number> = x => x < 10;
@@ -143,7 +144,7 @@ export const both =
  *
  * @example
  * import { either } from 'fp-ts-std/Boolean';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const lt5: Predicate<number> = x => x < 5;
  * const gt10: Predicate<number> = x => x > 10;

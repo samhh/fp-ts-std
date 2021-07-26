@@ -47,7 +47,7 @@ allPass :: Array (Predicate a) -> Predicate a
 
 ```ts
 import { allPass } from 'fp-ts-std/Boolean'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const gt3: Predicate<number> = (n) => n > 3
 const lt7: Predicate<number> = (n) => n < 7
@@ -104,7 +104,7 @@ anyPass :: Array (Predicate a) -> Predicate a
 
 ```ts
 import { anyPass } from 'fp-ts-std/Boolean'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const lt3: Predicate<number> = (n) => n < 3
 const gt7: Predicate<number> = (n) => n > 7
@@ -134,7 +134,7 @@ both :: Predicate a -> Endomorphism (Predicate a)
 
 ```ts
 import { both } from 'fp-ts-std/Boolean'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const gt5: Predicate<number> = (x) => x > 5
 const lt10: Predicate<number> = (x) => x < 10
@@ -165,7 +165,7 @@ either :: Predicate a -> Endomorphism (Predicate a)
 
 ```ts
 import { either } from 'fp-ts-std/Boolean'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const lt5: Predicate<number> = (x) => x < 5
 const gt10: Predicate<number> = (x) => x > 10

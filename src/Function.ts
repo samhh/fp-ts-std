@@ -10,13 +10,8 @@
 import * as O from "fp-ts/Option"
 import * as M from "fp-ts/Map"
 import * as A from "fp-ts/Array"
-import {
-  flow,
-  not,
-  pipe,
-  Predicate,
-  getMonoid as getFunctionMonoid,
-} from "fp-ts/function"
+import { flow, not, pipe, getMonoid as getFunctionMonoid } from "fp-ts/function"
+import { Predicate } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { concatAll } from "fp-ts/Monoid"
 import { Eq } from "fp-ts/Eq"
@@ -160,7 +155,7 @@ export const guard =
  * @example
  * import { ifElse } from 'fp-ts-std/Function';
  * import { increment, decrement } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isPositive: Predicate<number> = n => n > 0;
  * const normalise = ifElse(decrement)(increment)(isPositive);
@@ -183,7 +178,7 @@ export const ifElse =
  * @example
  * import { unless } from 'fp-ts-std/Function';
  * import { increment } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  * const ensureEven = unless(isEven)(increment);
@@ -205,7 +200,7 @@ export const unless =
  * @example
  * import { when } from 'fp-ts-std/Function';
  * import { increment } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  * const ensureOdd = when(isEven)(increment);
@@ -226,7 +221,7 @@ export const when: <A>(
  * @example
  * import { until } from 'fp-ts-std/Function';
  * import { increment } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isOver100: Predicate<number> = n => n > 100;
  * const doubleUntilOver100 = until(isOver100)(n => n * 2);

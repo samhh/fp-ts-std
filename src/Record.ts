@@ -4,7 +4,8 @@
  * @since 0.1.0
  */
 
-import { flow, not, Predicate } from "fp-ts/function"
+import { flow, not } from "fp-ts/function"
+import { Predicate } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as R from "fp-ts/Record"
@@ -111,7 +112,7 @@ export const omit =
  *
  * @example
  * import { reject } from 'fp-ts-std/Record';
- * import { Predicate } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
  *
  * const isEven: Predicate<number> = n => n % 2 === 0;
  *

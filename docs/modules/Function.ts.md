@@ -472,7 +472,7 @@ ifElse :: (a -> b) -> (a -> b) -> Predicate a -> a -> b
 ```ts
 import { ifElse } from 'fp-ts-std/Function'
 import { increment, decrement } from 'fp-ts-std/Number'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isPositive: Predicate<number> = (n) => n > 0
 const normalise = ifElse(decrement)(increment)(isPositive)
@@ -702,7 +702,7 @@ unless :: Predicate a -> Endomorphism a -> Endomorphism a
 ```ts
 import { unless } from 'fp-ts-std/Function'
 import { increment } from 'fp-ts-std/Number'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 const ensureEven = unless(isEven)(increment)
@@ -733,7 +733,7 @@ until :: Predicate a -> Endomorphism a -> Endomorphism a
 ```ts
 import { until } from 'fp-ts-std/Function'
 import { increment } from 'fp-ts-std/Number'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isOver100: Predicate<number> = (n) => n > 100
 const doubleUntilOver100 = until(isOver100)((n) => n * 2)
@@ -762,7 +762,7 @@ when :: Predicate a -> Endomorphism a -> Endomorphism a
 ```ts
 import { when } from 'fp-ts-std/Function'
 import { increment } from 'fp-ts-std/Number'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 const ensureOdd = when(isEven)(increment)

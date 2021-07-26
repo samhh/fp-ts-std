@@ -212,7 +212,7 @@ reject :: Predicate a -> Endomorphism (Record string a)
 
 ```ts
 import { reject } from 'fp-ts-std/Record'
-import { Predicate } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
 
 const isEven: Predicate<number> = (n) => n % 2 === 0
 
