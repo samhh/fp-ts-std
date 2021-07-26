@@ -74,7 +74,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] eqBy - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
 - [x] eqProps - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
 - [x] equals - [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
-- [ ] evolve
+- [x] evolve - [fp-ts/struct::evolve](https://gcanti.github.io/fp-ts/modules/struct.ts.html#evolve)
 - [x] F - [fp-ts/function::constFalse](https://gcanti.github.io/fp-ts/modules/function.ts.html#constfalse)
 - [x] filter - [fp-ts/Array::filter](https://gcanti.github.io/fp-ts/modules/Array.ts.html#filter)/[fp-ts/Record::filter](https://gcanti.github.io/fp-ts/modules/Record.ts.html#filter)
 - [x] find - [fp-ts/Array::findFirst](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findfirst)
