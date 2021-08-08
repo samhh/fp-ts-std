@@ -104,6 +104,14 @@ describe("Boolean", () => {
     it("succeeds if both predicates succeed", () => {
       expect(f(6)).toBe(true)
     })
+
+    it("short circuiting if first predicate fails", () => {
+      const snd = jest.fn().mockImplementation(constTrue)
+      const g = both<number>(constFalse)(snd)
+
+      expect(g(8)).toBe(false)
+      expect(snd).not.toBeCalledWith(8)
+    })
   })
 
   describe("either", () => {
@@ -123,6 +131,14 @@ describe("Boolean", () => {
 
     it("succeeds if both predicates succeed", () => {
       expect(f(6)).toBe(true)
+    })
+
+    it("short circuiting if first predicate succeed", () => {
+      const snd = jest.fn().mockImplementation(constFalse)
+      const g = either<number>(constTrue)(snd)
+
+      expect(g(8)).toBe(true)
+      expect(snd).not.toBeCalledWith(8)
     })
   })
 })
