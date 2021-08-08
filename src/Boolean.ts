@@ -4,10 +4,10 @@
  * @since 0.1.0
  */
 
-import { getSemigroup as getFunctionSemigroup } from "fp-ts/function"
 import { Predicate } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { SemigroupAll, SemigroupAny } from "fp-ts/boolean"
+import { curry2T } from "./Function"
 
 /**
  * Invert a boolean.
@@ -118,7 +118,7 @@ export const anyPass =
     fs.some(f => f(x))
 
 /**
- * Combine two predicates under conjunction.
+ * Combine two predicates under conjunction in short-circuited fashion.
  *
  * @example
  * import { both } from 'fp-ts-std/Boolean';
@@ -134,13 +134,10 @@ export const anyPass =
  *
  * @since 0.5.0
  */
-export const both =
-  <A>(f: Predicate<A>): Endomorphism<Predicate<A>> =>
-  g =>
-    getFunctionSemigroup(SemigroupAll)<A>().concat(f, g)
+export const both = curry2T(allPass)
 
 /**
- * Combine two predicates under disjunction.
+ * Combine two predicates under disjunction in short-circuited fashion.
  *
  * @example
  * import { either } from 'fp-ts-std/Boolean';
@@ -156,7 +153,4 @@ export const both =
  *
  * @since 0.5.0
  */
-export const either =
-  <A>(f: Predicate<A>): Endomorphism<Predicate<A>> =>
-  g =>
-    getFunctionSemigroup(SemigroupAny)<A>().concat(f, g)
+export const either = curry2T(anyPass)
