@@ -23,6 +23,8 @@ Added in v0.1.0
   - [fromNumber](#fromnumber)
   - [head](#head)
   - [init](#init)
+  - [isAlpha](#isalpha)
+  - [isAlphaNum](#isalphanum)
   - [last](#last)
   - [lines](#lines)
   - [lookup](#lookup)
@@ -273,6 +275,59 @@ assert.deepStrictEqual(init('abc'), O.some('ab'))
 ```
 
 Added in v0.7.0
+
+## isAlpha
+
+Tests if a string exclusively consists of alphabetic characters. Behaviour
+in case of an empty string is unspecified.
+
+**Signature**
+
+```ts
+export declare const isAlpha: Predicate<string>
+```
+
+```hs
+isAlpha :: Predicate string
+```
+
+**Example**
+
+```ts
+import { isAlpha } from 'fp-ts-std/String'
+
+assert.strictEqual(isAlpha('abc'), true)
+assert.strictEqual(isAlpha('123'), false)
+assert.strictEqual(isAlpha('abc123'), false)
+```
+
+Added in v0.11.0
+
+## isAlphaNum
+
+Tests if a string exclusively consists of alphabetic or numeric characters.
+Behaviour in case of an empty string is unspecified.
+
+**Signature**
+
+```ts
+export declare const isAlphaNum: Predicate<string>
+```
+
+```hs
+isAlphaNum :: Predicate string
+```
+
+**Example**
+
+```ts
+import { isAlphaNum } from 'fp-ts-std/String'
+
+assert.strictEqual(isAlphaNum('abc123'), true)
+assert.strictEqual(isAlphaNum('abc123!'), false)
+```
+
+Added in v0.11.0
 
 ## last
 

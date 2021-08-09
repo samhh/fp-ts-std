@@ -4,7 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.11.0 (_Unreleased_)
 
-- Add `splitAt` function to the `String` module.
+- Add `isAlpha`, `isAlphaNum`, and `splitAt` functions to the `String` module.
 - Add `zipAll` function to the `Array` and `ReadonlyArray` modules.
 - Add `fork` function to the `Function` module.
 - A few function signatures now use readonly arrays as opposed to regular arrays as a result of the following supercessions.

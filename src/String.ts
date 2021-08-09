@@ -545,3 +545,34 @@ export const splitAt =
   (index: number) =>
   (str: string): [string, string] =>
     [S.slice(0, index)(str), S.slice(index, Infinity)(str)]
+
+/**
+ * Tests if a string exclusively consists of alphabetic characters. Behaviour
+ * in case of an empty string is unspecified.
+ *
+ * @example
+ *
+ * import { isAlpha } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(isAlpha("abc"), true);
+ * assert.strictEqual(isAlpha("123"), false);
+ * assert.strictEqual(isAlpha("abc123"), false);
+ *
+ * @since 0.11.0
+ */
+export const isAlpha: Predicate<string> = test(/^\p{Alpha}+$/u)
+
+/**
+ * Tests if a string exclusively consists of alphabetic or numeric characters.
+ * Behaviour in case of an empty string is unspecified.
+ *
+ * @example
+ *
+ * import { isAlphaNum } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(isAlphaNum("abc123"), true);
+ * assert.strictEqual(isAlphaNum("abc123!"), false);
+ *
+ * @since 0.11.0
+ */
+export const isAlphaNum: Predicate<string> = test(/^(\p{Alpha}|\p{Number})+$/u)

@@ -28,6 +28,8 @@ import {
   takeLeftWhile,
   takeRightWhile,
   splitAt,
+  isAlpha,
+  isAlphaNum,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -639,6 +641,35 @@ describe("String", () => {
           )
         }),
       )
+    })
+  })
+
+  describe("isAlpha", () => {
+    const f = isAlpha
+
+    it("fails on any non-alphabetic char", () => {
+      expect(f("x1")).toBe(false)
+      expect(f("x y")).toBe(false)
+    })
+
+    it("accepts a diverse range of alphabetic chars", () => {
+      expect(f("aöкإ")).toBe(true)
+    })
+  })
+
+  describe("isAlphaNum", () => {
+    const f = isAlphaNum
+
+    it("accepts numbers", () => {
+      expect(f("x1y2")).toBe(true)
+    })
+
+    it("fails on any non-alphabetic/numeric char", () => {
+      expect(f("x y")).toBe(false)
+    })
+
+    it("accepts a diverse range of alphabetic chars", () => {
+      expect(f("aöкإ")).toBe(true)
     })
   })
 })
