@@ -12,6 +12,7 @@ This project adheres to semantic versioning.
 - Remove `applyTo` from the `Function` module as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply).
 - Remove `concat` from the `Array` and `ReadonlyArray` modules as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).
 - Remove `length` from the `ReadonlyArray` module as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).
+- Short-circuit `both` and `either` if the first predicate fails.
 - Bump minimum supported fp-ts version to 2.11.0.
 
 ## 0.10.1 (2021-07-01)

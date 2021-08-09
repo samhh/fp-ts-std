@@ -118,16 +118,16 @@ Added in v0.4.0
 
 ## both
 
-Combine two predicates under conjunction.
+Combine two predicates under conjunction in short-circuited fashion.
 
 **Signature**
 
 ```ts
-export declare const both: <A>(f: Predicate<A>) => Endomorphism<Predicate<A>>
+export declare const both: <A>(a: Predicate<A>) => (b: Predicate<A>) => Predicate<A>
 ```
 
 ```hs
-both :: Predicate a -> Endomorphism (Predicate a)
+both :: Predicate a -> Predicate a -> Predicate a
 ```
 
 **Example**
@@ -149,16 +149,16 @@ Added in v0.5.0
 
 ## either
 
-Combine two predicates under disjunction.
+Combine two predicates under disjunction in short-circuited fashion.
 
 **Signature**
 
 ```ts
-export declare const either: <A>(f: Predicate<A>) => Endomorphism<Predicate<A>>
+export declare const either: <A>(a: Predicate<A>) => (b: Predicate<A>) => Predicate<A>
 ```
 
 ```hs
-either :: Predicate a -> Endomorphism (Predicate a)
+either :: Predicate a -> Predicate a -> Predicate a
 ```
 
 **Example**
