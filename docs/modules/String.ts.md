@@ -25,6 +25,8 @@ Added in v0.1.0
   - [init](#init)
   - [isAlpha](#isalpha)
   - [isAlphaNum](#isalphanum)
+  - [isLower](#islower)
+  - [isUpper](#isupper)
   - [last](#last)
   - [lines](#lines)
   - [lookup](#lookup)
@@ -325,6 +327,60 @@ import { isAlphaNum } from 'fp-ts-std/String'
 
 assert.strictEqual(isAlphaNum('abc123'), true)
 assert.strictEqual(isAlphaNum('abc123!'), false)
+```
+
+Added in v0.11.0
+
+## isLower
+
+Tests if a string exclusively consists of lowercase alphabetic characters.
+Behaviour in case of an empty string is unspecified.
+
+**Signature**
+
+```ts
+export declare const isLower: Predicate<string>
+```
+
+```hs
+isLower :: Predicate string
+```
+
+**Example**
+
+```ts
+import { isLower } from 'fp-ts-std/String'
+
+assert.strictEqual(isLower('hello'), true)
+assert.strictEqual(isLower('Hello'), false)
+assert.strictEqual(isLower('hello1'), false)
+```
+
+Added in v0.11.0
+
+## isUpper
+
+Tests if a string exclusively consists of uppercase alphabetic characters.
+Behaviour in case of an empty string is unspecified.
+
+**Signature**
+
+```ts
+export declare const isUpper: Predicate<string>
+```
+
+```hs
+isUpper :: Predicate string
+```
+
+**Example**
+
+```ts
+import { isUpper } from 'fp-ts-std/String'
+
+assert.strictEqual(isUpper('HELLO'), true)
+assert.strictEqual(isUpper('Hello'), false)
+assert.strictEqual(isUpper('HELLO1'), false)
 ```
 
 Added in v0.11.0

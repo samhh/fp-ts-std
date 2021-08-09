@@ -30,6 +30,8 @@ import {
   splitAt,
   isAlpha,
   isAlphaNum,
+  isLower,
+  isUpper,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -670,6 +672,32 @@ describe("String", () => {
 
     it("accepts a diverse range of alphabetic chars", () => {
       expect(f("aöкإ")).toBe(true)
+    })
+  })
+
+  describe("isLower", () => {
+    const f = isLower
+
+    it("fails on any uppercase char", () => {
+      expect(f("aB")).toBe(false)
+      expect(f("B")).toBe(false)
+    })
+
+    it("accepts a diverse range of lowercase chars", () => {
+      expect(f("aöк")).toBe(true)
+    })
+  })
+
+  describe("isUpper", () => {
+    const f = isUpper
+
+    it("fails on any lowercase char", () => {
+      expect(f("Ab")).toBe(false)
+      expect(f("b")).toBe(false)
+    })
+
+    it("accepts a diverse range of alphabetic chars", () => {
+      expect(f("ÁB")).toBe(true)
     })
   })
 })

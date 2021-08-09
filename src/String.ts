@@ -576,3 +576,35 @@ export const isAlpha: Predicate<string> = test(/^\p{Alpha}+$/u)
  * @since 0.11.0
  */
 export const isAlphaNum: Predicate<string> = test(/^(\p{Alpha}|\p{Number})+$/u)
+
+/**
+ * Tests if a string exclusively consists of lowercase alphabetic characters.
+ * Behaviour in case of an empty string is unspecified.
+ *
+ * @example
+ *
+ * import { isLower } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(isLower("hello"), true);
+ * assert.strictEqual(isLower("Hello"), false);
+ * assert.strictEqual(isLower("hello1"), false);
+ *
+ * @since 0.11.0
+ */
+export const isLower: Predicate<string> = test(/^\p{Lower}+$/u)
+
+/**
+ * Tests if a string exclusively consists of uppercase alphabetic characters.
+ * Behaviour in case of an empty string is unspecified.
+ *
+ * @example
+ *
+ * import { isUpper } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(isUpper("HELLO"), true);
+ * assert.strictEqual(isUpper("Hello"), false);
+ * assert.strictEqual(isUpper("HELLO1"), false);
+ *
+ * @since 0.11.0
+ */
+export const isUpper: Predicate<string> = test(/^\p{Upper}+$/u)
