@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.11.0 (_Unreleased_)
+## 0.11.0 (2021-08-09)
 
 - Add `isAlpha`, `isAlphaNum`, `isLower`, `isUpper`, and `splitAt` functions to the `String` module.
 - Add `zipAll` function to the `Array` and `ReadonlyArray` modules.
