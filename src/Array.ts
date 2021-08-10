@@ -244,8 +244,7 @@ export const insertMany =
     )
 
 /**
- * Filter a list, removing any elements that repeat that directly preceding
- * them.
+ * Filter a list, removing any elements that repeat that directly precede them.
  *
  * @example
  * import { dropRepeats } from 'fp-ts-std/Array';

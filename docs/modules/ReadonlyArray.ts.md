@@ -193,8 +193,7 @@ Added in v0.10.0
 
 ## dropRepeats
 
-Filter a list, removing any elements that repeat that directly preceding
-them.
+Filter a list, removing any elements that repeat that directly precede them.
 
 **Signature**
 
