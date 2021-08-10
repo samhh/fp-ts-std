@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.12.0 (_Unreleased_)
+
+- Duplicate `filterA` from fp-ts-contrib.
+
 ## 0.11.0 (2021-08-09)
 
 - Add `isAlpha`, `isAlphaNum`, `isLower`, `isUpper`, and `splitAt` functions to the `String` module.

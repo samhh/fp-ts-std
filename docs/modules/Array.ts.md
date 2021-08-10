@@ -23,6 +23,7 @@ Added in v0.1.0
   - [dropRightWhile](#droprightwhile)
   - [elemFlipped](#elemflipped)
   - [endsWith](#endswith)
+  - [filterA](#filtera)
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
   - [join](#join)
@@ -301,6 +302,60 @@ assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false)
 ```
 
 Added in v0.6.0
+
+## filterA
+
+Filter an array based upon a predicate whose boolean is returned in an
+applicative context. This can be helpful if your predicate is asynchronous
+and therefore `Task`-based, for example.
+
+**Signature**
+
+```ts
+export declare function filterA<F extends URIS4>(
+  F: Applicative4<F>
+): <S, R, E, A>(p: (x: A) => Kind4<F, S, R, E, boolean>) => (xs: Array<A>) => Kind4<F, S, R, E, Array<A>>
+export declare function filterA<F extends URIS3>(
+  F: Applicative3<F>
+): <R, E, A>(p: (x: A) => Kind3<F, R, E, boolean>) => (xs: Array<A>) => Kind3<F, R, E, Array<A>>
+export declare function filterA<F extends URIS2>(
+  F: Applicative2<F>
+): <E, A>(p: (x: A) => Kind2<F, E, boolean>) => (xs: Array<A>) => Kind2<F, E, Array<A>>
+export declare function filterA<F extends URIS2, E>(
+  F: Applicative2C<F, E>
+): <A>(p: (x: A) => Kind2<F, E, boolean>) => (xs: Array<A>) => Kind2<F, E, Array<A>>
+export declare function filterA<F extends URIS>(
+  F: Applicative1<F>
+): <A>(p: (x: A) => Kind<F, boolean>) => (xs: Array<A>) => Kind<F, Array<A>>
+export declare function filterA<F>(
+  F: Applicative<F>
+): <A>(p: (x: A) => HKT<F, boolean>) => (xs: Array<A>) => HKT<F, Array<A>>
+```
+
+```hs
+filterA :: f extends URIS4 => Applicative4 f -> (a -> Kind4 f s r e boolean) -> Array a -> Kind4 f s r e (Array a)
+filterA :: f extends URIS3 => ((Applicative3 f) -> (a -> Kind3 f r e boolean) -> Array a -> Kind3 f r e (Array a))
+filterA :: f extends URIS2 => ((Applicative2 f) -> (a -> Kind2 f e boolean) -> Array a -> Kind2 f e (Array a))
+filterA :: f extends URIS2 => ((Applicative2C f e) -> (a -> Kind2 f e boolean) -> Array a -> Kind2 f e (Array a))
+filterA :: f extends URIS => ((Applicative1 f) -> (a -> Kind f boolean) -> Array a -> Kind f (Array a))
+filterA :: ((Applicative f) -> (a -> HKT f boolean) -> Array a -> HKT f (Array a))
+```
+
+**Example**
+
+```ts
+import * as T from 'fp-ts/Task'
+import { Task } from 'fp-ts/Task'
+import { filterA } from 'fp-ts-std/Array'
+
+const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0)
+
+filterA(T.ApplicativePar)(asyncIsEven)([1, 2, 3, 4, 5])().then((xs) => {
+  assert.deepStrictEqual(xs, [2, 4])
+})
+```
+
+Added in v0.12.0
 
 ## getDisorderedEq
 
