@@ -565,15 +565,6 @@ Added in v0.10.0
 
 Check if a predicate does not hold for any array member.
 
-import { none } from 'fp-ts-std/ReadonlyArray';
-import { Predicate } from 'fp-ts/Predicate';
-
-const isFive: Predicate<number> = n => n === 5;
-const noneAreFive = none(isFive);
-
-assert.strictEqual(noneAreFive([4, 4, 4]), true);
-assert.strictEqual(noneAreFive([4, 5, 4]), false);
-
 **Signature**
 
 ```ts
@@ -582,6 +573,19 @@ export declare const none: <A>(f: Predicate<A>) => Predicate<readonly A[]>
 
 ```hs
 none :: Predicate a -> Predicate (Array a)
+```
+
+**Example**
+
+```ts
+import { none } from 'fp-ts-std/ReadonlyArray'
+import { Predicate } from 'fp-ts/Predicate'
+
+const isFive: Predicate<number> = (n) => n === 5
+const noneAreFive = none(isFive)
+
+assert.strictEqual(noneAreFive([4, 4, 4]), true)
+assert.strictEqual(noneAreFive([4, 5, 4]), false)
 ```
 
 Added in v0.10.0

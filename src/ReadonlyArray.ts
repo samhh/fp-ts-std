@@ -49,6 +49,7 @@ export const elemFlipped =
 /**
  * Check if a predicate does not hold for any array member.
  *
+ * @example
  * import { none } from 'fp-ts-std/ReadonlyArray';
  * import { Predicate } from 'fp-ts/Predicate';
  *
