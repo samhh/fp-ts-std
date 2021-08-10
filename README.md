@@ -1,10 +1,8 @@
 # fp-ts-std
 
-The missing pseudo-standard library for [fp-ts](https://gcanti.github.io/fp-ts/). Supports both the web and Node.
+The missing pseudo-standard library for [fp-ts](https://gcanti.github.io/fp-ts/). Supports both modern browsers and Node.
 
 Documentation: [samhh.github.io/fp-ts-std](https://samhh.github.io/fp-ts-std/)
-
-For DOM bindings, check out [dom-ts](https://github.com/waynevanson/dom-ts).
 
 ## Installation
 
@@ -33,7 +31,7 @@ fp-ts-std strives to adhere to the following principles:
 - Impure functions are appropriately signed with the `IO` and `Task` types
 - Lean towards Haskell naming conventions and idioms with an eye to fp-ts norms
 
-Additionally, fp-ts-std enforces 100% testing coverage, and just about everything is documented with examples. (That said, any improvement to the documentation is welcome, either by suggestion or PR!)
+Additionally, fp-ts-std enforces 100% testing coverage, and just about everything is documented with examples.
 
 ## Contributing
 
