@@ -237,6 +237,26 @@ export const construct =
     new x(...xs)
 
 /**
+ * Invoke a method of the specified name with the provided arguments on an
+ * object. Helpful if an object-oriented construct you're working with doesn't
+ * have functional bindings.
+ *
+ * @example
+ * import { invoke } from 'fp-ts-std/Function';
+ *
+ * const f = invoke('padStart')([8, '.']);
+ *
+ * assert.strictEqual(f('hello'), '...hello');
+ *
+ * @since 0.12.0
+ */
+export const invoke =
+  <A extends string>(x: A) =>
+  <B extends Array<unknown>>(ys: [...B]) =>
+  <C>(z: Record<A, (...xs: B) => C>): C =>
+    z[x](...ys)
+
+/**
  * Given a function and an `Eq` instance for determining input equivalence,
  * returns a new function that caches the result of applying an input to said
  * function. If the cache hits, the cached value is returned and the function

@@ -8,6 +8,7 @@ import {
   when,
   until,
   construct,
+  invoke,
   memoize,
   curry2,
   curry2T,
@@ -161,6 +162,22 @@ describe("Function", () => {
       expect(f(X)(xs)).toEqual(new X(...xs))
       expect(f(X)(xs).x).toBe(123)
       expect(f(X)(xs).y).toBe("xyz")
+    })
+  })
+
+  describe("invoke", () => {
+    const f = invoke
+
+    it("calls the method with arguments on the object", () => {
+      // eslint-disable-next-line functional/no-class
+      class X {
+        static f(x: string) {
+          return x + x
+        }
+      }
+
+      expect(f("f")(["xyz"])(X)).toBe("xyzxyz")
+      expect(f("padStart")([8, "."])("hello")).toBe("...hello")
     })
   })
 

@@ -32,6 +32,7 @@ Added in v0.1.0
   - [fork](#fork)
   - [guard](#guard)
   - [ifElse](#ifelse)
+  - [invoke](#invoke)
   - [memoize](#memoize)
   - [unary](#unary)
   - [uncurry2](#uncurry2)
@@ -475,6 +476,32 @@ assert.strictEqual(normalise(3), 2)
 ```
 
 Added in v0.6.0
+
+## invoke
+
+Invoke a method of the specified name with the provided arguments on an
+object. Helpful if an object-oriented construct you're working with doesn't
+have functional bindings.
+
+**Signature**
+
+```ts
+export declare const invoke: <A extends string>(
+  x: A
+) => <B extends unknown[]>(ys: [...B]) => <C>(z: Record<A, (...xs: B) => C>) => C
+```
+
+**Example**
+
+```ts
+import { invoke } from 'fp-ts-std/Function'
+
+const f = invoke('padStart')([8, '.'])
+
+assert.strictEqual(f('hello'), '...hello')
+```
+
+Added in v0.12.0
 
 ## memoize
 
