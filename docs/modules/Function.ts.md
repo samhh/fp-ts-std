@@ -506,7 +506,7 @@ import { add } from 'fp-ts-std/Number'
 import { eqNumber } from 'fp-ts/Eq'
 
 let runs = 0
-const f = memoize(eqNumber)<number>((n) => {
+const f = memoize(eqNumber)((n) => {
   runs++
   return add(5)(n)
 })
