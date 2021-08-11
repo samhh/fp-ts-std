@@ -115,7 +115,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] isEmpty - [fp-ts/Array::isEmpty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#isempty)/[fp-ts/Record::isEmpty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#isempty)/[fp-ts/string::isEmpty](https://gcanti.github.io/fp-ts/modules/string.ts.html#isempty)
 - ~~[ ] isNil~~ Prefer `Option` type. Failing that, create `Eq` instances for `null` and `undefined`.
 - [x] join - [fp-ts-std/Array::join](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#join)
-- [ ] juxt
+- [x] juxt - [fp-ts-std/Function::fork](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#fork)
 - [x] keys - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [x] keysIn - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [x] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)/[fp-ts-std/String::last](https://samhh.github.io/fp-ts-std/modules/String.ts.html#last)
