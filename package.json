@@ -19,16 +19,13 @@
   "main": "./index.js",
   "sideEffects": false,
   "scripts": {
-    "dev": "tsc -p ./tsconfig.build.json -w",
     "build": "tsc -p ./tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "typecheck-dev": "tsc -w --noEmit",
     "lint": "eslint ./src/ ./test/ --ext ts",
-    "fmt": "prettier --write .",
-    "fmt-check": "prettier --check .",
+    "fmt": "prettier .",
     "test": "jest",
     "docs": "docs-ts",
-    "docs-tshm": "tshm-docs-ts ./docs/modules/*",
+    "tshm": "tshm-docs-ts ./docs/modules/*",
     "prepub": "rm -rf dist && mkdir -p dist && cp ./README.md ./dist/ && cat ./package.json | grep -v '\"private\":' > ./dist/package.json && yarn run build"
   },
   "devDependencies": {

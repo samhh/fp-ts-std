@@ -23,7 +23,7 @@ jobs:
       - name: Lint
         run: yarn lint
       - name: Check formatting
-        run: yarn fmt-check
+        run: yarn fmt --check
       - name: Test
         run: yarn test
       - name: Docs
