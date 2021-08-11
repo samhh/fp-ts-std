@@ -19,6 +19,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [construct](#construct)
+  - [converge](#converge)
   - [curry2](#curry2)
   - [curry2T](#curry2t)
   - [curry3](#curry3)
@@ -73,6 +74,34 @@ assert.deepStrictEqual(mkURL(xs), new URL(...xs))
 ```
 
 Added in v0.7.0
+
+## converge
+
+Takes a converging function and a tuple of branching functions. The branched
+return values are collected in a tuple and passed to the converging function.
+
+**Signature**
+
+```ts
+export declare const converge: <B, C extends B[], D>(
+  f: (xs: [B, ...C]) => D
+) => <A>(gs: [(x: A) => B, ...{ [K in keyof C]: (x: A) => C[K] }]) => (x: A) => D
+```
+
+**Example**
+
+```ts
+import { converge } from 'fp-ts-std/Function'
+import { flow, identity } from 'fp-ts/function'
+import * as S from 'fp-ts-std/String'
+import * as A from 'fp-ts-std/Array'
+
+const f = converge(A.join(' '))([S.append('!'), identity, S.prepend('?')])
+
+assert.deepStrictEqual(f('hello'), 'hello! hello ?hello')
+```
+
+Added in v0.12.0
 
 ## curry2
 

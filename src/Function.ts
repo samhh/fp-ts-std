@@ -591,3 +591,29 @@ export function fork<A, B, C, D, E, F, G, H, I, J>(
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return (x: A): unknown => fs.map(f => f!(x))
 }
+
+/**
+ * Takes a converging function and a tuple of branching functions. The branched
+ * return values are collected in a tuple and passed to the converging function.
+ *
+ * @example
+ * import { converge } from 'fp-ts-std/Function';
+ * import { flow, identity } from 'fp-ts/function';
+ * import * as S from 'fp-ts-std/String';
+ * import * as A from 'fp-ts-std/Array';
+ *
+ * const f = converge(A.join(' '))([S.append('!'), identity, S.prepend('?')]);
+ *
+ * assert.deepStrictEqual(f('hello'), 'hello! hello ?hello');
+ *
+ * @since 0.12.0
+ */
+// The tuple [B, ...C] allows the compiler to infer A in gs without the need
+// for x to be piped in first.
+export const converge =
+  <B, C extends Array<B>, D>(f: (xs: [B, ...C]) => D) =>
+  <A>(
+    gs: [(x: A) => B, ...{ [K in keyof C]: (x: A) => C[K] }],
+  ): ((x: A) => D) =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    flow(x => fork(gs as any)(x) as unknown as [B, ...C], f)

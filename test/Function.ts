@@ -22,6 +22,7 @@ import {
   uncurry4,
   uncurry5,
   fork,
+  converge,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -33,6 +34,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import * as N from "fp-ts/number"
 import fc from "fast-check"
 import * as S from "../src/String"
+import { join } from "../src/Array"
 
 describe("Function", () => {
   describe("flip", () => {
@@ -357,6 +359,29 @@ describe("Function", () => {
         ),
       )
       expect(f)
+    })
+  })
+
+  describe("converge", () => {
+    const f = converge
+
+    it("returns lifted identity on identity converging function and lifted identity tuple", () => {
+      fc.assert(
+        fc.property(fc.anything(), x =>
+          expect(f(identity)([identity])(x)).toEqual([x]),
+        ),
+      )
+    })
+
+    it("calls all provided functions and outputs the resulting tuple to the converging function", () => {
+      fc.assert(
+        fc.property(
+          fc.string(),
+          x =>
+            f(join(" "))([S.append("!"), identity, S.prepend("?")])(x) ===
+            `${x}! ${x} ?${x}`,
+        ),
+      )
     })
   })
 })

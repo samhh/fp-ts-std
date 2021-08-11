@@ -50,7 +50,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] construct - [fp-ts-std/Function::construct](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#construct)
 - [x] constructN - [fp-ts-std/Function::construct](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#construct) w/ [fp-ts-std/Function::curry2T](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2t) through [fp-ts-std/Function::curry5T](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5t)
 - [x] contains - [fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)/[fp-ts/string::includes](https://gcanti.github.io/fp-ts-std/modules/string.ts.html#includes)
-- [ ] converge
+- [x] converge - [fp-ts-std/Function::converge](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#converge)
 - [x] countBy - [fp-ts-std/Array::countBy](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#countby)
 - [x] curry - [fp-ts-std/Function::curry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2) through [fp-ts-std/Function::curry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5)
 - [x] curryN - [fp-ts-std/Function::curry2](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry2) through [fp-ts-std/Function::curry5](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#curry5)
