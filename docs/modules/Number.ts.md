@@ -29,6 +29,7 @@ Added in v0.1.0
   - [negate](#negate)
   - [rem](#rem)
   - [subtract](#subtract)
+  - [toFinite](#tofinite)
 
 ---
 
@@ -392,3 +393,31 @@ assert.strictEqual(subtract(3)(2), -1)
 ```
 
 Added in v0.2.0
+
+## toFinite
+
+If the provided number is `Infinity` or `-Infinity`, converts it to the
+nearest safe finite number.
+
+**Signature**
+
+```ts
+export declare const toFinite: Endomorphism<number>
+```
+
+```hs
+toFinite :: Endomorphism number
+```
+
+**Example**
+
+```ts
+import { toFinite } from 'fp-ts-std/Number'
+
+assert.strictEqual(toFinite(123), 123)
+assert.strictEqual(toFinite(-123), -123)
+assert.strictEqual(toFinite(Infinity), Number.MAX_SAFE_INTEGER)
+assert.strictEqual(toFinite(-Infinity), Number.MIN_SAFE_INTEGER)
+```
+
+Added in v0.12.0

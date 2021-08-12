@@ -13,6 +13,7 @@ import {
   floatFromString,
   fromStringWithRadix,
   isFinite,
+  toFinite,
 } from "../src/Number"
 import { fromNumber } from "../src/String"
 import fc from "fast-check"
@@ -172,6 +173,27 @@ describe("Number", () => {
     it("fails for Infinity (positive and negative)", () => {
       expect(f(Infinity)).toBe(false)
       expect(f(-Infinity)).toBe(false)
+    })
+  })
+
+  describe("toFinite", () => {
+    const f = toFinite
+
+    it("returns identity on non-Infinity", () => {
+      fc.assert(
+        fc.property(
+          fc.integer({
+            min: Number.MIN_SAFE_INTEGER,
+            max: Number.MAX_SAFE_INTEGER,
+          }),
+          x => f(x) === x,
+        ),
+      )
+    })
+
+    it("converts Infinity to smallest/largest safe integer", () => {
+      expect(f(Infinity)).toBe(Number.MAX_SAFE_INTEGER)
+      expect(f(-Infinity)).toBe(Number.MIN_SAFE_INTEGER)
     })
   })
 })

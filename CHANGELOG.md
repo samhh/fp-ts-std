@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## 0.12.0 (_Unreleased_)
 
 - Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
-- Add `isFinite` function to the `Number` module.
+- Add `isFinite` and `toFinite` functions to the `Number` module.
 - Duplicate `filterA` from fp-ts-contrib.
 
 ## 0.11.0 (2021-08-09)

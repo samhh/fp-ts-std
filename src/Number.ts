@@ -8,6 +8,7 @@ import { flow, pipe } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option, fromPredicate } from "fp-ts/Option"
+import { unless } from "./Function"
 
 /**
  * Check if a number is actually valid. Specifically, all this function is
@@ -224,3 +225,21 @@ export const negate: Endomorphism<number> = n => -n
  * @since 0.12.0
  */
 export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity
+
+/**
+ * If the provided number is `Infinity` or `-Infinity`, converts it to the
+ * nearest safe finite number.
+ *
+ * @example
+ * import { toFinite } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(toFinite(123), 123);
+ * assert.strictEqual(toFinite(-123), -123);
+ * assert.strictEqual(toFinite(Infinity), Number.MAX_SAFE_INTEGER);
+ * assert.strictEqual(toFinite(-Infinity), Number.MIN_SAFE_INTEGER);
+ *
+ * @since 0.12.0
+ */
+export const toFinite: Endomorphism<number> = unless(isFinite)(
+  n => Math.sign(n) * Number.MAX_SAFE_INTEGER,
+)
