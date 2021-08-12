@@ -4,7 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.12.0 (_Unreleased_)
 
-- Add `converge` and `invoke` functions to the `Function` module.
+- Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
 - Duplicate `filterA` from fp-ts-contrib.
 
 ## 0.11.0 (2021-08-09)

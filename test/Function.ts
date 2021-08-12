@@ -9,6 +9,7 @@ import {
   until,
   construct,
   invoke,
+  invokeOn,
   memoize,
   curry2,
   curry2T,
@@ -178,6 +179,19 @@ describe("Function", () => {
 
       expect(f("f")(["xyz"])(X)).toBe("xyzxyz")
       expect(f("padStart")([8, "."])("hello")).toBe("...hello")
+    })
+  })
+
+  describe("invokeOn", () => {
+    const f = invokeOn
+
+    it("calls the method with arguments on the object", () => {
+      fc.assert(
+        fc.property(
+          fc.string({ minLength: 5, maxLength: 5 }),
+          x => f<string>()("padStart")([8, "."])(x) === "..." + x,
+        ),
+      )
     })
   })
 

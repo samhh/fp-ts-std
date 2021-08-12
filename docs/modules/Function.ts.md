@@ -33,6 +33,7 @@ Added in v0.1.0
   - [guard](#guard)
   - [ifElse](#ifelse)
   - [invoke](#invoke)
+  - [invokeOn](#invokeon)
   - [memoize](#memoize)
   - [unary](#unary)
   - [uncurry2](#uncurry2)
@@ -480,8 +481,10 @@ Added in v0.6.0
 ## invoke
 
 Invoke a method of the specified name with the provided arguments on an
-object. Helpful if an object-oriented construct you're working with doesn't
-have functional bindings.
+object. Helpful for a one-time usage of an object-oriented construct you're
+working with that doesn't have functional bindings.
+
+To write your own bindings more conveniently, check out `methodOn`.
 
 **Signature**
 
@@ -499,6 +502,36 @@ import { invoke } from 'fp-ts-std/Function'
 const f = invoke('padStart')([8, '.'])
 
 assert.strictEqual(f('hello'), '...hello')
+```
+
+Added in v0.12.0
+
+## invokeOn
+
+Like `invoke`, but takes an initial type argument to hint at what shape the
+arguments tuple should be. This function is useful for producing bindings for
+object-oriented methods in tandem with the tuple*N*T range of functions.
+
+**Signature**
+
+```ts
+export declare const invokeOn: <A>() => <
+  B extends { [K in keyof A]: A[K] extends (...xs: Array<any>) => unknown ? A[K] : never },
+  C extends keyof B
+>(
+  x: C
+) => (xs: Required<Parameters<B[C]>>) => (y: B) => ReturnType<B[C]>
+```
+
+**Example**
+
+```ts
+import { invokeOn, curry2T } from 'fp-ts-std/Function'
+
+const padStart = curry2T(invokeOn<string>()('padStart'))
+const x = 'hello'
+
+assert.strictEqual(padStart(8)('.')(x), x.padStart(8, '.'))
 ```
 
 Added in v0.12.0

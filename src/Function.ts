@@ -238,8 +238,10 @@ export const construct =
 
 /**
  * Invoke a method of the specified name with the provided arguments on an
- * object. Helpful if an object-oriented construct you're working with doesn't
- * have functional bindings.
+ * object. Helpful for a one-time usage of an object-oriented construct you're
+ * working with that doesn't have functional bindings.
+ *
+ * To write your own bindings more conveniently, check out `methodOn`.
  *
  * @example
  * import { invoke } from 'fp-ts-std/Function';
@@ -255,6 +257,43 @@ export const invoke =
   <B extends Array<unknown>>(ys: [...B]) =>
   <C>(z: Record<A, (...xs: B) => C>): C =>
     z[x](...ys)
+
+/**
+ * Like `invoke`, but takes an initial type argument to hint at what shape the
+ * arguments tuple should be. This function is useful for producing bindings for
+ * object-oriented methods in tandem with the tuple*N*T range of functions.
+ *
+ * @example
+ * import { invokeOn, curry2T } from 'fp-ts-std/Function';
+ *
+ * const padStart = curry2T(invokeOn<string>()('padStart'));
+ * const x = 'hello';
+ *
+ * assert.strictEqual(padStart(8)('.')(x), x.padStart(8, '.'));
+ *
+ * @since 0.12.0
+ */
+// Type parameter D allows the end user to override what's inferred in case of
+// optional arguments, which upsets the compiler when then passed onto something
+// like curry2T.
+//
+// The Arguments array needs to contain any instead of unknown for some reason.
+export const invokeOn =
+  <A>() =>
+  <
+    B extends {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      [K in keyof A]: A[K] extends (...xs: Array<any>) => unknown
+        ? A[K]
+        : never
+    },
+    C extends keyof B,
+  >(
+    x: C,
+  ): ((xs: Required<Parameters<B[C]>>) => (y: B) => ReturnType<B[C]>) =>
+  ys =>
+  z =>
+    z[x](...ys) as ReturnType<B[C]>
 
 /**
  * Given a function and an `Eq` instance for determining input equivalence,
