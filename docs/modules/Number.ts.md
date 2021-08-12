@@ -22,6 +22,7 @@ Added in v0.1.0
   - [fromString](#fromstring)
   - [fromStringWithRadix](#fromstringwithradix)
   - [increment](#increment)
+  - [isFinite](#isfinite)
   - [isValid](#isvalid)
   - [mod](#mod)
   - [multiply](#multiply)
@@ -208,6 +209,33 @@ assert.strictEqual(increment(3), 4)
 ```
 
 Added in v0.1.0
+
+## isFinite
+
+Check if a number is finite.
+
+**Signature**
+
+```ts
+export declare const isFinite: Predicate<number>
+```
+
+```hs
+isFinite :: Predicate number
+```
+
+**Example**
+
+```ts
+import { isFinite } from 'fp-ts-std/Number'
+
+assert.strictEqual(isFinite(123), true)
+assert.strictEqual(isFinite(-123), true)
+assert.strictEqual(isFinite(Infinity), false)
+assert.strictEqual(isFinite(-Infinity), false)
+```
+
+Added in v0.12.0
 
 ## isValid
 

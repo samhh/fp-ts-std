@@ -209,3 +209,18 @@ export const mod =
  * @since 0.7.0
  */
 export const negate: Endomorphism<number> = n => -n
+
+/**
+ * Check if a number is finite.
+ *
+ * @example
+ * import { isFinite } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(isFinite(123), true);
+ * assert.strictEqual(isFinite(-123), true);
+ * assert.strictEqual(isFinite(Infinity), false);
+ * assert.strictEqual(isFinite(-Infinity), false);
+ *
+ * @since 0.12.0
+ */
+export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity

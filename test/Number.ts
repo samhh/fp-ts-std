@@ -12,6 +12,7 @@ import {
   fromString,
   floatFromString,
   fromStringWithRadix,
+  isFinite,
 } from "../src/Number"
 import { fromNumber } from "../src/String"
 import fc from "fast-check"
@@ -150,6 +151,27 @@ describe("Number", () => {
 
     it("is reversible", () => {
       fc.assert(fc.property(fc.integer(), n => f(f(n)) === n))
+    })
+  })
+
+  describe("isFinite", () => {
+    const f = isFinite
+
+    it("passes for any non-Infinity number", () => {
+      fc.assert(
+        fc.property(
+          fc.integer({
+            min: Number.MIN_SAFE_INTEGER,
+            max: Number.MAX_SAFE_INTEGER,
+          }),
+          f,
+        ),
+      )
+    })
+
+    it("fails for Infinity (positive and negative)", () => {
+      expect(f(Infinity)).toBe(false)
+      expect(f(-Infinity)).toBe(false)
     })
   })
 })
