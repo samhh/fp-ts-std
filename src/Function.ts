@@ -283,9 +283,7 @@ export const invokeOn =
   <
     B extends {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      [K in keyof A]: A[K] extends (...xs: Array<any>) => unknown
-        ? A[K]
-        : never
+      [K in keyof A]: A[K] extends (...xs: Array<any>) => unknown ? A[K] : never
     },
     C extends keyof B,
   >(
