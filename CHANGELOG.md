@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.12.0 (_Unreleased_)
 
 - Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
+- Add `whenInvocationCount` function to the `IO` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
 - Duplicate `filterA` from fp-ts-contrib.
 

@@ -5,6 +5,8 @@
  */
 
 import * as IO from "fp-ts/IO"
+import { Endomorphism } from "fp-ts/Endomorphism"
+import { Predicate } from "fp-ts/Predicate"
 
 type IO<A> = IO.IO<A>
 
@@ -68,3 +70,47 @@ export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
     return IO.of(val)
   }
 }
+
+/**
+ * Applies an effectful function when the predicate against the invocation
+ * count passes.
+ *
+ * The invocation count will continue to increment and the predicate will
+ * continue to be checked on future invocations even after the predicate fails.
+ *
+ * Invocations start at the number one.
+ *
+ * @example
+ * import { IO } from 'fp-ts/IO';
+ * import { Predicate } from 'fp-ts/Predicate';
+ * import { whenInvocationCount } from 'fp-ts-std/IO';
+ *
+ * const isUnderThree: Predicate<number> = n => n < 3
+ *
+ * let n = 0
+ * const increment: IO<void> = () => { n++ }
+ *
+ * const f = whenInvocationCount(isUnderThree)(increment)
+ *
+ * assert.strictEqual(n, 0)
+ * f()
+ * assert.strictEqual(n, 1)
+ * f()
+ * assert.strictEqual(n, 2)
+ * f()
+ * assert.strictEqual(n, 2)
+ *
+ * @since 0.12.0
+ */
+export const whenInvocationCount =
+  (p: Predicate<number>): Endomorphism<IO<void>> =>
+  f => {
+    /* eslint-disable */
+    let n = 0
+
+    return () => {
+      n++
+      if (p(n)) f()
+    }
+    /* eslint-enable */
+  }

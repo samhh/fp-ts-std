@@ -17,6 +17,7 @@ Added in v0.7.0
 - [utils](#utils)
   - [once](#once)
   - [tap](#tap)
+  - [whenInvocationCount](#wheninvocationcount)
 
 ---
 
@@ -92,3 +93,50 @@ assert.strictEqual(x, 4)
 ```
 
 Added in v0.7.0
+
+## whenInvocationCount
+
+Applies an effectful function when the predicate against the invocation
+count passes.
+
+The invocation count will continue to increment and the predicate will
+continue to be checked on future invocations even after the predicate fails.
+
+Invocations start at the number one.
+
+**Signature**
+
+```ts
+export declare const whenInvocationCount: (p: Predicate<number>) => Endomorphism<IO<void>>
+```
+
+```hs
+whenInvocationCount :: Predicate number -> Endomorphism (IO void)
+```
+
+**Example**
+
+```ts
+import { IO } from 'fp-ts/IO'
+import { Predicate } from 'fp-ts/Predicate'
+import { whenInvocationCount } from 'fp-ts-std/IO'
+
+const isUnderThree: Predicate<number> = (n) => n < 3
+
+let n = 0
+const increment: IO<void> = () => {
+  n++
+}
+
+const f = whenInvocationCount(isUnderThree)(increment)
+
+assert.strictEqual(n, 0)
+f()
+assert.strictEqual(n, 1)
+f()
+assert.strictEqual(n, 2)
+f()
+assert.strictEqual(n, 2)
+```
+
+Added in v0.12.0
