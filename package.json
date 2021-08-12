@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "fp-ts-std",
   "description": "The missing pseudo-standard library for fp-ts.",
   "version": "0.11.0",
@@ -16,17 +15,24 @@
     "typescript",
     "fp-ts"
   ],
-  "main": "./index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    "./*": {
+      "require": "./dist/cjs/*.js",
+      "import": "./dist/esm/*.js"
+    }
+  },
   "sideEffects": false,
   "scripts": {
-    "build": "tsc -p ./tsconfig.build.json",
+    "build": "./prepare.sh && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src/ ./test/ --ext ts",
     "fmt": "prettier .",
     "test": "jest",
     "docs": "docs-ts",
     "tshm": "tshm-docs-ts ./docs/modules/*",
-    "prepub": "rm -rf dist && mkdir -p dist && cp ./README.md ./dist/ && cat ./package.json | grep -v '\"private\":' > ./dist/package.json && yarn run build"
+    "prepub": "yarn run build"
   },
   "devDependencies": {
     "@types/eslint": "^7.0.0",
