@@ -15,12 +15,48 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [invert](#invert)
   - [noneAs](#noneas)
   - [unsafeUnwrap](#unsafeunwrap)
 
 ---
 
 # utils
+
+## invert
+
+Given an unwrapped value and an associated `Eq` instance for determining
+equivalence, inverts an `Option` that may contain the same value, something
+else, or nothing.
+
+This can be useful for circumstances in which you want to in a sense toggle
+an `Option` value.
+
+**Signature**
+
+```ts
+export declare const invert: <A>(eq: Eq<A>) => (val: A) => Endomorphism<Option<A>>
+```
+
+```hs
+invert :: Eq a -> a -> Endomorphism (Option a)
+```
+
+**Example**
+
+```ts
+import { invert } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+import * as S from 'fp-ts/string'
+
+const f = invert(S.Eq)('x')
+
+assert.deepStrictEqual(f(O.none), O.some('x'))
+assert.deepStrictEqual(f(O.some('y')), O.some('x'))
+assert.deepStrictEqual(f(O.some('x')), O.none)
+```
+
+Added in v0.12.0
 
 ## noneAs
 
