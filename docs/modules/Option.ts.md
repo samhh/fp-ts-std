@@ -15,11 +15,40 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [noneAs](#noneas)
   - [unsafeUnwrap](#unsafeunwrap)
 
 ---
 
 # utils
+
+## noneAs
+
+A thunked `None` constructor. Enables specifying the type of the `Option`
+without a type assertion. Helpful in certain circumstances in which type
+inferrence isn't smart enough to unify with the `Option<never>` of the
+standard `None` constructor.
+
+**Signature**
+
+```ts
+export declare const noneAs: <A>() => Option<A>
+```
+
+```hs
+noneAs :: () -> Option a
+```
+
+**Example**
+
+```ts
+import { noneAs } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(noneAs<any>(), O.none)
+```
+
+Added in v0.12.0
 
 ## unsafeUnwrap
 

@@ -24,3 +24,19 @@ export const unsafeUnwrap = <A>(x: Option<A>): A => {
 
   return x.value
 }
+
+/**
+ * A thunked `None` constructor. Enables specifying the type of the `Option`
+ * without a type assertion. Helpful in certain circumstances in which type
+ * inferrence isn't smart enough to unify with the `Option<never>` of the
+ * standard `None` constructor.
+ *
+ * @example
+ * import { noneAs } from 'fp-ts-std/Option';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(noneAs<any>(), O.none);
+ *
+ * @since 0.12.0
+ */
+export const noneAs = <A>(): Option<A> => O.none
