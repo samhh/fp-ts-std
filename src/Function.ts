@@ -241,7 +241,7 @@ export const construct =
  * object. Helpful for a one-time usage of an object-oriented construct you're
  * working with that doesn't have functional bindings.
  *
- * To write your own bindings more conveniently, check out `methodOn`.
+ * To write your own bindings more conveniently, check out `invokeOn`.
  *
  * @example
  * import { invoke } from 'fp-ts-std/Function';
