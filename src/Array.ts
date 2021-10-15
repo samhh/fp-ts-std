@@ -318,7 +318,7 @@ export const endsWith =
 export const without =
   <A>(eq: Eq<A>) =>
   (xs: Array<A>): Endomorphism<Array<A>> =>
-    flow(A.filter(y => !A.elem(eq)(y)(xs)))
+    A.filter(y => !A.elem(eq)(y)(xs))
 
 /**
  * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
