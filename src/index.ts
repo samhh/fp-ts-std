@@ -19,6 +19,7 @@ import * as readonlyArray from "./ReadonlyArray"
 import * as readonlyRecord from "./ReadonlyRecord"
 import * as string from "./String"
 import * as task from "./Task"
+import * as tuple from "./Tuple"
 import * as url from "./URL"
 import * as urlSearchParams from "./URLSearchParams"
 
@@ -113,6 +114,12 @@ export {
    * @since 0.5.1
    */
   task,
+  /**
+   * A re-export of the `fp-ts-std/Tuple` module.
+   *
+   * @since 0.12.0
+   */
+  tuple,
   /**
    * A re-export of the `fp-ts-std/URL` module.
    *

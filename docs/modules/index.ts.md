@@ -30,6 +30,7 @@ Added in v0.5.1
   - [record](#record)
   - [string](#string)
   - [task](#task)
+  - [tuple](#tuple)
   - [url](#url)
   - [urlSearchParams](#urlsearchparams)
 
@@ -276,6 +277,22 @@ task :: typeof task
 ```
 
 Added in v0.5.1
+
+## tuple
+
+A re-export of the `fp-ts-std/Tuple` module.
+
+**Signature**
+
+```ts
+export declare const tuple: typeof tuple
+```
+
+```hs
+tuple :: typeof tuple
+```
+
+Added in v0.12.0
 
 ## url
 
