@@ -81,6 +81,23 @@ export const pick =
   }
 
 /**
+ * Like `pick`, but allows you to specify the input record upfront.
+ *
+ * @example
+ * import { pickFrom } from 'fp-ts-std/Record';
+ *
+ * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> };
+ * const picked = pickFrom<MyType>()(['a', 'c']);
+ *
+ * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
+ *
+ * @since 0.12.0
+ */
+export const pickFrom = <A>(): (<K extends keyof A>(
+  ks: Array<K>,
+) => (x: A) => Pick<A, K>) => pick
+
+/**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
  * type.
  *
