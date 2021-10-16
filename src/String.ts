@@ -324,7 +324,7 @@ export const test =
  * @since 0.7.0
  */
 export const replaceAll =
-  (r: string | RegExp) =>
+  (r: string) =>
   (s: string): Endomorphism<string> =>
   x =>
     x.replaceAll(r, s)

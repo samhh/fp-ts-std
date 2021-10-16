@@ -566,11 +566,11 @@ To use a `RegExp` (with a global flag) instead of a string to match, use
 **Signature**
 
 ```ts
-export declare const replaceAll: (r: string | RegExp) => (s: string) => Endomorphism<string>
+export declare const replaceAll: (r: string) => (s: string) => Endomorphism<string>
 ```
 
 ```hs
-replaceAll :: string | RegExp -> string -> Endomorphism string
+replaceAll :: string -> string -> Endomorphism string
 ```
 
 **Example**

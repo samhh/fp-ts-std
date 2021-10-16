@@ -9,6 +9,7 @@ This project adheres to semantic versioning.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
 - Add `noneAs` and `invert` functions to the `Option` module.
 - Duplicate `filterA` from fp-ts-contrib.
+- Narrow the type of the first parameter in `replaceAll`. This reverts the change made in 0.10.1.
 
 ## 0.11.0 (2021-08-09)
 
