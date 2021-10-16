@@ -53,17 +53,19 @@ export const lookupFlipped =
  *
  * @example
  * import { pick } from 'fp-ts-std/ReadonlyRecord';
+ * import { pipe } from 'fp-ts/function'
  *
- * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> };
- * const picked = pick<MyType>()(['a', 'c']);
+ * const picked = pipe(
+ *   { a: 1, b: 'two', c: [true] },
+ *   pick(['a', 'c'])
+ * );
  *
- * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
+ * assert.deepStrictEqual(picked, { a: 1, c: [true] });
  *
  * @since 0.10.0
  */
 export const pick =
-  <A>() =>
-  <K extends keyof A>(ks: ReadonlyArray<K>) =>
+  <A, K extends keyof A>(ks: ReadonlyArray<K>) =>
   (x: A): Pick<A, K> => {
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
