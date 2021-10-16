@@ -2,6 +2,9 @@ name: on-push
 on: [push, pull_request]
 jobs:
   code-quality:
+    strategy:
+      matrix:
+        node: [14, 16]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "15.x"
+          node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Typecheck
