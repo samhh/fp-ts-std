@@ -25,6 +25,25 @@ import { max, min } from "fp-ts/Semigroup"
 import { flip } from "./Function"
 import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
+import {
+  HKT,
+  Kind,
+  Kind2,
+  Kind3,
+  Kind4,
+  URIS,
+  URIS2,
+  URIS3,
+  URIS4,
+} from "fp-ts/HKT"
+import {
+  Applicative,
+  Applicative1,
+  Applicative2,
+  Applicative3,
+  Applicative4,
+  Applicative2C,
+} from "fp-ts/Applicative"
 
 /**
  * Like `fp-ts/Array::elem`, but flipped.
@@ -792,3 +811,60 @@ export const zipAll =
       RA.concat(rest),
     )
   }
+
+/**
+ * Filter an array based upon a predicate whose boolean is returned in an
+ * applicative context. This can be helpful if your predicate is asynchronous
+ * and therefore `Task`-based, for example.
+ *
+ * @example
+ * import * as T from "fp-ts/Task";
+ * import { Task } from "fp-ts/Task";
+ * import { filterA } from "fp-ts-std/ReadonlyArray";
+ *
+ * const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0);
+ *
+ * filterA(T.ApplicativePar)(asyncIsEven)([1, 2, 3, 4, 5])().then((xs) => {
+ *     assert.deepStrictEqual(xs, [2, 4]);
+ * });
+ *
+ * @since 0.12.0
+ */
+export function filterA<F extends URIS4>(
+  F: Applicative4<F>,
+): <S, R, E, A>(
+  p: (x: A) => Kind4<F, S, R, E, boolean>,
+) => (xs: ReadonlyArray<A>) => Kind4<F, S, R, E, ReadonlyArray<A>>
+export function filterA<F extends URIS3>(
+  F: Applicative3<F>,
+): <R, E, A>(
+  p: (x: A) => Kind3<F, R, E, boolean>,
+) => (xs: ReadonlyArray<A>) => Kind3<F, R, E, ReadonlyArray<A>>
+export function filterA<F extends URIS2>(
+  F: Applicative2<F>,
+): <E, A>(
+  p: (x: A) => Kind2<F, E, boolean>,
+) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
+export function filterA<F extends URIS2, E>(
+  F: Applicative2C<F, E>,
+): <A>(
+  p: (x: A) => Kind2<F, E, boolean>,
+) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
+export function filterA<F extends URIS>(
+  F: Applicative1<F>,
+): <A>(
+  p: (x: A) => Kind<F, boolean>,
+) => (xs: ReadonlyArray<A>) => Kind<F, ReadonlyArray<A>>
+export function filterA<F>(
+  F: Applicative<F>,
+): <A>(
+  p: (x: A) => HKT<F, boolean>,
+) => (xs: ReadonlyArray<A>) => HKT<F, ReadonlyArray<A>>
+export function filterA<F>(
+  F: Applicative<F>,
+): <A>(
+  p: (x: A) => HKT<F, boolean>,
+) => (xs: ReadonlyArray<A>) => HKT<F, ReadonlyArray<A>> {
+  return p => xs =>
+    RA.Witherable.wither(F)(xs, x => F.map(p(x), y => (y ? O.some(x) : O.none)))
+}

@@ -31,6 +31,7 @@ import {
   minimum,
   maximum,
   zipAll,
+  filterA,
 } from "../src/ReadonlyArray"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
@@ -54,6 +55,7 @@ import { values } from "../src/Record"
 import { add } from "../src/Number"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as T from "fp-ts/These"
+import * as IO from "fp-ts/IO"
 
 describe("Array", () => {
   describe("elemFlipped", () => {
@@ -994,6 +996,22 @@ describe("Array", () => {
           fc.array(fc.anything()),
           fc.array(fc.anything()),
           (xs, ys) => A.size(f(xs)(ys)) === max(N.Ord)(A.size(xs), A.size(ys)),
+        ),
+      )
+    })
+  })
+
+  describe("filterA", () => {
+    const f = filterA(IO.Applicative)
+
+    it("is identical to filter in an applicative context", () => {
+      const g = A.filter
+      const isEven: Predicate<number> = n => n % 2 === 0
+      const isEvenIO = flow(isEven, IO.of)
+
+      fc.assert(
+        fc.property(fc.array(fc.integer()), xs =>
+          expect(f(isEvenIO)(xs)()).toEqual(g(isEven)(xs)),
         ),
       )
     })
