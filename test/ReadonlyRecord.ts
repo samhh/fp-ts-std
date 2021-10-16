@@ -2,6 +2,7 @@ import {
   values,
   lookupFlipped,
   pick,
+  pickFrom,
   omit,
   reject,
   merge,
@@ -57,6 +58,25 @@ describe("Record", () => {
 
     it("picks multiple keys", () => {
       expect(pipe(x, pick(["name", "age"]))).toEqual(x)
+    })
+  })
+
+  describe("pickFrom", () => {
+    type Thing = { name: string; age: number }
+    const x: Thing = { name: "Hodor", age: 123 }
+    const f = pickFrom<Thing>()
+
+    it("picks no keys", () => {
+      expect(f([])(x)).toEqual({})
+    })
+
+    it("picks individual keys", () => {
+      expect(f(["name"])(x)).toEqual({ name: "Hodor" })
+      expect(f(["age"])(x)).toEqual({ age: 123 })
+    })
+
+    it("picks multiple keys", () => {
+      expect(f(["name", "age"])(x)).toEqual(x)
     })
   })
 
