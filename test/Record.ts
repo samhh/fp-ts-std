@@ -47,16 +47,16 @@ describe("Record", () => {
     const x: Thing = { name: "Hodor", age: 123 }
 
     it("picks no keys", () => {
-      expect(pick<Thing>()([])(x)).toEqual({})
+      expect(pipe(x, pick([]))).toEqual({})
     })
 
     it("picks individual keys", () => {
-      expect(pick<Thing>()(["name"])(x)).toEqual({ name: "Hodor" })
-      expect(pick<Thing>()(["age"])(x)).toEqual({ age: 123 })
+      expect(pipe(x, pick(["name"]))).toEqual({ name: "Hodor" })
+      expect(pipe(x, pick(["age"]))).toEqual({ age: 123 })
     })
 
     it("picks multiple keys", () => {
-      expect(pick<Thing>()(["name", "age"])(x)).toEqual(x)
+      expect(pipe(x, pick(["name", "age"]))).toEqual(x)
     })
   })
 
