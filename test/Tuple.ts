@@ -1,4 +1,4 @@
-import { toFst, toSnd, traverseToFst, traverseToSnd } from "../src/Tuple"
+import { dup, toFst, toSnd, traverseToFst, traverseToSnd } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, pipe } from "fp-ts/function"
 import { swap } from "fp-ts/lib/Tuple"
@@ -8,6 +8,14 @@ import fc from "fast-check"
 const nonMaxNumber = fc.integer({ max: Number.MAX_SAFE_INTEGER - 1 })
 
 describe("Tuple", () => {
+  describe("dup", () => {
+    const f = dup
+
+    it("duplicates the input", () => {
+      fc.assert(fc.property(fc.anything(), x => expect(f(x)).toEqual([x, x])))
+    })
+  })
+
   describe("toFst", () => {
     const f = toFst
     const g = f(increment)

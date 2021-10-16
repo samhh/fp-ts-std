@@ -15,6 +15,7 @@ Added in v0.12.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [dup](#dup)
   - [toFst](#tofst)
   - [toSnd](#tosnd)
   - [traverseToFst](#traversetofst)
@@ -23,6 +24,30 @@ Added in v0.12.0
 ---
 
 # utils
+
+## dup
+
+Duplicate a value into a tuple.
+
+**Signature**
+
+```ts
+export declare const dup: <A>(x: A) => [A, A]
+```
+
+```hs
+dup :: a -> [a, a]
+```
+
+**Example**
+
+```ts
+import { dup } from 'fp-ts-std/Tuple'
+
+assert.deepStrictEqual(dup('x'), ['x', 'x'])
+```
+
+Added in v0.12.0
 
 ## toFst
 

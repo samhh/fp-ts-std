@@ -25,6 +25,18 @@ import {
 } from "fp-ts/Functor"
 
 /**
+ * Duplicate a value into a tuple.
+ *
+ * @example
+ * import { dup } from 'fp-ts-std/Tuple';
+ *
+ * assert.deepStrictEqual(dup('x'), ['x', 'x']);
+ *
+ * @since 0.12.0
+ */
+export const dup = <A>(x: A): [A, A] => [x, x]
+
+/**
  * Apply a function, collecting the output alongside the input. A dual to
  * `toSnd`.
  *
