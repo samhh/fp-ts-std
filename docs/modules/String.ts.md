@@ -561,7 +561,7 @@ Added in v0.1.0
 Replace every occurrence of a matched substring with a replacement.
 
 To use a `RegExp` (with a global flag) instead of a string to match, use
-`replace` instead.
+`replace` in `fp-ts/string` instead.
 
 **Signature**
 

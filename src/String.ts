@@ -314,7 +314,7 @@ export const test =
  * Replace every occurrence of a matched substring with a replacement.
  *
  * To use a `RegExp` (with a global flag) instead of a string to match, use
- * `replace` instead.
+ * `replace` in `fp-ts/string` instead.
  *
  * @example
  * import { replaceAll } from 'fp-ts-std/String';
