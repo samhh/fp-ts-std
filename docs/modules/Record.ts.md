@@ -21,6 +21,7 @@ Added in v0.1.0
   - [merge](#merge)
   - [omit](#omit)
   - [pick](#pick)
+  - [pickFrom](#pickfrom)
   - [reject](#reject)
   - [values](#values)
 
@@ -172,25 +173,52 @@ type.
 **Signature**
 
 ```ts
-export declare const pick: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+export declare const pick: <A, K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
 ```
 
 ```hs
-pick :: k extends (keyof a) => () -> Array k -> a -> Pick a k
+pick :: k extends (keyof a) => Array k -> a -> Pick a k
 ```
 
 **Example**
 
 ```ts
 import { pick } from 'fp-ts-std/Record'
+import { pipe } from 'fp-ts/function'
 
-type MyType = { a: number; b: string; c: Array<boolean> }
-const picked = pick<MyType>()(['a', 'c'])
+const picked = pipe({ a: 1, b: 'two', c: [true] }, pick(['a', 'c']))
+
+assert.deepStrictEqual(picked, { a: 1, c: [true] })
+```
+
+Added in v0.1.0
+
+## pickFrom
+
+Like `pick`, but allows you to specify the input record upfront.
+
+**Signature**
+
+```ts
+export declare const pickFrom: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+```
+
+```hs
+pickFrom :: k extends (keyof a) => () -> Array k -> a -> Pick a k
+```
+
+**Example**
+
+```ts
+import { pickFrom } from 'fp-ts-std/Record'
+
+type MyType = { a: number; b: string; c: ReadonlyArray<boolean> }
+const picked = pickFrom<MyType>()(['a', 'c'])
 
 assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
 ```
 
-Added in v0.1.0
+Added in v0.12.0
 
 ## reject
 
