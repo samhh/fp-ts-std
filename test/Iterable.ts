@@ -11,4 +11,16 @@ describe("iterable", () => {
       laws.eq(eq, fc.array(fc.string()))
     })
   })
+
+  describe("Pointed", () => {
+    it("of", () => {
+      const result = []
+      //eslint-disable-next-line functional/no-loop-statement
+      for (const a of iterable.of(1)) {
+        //eslint-disable-next-line
+        result.push(a)
+      }
+      expect(result).toStrictEqual([1])
+    })
+  })
 })

@@ -2,6 +2,7 @@
  * @since 0.12.0
  */
 import { eq as EQ } from "fp-ts"
+import { Pointed1 } from "fp-ts/lib/Pointed"
 
 /**
  * @category Model
@@ -21,6 +22,17 @@ declare module "fp-ts/HKT" {
     readonly [URI]: Iterable<A>
   }
 }
+
+/**
+ * @category Pointed
+ * @since 0.12.0
+ */
+export const of: Pointed1<URI>["of"] = a => ({
+  *[Symbol.iterator]() {
+    // eslint-disable-next-line functional/no-expression-statement
+    yield a
+  },
+})
 
 /**
  * @category Eq
@@ -51,4 +63,13 @@ export function getEq<A>(eq: EQ.Eq<A>): EQ.Eq<Iterable<A>> {
       /* eslint-enable */
     },
   }
+}
+
+/**
+ * @category instances
+ * @since 0.12.0
+ */
+export const Pointed: Pointed1<URI> = {
+  URI,
+  of,
 }
