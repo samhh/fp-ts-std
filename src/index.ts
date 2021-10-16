@@ -11,6 +11,7 @@ import * as debug from "./Debug"
 import * as either from "./Either"
 import * as function_ from "./Function"
 import * as io from "./IO"
+import * as iterable from "./Iterable"
 import * as json from "./JSON"
 import * as number from "./Number"
 import * as option from "./Option"
@@ -59,6 +60,12 @@ export {
    * @since 0.5.1
    */
   function_ as function,
+  /**
+   * A re-export of the `fp-ts-std/IO` module.
+   *
+   * @since 0.12.0
+   */
+  iterable,
   /**
    * A re-export of the `fp-ts-std/IO` module.
    *
