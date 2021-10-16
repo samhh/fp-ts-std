@@ -327,7 +327,7 @@ export const replaceAll =
   (r: string | RegExp) =>
   (s: string): Endomorphism<string> =>
   x =>
-    x.replaceAll(r, s)
+    x.replace(new RegExp(r, "g"), s)
 
 /**
  * Drop a number of characters from the start of a string, returning a new
