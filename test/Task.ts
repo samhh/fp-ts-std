@@ -5,7 +5,9 @@ import { constant, constVoid, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
 import { mkMilliseconds, unMilliseconds } from "../src/Date"
 
-const flushPromises = () => new Promise(setImmediate)
+const flushPromises = (): Promise<void> =>
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+  new Promise(jest.requireActual("timers").setImmediate)
 
 describe("Task", () => {
   describe("sleep", () => {
