@@ -98,7 +98,7 @@ const delayed = pipe(
 )
 const instant2 = append('c')
 
-sequenceT(T.task)(instant1, delayed, instant2)().then(() => {
+sequenceT(T.ApplicativePar)(instant1, delayed, instant2)().then(() => {
   assert.deepStrictEqual(xs, ['a', 'c', 'b'])
 })
 ```

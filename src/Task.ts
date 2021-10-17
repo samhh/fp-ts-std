@@ -32,7 +32,7 @@ import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
  * const delayed = pipe(sleep(mkMilliseconds(10)), T.chain(() => append('b')));
  * const instant2 = append('c');
  *
- * sequenceT(T.task)(instant1, delayed, instant2)().then(() => {
+ * sequenceT(T.ApplicativePar)(instant1, delayed, instant2)().then(() => {
  *     assert.deepStrictEqual(xs, ['a', 'c', 'b']);
  * });
  *
