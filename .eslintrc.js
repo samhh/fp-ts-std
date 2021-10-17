@@ -12,6 +12,7 @@ module.exports = {
     project: "./tsconfig.json",
   },
   rules: {
+    "functional/prefer-tacit": 2,
     "functional/no-expression-statement": [
       2,
       { ignorePattern: "(describe)|(it)|(expect)|(fc.)" },
