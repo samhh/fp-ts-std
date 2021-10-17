@@ -672,5 +672,5 @@ export const converge =
   <A>(
     gs: [(x: A) => B, ...{ [K in keyof C]: (x: A) => C[K] }],
   ): ((x: A) => D) =>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
     flow(x => fork(gs as any)(x) as unknown as [B, ...C], f)

@@ -16,6 +16,8 @@ module.exports = {
       2,
       { ignorePattern: "(describe)|(it)|(expect)|(fc.)" },
     ],
+    // Tripped in Jest suites
+    "functional/no-return-void": [2, { ignoreImplicit: true }],
     "functional/prefer-readonly-type": 0,
     "functional/functional-parameters": 0,
     "@typescript-eslint/prefer-regexp-exec": 0,
