@@ -11,7 +11,6 @@ import {
   PredicateWithIndex,
   RefinementWithIndex,
 } from "fp-ts/lib/FilterableWithIndex"
-import { Foldable } from "fp-ts/lib/Foldable"
 import { FoldableWithIndex1 } from "fp-ts/lib/FoldableWithIndex"
 import { pipe } from "fp-ts/lib/function"
 import { FunctorWithIndex1 } from "fp-ts/lib/FunctorWithIndex"
@@ -308,4 +307,38 @@ export const FoldableWithIndex: FoldableWithIndex1<URI, number> = {
   reduceRight: (fa, b, f) => pipe(fa, toReadonlyArray, A.reduceRight(b, f)),
   reduceRightWithIndex: (fa, b, f) =>
     pipe(fa, toReadonlyArray, A.reduceRightWithIndex(b, f)),
+}
+
+export function takeWhileMapWithIndex<A, B extends A>(
+  f: (i: number, a: A) => O.Option<B>,
+) {
+  return (fa: Iterable<A>): Iterable<B> => ({
+    *[Symbol.iterator]() {
+      let i = 0
+      for (const a of fa) {
+        const ob = f(i++, a)
+        if (O.isSome(ob)) {
+          yield ob.value
+        } else {
+          break
+        }
+      }
+    },
+  })
+}
+
+export function skipWhileWithIndex<A>(f: PredicateWithIndex<number, A>) {
+  return (fa: Iterable<A>): Iterable<A> => ({
+    *[Symbol.iterator]() {
+      let i = 0
+      let take = false
+      for (const a of fa) {
+        if (take) {
+          yield a
+        } else if (!f(i++, a)) {
+          take = true
+        }
+      }
+    },
+  })
 }
