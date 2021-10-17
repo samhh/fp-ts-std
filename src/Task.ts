@@ -28,11 +28,11 @@ import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
  *     xs.push(msg);
  * });
  *
- * const instant1 = append('a');
- * const delayed = pipe(sleep(mkMilliseconds(10)), T.chain(() => append('b')));
- * const instant2 = append('c');
+ * const instant = append('a');
+ * const slowest = pipe(sleep(mkMilliseconds(10)), T.chain(() => append('b')));
+ * const slow = pipe(sleep(mkMilliseconds(5)), T.chain(() => append('c')));
  *
- * sequenceT(T.ApplicativePar)(instant1, delayed, instant2)().then(() => {
+ * sequenceT(T.ApplicativePar)(instant, slowest, slow)().then(() => {
  *     assert.deepStrictEqual(xs, ['a', 'c', 'b']);
  * });
  *
