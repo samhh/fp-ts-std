@@ -38,6 +38,7 @@
     "eslint-plugin-functional": "^4.0.0",
     "fast-check": "^2.5.0",
     "fp-ts": "^2.11.0",
+    "fp-ts-laws": "^0.3.0",
     "jest": "^27.3.0",
     "monocle-ts": "^2.0.0",
     "newtype-ts": "^0.3.0",

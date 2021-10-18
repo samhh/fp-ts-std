@@ -1643,6 +1643,11 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+fp-ts-laws@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/fp-ts-laws/-/fp-ts-laws-0.3.0.tgz#428639e087081317cdbf96fc7958449fb8c42602"
+  integrity sha512-uCLBnZq429UDYIx7TDsKmIOXQvgVfEFJMDBbJ2OljpW19cCEF+UgwoGnTfq6AYkHofFlkd6t0p3a9HB1OXTiaA==
+
 fp-ts@^2.11.0, fp-ts@^2.9.3:
   version "2.11.5"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.11.5.tgz#97cceb26655b1452d7088d6fb0864f84cceffbe4"
