@@ -89,8 +89,11 @@ describe("iterable", () => {
       })
     })
 
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     describe("Compactable", () => {})
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     describe("FilterableWithIndex", () => {})
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     describe("FoldableWithIndex", () => {})
   })
 })
