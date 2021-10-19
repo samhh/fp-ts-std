@@ -10,7 +10,7 @@ This project adheres to semantic versioning.
 - Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
 - Add `whenInvocationCount` function to the `IO` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
-- Add `noneAs` and `invert` functions to the `Option` module.
+- Add `noneAs`, `invert`, and `toMonoid` functions to the `Option` module.
 - Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.
 - Replace `pick` in the `Record` and `ReadonlyRecord` modules with a non-thunked version. The old implementation is now called `pickFrom`.
 - Narrow the type of the first parameter in `replaceAll`. This reverts the change made in 0.10.1.

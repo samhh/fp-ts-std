@@ -17,6 +17,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [invert](#invert)
   - [noneAs](#noneas)
+  - [toMonoid](#tomonoid)
   - [unsafeUnwrap](#unsafeunwrap)
 
 ---
@@ -82,6 +83,35 @@ import { noneAs } from 'fp-ts-std/Option'
 import * as O from 'fp-ts/Option'
 
 assert.deepStrictEqual(noneAs<any>(), O.none)
+```
+
+Added in v0.12.0
+
+## toMonoid
+
+Extracts monoidal identity if `None`.
+
+**Signature**
+
+```ts
+export declare const toMonoid: <A>(G: Monoid<A>) => (x: Option<A>) => A
+```
+
+```hs
+toMonoid :: Monoid a -> Option a -> a
+```
+
+**Example**
+
+```ts
+import { toMonoid } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+import * as Str from 'fp-ts/string'
+
+const f = toMonoid(Str.Monoid)
+
+assert.deepStrictEqual(f(O.some('x')), 'x')
+assert.deepStrictEqual(f(O.none), '')
 ```
 
 Added in v0.12.0

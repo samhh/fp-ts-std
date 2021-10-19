@@ -10,6 +10,7 @@ import { Eq } from "fp-ts/lib/Eq"
 import { Endomorphism } from "fp-ts/lib/Endomorphism"
 import { constant, flow } from "fp-ts/lib/function"
 import * as B from "fp-ts/boolean"
+import { toMonoid as _toMonoid } from "./Monoid"
 
 /**
  * Unwrap the value from within an `Option`, throwing if `None`.
@@ -73,3 +74,20 @@ export const invert =
       O.exists(x => eq.equals(x, val)),
       B.match(() => O.some(val), constant(O.none)),
     )
+
+/**
+ * Extracts monoidal identity if `None`.
+ *
+ * @example
+ * import { toMonoid } from 'fp-ts-std/Option';
+ * import * as O from 'fp-ts/Option';
+ * import * as Str from 'fp-ts/string';
+ *
+ * const f = toMonoid(Str.Monoid)
+ *
+ * assert.deepStrictEqual(f(O.some('x')), 'x');
+ * assert.deepStrictEqual(f(O.none), '');
+ *
+ * @since 0.12.0
+ */
+export const toMonoid = _toMonoid(O.Foldable)
