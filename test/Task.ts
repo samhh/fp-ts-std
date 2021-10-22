@@ -1,6 +1,7 @@
 /* eslint-disable functional/no-expression-statement */
 
-import { sleep, elapsed } from "../src/Task"
+import fc from "fast-check"
+import { sleep, elapsed, execute } from "../src/Task"
 import { constant, constVoid, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
 import { mkMilliseconds, unMilliseconds } from "../src/Date"
@@ -60,6 +61,16 @@ describe("Task", () => {
       )()
 
       return time >= 50 && time < 60
+    })
+
+    describe("execute", () => {
+      it("gets the value", () => {
+        return fc.assert(
+          fc.asyncProperty(fc.anything(), async x =>
+            expect(x).toEqual(await pipe(x, T.of, execute)),
+          ),
+        )
+      })
     })
   })
 })

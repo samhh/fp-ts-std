@@ -16,6 +16,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [elapsed](#elapsed)
+  - [execute](#execute)
   - [sleep](#sleep)
 
 ---
@@ -56,6 +57,34 @@ waitAndTrackElapsed().then(() => {
 ```
 
 Added in v0.5.0
+
+## execute
+
+Execute a `Task`, returning the `Promise` within. Helpful for staying within
+function application and composition pipelines.
+
+**Signature**
+
+```ts
+export declare const execute: <A>(x: Task<A>) => Promise<A>
+```
+
+```hs
+execute :: Task a -> Promise a
+```
+
+**Example**
+
+```ts
+import { execute } from 'fp-ts-std/Task'
+import * as T from 'fp-ts/Task'
+
+execute(T.of(5)).then((x) => {
+  assert.strictEqual(x, 5)
+})
+```
+
+Added in v0.12.0
 
 ## sleep
 

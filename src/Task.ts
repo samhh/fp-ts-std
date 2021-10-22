@@ -77,3 +77,19 @@ export const elapsed =
 
     return y
   }
+
+/**
+ * Execute a `Task`, returning the `Promise` within. Helpful for staying within
+ * function application and composition pipelines.
+ *
+ * @example
+ * import { execute } from 'fp-ts-std/Task';
+ * import * as T from 'fp-ts/Task';
+ *
+ * execute(T.of(5)).then((x) => {
+ *   assert.strictEqual(x, 5);
+ * });
+ *
+ * @since 0.12.0
+ */
+export const execute = <A>(x: Task<A>): Promise<A> => x()
