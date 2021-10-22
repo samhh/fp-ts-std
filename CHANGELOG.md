@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.12.0 (_Unreleased_)
 
+- Add `TaskEither` module.
 - Add `Tuple` module.
 - Add `Monoid` module.
 - Add `Lazy` module.
