@@ -40,6 +40,7 @@ Added in v0.12.0
   - [bindTo](#bindto)
   - [chain](#chain)
   - [chainFirst](#chainfirst)
+  - [execute](#execute)
   - [flap](#flap)
   - [flatten](#flatten)
   - [map](#map)
@@ -384,6 +385,31 @@ export declare const chainFirst: <A, B>(f: (a: A) => Lazy<B>) => (first: Lazy<A>
 
 ```hs
 chainFirst :: (a -> Lazy b) -> Lazy a -> Lazy a
+```
+
+Added in v0.12.0
+
+## execute
+
+Execute a `Lazy`, returning the value within. Helpful for staying within
+function application and composition pipelines.
+
+**Signature**
+
+```ts
+export declare const execute: <A>(x: Lazy<A>) => A
+```
+
+```hs
+execute :: Lazy a -> a
+```
+
+**Example**
+
+```ts
+import * as Lazy from 'fp-ts-std/Lazy'
+
+assert.strictEqual(Lazy.execute(Lazy.of(5)), 5)
 ```
 
 Added in v0.12.0

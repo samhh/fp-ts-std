@@ -325,3 +325,16 @@ export const traverseArray = <A, B>(
 export const sequenceArray: <A>(
   arr: ReadonlyArray<Lazy<A>>,
 ) => Lazy<ReadonlyArray<A>> = traverseArray(identity)
+
+/**
+ * Execute a `Lazy`, returning the value within. Helpful for staying within
+ * function application and composition pipelines.
+ *
+ * @example
+ * import * as Lazy from 'fp-ts-std/Lazy';
+ *
+ * assert.strictEqual(Lazy.execute(Lazy.of(5)), 5);
+ *
+ * @since 0.12.0
+ */
+export const execute = <A>(x: Lazy<A>): A => x()

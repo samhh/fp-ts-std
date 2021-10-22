@@ -125,4 +125,14 @@ describe("Lazy", () => {
       )
     })
   })
+
+  describe("execute", () => {
+    it("gets the value", () => {
+      fc.assert(
+        fc.property(fc.anything(), x =>
+          expect(x).toEqual(pipe(x, Lazy.of, Lazy.execute)),
+        ),
+      )
+    })
+  })
 })
