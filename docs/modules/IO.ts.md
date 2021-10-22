@@ -15,6 +15,7 @@ Added in v0.7.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [execute](#execute)
   - [once](#once)
   - [tap](#tap)
   - [whenInvocationCount](#wheninvocationcount)
@@ -22,6 +23,32 @@ Added in v0.7.0
 ---
 
 # utils
+
+## execute
+
+Execute an `IO`, returning the value within. Helpful for staying within
+function application and composition pipelines.
+
+**Signature**
+
+```ts
+export declare const execute: <A>(x: IO<A>) => A
+```
+
+```hs
+execute :: IO a -> a
+```
+
+**Example**
+
+```ts
+import { execute } from 'fp-ts-std/IO'
+import * as IO from 'fp-ts/IO'
+
+assert.strictEqual(execute(IO.of(5)), 5)
+```
+
+Added in v0.12.0
 
 ## once
 

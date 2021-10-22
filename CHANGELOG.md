@@ -9,7 +9,7 @@ This project adheres to semantic versioning.
 - Add `Lazy` module.
 - Add `DOM` module.
 - Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
-- Add `whenInvocationCount` function to the `IO` module.
+- Add `whenInvocationCount` and `execute` functions to the `IO` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
 - Add `noneAs`, `invert`, and `toMonoid` functions to the `Option` module.
 - Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.

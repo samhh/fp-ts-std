@@ -1,6 +1,12 @@
 import * as IO from "fp-ts/IO"
-import { constant, constFalse, constTrue, constVoid } from "fp-ts/function"
-import { tap, once, whenInvocationCount } from "../src/IO"
+import {
+  constant,
+  constFalse,
+  constTrue,
+  constVoid,
+  pipe,
+} from "fp-ts/function"
+import { tap, once, whenInvocationCount, execute } from "../src/IO"
 import { add } from "../src/Number"
 import fc from "fast-check"
 
@@ -117,4 +123,14 @@ describe("IO", () => {
     })
   })
   /* eslint-enable */
+
+  describe("execute", () => {
+    it("gets the value", () => {
+      fc.assert(
+        fc.property(fc.anything(), x =>
+          expect(x).toEqual(pipe(x, IO.of, execute)),
+        ),
+      )
+    })
+  })
 })

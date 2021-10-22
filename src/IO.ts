@@ -114,3 +114,17 @@ export const whenInvocationCount =
     }
     /* eslint-enable */
   }
+
+/**
+ * Execute an `IO`, returning the value within. Helpful for staying within
+ * function application and composition pipelines.
+ *
+ * @example
+ * import { execute } from 'fp-ts-std/IO';
+ * import * as IO from 'fp-ts/IO';
+ *
+ * assert.strictEqual(execute(IO.of(5)), 5);
+ *
+ * @since 0.12.0
+ */
+export const execute = <A>(x: IO<A>): A => x()
