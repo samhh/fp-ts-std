@@ -31,6 +31,7 @@
   "devDependencies": {
     "@types/eslint": "^7.0.0",
     "@types/jest": "^27.0.2",
+    "@types/jsdom": "^16.2.5",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "docs-ts": "^0.6.7",
@@ -38,8 +39,10 @@
     "eslint-plugin-functional": "^4.0.0",
     "fast-check": "^2.5.0",
     "fp-ts": "^2.11.0",
+    "fp-ts-contrib": "^0.1.26",
     "fp-ts-laws": "^0.3.0",
     "jest": "^27.3.0",
+    "jsdom": "^18.0.0",
     "monocle-ts": "^2.0.0",
     "newtype-ts": "^0.3.0",
     "prettier": "^2.1.2",

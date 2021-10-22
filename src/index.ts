@@ -8,6 +8,7 @@ import * as array from "./Array"
 import * as boolean from "./Boolean"
 import * as date from "./Date"
 import * as debug from "./Debug"
+import * as dom from "./DOM"
 import * as either from "./Either"
 import * as function_ from "./Function"
 import * as io from "./IO"
@@ -48,6 +49,13 @@ export {
    * @since 0.8.0
    */
   debug,
+  /**
+   * A re-export of the `fp-ts-std/DOM` module.
+   *
+   * @since 0.10.0
+   */
+  dom,
+  /**
   /**
    * A re-export of the `fp-ts-std/Either` module.
    *

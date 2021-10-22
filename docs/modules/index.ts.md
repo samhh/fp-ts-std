@@ -1,6 +1,6 @@
 ---
 title: index.ts
-nav_order: 8
+nav_order: 9
 parent: Modules
 ---
 
@@ -19,6 +19,7 @@ Added in v0.5.1
   - [boolean](#boolean)
   - [date](#date)
   - [debug](#debug)
+  - [dom](#dom)
   - [either](#either)
   - [function](#function)
   - [io](#io)
@@ -102,8 +103,25 @@ debug :: typeof debug
 
 Added in v0.8.0
 
+## dom
+
+A re-export of the `fp-ts-std/DOM` module.
+
+**Signature**
+
+```ts
+export declare const dom: typeof dom
+```
+
+```hs
+dom :: typeof dom
+```
+
+Added in v0.10.0
+
 ## either
 
+/\*\*
 A re-export of the `fp-ts-std/Either` module.
 
 **Signature**
