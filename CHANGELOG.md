@@ -4,11 +4,11 @@ This project adheres to semantic versioning.
 
 ## 0.12.0 (_Unreleased_)
 
+- Add `DOM` module.
+- Add `Lazy` module.
+- Add `Monoid` module.
 - Add `TaskEither` module.
 - Add `Tuple` module.
-- Add `Monoid` module.
-- Add `Lazy` module.
-- Add `DOM` module.
 - Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
 - Add `whenInvocationCount` and `execute` functions to the `IO` module.
 - Add `execute` function to the `Task` module.
