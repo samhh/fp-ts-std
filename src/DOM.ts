@@ -13,8 +13,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
-import * as A from "fp-ts/Array"
-import { constVoid, flow, pipe } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import { invoke } from "./Function"
 
 /**
@@ -190,12 +189,7 @@ export const appendChild =
  */
 export const emptyChildren: (x: Node) => IO<void> = flow(
   childNodes,
-  IO.chain(
-    O.fold(
-      flow(constVoid, IO.of),
-      flow(A.map(remove), IO.sequenceArray, IO.map(constVoid)),
-    ),
-  ),
+  IO.chain(O.traverse(IO.Applicative)(IO.traverseArray(remove))),
 )
 
 /**
