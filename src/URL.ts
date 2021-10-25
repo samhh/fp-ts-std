@@ -10,7 +10,7 @@ import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { flow, identity, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { is } from "./Function"
+import { construct, is } from "./Function"
 
 /**
  * Unsafely parse a `URL`, throwing on failure.
@@ -22,7 +22,7 @@ import { is } from "./Function"
  *
  * @since 0.1.0
  */
-export const unsafeParse = (x: string): URL => new URL(x)
+export const unsafeParse = (x: string): URL => pipe([x], construct(URL))
 
 /**
  * Safely parse a `URL`.

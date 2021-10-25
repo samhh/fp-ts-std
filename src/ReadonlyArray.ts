@@ -22,7 +22,7 @@ import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
 import { concatAll } from "fp-ts/Monoid"
 import { max, min } from "fp-ts/Semigroup"
-import { flip } from "./Function"
+import { flip, invoke } from "./Function"
 import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 import {
@@ -100,10 +100,8 @@ export const none: <A>(f: Predicate<A>) => Predicate<ReadonlyArray<A>> = flow(
  *
  * @since 0.10.0
  */
-export const join =
-  (x: string) =>
-  (ys: ReadonlyArray<string>): string =>
-    ys.join(x)
+export const join = (x: string): ((ys: ReadonlyArray<string>) => string) =>
+  invoke("join")([x])
 
 /**
  * Like `fp-ts/Array::getEq`, but items are not required to be in the same
@@ -459,9 +457,8 @@ export const aperture =
  */
 export const slice =
   (start: number) =>
-  (end: number) =>
-  <A>(xs: ReadonlyArray<A>): ReadonlyArray<A> =>
-    xs.slice(start, end)
+  (end: number): (<A>(xs: ReadonlyArray<A>) => ReadonlyArray<A>) =>
+    invoke("slice")([start, end])
 
 /**
  * Filters out items in the array for which the predicate holds. This can be

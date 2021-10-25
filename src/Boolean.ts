@@ -7,7 +7,9 @@
 import { Predicate } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { SemigroupAll, SemigroupAny } from "fp-ts/boolean"
-import { curry2T } from "./Function"
+import * as A from "fp-ts/Array"
+import { apply, pipe } from "fp-ts/function"
+import { curry2, curry2T } from "./Function"
 
 /**
  * Invert a boolean.
@@ -34,10 +36,9 @@ export const invert: Endomorphism<boolean> = x => !x
  *
  * @since 0.4.0
  */
-export const and =
-  (x: boolean): Endomorphism<boolean> =>
-  y =>
-    SemigroupAll.concat(x, y)
+export const and: (x: boolean) => Endomorphism<boolean> = curry2(
+  SemigroupAll.concat,
+)
 
 /**
  * Returns `true` if one or both arguments are `true`, else `false`. Equivalent
@@ -51,10 +52,9 @@ export const and =
  *
  * @since 0.4.0
  */
-export const or =
-  (x: boolean): Endomorphism<boolean> =>
-  y =>
-    SemigroupAny.concat(x, y)
+export const or: (x: boolean) => Endomorphism<boolean> = curry2(
+  SemigroupAny.concat,
+)
 
 /**
  * Returns `true` if one argument is `true` and the other is `false`, else
@@ -93,7 +93,7 @@ export const xor =
 export const allPass =
   <A>(fs: Array<Predicate<A>>): Predicate<A> =>
   x =>
-    fs.every(f => f(x))
+    pipe(fs, A.every(apply(x)))
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
@@ -115,7 +115,7 @@ export const allPass =
 export const anyPass =
   <A>(fs: Array<Predicate<A>>): Predicate<A> =>
   x =>
-    fs.some(f => f(x))
+    pipe(fs, A.some(apply(x)))
 
 /**
  * Combine two predicates under conjunction in short-circuited fashion.

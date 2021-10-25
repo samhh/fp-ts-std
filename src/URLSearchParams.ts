@@ -7,9 +7,9 @@
 
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { pipe } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { is } from "./Function"
+import { construct, invoke, is } from "./Function"
 
 /**
  * An empty `URLSearchParams`.
@@ -21,7 +21,7 @@ import { is } from "./Function"
  *
  * @since 0.2.0
  */
-export const empty: URLSearchParams = new URLSearchParams()
+export const empty: URLSearchParams = construct(URLSearchParams)([])
 
 /**
  * Parse a `URLSearchParams` from a string.
@@ -35,7 +35,8 @@ export const empty: URLSearchParams = new URLSearchParams()
  *
  * @since 0.2.0
  */
-export const fromString = (x: string): URLSearchParams => new URLSearchParams(x)
+export const fromString = (x: string): URLSearchParams =>
+  pipe([x], construct(URLSearchParams))
 
 /**
  * Parse a `URLSearchParams` from a record.
@@ -50,7 +51,7 @@ export const fromString = (x: string): URLSearchParams => new URLSearchParams(x)
  * @since 0.2.0
  */
 export const fromRecord = (x: Record<string, string>): URLSearchParams =>
-  new URLSearchParams(x)
+  pipe([x], construct(URLSearchParams))
 
 /**
  * Parse a `URLSearchParams` from an array of tuples.
@@ -65,7 +66,7 @@ export const fromRecord = (x: Record<string, string>): URLSearchParams =>
  * @since 0.2.0
  */
 export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
-  new URLSearchParams(x)
+  pipe([x], construct(URLSearchParams))
 
 /**
  * Clone a `URLSearchParams`.
@@ -81,7 +82,7 @@ export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
  * @since 0.2.0
  */
 export const clone = (x: URLSearchParams): URLSearchParams =>
-  new URLSearchParams(x)
+  pipe([x], construct(URLSearchParams))
 
 /**
  * Refine a foreign value to `URLSearchParams`.
@@ -113,10 +114,10 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
  *
  * @since 0.1.0
  */
-export const getParam =
-  (k: string) =>
-  (ps: URLSearchParams): Option<string> =>
-    pipe(ps.get(k), O.fromNullable)
+export const getParam = (
+  k: string,
+): ((ps: URLSearchParams) => Option<string>) =>
+  flow(invoke("get")([k]), O.fromNullable)
 
 /**
  * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
@@ -139,7 +140,7 @@ export const setParam =
   (k: string) =>
   (v: string) =>
   (x: URLSearchParams): URLSearchParams => {
-    const y = new URLSearchParams(x)
+    const y = clone(x)
     y.set(k, v) // eslint-disable-line functional/no-expression-statement
     return y
   }

@@ -25,8 +25,8 @@ import { last } from "fp-ts/Semigroup"
  *
  * @since 0.10.0
  */
-export const values = <A>(x: RR.ReadonlyRecord<string, A>): ReadonlyArray<A> =>
-  Object.values(x)
+export const values: <A>(x: RR.ReadonlyRecord<string, A>) => ReadonlyArray<A> =
+  Object.values
 
 /**
  * Like `lookup` from fp-ts, but flipped.

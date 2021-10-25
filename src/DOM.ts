@@ -15,6 +15,7 @@ import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
 import { constVoid, flow, pipe } from "fp-ts/function"
+import { invoke } from "./Function"
 
 /**
  * Convert a `NodeList` into an `Array`.
@@ -58,7 +59,7 @@ export const querySelector =
   (q: string) =>
   (x: ParentNode): IO<Option<Element>> =>
   () =>
-    pipe(x.querySelector(q), O.fromNullable)
+    pipe(x, invoke("querySelector")([q]), O.fromNullable)
 
 /**
  * Returns every descendent element of the input node matching the provided
@@ -83,7 +84,7 @@ export const querySelectorAll =
   (q: string) =>
   (x: ParentNode): IO<Option<NonEmptyArray<Element>>> =>
   () =>
-    pipe(x.querySelectorAll(q), fromNodeList, NEA.fromArray)
+    pipe(x, invoke("querySelectorAll")([q]), fromNodeList, NEA.fromArray)
 
 /**
  * Returns all child nodes, if any, of a node.
@@ -135,7 +136,7 @@ export const childNodes =
 export const remove =
   (x: ChildNode): IO<void> =>
   () =>
-    x.remove()
+    pipe(x, invoke("remove")([]))
 
 /**
  * Appends a node as a child of another.
@@ -163,7 +164,7 @@ export const appendChild =
   (child: Node) =>
   (parent: Node): IO<void> =>
   () =>
-    parent.appendChild(child)
+    pipe(parent, invoke("appendChild")([child]))
 
 /**
  * Removes all the child nodes, if any, of a given node.
@@ -218,7 +219,7 @@ export const emptyChildren: (x: Node) => IO<void> = flow(
 export const getTextContent =
   (x: Node): IO<Option<string>> =>
   () =>
-    O.fromNullable(x.textContent)
+    pipe(x.textContent, O.fromNullable)
 
 /**
  * Sets the text content of a node.
@@ -277,4 +278,4 @@ export const addEventListener =
   (f: (evt: Event) => IO<void>) =>
   (x: Node): IO<void> =>
   () =>
-    x.addEventListener(type, evt => f(evt)())
+    pipe(x, invoke("addEventListener")([type, evt => f(evt)()]))

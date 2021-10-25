@@ -20,6 +20,8 @@ import {
 } from "./ReadonlyArray"
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
+import { flip, invoke, when } from "./Function"
+import { both } from "./Boolean"
 
 /**
  * Convert a number to a string.
@@ -31,7 +33,7 @@ import { Ord as ordNumber } from "fp-ts/number"
  *
  * @since 0.1.0
  */
-export const fromNumber = (x: number): string => String(x)
+export const fromNumber: (x: number) => string = String
 
 /**
  * Prepend one string to another.
@@ -62,10 +64,8 @@ export const prepend =
  *
  * @since 0.1.0
  */
-export const unprepend =
-  (start: string): Endomorphism<string> =>
-  val =>
-    val.startsWith(start) ? val.substring(start.length) : val
+export const unprepend = (start: string): Endomorphism<string> =>
+  when(S.startsWith(start))(dropLeft(start.length))
 
 /**
  * Append one string to another.
@@ -79,10 +79,7 @@ export const unprepend =
  *
  * @since 0.1.0
  */
-export const append =
-  (appended: string): Endomorphism<string> =>
-  rest =>
-    rest + appended
+export const append: (appended: string) => Endomorphism<string> = flip(prepend)
 
 /**
  * Remove the end of a string, if it exists.
@@ -96,10 +93,8 @@ export const append =
  *
  * @since 0.1.0
  */
-export const unappend =
-  (end: string) =>
-  (val: string): string =>
-    val.endsWith(end) ? val.substring(0, val.lastIndexOf(end)) : val
+export const unappend = (end: string): Endomorphism<string> =>
+  when(S.endsWith(end))(dropRight(end.length))
 
 /**
  * Surround a string. Equivalent to calling `prepend` and `append` with the
@@ -129,12 +124,8 @@ export const surround = (x: string): Endomorphism<string> =>
  *
  * @since 0.1.0
  */
-export const unsurround =
-  (x: string): Endomorphism<string> =>
-  val =>
-    val.startsWith(x) && val.endsWith(x)
-      ? pipe(val, unprepend(x), unappend(x))
-      : val
+export const unsurround = (x: string): Endomorphism<string> =>
+  when(both(S.startsWith(x))(S.endsWith(x)))(flow(unprepend(x), unappend(x)))
 
 /**
  * Keep the specified number of characters from the start of a string.
@@ -193,10 +184,8 @@ export const takeRight =
  *
  * @since 0.1.0
  */
-export const match =
-  (r: RegExp) =>
-  (x: string): Option<RegExpMatchArray> =>
-    O.fromNullable(x.match(r))
+export const match = (r: RegExp): ((x: string) => Option<RegExpMatchArray>) =>
+  flow(invoke("match")([r]), O.fromNullable)
 
 /**
  * A functional wrapper around `String.prototype.matchAll`.
@@ -246,14 +235,7 @@ export const matchAll =
  */
 export const under = (
   f: Endomorphism<ReadonlyArray<string>>,
-): Endomorphism<string> =>
-  flow(
-    S.split(""),
-    xs => xs,
-    f,
-    xs => xs,
-    join(""),
-  )
+): Endomorphism<string> => flow(S.split(""), f, join(""))
 
 /**
  * Reverse a string.
@@ -308,7 +290,7 @@ export const unlines = join("\n")
 export const test =
   (r: RegExp): Predicate<string> =>
   x =>
-    r.test(x)
+    pipe(r, invoke("test")([x]))
 
 /**
  * Replace every occurrence of a matched substring with a replacement.
@@ -326,8 +308,7 @@ export const test =
 export const replaceAll =
   (r: string) =>
   (s: string): Endomorphism<string> =>
-  x =>
-    x.replaceAll(r, s)
+    invoke("replaceAll")([r, s])
 
 /**
  * Drop a number of characters from the start of a string, returning a new
@@ -347,10 +328,8 @@ export const replaceAll =
  *
  * @since 0.6.0
  */
-export const dropLeft =
-  (n: number): Endomorphism<string> =>
-  x =>
-    x.substring(n)
+export const dropLeft = (n: number): Endomorphism<string> =>
+  invoke("substring")([n])
 
 /**
  * Drop a number of characters from the end of a string, returning a new
@@ -373,7 +352,7 @@ export const dropLeft =
 export const dropRight =
   (n: number): Endomorphism<string> =>
   x =>
-    x.substring(0, x.length - Math.floor(n))
+    pipe(x, invoke("substring")([0, x.length - Math.floor(n)]))
 
 /**
  * Remove the longest initial substring for which all characters satisfy the
@@ -497,7 +476,7 @@ export const init: (x: string) => Option<string> = flow(
 export const lookup =
   (i: number) =>
   (x: string): Option<string> =>
-    O.fromNullable(x[i])
+    pipe(x[i], O.fromNullable)
 
 /**
  * Calculate the longest initial substring for which all characters satisfy the

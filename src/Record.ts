@@ -25,7 +25,7 @@ import { last } from "fp-ts/Semigroup"
  *
  * @since 0.1.0
  */
-export const values = <A>(x: Record<string, A>): Array<A> => Object.values(x)
+export const values: <A>(x: Record<string, A>) => Array<A> = Object.values
 
 /**
  * Like `lookup` from fp-ts, but flipped.

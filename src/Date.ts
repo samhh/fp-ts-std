@@ -15,7 +15,7 @@ import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { is } from "./Function"
+import { construct, invokeOn, is } from "./Function"
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an
@@ -32,7 +32,8 @@ import { is } from "./Function"
  *
  * @since 0.1.0
  */
-export const unsafeParseDate = (x: string | number): Date => new Date(x)
+export const unsafeParseDate = (x: string | number): Date =>
+  construct(Date)([x])
 
 /**
  * Newtype representing milliseconds.
@@ -103,8 +104,10 @@ export const fromMilliseconds: (x: Milliseconds) => Date = flow(
  *
  * @since 0.1.0
  */
-export const getTime = (x: Date): Milliseconds =>
-  pipe(x.getTime(), mkMilliseconds)
+export const getTime: (x: Date) => Milliseconds = flow(
+  invokeOn<Date>()("getTime")([]),
+  mkMilliseconds,
+)
 
 /**
  * Returns a date as a string value in ISO format.
@@ -118,7 +121,9 @@ export const getTime = (x: Date): Milliseconds =>
  *
  * @since 0.1.0
  */
-export const toISOString = (x: Date): string => x.toISOString()
+export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
+  [],
+)
 
 /**
  * Check if a foreign value is a `Date`.
