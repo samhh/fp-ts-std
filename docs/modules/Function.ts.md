@@ -34,6 +34,7 @@ Added in v0.1.0
   - [ifElse](#ifelse)
   - [invoke](#invoke)
   - [invokeOn](#invokeon)
+  - [is](#is)
   - [memoize](#memoize)
   - [unary](#unary)
   - [uncurry2](#uncurry2)
@@ -532,6 +533,34 @@ const padStart = curry2T(invokeOn<string>()('padStart'))
 const x = 'hello'
 
 assert.strictEqual(padStart(8)('.')(x), x.padStart(8, '.'))
+```
+
+Added in v0.12.0
+
+## is
+
+A curried function equivalent to the `instanceof` operator, for when you
+absolutely must test a prototype.
+
+**Signature**
+
+```ts
+export declare const is: <A>(x: new (...args: Array<any>) => unknown) => Refinement<unknown, A>
+```
+
+```hs
+is :: (...Array any -> unknown) -> Refinement unknown a
+```
+
+**Example**
+
+```ts
+import { is } from 'fp-ts-std/Function'
+
+const isString = is(String)
+
+assert.strictEqual(isString('ciao'), false)
+assert.strictEqual(isString(new String('ciao')), true)
 ```
 
 Added in v0.12.0

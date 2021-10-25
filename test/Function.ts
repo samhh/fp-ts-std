@@ -25,6 +25,7 @@ import {
   uncurry5,
   fork,
   converge,
+  is,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -413,6 +414,18 @@ describe("Function", () => {
             `${x}! ${x} ?${x}`,
         ),
       )
+    })
+  })
+
+  describe("is", () => {
+    it("is equivalent to instanceof operator", () => {
+      // eslint-disable-next-line functional/no-class
+      class X {}
+      const x = new X()
+
+      expect(is(X)(x)).toBe(true)
+      expect(is(Object)(x)).toBe(true)
+      expect(is(Function)(x)).toBe(false)
     })
   })
 })

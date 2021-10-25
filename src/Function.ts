@@ -21,6 +21,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import { concatAll } from "fp-ts/Monoid"
 import { first } from "fp-ts/Semigroup"
 import { Eq } from "fp-ts/Eq"
+import { Refinement } from "fp-ts/Refinement"
 
 /**
  * Flip the function/argument order of a curried function.
@@ -674,3 +675,25 @@ export const converge =
   ): ((x: A) => D) =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
     flow(x => fork(gs as any)(x) as unknown as [B, ...C], f)
+
+/**
+ * A curried function equivalent to the `instanceof` operator, for when you
+ * absolutely must test a prototype.
+ *
+ * @example
+ * import { is } from 'fp-ts-std/Function';
+ *
+ * const isString = is(String);
+ *
+ * assert.strictEqual(isString('ciao'), false);
+ * assert.strictEqual(isString(new String('ciao')), true);
+ *
+ * @since 0.12.0
+ */
+export const is =
+  <A>(x: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    new (...args: Array<any>): unknown
+  }): Refinement<unknown, A> =>
+  (y: unknown): y is A =>
+    y instanceof x

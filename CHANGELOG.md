@@ -9,7 +9,7 @@ This project adheres to semantic versioning.
 - Add `Monoid` module.
 - Add `TaskEither` module.
 - Add `Tuple` module.
-- Add `converge`, `invoke`, and `invokeOn` functions to the `Function` module.
+- Add `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.
 - Add `whenInvocationCount` and `execute` functions to the `IO` module.
 - Add `execute` function to the `Task` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
