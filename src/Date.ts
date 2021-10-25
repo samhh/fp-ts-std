@@ -15,6 +15,7 @@ import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
+import { is } from "./Function"
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an
@@ -130,8 +131,7 @@ export const toISOString = (x: Date): string => x.toISOString()
  *
  * @since 0.1.0
  */
-export const isDate: Refinement<unknown, Date> = (x): x is Date =>
-  x instanceof Date
+export const isDate: Refinement<unknown, Date> = is(Date)
 
 /**
  * Check if a `Date` is actually valid. (We all love JavaScript, don't we?)

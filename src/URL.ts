@@ -10,6 +10,7 @@ import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { flow, identity, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
+import { is } from "./Function"
 
 /**
  * Unsafely parse a `URL`, throwing on failure.
@@ -78,4 +79,4 @@ export const parseO: (href: string) => Option<URL> = flow(
  *
  * @since 0.1.0
  */
-export const isURL: Refinement<unknown, URL> = (x): x is URL => x instanceof URL
+export const isURL: Refinement<unknown, URL> = is(URL)

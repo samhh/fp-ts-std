@@ -9,6 +9,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
+import { is } from "./Function"
 
 /**
  * An empty `URLSearchParams`.
@@ -95,9 +96,8 @@ export const clone = (x: URLSearchParams): URLSearchParams =>
  *
  * @since 0.1.0
  */
-export const isURLSearchParams: Refinement<unknown, URLSearchParams> = (
-  x,
-): x is URLSearchParams => x instanceof URLSearchParams
+export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
+  is(URLSearchParams)
 
 /**
  * Attempt to get a URL parameter from a `URLSearchParams`.
