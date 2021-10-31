@@ -2,7 +2,7 @@
  * Various functions to aid in working with predicates. You may also find the
  * `Boolean` module relevant.
  *
- * @since 0.1.0
+ * @since 0.12.0
  */
 
 import { Predicate } from "fp-ts/Predicate"
@@ -25,7 +25,7 @@ import { invert } from "./Boolean"
  * assert.strictEqual(allPass([gt3, lt7, even])(4), true);
  * assert.strictEqual(allPass([gt3, lt7, even])(5), false);
  *
- * @since 0.4.0
+ * @since 0.12.0
  */
 export const allPass =
   <A>(fs: Array<Predicate<A>>): Predicate<A> =>
@@ -47,7 +47,7 @@ export const allPass =
  * assert.strictEqual(anyPass([lt3, gt7, even])(4), true);
  * assert.strictEqual(anyPass([lt3, gt7, even])(5), false);
  *
- * @since 0.4.0
+ * @since 0.12.0
  */
 export const anyPass =
   <A>(fs: Array<Predicate<A>>): Predicate<A> =>
@@ -69,7 +69,7 @@ export const anyPass =
  * assert.strictEqual(nonePass([lt3, gt7, even])(4), false);
  * assert.strictEqual(nonePass([lt3, gt7, even])(5), true);
  *
- * @since 0.4.0
+ * @since 0.12.0
  */
 
 export const nonePass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>

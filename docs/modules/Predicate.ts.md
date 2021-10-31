@@ -9,7 +9,7 @@ parent: Modules
 Various functions to aid in working with predicates. You may also find the
 `Boolean` module relevant.
 
-Added in v0.1.0
+Added in v0.12.0
 
 ---
 
@@ -53,7 +53,7 @@ assert.strictEqual(allPass([gt3, lt7, even])(4), true)
 assert.strictEqual(allPass([gt3, lt7, even])(5), false)
 ```
 
-Added in v0.4.0
+Added in v0.12.0
 
 ## anyPass
 
@@ -84,7 +84,7 @@ assert.strictEqual(anyPass([lt3, gt7, even])(4), true)
 assert.strictEqual(anyPass([lt3, gt7, even])(5), false)
 ```
 
-Added in v0.4.0
+Added in v0.12.0
 
 ## nonePass
 
@@ -115,4 +115,4 @@ assert.strictEqual(nonePass([lt3, gt7, even])(4), false)
 assert.strictEqual(nonePass([lt3, gt7, even])(5), true)
 ```
 
-Added in v0.4.0
+Added in v0.12.0
