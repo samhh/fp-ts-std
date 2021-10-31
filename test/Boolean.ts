@@ -1,9 +1,4 @@
-import {
-  invert,
-  and,
-  or,
-  xor,
-} from "../src/Boolean"
+import { invert, and, or, xor } from "../src/Boolean"
 
 describe("Boolean", () => {
   describe("invert", () => {
