@@ -1,5 +1,5 @@
 import { constFalse, constTrue } from "fp-ts/function"
-import { allPass, anyPass } from "../src/Predicate"
+import { allPass, anyPass, nonePass } from "../src/Predicate"
 
 describe("Predicate", () => {
   describe("allPass", () => {
@@ -23,6 +23,18 @@ describe("Predicate", () => {
 
     it("returns false if all predicates fail", () => {
       expect(f([constFalse, constFalse, constFalse])(null)).toBe(false)
+    })
+  })
+
+  describe("nonePass", () => {
+    const f = nonePass
+
+    it("returns true if all predicates fail", () => {
+      expect(f([constFalse, constFalse, constFalse])(null)).toBe(true)
+    })
+
+    it("returns false if any predicate succeeds", () => {
+      expect(f([constFalse, constTrue, constFalse])(null)).toBe(false)
     })
   })
 })

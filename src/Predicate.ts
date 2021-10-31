@@ -7,7 +7,8 @@
 
 import { Predicate } from "fp-ts/Predicate"
 import * as A from "fp-ts/Array"
-import { apply, pipe } from "fp-ts/function"
+import { apply, flow, pipe } from "fp-ts/function"
+import { invert } from "./Boolean"
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
@@ -52,3 +53,24 @@ export const anyPass =
   <A>(fs: Array<Predicate<A>>): Predicate<A> =>
   x =>
     pipe(fs, A.some(apply(x)))
+
+/**
+ * Given an array of predicates, returns a predicate that returns true if the
+ * argument passes none of the predicates.
+ *
+ * @example
+ * import { nonePass } from 'fp-ts-std/Predicate';
+ * import { Predicate } from 'fp-ts/Predicate';
+ *
+ * const lt3: Predicate<number> = n => n < 3;
+ * const gt7: Predicate<number> = n => n > 7;
+ * const even: Predicate<number> = n => n % 2 === 0;
+ *
+ * assert.strictEqual(nonePass([lt3, gt7, even])(4), false);
+ * assert.strictEqual(nonePass([lt3, gt7, even])(5), true);
+ *
+ * @since 0.4.0
+ */
+
+export const nonePass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
+  flow(anyPass(fs), invert)

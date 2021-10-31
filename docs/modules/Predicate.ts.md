@@ -18,6 +18,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [allPass](#allpass)
   - [anyPass](#anypass)
+  - [nonePass](#nonepass)
 
 ---
 
@@ -81,6 +82,37 @@ const even: Predicate<number> = (n) => n % 2 === 0
 
 assert.strictEqual(anyPass([lt3, gt7, even])(4), true)
 assert.strictEqual(anyPass([lt3, gt7, even])(5), false)
+```
+
+Added in v0.4.0
+
+## nonePass
+
+Given an array of predicates, returns a predicate that returns true if the
+argument passes none of the predicates.
+
+**Signature**
+
+```ts
+export declare const nonePass: <A>(fs: Predicate<A>[]) => Predicate<A>
+```
+
+```hs
+nonePass :: Array (Predicate a) -> Predicate a
+```
+
+**Example**
+
+```ts
+import { nonePass } from 'fp-ts-std/Predicate'
+import { Predicate } from 'fp-ts/Predicate'
+
+const lt3: Predicate<number> = (n) => n < 3
+const gt7: Predicate<number> = (n) => n > 7
+const even: Predicate<number> = (n) => n % 2 === 0
+
+assert.strictEqual(nonePass([lt3, gt7, even])(4), false)
+assert.strictEqual(nonePass([lt3, gt7, even])(5), true)
 ```
 
 Added in v0.4.0
