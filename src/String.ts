@@ -5,7 +5,7 @@
  */
 
 import { pipe, flow } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
+import { Predicate, and, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
@@ -21,7 +21,6 @@ import {
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
 import { flip, invoke, when } from "./Function"
-import { both } from "./Predicate"
 
 /**
  * Convert a number to a string.
@@ -125,7 +124,7 @@ export const surround = (x: string): Endomorphism<string> =>
  * @since 0.1.0
  */
 export const unsurround = (x: string): Endomorphism<string> =>
-  when(both(S.startsWith(x))(S.endsWith(x)))(flow(unprepend(x), unappend(x)))
+  when(and(S.startsWith(x))(S.endsWith(x)))(flow(unprepend(x), unappend(x)))
 
 /**
  * Keep the specified number of characters from the start of a string.

@@ -18,6 +18,7 @@ This project adheres to semantic versioning.
 - Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.
 - Replace `pick` in the `Record` and `ReadonlyRecord` modules with a non-thunked version. The old implementation is now called `pickFrom`.
 - Narrow the type of the first parameter in `replaceAll`. This reverts the change made in 0.10.1.
+- Remove `both` and `either` from the `Predicate` module (formerly `Boolean`) as they're superceded by [and](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#and) and [or](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#or) respectively.
 
 ## 0.11.0 (2021-08-09)
 
