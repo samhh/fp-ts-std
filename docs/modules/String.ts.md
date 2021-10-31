@@ -1,6 +1,6 @@
 ---
 title: String.ts
-nav_order: 19
+nav_order: 20
 parent: Modules
 ---
 
@@ -834,11 +834,11 @@ Remove the end of a string, if it exists.
 **Signature**
 
 ```ts
-export declare const unappend: (end: string) => (val: string) => string
+export declare const unappend: (end: string) => Endomorphism<string>
 ```
 
 ```hs
-unappend :: string -> string -> string
+unappend :: string -> Endomorphism string
 ```
 
 **Example**

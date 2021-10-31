@@ -7,6 +7,7 @@ This project adheres to semantic versioning.
 - Add `DOM` module.
 - Add `Lazy` module.
 - Add `Monoid` module.
+- Add `Predicate` module. Some of the functions from `Boolean` have been moved here.
 - Add `TaskEither` module.
 - Add `Tuple` module.
 - Add `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.

@@ -21,7 +21,7 @@ import {
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
 import { flip, invoke, when } from "./Function"
-import { both } from "./Boolean"
+import { both } from "./Predicate"
 
 /**
  * Convert a number to a string.
