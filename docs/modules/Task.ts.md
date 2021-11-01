@@ -18,6 +18,7 @@ Added in v0.1.0
   - [elapsed](#elapsed)
   - [execute](#execute)
   - [sleep](#sleep)
+  - [unless](#unless)
   - [when](#when)
 
 ---
@@ -137,6 +138,41 @@ sequenceT(T.ApplicativePar)(instant, slowest, slow)().then(() => {
 ```
 
 Added in v0.1.0
+
+## unless
+
+The reverse of `when`.
+
+**Signature**
+
+```ts
+export declare const unless: (x: boolean) => Endomorphism<Task<void>>
+```
+
+```hs
+unless :: boolean -> Endomorphism (Task void)
+```
+
+**Example**
+
+```ts
+import { flow, pipe } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
+import { unless } from 'fp-ts-std/Task'
+import * as TE from 'fp-ts/TaskEither'
+import * as T from 'fp-ts/Task'
+import { log } from 'fp-ts/Console'
+
+const logAsync = flow(log, T.fromIO)
+const isValid: Predicate<number> = (n) => n === 42
+
+pipe(
+  TE.of(123),
+  TE.chainFirstTaskK((n) => unless(isValid(n))(logAsync(n)))
+)
+```
+
+Added in v0.12.0
 
 ## when
 

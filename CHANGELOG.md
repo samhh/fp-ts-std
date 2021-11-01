@@ -15,7 +15,7 @@ This project adheres to semantic versioning.
 - Add `Tuple` module.
 - Add `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.
 - Add `when`, `unless`, `whenInvocationCount`, and `execute` functions to the `IO` module.
-- Add `when` and `execute` functions to the `Task` module.
+- Add `when`, `unless`, and `execute` functions to the `Task` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
 - Add `noneAs`, `invert`, and `toMonoid` functions to the `Option` module.
 - Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.

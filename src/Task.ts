@@ -9,7 +9,7 @@ type Task<A> = T.Task<A>
 import { IO } from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
-import { when as _when } from "./Applicative"
+import { when as _when, unless as _unless } from "./Applicative"
 
 /**
  * Wait for the specified number of milliseconds before resolving.
@@ -121,5 +121,31 @@ export const execute = <A>(x: Task<A>): Promise<A> => x()
  * @since 0.12.0
  */
 export const when: (x: boolean) => Endomorphism<Task<void>> = _when(
+  T.ApplicativePar,
+)
+
+/**
+ * The reverse of `when`.
+ *
+ * @example
+ * import { flow, pipe } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
+ * import { unless } from 'fp-ts-std/Task';
+ * import * as TE from 'fp-ts/TaskEither';
+ * import * as T from 'fp-ts/Task';
+ * import { log } from 'fp-ts/Console';
+ *
+ * const logAsync = flow(log, T.fromIO);
+ * const isValid: Predicate<number> = n => n === 42;
+ *
+ * pipe(
+ *   TE.of(123),
+ *   TE.chainFirstTaskK(n =>
+ *     unless(isValid(n))(logAsync(n))),
+ * );
+ *
+ * @since 0.12.0
+ */
+export const unless: (x: boolean) => Endomorphism<Task<void>> = _unless(
   T.ApplicativePar,
 )
