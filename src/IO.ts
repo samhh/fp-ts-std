@@ -7,6 +7,7 @@
 import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
+import { when as _when } from "./Applicative"
 
 type IO<A> = IO.IO<A>
 
@@ -128,3 +129,27 @@ export const whenInvocationCount =
  * @since 0.12.0
  */
 export const execute = <A>(x: IO<A>): A => x()
+
+/**
+ * Conditional execution of an `IO`. Helpful for things like logging.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
+ * import { when } from 'fp-ts-std/IO';
+ * import * as IOE from 'fp-ts/IOEither';
+ * import { log } from 'fp-ts/Console';
+ *
+ * const isInvalid: Predicate<number> = n => n !== 42;
+ *
+ * pipe(
+ *   IOE.of(123),
+ *   IOE.chainFirstIOK(n =>
+ *     when(isInvalid(n))(log(n))),
+ * );
+ *
+ * @since 0.12.0
+ */
+export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
+  IO.Applicative,
+)

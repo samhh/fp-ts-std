@@ -1,6 +1,6 @@
 ---
 title: IO.ts
-nav_order: 10
+nav_order: 11
 parent: Modules
 ---
 
@@ -18,6 +18,7 @@ Added in v0.7.0
   - [execute](#execute)
   - [once](#once)
   - [tap](#tap)
+  - [when](#when)
   - [whenInvocationCount](#wheninvocationcount)
 
 ---
@@ -120,6 +121,39 @@ assert.strictEqual(x, 4)
 ```
 
 Added in v0.7.0
+
+## when
+
+Conditional execution of an `IO`. Helpful for things like logging.
+
+**Signature**
+
+```ts
+export declare const when: (x: boolean) => Endomorphism<IO<void>>
+```
+
+```hs
+when :: boolean -> Endomorphism (IO void)
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
+import { when } from 'fp-ts-std/IO'
+import * as IOE from 'fp-ts/IOEither'
+import { log } from 'fp-ts/Console'
+
+const isInvalid: Predicate<number> = (n) => n !== 42
+
+pipe(
+  IOE.of(123),
+  IOE.chainFirstIOK((n) => when(isInvalid(n))(log(n)))
+)
+```
+
+Added in v0.12.0
 
 ## whenInvocationCount
 

@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.12.0 (_Unreleased_)
 
+- Add `Applicative` module.
 - Add `DOM` module.
 - Add `Lazy` module.
 - Add `Monoid` module.
@@ -13,8 +14,8 @@ This project adheres to semantic versioning.
 - Add `TaskEither` module.
 - Add `Tuple` module.
 - Add `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.
-- Add `whenInvocationCount` and `execute` functions to the `IO` module.
-- Add `execute` function to the `Task` module.
+- Add `when`, `whenInvocationCount`, and `execute` functions to the `IO` module.
+- Add `when` and `execute` functions to the `Task` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
 - Add `noneAs`, `invert`, and `toMonoid` functions to the `Option` module.
 - Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.

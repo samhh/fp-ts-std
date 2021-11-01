@@ -1,6 +1,6 @@
 ---
 title: Task.ts
-nav_order: 23
+nav_order: 24
 parent: Modules
 ---
 
@@ -18,6 +18,7 @@ Added in v0.1.0
   - [elapsed](#elapsed)
   - [execute](#execute)
   - [sleep](#sleep)
+  - [when](#when)
 
 ---
 
@@ -136,3 +137,39 @@ sequenceT(T.ApplicativePar)(instant, slowest, slow)().then(() => {
 ```
 
 Added in v0.1.0
+
+## when
+
+Conditional execution of a `Task`. Helpful for things like asychronous
+logging.
+
+**Signature**
+
+```ts
+export declare const when: (x: boolean) => Endomorphism<Task<void>>
+```
+
+```hs
+when :: boolean -> Endomorphism (Task void)
+```
+
+**Example**
+
+```ts
+import { flow, pipe } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
+import { when } from 'fp-ts-std/Task'
+import * as TE from 'fp-ts/TaskEither'
+import * as T from 'fp-ts/Task'
+import { log } from 'fp-ts/Console'
+
+const logAsync = flow(log, T.fromIO)
+const isInvalid: Predicate<number> = (n) => n !== 42
+
+pipe(
+  TE.of(123),
+  TE.chainFirstTaskK((n) => when(isInvalid(n))(logAsync(n)))
+)
+```
+
+Added in v0.12.0

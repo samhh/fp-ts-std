@@ -1,7 +1,7 @@
 /* eslint-disable functional/no-expression-statement */
 
 import fc from "fast-check"
-import { sleep, elapsed, execute } from "../src/Task"
+import { sleep, elapsed, execute, when } from "../src/Task"
 import { constant, constVoid, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
 import { mkMilliseconds, unMilliseconds } from "../src/Date"
@@ -72,5 +72,41 @@ describe("Task", () => {
         )
       })
     })
+
+    /* eslint-disable */
+    describe("when", () => {
+      const f = when
+
+      it("runs the effect on true condition", async () => {
+        let ran = false
+        const g = f(true)(async () => void (ran = true))
+
+        await g()
+        return expect(ran).toBe(true)
+      })
+
+      it("does not run the effect on false condition", async () => {
+        let ran = false
+        const g = f(false)(async () => void (ran = true))
+
+        await g()
+        return expect(ran).toBe(false)
+      })
+
+      it("does not prematurely execute side effect", async () => {
+        let ran = false
+        const g = f(true)(async () => void (ran = true))
+
+        expect(ran).toBe(false)
+        const h = pipe(
+          T.of(123),
+          T.chainFirst(() => g),
+        )
+        expect(ran).toBe(false)
+        await h()
+        return expect(ran).toBe(true)
+      })
+    })
+    /* eslint-enable */
   })
 })
