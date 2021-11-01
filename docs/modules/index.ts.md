@@ -15,22 +15,30 @@ Added in v0.5.1
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [applicative](#applicative)
   - [array](#array)
   - [boolean](#boolean)
   - [date](#date)
   - [debug](#debug)
   - [dom](#dom)
   - [either](#either)
+  - [env](#env)
   - [function](#function)
   - [io](#io)
   - [json](#json)
+  - [lazy](#lazy)
+  - [monoid](#monoid)
   - [number](#number)
   - [option](#option)
+  - [ordering](#ordering)
+  - [predicate](#predicate)
   - [readonlyArray](#readonlyarray)
   - [readonlyRecord](#readonlyrecord)
   - [record](#record)
+  - [show](#show)
   - [string](#string)
   - [task](#task)
+  - [taskEither](#taskeither)
   - [tuple](#tuple)
   - [url](#url)
   - [urlSearchParams](#urlsearchparams)
@@ -38,6 +46,22 @@ Added in v0.5.1
 ---
 
 # utils
+
+## applicative
+
+A re-export of the `fp-ts-std/Applicative` module.
+
+**Signature**
+
+```ts
+export declare const applicative: typeof applicative
+```
+
+```hs
+applicative :: typeof applicative
+```
+
+Added in v0.12.0
 
 ## array
 
@@ -136,6 +160,22 @@ either :: typeof either
 
 Added in v0.5.1
 
+## env
+
+A re-export of the `fp-ts-std/Env` module.
+
+**Signature**
+
+```ts
+export declare const env: typeof env
+```
+
+```hs
+env :: typeof env
+```
+
+Added in v0.12.0
+
 ## function
 
 A re-export of the `fp-ts-std/Function` module.
@@ -184,6 +224,38 @@ json :: typeof json
 
 Added in v0.5.1
 
+## lazy
+
+A re-export of the `fp-ts-std/Lazy` module.
+
+**Signature**
+
+```ts
+export declare const lazy: typeof lazy
+```
+
+```hs
+lazy :: typeof lazy
+```
+
+Added in v0.12.0
+
+## monoid
+
+A re-export of the `fp-ts-std/Monoid` module.
+
+**Signature**
+
+```ts
+export declare const monoid: typeof monoid
+```
+
+```hs
+monoid :: typeof monoid
+```
+
+Added in v0.12.0
+
 ## number
 
 A re-export of the `fp-ts-std/Number` module.
@@ -215,6 +287,38 @@ option :: typeof option
 ```
 
 Added in v0.5.1
+
+## ordering
+
+A re-export of the `fp-ts-std/Ordering` module.
+
+**Signature**
+
+```ts
+export declare const ordering: typeof ordering
+```
+
+```hs
+ordering :: typeof ordering
+```
+
+Added in v0.12.0
+
+## predicate
+
+A re-export of the `fp-ts-std/Predicate` module.
+
+**Signature**
+
+```ts
+export declare const predicate: typeof predicate
+```
+
+```hs
+predicate :: typeof predicate
+```
+
+Added in v0.12.0
 
 ## readonlyArray
 
@@ -264,6 +368,22 @@ record :: typeof record
 
 Added in v0.5.1
 
+## show
+
+A re-export of the `fp-ts-std/Show` module.
+
+**Signature**
+
+```ts
+export declare const show: typeof show
+```
+
+```hs
+show :: typeof show
+```
+
+Added in v0.12.0
+
 ## string
 
 A re-export of the `fp-ts-std/String` module.
@@ -295,6 +415,22 @@ task :: typeof task
 ```
 
 Added in v0.5.1
+
+## taskEither
+
+A re-export of the `fp-ts-std/TaskEither` module.
+
+**Signature**
+
+```ts
+export declare const taskEither: typeof taskEither
+```
+
+```hs
+taskEither :: typeof taskEither
+```
+
+Added in v0.12.0
 
 ## tuple
 

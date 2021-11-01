@@ -4,27 +4,41 @@
  * @since 0.5.1
  */
 
+import * as applicative from "./Applicative"
 import * as array from "./Array"
 import * as boolean from "./Boolean"
 import * as date from "./Date"
 import * as debug from "./Debug"
 import * as dom from "./DOM"
 import * as either from "./Either"
+import * as env from "./Env"
 import * as function_ from "./Function"
 import * as io from "./IO"
 import * as json from "./JSON"
+import * as lazy from "./Lazy"
+import * as monoid from "./Monoid"
 import * as number from "./Number"
 import * as option from "./Option"
-import * as record from "./Record"
+import * as ordering from "./Ordering"
+import * as predicate from "./Predicate"
 import * as readonlyArray from "./ReadonlyArray"
 import * as readonlyRecord from "./ReadonlyRecord"
+import * as record from "./Record"
+import * as show from "./Show"
 import * as string from "./String"
 import * as task from "./Task"
+import * as taskEither from "./TaskEither"
 import * as tuple from "./Tuple"
 import * as url from "./URL"
 import * as urlSearchParams from "./URLSearchParams"
 
 export {
+  /**
+   * A re-export of the `fp-ts-std/Applicative` module.
+   *
+   * @since 0.12.0
+   */
+  applicative,
   /**
    * A re-export of the `fp-ts-std/Array` module.
    *
@@ -63,6 +77,12 @@ export {
    */
   either,
   /**
+   * A re-export of the `fp-ts-std/Env` module.
+   *
+   * @since 0.12.0
+   */
+  env,
+  /**
    * A re-export of the `fp-ts-std/Function` module.
    *
    * @since 0.5.1
@@ -81,6 +101,18 @@ export {
    */
   json,
   /**
+   * A re-export of the `fp-ts-std/Lazy` module.
+   *
+   * @since 0.12.0
+   */
+  lazy,
+  /**
+   * A re-export of the `fp-ts-std/Monoid` module.
+   *
+   * @since 0.12.0
+   */
+  monoid,
+  /**
    * A re-export of the `fp-ts-std/Number` module.
    *
    * @since 0.5.1
@@ -93,11 +125,17 @@ export {
    */
   option,
   /**
-   * A re-export of the `fp-ts-std/Record` module.
+   * A re-export of the `fp-ts-std/Ordering` module.
    *
-   * @since 0.5.1
+   * @since 0.12.0
    */
-  record,
+  ordering,
+  /**
+   * A re-export of the `fp-ts-std/Predicate` module.
+   *
+   * @since 0.12.0
+   */
+  predicate,
   /**
    * A re-export of the `fp-ts-std/ReadonlyArray` module.
    *
@@ -111,6 +149,18 @@ export {
    */
   readonlyRecord,
   /**
+   * A re-export of the `fp-ts-std/Record` module.
+   *
+   * @since 0.5.1
+   */
+  record,
+  /**
+   * A re-export of the `fp-ts-std/Show` module.
+   *
+   * @since 0.12.0
+   */
+  show,
+  /**
    * A re-export of the `fp-ts-std/String` module.
    *
    * @since 0.5.1
@@ -122,6 +172,12 @@ export {
    * @since 0.5.1
    */
   task,
+  /**
+   * A re-export of the `fp-ts-std/TaskEither` module.
+   *
+   * @since 0.12.0
+   */
+  taskEither,
   /**
    * A re-export of the `fp-ts-std/Tuple` module.
    *
