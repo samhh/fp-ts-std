@@ -7,7 +7,7 @@
 import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
-import { when as _when } from "./Applicative"
+import { when as _when, unless as _unless } from "./Applicative"
 
 type IO<A> = IO.IO<A>
 
@@ -151,5 +151,29 @@ export const execute = <A>(x: IO<A>): A => x()
  * @since 0.12.0
  */
 export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
+  IO.Applicative,
+)
+
+/**
+ * The reverse of `when`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
+ * import { unless } from 'fp-ts-std/IO';
+ * import * as IOE from 'fp-ts/IOEither';
+ * import { log } from 'fp-ts/Console';
+ *
+ * const isValid: Predicate<number> = n => n === 42;
+ *
+ * pipe(
+ *   IOE.of(123),
+ *   IOE.chainFirstIOK(n =>
+ *     unless(isValid(n))(log(n))),
+ * );
+ *
+ * @since 0.12.0
+ */
+export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
   IO.Applicative,
 )

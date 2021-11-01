@@ -6,7 +6,14 @@ import {
   constVoid,
   pipe,
 } from "fp-ts/function"
-import { tap, once, whenInvocationCount, execute, when } from "../src/IO"
+import {
+  tap,
+  once,
+  whenInvocationCount,
+  execute,
+  when,
+  unless,
+} from "../src/IO"
 import { add } from "../src/Number"
 import fc from "fast-check"
 
@@ -157,6 +164,42 @@ describe("IO", () => {
     it("does not prematurely execute side effect", () => {
       let ran = false
       const g = f(true)(() => (ran = true))
+
+      expect(ran).toBe(false)
+      const h = pipe(
+        IO.of(123),
+        IO.chainFirst(() => g),
+      )
+      expect(ran).toBe(false)
+      h()
+      expect(ran).toBe(true)
+    })
+  })
+  /* eslint-enable */
+
+  /* eslint-disable */
+  describe("unless", () => {
+    const f = unless
+
+    it("runs the effect on false condition", () => {
+      let ran = false
+      const g = f(false)(() => (ran = true))
+
+      g()
+      expect(ran).toBe(true)
+    })
+
+    it("does not run the effect on true condition", () => {
+      let ran = false
+      const g = f(true)(() => (ran = true))
+
+      g()
+      expect(ran).toBe(false)
+    })
+
+    it("does not prematurely execute side effect", () => {
+      let ran = false
+      const g = f(false)(() => (ran = true))
 
       expect(ran).toBe(false)
       const h = pipe(

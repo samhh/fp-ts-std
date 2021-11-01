@@ -18,6 +18,7 @@ Added in v0.7.0
   - [execute](#execute)
   - [once](#once)
   - [tap](#tap)
+  - [unless](#unless)
   - [when](#when)
   - [whenInvocationCount](#wheninvocationcount)
 
@@ -121,6 +122,39 @@ assert.strictEqual(x, 4)
 ```
 
 Added in v0.7.0
+
+## unless
+
+The reverse of `when`.
+
+**Signature**
+
+```ts
+export declare const unless: (x: boolean) => Endomorphism<IO<void>>
+```
+
+```hs
+unless :: boolean -> Endomorphism (IO void)
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
+import { unless } from 'fp-ts-std/IO'
+import * as IOE from 'fp-ts/IOEither'
+import { log } from 'fp-ts/Console'
+
+const isValid: Predicate<number> = (n) => n === 42
+
+pipe(
+  IOE.of(123),
+  IOE.chainFirstIOK((n) => unless(isValid(n))(log(n)))
+)
+```
+
+Added in v0.12.0
 
 ## when
 
