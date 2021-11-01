@@ -72,3 +72,50 @@ export function when<F>(
 ): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
   return b => x => b ? x : F.of(undefined)
 }
+
+/**
+ * The reverse of `when`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { Predicate } from 'fp-ts/Predicate';
+ * import { unless } from 'fp-ts-std/Applicative';
+ * import * as IO from 'fp-ts/IO';
+ * import * as IOE from 'fp-ts/IOEither';
+ * import { log } from 'fp-ts/Console';
+ *
+ * const isValid: Predicate<number> = n => n === 42;
+ *
+ * pipe(
+ *   IOE.of(123),
+ *   IOE.chainFirstIOK(n =>
+ *     unless(IO.Applicative)(isValid(n))(log(n))),
+ * );
+ *
+ * @since 0.12.0
+ */
+export function unless<F extends URIS4>(
+  F: Applicative4<F>,
+): (
+  b: boolean,
+) => <S, R, E>(x: Kind4<F, S, R, E, void>) => Kind4<F, S, R, E, void>
+export function unless<F extends URIS3>(
+  F: Applicative3<F>,
+): (b: boolean) => <R, E>(x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
+export function unless<F extends URIS3, E>(
+  F: Applicative3C<F, E>,
+): (b: boolean) => <R>(x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
+export function unless<F extends URIS2>(
+  F: Applicative2<F>,
+): (b: boolean) => <E>(x: Kind2<F, E, void>) => Kind2<F, E, void>
+export function unless<F extends URIS2, E>(
+  F: Applicative2C<F, E>,
+): (b: boolean) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
+export function unless<F extends URIS>(
+  F: Applicative1<F>,
+): (b: boolean) => (x: Kind<F, void>) => Kind<F, void>
+export function unless<F>(
+  F: Applicative<F>,
+): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
+  return b => x => b ? F.of(undefined) : x
+}
