@@ -1,4 +1,12 @@
-import { dup, toFst, toSnd, traverseToFst, traverseToSnd } from "../src/Tuple"
+import {
+  dup,
+  toFst,
+  toSnd,
+  traverseToFst,
+  traverseToSnd,
+  withFst,
+  withSnd,
+} from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, pipe } from "fp-ts/function"
 import { swap } from "fp-ts/lib/Tuple"
@@ -87,6 +95,22 @@ describe("Tuple", () => {
           ),
         ),
       )
+    })
+  })
+
+  describe("withFst", () => {
+    const f = withFst
+
+    it("constructs a tuple in order of arguments", () => {
+      expect(f(1)(2)).toEqual([1, 2])
+    })
+  })
+
+  describe("withSnd", () => {
+    const f = withSnd
+
+    it("constructs a tuple in reverse order of arguments", () => {
+      expect(f(1)(2)).toEqual([2, 1])
     })
   })
 })

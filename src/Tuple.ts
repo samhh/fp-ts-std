@@ -159,3 +159,37 @@ export function traverseToSnd<F>(
 ): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [A, B]> {
   return g => x => F.map(g(x), y => [x, y])
 }
+
+/**
+ * Curried tuple construction. A dual to `withSnd`. Equivalent to Haskell's
+ * tuple sections.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { withFst } from 'fp-ts-std/Tuple';
+ *
+ * assert.deepStrictEqual(pipe('x', withFst('y')), ['y', 'x']);
+ *
+ * @since 0.12.0
+ */
+export const withFst =
+  <A>(x: A) =>
+  <B>(y: B): [A, B] =>
+    [x, y]
+
+/**
+ * Curried tuple construction. A dual to `withFst`. Equivalent to Haskell's
+ * tuple sections.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { withSnd } from 'fp-ts-std/Tuple';
+ *
+ * assert.deepStrictEqual(pipe('x', withSnd('y')), ['x', 'y']);
+ *
+ * @since 0.12.0
+ */
+export const withSnd =
+  <A>(x: A) =>
+  <B>(y: B): [B, A] =>
+    [y, x]

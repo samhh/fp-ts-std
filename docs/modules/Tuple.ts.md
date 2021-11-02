@@ -20,6 +20,8 @@ Added in v0.12.0
   - [toSnd](#tosnd)
   - [traverseToFst](#traversetofst)
   - [traverseToSnd](#traversetosnd)
+  - [withFst](#withfst)
+  - [withSnd](#withsnd)
 
 ---
 
@@ -201,6 +203,58 @@ const fromNumberO = flow(fromNumber, O.some)
 
 assert.deepStrictEqual(traverseToSndO(fromNumberO)(5), O.some([5, '5']))
 assert.deepStrictEqual(traverseToSndO(constant(O.none))(5), O.none)
+```
+
+Added in v0.12.0
+
+## withFst
+
+Curried tuple construction. A dual to `withSnd`. Equivalent to Haskell's
+tuple sections.
+
+**Signature**
+
+```ts
+export declare const withFst: <A>(x: A) => <B>(y: B) => [A, B]
+```
+
+```hs
+withFst :: a -> b -> [a, b]
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { withFst } from 'fp-ts-std/Tuple'
+
+assert.deepStrictEqual(pipe('x', withFst('y')), ['y', 'x'])
+```
+
+Added in v0.12.0
+
+## withSnd
+
+Curried tuple construction. A dual to `withFst`. Equivalent to Haskell's
+tuple sections.
+
+**Signature**
+
+```ts
+export declare const withSnd: <A>(x: A) => <B>(y: B) => [B, A]
+```
+
+```hs
+withSnd :: a -> b -> [b, a]
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { withSnd } from 'fp-ts-std/Tuple'
+
+assert.deepStrictEqual(pipe('x', withSnd('y')), ['x', 'y'])
 ```
 
 Added in v0.12.0
