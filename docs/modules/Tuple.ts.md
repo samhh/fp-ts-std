@@ -15,6 +15,7 @@ Added in v0.12.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [create](#create)
   - [dup](#dup)
   - [toFst](#tofst)
   - [toSnd](#tosnd)
@@ -26,6 +27,31 @@ Added in v0.12.0
 ---
 
 # utils
+
+## create
+
+Create a tuple. Helps with fighting TypeScript's type inferrence without
+having to repeat yourself or use `as const`.
+
+**Signature**
+
+```ts
+export declare const create: <A, B>(xs: [A, B]) => [A, B]
+```
+
+```hs
+create :: [a, b] -> [a, b]
+```
+
+**Example**
+
+```ts
+import { create } from 'fp-ts-std/Tuple'
+
+assert.deepStrictEqual(create(['x', 'y']), ['x', 'y'])
+```
+
+Added in v0.12.0
 
 ## dup
 

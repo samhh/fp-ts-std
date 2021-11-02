@@ -193,3 +193,16 @@ export const withSnd =
   <A>(x: A) =>
   <B>(y: B): [B, A] =>
     [y, x]
+
+/**
+ * Create a tuple. Helps with fighting TypeScript's type inferrence without
+ * having to repeat yourself or use `as const`.
+ *
+ * @example
+ * import { create } from 'fp-ts-std/Tuple';
+ *
+ * assert.deepStrictEqual(create(['x', 'y']), ['x', 'y']);
+ *
+ * @since 0.12.0
+ */
+export const create: <A, B>(xs: [A, B]) => [A, B] = identity

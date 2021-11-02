@@ -6,6 +6,7 @@ import {
   traverseToSnd,
   withFst,
   withSnd,
+  create,
 } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, pipe } from "fp-ts/function"
@@ -111,6 +112,18 @@ describe("Tuple", () => {
 
     it("constructs a tuple in reverse order of arguments", () => {
       expect(f(1)(2)).toEqual([2, 1])
+    })
+  })
+
+  describe("create", () => {
+    const f = create
+
+    it("is equivalent to identity at runtime", () => {
+      fc.assert(
+        fc.property(fc.anything(), fc.anything(), (x, y) =>
+          expect(f([x, y])).toEqual([x, y]),
+        ),
+      )
     })
   })
 })
