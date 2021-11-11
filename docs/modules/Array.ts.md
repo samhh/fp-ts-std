@@ -23,6 +23,7 @@ Added in v0.1.0
   - [dropRightWhile](#droprightwhile)
   - [elemFlipped](#elemflipped)
   - [endsWith](#endswith)
+  - [extractAt](#extractat)
   - [filterA](#filtera)
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
@@ -301,6 +302,35 @@ assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false)
 ```
 
 Added in v0.6.0
+
+## extractAt
+
+Remove the element at the specified index, returning both said element and
+the remaining array. Returns `None` if the index is out of bounds.
+
+**Signature**
+
+```ts
+export declare const extractAt: (i: number) => <A>(xs: A[]) => Option<[A, A[]]>
+```
+
+```hs
+extractAt :: number -> Array a -> Option [a, (Array a)]
+```
+
+**Example**
+
+```ts
+import { extractAt } from 'fp-ts-std/Array'
+import * as O from 'fp-ts/Option'
+
+const f = extractAt(1)
+assert.deepStrictEqual(f(['x']), O.none)
+assert.deepStrictEqual(f(['x', 'y']), O.some(['y', ['x']]))
+assert.deepStrictEqual(f(['x', 'y', 'z']), O.some(['y', ['x', 'z']]))
+```
+
+Added in v0.12.0
 
 ## filterA
 
