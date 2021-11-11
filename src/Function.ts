@@ -17,7 +17,7 @@ import {
   apply,
 } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
 import { concatAll } from "fp-ts/Monoid"
 import { first } from "fp-ts/Semigroup"
 import { Eq } from "fp-ts/Eq"
@@ -697,3 +697,22 @@ export const is =
   }): Refinement<unknown, A> =>
   (y: unknown): y is A =>
     y instanceof x
+
+/**
+ * Apply an array of endomorphisms to an array from left-to-right.
+ *
+ * @example
+ * import { applyEvery } from 'fp-ts-std/Function';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { increment, multiply } from 'fp-ts-std/Number';
+ *
+ * const fs: Array<Endomorphism<number>> = [increment, multiply(3)];
+ * const g = applyEvery(fs);
+ *
+ * assert.deepStrictEqual(g(1), 6);
+ * assert.deepStrictEqual(g(3), 12);
+ *
+ * @since 0.12.0
+ */
+export const applyEvery: <A>(fs: Array<Endomorphism<A>>) => Endomorphism<A> =
+  concatAll(getEndoMonoid())

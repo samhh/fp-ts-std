@@ -14,7 +14,7 @@ This project adheres to semantic versioning.
 - Add `Show` module.
 - Add `TaskEither` module.
 - Add `Tuple` module.
-- Add `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.
+- Add `applyEvery`, `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.
 - Add `when`, `unless`, `whenInvocationCount`, and `execute` functions to the `IO` module.
 - Add `when`, `unless`, and `execute` functions to the `Task` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.

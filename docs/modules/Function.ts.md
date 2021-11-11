@@ -18,6 +18,7 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [applyEvery](#applyevery)
   - [construct](#construct)
   - [converge](#converge)
   - [curry2](#curry2)
@@ -49,6 +50,36 @@ Added in v0.1.0
 ---
 
 # utils
+
+## applyEvery
+
+Apply an array of endomorphisms to an array from left-to-right.
+
+**Signature**
+
+```ts
+export declare const applyEvery: <A>(fs: Endomorphism<A>[]) => Endomorphism<A>
+```
+
+```hs
+applyEvery :: Array (Endomorphism a) -> Endomorphism a
+```
+
+**Example**
+
+```ts
+import { applyEvery } from 'fp-ts-std/Function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
+import { increment, multiply } from 'fp-ts-std/Number'
+
+const fs: Array<Endomorphism<number>> = [increment, multiply(3)]
+const g = applyEvery(fs)
+
+assert.deepStrictEqual(g(1), 6)
+assert.deepStrictEqual(g(3), 12)
+```
+
+Added in v0.12.0
 
 ## construct
 

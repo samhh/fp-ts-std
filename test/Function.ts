@@ -26,13 +26,20 @@ import {
   fork,
   converge,
   is,
+  applyEvery,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
-import { constant, constFalse, constTrue, identity } from "fp-ts/function"
+import {
+  constant,
+  constFalse,
+  constTrue,
+  identity,
+  increment,
+} from "fp-ts/function"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as N from "fp-ts/number"
 import fc from "fast-check"
@@ -426,6 +433,20 @@ describe("Function", () => {
       expect(is(X)(x)).toBe(true)
       expect(is(Object)(x)).toBe(true)
       expect(is(Function)(x)).toBe(false)
+    })
+  })
+
+  describe("applyEvery", () => {
+    const f = applyEvery
+
+    it("returns identity on empty array", () => {
+      fc.assert(fc.property(fc.anything(), x => expect(f([])(x)).toEqual(x)))
+    })
+
+    it("applies functions from left side", () => {
+      const fs: Array<Endomorphism<number>> = [increment, multiply(3)]
+      expect(f(fs)(1)).not.toBe(4)
+      expect(f(fs)(1)).toBe(6)
     })
   })
 })
