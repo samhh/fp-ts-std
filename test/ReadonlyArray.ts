@@ -32,6 +32,7 @@ import {
   maximum,
   zipAll,
   filterA,
+  extractAt,
 } from "../src/ReadonlyArray"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
@@ -52,10 +53,11 @@ import { concatAll } from "fp-ts/Monoid"
 import { split } from "fp-ts/string"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import { values } from "../src/Record"
-import { add } from "../src/Number"
+import { add, decrement } from "../src/Number"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"
+import { fst, snd } from "fp-ts/Tuple"
 
 describe("Array", () => {
   describe("elemFlipped", () => {
@@ -1014,6 +1016,40 @@ describe("Array", () => {
           expect(f(isEvenIO)(xs)()).toEqual(g(isEven)(xs)),
         ),
       )
+    })
+  })
+
+  describe("extractAt", () => {
+    const f = extractAt(1)
+
+    it("returns None on index out of bounds", () => {
+      expect(f([])).toEqual(O.none)
+      expect(f(["x"])).toEqual(O.none)
+    })
+
+    it("returns array of input size minus one", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything(), { minLength: 2 }), xs =>
+          expect(pipe(xs, f, O.map(flow(snd, A.size)))).toEqual(
+            pipe(xs, A.size, decrement, O.some),
+          ),
+        ),
+      )
+    })
+
+    it("returns element at index", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything(), { minLength: 2 }), xs =>
+          expect(pipe(xs, f, O.map(fst))).toEqual(A.lookup(1)(xs)),
+        ),
+      )
+    })
+
+    it("does not mutate input", () => {
+      const xs = [1, 2, 3]
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const _ = f(xs)
+      expect(xs).toEqual([1, 2, 3])
     })
   })
 })

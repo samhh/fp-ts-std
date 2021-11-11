@@ -18,7 +18,7 @@ This project adheres to semantic versioning.
 - Add `when`, `unless`, and `execute` functions to the `Task` module.
 - Add `isFinite` and `toFinite` functions to the `Number` module.
 - Add `noneAs`, `invert`, and `toMonoid` functions to the `Option` module.
-- Add `extractAt` function to the `Array` module.
+- Add `extractAt` function to the `Array` and `ReadonlyArray` modules.
 - Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.
 - Replace `pick` in the `Record` and `ReadonlyRecord` modules with a non-thunked version. The old implementation is now called `pickFrom`.
 - Narrow the type of the first parameter in `replaceAll`. This reverts the change made in 0.10.1.

@@ -865,3 +865,27 @@ export function filterA<F>(
   return p => xs =>
     RA.Witherable.wither(F)(xs, x => F.map(p(x), y => (y ? O.some(x) : O.none)))
 }
+
+/**
+ * Remove the element at the specified index, returning both said element and
+ * the remaining array. Returns `None` if the index is out of bounds.
+ *
+ * @example
+ * import { extractAt } from 'fp-ts-std/ReadonlyArray';
+ * import * as O from 'fp-ts/Option';
+ *
+ * const f = extractAt(1);
+ * assert.deepStrictEqual(f(['x']), O.none);
+ * assert.deepStrictEqual(f(['x', 'y']), O.some(['y', ['x']]));
+ * assert.deepStrictEqual(f(['x', 'y', 'z']), O.some(['y', ['x', 'z']]));
+ *
+ * @since 0.12.0
+ */
+export const extractAt =
+  (i: number) =>
+  <A>(xs: ReadonlyArray<A>): Option<[A, ReadonlyArray<A>]> =>
+    pipe(
+      xs,
+      RA.lookup(i),
+      O.map(x => [x, RA.unsafeDeleteAt(i, xs)]),
+    )
