@@ -10,6 +10,7 @@ This project adheres to semantic versioning.
 - Add `Monoid` module.
 - Add `Ordering` module.
 - Add `Predicate` module. Some of the functions from `Boolean` have been moved here.
+- Add `Random` module.
 - Add `Show` module.
 - Add `TaskEither` module.
 - Add `Tuple` module.
