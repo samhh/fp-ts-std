@@ -25,7 +25,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "./prepare.sh && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json",
+    "build": "./prepare.sh && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src/ ./test/ --ext ts",
     "fmt": "prettier .",
