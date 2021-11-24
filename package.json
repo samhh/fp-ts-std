@@ -23,6 +23,11 @@
       "import": "./dist/esm/*.js"
     }
   },
+  "typesVersions": {
+    "*": {
+      "*": ["./dist/types/*"]
+    }
+  },
   "sideEffects": false,
   "scripts": {
     "build": "./prepare.sh && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",
