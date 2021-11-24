@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.12.0 (_Unreleased_)
+## 0.12.0 (_beta.0:_ 2021-11-24)
 
 - Add `Applicative` module.
 - Add `DOM` module.
