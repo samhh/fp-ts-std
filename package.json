@@ -38,7 +38,7 @@
     "test": "jest",
     "docs": "docs-ts",
     "tshm": "tshm-docs-ts ./docs/modules/*",
-    "prepub": "yarn run build"
+    "prepublish": "yarn run build"
   },
   "devDependencies": {
     "@types/eslint": "^7.0.0",
