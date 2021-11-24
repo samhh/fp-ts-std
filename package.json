@@ -28,6 +28,7 @@
       "*": ["./dist/types/*"]
     }
   },
+  "files": ["dist/"],
   "sideEffects": false,
   "scripts": {
     "build": "./prepare.sh && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",
