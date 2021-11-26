@@ -4,7 +4,8 @@
     "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "strict": true,
-    "declaration": false
+    "declaration": false,
+    "removeComments": true
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }
