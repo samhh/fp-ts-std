@@ -12,7 +12,7 @@ fp-ts, [newtype-ts](https://gcanti.github.io/newtype-ts/), and [monocle-ts](http
 
 Some of the more commonly needed functions from [fp-ts-contrib](https://gcanti.github.io/fp-ts-contrib/docs/modules) are duplicated here.
 
-fp-ts-std is published with both ESM and CJS modules. The import paths in either case needn't change and the appropriate module resolution should be picked up by npm and your bundler. Given ESM modules the library should tree shake well.
+fp-ts-std is published with both ESM and CJS modules. The import paths in either case needn't change and the appropriate module resolution should be picked up by Node and your bundler, however if your environment doesn't support [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) you'll need to import directly from a `dist/(cjs|esm)/` subdirectory. Given ESM modules the library should tree shake well.
 
 ## Objectives
 

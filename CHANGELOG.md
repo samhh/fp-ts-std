@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.12.0 (_beta.0:_ 2021-11-24)
 
+- Add ESM support for tree shaking. Note that your bundler or Node environment must now support [conditional exports](https://nodejs.org/api/packages.html#conditional-exports), else you'll need to import directly from a `dist/(cjs|esm)/` subdirectory.
 - Add `Applicative` module.
 - Add `DOM` module.
 - Add `Lazy` module.
