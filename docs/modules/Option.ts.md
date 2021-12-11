@@ -16,6 +16,8 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [invert](#invert)
+  - [memptyUnless](#memptyunless)
+  - [memptyWhen](#memptywhen)
   - [noneAs](#noneas)
   - [toMonoid](#tomonoid)
   - [unsafeUnwrap](#unsafeunwrap)
@@ -58,6 +60,64 @@ assert.deepStrictEqual(f(O.some('x')), O.none)
 ```
 
 Added in v0.12.0
+
+## memptyUnless
+
+Conditionally returns the provided `Option` or `None`. The dual to
+`memptyWhen`.
+
+**Signature**
+
+```ts
+export declare const memptyUnless: (x: boolean) => <A>(m: Option<A>) => Option<A>
+```
+
+```hs
+memptyUnless :: boolean -> Option a -> Option a
+```
+
+**Example**
+
+```ts
+import { memptyUnless } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(memptyUnless(true)(O.some('x')), O.some('x'))
+assert.deepStrictEqual(memptyUnless(true)(O.none), O.none)
+assert.deepStrictEqual(memptyUnless(false)(O.some('x')), O.none)
+assert.deepStrictEqual(memptyUnless(false)(O.none), O.none)
+```
+
+Added in v0.13.0
+
+## memptyWhen
+
+Conditionally returns the provided `Option` or `None`. The dual to
+`memptyUnless`.
+
+**Signature**
+
+```ts
+export declare const memptyWhen: (x: boolean) => <A>(m: Option<A>) => Option<A>
+```
+
+```hs
+memptyWhen :: boolean -> Option a -> Option a
+```
+
+**Example**
+
+```ts
+import { memptyWhen } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(memptyWhen(true)(O.some('x')), O.none)
+assert.deepStrictEqual(memptyWhen(true)(O.none), O.none)
+assert.deepStrictEqual(memptyWhen(false)(O.some('x')), O.some('x'))
+assert.deepStrictEqual(memptyWhen(false)(O.none), O.none)
+```
+
+Added in v0.13.0
 
 ## noneAs
 

@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.13.0 (_Unreleased_)
 
 - Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
+- Add `memptyWhen` and `memptyUnless` functions to the `Option` module.
 
 ## 0.12.0 (2021-12-01)
 

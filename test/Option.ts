@@ -1,8 +1,19 @@
-import { unsafeUnwrap, noneAs, invert, toMonoid } from "../src/Option"
+import {
+  unsafeUnwrap,
+  noneAs,
+  invert,
+  toMonoid,
+  memptyWhen,
+  memptyUnless,
+} from "../src/Option"
 import * as O from "fp-ts/Option"
+import { Option } from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
 import { pipe } from "fp-ts/function"
+
+const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
+  fc.oneof(x.map(O.some), fc.constant(O.none))
 
 describe("Option", () => {
   describe("unsafeUnwrap", () => {
@@ -58,6 +69,44 @@ describe("Option", () => {
 
     it("unwraps Some", () => {
       fc.assert(fc.property(fc.string(), x => pipe(x, O.some, f) === x))
+    })
+  })
+
+  describe("memptyWhen", () => {
+    const f = memptyWhen
+
+    it("returns identity element on true condition", () => {
+      fc.assert(
+        fc.property(arbOption(fc.string()), x =>
+          expect(f(true)(x)).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("returns identity on argument on false condition", () => {
+      fc.assert(
+        fc.property(arbOption(fc.string()), x =>
+          expect(f(false)(x)).toEqual(x),
+        ),
+      )
+    })
+  })
+
+  describe("memptyUnless", () => {
+    const f = memptyUnless
+
+    it("returns identity element on false condition", () => {
+      fc.assert(
+        fc.property(arbOption(fc.string()), x =>
+          expect(f(false)(x)).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("returns identity on argument on true condition", () => {
+      fc.assert(
+        fc.property(arbOption(fc.string()), x => expect(f(true)(x)).toEqual(x)),
+      )
     })
   })
 })

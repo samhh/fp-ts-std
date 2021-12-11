@@ -10,6 +10,7 @@ import { Eq } from "fp-ts/lib/Eq"
 import { Endomorphism } from "fp-ts/lib/Endomorphism"
 import { constant, flow } from "fp-ts/lib/function"
 import * as B from "fp-ts/boolean"
+import { invert as invertBool } from "./Boolean"
 import { toMonoid as _toMonoid } from "./Monoid"
 
 /**
@@ -91,3 +92,43 @@ export const invert =
  * @since 0.12.0
  */
 export const toMonoid = _toMonoid(O.Foldable)
+
+// These aren't defined in terms of Monoid memptyWhen/Unless because then we'd
+// need a redundant `Monoid<A>` input.
+/**
+ * Conditionally returns the provided `Option` or `None`. The dual to
+ * `memptyUnless`.
+ *
+ * @example
+ * import { memptyWhen } from 'fp-ts-std/Option';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(memptyWhen(true)(O.some('x')), O.none);
+ * assert.deepStrictEqual(memptyWhen(true)(O.none), O.none);
+ * assert.deepStrictEqual(memptyWhen(false)(O.some('x')), O.some('x'));
+ * assert.deepStrictEqual(memptyWhen(false)(O.none), O.none);
+ *
+ * @since 0.13.0
+ */
+export const memptyWhen =
+  (x: boolean) =>
+  <A>(m: Option<A>): Option<A> =>
+    x ? O.none : m
+
+/**
+ * Conditionally returns the provided `Option` or `None`. The dual to
+ * `memptyWhen`.
+ *
+ * @example
+ * import { memptyUnless } from 'fp-ts-std/Option';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(memptyUnless(true)(O.some('x')), O.some('x'));
+ * assert.deepStrictEqual(memptyUnless(true)(O.none), O.none);
+ * assert.deepStrictEqual(memptyUnless(false)(O.some('x')), O.none);
+ * assert.deepStrictEqual(memptyUnless(false)(O.none), O.none);
+ *
+ * @since 0.13.0
+ */
+export const memptyUnless: (x: boolean) => <A>(m: Option<A>) => Option<A> =
+  flow(invertBool, memptyWhen)
