@@ -189,10 +189,10 @@ dropRightWhile :: Predicate string -> Endomorphism string
 
 ```ts
 import { dropRightWhile } from 'fp-ts-std/String'
-import { elemFlipped } from 'fp-ts-std/Array'
+import { elemV } from 'fp-ts-std/Array'
 import { eqString } from 'fp-ts/Eq'
 
-const isVowel = elemFlipped(eqString)(['a', 'e', 'i', 'o', 'u'])
+const isVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u'])
 const dropRightVowels = dropRightWhile(isVowel)
 
 assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')

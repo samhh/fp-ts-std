@@ -28,20 +28,20 @@ import { last } from "fp-ts/Semigroup"
 export const values: <A>(x: Record<string, A>) => Array<A> = Object.values
 
 /**
- * Like `lookup` from fp-ts, but flipped.
+ * Like `fp-ts/Record::lookup` but flipped, which the "V" suffix denotes.
  *
  * @example
- * import { lookupFlipped } from 'fp-ts-std/Record';
+ * import { lookupV } from 'fp-ts-std/Record';
  * import * as A from 'fp-ts/Array';
  *
  * const x = { a: 1, b: 'two', c: [true] };
  * const ks = ['a', 'c'];
  *
- * assert.deepStrictEqual(A.filterMap(lookupFlipped(x))(ks), [1, [true]]);
+ * assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]]);
  *
  * @since 0.1.0
  */
-export const lookupFlipped =
+export const lookupV =
   <A>(x: Record<string, A>) =>
   (k: string): Option<A> =>
     R.lookup(k)(x)

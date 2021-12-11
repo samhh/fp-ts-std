@@ -45,20 +45,20 @@ import {
 } from "fp-ts/Applicative"
 
 /**
- * Like `fp-ts/Array::elem`, but flipped.
+ * Like `fp-ts/Array::elem` but flipped, which the "V" suffix denotes.
  *
  * @example
- * import { elemFlipped } from 'fp-ts-std/Array';
+ * import { elemV } from 'fp-ts-std/Array';
  * import { eqString } from 'fp-ts/Eq';
  *
- * const isLowerVowel = elemFlipped(eqString)(['a', 'e', 'i', 'o', 'u']);
+ * const isLowerVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u']);
  *
  * assert.strictEqual(isLowerVowel('a'), true);
  * assert.strictEqual(isLowerVowel('b'), false);
  *
  * @since 0.1.0
  */
-export const elemFlipped =
+export const elemV =
   <A>(eq: Eq<A>) =>
   (xs: Array<A>): Predicate<A> =>
   y =>

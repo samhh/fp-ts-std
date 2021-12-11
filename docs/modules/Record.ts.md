@@ -17,7 +17,7 @@ Added in v0.1.0
 - [utils](#utils)
   - [invertAll](#invertall)
   - [invertLast](#invertlast)
-  - [lookupFlipped](#lookupflipped)
+  - [lookupV](#lookupv)
   - [merge](#merge)
   - [omit](#omit)
   - [pick](#pick)
@@ -83,30 +83,30 @@ assert.deepStrictEqual(invertLast(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1'
 
 Added in v0.7.0
 
-## lookupFlipped
+## lookupV
 
-Like `lookup` from fp-ts, but flipped.
+Like `fp-ts/Record::lookup` but flipped, which the "V" suffix denotes.
 
 **Signature**
 
 ```ts
-export declare const lookupFlipped: <A>(x: Record<string, A>) => (k: string) => Option<A>
+export declare const lookupV: <A>(x: Record<string, A>) => (k: string) => Option<A>
 ```
 
 ```hs
-lookupFlipped :: Record string a -> string -> Option a
+lookupV :: Record string a -> string -> Option a
 ```
 
 **Example**
 
 ```ts
-import { lookupFlipped } from 'fp-ts-std/Record'
+import { lookupV } from 'fp-ts-std/Record'
 import * as A from 'fp-ts/Array'
 
 const x = { a: 1, b: 'two', c: [true] }
 const ks = ['a', 'c']
 
-assert.deepStrictEqual(A.filterMap(lookupFlipped(x))(ks), [1, [true]])
+assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]])
 ```
 
 Added in v0.1.0

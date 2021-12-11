@@ -29,20 +29,21 @@ export const values: <A>(x: RR.ReadonlyRecord<string, A>) => ReadonlyArray<A> =
   Object.values
 
 /**
- * Like `lookup` from fp-ts, but flipped.
+ * Like `fp-ts/ReadonlyRecord::lookup` but flipped, which the "V" suffix
+ * denotes.
  *
  * @example
- * import { lookupFlipped } from 'fp-ts-std/ReadonlyRecord';
+ * import { lookupV } from 'fp-ts-std/ReadonlyRecord';
  * import * as A from 'fp-ts/Array';
  *
  * const x = { a: 1, b: 'two', c: [true] };
  * const ks = ['a', 'c'];
  *
- * assert.deepStrictEqual(A.filterMap(lookupFlipped(x))(ks), [1, [true]]);
+ * assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]]);
  *
  * @since 0.10.0
  */
-export const lookupFlipped =
+export const lookupV =
   <A>(x: RR.ReadonlyRecord<string, A>) =>
   (k: string): Option<A> =>
     RR.lookup(k)(x)

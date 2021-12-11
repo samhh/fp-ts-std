@@ -1,5 +1,5 @@
 import {
-  elemFlipped,
+  elemV,
   none,
   join,
   pluckFirst,
@@ -60,8 +60,8 @@ import * as IO from "fp-ts/IO"
 import { fst, snd } from "fp-ts/Tuple"
 
 describe("Array", () => {
-  describe("elemFlipped", () => {
-    const f = elemFlipped(N.Eq)
+  describe("elemV", () => {
+    const f = elemV(N.Eq)
 
     it("finds the element", () => {
       expect(f([])(0)).toBe(false)
@@ -263,7 +263,7 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(fc.array(fc.integer()), xs =>
-          pipe(xs, f, g, A.every(elemFlipped(N.Eq)(g(xs)))),
+          pipe(xs, f, g, A.every(elemV(N.Eq)(g(xs)))),
         ),
       )
     })

@@ -21,7 +21,7 @@ Added in v0.1.0
   - [dropAt](#dropat)
   - [dropRepeats](#droprepeats)
   - [dropRightWhile](#droprightwhile)
-  - [elemFlipped](#elemflipped)
+  - [elemV](#elemv)
   - [endsWith](#endswith)
   - [extractAt](#extractat)
   - [filterA](#filtera)
@@ -247,27 +247,27 @@ assert.deepStrictEqual(dropRightEvens([6, 7, 3, 4, 2]), [6, 7, 3])
 
 Added in v0.7.0
 
-## elemFlipped
+## elemV
 
-Like `fp-ts/Array::elem`, but flipped.
+Like `fp-ts/Array::elem` but flipped, which the "V" suffix denotes.
 
 **Signature**
 
 ```ts
-export declare const elemFlipped: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
+export declare const elemV: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
 ```
 
 ```hs
-elemFlipped :: Eq a -> Array a -> Predicate a
+elemV :: Eq a -> Array a -> Predicate a
 ```
 
 **Example**
 
 ```ts
-import { elemFlipped } from 'fp-ts-std/Array'
+import { elemV } from 'fp-ts-std/Array'
 import { eqString } from 'fp-ts/Eq'
 
-const isLowerVowel = elemFlipped(eqString)(['a', 'e', 'i', 'o', 'u'])
+const isLowerVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u'])
 
 assert.strictEqual(isLowerVowel('a'), true)
 assert.strictEqual(isLowerVowel('b'), false)

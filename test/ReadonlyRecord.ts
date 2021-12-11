@@ -1,6 +1,6 @@
 import {
   values,
-  lookupFlipped,
+  lookupV,
   pick,
   pickFrom,
   omit,
@@ -30,8 +30,8 @@ describe("Record", () => {
     })
   })
 
-  describe("lookupFlipped", () => {
-    const f = lookupFlipped
+  describe("lookupV", () => {
+    const f = lookupV
 
     it("cannot find anything in empty object", () => {
       fc.assert(fc.property(fc.string(), x => O.isNone(f({})(x))))
