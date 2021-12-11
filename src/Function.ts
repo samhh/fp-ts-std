@@ -38,17 +38,10 @@ import { Refinement } from "fp-ts/Refinement"
  * @since 0.1.0
  */
 export const flip =
-  <
-    A extends Array<unknown>,
-    B extends Array<unknown>,
-    C,
-    // eslint-disable-next-line functional/functional-parameters
-  >(
-    f: (...a: A) => (...b: B) => C,
-  ) =>
-  (...b: B) =>
-  (...a: A): C =>
-    f(...a)(...b)
+  <A, B, C>(f: (x: A) => (y: B) => C) =>
+  (x: B) =>
+  (y: A): C =>
+    f(y)(x)
 
 /**
  * Given a curried function with an iterative callback, this returns a new

@@ -358,13 +358,11 @@ Flip the function/argument order of a curried function.
 **Signature**
 
 ```ts
-export declare const flip: <A extends unknown[], B extends unknown[], C>(
-  f: (...a: A) => (...b: B) => C
-) => (...b: B) => (...a: A) => C
+export declare const flip: <A, B, C>(f: (x: A) => (y: B) => C) => (x: B) => (y: A) => C
 ```
 
 ```hs
-flip :: a extends (Array unknown), b extends (Array unknown) => (...a -> ...b -> c) -> ...b -> ...a -> c
+flip :: (a -> b -> c) -> b -> a -> c
 ```
 
 **Example**

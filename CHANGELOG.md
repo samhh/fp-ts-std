@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
 - Add `memptyWhen` and `memptyUnless` functions to the `Option` module.
+- Remove support for variadic/non-unary functions from `flip`.
 
 ## 0.12.0 (2021-12-01)
 
