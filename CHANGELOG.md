@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.13.0 (_Unreleased_)
+
+- Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
+
 ## 0.12.0 (2021-12-01)
 
 - Add ESM support for tree shaking. Note that your bundler or Node environment must now support [conditional exports](https://nodejs.org/api/packages.html#conditional-exports), else you'll need to import directly from a `dist/(cjs|esm)/` subdirectory.

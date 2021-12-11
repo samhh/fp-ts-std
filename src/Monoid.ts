@@ -25,7 +25,9 @@ import {
   URIS4,
 } from "fp-ts/HKT"
 import { Monoid } from "fp-ts/Monoid"
-import { identity } from "fp-ts/function"
+import { flow, identity } from "fp-ts/function"
+import { Endomorphism } from "fp-ts/lib/Endomorphism"
+import { invert } from "./Boolean"
 
 /**
  * Extracts the value from within a foldable, falling back to the monoidal
@@ -66,3 +68,49 @@ export function toMonoid<F>(
 ): <A>(G: Monoid<A>) => (x: HKT<F, A>) => A {
   return G => x => F.foldMap(G)(x, identity)
 }
+
+/**
+ * Conditionally returns the provided monoidal value or its identity. The dual
+ * to `memptyUnless`.
+ *
+ * @example
+ * import { memptyWhen } from 'fp-ts-std/Monoid';
+ * import * as O from 'fp-ts/Option';
+ * import * as Str from 'fp-ts/string';
+ *
+ * const f = memptyWhen(O.getMonoid(Str.Monoid));
+ *
+ * assert.deepStrictEqual(f(true)(O.some('x')), O.none);
+ * assert.deepStrictEqual(f(true)(O.none), O.none);
+ * assert.deepStrictEqual(f(false)(O.some('x')), O.some('x'));
+ * assert.deepStrictEqual(f(false)(O.none), O.none);
+ *
+ * @since 0.13.0
+ */
+export const memptyWhen =
+  <A>(M: Monoid<A>) =>
+  (x: boolean): Endomorphism<A> =>
+  y =>
+    x ? M.empty : y
+
+/**
+ * Conditionally returns the provided monoidal value or its identity. The dual
+ * to `memptyWhen`.
+ *
+ * @example
+ * import { memptyUnless } from 'fp-ts-std/Monoid';
+ * import * as O from 'fp-ts/Option';
+ * import * as Str from 'fp-ts/string';
+ *
+ * const f = memptyUnless(O.getMonoid(Str.Monoid));
+ *
+ * assert.deepStrictEqual(f(true)(O.some('x')), O.some('x'));
+ * assert.deepStrictEqual(f(true)(O.none), O.none);
+ * assert.deepStrictEqual(f(false)(O.some('x')), O.none);
+ * assert.deepStrictEqual(f(false)(O.none), O.none);
+ *
+ * @since 0.13.0
+ */
+export const memptyUnless = <A>(
+  M: Monoid<A>,
+): ((x: boolean) => Endomorphism<A>) => flow(invert, memptyWhen(M))
