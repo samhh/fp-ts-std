@@ -586,3 +586,19 @@ export const isLower: Predicate<string> = test(/^\p{Lower}+$/u)
  * @since 0.11.0
  */
 export const isUpper: Predicate<string> = test(/^\p{Upper}+$/u)
+
+/**
+ * Tests if a string exclusively consists of whitespace. Behaviour in case of
+ * an empty string is unspecified.
+ *
+ * @example
+ *
+ * import { isSpace } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(isSpace(" "), true);
+ * assert.strictEqual(isSpace("x"), false);
+ * assert.strictEqual(isSpace("\n\t"), true);
+ *
+ * @since 0.13.0
+ */
+export const isSpace: Predicate<string> = test(/^\s+$/)

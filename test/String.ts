@@ -32,6 +32,7 @@ import {
   isAlphaNum,
   isLower,
   isUpper,
+  isSpace,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -698,6 +699,20 @@ describe("String", () => {
 
     it("accepts a diverse range of alphabetic chars", () => {
       expect(f("ÁB")).toBe(true)
+    })
+  })
+
+  describe("isSpace", () => {
+    const f = isSpace
+
+    it("fails on any non-whitespace char", () => {
+      expect(f("x")).toBe(false)
+      expect(f("x y")).toBe(false)
+      expect(f("\t!\n")).toBe(false)
+    })
+
+    it("accepts any whitespace char", () => {
+      expect(f("\t    \n")).toBe(true)
     })
   })
 })

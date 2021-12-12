@@ -10,6 +10,7 @@ This project adheres to semantic versioning.
 - Add `memptyWhen` and `memptyUnless` to `Monoid`.
 - Add `isPositive`, `isNegative`, `isNonNegative`, and `isNonPositive` to `Number`.
 - Add `memptyWhen`, `memptyUnless`, and `pureIf` to `Option`.
+- Add `isSpace` to `String`.
 - Remove support for variadic/non-unary functions from `flip`.
 - Rename the "Flipped" suffix wherever present to "V".
 

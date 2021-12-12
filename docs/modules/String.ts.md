@@ -26,6 +26,7 @@ Added in v0.1.0
   - [isAlpha](#isalpha)
   - [isAlphaNum](#isalphanum)
   - [isLower](#islower)
+  - [isSpace](#isspace)
   - [isUpper](#isupper)
   - [last](#last)
   - [lines](#lines)
@@ -357,6 +358,33 @@ assert.strictEqual(isLower('hello1'), false)
 ```
 
 Added in v0.11.0
+
+## isSpace
+
+Tests if a string exclusively consists of whitespace. Behaviour in case of
+an empty string is unspecified.
+
+**Signature**
+
+```ts
+export declare const isSpace: Predicate<string>
+```
+
+```hs
+isSpace :: Predicate string
+```
+
+**Example**
+
+```ts
+import { isSpace } from 'fp-ts-std/String'
+
+assert.strictEqual(isSpace(' '), true)
+assert.strictEqual(isSpace('x'), false)
+assert.strictEqual(isSpace('\n\t'), true)
+```
+
+Added in v0.13.0
 
 ## isUpper
 
