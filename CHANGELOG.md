@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.13.0 (_Unreleased_)
 
+- Add `Alternative` module.
 - Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
 - Add `memptyWhen` and `memptyUnless` functions to the `Option` module.
 - Remove support for variadic/non-unary functions from `flip`.
