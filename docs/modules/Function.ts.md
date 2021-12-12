@@ -53,7 +53,7 @@ Added in v0.1.0
 
 ## applyEvery
 
-Apply an array of endomorphisms to an array from left-to-right.
+Apply an array of endomorphisms from left-to-right.
 
 **Signature**
 

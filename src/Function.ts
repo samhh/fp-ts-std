@@ -692,7 +692,7 @@ export const is =
     y instanceof x
 
 /**
- * Apply an array of endomorphisms to an array from left-to-right.
+ * Apply an array of endomorphisms from left-to-right.
  *
  * @example
  * import { applyEvery } from 'fp-ts-std/Function';
