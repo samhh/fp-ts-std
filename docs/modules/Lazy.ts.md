@@ -43,6 +43,7 @@ Added in v0.12.0
   - [execute](#execute)
   - [flap](#flap)
   - [flatten](#flatten)
+  - [lazy](#lazy)
   - [map](#map)
   - [of](#of)
   - [sequenceArray](#sequencearray)
@@ -446,6 +447,33 @@ flatten :: Lazy (Lazy a) -> Lazy a
 ```
 
 Added in v0.12.0
+
+## lazy
+
+A constructor for `Lazy` values. Given `Lazy` is a type alias around
+`() => A`, this function's only purpose is to aid in readability and express
+intentional laziness, as opposed to for example forgetting or opting not to
+use `constant`.
+
+**Signature**
+
+```ts
+export declare const lazy: <A>(f: () => A) => Lazy<A>
+```
+
+```hs
+lazy :: (() -> a) -> Lazy a
+```
+
+**Example**
+
+```ts
+import { lazy } from 'fp-ts-std/Lazy'
+
+const calc = lazy(() => 'do something expensive here')
+```
+
+Added in v0.13.0
 
 ## map
 

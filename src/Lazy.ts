@@ -338,3 +338,18 @@ export const sequenceArray: <A>(
  * @since 0.12.0
  */
 export const execute = <A>(x: Lazy<A>): A => x()
+
+/**
+ * A constructor for `Lazy` values. Given `Lazy` is a type alias around
+ * `() => A`, this function's only purpose is to aid in readability and express
+ * intentional laziness, as opposed to for example forgetting or opting not to
+ * use `constant`.
+ *
+ * @example
+ * import { lazy } from 'fp-ts-std/Lazy';
+ *
+ * const calc = lazy(() => 'do something expensive here');
+ *
+ * @since 0.13.0
+ */
+export const lazy: <A>(f: () => A) => Lazy<A> = identity

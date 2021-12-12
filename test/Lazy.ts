@@ -135,4 +135,19 @@ describe("Lazy", () => {
       )
     })
   })
+
+  describe("lazy", () => {
+    it("constructs ordinary Lazy value", () => {
+      fc.assert(
+        fc.property(fc.anything(), x =>
+          expect(
+            pipe(
+              Lazy.lazy(() => x),
+              Lazy.execute,
+            ),
+          ).toEqual(pipe(() => x, Lazy.execute)),
+        ),
+      )
+    })
+  })
 })

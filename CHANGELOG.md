@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.13.0 (_Unreleased_)
 
 - Add `Alternative` module.
+- Add `lazy` function to the `Lazy` module.
 - Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
 - Add `isPositive`, `isNegative`, `isNonNegative`, and `isNonPositive` functions to the `Number` module.
 - Add `memptyWhen`, `memptyUnless`, and `pureIf` functions to the `Option` module.
