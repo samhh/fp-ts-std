@@ -4,6 +4,7 @@
  * @since 0.5.1
  */
 
+import * as alternative from "./Alternative"
 import * as applicative from "./Applicative"
 import * as array from "./Array"
 import * as boolean from "./Boolean"
@@ -33,6 +34,12 @@ import * as url from "./URL"
 import * as urlSearchParams from "./URLSearchParams"
 
 export {
+  /**
+   * A re-export of the `fp-ts-std/Alternative` module.
+   *
+   * @since 0.13.0
+   */
+  alternative,
   /**
    * A re-export of the `fp-ts-std/Applicative` module.
    *

@@ -15,6 +15,7 @@ Added in v0.5.1
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [alternative](#alternative)
   - [applicative](#applicative)
   - [array](#array)
   - [boolean](#boolean)
@@ -46,6 +47,22 @@ Added in v0.5.1
 ---
 
 # utils
+
+## alternative
+
+A re-export of the `fp-ts-std/Alternative` module.
+
+**Signature**
+
+```ts
+export declare const alternative: typeof alternative
+```
+
+```hs
+alternative :: typeof alternative
+```
+
+Added in v0.13.0
 
 ## applicative
 
