@@ -19,6 +19,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [applyEvery](#applyevery)
+  - [applySomes](#applysomes)
   - [construct](#construct)
   - [converge](#converge)
   - [curry2](#curry2)
@@ -80,6 +81,35 @@ assert.deepStrictEqual(g(3), 12)
 ```
 
 Added in v0.12.0
+
+## applySomes
+
+Apply an array of potential endomorphisms from left-to-right, skipping any
+that are `None`.
+
+**Signature**
+
+```ts
+export declare const applySomes: <A>(fs: O.Option<Endomorphism<A>>[]) => Endomorphism<A>
+```
+
+**Example**
+
+```ts
+import { applySomes } from 'fp-ts-std/Function'
+import * as O from 'fp-ts/Option'
+import { Option } from 'fp-ts/Option'
+import { Endomorphism } from 'fp-ts/Endomorphism'
+import { increment, multiply } from 'fp-ts-std/Number'
+
+const fs: Array<Option<Endomorphism<number>>> = [O.some(increment), O.none, O.some(multiply(3))]
+const g = applySomes(fs)
+
+assert.deepStrictEqual(g(1), 6)
+assert.deepStrictEqual(g(3), 12)
+```
+
+Added in v0.13.0
 
 ## construct
 

@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.13.0 (_Unreleased_)
 
 - Add `Alternative` module.
+- Add `applySomes` to `Function`.
 - Add `lazy` to `Lazy`.
 - Add `memptyWhen` and `memptyUnless` to `Monoid`.
 - Add `isPositive`, `isNegative`, `isNonNegative`, and `isNonPositive` to `Number`.

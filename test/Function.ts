@@ -27,6 +27,7 @@ import {
   converge,
   is,
   applyEvery,
+  applySomes,
 } from "../src/Function"
 import { fromNumber, prepend } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -445,6 +446,32 @@ describe("Function", () => {
 
     it("applies functions from left side", () => {
       const fs: Array<Endomorphism<number>> = [increment, multiply(3)]
+      expect(f(fs)(1)).not.toBe(4)
+      expect(f(fs)(1)).toBe(6)
+    })
+  })
+
+  describe("applySomes", () => {
+    const f = applySomes
+
+    it("returns identity on empty array", () => {
+      fc.assert(fc.property(fc.anything(), x => expect(f([])(x)).toEqual(x)))
+    })
+
+    it("returns identity on array of None", () => {
+      fc.assert(
+        fc.property(fc.anything(), fc.array(fc.constant(O.none)), (x, gs) =>
+          expect(f(gs)(x)).toEqual(x),
+        ),
+      )
+    })
+
+    it("applies functions from left side if Some", () => {
+      const fs: Array<Option<Endomorphism<number>>> = [
+        O.some(increment),
+        O.none,
+        O.some(multiply(3)),
+      ]
       expect(f(fs)(1)).not.toBe(4)
       expect(f(fs)(1)).toBe(6)
     })

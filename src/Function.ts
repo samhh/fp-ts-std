@@ -15,6 +15,7 @@ import {
   pipe,
   getMonoid as getFunctionMonoid,
   apply,
+  constant,
 } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
@@ -709,3 +710,30 @@ export const is =
  */
 export const applyEvery: <A>(fs: Array<Endomorphism<A>>) => Endomorphism<A> =
   concatAll(getEndoMonoid())
+
+/**
+ * Apply an array of potential endomorphisms from left-to-right, skipping any
+ * that are `None`.
+ *
+ * @example
+ * import { applySomes } from 'fp-ts-std/Function';
+ * import * as O from 'fp-ts/Option';
+ * import { Option } from 'fp-ts/Option';
+ * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { increment, multiply } from 'fp-ts-std/Number';
+ *
+ * const fs: Array<Option<Endomorphism<number>>> = [O.some(increment), O.none, O.some(multiply(3))];
+ * const g = applySomes(fs);
+ *
+ * assert.deepStrictEqual(g(1), 6);
+ * assert.deepStrictEqual(g(3), 12);
+ *
+ * @since 0.13.0
+ */
+export const applySomes =
+  <A>(fs: Array<O.Option<Endomorphism<A>>>): Endomorphism<A> =>
+  x =>
+    pipe(
+      fs,
+      A.reduce(x, (y, mf) => pipe(mf, O.match(constant(y), apply(y)))),
+    )
