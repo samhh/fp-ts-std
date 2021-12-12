@@ -24,6 +24,8 @@ Added in v0.1.0
   - [increment](#increment)
   - [isFinite](#isfinite)
   - [isNegative](#isnegative)
+  - [isNonNegative](#isnonnegative)
+  - [isNonPositive](#isnonpositive)
   - [isPositive](#ispositive)
   - [isValid](#isvalid)
   - [mod](#mod)
@@ -262,6 +264,58 @@ import { isNegative } from 'fp-ts-std/Number'
 assert.strictEqual(isNegative(42), false)
 assert.strictEqual(isNegative(0), false)
 assert.strictEqual(isNegative(-42), true)
+```
+
+Added in v0.13.0
+
+## isNonNegative
+
+Check if a number is non-negative.
+
+**Signature**
+
+```ts
+export declare const isNonNegative: Predicate<number>
+```
+
+```hs
+isNonNegative :: Predicate number
+```
+
+**Example**
+
+```ts
+import { isNonNegative } from 'fp-ts-std/Number'
+
+assert.strictEqual(isNonNegative(42), true)
+assert.strictEqual(isNonNegative(0), true)
+assert.strictEqual(isNonNegative(-42), false)
+```
+
+Added in v0.13.0
+
+## isNonPositive
+
+Check if a number is non-positive.
+
+**Signature**
+
+```ts
+export declare const isNonPositive: Predicate<number>
+```
+
+```hs
+isNonPositive :: Predicate number
+```
+
+**Example**
+
+```ts
+import { isNonPositive } from 'fp-ts-std/Number'
+
+assert.strictEqual(isNonPositive(42), false)
+assert.strictEqual(isNonPositive(0), true)
+assert.strictEqual(isNonPositive(-42), true)
 ```
 
 Added in v0.13.0

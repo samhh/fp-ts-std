@@ -6,7 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `Alternative` module.
 - Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
-- Add `isPositive` and `isNegative` functions to the `Number` module.
+- Add `isPositive`, `isNegative`, `isNonNegative`, and `isNonPositive` functions to the `Number` module.
 - Add `memptyWhen`, `memptyUnless`, and `pureIf` functions to the `Option` module.
 - Remove support for variadic/non-unary functions from `flip`.
 - Rename the "Flipped" suffix wherever present to "V".

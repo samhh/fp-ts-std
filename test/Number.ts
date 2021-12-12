@@ -16,6 +16,8 @@ import {
   toFinite,
   isPositive,
   isNegative,
+  isNonNegative,
+  isNonPositive,
 } from "../src/Number"
 import { fromNumber } from "../src/String"
 import fc from "fast-check"
@@ -237,6 +239,54 @@ describe("Number", () => {
 
     it("returns false for zero", () => {
       expect(f(0)).toBe(false)
+    })
+
+    it("returns true for any number below zero", () => {
+      expect(f(-0.000001)).toBe(true)
+      expect(f(-42)).toBe(true)
+      expect(f(-Infinity)).toBe(true)
+
+      fc.assert(fc.property(fc.integer({ max: -1 }), f))
+    })
+  })
+
+  describe("isNonNegative", () => {
+    const f = isNonNegative
+
+    it("returns true for any number above zero", () => {
+      expect(f(0.000001)).toBe(true)
+      expect(f(42)).toBe(true)
+      expect(f(Infinity)).toBe(true)
+
+      fc.assert(fc.property(fc.integer({ min: 1 }), f))
+    })
+
+    it("returns true for zero", () => {
+      expect(f(0)).toBe(true)
+    })
+
+    it("returns false for any number below zero", () => {
+      expect(f(-0.000001)).toBe(false)
+      expect(f(-42)).toBe(false)
+      expect(f(-Infinity)).toBe(false)
+
+      fc.assert(fc.property(fc.integer({ max: -1 }), Pred.not(f)))
+    })
+  })
+
+  describe("isNonPositive", () => {
+    const f = isNonPositive
+
+    it("returns false for any number above zero", () => {
+      expect(f(0.000001)).toBe(false)
+      expect(f(42)).toBe(false)
+      expect(f(Infinity)).toBe(false)
+
+      fc.assert(fc.property(fc.integer({ min: 1 }), Pred.not(f)))
+    })
+
+    it("returns true for zero", () => {
+      expect(f(0)).toBe(true)
     })
 
     it("returns true for any number below zero", () => {

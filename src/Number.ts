@@ -271,3 +271,31 @@ export const isPositive: Predicate<number> = n => Math.sign(n) === 1
  * @since 0.13.0
  */
 export const isNegative: Predicate<number> = n => Math.sign(n) === -1
+
+/**
+ * Check if a number is non-negative.
+ *
+ * @example
+ * import { isNonNegative } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(isNonNegative(42), true);
+ * assert.strictEqual(isNonNegative(0), true);
+ * assert.strictEqual(isNonNegative(-42), false);
+ *
+ * @since 0.13.0
+ */
+export const isNonNegative: Predicate<number> = n => Math.sign(n) !== -1
+
+/**
+ * Check if a number is non-positive.
+ *
+ * @example
+ * import { isNonPositive } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(isNonPositive(42), false);
+ * assert.strictEqual(isNonPositive(0), true);
+ * assert.strictEqual(isNonPositive(-42), true);
+ *
+ * @since 0.13.0
+ */
+export const isNonPositive: Predicate<number> = n => Math.sign(n) !== 1
