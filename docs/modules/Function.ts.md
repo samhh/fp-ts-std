@@ -385,7 +385,7 @@ Added in v0.1.0
 ## fork
 
 Fork an input across a series of functions, collecting the results in a
-tuple.
+tuple. Similar to `flap` but overloaded for variadic tuples.
 
 **Signature**
 

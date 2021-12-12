@@ -555,7 +555,7 @@ export const uncurry5 =
 
 /**
  * Fork an input across a series of functions, collecting the results in a
- * tuple.
+ * tuple. Similar to `flap` but overloaded for variadic tuples.
  *
  * @example
  * import { fork } from 'fp-ts-std/Function';
