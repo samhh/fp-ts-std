@@ -5,10 +5,10 @@ This project adheres to semantic versioning.
 ## 0.13.0 (_Unreleased_)
 
 - Add `Alternative` module.
-- Add `lazy` function to the `Lazy` module.
-- Add `memptyWhen` and `memptyUnless` functions to the `Monoid` module.
-- Add `isPositive`, `isNegative`, `isNonNegative`, and `isNonPositive` functions to the `Number` module.
-- Add `memptyWhen`, `memptyUnless`, and `pureIf` functions to the `Option` module.
+- Add `lazy` to `Lazy`.
+- Add `memptyWhen` and `memptyUnless` to `Monoid`.
+- Add `isPositive`, `isNegative`, `isNonNegative`, and `isNonPositive` to `Number`.
+- Add `memptyWhen`, `memptyUnless`, and `pureIf` to `Option`.
 - Remove support for variadic/non-unary functions from `flip`.
 - Rename the "Flipped" suffix wherever present to "V".
 
@@ -25,27 +25,27 @@ This project adheres to semantic versioning.
 - Add `Show` module.
 - Add `TaskEither` module.
 - Add `Tuple` module.
-- Add `applyEvery`, `converge`, `invoke`, `invokeOn`, and `is` functions to the `Function` module.
-- Add `when`, `unless`, `whenInvocationCount`, and `execute` functions to the `IO` module.
-- Add `when`, `unless`, and `execute` functions to the `Task` module.
-- Add `isFinite` and `toFinite` functions to the `Number` module.
-- Add `noneAs`, `invert`, and `toMonoid` functions to the `Option` module.
-- Add `extractAt` function to the `Array` and `ReadonlyArray` modules.
-- Duplicate `filterA` from fp-ts-contrib into the `Array` and `ReadonlyArray` modules.
-- Replace `pick` in the `Record` and `ReadonlyRecord` modules with a non-thunked version. The old implementation is now called `pickFrom`.
+- Add `applyEvery`, `converge`, `invoke`, `invokeOn`, and `is` to `Function`.
+- Add `when`, `unless`, `whenInvocationCount`, and `execute` to `IO`.
+- Add `when`, `unless`, and `execute` to `Task`.
+- Add `isFinite` and `toFinite` to `Number`.
+- Add `noneAs`, `invert`, and `toMonoid` to `Option`.
+- Add `extractAt` to `Array` and `ReadonlyArray`..
+- Duplicate `filterA` from fp-ts-contrib into `Array` and `ReadonlyArray`.
+- Replace `pick` in `Record` and `ReadonlyRecord` with a non-thunked version. The old implementation is now called `pickFrom`.
 - Narrow the type of the first parameter in `replaceAll`. This reverts the change made in 0.10.1.
-- Remove `both` and `either` from the `Predicate` module (formerly `Boolean`) as they're superceded by [and](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#and) and [or](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#or) respectively.
+- Remove `both` and `either` from `Predicate` (formerly `Boolean`) as they're superceded by [and](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#and) and [or](https://gcanti.github.io/fp-ts/modules/Predicate.ts.html#or) respectively.
 
 ## 0.11.0 (2021-08-09)
 
-- Add `isAlpha`, `isAlphaNum`, `isLower`, `isUpper`, and `splitAt` functions to the `String` module.
-- Add `zipAll` function to the `Array` and `ReadonlyArray` modules.
-- Add `fork` function to the `Function` module.
+- Add `isAlpha`, `isAlphaNum`, `isLower`, `isUpper`, and `splitAt` to `String`.
+- Add `zipAll` to `Array` and `ReadonlyArray`..
+- Add `fork` to `Function`.
 - A few function signatures now use readonly arrays as opposed to regular arrays as a result of the following supercessions.
-- Remove `contains`, `endsWith`, `isString`, `replace`, `slice`, `split`, `startsWith`, `toLower`, `toUpper`, `trim`, `trimLeft`, and `trimRight` from the String module as they've been superceded by new additions to [fp-ts/string](https://gcanti.github.io/fp-ts/modules/string.ts.html).
-- Remove `applyTo` from the `Function` module as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply).
-- Remove `concat` from the `Array` and `ReadonlyArray` modules as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).
-- Remove `length` from the `ReadonlyArray` module as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).
+- Remove `contains`, `endsWith`, `isString`, `replace`, `slice`, `split`, `startsWith`, `toLower`, `toUpper`, `trim`, `trimLeft`, and `trimRight` from `String` as they've been superceded by new additions to [fp-ts/string](https://gcanti.github.io/fp-ts/modules/string.ts.html).
+- Remove `applyTo` from `Function` as it's superceded by [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply).
+- Remove `concat` from `Array` and `ReadonlyArray` as it's superceded by [fp-ts/Array::concat](https://gcanti.github.io/fp-ts/modules/Array.ts.html#concat)/[fp-ts/ReadonlyArray::concat](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#concat).
+- Remove `length` from `ReadonlyArray` as it's superceded by [fp-ts/ReadonlyArray::size](https://gcanti.github.io/fp-ts/modules/ReadonlyArray.ts.html#size).
 - Short-circuit `both` and `either` if the first predicate fails.
 - Bump minimum supported fp-ts version to 2.11.0.
 
@@ -56,45 +56,45 @@ This project adheres to semantic versioning.
 ## 0.10.0 (2021-04-16)
 
 - Add `ReadonlyArray` and `ReadonlyRecord` modules.
-- Add `fromString`, `fromStringWithRadix`, and `floatFromString` functions to the `Number` module.
-- Remove `empty`, `isEmpty`, and `length` from the `String` module as they're superceded by the new [fp-ts/string](https://gcanti.github.io/fp-ts/modules/string.ts.html) module.
-- Remove `length` from the `Array` module as it's superceded by [fp-ts/Array::size](https://gcanti.github.io/fp-ts/modules/Array.ts.html#size).
+- Add `fromString`, `fromStringWithRadix`, and `floatFromString` to `Number`.
+- Remove `empty`, `isEmpty`, and `length` from `String` as they're superceded by the new [fp-ts/string](https://gcanti.github.io/fp-ts/modules/string.ts.html) module.
+- Remove `length` from `Array` as it's superceded by [fp-ts/Array::size](https://gcanti.github.io/fp-ts/modules/Array.ts.html#size).
 
 ## 0.9.0 (2021-03-15)
 
-- Add `Env` module with `getParam` and `getParamNonEmpty` functions.
-- Add `minimum`, `maximum`, and `concat` functions to the `Array` module.
+- Add `Env` module with `getParam` and `getParamNonEmpty`.
+- Add `minimum`, `maximum`, and `concat` to `Array`.
 - Narrow the return type of `parse`.
 - Throw the value that does exist in the `Either` in `unsafeUnwrap` and `unsafeUnwrapLeft`.
 
 ## 0.8.0 (2021-01-20)
 
-- Add `reduceWhile` and `reduceRightWhile` functions to the `Array` module.
+- Add `reduceWhile` and `reduceRightWhile` to `Array`.
 - Add missing re-exports to index module (`Debug`, `IO`).
 
 ## 0.7.0 (2020-11-29)
 
-- Add `IO` module with `tap` and `once` functions.
-- Add `aperture`, `slice`, `reject`, `none`, `startsWith`, `moveFrom`, `moveTo`, `countBy`, `dropRightWhile`, `mean`, `median`, `dropAt`, `transpose`, `takeRightWhile`, and `symmetricDifference` functions to the `Array` module.
-- Add `reject`, `merge`, `invertLast`, and `invertAll` functions to the `Record` module.
-- Add `last`, `init`, `slice`, `lookup`, `toUpper`, `toLower`, `dropRightWhile`, `under`, `replace`, `replaceAll`, `takeLeftWhile`, and `takeRightWhile` functions to the `String` module.
-- Add `isValid`, `rem`, `mod`, and `negate` functions to the `Number` module.
-- Add `construct`, `memoize`, `curry2` through `curry5`, `curry2T` through `curry5T`, and `uncurry2` through `uncurry5` functions to the `Function` module.
-- Add `Milliseconds` newtype to the `Date` module, and update the `Date` and `Task` modules to universally utilise it.
-- Remove `all` from the `Array` module as it's superceded by [fp-ts/Array::every](https://gcanti.github.io/fp-ts/modules/Array.ts.html#every).
-- Remove `any` from the `Array` module as it's superceded by [fp-ts/Array::some](https://gcanti.github.io/fp-ts/modules/Array.ts.html#some).
+- Add `IO` module with `tap` and `once`.
+- Add `aperture`, `slice`, `reject`, `none`, `startsWith`, `moveFrom`, `moveTo`, `countBy`, `dropRightWhile`, `mean`, `median`, `dropAt`, `transpose`, `takeRightWhile`, and `symmetricDifference` to `Array`.
+- Add `reject`, `merge`, `invertLast`, and `invertAll` to `Record`.
+- Add `last`, `init`, `slice`, `lookup`, `toUpper`, `toLower`, `dropRightWhile`, `under`, `replace`, `replaceAll`, `takeLeftWhile`, and `takeRightWhile` to `String`.
+- Add `isValid`, `rem`, `mod`, and `negate` to `Number`.
+- Add `construct`, `memoize`, `curry2` through `curry5`, `curry2T` through `curry5T`, and `uncurry2` through `uncurry5` to `Function`.
+- Add `Milliseconds` newtype to `Date`, and update the `Date` and `Task` modules to universally utilise it.
+- Remove `all` from `Array` as it's superceded by [fp-ts/Array::every](https://gcanti.github.io/fp-ts/modules/Array.ts.html#every).
+- Remove `any` from `Array` as it's superceded by [fp-ts/Array::some](https://gcanti.github.io/fp-ts/modules/Array.ts.html#some).
 - Provide the input value to the fallback function of `guard`.
 - Loosen the input type of `sum` and `product` such that it needn't be readonly.
 - Bump minimum supported fp-ts version to 2.9.0.
 
 ## 0.6.0 (2020-11-20)
 
-- Add `dropRepeats`, `endsWith`, `without`, `cartesian`, `sum`, and `product` functions to the `Array` module.
-- Add `dropLeft`, `dropLeftWhile`, `dropRight`, `head`, and `tail` functions to the `String` module.
-- Add `empty` constant to the `String` module.
-- Add `unJSONString` function to the `JSON` module.
-- Add `unary`, `applyTo`, `guard`, `ifElse`, `unless`, `when`, and `until` functions to the `Function` module.
-- Remove `concat` function from the `String` module as it's a duplicate of `prepend`.
+- Add `dropRepeats`, `endsWith`, `without`, `cartesian`, `sum`, and `product` to `Array`.
+- Add `dropLeft`, `dropLeftWhile`, `dropRight`, `head`, and `tail` to `String`.
+- Add `empty` to `String`.
+- Add `unJSONString` to `JSON`.
+- Add `unary`, `applyTo`, `guard`, `ifElse`, `unless`, `when`, and `until` to `Function`.
+- Remove `concat` from `String` as it's a duplicate of `prepend`.
 
 ## 0.5.2 (2020-11-02)
 
@@ -102,44 +102,44 @@ This project adheres to semantic versioning.
 
 ## 0.5.1 (2020-10-30)
 
-- Make the `omit` function in the `Record` module more permissive. It will now typecheck if you try to omit keys which aren't present in the target object.
+- Make `omit` in `Record` more permissive. It will now typecheck if you try to omit keys which aren't present in the target object.
 - Drop the `lib/` prefix from imports.
 - Add an optional "main" entrypoint which re-exports all modules.
 
 ## 0.5.0 (2020-10-29)
 
-- Add `JSONString` newtype to the `JSON` module, and update various functions in this module accordingly. This adds `newtype-ts` and `monocle-ts` as peer dependencies.
-- Add `insertMany` function to the `Array` module.
-- Add `withIndex` function to the `Function` module.
-- Add `elapsed` function to the `Task` module.
-- Add `both` and `either` functions to the `Boolean` module.
-- Add `unsafeUnwrapLeft` function to the `Either` module.
-- Replace `exec` in the `String` module with `matchAll`.
-- Remove `contains` from the `Array` module as it's a duplicate of `elem` in fp-ts.
-- Rename `containsFlipped` in the `Array` module to `elemFlipped` for consistency with fp-ts.
-- Remove `getInvertedOrd` from `Ord` module (removing the `Ord` module entirely) as it's a duplicate of `getDualOrd` in fp-ts.
+- Add `JSONString` newtype to `JSON`, and update various functions in this module accordingly. This adds `newtype-ts` and `monocle-ts` as peer dependencies.
+- Add `insertMany` to `Array`.
+- Add `withIndex` to `Function`.
+- Add `elapsed` to `Task`.
+- Add `both` and `either` to `Boolean`.
+- Add `unsafeUnwrapLeft` to `Either`.
+- Replace `exec` in `String` with `matchAll`.
+- Remove `contains` from `Array` as it's a duplicate of `elem` in fp-ts.
+- Rename `containsFlipped` in `Array` to `elemFlipped` for consistency with fp-ts.
+- Remove `getInvertedOrd` from `Ord` (removing the `Ord` module entirely) as it's a duplicate of `getDualOrd` in fp-ts.
 
 ## 0.4.0 (2020-10-21)
 
-- Add the `invert`, `and`, `or`, `xor`, `allPass`, and `anyPass` functions to the `Boolean` module.
-- Remove the `not` function in the `Boolean` module as it's a duplicate of an fp-ts function.
-- Remove `unsafeExactKeys` function from the `Record` module as it's a duplicate of `keys` in fp-ts.
-- Update `unsurround` function in the `String` module to be consistent with the `surround` function.
+- Add the `invert`, `and`, `or`, `xor`, `allPass`, and `anyPass` to `Boolean`.
+- Remove `not` from `Boolean` as it's a duplicate of an fp-ts function.
+- Remove `unsafeExactKeys` from `Record` as it's a duplicate of `keys` in fp-ts.
+- Update `unsurround` in `String` to be consistent with `surround`.
 - Fix `stringify`/`stringifyO` not adhering to the function signature if supplied `undefined` input.
 
 ## 0.3.0 (2020-10-20)
 
-- Add `startsWith`, `endsWith`, `takeLeft`, `takeRight`, and `reverse` functions to the `String` module.
+- Add `startsWith`, `endsWith`, `takeLeft`, `takeRight`, and `reverse` to `String`.
 - Remove unneeded `newtype-ts` peer dependency. This may be added back in the future if and when we are actively utilising it.
-- Upgrade `upsert` function in the `Array` module to return a `NonEmptyArray`.
-- Remove `undefined` as acceptable input to `stringifyPrimitive` function in the `JSON` module.
+- Upgrade `upsert` in `Array` to return a `NonEmptyArray`.
+- Remove `undefined` as acceptable input to `stringifyPrimitive` in `JSON`.
 
 ## 0.2.0 (2020-10-19)
 
 - Add `Debug` module.
 - Add `URLSearchParams` module.
-- Add more arithmetic functions to the `Number` module.
-- Add `exec` function to the `String` module.
+- Add more arithmetic to `Number`.
+- Add `exec` to `String`.
 
 ## 0.1.2 (2020-10-19)
 
