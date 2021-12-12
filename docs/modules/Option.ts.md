@@ -19,6 +19,7 @@ Added in v0.1.0
   - [memptyUnless](#memptyunless)
   - [memptyWhen](#memptywhen)
   - [noneAs](#noneas)
+  - [pureIf](#pureif)
   - [toMonoid](#tomonoid)
   - [unsafeUnwrap](#unsafeunwrap)
 
@@ -146,6 +147,34 @@ assert.deepStrictEqual(noneAs<any>(), O.none)
 ```
 
 Added in v0.12.0
+
+## pureIf
+
+Conditionally lifts a value to `Some` or returns `None`.
+
+**Signature**
+
+```ts
+export declare const pureIf: (x: boolean) => <A>(y: A) => Option<A>
+```
+
+```hs
+pureIf :: boolean -> a -> Option a
+```
+
+**Example**
+
+```ts
+import { pureIf } from 'fp-ts-std/Option'
+import { Predicate } from 'fp-ts/Predicate'
+
+const person = { name: 'Hodor', age: 40 }
+const isMagicNumber: Predicate<number> = (n) => n === 42
+
+const mname = pureIf(isMagicNumber(person.age))(person.name)
+```
+
+Added in v0.13.0
 
 ## toMonoid
 

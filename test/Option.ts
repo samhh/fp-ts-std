@@ -5,6 +5,7 @@ import {
   toMonoid,
   memptyWhen,
   memptyUnless,
+  pureIf,
 } from "../src/Option"
 import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
@@ -106,6 +107,22 @@ describe("Option", () => {
     it("returns identity on argument on true condition", () => {
       fc.assert(
         fc.property(arbOption(fc.string()), x => expect(f(true)(x)).toEqual(x)),
+      )
+    })
+  })
+
+  describe("pureIf", () => {
+    const f = pureIf
+
+    it("returns constant empty/zero on false", () => {
+      fc.assert(
+        fc.property(fc.anything(), x => expect(f(false)(x)).toEqual(O.none)),
+      )
+    })
+
+    it("returns lifted input on true", () => {
+      fc.assert(
+        fc.property(fc.anything(), x => expect(f(true)(x)).toEqual(O.some(x))),
       )
     })
   })

@@ -11,6 +11,7 @@ import { Endomorphism } from "fp-ts/lib/Endomorphism"
 import { constant, flow } from "fp-ts/lib/function"
 import * as B from "fp-ts/boolean"
 import { invert as invertBool } from "./Boolean"
+import { pureIf as _pureIf } from "./Alternative"
 import { toMonoid as _toMonoid } from "./Monoid"
 
 /**
@@ -132,3 +133,21 @@ export const memptyWhen =
  */
 export const memptyUnless: (x: boolean) => <A>(m: Option<A>) => Option<A> =
   flow(invertBool, memptyWhen)
+
+/**
+ * Conditionally lifts a value to `Some` or returns `None`.
+ *
+ * @example
+ * import { pureIf } from 'fp-ts-std/Option';
+ * import { Predicate } from 'fp-ts/Predicate';
+ *
+ * const person = { name: 'Hodor', age: 40 };
+ * const isMagicNumber: Predicate<number> = n => n === 42;
+ *
+ * const mname = pureIf(isMagicNumber(person.age))(person.name);
+ *
+ * @since 0.13.0
+ */
+export const pureIf: (x: boolean) => <A>(y: A) => Option<A> = _pureIf(
+  O.Alternative,
+)
