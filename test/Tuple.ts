@@ -10,7 +10,7 @@ import {
 } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, pipe } from "fp-ts/function"
-import { swap } from "fp-ts/lib/Tuple"
+import { swap } from "fp-ts/Tuple"
 import * as O from "fp-ts/Option"
 import fc from "fast-check"
 

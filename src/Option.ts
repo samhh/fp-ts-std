@@ -6,9 +6,9 @@
 
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { Eq } from "fp-ts/lib/Eq"
-import { Endomorphism } from "fp-ts/lib/Endomorphism"
-import { constant, flow } from "fp-ts/lib/function"
+import { Eq } from "fp-ts/Eq"
+import { Endomorphism } from "fp-ts/Endomorphism"
+import { constant, flow } from "fp-ts/function"
 import * as B from "fp-ts/boolean"
 import { invert as invertBool } from "./Boolean"
 import { pureIf as _pureIf } from "./Alternative"

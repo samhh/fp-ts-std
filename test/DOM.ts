@@ -15,7 +15,7 @@ import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
 import { JSDOM } from "jsdom"
-import { constant, pipe } from "fp-ts/lib/function"
+import { constant, pipe } from "fp-ts/function"
 import { unsafeUnwrap } from "../src/Option"
 
 describe("DOM", () => {

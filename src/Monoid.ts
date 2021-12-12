@@ -26,7 +26,7 @@ import {
 } from "fp-ts/HKT"
 import { Monoid } from "fp-ts/Monoid"
 import { flow, identity } from "fp-ts/function"
-import { Endomorphism } from "fp-ts/lib/Endomorphism"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { invert } from "./Boolean"
 
 /**
