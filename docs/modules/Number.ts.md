@@ -23,6 +23,8 @@ Added in v0.1.0
   - [fromStringWithRadix](#fromstringwithradix)
   - [increment](#increment)
   - [isFinite](#isfinite)
+  - [isNegative](#isnegative)
+  - [isPositive](#ispositive)
   - [isValid](#isvalid)
   - [mod](#mod)
   - [multiply](#multiply)
@@ -237,6 +239,58 @@ assert.strictEqual(isFinite(-Infinity), false)
 ```
 
 Added in v0.12.0
+
+## isNegative
+
+Check if a number is negative.
+
+**Signature**
+
+```ts
+export declare const isNegative: Predicate<number>
+```
+
+```hs
+isNegative :: Predicate number
+```
+
+**Example**
+
+```ts
+import { isNegative } from 'fp-ts-std/Number'
+
+assert.strictEqual(isNegative(42), false)
+assert.strictEqual(isNegative(0), false)
+assert.strictEqual(isNegative(-42), true)
+```
+
+Added in v0.13.0
+
+## isPositive
+
+Check if a number is positive.
+
+**Signature**
+
+```ts
+export declare const isPositive: Predicate<number>
+```
+
+```hs
+isPositive :: Predicate number
+```
+
+**Example**
+
+```ts
+import { isPositive } from 'fp-ts-std/Number'
+
+assert.strictEqual(isPositive(42), true)
+assert.strictEqual(isPositive(0), false)
+assert.strictEqual(isPositive(-42), false)
+```
+
+Added in v0.13.0
 
 ## isValid
 

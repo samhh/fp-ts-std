@@ -243,3 +243,31 @@ export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity
 export const toFinite: Endomorphism<number> = unless(isFinite)(
   n => Math.sign(n) * Number.MAX_SAFE_INTEGER,
 )
+
+/**
+ * Check if a number is positive.
+ *
+ * @example
+ * import { isPositive } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(isPositive(42), true);
+ * assert.strictEqual(isPositive(0), false);
+ * assert.strictEqual(isPositive(-42), false);
+ *
+ * @since 0.13.0
+ */
+export const isPositive: Predicate<number> = n => Math.sign(n) === 1
+
+/**
+ * Check if a number is negative.
+ *
+ * @example
+ * import { isNegative } from 'fp-ts-std/Number';
+ *
+ * assert.strictEqual(isNegative(42), false);
+ * assert.strictEqual(isNegative(0), false);
+ * assert.strictEqual(isNegative(-42), true);
+ *
+ * @since 0.13.0
+ */
+export const isNegative: Predicate<number> = n => Math.sign(n) === -1

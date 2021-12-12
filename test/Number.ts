@@ -14,10 +14,13 @@ import {
   fromStringWithRadix,
   isFinite,
   toFinite,
+  isPositive,
+  isNegative,
 } from "../src/Number"
 import { fromNumber } from "../src/String"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
+import * as Pred from "fp-ts/Predicate"
 
 describe("Number", () => {
   describe("add", () => {
@@ -194,6 +197,54 @@ describe("Number", () => {
     it("converts Infinity to smallest/largest safe integer", () => {
       expect(f(Infinity)).toBe(Number.MAX_SAFE_INTEGER)
       expect(f(-Infinity)).toBe(Number.MIN_SAFE_INTEGER)
+    })
+  })
+
+  describe("isPositive", () => {
+    const f = isPositive
+
+    it("returns true for any number above zero", () => {
+      expect(f(0.000001)).toBe(true)
+      expect(f(42)).toBe(true)
+      expect(f(Infinity)).toBe(true)
+
+      fc.assert(fc.property(fc.integer({ min: 1 }), f))
+    })
+
+    it("returns false for zero", () => {
+      expect(f(0)).toBe(false)
+    })
+
+    it("returns false for any number below zero", () => {
+      expect(f(-0.000001)).toBe(false)
+      expect(f(-42)).toBe(false)
+      expect(f(-Infinity)).toBe(false)
+
+      fc.assert(fc.property(fc.integer({ max: -1 }), Pred.not(f)))
+    })
+  })
+
+  describe("isNegative", () => {
+    const f = isNegative
+
+    it("returns false for any number above zero", () => {
+      expect(f(0.000001)).toBe(false)
+      expect(f(42)).toBe(false)
+      expect(f(Infinity)).toBe(false)
+
+      fc.assert(fc.property(fc.integer({ min: 1 }), Pred.not(f)))
+    })
+
+    it("returns false for zero", () => {
+      expect(f(0)).toBe(false)
+    })
+
+    it("returns true for any number below zero", () => {
+      expect(f(-0.000001)).toBe(true)
+      expect(f(-42)).toBe(true)
+      expect(f(-Infinity)).toBe(true)
+
+      fc.assert(fc.property(fc.integer({ max: -1 }), f))
     })
   })
 })
