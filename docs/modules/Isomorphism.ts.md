@@ -58,7 +58,7 @@ Derive a `Semigroup` for `B` given a `Semigroup` for `A` and an
 **Signature**
 
 ```ts
-export declare const deriveSemigroup: <A, B>(x: Isomorphism<A, B>) => (S: Semigroup<A>) => Semigroup<B>
+export declare const deriveSemigroup: <A, B>(I: Isomorphism<A, B>) => (S: Semigroup<A>) => Semigroup<B>
 ```
 
 ```hs
@@ -94,7 +94,7 @@ Convert a monocle-ts `Iso` to an `Isomorphism`.
 **Signature**
 
 ```ts
-export declare const fromIso: <A, B>(x: Iso<A, B>) => Isomorphism<A, B>
+export declare const fromIso: <A, B>(I: Iso<A, B>) => Isomorphism<A, B>
 ```
 
 ```hs
@@ -110,7 +110,7 @@ Reverse the order of the types in an `Isomorphism`.
 **Signature**
 
 ```ts
-export declare const reverse: <A, B>(x: Isomorphism<A, B>) => Isomorphism<B, A>
+export declare const reverse: <A, B>(I: Isomorphism<A, B>) => Isomorphism<B, A>
 ```
 
 ```hs
@@ -126,7 +126,7 @@ Convert an `Isomorphism` to a monocle-ts `Iso`.
 **Signature**
 
 ```ts
-export declare const toIso: <A, B>(x: Isomorphism<A, B>) => Iso<A, B>
+export declare const toIso: <A, B>(I: Isomorphism<A, B>) => Iso<A, B>
 ```
 
 ```hs

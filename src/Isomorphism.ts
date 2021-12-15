@@ -27,8 +27,8 @@ export type Isomorphism<A, B> = {
  * `Isomorphism` and `Iso` themselves are isomorphic!
  */
 const getIsoIso = <A, B>(): Isomorphism<Isomorphism<A, B>, Iso<A, B>> => ({
-  to: x => ({ get: x.to, reverseGet: x.from }),
-  from: x => ({ to: x.get, from: x.reverseGet }),
+  to: I => ({ get: I.to, reverseGet: I.from }),
+  from: I => ({ to: I.get, from: I.reverseGet }),
 })
 
 /**
@@ -36,25 +36,25 @@ const getIsoIso = <A, B>(): Isomorphism<Isomorphism<A, B>, Iso<A, B>> => ({
  *
  * @since 0.13.0
  */
-export const toIso = <A, B>(x: Isomorphism<A, B>): Iso<A, B> =>
-  getIsoIso<A, B>().to(x)
+export const toIso = <A, B>(I: Isomorphism<A, B>): Iso<A, B> =>
+  getIsoIso<A, B>().to(I)
 
 /**
  * Convert a monocle-ts `Iso` to an `Isomorphism`.
  *
  * @since 0.13.0
  */
-export const fromIso = <A, B>(x: Iso<A, B>): Isomorphism<A, B> =>
-  getIsoIso<A, B>().from(x)
+export const fromIso = <A, B>(I: Iso<A, B>): Isomorphism<A, B> =>
+  getIsoIso<A, B>().from(I)
 
 /**
  * Reverse the order of the types in an `Isomorphism`.
  *
  * @since 0.13.0
  */
-export const reverse = <A, B>(x: Isomorphism<A, B>): Isomorphism<B, A> => ({
-  to: x.from,
-  from: x.to,
+export const reverse = <A, B>(I: Isomorphism<A, B>): Isomorphism<B, A> => ({
+  to: I.from,
+  from: I.to,
 })
 
 /**
@@ -81,7 +81,7 @@ export const reverse = <A, B>(x: Isomorphism<A, B>): Isomorphism<B, A> => ({
  * @since 0.13.0
  */
 export const deriveSemigroup =
-  <A, B>(x: Isomorphism<A, B>) =>
+  <A, B>(I: Isomorphism<A, B>) =>
   (S: Semigroup<A>): Semigroup<B> => ({
-    concat: (y, z) => x.to(S.concat(x.from(y), x.from(z))),
+    concat: (x, y) => I.to(S.concat(I.from(x), I.from(y))),
   })
