@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.13.0 (_Unreleased_)
 
 - Add `Alternative` module.
+- Add `Isomorphism` module.
 - Add `applySomes` to `Function`.
 - Add `lazy` to `Lazy`.
 - Add `memptyWhen` and `memptyUnless` to `Monoid`.
@@ -13,6 +14,7 @@ This project adheres to semantic versioning.
 - Add `isSpace` to `String`.
 - Remove support for variadic/non-unary functions from `flip`.
 - Rename the "Flipped" suffix wherever present to "V".
+- Bump minimum supported monocle-ts version to 2.3.0.
 
 ## 0.12.0 (2021-12-01)
 
