@@ -22,6 +22,7 @@ Added in v0.13.0
 - [utils](#utils)
   - [Isomorphism (type alias)](#isomorphism-type-alias)
   - [fromIso](#fromiso)
+  - [reverse](#reverse)
   - [toIso](#toiso)
 
 ---
@@ -60,6 +61,22 @@ export declare const fromIso: <A, B>(x: Iso<A, B>) => Isomorphism<A, B>
 
 ```hs
 fromIso :: Iso a b -> Isomorphism a b
+```
+
+Added in v0.13.0
+
+## reverse
+
+Reverse the order of the types in an `Isomorphism`.
+
+**Signature**
+
+```ts
+export declare const reverse: <A, B>(x: Isomorphism<A, B>) => Isomorphism<B, A>
+```
+
+```hs
+reverse :: Isomorphism a b -> Isomorphism b a
 ```
 
 Added in v0.13.0

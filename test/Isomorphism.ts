@@ -1,4 +1,4 @@
-import { Isomorphism, toIso, fromIso } from "../src/Isomorphism"
+import { Isomorphism, toIso, fromIso, reverse } from "../src/Isomorphism"
 import { Iso } from "monocle-ts/Iso"
 
 describe("Isomorphism", () => {
@@ -23,6 +23,15 @@ describe("Isomorphism", () => {
   describe("fromIso", () => {
     it("performs simple key transformation", () => {
       expect(fromIso(isoM)).toEqual(isoF)
+    })
+  })
+
+  describe("reverse", () => {
+    it("performs simple key transformation", () => {
+      expect(reverse(isoF)).toEqual({
+        to: fromBinary,
+        from: toBinary,
+      })
     })
   })
 })
