@@ -6,9 +6,10 @@
  */
 
 import { Predicate } from "fp-ts/Predicate"
-import * as A from "fp-ts/Array"
-import { apply, flow, pipe } from "fp-ts/function"
+import * as Pred from "fp-ts/Predicate"
+import { flow } from "fp-ts/function"
 import { invert } from "./Boolean"
+import { concatAll } from "fp-ts/Monoid"
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
@@ -27,10 +28,8 @@ import { invert } from "./Boolean"
  *
  * @since 0.12.0
  */
-export const allPass =
-  <A>(fs: Array<Predicate<A>>): Predicate<A> =>
-  x =>
-    pipe(fs, A.every(apply(x)))
+export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
+  concatAll(Pred.getMonoidAll<A>())(fs)
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
@@ -49,10 +48,8 @@ export const allPass =
  *
  * @since 0.12.0
  */
-export const anyPass =
-  <A>(fs: Array<Predicate<A>>): Predicate<A> =>
-  x =>
-    pipe(fs, A.some(apply(x)))
+export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
+  concatAll(Pred.getMonoidAny<A>())(fs)
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
