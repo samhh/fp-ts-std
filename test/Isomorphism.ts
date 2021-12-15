@@ -7,10 +7,12 @@ import {
   reverse,
   deriveSemigroup,
   deriveMonoid,
+  compose,
 } from "../src/Isomorphism"
 import { Iso } from "monocle-ts/Iso"
 import * as Eq from "fp-ts/Eq"
 import * as Bool from "fp-ts/boolean"
+import { flow } from "fp-ts/function"
 
 describe("Isomorphism", () => {
   type Binary = 0 | 1
@@ -96,6 +98,44 @@ describe("Isomorphism", () => {
         f(isoF)(Bool.MonoidAll),
         Eq.contramap(isoF.from)(Bool.Eq),
         fc.boolean().map(isoF.to),
+      )
+    })
+  })
+
+  describe("compose", () => {
+    // None of this is isomorphic but it proves the property we're testing.
+    const f: (x: boolean) => number = Number
+    const g: (x: number) => string = String
+    const absurd = (): never => {
+      // eslint-disable-next-line functional/no-throw-statement
+      throw new Error("unreachable")
+    }
+
+    it('"to" mirrors lifted function composition', () => {
+      // Sanity check
+      expect(
+        compose({ to: f, from: absurd })({ to: g, from: absurd }).to(true),
+      ).toBe("1")
+
+      expect(flow(f, g)(true)).toBe(
+        compose({ to: f, from: absurd })({ to: g, from: absurd }).to(true),
+      )
+      expect(flow(f, g)(false)).toBe(
+        compose({ to: f, from: absurd })({ to: g, from: absurd }).to(false),
+      )
+    })
+
+    it('"from" mirrors reversed lifted function composition', () => {
+      // Sanity check
+      expect(
+        compose({ to: absurd, from: g })({ to: absurd, from: f }).from(false),
+      ).toBe("0")
+
+      expect(flow(f, g)(true)).toBe(
+        compose({ to: absurd, from: g })({ to: absurd, from: f }).from(true),
+      )
+      expect(flow(f, g)(false)).toBe(
+        compose({ to: absurd, from: g })({ to: absurd, from: f }).from(false),
       )
     })
   })

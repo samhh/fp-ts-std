@@ -21,6 +21,7 @@ Added in v0.13.0
 
 - [utils](#utils)
   - [Isomorphism (type alias)](#isomorphism-type-alias)
+  - [compose](#compose)
   - [deriveMonoid](#derivemonoid)
   - [deriveSemigroup](#derivesemigroup)
   - [fromIso](#fromiso)
@@ -47,6 +48,52 @@ export type Isomorphism<A, B> = {
 
 ```hs
 type Isomorphism a b = { to: a -> b, from: b -> a }
+```
+
+Added in v0.13.0
+
+## compose
+
+Isomorphisms can be composed together much like functions. Consider this
+type signature a window into category theory!
+
+**Signature**
+
+```ts
+export declare const compose: <A, B>(F: Isomorphism<A, B>) => <C>(G: Isomorphism<B, C>) => Isomorphism<A, C>
+```
+
+```hs
+compose :: Isomorphism a b -> Isomorphism b c -> Isomorphism a c
+```
+
+**Example**
+
+```ts
+import * as Iso from 'fp-ts-std/Isomorphism'
+import { Isomorphism } from 'fp-ts-std/Isomorphism'
+import * as E from 'fp-ts/Either'
+import { Either } from 'fp-ts/Either'
+
+type Side = Either<null, null>
+type Binary = 0 | 1
+
+const isoSideBool: Isomorphism<Side, boolean> = {
+  to: E.isRight,
+  from: (x) => (x ? E.right(null) : E.left(null)),
+}
+
+const isoBoolBinary: Isomorphism<boolean, Binary> = {
+  to: (x) => (x ? 1 : 0),
+  from: Boolean,
+}
+
+const isoSideBinary: Isomorphism<Side, Binary> = Iso.compose(isoSideBool)(isoBoolBinary)
+
+assert.strictEqual(isoSideBinary.to(E.left(null)), 0)
+assert.strictEqual(isoSideBinary.to(E.right(null)), 1)
+assert.deepStrictEqual(isoSideBinary.from(0), E.left(null))
+assert.deepStrictEqual(isoSideBinary.from(1), E.right(null))
 ```
 
 Added in v0.13.0

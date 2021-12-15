@@ -12,6 +12,7 @@
 import { Iso } from "monocle-ts/Iso"
 import { Semigroup } from "fp-ts/Semigroup"
 import { Monoid } from "fp-ts/Monoid"
+import { flow } from "fp-ts/lib/function"
 
 /**
  * An isomorphism is formed between two reversible, lossless functions. The
@@ -116,4 +117,46 @@ export const deriveMonoid =
   (M: Monoid<A>): Monoid<B> => ({
     empty: I.to(M.empty),
     concat: (x, y) => I.to(M.concat(I.from(x), I.from(y))),
+  })
+
+// Whilst `(b -> c) -> (a -> b) -> a -> c` would be much cuter and match the
+// shape of Haskell's composition operator, this left-to-right order makes more
+// sense in an fp-ts context.
+/**
+ * Isomorphisms can be composed together much like functions. Consider this
+ * type signature a window into category theory!
+ *
+ * @example
+ * import * as Iso from 'fp-ts-std/Isomorphism';
+ * import { Isomorphism } from 'fp-ts-std/Isomorphism';
+ * import * as E from 'fp-ts/Either';
+ * import { Either } from 'fp-ts/Either';
+ *
+ * type Side = Either<null, null>;
+ * type Binary = 0 | 1;
+ *
+ * const isoSideBool: Isomorphism<Side, boolean> = {
+ *   to: E.isRight,
+ *   from: x => x ? E.right(null) : E.left(null),
+ * };
+ *
+ * const isoBoolBinary: Isomorphism<boolean, Binary> = {
+ *   to: x => x ? 1 : 0,
+ *   from: Boolean,
+ * };
+ *
+ * const isoSideBinary: Isomorphism<Side, Binary> = Iso.compose(isoSideBool)(isoBoolBinary);
+ *
+ * assert.strictEqual(isoSideBinary.to(E.left(null)), 0);
+ * assert.strictEqual(isoSideBinary.to(E.right(null)), 1);
+ * assert.deepStrictEqual(isoSideBinary.from(0), E.left(null));
+ * assert.deepStrictEqual(isoSideBinary.from(1), E.right(null));
+ *
+ * @since 0.13.0
+ */
+export const compose =
+  <A, B>(F: Isomorphism<A, B>) =>
+  <C>(G: Isomorphism<B, C>): Isomorphism<A, C> => ({
+    to: flow(F.to, G.to),
+    from: flow(G.from, F.from),
   })
