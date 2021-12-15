@@ -21,6 +21,7 @@ Added in v0.13.0
 
 - [utils](#utils)
   - [Isomorphism (type alias)](#isomorphism-type-alias)
+  - [deriveMonoid](#derivemonoid)
   - [deriveSemigroup](#derivesemigroup)
   - [fromIso](#fromiso)
   - [reverse](#reverse)
@@ -46,6 +47,44 @@ export type Isomorphism<A, B> = {
 
 ```hs
 type Isomorphism a b = { to: a -> b, from: b -> a }
+```
+
+Added in v0.13.0
+
+## deriveMonoid
+
+Derive a `Monoid` for `B` given a `Monoid` for `A` and an
+`Isomorphism` between the two types.
+
+**Signature**
+
+```ts
+export declare const deriveMonoid: <A, B>(I: Isomorphism<A, B>) => (M: Monoid<A>) => Monoid<B>
+```
+
+```hs
+deriveMonoid :: Isomorphism a b -> Monoid a -> Monoid b
+```
+
+**Example**
+
+```ts
+import * as Iso from 'fp-ts-std/Isomorphism'
+import { Isomorphism } from 'fp-ts-std/Isomorphism'
+import * as Bool from 'fp-ts/boolean'
+
+type Binary = 0 | 1
+
+const isoBoolBinary: Isomorphism<boolean, Binary> = {
+  to: (x) => (x ? 1 : 0),
+  from: Boolean,
+}
+
+const monoidBinaryAll = Iso.deriveMonoid(isoBoolBinary)(Bool.MonoidAll)
+
+assert.strictEqual(monoidBinaryAll.empty, 1)
+assert.strictEqual(monoidBinaryAll.concat(0, 1), 0)
+assert.strictEqual(monoidBinaryAll.concat(1, 1), 1)
 ```
 
 Added in v0.13.0

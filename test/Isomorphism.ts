@@ -6,6 +6,7 @@ import {
   fromIso,
   reverse,
   deriveSemigroup,
+  deriveMonoid,
 } from "../src/Isomorphism"
 import { Iso } from "monocle-ts/Iso"
 import * as Eq from "fp-ts/Eq"
@@ -65,6 +66,34 @@ describe("Isomorphism", () => {
     it("provides lawful output given lawful input", () => {
       laws.semigroup(
         f(isoF)(Bool.SemigroupAll),
+        Eq.contramap(isoF.from)(Bool.Eq),
+        fc.boolean().map(isoF.to),
+      )
+    })
+  })
+
+  describe("deriveMonoid", () => {
+    const f = deriveMonoid
+
+    it("uses provided Monoid instance", () => {
+      const MAll = f(isoF)(Bool.MonoidAll)
+      expect(MAll.empty).toBe(1)
+      expect(MAll.concat(0, 0)).toBe(0)
+      expect(MAll.concat(0, 1)).toBe(0)
+      expect(MAll.concat(1, 0)).toBe(0)
+      expect(MAll.concat(1, 1)).toBe(1)
+
+      const MAny = f(isoF)(Bool.MonoidAny)
+      expect(MAny.empty).toBe(0)
+      expect(MAny.concat(0, 0)).toBe(0)
+      expect(MAny.concat(0, 1)).toBe(1)
+      expect(MAny.concat(1, 0)).toBe(1)
+      expect(MAny.concat(1, 1)).toBe(1)
+    })
+
+    it("provides lawful output given lawful input", () => {
+      laws.monoid(
+        f(isoF)(Bool.MonoidAll),
         Eq.contramap(isoF.from)(Bool.Eq),
         fc.boolean().map(isoF.to),
       )

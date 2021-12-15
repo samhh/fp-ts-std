@@ -11,6 +11,7 @@
 
 import { Iso } from "monocle-ts/Iso"
 import { Semigroup } from "fp-ts/Semigroup"
+import { Monoid } from "fp-ts/Monoid"
 
 /**
  * An isomorphism is formed between two reversible, lossless functions. The
@@ -84,4 +85,35 @@ export const deriveSemigroup =
   <A, B>(I: Isomorphism<A, B>) =>
   (S: Semigroup<A>): Semigroup<B> => ({
     concat: (x, y) => I.to(S.concat(I.from(x), I.from(y))),
+  })
+
+/**
+ * Derive a `Monoid` for `B` given a `Monoid` for `A` and an
+ * `Isomorphism` between the two types.
+ *
+ * @example
+ * import * as Iso from 'fp-ts-std/Isomorphism';
+ * import { Isomorphism } from 'fp-ts-std/Isomorphism';
+ * import * as Bool from 'fp-ts/boolean';
+ *
+ * type Binary = 0 | 1;
+ *
+ * const isoBoolBinary: Isomorphism<boolean, Binary> = {
+ *   to: x => x ? 1 : 0,
+ *   from: Boolean,
+ * };
+ *
+ * const monoidBinaryAll = Iso.deriveMonoid(isoBoolBinary)(Bool.MonoidAll);
+ *
+ * assert.strictEqual(monoidBinaryAll.empty, 1);
+ * assert.strictEqual(monoidBinaryAll.concat(0, 1), 0);
+ * assert.strictEqual(monoidBinaryAll.concat(1, 1), 1);
+ *
+ * @since 0.13.0
+ */
+export const deriveMonoid =
+  <A, B>(I: Isomorphism<A, B>) =>
+  (M: Monoid<A>): Monoid<B> => ({
+    empty: I.to(M.empty),
+    concat: (x, y) => I.to(M.concat(I.from(x), I.from(y))),
   })
