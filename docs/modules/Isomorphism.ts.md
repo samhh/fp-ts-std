@@ -21,6 +21,7 @@ Added in v0.13.0
 
 - [utils](#utils)
   - [Isomorphism (type alias)](#isomorphism-type-alias)
+  - [deriveSemigroup](#derivesemigroup)
   - [fromIso](#fromiso)
   - [reverse](#reverse)
   - [toIso](#toiso)
@@ -45,6 +46,43 @@ export type Isomorphism<A, B> = {
 
 ```hs
 type Isomorphism a b = { to: a -> b, from: b -> a }
+```
+
+Added in v0.13.0
+
+## deriveSemigroup
+
+Derive a `Semigroup` for `B` given a `Semigroup` for `A` and an
+`Isomorphism` between the two types.
+
+**Signature**
+
+```ts
+export declare const deriveSemigroup: <A, B>(x: Isomorphism<A, B>) => (S: Semigroup<A>) => Semigroup<B>
+```
+
+```hs
+deriveSemigroup :: Isomorphism a b -> Semigroup a -> Semigroup b
+```
+
+**Example**
+
+```ts
+import * as Iso from 'fp-ts-std/Isomorphism'
+import { Isomorphism } from 'fp-ts-std/Isomorphism'
+import * as Bool from 'fp-ts/boolean'
+
+type Binary = 0 | 1
+
+const isoBoolBinary: Isomorphism<boolean, Binary> = {
+  to: (x) => (x ? 1 : 0),
+  from: Boolean,
+}
+
+const semigroupBinaryAll = Iso.deriveSemigroup(isoBoolBinary)(Bool.SemigroupAll)
+
+assert.strictEqual(semigroupBinaryAll.concat(0, 1), 0)
+assert.strictEqual(semigroupBinaryAll.concat(1, 1), 1)
 ```
 
 Added in v0.13.0

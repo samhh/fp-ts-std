@@ -10,6 +10,7 @@
  */
 
 import { Iso } from "monocle-ts/Iso"
+import { Semigroup } from "fp-ts/Semigroup"
 
 /**
  * An isomorphism is formed between two reversible, lossless functions. The
@@ -55,3 +56,32 @@ export const reverse = <A, B>(x: Isomorphism<A, B>): Isomorphism<B, A> => ({
   to: x.from,
   from: x.to,
 })
+
+/**
+ * Derive a `Semigroup` for `B` given a `Semigroup` for `A` and an
+ * `Isomorphism` between the two types.
+ *
+ * @example
+ * import * as Iso from 'fp-ts-std/Isomorphism';
+ * import { Isomorphism } from 'fp-ts-std/Isomorphism';
+ * import * as Bool from 'fp-ts/boolean';
+ *
+ * type Binary = 0 | 1;
+ *
+ * const isoBoolBinary: Isomorphism<boolean, Binary> = {
+ *   to: x => x ? 1 : 0,
+ *   from: Boolean,
+ * };
+ *
+ * const semigroupBinaryAll = Iso.deriveSemigroup(isoBoolBinary)(Bool.SemigroupAll);
+ *
+ * assert.strictEqual(semigroupBinaryAll.concat(0, 1), 0);
+ * assert.strictEqual(semigroupBinaryAll.concat(1, 1), 1);
+ *
+ * @since 0.13.0
+ */
+export const deriveSemigroup =
+  <A, B>(x: Isomorphism<A, B>) =>
+  (S: Semigroup<A>): Semigroup<B> => ({
+    concat: (y, z) => x.to(S.concat(x.from(y), x.from(z))),
+  })
