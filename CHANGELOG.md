@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.13.0 (_Unreleased_)
+## 0.13.0 (2021-12-16)
 
 - Add `Alternative` module.
 - Add `Isomorphism` module.
