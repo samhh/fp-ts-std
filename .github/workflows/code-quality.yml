@@ -3,6 +3,10 @@ on: [push, pull_request]
 jobs:
   code-quality:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Latest released and oldest supported.
+        node: [17, 12]
     steps:
       - uses: actions/checkout@v2
       - name: Cache Yarn dependencies
@@ -15,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "16.x"
+          node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Typecheck
