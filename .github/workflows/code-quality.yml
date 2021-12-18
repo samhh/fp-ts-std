@@ -29,6 +29,11 @@ jobs:
       - name: Check formatting
         run: yarn fmt --check
       - name: Test
+        if: matrix.node == 17
         run: yarn test
+      # Older versions of Node aren't as good at detecting coverage.
+      - name: Test w/o coverage
+        if: matrix.node == 12
+        run: yarn test --coverage=false
       - name: Docs
         run: yarn docs
