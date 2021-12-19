@@ -14,6 +14,8 @@ Some of the more commonly needed functions from [fp-ts-contrib](https://gcanti.g
 
 fp-ts-std is published with both ESM and CJS modules. The import paths in either case needn't change and the appropriate module resolution should be picked up by Node and your bundler, however if your environment doesn't support [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) you'll need to import directly from a `dist/(cjs|esm)/` subdirectory. Given ESM modules the library should tree shake well.
 
+Node LTS - at time of writing v12 - and the latest evergreen browsers are supported.
+
 ## Objectives
 
 fp-ts-std aims to achieve the following objectives:

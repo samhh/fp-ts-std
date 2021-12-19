@@ -307,7 +307,8 @@ export const test =
 export const replaceAll =
   (r: string) =>
   (s: string): Endomorphism<string> =>
-    invoke("replaceAll")([r, s])
+    // COMPAT: Use native `replaceAll` method once we drop support for Node <15.
+    invoke("replace")([new RegExp(r, "g"), s])
 
 /**
  * Drop a number of characters from the start of a string, returning a new

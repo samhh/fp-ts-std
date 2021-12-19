@@ -3,19 +3,17 @@ on: [push, pull_request]
 jobs:
   code-quality:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Latest released and oldest supported.
+        node: [17, 12]
     steps:
       - uses: actions/checkout@v2
-      - name: Cache Yarn dependencies
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-yarn
+      - name: Setup Node.js & Yarn
+        uses: actions/setup-node@v2
         with:
-          path: ~/.cache/yarn/
-          key: yarn-${{ hashFiles('./yarn.lock') }}
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: "16.x"
+          node-version: ${{ matrix.node }}
+          cache: yarn
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Typecheck
@@ -25,6 +23,11 @@ jobs:
       - name: Check formatting
         run: yarn fmt --check
       - name: Test
+        if: matrix.node == 17
         run: yarn test
+      # Older versions of Node aren't as good at detecting coverage.
+      - name: Test w/o coverage
+        if: matrix.node == 12
+        run: yarn test --coverage=false
       - name: Docs
         run: yarn docs
