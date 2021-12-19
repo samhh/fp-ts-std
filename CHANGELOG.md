@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.14.0 (_Unreleased_)
+
+- Support Node LTS (and latest evergreen browsers). This includes patching support for `replaceAll` in `String`.
+
 ## 0.13.0 (2021-12-16)
 
 - Add `Alternative` module.
