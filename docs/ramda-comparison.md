@@ -120,7 +120,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] keysIn - [fp-ts/Record::keys](https://gcanti.github.io/fp-ts/modules/Record.ts.html#keys)
 - [x] last - [fp-ts/Array::last](https://gcanti.github.io/fp-ts/modules/Array.ts.html#last)/[fp-ts-std/String::last](https://samhh.github.io/fp-ts-std/modules/String.ts.html#last)
 - [x] lastIndexOf - [fp-ts/Array::lastIndexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findlastindex)
-- [x] length - [fp-ts/Array::size](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#size)
+- [x] length - [fp-ts/Array::size](https://gcanti.github.io/fp-ts/modules/Array.ts.html#size)
 - [x] lens - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensIndex - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] lensPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
