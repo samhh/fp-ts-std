@@ -14,18 +14,18 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 
 - ~~[ ] \_\_~~ Use currying and potentially [fp-ts-std/Function::flip](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#flip) instead.
 - [x] add - [fp-ts-std/Number::add](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#add)/[fp-ts/Field](https://gcanti.github.io/fp-ts/modules/Field.ts.html)
-- [x] addIndex - [fp-ts-std/Function::withIndex](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#addindex)
+- [x] addIndex - [fp-ts-std/Function::withIndex](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#withIndex)
 - [x] adjust - [fp-ts/Array::modifyAt](https://gcanti.github.io/fp-ts/modules/Array.ts.html#modifyat)
 - [x] all - [fp-ts/Array::every](https://gcanti.github.io/fp-ts/modules/Array.ts.html#every)
-- [x] allPass - [fp-ts-std/Boolean::allPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#allpass)
+- [ ] allPass 
 - [x] always - [fp-ts/function::constant](https://gcanti.github.io/fp-ts/modules/function.ts.html#constant)
 - [x] and - [fp-ts-std/Boolean::and](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#and)/[fp-ts/Semigroup::semigroupAll](https://gcanti.github.io/fp-ts/modules/Semigroup.ts.html#semigroupall)
 - [x] andThen - [fp-ts/Task::map](https://gcanti.github.io/fp-ts/modules/Task.ts.html#map)
 - [x] any - [fp-ts/Array::some](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#some)
-- [x] anyPass - [fp-ts-std/Boolean::anyPass](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#anypass)
+- [ ] anyPass 
 - [x] ap - [fp-ts/Array::ap](https://gcanti.github.io/fp-ts/modules/Array.ts.html#ap)
 - [x] aperture - [fp-ts-std/Array::aperture](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#aperture)
-- [x] append - [fp-ts/Array::snoc](https://gcanti.github.io/fp-ts/modules/Array.ts.html#snoc)
+- [x] append - [fp-ts/Array::append](https://gcanti.github.io/fp-ts/modules/Array.ts.html#append)
 - [x] apply - [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary)
 - [x] applySpec - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] applyTo - [fp-ts/function::apply](https://gcanti.github.io/fp-ts/modules/function.ts.html#apply)
@@ -34,7 +34,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] assocPath - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - ~~[ ] binary~~ Use currying and potentially [fp-ts-std/Function::unary](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#unary) instead.
 - ~~[ ] bind~~ Do not use `this`.
-- [x] both - [fp-ts-std/Boolean::both](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#both)/[fp-ts/Option::apFirst](https://gcanti.github.io/fp-ts/modules/Option.ts.html#apfirst)
+- [x] both - [fp-ts-std/Boolean::and](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#and)/[fp-ts/Option::apFirst](https://gcanti.github.io/fp-ts/modules/Option.ts.html#apfirst)
 - ~~[ ] call~~ Use currying.
 - [x] chain - [fp-ts/Array::chain](https://gcanti.github.io/fp-ts/modules/Array.ts.html#chain)
 - [x] clamp - [fp-ts/Ord::clamp](https://gcanti.github.io/fp-ts/modules/Ord.ts.html#clamp)
@@ -68,7 +68,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] dropRepeats - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropRepeatsWith - [fp-ts-std/Array::dropRepeats](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#droprepeats)
 - [x] dropWhile - [fp-ts/Array::dropLeftWhile](https://gcanti.github.io/fp-ts/modules/Array.ts.html#dropleftwhile)/[fp-ts-std/String::dropLeftWhile](https://samhh.github.io/fp-ts-std/modules/String.ts.html#dropleftwhile)
-- [x] either - [fp-ts-std/Boolean::either](https://samhh.github.io/fp-ts-std/modules/Boolean.ts.html#either)/[fp-ts/Option::alt](https://gcanti.github.io/fp-ts/modules/Option.ts.html#alt)
+- [x] either - [fp-ts/Option::alt](https://gcanti.github.io/fp-ts/modules/Option.ts.html#alt)
 - [x] empty - [fp-ts/Array::empty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#empty)/[fp-ts/Record::empty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#empty)/[fp-ts/Option::empty]/[fp-ts/string::empty](https://gcanti.github.io/fp-ts/modules/string.ts.html#empty)
 - [x] endsWith - [fp-ts-std/Array::endsWith](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#endswith)/[fp-ts/string::endsWith](https://gcanti.github.io/fp-ts-std/modules/string.ts.html#endswith)
 - [x] eqBy - [fp-ts/Eq::contramap](https://gcanti.github.io/fp-ts/modules/Eq.ts.html#contramap)
@@ -98,7 +98,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] identity - [fp-ts/function::identity](https://gcanti.github.io/fp-ts/modules/function.ts.html#identity)
 - [x] ifElse - [fp-ts-std/Function::ifElse](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#ifelse)
 - [x] inc - [fp-ts-std/Number::increment](https://samhh.github.io/fp-ts-std/modules/Number.ts.html#increment)/[fp-ts/function::increment](https://gcanti.github.io/fp-ts/modules/function.ts.html#increment]
-- [x] includes - [fp-ts-std/Array::contains](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#contains)
+- [x] includes - [fp-ts/Array::elem](https://gcanti.github.io/fp-ts/modules/Array.ts.html#elem)
 - [x] indexBy - [fp-ts/NonEmptyArray::groupBy](https://gcanti.github.io/fp-ts/modules/NonEmptyArray.ts.html#groupby)
 - [x] indexOf - [fp-ts/Array::indexOf](https://gcanti.github.io/fp-ts/modules/Array.ts.html#findindex)
 - [x] init - [fp-ts/Array::init](https://gcanti.github.io/fp-ts/modules/Array.ts.html#init)/[fp-ts-std/String::init](https://samhh.github.io/fp-ts/modules/String.ts.html#init)
