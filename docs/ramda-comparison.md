@@ -178,7 +178,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] pathOr - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] paths - [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] pathSatisfies - [monocle-ts](https://gcanti.github.io/monocle-ts/)
-- [x] pick - [fp-ts-std/Record::pick](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#pick)
+- [x] pick - [fp-ts-std/Record::pick](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#pick) (returns undefined on missing values)
 - [ ] pickAll
 - [x] pickBy - [fp-ts/Record::filterWithIndex](https://gcanti.github.io/fp-ts/modules/Record.ts.html#filterwithindex)
 - [x] pipe - [fp-ts/function::flow](https://gcanti.github.io/fp-ts/modules/function.ts.html#flow)
