@@ -168,7 +168,7 @@ Added in v0.1.0
 ## pick
 
 Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
-type.
+type. Returns undefined on missing values.
 
 **Signature**
 
@@ -187,8 +187,10 @@ import { pick } from 'fp-ts-std/Record'
 import { pipe } from 'fp-ts/function'
 
 const picked = pipe({ a: 1, b: 'two', c: [true] }, pick(['a', 'c']))
-
+const pickedMissing = pipe({ a: 1, b: 'two' }, pick(['a', 'c']))
 assert.deepStrictEqual(picked, { a: 1, c: [true] })
+assert.deepStrictEqual(picked, { a: 1, c: undefined })
+
 ```
 
 Added in v0.1.0
