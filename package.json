@@ -18,11 +18,13 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "exports": {
+    ".": "./dist/cjs/index.js",
     "./*": {
       "require": "./dist/cjs/*.js",
       "import": "./dist/esm/*.js"
     }
   },
+  "types": "index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
