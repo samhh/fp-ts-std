@@ -23,7 +23,6 @@ import {
   Functor4,
   Functor2C,
 } from "fp-ts/Functor"
-import { fork } from "./Function"
 import { identity } from "fp-ts/function"
 
 /**
@@ -36,7 +35,7 @@ import { identity } from "fp-ts/function"
  *
  * @since 0.12.0
  */
-export const dup: <A>(x: A) => [A, A] = fork([identity, identity])
+export const dup: <A>(x: A) => [A, A] = x => create([x, x])
 
 /**
  * Apply a function, collecting the output alongside the input. A dual to
@@ -50,8 +49,10 @@ export const dup: <A>(x: A) => [A, A] = fork([identity, identity])
  *
  * @since 0.12.0
  */
-export const toFst = <A, B>(f: (x: A) => B): ((x: A) => [B, A]) =>
-  fork([f, identity])
+export const toFst =
+  <A, B>(f: (x: A) => B) =>
+  (x: A): [B, A] =>
+    create([f(x), x])
 
 /**
  * Apply a function, collecting the input alongside the output. A dual to
@@ -65,8 +66,10 @@ export const toFst = <A, B>(f: (x: A) => B): ((x: A) => [B, A]) =>
  *
  * @since 0.12.0
  */
-export const toSnd = <A, B>(f: (x: A) => B): ((x: A) => [A, B]) =>
-  fork([identity, f])
+export const toSnd =
+  <A, B>(f: (x: A) => B) =>
+  (x: A): [A, B] =>
+    create([x, f(x)])
 
 /**
  * Apply a functorial function, collecting the output alongside the input. A
