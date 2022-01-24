@@ -189,7 +189,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] prepend - [fp-ts/Array::cons](https://gcanti.github.io/fp-ts/modules/Array.ts.html#cons)
 - [x] product - [fp-ts-std/Array::product](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#product)
 - ~~[ ] project~~ Use [fp-ts-std/Record::pick](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#pick) in array map instead.
-- [x] prop - [monocle-ts](https://gcanti.github.io/monocle-ts/)
+- [x] prop - [monocle-ts](https://gcanti.github.io/monocle-ts/)  /  [fp-ts/Record::lookup](https://gcanti.github.io/fp-ts/modules/Record.ts.html#lookup)  / [fp-ts-ramda::prop](https://giogonzo.github.io/fp-ts-ramda/modules/prop.ts.html)
 - [x] propEq - [monocle-ts](https://gcanti.github.io/monocle-ts/) & [fp-ts/Eq](https://gcanti.github.io/fp-ts/modules/Eq.ts.html)
 - [x] propIs - [io-ts](https://gcanti.github.io/io-ts/) & [monocle-ts](https://gcanti.github.io/monocle-ts/)
 - [x] propOr - [monocle-ts](https://gcanti.github.io/monocle-ts/)
