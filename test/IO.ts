@@ -215,25 +215,25 @@ describe("IO", () => {
   /* eslint-enable */
 
   /* eslint-disable */
-  describe('memoize', () => {
+  describe("memoize", () => {
     const f = memoize
 
-    it('always returns the first result', () => {
-      let i = 0;
-      const g = f(() => i++);
+    it("always returns the first result", () => {
+      let i = 0
+      const g = f(() => i++)
 
-      expect(g()).toBe(g());
+      expect(g()).toBe(g())
     })
 
-    it('does not rerun the input function', () => {
-      let i = 0;
-      const g = f(() => i++);
+    it("does not rerun the input function", () => {
+      let i = 0
+      const g = f(() => i++)
 
-      g();
-      g();
-      g();
+      g()
+      g()
+      g()
 
-      expect(i).toBe(1);
+      expect(i).toBe(1)
     })
   })
   /* eslint-enable */
