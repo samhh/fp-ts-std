@@ -17,6 +17,7 @@ Added in v0.12.0
 - [utils](#utils)
   - [create](#create)
   - [dup](#dup)
+  - [mapBoth](#mapboth)
   - [toFst](#tofst)
   - [toSnd](#tosnd)
   - [traverseToFst](#traversetofst)
@@ -76,6 +77,34 @@ assert.deepStrictEqual(dup('x'), ['x', 'x'])
 ```
 
 Added in v0.12.0
+
+## mapBoth
+
+Apply a function to both elements of a tuple.
+
+**Signature**
+
+```ts
+export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B]
+```
+
+```hs
+mapBoth :: (a -> b) -> [a, a] -> [b, b]
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { mapBoth } from 'fp-ts-std/Tuple'
+import { multiply } from 'fp-ts-std/Number'
+
+const xs = pipe([3, 5], mapBoth(multiply(2)))
+
+assert.deepStrictEqual(xs, [6, 10])
+```
+
+Added in v0.14.0
 
 ## toFst
 

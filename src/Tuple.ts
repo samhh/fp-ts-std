@@ -23,8 +23,10 @@ import {
   Functor4,
   Functor2C,
 } from "fp-ts/Functor"
+import * as Tuple from "fp-ts/Tuple"
 import { fork } from "./Function"
 import { identity } from "fp-ts/function"
+import { mapBoth as _mapBoth } from "./Bifunctor"
 
 /**
  * Duplicate a value into a tuple.
@@ -206,3 +208,20 @@ export const withSnd =
  * @since 0.12.0
  */
 export const create: <A, B>(xs: [A, B]) => [A, B] = identity
+
+/**
+ * Apply a function to both elements of a tuple.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { mapBoth } from 'fp-ts-std/Tuple';
+ * import { multiply } from 'fp-ts-std/Number';
+ *
+ * const xs = pipe([3, 5], mapBoth(multiply(2)));
+ *
+ * assert.deepStrictEqual(xs, [6, 10]);
+ *
+ * @since 0.14.0
+ */
+export const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B] =
+  _mapBoth(Tuple.Bifunctor)

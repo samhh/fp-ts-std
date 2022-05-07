@@ -7,10 +7,11 @@ import {
   withFst,
   withSnd,
   create,
+  mapBoth,
 } from "../src/Tuple"
 import { increment } from "../src/Number"
-import { constant, flow, pipe } from "fp-ts/function"
-import { swap } from "fp-ts/Tuple"
+import { constant, flow, identity, pipe } from "fp-ts/function"
+import { bimap, swap } from "fp-ts/Tuple"
 import * as O from "fp-ts/Option"
 import fc from "fast-check"
 
@@ -122,6 +123,38 @@ describe("Tuple", () => {
       fc.assert(
         fc.property(fc.anything(), fc.anything(), (x, y) =>
           expect(f([x, y])).toEqual([x, y]),
+        ),
+      )
+    })
+  })
+
+  describe("mapBoth", () => {
+    const f = mapBoth
+
+    it("returns identity on identity input", () => {
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (l, r) =>
+          expect(f(identity)([l, r])).toEqual([l, r]),
+        ),
+      )
+    })
+
+    it("maps both sides of a tuple", () => {
+      const g = O.some
+
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (l, r) =>
+          expect(f(g)([l, r])).toEqual([g(l), g(r)]),
+        ),
+      )
+    })
+
+    it("is equivalent to doubly applied bimap", () => {
+      const g = O.some
+
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (l, r) =>
+          expect(f(g)([l, r])).toEqual(bimap(g, g)([l, r])),
         ),
       )
     })
