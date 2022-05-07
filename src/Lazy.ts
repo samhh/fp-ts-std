@@ -353,3 +353,24 @@ export const execute = <A>(x: Lazy<A>): A => x()
  * @since 0.13.0
  */
 export const lazy: <A>(f: () => A) => Lazy<A> = identity
+
+/**
+ * Memoize a `Lazy`. Provided the input function is pure, this function is too.
+ *
+ * @example
+ * import { lazy, memoize } from 'fp-ts-std/Lazy';
+ *
+ * const expensive = lazy(() => 42);
+ * const payOnce = memoize(expensive);
+ *
+ * assert.strictEqual(payOnce(), payOnce());
+ *
+ * @since 0.14.0
+ */
+export const memoize = <A>(f: Lazy<A>): Lazy<A> => {
+  const empty = Symbol()
+  // eslint-disable-next-line functional/no-let
+  let res: A | typeof empty = empty
+
+  return () => (res === empty ? (res = f()) : res)
+}

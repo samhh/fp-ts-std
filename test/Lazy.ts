@@ -150,4 +150,21 @@ describe("Lazy", () => {
       )
     })
   })
+
+  /* eslint-disable */
+  describe("memoize", () => {
+    const f = Lazy.memoize
+
+    it("does not rerun the input function", () => {
+      let i = 0
+      const g = f(() => i++)
+
+      g()
+      g()
+      g()
+
+      expect(i).toBe(1)
+    })
+  })
+  /* eslint-enable */
 })

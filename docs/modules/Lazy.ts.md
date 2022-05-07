@@ -45,6 +45,7 @@ Added in v0.12.0
   - [flatten](#flatten)
   - [lazy](#lazy)
   - [map](#map)
+  - [memoize](#memoize)
   - [of](#of)
   - [sequenceArray](#sequencearray)
   - [traverseArray](#traversearray)
@@ -490,6 +491,33 @@ map :: (a -> b) -> Lazy a -> Lazy b
 ```
 
 Added in v0.12.0
+
+## memoize
+
+Memoize a `Lazy`. Provided the input function is pure, this function is too.
+
+**Signature**
+
+```ts
+export declare const memoize: <A>(f: Lazy<A>) => Lazy<A>
+```
+
+```hs
+memoize :: Lazy a -> Lazy a
+```
+
+**Example**
+
+```ts
+import { lazy, memoize } from 'fp-ts-std/Lazy'
+
+const expensive = lazy(() => 42)
+const payOnce = memoize(expensive)
+
+assert.strictEqual(payOnce(), payOnce())
+```
+
+Added in v0.14.0
 
 ## of
 
