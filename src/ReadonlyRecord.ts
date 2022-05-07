@@ -4,7 +4,7 @@
  *
  * @since 0.10.0
  */
-import { flow } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
@@ -82,20 +82,28 @@ export const merge =
  */
 export const pick =
   <A, K extends keyof A>(ks: ReadonlyArray<K>) =>
-  (x: A): Pick<A, K> => {
+  (x: A): Pick<A, K> =>
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
     // it's in a single reused place
-    const o = {} as Pick<A, K>
+    pipe(
+      ks,
+      RA.reduce({} as Pick<A, K>, (ys, k) =>
+        merge(ys)(k in x ? { [k]: x[k] } : {}),
+      ),
+    )
 
-    /* eslint-disable */
-    for (const k of ks) {
-      o[k] = x[k]
-    }
-    /* eslint-enable */
-
-    return o
-  }
+//   {
+//   const o = {} as Pick<A, K>
+//
+//   /* eslint-disable */
+//   for (const k of ks) {
+//     o[k] = x[k]
+//   }
+//   /* eslint-enable */
+//
+//   return o
+// }
 
 /**
  * Like `pick`, but allows you to specify the input record upfront.
