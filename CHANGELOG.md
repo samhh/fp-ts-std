@@ -2,6 +2,11 @@
 
 This project adheres to semantic versioning.
 
+## 0.14.0 (*UNRELEASED*)
+
+- Fix behaviour of `pick` and `pickFrom` in `Record` with regards to optional properties.
+- Bump minimum supported Node LTS to v14.
+
 ## 0.13.1 (2022-01-16)
 
 - Support Node LTS (and latest evergreen browsers). This includes patching support for `replaceAll` in `String`.
