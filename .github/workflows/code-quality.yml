@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         # Latest released and oldest supported.
-        node: [17, 14]
+        node: [18, 14]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js & Yarn
@@ -23,7 +23,7 @@ jobs:
       - name: Check formatting
         run: yarn fmt --check
       - name: Test
-        if: matrix.node == 17
+        if: matrix.node == 18
         run: yarn test
       # Older versions of Node aren't as good at detecting coverage.
       - name: Test w/o coverage
