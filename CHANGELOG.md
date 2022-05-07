@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.14.0 (_UNRELEASED_)
 
 - Add `Bifunctor` module.
+- Add `mapBoth` to `Either`.
 - Add `mapBoth` to `Tuple`.
 - Fix behaviour of `pick` and `pickFrom` in `Record` with regards to optional properties.
 - Bump minimum supported Node LTS to v14.

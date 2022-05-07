@@ -1,5 +1,8 @@
-import { unsafeUnwrap, unsafeUnwrapLeft } from "../src/Either"
+import { unsafeUnwrap, unsafeUnwrapLeft, mapBoth } from "../src/Either"
 import * as E from "fp-ts/Either"
+import { identity } from "fp-ts/function"
+import * as Str from "../src/String"
+import fc from "fast-check"
 
 describe("Either", () => {
   describe("unsafeUnwrap", () => {
@@ -23,6 +26,41 @@ describe("Either", () => {
 
     it("throws Right", () => {
       expect(() => f(E.right("r"))).toThrow("r")
+    })
+  })
+
+  describe("mapBoth", () => {
+    const f = mapBoth
+
+    it("returns identity on identity input", () => {
+      fc.assert(
+        fc.property(fc.string(), x => {
+          expect(f(identity)(E.left(x))).toEqual(E.left(x))
+          expect(f(identity)(E.right(x))).toEqual(E.right(x))
+        }),
+      )
+    })
+
+    it("maps both sides of a tuple", () => {
+      const g = Str.append("!")
+
+      fc.assert(
+        fc.property(fc.string(), x => {
+          expect(f(g)(E.left(x))).toEqual(E.left(g(x)))
+          expect(f(g)(E.right(x))).toEqual(E.right(g(x)))
+        }),
+      )
+    })
+
+    it("is equivalent to doubly applied bimap", () => {
+      const g = Str.append("!")
+
+      fc.assert(
+        fc.property(fc.string(), x => {
+          expect(f(g)(E.left(x))).toEqual(E.bimap(g, g)(E.left(x)))
+          expect(f(g)(E.right(x))).toEqual(E.bimap(g, g)(E.right(x)))
+        }),
+      )
     })
   })
 })

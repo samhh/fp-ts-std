@@ -6,6 +6,7 @@
 
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
+import { mapBoth as _mapBoth } from "./Bifunctor"
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Left`
@@ -44,3 +45,21 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
 
   return x.left
 }
+
+/**
+ * Apply a function to both elements of an `Either`.
+ *
+ * @example
+ * import * as E from 'fp-ts/Either';
+ * import { mapBoth } from 'fp-ts-std/Either';
+ * import { multiply } from 'fp-ts-std/Number';
+ *
+ * const f = mapBoth(multiply(2));
+ *
+ * assert.deepStrictEqual(f(E.left(3)), E.left(6));
+ * assert.deepStrictEqual(f(E.right(3)), E.right(6));
+ *
+ * @since 0.14.0
+ */
+export const mapBoth: <A, B>(f: (x: A) => B) => (xs: Either<A, A>) => Either<B, B> =
+  _mapBoth(E.Bifunctor)

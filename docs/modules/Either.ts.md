@@ -15,12 +15,42 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [mapBoth](#mapboth)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
 
 ---
 
 # utils
+
+## mapBoth
+
+Apply a function to both elements of an `Either`.
+
+**Signature**
+
+```ts
+export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: Either<A, A>) => Either<B, B>
+```
+
+```hs
+mapBoth :: (a -> b) -> Either a a -> Either b b
+```
+
+**Example**
+
+```ts
+import * as E from 'fp-ts/Either'
+import { mapBoth } from 'fp-ts-std/Either'
+import { multiply } from 'fp-ts-std/Number'
+
+const f = mapBoth(multiply(2))
+
+assert.deepStrictEqual(f(E.left(3)), E.left(6))
+assert.deepStrictEqual(f(E.right(3)), E.right(6))
+```
+
+Added in v0.14.0
 
 ## unsafeUnwrap
 
