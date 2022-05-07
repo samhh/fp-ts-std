@@ -4,7 +4,7 @@
  * @since 0.1.0
  */
 
-import { flow } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
@@ -80,18 +80,16 @@ export const merge =
  */
 export const pick =
   <A, K extends keyof A>(ks: Array<K>) =>
-  (x: A): Pick<A, K> => {
+  (x: A): Pick<A, K> =>
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
-    // it's in a single reused place
-    return ks.reduce(
-      (memo, key) => ({
-        ...memo,
-        ...(key in x ? { [key]: x[key] } : {}),
-      }),
-      {},
-    ) as Pick<A, K>
-  }
+    // it's in a single reused place.
+    pipe(
+      ks,
+      A.reduce({} as Pick<A, K>, (ys, k) =>
+        merge(ys)(k in x ? { [k]: x[k] } : {}),
+      ),
+    )
 
 /**
  * Like `pick`, but allows you to specify the input record upfront.
