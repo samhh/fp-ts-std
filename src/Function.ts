@@ -254,6 +254,22 @@ export const invoke =
     z[x](...ys)
 
 /**
+ * `invoke` specialised to nullary methods.
+ *
+ * @example
+ * import { invokeNullary } from 'fp-ts-std/Function';
+ *
+ * const f = invokeNullary('trim');
+ *
+ * assert.strictEqual(f(' hello '), 'hello');
+ *
+ * @since 0.14.0
+ */
+export const invokeNullary: <A extends string>(
+  x: A,
+) => <B>(y: Record<A, () => B>) => B = flip(invoke)([])
+
+/**
  * Like `invoke`, but takes an initial type argument to hint at what shape the
  * arguments tuple should be. This function is useful for producing bindings for
  * object-oriented methods in tandem with the tuple*N*T range of functions.

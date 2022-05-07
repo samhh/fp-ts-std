@@ -35,6 +35,7 @@ Added in v0.1.0
   - [guard](#guard)
   - [ifElse](#ifelse)
   - [invoke](#invoke)
+  - [invokeNullary](#invokenullary)
   - [invokeOn](#invokeon)
   - [is](#is)
   - [memoize](#memoize)
@@ -565,6 +566,32 @@ assert.strictEqual(f('hello'), '...hello')
 ```
 
 Added in v0.12.0
+
+## invokeNullary
+
+`invoke` specialised to nullary methods.
+
+**Signature**
+
+```ts
+export declare const invokeNullary: <A extends string>(x: A) => <B>(y: Record<A, () => B>) => B
+```
+
+```hs
+invokeNullary :: a extends string => a -> Record a (() -> b) -> b
+```
+
+**Example**
+
+```ts
+import { invokeNullary } from 'fp-ts-std/Function'
+
+const f = invokeNullary('trim')
+
+assert.strictEqual(f(' hello '), 'hello')
+```
+
+Added in v0.14.0
 
 ## invokeOn
 

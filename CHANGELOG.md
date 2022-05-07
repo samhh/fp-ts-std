@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `Bifunctor` module.
 - Add `mapBoth` to `Either`.
+- Add `invokeNullary` to `Function`.
 - Add `mapBoth` to `TaskEither`.
 - Add `mapBoth` to `Tuple`.
 - Fix behaviour of `pick` and `pickFrom` in `Record` with regards to optional properties.

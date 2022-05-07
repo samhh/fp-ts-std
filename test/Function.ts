@@ -9,6 +9,7 @@ import {
   until,
   construct,
   invoke,
+  invokeNullary,
   invokeOn,
   memoize,
   curry2,
@@ -188,6 +189,22 @@ describe("Function", () => {
 
       expect(f("f")(["xyz"])(X)).toBe("xyzxyz")
       expect(f("padStart")([8, "."])("hello")).toBe("...hello")
+    })
+  })
+
+  describe("invokeNullary", () => {
+    const f = invokeNullary
+
+    it("calls the method", () => {
+      // eslint-disable-next-line functional/no-class
+      class X {
+        static f() {
+          return 42
+        }
+      }
+
+      expect(f("f")(X)).toBe(42)
+      expect(f("trim")(" hello ")).toBe("hello")
     })
   })
 
