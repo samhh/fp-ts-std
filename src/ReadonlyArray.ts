@@ -80,9 +80,10 @@ export const elemV =
  *
  * @since 0.10.0
  */
+// tsc doesn't like pointfree here. /shrug
 export const none: <A>(f: Predicate<A>) => Predicate<ReadonlyArray<A>> = flow(
   not,
-  RA.every,
+  p => RA.every(p),
 )
 
 /**

@@ -79,9 +79,9 @@ export const elemV =
  *
  * @since 0.7.0
  */
-export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(
-  not,
-  A.every,
+// tsc doesn't like pointfree here. /shrug
+export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(not, p =>
+  A.every(p),
 )
 
 /**
