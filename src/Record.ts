@@ -69,15 +69,13 @@ export const pick =
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
     // it's in a single reused place
-    const o = {} as Pick<A, K>
-
-    /* eslint-disable */
-    for (const k of ks) {
-      o[k] = x[k]
-    }
-    /* eslint-enable */
-
-    return o
+    return ks.reduce(
+      (memo, key) => ({
+        ...memo,
+        ...(key in x ? { [key]: x[key] } : {}),
+      }),
+      {},
+    ) as Pick<A, K>
   }
 
 /**
