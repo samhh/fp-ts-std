@@ -2,8 +2,9 @@
 
 This project adheres to semantic versioning.
 
-## 0.14.0 (*UNRELEASED*)
+## 0.14.0 (_UNRELEASED_)
 
+- Add `Bifunctor` module.
 - Fix behaviour of `pick` and `pickFrom` in `Record` with regards to optional properties.
 - Bump minimum supported Node LTS to v14.
 
