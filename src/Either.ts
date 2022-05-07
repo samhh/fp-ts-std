@@ -61,5 +61,6 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
  *
  * @since 0.14.0
  */
-export const mapBoth: <A, B>(f: (x: A) => B) => (xs: Either<A, A>) => Either<B, B> =
-  _mapBoth(E.Bifunctor)
+export const mapBoth: <A, B>(
+  f: (x: A) => B,
+) => (xs: Either<A, A>) => Either<B, B> = _mapBoth(E.Bifunctor)
