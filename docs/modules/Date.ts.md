@@ -27,6 +27,7 @@ Added in v0.1.0
   - [ordMilliseconds](#ordmilliseconds)
   - [parseDate](#parsedate)
   - [toISOString](#toisostring)
+  - [toUTCString](#toutcstring)
   - [unMilliseconds](#unmilliseconds)
   - [unsafeParseDate](#unsafeparsedate)
 
@@ -281,6 +282,32 @@ assert.strictEqual(toISOString(d), d.toISOString())
 ```
 
 Added in v0.1.0
+
+## toUTCString
+
+Returns a date converted to a string using Universal Coordinated Time (UTC).
+
+**Signature**
+
+```ts
+export declare const toUTCString: (x: Date) => string
+```
+
+```hs
+toUTCString :: Date -> string
+```
+
+**Example**
+
+```ts
+import { toUTCString } from 'fp-ts-std/Date'
+
+const d = new Date()
+
+assert.strictEqual(toUTCString(d), d.toUTCString())
+```
+
+Added in v0.14.0
 
 ## unMilliseconds
 

@@ -1,6 +1,7 @@
 import {
   getTime,
   toISOString,
+  toUTCString,
   isDate,
   isValid,
   unsafeParseDate,
@@ -36,6 +37,16 @@ describe("Date", () => {
       const d = new Date()
 
       expect(f(d)).toBe(d.toISOString())
+    })
+  })
+
+  describe("toUTCString", () => {
+    const f = toUTCString
+
+    it("wraps prototype method", () => {
+      const d = new Date()
+
+      expect(f(d)).toBe(d.toUTCString())
     })
   })
 

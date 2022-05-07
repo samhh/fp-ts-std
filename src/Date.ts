@@ -126,6 +126,22 @@ export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
 )
 
 /**
+ * Returns a date converted to a string using Universal Coordinated Time (UTC).
+ *
+ * @example
+ * import { toUTCString } from 'fp-ts-std/Date';
+ *
+ * const d = new Date();
+ *
+ * assert.strictEqual(toUTCString(d), d.toUTCString());
+ *
+ * @since 0.14.0
+ */
+export const toUTCString: (x: Date) => string = invokeOn<Date>()("toUTCString")(
+  [],
+)
+
+/**
  * Check if a foreign value is a `Date`.
  *
  * @example
