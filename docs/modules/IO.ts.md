@@ -16,6 +16,7 @@ Added in v0.7.0
 
 - [utils](#utils)
   - [execute](#execute)
+  - [memoize](#memoize)
   - [once](#once)
   - [tap](#tap)
   - [unless](#unless)
@@ -51,6 +52,33 @@ assert.strictEqual(execute(IO.of(5)), 5)
 ```
 
 Added in v0.12.0
+
+## memoize
+
+Memoize an `IO`, reusing the result of its first execution.
+
+**Signature**
+
+```ts
+export declare const memoize: <A>(f: IO<A>) => IO<A>
+```
+
+```hs
+memoize :: IO a -> IO a
+```
+
+**Example**
+
+```ts
+import { memoize } from 'fp-ts-std/IO'
+import { now } from 'fp-ts-std/Date'
+
+const then = memoize(now)
+
+assert.strictEqual(then(), then())
+```
+
+Added in v0.14.0
 
 ## once
 

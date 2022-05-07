@@ -177,3 +177,24 @@ export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
 export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
   IO.Applicative,
 )
+
+/**
+ * Memoize an `IO`, reusing the result of its first execution.
+ *
+ * @example
+ * import { memoize } from 'fp-ts-std/IO';
+ * import { now } from 'fp-ts-std/Date';
+ *
+ * const then = memoize(now);
+ *
+ * assert.strictEqual(then(), then());
+ *
+ * @since 0.14.0
+ */
+export const memoize = <A>(f: IO<A>): IO<A> => {
+  const empty = Symbol()
+  // eslint-disable-next-line functional/no-let
+  let res: A | typeof empty = empty
+
+  return () => (res === empty ? (res = f()) : res)
+}

@@ -13,6 +13,7 @@ import {
   execute,
   when,
   unless,
+  memoize,
 } from "../src/IO"
 import { add } from "../src/Number"
 import fc from "fast-check"
@@ -209,6 +210,30 @@ describe("IO", () => {
       expect(ran).toBe(false)
       h()
       expect(ran).toBe(true)
+    })
+  })
+  /* eslint-enable */
+
+  /* eslint-disable */
+  describe('memoize', () => {
+    const f = memoize
+
+    it('always returns the first result', () => {
+      let i = 0;
+      const g = f(() => i++);
+
+      expect(g()).toBe(g());
+    })
+
+    it('does not rerun the input function', () => {
+      let i = 0;
+      const g = f(() => i++);
+
+      g();
+      g();
+      g();
+
+      expect(i).toBe(1);
     })
   })
   /* eslint-enable */
