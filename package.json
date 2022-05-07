@@ -16,7 +16,7 @@
     "fp-ts"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
