@@ -47,6 +47,21 @@ export const lookupV =
     R.lookup(k)(x)
 
 /**
+ * Merge two records together. For merging many identical records, instead
+ * consider defining a semigroup.
+ *
+ * @example
+ * import { merge } from 'fp-ts-std/Record';
+ *
+ * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true });
+ *
+ * @since 0.7.0
+ */
+export const merge =
+  <A>(x: A) =>
+  <B>(y: B): A & B => ({ ...x, ...y })
+
+/**
  * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
  * type.
  *
@@ -139,21 +154,6 @@ export const omit =
  */
 export const reject = <A>(f: Predicate<A>): Endomorphism<Record<string, A>> =>
   R.filter(not(f))
-
-/**
- * Merge two records together. For merging many identical records, instead
- * consider defining a semigroup.
- *
- * @example
- * import { merge } from 'fp-ts-std/Record';
- *
- * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true });
- *
- * @since 0.7.0
- */
-export const merge =
-  <A>(x: A) =>
-  <B>(y: B): A & B => ({ ...x, ...y })
 
 /**
  * Invert a record, keeping only the last value should the same key be
