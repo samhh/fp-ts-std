@@ -282,7 +282,7 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(fc.array(fc.integer()), fc.array(fc.integer()), (xs, ys) =>
-          f(xs)(xs.concat(ys)),
+          f(xs)(A.concat(ys)(xs)),
         ),
       )
     })
@@ -301,7 +301,7 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(fc.array(fc.integer()), fc.array(fc.integer()), (xs, ys) =>
-          f(xs)(ys.concat(xs)),
+          f(xs)(A.concat(xs)(ys)),
         ),
       )
     })
