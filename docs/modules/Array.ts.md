@@ -25,6 +25,7 @@ Added in v0.1.0
   - [endsWith](#endswith)
   - [extractAt](#extractat)
   - [filterA](#filtera)
+  - [fromIterable](#fromiterable)
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
   - [join](#join)
@@ -385,6 +386,30 @@ filterA(T.ApplicativePar)(asyncIsEven)([1, 2, 3, 4, 5])().then((xs) => {
 ```
 
 Added in v0.12.0
+
+## fromIterable
+
+Convert an `Iterable` to an `Array`.
+
+**Signature**
+
+```ts
+export declare const fromIterable: <A>(xs: Iterable<A>) => A[]
+```
+
+```hs
+fromIterable :: Iterable a -> Array a
+```
+
+**Example**
+
+```ts
+import { fromIterable } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o'])
+```
+
+Added in v0.14.0
 
 ## getDisorderedEq
 

@@ -872,3 +872,15 @@ export const extractAt =
       A.lookup(i),
       O.map(x => [x, A.unsafeDeleteAt(i, xs)]),
     )
+
+/**
+ * Convert an `Iterable` to an `Array`.
+ *
+ * @example
+ * import { fromIterable } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o']);
+ *
+ * @since 0.14.0
+ */
+export const fromIterable: <A>(xs: Iterable<A>) => Array<A> = Array.from
