@@ -603,3 +603,16 @@ export const isUpper: Predicate<string> = test(/^\p{Upper}+$/u)
  * @since 0.13.0
  */
 export const isSpace: Predicate<string> = test(/^\s+$/)
+
+/**
+ * Split a string into substrings using any recognised whitespace as the
+ * separator.
+ *
+ * @example
+ * import { words } from 'fp-ts-std/String';
+ *
+ * assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c']);
+ *
+ * @since 0.4.0
+ */
+export const words = S.split(/\s/)

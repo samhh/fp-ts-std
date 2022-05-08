@@ -49,6 +49,7 @@ Added in v0.1.0
   - [unlines](#unlines)
   - [unprepend](#unprepend)
   - [unsurround](#unsurround)
+  - [words](#words)
 
 ---
 
@@ -988,3 +989,28 @@ assert.strictEqual(unquote('"abc"'), 'abc')
 ```
 
 Added in v0.1.0
+
+## words
+
+Split a string into substrings using any recognised whitespace as the
+separator.
+
+**Signature**
+
+```ts
+export declare const words: (s: string) => ReadonlyNonEmptyArray<string>
+```
+
+```hs
+words :: string -> ReadonlyNonEmptyArray string
+```
+
+**Example**
+
+```ts
+import { words } from 'fp-ts-std/String'
+
+assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c'])
+```
+
+Added in v0.4.0

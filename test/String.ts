@@ -33,6 +33,7 @@ import {
   isLower,
   isUpper,
   isSpace,
+  words,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -713,6 +714,28 @@ describe("String", () => {
 
     it("accepts any whitespace char", () => {
       expect(f("\t    \n")).toBe(true)
+    })
+  })
+
+  describe("words", () => {
+    const f = words
+
+    it("splits on whitespace", () => {
+      expect(f("")).toEqual([""])
+      expect(f(" ")).toEqual(["", ""])
+      expect(f("  ")).toEqual(["", "", ""])
+      expect(f(" a")).toEqual(["", "a"])
+      expect(f("a ")).toEqual(["a", ""])
+      expect(f("a b")).toEqual(["a", "b"])
+    })
+
+    it("splits on newlines", () => {
+      expect(f("")).toEqual([""])
+      expect(f("\n")).toEqual(["", ""])
+      expect(f("\n\n")).toEqual(["", "", ""])
+      expect(f("\na")).toEqual(["", "a"])
+      expect(f("a\n")).toEqual(["a", ""])
+      expect(f("a\nb")).toEqual(["a", "b"])
     })
   })
 })
