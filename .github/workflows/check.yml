@@ -1,7 +1,7 @@
-name: on-push
+name: Check
 on: [push, pull_request]
 jobs:
-  code-quality:
+  check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
