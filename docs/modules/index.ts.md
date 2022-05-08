@@ -18,6 +18,7 @@ Added in v0.5.1
   - [alternative](#alternative)
   - [applicative](#applicative)
   - [array](#array)
+  - [bifunctor](#bifunctor)
   - [boolean](#boolean)
   - [date](#date)
   - [debug](#debug)
@@ -35,9 +36,11 @@ Added in v0.5.1
   - [predicate](#predicate)
   - [readonlyArray](#readonlyarray)
   - [readonlyRecord](#readonlyrecord)
+  - [readonlyStruct](#readonlystruct)
   - [record](#record)
   - [show](#show)
   - [string](#string)
+  - [struct](#struct)
   - [task](#task)
   - [taskEither](#taskeither)
   - [tuple](#tuple)
@@ -95,6 +98,22 @@ array :: typeof array
 ```
 
 Added in v0.5.1
+
+## bifunctor
+
+A re-export of the `fp-ts-std/Bifunctor` module.
+
+**Signature**
+
+```ts
+export declare const bifunctor: typeof bifunctor
+```
+
+```hs
+bifunctor :: typeof bifunctor
+```
+
+Added in v0.14.0
 
 ## boolean
 
@@ -369,6 +388,22 @@ readonlyRecord :: typeof readonlyRecord
 
 Added in v0.10.0
 
+## readonlyStruct
+
+A re-export of the `fp-ts-std/ReadonlyStruct` module.
+
+**Signature**
+
+```ts
+export declare const readonlyStruct: typeof readonlyStruct
+```
+
+```hs
+readonlyStruct :: typeof readonlyStruct
+```
+
+Added in v0.14.0
+
 ## record
 
 A re-export of the `fp-ts-std/Record` module.
@@ -416,6 +451,22 @@ string :: typeof string
 ```
 
 Added in v0.5.1
+
+## struct
+
+A re-export of the `fp-ts-std/Struct` module.
+
+**Signature**
+
+```ts
+export declare const struct: typeof struct
+```
+
+```hs
+struct :: typeof struct
+```
+
+Added in v0.14.0
 
 ## task
 

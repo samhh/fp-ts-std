@@ -7,6 +7,7 @@
 import * as alternative from "./Alternative"
 import * as applicative from "./Applicative"
 import * as array from "./Array"
+import * as bifunctor from "./Bifunctor"
 import * as boolean from "./Boolean"
 import * as date from "./Date"
 import * as debug from "./Debug"
@@ -24,9 +25,11 @@ import * as ordering from "./Ordering"
 import * as predicate from "./Predicate"
 import * as readonlyArray from "./ReadonlyArray"
 import * as readonlyRecord from "./ReadonlyRecord"
+import * as readonlyStruct from "./ReadonlyStruct"
 import * as record from "./Record"
 import * as show from "./Show"
 import * as string from "./String"
+import * as struct from "./Struct"
 import * as task from "./Task"
 import * as taskEither from "./TaskEither"
 import * as tuple from "./Tuple"
@@ -52,6 +55,12 @@ export {
    * @since 0.5.1
    */
   array,
+  /**
+   * A re-export of the `fp-ts-std/Bifunctor` module.
+   *
+   * @since 0.14.0
+   */
+  bifunctor,
   /**
    * A re-export of the `fp-ts-std/Boolean` module.
    *
@@ -156,6 +165,12 @@ export {
    */
   readonlyRecord,
   /**
+   * A re-export of the `fp-ts-std/ReadonlyStruct` module.
+   *
+   * @since 0.14.0
+   */
+  readonlyStruct,
+  /**
    * A re-export of the `fp-ts-std/Record` module.
    *
    * @since 0.5.1
@@ -173,6 +188,12 @@ export {
    * @since 0.5.1
    */
   string,
+  /**
+   * A re-export of the `fp-ts-std/Struct` module.
+   *
+   * @since 0.14.0
+   */
+  struct,
   /**
    * A re-export of the `fp-ts-std/Task` module.
    *
