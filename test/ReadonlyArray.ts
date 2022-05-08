@@ -33,6 +33,7 @@ import {
   zipAll,
   filterA,
   extractAt,
+  fromIterable,
 } from "../src/ReadonlyArray"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
@@ -1050,6 +1051,22 @@ describe("Array", () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const _ = f(xs)
       expect(xs).toEqual([1, 2, 3])
+    })
+  })
+
+  describe("fromIterable", () => {
+    const f = fromIterable
+    const iterableArb: fc.Arbitrary<Iterable<unknown>> = fc.oneof(
+      fc.string(),
+      fc.array(fc.anything()),
+      fc.constant(new Set([42])),
+      fc.constant(new Map([["foo", "bar"]])),
+    )
+
+    it('behaves identically to Array.from for Iterable input", () => {', () => {
+      fc.assert(
+        fc.property(iterableArb, x => expect(f(x)).toEqual(Array.from(x))),
+      )
     })
   })
 })

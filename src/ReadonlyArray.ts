@@ -890,3 +890,15 @@ export const extractAt =
       RA.lookup(i),
       O.map(x => [x, RA.unsafeDeleteAt(i, xs)]),
     )
+
+/**
+ * Convert an `Iterable` to a `ReadonlyArray`.
+ *
+ * @example
+ * import { fromIterable } from 'fp-ts-std/ReadonlyArray';
+ *
+ * assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o']);
+ *
+ * @since 0.14.0
+ */
+export const fromIterable: <A>(xs: Iterable<A>) => ReadonlyArray<A> = Array.from
