@@ -1,13 +1,13 @@
 ---
-title: Struct.ts
-nav_order: 29
+title: ReadonlyStruct.ts
+nav_order: 25
 parent: Modules
 ---
 
-## Struct overview
+## ReadonlyStruct overview
 
-This module targets objects in the sense of product types. For objects in
-the sense of maps see the `Record` module.
+This module targets readonly objects in the sense of product types. For
+readonly objects in the sense of maps see the `Record` module.
 
 Added in v0.14.0
 
@@ -43,7 +43,7 @@ merge :: a -> b -> a & b
 **Example**
 
 ```ts
-import { merge } from 'fp-ts-std/Struct'
+import { merge } from 'fp-ts-std/ReadonlyStruct'
 
 assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true })
 ```
@@ -59,18 +59,18 @@ type.
 
 ```ts
 export declare const omit: <K extends string>(
-  ks: K[]
-) => <V, A extends Record<K, V>>(x: Partial<A>) => Pick<A, Exclude<keyof A, K>>
+  ks: readonly K[]
+) => <V, A extends Readonly<Record<K, V>>>(x: Partial<A>) => Pick<A, Exclude<keyof A, K>>
 ```
 
 ```hs
-omit :: k extends string, a extends (Record k v) => Array k -> Partial a -> Pick a (Exclude (keyof a) k)
+omit :: k extends string, a extends (Readonly (Record k v)) => Array k -> Partial a -> Pick a (Exclude (keyof a) k)
 ```
 
 **Example**
 
 ```ts
-import { omit } from 'fp-ts-std/Struct'
+import { omit } from 'fp-ts-std/ReadonlyStruct'
 
 const sansB = omit(['b'])
 
@@ -87,7 +87,7 @@ type.
 **Signature**
 
 ```ts
-export declare const pick: <A, K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+export declare const pick: <A, K extends keyof A>(ks: readonly K[]) => (x: A) => Pick<A, K>
 ```
 
 ```hs
@@ -97,7 +97,7 @@ pick :: k extends (keyof a) => Array k -> a -> Pick a k
 **Example**
 
 ```ts
-import { pick } from 'fp-ts-std/Struct'
+import { pick } from 'fp-ts-std/ReadonlyStruct'
 import { pipe } from 'fp-ts/function'
 
 const picked = pipe({ a: 1, b: 'two', c: [true] }, pick(['a', 'c']))
@@ -114,7 +114,7 @@ Like `pick`, but allows you to specify the input record upfront.
 **Signature**
 
 ```ts
-export declare const pickFrom: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+export declare const pickFrom: <A>() => <K extends keyof A>(ks: readonly K[]) => (x: A) => Pick<A, K>
 ```
 
 ```hs
@@ -124,7 +124,7 @@ pickFrom :: k extends (keyof a) => () -> Array k -> a -> Pick a k
 **Example**
 
 ```ts
-import { pickFrom } from 'fp-ts-std/Struct'
+import { pickFrom } from 'fp-ts-std/ReadonlyStruct'
 
 type MyType = { a: number; b: string; c: ReadonlyArray<boolean> }
 const picked = pickFrom<MyType>()(['a', 'c'])
