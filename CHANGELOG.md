@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.14.0 (_UNRELEASED_)
 
 - Add `Bifunctor` module.
+- Add `Struct` module. Some of the functions from `Record` have been moved here.
 - Add `fromIterable` to `Array` and `ReadonlyArray`.
 - Add `fromReadonly` and `toReadonly` to `Array`.
 - Add `toUTCString` to `Date`.
