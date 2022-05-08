@@ -1,0 +1,19 @@
+name: Setup - matrix
+
+inputs:
+  node-version:
+    type: string
+    required: false
+    default: 18
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js & Yarn
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: yarn
+    - name: Install dependencies
+      shell: bash
+      run: yarn install --frozen-lockfile
