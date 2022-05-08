@@ -6,7 +6,6 @@ This project adheres to semantic versioning.
 
 - Add `Bifunctor` module.
 - Add `Struct` and `ReadonlyStruct` modules. Some of the functions from `Record` and `ReadonlyRecord` respectively have been moved there.
-- Add `Struct` module. Some of the functions from `Record` have been moved here.
 - Add `fromIterable` to `Array` and `ReadonlyArray`.
 - Add `fromReadonly` and `toReadonly` to `Array`.
 - Add `toUTCString` to `Date`.
