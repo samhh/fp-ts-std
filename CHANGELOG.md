@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `Bifunctor` module.
 - Add `fromIterable` to `Array` and `ReadonlyArray`.
+- Add `fromReadonly` and `toReadonly` to `Array`.
 - Add `toUTCString` to `Date`.
 - Add `mapBoth` to `Either`.
 - Add `invokeNullary` to `Function`.

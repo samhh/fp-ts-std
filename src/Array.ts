@@ -13,6 +13,7 @@ import { match as orderingMatch } from "fp-ts/Ordering"
 import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/number"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
+import * as RA from "fp-ts/ReadonlyArray"
 import * as A from "fp-ts/Array"
 import * as R from "fp-ts/Record"
 import { Option } from "fp-ts/Option"
@@ -884,3 +885,27 @@ export const extractAt =
  * @since 0.14.0
  */
 export const fromIterable: <A>(xs: Iterable<A>) => Array<A> = Array.from
+
+/**
+ * Copy a readonly array to a non-readonly array.
+ *
+ * @example
+ * import { fromReadonly } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual([1, 2, 3], fromReadonly([1, 2, 3]));
+ *
+ * @since 0.14.0
+ */
+export const fromReadonly: <A>(xs: ReadonlyArray<A>) => Array<A> = RA.toArray
+
+/**
+ * Copy a non-readonly array to a readonly array.
+ *
+ * @example
+ * import { toReadonly } from 'fp-ts-std/Array';
+ *
+ * assert.deepStrictEqual([1, 2, 3], toReadonly([1, 2, 3]));
+ *
+ * @since 0.14.0
+ */
+export const toReadonly: <A>(xs: Array<A>) => ReadonlyArray<A> = RA.fromArray

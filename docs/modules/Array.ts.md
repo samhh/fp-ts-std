@@ -26,6 +26,7 @@ Added in v0.1.0
   - [extractAt](#extractat)
   - [filterA](#filtera)
   - [fromIterable](#fromiterable)
+  - [fromReadonly](#fromreadonly)
   - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
   - [join](#join)
@@ -46,6 +47,7 @@ Added in v0.1.0
   - [sum](#sum)
   - [symmetricDifference](#symmetricdifference)
   - [takeRightWhile](#takerightwhile)
+  - [toReadonly](#toreadonly)
   - [transpose](#transpose)
   - [upsert](#upsert)
   - [without](#without)
@@ -407,6 +409,30 @@ fromIterable :: Iterable a -> Array a
 import { fromIterable } from 'fp-ts-std/Array'
 
 assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o'])
+```
+
+Added in v0.14.0
+
+## fromReadonly
+
+Copy a readonly array to a non-readonly array.
+
+**Signature**
+
+```ts
+export declare const fromReadonly: <A>(xs: readonly A[]) => A[]
+```
+
+```hs
+fromReadonly :: Array a -> Array a
+```
+
+**Example**
+
+```ts
+import { fromReadonly } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual([1, 2, 3], fromReadonly([1, 2, 3]))
 ```
 
 Added in v0.14.0
@@ -988,6 +1014,30 @@ assert.deepStrictEqual(takeRightEvens([6, 7, 3, 4, 2]), [4, 2])
 ```
 
 Added in v0.7.0
+
+## toReadonly
+
+Copy a non-readonly array to a readonly array.
+
+**Signature**
+
+```ts
+export declare const toReadonly: <A>(xs: A[]) => readonly A[]
+```
+
+```hs
+toReadonly :: Array a -> Array a
+```
+
+**Example**
+
+```ts
+import { toReadonly } from 'fp-ts-std/Array'
+
+assert.deepStrictEqual([1, 2, 3], toReadonly([1, 2, 3]))
+```
+
+Added in v0.14.0
 
 ## transpose
 

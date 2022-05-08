@@ -34,6 +34,8 @@ import {
   filterA,
   extractAt,
   fromIterable,
+  fromReadonly,
+  toReadonly,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as RA from "fp-ts/ReadonlyArray"
@@ -1066,6 +1068,48 @@ describe("Array", () => {
     it('behaves identically to Array.from for Iterable input", () => {', () => {
       fc.assert(
         fc.property(iterableArb, x => expect(f(x)).toEqual(Array.from(x))),
+      )
+    })
+  })
+
+  describe("fromReadonly", () => {
+    const f = fromReadonly
+
+    it("copies the array contents", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs => expect(f(xs)).toEqual(xs)),
+      )
+    })
+
+    it("does not reuse the input reference/object", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs => {
+          const ys = f(xs)
+
+          expect(xs).toBe(xs)
+          expect(xs).not.toBe(ys)
+        }),
+      )
+    })
+  })
+
+  describe("toReadonly", () => {
+    const f = toReadonly
+
+    it("copies the array contents", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs => expect(f(xs)).toEqual(xs)),
+      )
+    })
+
+    it("does not reuse the input reference/object", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything()), xs => {
+          const ys = f(xs)
+
+          expect(xs).toBe(xs)
+          expect(xs).not.toBe(ys)
+        }),
       )
     })
   })
