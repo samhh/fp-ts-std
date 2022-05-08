@@ -616,3 +616,15 @@ export const isSpace: Predicate<string> = test(/^\s+$/)
  * @since 0.4.0
  */
 export const words = S.split(/\s/)
+
+/**
+ * Join whitespace-separated strings together.
+ *
+ * @example
+ * import { unwords } from 'fp-ts-std/String';
+ *
+ * assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c');
+ *
+ * @since 0.1.0
+ */
+export const unwords = join(" ")

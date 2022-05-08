@@ -49,6 +49,7 @@ Added in v0.1.0
   - [unlines](#unlines)
   - [unprepend](#unprepend)
   - [unsurround](#unsurround)
+  - [unwords](#unwords)
   - [words](#words)
 
 ---
@@ -986,6 +987,30 @@ import { unsurround } from 'fp-ts-std/String'
 const unquote = unsurround('"')
 
 assert.strictEqual(unquote('"abc"'), 'abc')
+```
+
+Added in v0.1.0
+
+## unwords
+
+Join whitespace-separated strings together.
+
+**Signature**
+
+```ts
+export declare const unwords: (ys: readonly string[]) => string
+```
+
+```hs
+unwords :: Array string -> string
+```
+
+**Example**
+
+```ts
+import { unwords } from 'fp-ts-std/String'
+
+assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c')
 ```
 
 Added in v0.1.0

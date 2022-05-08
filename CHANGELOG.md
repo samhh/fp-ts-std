@@ -12,7 +12,7 @@ This project adheres to semantic versioning.
 - Add `invokeNullary` to `Function`.
 - Add `memoize` to `IO`.
 - Add `memoize` to `Lazy`.
-- Add `words` to `String`.
+- Add `words` and `unwords` to `String`.
 - Add `mapBoth` to `TaskEither`.
 - Add `mapBoth` to `Tuple`.
 - Fix behaviour of `pick` and `pickFrom` in `Record` with regards to optional properties.

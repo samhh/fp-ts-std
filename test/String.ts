@@ -34,6 +34,7 @@ import {
   isUpper,
   isSpace,
   words,
+  unwords,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -736,6 +737,22 @@ describe("String", () => {
       expect(f("\na")).toEqual(["", "a"])
       expect(f("a\n")).toEqual(["a", ""])
       expect(f("a\nb")).toEqual(["a", "b"])
+    })
+  })
+
+  describe("unwords", () => {
+    const f = unwords
+
+    it("morphs empty array to empty string", () => {
+      expect(f([])).toBe("")
+    })
+
+    it("extracts single string out of array", () => {
+      expect(f(["a"])).toBe("a")
+    })
+
+    it("joins array of strings with whitespace", () => {
+      expect(f(["a", "b", "c"])).toBe("a b c")
     })
   })
 })
