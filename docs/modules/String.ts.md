@@ -1013,7 +1013,7 @@ import { unwords } from 'fp-ts-std/String'
 assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c')
 ```
 
-Added in v0.1.0
+Added in v0.14.0
 
 ## words
 
@@ -1038,4 +1038,4 @@ import { words } from 'fp-ts-std/String'
 assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c'])
 ```
 
-Added in v0.4.0
+Added in v0.14.0

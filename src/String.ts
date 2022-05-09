@@ -613,7 +613,7 @@ export const isSpace: Predicate<string> = test(/^\s+$/)
  *
  * assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c']);
  *
- * @since 0.4.0
+ * @since 0.14.0
  */
 export const words = S.split(/\s/)
 
@@ -625,6 +625,6 @@ export const words = S.split(/\s/)
  *
  * assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c');
  *
- * @since 0.1.0
+ * @since 0.14.0
  */
 export const unwords = join(" ")
