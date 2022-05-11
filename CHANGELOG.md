@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.14.2 (2022-05-11)
+
+- Fix previous release, which was mistakenly identical to 0.14.0.
+
 ## 0.14.1 (2022-05-11)
 
 - Extend various functions' type definitions to support subtyping.
