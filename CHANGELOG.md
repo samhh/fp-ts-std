@@ -16,7 +16,7 @@ This project adheres to semantic versioning.
 - Add `words` and `unwords` to `String`.
 - Add `mapBoth` to `TaskEither`.
 - Add `mapBoth` to `Tuple`.
-- Fix behaviour of `pick` and `pickFrom` in `Record` with regards to optional properties.
+- Fix behaviour of `pick` and `pickFrom` in `Struct` (previously `Record`) with regards to optional properties.
 - Bump minimum supported Node LTS to v14.
 
 ## 0.13.1 (2022-01-16)
