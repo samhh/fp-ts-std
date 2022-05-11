@@ -46,7 +46,8 @@
     "fmt": "prettier .",
     "test": "jest",
     "docs": "docs-ts",
-    "tshm": "tshm-docs-ts ./docs/modules/*"
+    "tshm": "tshm-docs-ts ./docs/modules/*",
+    "prepublish": "yarn run build"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
