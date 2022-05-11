@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.14.0 (_UNRELEASED_)
+## 0.14.0 (2022-05-11)
 
 - Add `Bifunctor` module.
 - Add `Struct` and `ReadonlyStruct` modules. Some of the functions from `Record` and `ReadonlyRecord` respectively have been moved there.
