@@ -114,11 +114,13 @@ filtering.
 **Signature**
 
 ```ts
-export declare const reject: <A>(f: Predicate<A>) => Endomorphism<Readonly<Record<string, A>>>
+export declare const reject: <A>(
+  f: Predicate<A>
+) => <B extends A>(x: Readonly<Record<string, B>>) => Readonly<Record<string, B>>
 ```
 
 ```hs
-reject :: Predicate a -> Endomorphism (Readonly (Record string a))
+reject :: b extends a => Predicate a -> Readonly (Record string b) -> Readonly (Record string b)
 ```
 
 **Example**

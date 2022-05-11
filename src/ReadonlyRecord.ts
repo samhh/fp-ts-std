@@ -7,7 +7,6 @@
 
 import { flow } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
@@ -66,7 +65,9 @@ export const lookupV =
  */
 export const reject = <A>(
   f: Predicate<A>,
-): Endomorphism<RR.ReadonlyRecord<string, A>> => RR.filter(not(f))
+): (<B extends A>(
+  x: RR.ReadonlyRecord<string, B>,
+) => RR.ReadonlyRecord<string, B>) => RR.filter(not(f))
 
 /**
  * Invert a record, keeping only the last value should the same key be

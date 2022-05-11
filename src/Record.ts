@@ -7,7 +7,6 @@
 
 import { flow } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
@@ -62,7 +61,9 @@ export const lookupV =
  *
  * @since 0.7.0
  */
-export const reject = <A>(f: Predicate<A>): Endomorphism<Record<string, A>> =>
+export const reject = <A>(
+  f: Predicate<A>,
+): (<B extends A>(x: Record<string, B>) => Record<string, B>) =>
   R.filter(not(f))
 
 /**

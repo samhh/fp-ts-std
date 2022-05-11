@@ -3,7 +3,7 @@ import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
 import fc from "fast-check"
-import { flow, pipe } from "fp-ts/function"
+import { constTrue, flow, pipe } from "fp-ts/function"
 import { Predicate } from "fp-ts/Predicate"
 import { fromNumber } from "../src/String"
 import * as N from "fp-ts/number"
@@ -49,6 +49,13 @@ describe("Record", () => {
             pipe(xs, R.filter(p), R.size) + pipe(xs, f, R.size) === R.size(xs),
         ),
       )
+    })
+
+    it("supports subtyping", () => {
+      type A = { n: number }
+      type B = A & { x: string }
+      const x: Record<string, B> = {}
+      const _y: Record<string, B> = reject<A>(constTrue)(x)
     })
   })
 

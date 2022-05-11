@@ -9,7 +9,7 @@ import * as O from "fp-ts/Option"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
 import fc from "fast-check"
-import { flow, pipe } from "fp-ts/function"
+import { constTrue, flow, pipe } from "fp-ts/function"
 import { Predicate } from "fp-ts/Predicate"
 import { fromNumber } from "../src/String"
 import * as N from "fp-ts/number"
@@ -56,6 +56,13 @@ describe("Record", () => {
             RR.size(xs),
         ),
       )
+    })
+
+    it("supports subtyping", () => {
+      type A = { n: number }
+      type B = A & { x: string }
+      const x: RR.ReadonlyRecord<string, B> = {}
+      const _y: RR.ReadonlyRecord<string, B> = reject<A>(constTrue)(x)
     })
   })
 

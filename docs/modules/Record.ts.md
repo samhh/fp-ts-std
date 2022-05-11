@@ -117,11 +117,11 @@ filtering.
 **Signature**
 
 ```ts
-export declare const reject: <A>(f: Predicate<A>) => Endomorphism<Record<string, A>>
+export declare const reject: <A>(f: Predicate<A>) => <B extends A>(x: Record<string, B>) => Record<string, B>
 ```
 
 ```hs
-reject :: Predicate a -> Endomorphism (Record string a)
+reject :: b extends a => Predicate a -> Record string b -> Record string b
 ```
 
 **Example**
