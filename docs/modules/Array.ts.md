@@ -994,11 +994,11 @@ which all elements satisfy the specified predicate, creating a new array.
 **Signature**
 
 ```ts
-export declare const takeRightWhile: <A>(f: Predicate<A>) => Endomorphism<A[]>
+export declare const takeRightWhile: <A>(f: Predicate<A>) => <B extends A>(xs: B[]) => B[]
 ```
 
 ```hs
-takeRightWhile :: Predicate a -> Endomorphism (Array a)
+takeRightWhile :: b extends a => Predicate a -> Array b -> Array b
 ```
 
 **Example**

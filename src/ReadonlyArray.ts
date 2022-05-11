@@ -666,7 +666,7 @@ export const transpose = <A>(
  */
 export const takeRightWhile = <A>(
   f: Predicate<A>,
-): Endomorphism<ReadonlyArray<A>> =>
+): (<B extends A>(xs: ReadonlyArray<B>) => ReadonlyArray<B>) =>
   flow(RA.reverse, RA.takeLeftWhile(f), RA.reverse)
 
 /**
