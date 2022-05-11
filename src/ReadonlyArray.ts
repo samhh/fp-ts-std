@@ -475,7 +475,9 @@ export const slice =
  *
  * @since 0.10.0
  */
-export const reject = <A>(f: Predicate<A>): Endomorphism<ReadonlyArray<A>> =>
+export const reject = <A>(
+  f: Predicate<A>,
+): (<B extends A>(xs: ReadonlyArray<B>) => ReadonlyArray<B>) =>
   RA.filter(not(f))
 
 /**

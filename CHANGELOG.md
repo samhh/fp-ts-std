@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.14.1 (_Unreleased_)
+
+- Extend various functions' type definitions to support subtyping.
+
 ## 0.14.0 (2022-05-11)
 
 - Add `Bifunctor` module.

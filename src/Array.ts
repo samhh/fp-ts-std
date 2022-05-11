@@ -471,8 +471,9 @@ export const slice =
  *
  * @since 0.7.0
  */
-export const reject = <A>(f: Predicate<A>): Endomorphism<Array<A>> =>
-  A.filter(not(f))
+export const reject = <A>(
+  f: Predicate<A>,
+): (<B extends A>(xs: Array<B>) => Array<B>) => A.filter(not(f))
 
 /**
  * Move an item at index `from` to index `to`. See also `moveTo`.

@@ -480,6 +480,13 @@ describe("Array", () => {
         ),
       )
     })
+
+    it("supports subtyping", () => {
+      type A = { n: number }
+      type B = A & { x: string }
+      const xs: ReadonlyArray<B> = [];
+      const _ys: ReadonlyArray<B> = reject<A>(constTrue)(xs);
+    })
   })
 
   describe("moveFrom", () => {

@@ -482,6 +482,13 @@ describe("Array", () => {
         ),
       )
     })
+
+    it("supports subtyping", () => {
+      type A = { n: number }
+      type B = A & { x: string }
+      const xs: Array<B> = [];
+      const _ys: Array<B> = reject<A>(constTrue)(xs);
+    })
   })
 
   describe("moveFrom", () => {

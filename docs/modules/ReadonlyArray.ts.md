@@ -835,11 +835,11 @@ thought of as the inverse of ordinary array filtering.
 **Signature**
 
 ```ts
-export declare const reject: <A>(f: Predicate<A>) => Endomorphism<readonly A[]>
+export declare const reject: <A>(f: Predicate<A>) => <B extends A>(xs: readonly B[]) => readonly B[]
 ```
 
 ```hs
-reject :: Predicate a -> Endomorphism (Array a)
+reject :: b extends a => Predicate a -> Array b -> Array b
 ```
 
 **Example**
