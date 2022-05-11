@@ -23,5 +23,8 @@ module.exports = {
     "functional/functional-parameters": 0,
     "@typescript-eslint/prefer-regexp-exec": 0,
     "@typescript-eslint/array-type": [1, { default: "generic" }],
+    // We'll have unused vars when testing types via declarations. This allows
+    // them when prefixed with an underscore.
+    "@typescript-eslint/no-unused-vars": [1, { varsIgnorePattern: "^_" }],
   },
 }
