@@ -227,11 +227,11 @@ which all elements satisfy the specified predicate, creating a new array.
 **Signature**
 
 ```ts
-export declare const dropRightWhile: <A>(f: Predicate<A>) => Endomorphism<readonly A[]>
+export declare const dropRightWhile: <A>(f: Predicate<A>) => <B extends A>(xs: readonly B[]) => readonly B[]
 ```
 
 ```hs
-dropRightWhile :: Predicate a -> Endomorphism (Array a)
+dropRightWhile :: b extends a => Predicate a -> Array b -> Array b
 ```
 
 **Example**

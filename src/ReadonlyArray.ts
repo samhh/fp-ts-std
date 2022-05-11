@@ -572,7 +572,7 @@ export const countBy =
  */
 export const dropRightWhile = <A>(
   f: Predicate<A>,
-): Endomorphism<ReadonlyArray<A>> =>
+): (<B extends A>(xs: ReadonlyArray<B>) => ReadonlyArray<B>) =>
   flow(RA.reverse, RA.dropLeftWhile(f), RA.reverse)
 
 /**
