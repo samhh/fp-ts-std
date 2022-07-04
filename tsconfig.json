@@ -1,10 +1,6 @@
 {
+  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    "target": "es2020",
-    "lib": ["esnext", "dom"],
-    "moduleResolution": "node",
-    "strict": true,
-    "declaration": false,
     "removeComments": true
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]
