@@ -10,7 +10,14 @@
         let pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          devShells.default = import ./shell.nix { inherit pkgs; };
+          devShells.default =
+            pkgs.mkShell {
+              buildInputs = with pkgs; [
+                git
+                nodejs-18_x
+                yarn
+              ];
+            };
         }
       );
 }
