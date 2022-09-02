@@ -1,6 +1,6 @@
 ---
 title: Tuple.ts
-nav_order: 32
+nav_order: 33
 parent: Modules
 ---
 
@@ -17,6 +17,7 @@ Added in v0.12.0
 - [utils](#utils)
   - [create](#create)
   - [dup](#dup)
+  - [fanout](#fanout)
   - [mapBoth](#mapboth)
   - [toFst](#tofst)
   - [toSnd](#tosnd)
@@ -77,6 +78,35 @@ assert.deepStrictEqual(dup('x'), ['x', 'x'])
 ```
 
 Added in v0.12.0
+
+## fanout
+
+Send an input to two functions and combine their outputs in a tuple. For a
+variadic version, consider `fork` in `Function`.
+
+**Signature**
+
+```ts
+export declare const fanout: <A, B>(f: (x: A) => B) => <C>(g: (x: A) => C) => (x: A) => [B, C]
+```
+
+```hs
+fanout :: (a -> b) -> (a -> c) -> a -> [b, c]
+```
+
+**Example**
+
+```ts
+import { fanout } from 'fp-ts-std/Tuple'
+import { add } from 'fp-ts-std/Number'
+import * as S from 'fp-ts-std/String'
+
+const add2 = add(2)
+
+assert.deepStrictEqual(fanout(S.fromNumber)(add2)(0), ['0', 2])
+```
+
+Added in v0.15.0
 
 ## mapBoth
 

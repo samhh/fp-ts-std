@@ -225,3 +225,24 @@ export const create: <A, B>(xs: [A, B]) => [A, B] = identity
  */
 export const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B] =
   _mapBoth(Tuple.Bifunctor)
+
+/**
+ * Send an input to two functions and combine their outputs in a tuple. For a
+ * variadic version, consider `fork` in `Function`.
+ *
+ * @example
+ * import { fanout } from 'fp-ts-std/Tuple';
+ * import { add } from 'fp-ts-std/Number';
+ * import * as S from 'fp-ts-std/String';
+ *
+ * const add2 = add(2);
+ *
+ * assert.deepStrictEqual(fanout(S.fromNumber)(add2)(0), ['0', 2]);
+ *
+ * @since 0.15.0
+ */
+// Not implemented in terms of `fp-ts/Strong` as there's no relevant typeclass
+// instances, and the implementation is very straightforward.
+export const fanout: <A, B>(
+  f: (x: A) => B,
+) => <C>(g: (x: A) => C) => (x: A) => [B, C] = f => g => fork([f, g])

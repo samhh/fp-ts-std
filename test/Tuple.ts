@@ -8,6 +8,7 @@ import {
   withSnd,
   create,
   mapBoth,
+  fanout,
 } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, identity, pipe } from "fp-ts/function"
@@ -157,6 +158,19 @@ describe("Tuple", () => {
           expect(f(g)([l, r])).toEqual(bimap(g, g)([l, r])),
         ),
       )
+    })
+  })
+
+  describe("fanout", () => {
+    const f = fanout
+
+    it("calls both provided functions and returns their outputs in order", () => {
+      fc.assert(
+        fc.property(fc.string(), x =>
+          expect(fanout(O.of)(constant("foo"))(x)).toEqual([O.of(x), "foo"]),
+        ),
+      )
+      expect(f)
     })
   })
 })
