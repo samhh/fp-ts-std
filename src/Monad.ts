@@ -129,3 +129,55 @@ export function andM<M>(
   //   ifM(M)(x)(y)(M.of(false))
   return x => y => M.chain(x, b => (b ? y : M.of(false)))
 }
+
+/**
+ * Monadic ||. Short-circuits.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function';
+ * import { orM } from 'fp-ts-std/Monad';
+ * import * as IO from 'fp-ts/IO';
+ * import { execute } from 'fp-ts-std/IO';
+ *
+ * const f = orM(IO.Monad)(IO.of(false));
+ *
+ * assert.strictEqual(execute(f(IO.of(true))), true);
+ * assert.strictEqual(execute(f(IO.of(false))), false);
+ *
+ * @since 0.15.0
+ */
+export function orM<M extends URIS4>(
+  M: Monad4<M>,
+): <S, R, E>(
+  x: Kind4<M, S, R, E, boolean>,
+) => (y: Kind4<M, S, R, E, boolean>) => Kind4<M, S, R, E, boolean>
+export function orM<M extends URIS3>(
+  M: Monad3<M>,
+): <R, E>(
+  x: Kind3<M, R, E, boolean>,
+) => (y: Kind3<M, R, E, boolean>) => Kind3<M, R, E, boolean>
+export function orM<M extends URIS3, E>(
+  M: Monad3C<M, E>,
+): <R>(
+  x: Kind3<M, R, E, boolean>,
+) => (y: Kind3<M, R, E, boolean>) => Kind3<M, R, E, boolean>
+export function orM<M extends URIS2>(
+  M: Monad2<M>,
+): <E>(
+  x: Kind2<M, E, boolean>,
+) => (y: Kind2<M, E, boolean>) => Kind2<M, E, boolean>
+export function orM<M extends URIS2, E>(
+  M: Monad2C<M, E>,
+): (
+  x: Kind2<M, E, boolean>,
+) => (y: Kind2<M, E, boolean>) => Kind2<M, E, boolean>
+export function orM<M extends URIS>(
+  M: Monad1<M>,
+): (x: Kind<M, boolean>) => (y: Kind<M, boolean>) => Kind<M, boolean>
+export function orM<M>(
+  M: Monad<M>,
+): (x: HKT<M, boolean>) => (y: HKT<M, boolean>) => HKT<M, boolean> {
+  // Can't reuse `ifM` here, unsure why:
+  //   ifM(M)(x)(M.of(true))(y)
+  return x => y => M.chain(x, b => (b ? M.of(true) : y))
+}
