@@ -44,12 +44,12 @@ unsafeUnwrap(RTE.right(5))({}).then((x) => {
 })
 ```
 
-Added in v0.14.3
+Added in v0.15.0
 
 ## unsafeUnwrapLeft
 
-Unwrap the promise from within a `ReaderTaskEither`, throwing the inner value of
-`Right` if `Right`.
+Unwrap the promise from within a `ReaderTaskEither`, throwing the inner
+value of `Right` if `Right`.
 
 **Signature**
 
@@ -68,4 +68,4 @@ unsafeUnwrapLeft(RTE.left(5))({}).then((x) => {
 })
 ```
 
-Added in v0.14.3
+Added in v0.15.0

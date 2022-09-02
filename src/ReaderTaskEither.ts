@@ -21,7 +21,7 @@ import {
  *   assert.strictEqual(x, 5);
  * });
  *
- * @since 0.14.3
+ * @since 0.15.0
  */
 export const unsafeUnwrap =
   <R, A>(rte: RTE.ReaderTaskEither<R, unknown, A>) =>
@@ -29,8 +29,8 @@ export const unsafeUnwrap =
     unsafeUnwrapTE(rte(r))
 
 /**
- * Unwrap the promise from within a `ReaderTaskEither`, throwing the inner value of
- * `Right` if `Right`.
+ * Unwrap the promise from within a `ReaderTaskEither`, throwing the inner
+ * value of `Right` if `Right`.
  *
  * @example
  * import { unsafeUnwrapLeft } from 'fp-ts-std/ReaderTaskEither';
@@ -40,7 +40,7 @@ export const unsafeUnwrap =
  *   assert.strictEqual(x, 5);
  * });
  *
- * @since 0.14.3
+ * @since 0.15.0
  */
 export const unsafeUnwrapLeft =
   <R, E>(rte: RTE.ReaderTaskEither<R, E, unknown>) =>
