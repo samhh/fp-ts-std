@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.15.0 (_Unreleased_)
 
+- Add `ReaderTaskEither` module.
 - Add `fanout` to `Tuple`.
 
 ## 0.14.2 (2022-05-11)
