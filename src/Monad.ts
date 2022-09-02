@@ -29,7 +29,6 @@ import {
  * Monadic if/then/else. Only executes the relevant action.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
  * import { ifM } from 'fp-ts-std/Monad';
  * import * as IO from 'fp-ts/IO';
  * import { execute } from 'fp-ts-std/IO';
@@ -82,7 +81,6 @@ export function ifM<M>(
  * Monadic &&. Short-circuits.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
  * import { andM } from 'fp-ts-std/Monad';
  * import * as IO from 'fp-ts/IO';
  * import { execute } from 'fp-ts-std/IO';
@@ -134,7 +132,6 @@ export function andM<M>(
  * Monadic ||. Short-circuits.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
  * import { orM } from 'fp-ts-std/Monad';
  * import * as IO from 'fp-ts/IO';
  * import { execute } from 'fp-ts-std/IO';

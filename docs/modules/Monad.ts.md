@@ -62,7 +62,6 @@ andM :: m extends URIS => ((Monad1 m) -> Kind m boolean -> Kind m boolean -> Kin
 **Example**
 
 ```ts
-import { pipe } from 'fp-ts/function'
 import { andM } from 'fp-ts-std/Monad'
 import * as IO from 'fp-ts/IO'
 import { execute } from 'fp-ts-std/IO'
@@ -116,7 +115,6 @@ ifM :: m extends URIS => ((Monad1 m) -> Kind m boolean -> Kind m a -> Kind m a -
 **Example**
 
 ```ts
-import { pipe } from 'fp-ts/function'
 import { ifM } from 'fp-ts-std/Monad'
 import * as IO from 'fp-ts/IO'
 import { execute } from 'fp-ts-std/IO'
@@ -167,7 +165,6 @@ orM :: m extends URIS => ((Monad1 m) -> Kind m boolean -> Kind m boolean -> Kind
 **Example**
 
 ```ts
-import { pipe } from 'fp-ts/function'
 import { orM } from 'fp-ts-std/Monad'
 import * as IO from 'fp-ts/IO'
 import { execute } from 'fp-ts-std/IO'
