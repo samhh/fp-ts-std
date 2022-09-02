@@ -44,6 +44,15 @@ import {
   Applicative4,
   Applicative2C,
 } from "fp-ts/Applicative"
+import {
+  Monad,
+  Monad1,
+  Monad2,
+  Monad2C,
+  Monad3,
+  Monad3C,
+  Monad4,
+} from "fp-ts/Monad"
 
 /**
  * Like `fp-ts/Array::elem` but flipped, which the "V" suffix denotes.
@@ -914,3 +923,48 @@ export const fromReadonly: <A>(xs: ReadonlyArray<A>) => Array<A> = RA.toArray
  * @since 0.14.0
  */
 export const toReadonly: <A>(xs: Array<A>) => ReadonlyArray<A> = RA.fromArray
+
+/**
+ * Fold an array of monadic booleans from left-to-right in terms of &&.
+ * Short-circuits.
+ *
+ * @example
+ * import { allM } from 'fp-ts-std/Array';
+ * import * as IO from 'fp-ts/IO';
+ * import { execute } from 'fp-ts-std/IO';
+ *
+ * const f = allM(IO.Monad);
+ *
+ * assert.strictEqual(execute(f([IO.of(true), IO.of(true), IO.of(true)])), true);
+ * assert.strictEqual(execute(f([IO.of(true), IO.of(false), IO.of(true)])), false);
+ *
+ * @since 0.15.0
+ */
+export function allM<M extends URIS4>(
+  M: Monad4<M>,
+): <S, R, E>(
+  xs: Array<Kind4<M, S, R, E, boolean>>,
+) => Kind4<M, S, R, E, boolean>
+export function allM<M extends URIS3>(
+  M: Monad3<M>,
+): <R, E>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+export function allM<M extends URIS3, E>(
+  M: Monad3C<M, E>,
+): <R>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+export function allM<M extends URIS2>(
+  M: Monad2<M>,
+): <E>(xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export function allM<M extends URIS2, E>(
+  M: Monad2C<M, E>,
+): (xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export function allM<M extends URIS>(
+  M: Monad1<M>,
+): (xs: Array<Kind<M, boolean>>) => Kind<M, boolean>
+export function allM<M>(
+  M: Monad<M>,
+): (xs: Array<HKT<M, boolean>>) => HKT<M, boolean> {
+  // Can't reuse `andM` here, unsure why.
+  return A.reduce(M.of<boolean>(true), (x, y) =>
+    M.chain(x, b => (b ? y : M.of(false))),
+  )
+}

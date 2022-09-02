@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `Monad` module.
 - Add `ReaderTaskEither` module.
+- Add `allM` to `Array`.
 - Add `fanout` to `Tuple`.
 
 ## 0.14.2 (2022-05-11)
