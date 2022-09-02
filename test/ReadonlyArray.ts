@@ -34,6 +34,7 @@ import {
   filterA,
   extractAt,
   fromIterable,
+  allM,
 } from "../src/ReadonlyArray"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
@@ -59,6 +60,8 @@ import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"
 import { fst, snd } from "fp-ts/Tuple"
+
+type IO<A> = IO.IO<A>
 
 describe("Array", () => {
   describe("elemV", () => {
@@ -1089,5 +1092,36 @@ describe("Array", () => {
         fc.property(iterableArb, x => expect(f(x)).toEqual(Array.from(x))),
       )
     })
+  })
+
+  describe("allM", () => {
+    const f = allM(IO.Monad)
+
+    it("returns conjunctive identity on empty input", () => {
+      expect(f([])()).toBe(true)
+    })
+
+    it("equivalent to fold on lifted &&", () => {
+      expect(f([IO.of(true), IO.of(true)])()).toBe(true && true)
+      expect(f([IO.of(true), IO.of(false)])()).toBe(true && false)
+      expect(f([IO.of(false), IO.of(true)])()).toBe(false && true)
+      expect(f([IO.of(false), IO.of(false)])()).toBe(false && false)
+    })
+
+    /* eslint-disable functional/no-expression-statement */
+    it("runs from the left and short-circuits", () => {
+      let exe = false // eslint-disable-line functional/no-let
+      const set: IO<boolean> = () => {
+        exe = true
+        return true
+      }
+
+      f([IO.of(true), IO.of(false), set, IO.of(true)])()
+      expect(exe).toBe(false)
+
+      f([IO.of(true), IO.of(true), set, IO.of(true)])()
+      expect(exe).toBe(true)
+    })
+    /* eslint-enable functional/no-expression-statement */
   })
 })
