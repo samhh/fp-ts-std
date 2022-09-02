@@ -16,6 +16,7 @@ Added in v0.10.0
 
 - [utils](#utils)
   - [allM](#allm)
+  - [anyM](#anym)
   - [aperture](#aperture)
   - [cartesian](#cartesian)
   - [countBy](#countby)
@@ -66,29 +67,29 @@ Short-circuits.
 ```ts
 export declare function allM<M extends URIS4>(
   M: Monad4<M>
-): <S, R, E>(xs: Array<Kind4<M, S, R, E, boolean>>) => Kind4<M, S, R, E, boolean>
+): <S, R, E>(xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>) => Kind4<M, S, R, E, boolean>
 export declare function allM<M extends URIS3>(
   M: Monad3<M>
-): <R, E>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+): <R, E>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export declare function allM<M extends URIS3, E>(
   M: Monad3C<M, E>
-): <R>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+): <R>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export declare function allM<M extends URIS2>(
   M: Monad2<M>
-): <E>(xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+): <E>(xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export declare function allM<M extends URIS2, E>(
   M: Monad2C<M, E>
-): (xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
-export declare function allM<M extends URIS>(M: Monad1<M>): (xs: Array<Kind<M, boolean>>) => Kind<M, boolean>
+): (xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export declare function allM<M extends URIS>(M: Monad1<M>): (xs: ReadonlyArray<Kind<M, boolean>>) => Kind<M, boolean>
 ```
 
 ```hs
-allM :: m extends URIS4 => Monad4 m -> Array (Kind4 m s r e boolean) -> Kind4 m s r e boolean
-allM :: m extends URIS3 => ((Monad3 m) -> Array (Kind3 m r e boolean) -> Kind3 m r e boolean)
-allM :: m extends URIS3 => ((Monad3C m e) -> Array (Kind3 m r e boolean) -> Kind3 m r e boolean)
-allM :: m extends URIS2 => ((Monad2 m) -> Array (Kind2 m e boolean) -> Kind2 m e boolean)
-allM :: m extends URIS2 => ((Monad2C m e) -> Array (Kind2 m e boolean) -> Kind2 m e boolean)
-allM :: m extends URIS => ((Monad1 m) -> Array (Kind m boolean) -> Kind m boolean)
+allM :: m extends URIS4 => Monad4 m -> ReadonlyArray (Kind4 m s r e boolean) -> Kind4 m s r e boolean
+allM :: m extends URIS3 => ((Monad3 m) -> ReadonlyArray (Kind3 m r e boolean) -> Kind3 m r e boolean)
+allM :: m extends URIS3 => ((Monad3C m e) -> ReadonlyArray (Kind3 m r e boolean) -> Kind3 m r e boolean)
+allM :: m extends URIS2 => ((Monad2 m) -> ReadonlyArray (Kind2 m e boolean) -> Kind2 m e boolean)
+allM :: m extends URIS2 => ((Monad2C m e) -> ReadonlyArray (Kind2 m e boolean) -> Kind2 m e boolean)
+allM :: m extends URIS => ((Monad1 m) -> ReadonlyArray (Kind m boolean) -> Kind m boolean)
 ```
 
 **Example**
@@ -102,6 +103,56 @@ const f = allM(IO.Monad)
 
 assert.strictEqual(execute(f([IO.of(true), IO.of(true), IO.of(true)])), true)
 assert.strictEqual(execute(f([IO.of(true), IO.of(false), IO.of(true)])), false)
+```
+
+Added in v0.15.0
+
+## anyM
+
+Fold an array of monadic booleans from left-to-right in terms of ||.
+Short-circuits.
+
+**Signature**
+
+```ts
+export declare function anyM<M extends URIS4>(
+  M: Monad4<M>
+): <S, R, E>(xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>) => Kind4<M, S, R, E, boolean>
+export declare function anyM<M extends URIS3>(
+  M: Monad3<M>
+): <R, E>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+export declare function anyM<M extends URIS3, E>(
+  M: Monad3C<M, E>
+): <R>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+export declare function anyM<M extends URIS2>(
+  M: Monad2<M>
+): <E>(xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export declare function anyM<M extends URIS2, E>(
+  M: Monad2C<M, E>
+): (xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export declare function anyM<M extends URIS>(M: Monad1<M>): (xs: ReadonlyArray<Kind<M, boolean>>) => Kind<M, boolean>
+```
+
+```hs
+anyM :: m extends URIS4 => Monad4 m -> ReadonlyArray (Kind4 m s r e boolean) -> Kind4 m s r e boolean
+anyM :: m extends URIS3 => ((Monad3 m) -> ReadonlyArray (Kind3 m r e boolean) -> Kind3 m r e boolean)
+anyM :: m extends URIS3 => ((Monad3C m e) -> ReadonlyArray (Kind3 m r e boolean) -> Kind3 m r e boolean)
+anyM :: m extends URIS2 => ((Monad2 m) -> ReadonlyArray (Kind2 m e boolean) -> Kind2 m e boolean)
+anyM :: m extends URIS2 => ((Monad2C m e) -> ReadonlyArray (Kind2 m e boolean) -> Kind2 m e boolean)
+anyM :: m extends URIS => ((Monad1 m) -> ReadonlyArray (Kind m boolean) -> Kind m boolean)
+```
+
+**Example**
+
+```ts
+import { anyM } from 'fp-ts-std/ReadonlyArray'
+import * as IO from 'fp-ts/IO'
+import { execute } from 'fp-ts-std/IO'
+
+const f = anyM(IO.Monad)
+
+assert.strictEqual(execute(f([IO.of(false), IO.of(false), IO.of(false)])), false)
+assert.strictEqual(execute(f([IO.of(false), IO.of(true), IO.of(false)])), true)
 ```
 
 Added in v0.15.0

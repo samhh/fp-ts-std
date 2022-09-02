@@ -958,3 +958,48 @@ export function allM<M>(
     M.chain(x, b => (b ? y : M.of(false))),
   )
 }
+
+/**
+ * Fold an array of monadic booleans from left-to-right in terms of ||.
+ * Short-circuits.
+ *
+ * @example
+ * import { anyM } from 'fp-ts-std/ReadonlyArray';
+ * import * as IO from 'fp-ts/IO';
+ * import { execute } from 'fp-ts-std/IO';
+ *
+ * const f = anyM(IO.Monad);
+ *
+ * assert.strictEqual(execute(f([IO.of(false), IO.of(false), IO.of(false)])), false);
+ * assert.strictEqual(execute(f([IO.of(false), IO.of(true), IO.of(false)])), true);
+ *
+ * @since 0.15.0
+ */
+export function anyM<M extends URIS4>(
+  M: Monad4<M>,
+): <S, R, E>(
+  xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>,
+) => Kind4<M, S, R, E, boolean>
+export function anyM<M extends URIS3>(
+  M: Monad3<M>,
+): <R, E>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+export function anyM<M extends URIS3, E>(
+  M: Monad3C<M, E>,
+): <R>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
+export function anyM<M extends URIS2>(
+  M: Monad2<M>,
+): <E>(xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export function anyM<M extends URIS2, E>(
+  M: Monad2C<M, E>,
+): (xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
+export function anyM<M extends URIS>(
+  M: Monad1<M>,
+): (xs: ReadonlyArray<Kind<M, boolean>>) => Kind<M, boolean>
+export function anyM<M>(
+  M: Monad<M>,
+): (xs: ReadonlyArray<HKT<M, boolean>>) => HKT<M, boolean> {
+  // Can't reuse `orM` here, unsure why.
+  return RA.reduce(M.of<boolean>(false), (x, y) =>
+    M.chain(x, b => (b ? M.of(true) : y)),
+  )
+}

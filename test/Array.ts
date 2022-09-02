@@ -37,6 +37,7 @@ import {
   fromReadonly,
   toReadonly,
   allM,
+  anyM,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as RA from "fp-ts/ReadonlyArray"
@@ -1145,7 +1146,7 @@ describe("Array", () => {
       expect(f([])()).toBe(true)
     })
 
-    it('equivalent to fold on lifted &&', () => {
+    it("equivalent to fold on lifted &&", () => {
       expect(f([IO.of(true), IO.of(true)])()).toBe(true && true)
       expect(f([IO.of(true), IO.of(false)])()).toBe(true && false)
       expect(f([IO.of(false), IO.of(true)])()).toBe(false && true)
@@ -1164,6 +1165,37 @@ describe("Array", () => {
       expect(exe).toBe(false)
 
       f([IO.of(true), IO.of(true), set, IO.of(true)])()
+      expect(exe).toBe(true)
+    })
+    /* eslint-enable functional/no-expression-statement */
+  })
+
+  describe("anyM", () => {
+    const f = anyM(IO.Monad)
+
+    it("returns disjunctive identity on empty input", () => {
+      expect(f([])()).toBe(false)
+    })
+
+    it("equivalent to fold on lifted ||", () => {
+      expect(f([IO.of(true), IO.of(true)])()).toBe(true || true)
+      expect(f([IO.of(true), IO.of(false)])()).toBe(true || false)
+      expect(f([IO.of(false), IO.of(true)])()).toBe(false || true)
+      expect(f([IO.of(false), IO.of(false)])()).toBe(false || false)
+    })
+
+    /* eslint-disable functional/no-expression-statement */
+    it("runs from the left and short-circuits", () => {
+      let exe = false // eslint-disable-line functional/no-let
+      const set: IO<boolean> = () => {
+        exe = true
+        return true
+      }
+
+      f([IO.of(false), IO.of(true), set, IO.of(false)])()
+      expect(exe).toBe(false)
+
+      f([IO.of(false), IO.of(false), set, IO.of(false)])()
       expect(exe).toBe(true)
     })
     /* eslint-enable functional/no-expression-statement */
