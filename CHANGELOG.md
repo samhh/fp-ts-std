@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.15.0 (_Unreleased_)
 
+- Add `Monad` module.
 - Add `ReaderTaskEither` module.
 - Add `fanout` to `Tuple`.
 
