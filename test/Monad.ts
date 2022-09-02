@@ -2,7 +2,7 @@
 
 import * as IO from "fp-ts/IO"
 import { constVoid } from "fp-ts/function"
-import { ifM } from "../src/Monad"
+import { ifM, andM } from "../src/Monad"
 
 type IO<A> = IO.IO<A>
 
@@ -36,6 +36,31 @@ describe("Monad", () => {
 
       f(IO.of(false))(set)(constVoid)()
       expect(exe).toBe(false)
+    })
+  })
+
+  describe("andM", () => {
+    const f = andM(IO.Monad)
+
+    it("equivalent to lifted &&", () => {
+      expect(f(IO.of(true))(IO.of(true))()).toBe(true && true)
+      expect(f(IO.of(true))(IO.of(false))()).toBe(true && false)
+      expect(f(IO.of(false))(IO.of(true))()).toBe(false && true)
+      expect(f(IO.of(false))(IO.of(false))()).toBe(false && false)
+    })
+
+    it("short-circuits", () => {
+      let exe = false // eslint-disable-line functional/no-let
+      const set: IO<boolean> = () => {
+        exe = true
+        return true
+      }
+
+      f(IO.of(false))(set)()
+      expect(exe).toBe(false)
+
+      f(IO.of(true))(set)()
+      expect(exe).toBe(true)
     })
   })
 })
