@@ -416,7 +416,8 @@ Added in v0.1.0
 ## fork
 
 Fork an input across a series of functions, collecting the results in a
-tuple. Similar to `flap` but overloaded for variadic tuples.
+tuple. Similar to `flap` but overloaded for variadic tuples. Similar to
+`fanout` but supporting variadic rather than binary tuples.
 
 **Signature**
 
