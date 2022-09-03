@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.15.0 (_Unreleased_)
 
 - Add `Newtype` module.
+- Add `NonEmptyString` module.
 - Add `Monad` module.
 - Add `ReaderTaskEither` module.
 - Add `altAllBy` to `Alternative` and `Option`.

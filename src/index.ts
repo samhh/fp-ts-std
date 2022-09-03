@@ -21,6 +21,7 @@ import * as lazy from "./Lazy"
 import * as monad from "./Monad"
 import * as monoid from "./Monoid"
 import * as newtype from "./Newtype"
+import * as nonEmptyString from "./NonEmptyString"
 import * as number from "./Number"
 import * as option from "./Option"
 import * as ordering from "./Ordering"
@@ -143,6 +144,12 @@ export {
    * @since 0.15.0
    */
   newtype,
+  /**
+   * A re-export of the `fp-ts-std/NonEmptyString` module.
+   *
+   * @since 0.15.0
+   */
+  nonEmptyString,
   /**
    * A re-export of the `fp-ts-std/Number` module.
    *

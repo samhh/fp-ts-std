@@ -32,6 +32,7 @@ Added in v0.5.1
   - [monad](#monad)
   - [monoid](#monoid)
   - [newtype](#newtype)
+  - [nonEmptyString](#nonemptystring)
   - [number](#number)
   - [option](#option)
   - [ordering](#ordering)
@@ -323,6 +324,22 @@ export declare const newtype: typeof newtype
 
 ```hs
 newtype :: typeof newtype
+```
+
+Added in v0.15.0
+
+## nonEmptyString
+
+A re-export of the `fp-ts-std/NonEmptyString` module.
+
+**Signature**
+
+```ts
+export declare const nonEmptyString: typeof nonEmptyString
+```
+
+```hs
+nonEmptyString :: typeof nonEmptyString
 ```
 
 Added in v0.15.0
