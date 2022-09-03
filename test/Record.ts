@@ -43,10 +43,8 @@ describe("Record", () => {
 
     it("is the inverse of filter", () => {
       fc.assert(
-        fc.property(
-          fc.dictionary(fc.string(), fc.integer()),
-          xs =>
-            pipe(xs, R.filter(p), R.size) + pipe(xs, f, R.size) === R.size(xs),
+        fc.property(fc.dictionary(fc.string(), fc.integer()), xs =>
+          expect(pipe(xs, R.filter(p), f)).toEqual({}),
         ),
       )
     })
