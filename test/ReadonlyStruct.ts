@@ -1,4 +1,10 @@
-import { pick, pickFrom, omit, merge } from "../src/ReadonlyStruct"
+import {
+  pick,
+  pickFrom,
+  omit,
+  merge,
+  withDefaults,
+} from "../src/ReadonlyStruct"
 import { pipe } from "fp-ts/function"
 
 describe("ReadonlyStruct", () => {
@@ -70,6 +76,29 @@ describe("ReadonlyStruct", () => {
         b: "two",
         c: true,
       })
+    })
+  })
+
+  describe("withDefaults", () => {
+    it("provides defaults for optional values, requiring values if and only if a property is optional", () => {
+      const x: { a: number; b?: string } = { a: 1 }
+      const y = pipe(x, withDefaults({ b: "foo" }))
+
+      // @ts-expect-error -- missing an optional property of x
+      pipe(x, withDefaults({}))
+      // @ts-expect-error -- includes required properties
+      pipe(x, withDefaults({ a: 2, b: "" }))
+      // @ts-expect-error -- includes excess properties
+      pipe(x, withDefaults({ b: "", c: "foo" }))
+
+      expect(y).toEqual({ a: 1, b: "foo" })
+    })
+
+    it("preserves preexisting optional properties", () => {
+      const x: { a: number; b?: string } = { a: 1, b: "foo" }
+      const y = pipe(x, withDefaults({ b: "bar" }))
+
+      expect(y).toEqual(x)
     })
   })
 })

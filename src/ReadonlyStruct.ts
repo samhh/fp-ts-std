@@ -109,3 +109,32 @@ export const omit =
 
     return y as Omit<A, K>
   }
+
+type OptionalKeys<O extends object> = {
+  [K in keyof O]-?: RR.ReadonlyRecord<string, unknown> extends Pick<O, K>
+    ? K
+    : never
+}[keyof O]
+
+type Exact<A extends Readonly<object>, B extends A> = A &
+  Readonly<Record<Exclude<keyof B, keyof A>, never>>
+
+/**
+ * Provide default values for an object with optional properties.
+ *
+ * @example
+ * import { withDefaults } from 'fp-ts-std/ReadonlyStruct';
+ * import { pipe } from 'fp-ts/function';
+ *
+ * const aOptB: { a: number; b?: string } = { a: 1 };
+ *
+ * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' });
+ *
+ * @since 0.15.0
+ */
+export const withDefaults: <
+  T extends RR.ReadonlyRecord<string, unknown>,
+  PT extends Exact<{ [K in OptionalKeys<T>]-?: Exclude<T[K], undefined> }, PT>,
+>(
+  defaults: PT,
+) => (t: T) => Readonly<PT & T> = merge
