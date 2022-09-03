@@ -8,6 +8,7 @@
  */
 
 import { Newtype, iso } from "newtype-ts"
+import { pipe } from "fp-ts/function"
 import { Endomorphism } from "fp-ts/Endomorphism"
 
 /**
@@ -63,4 +64,4 @@ export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
 export const over =
   <A>(f: Endomorphism<A>) =>
   <B extends Newtype<unknown, A>>(x: B): B =>
-    iso<B>().modify(f)(x)
+    pipe(x, unpack, f, pack<B>)
