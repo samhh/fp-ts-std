@@ -7,6 +7,7 @@
 
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
+import * as R from "fp-ts/Record"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { construct, invoke, is } from "./Function"
@@ -39,21 +40,6 @@ export const fromString = (x: string): URLSearchParams =>
   pipe([x], construct(URLSearchParams))
 
 /**
- * Parse a `URLSearchParams` from a record.
- *
- * @example
- * import { fromRecord } from 'fp-ts-std/URLSearchParams'
- *
- * const x = { a: 'b', c: 'd' }
- *
- * assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x))
- *
- * @since 0.2.0
- */
-export const fromRecord = (x: Record<string, string>): URLSearchParams =>
-  pipe([x], construct(URLSearchParams))
-
-/**
  * Parse a `URLSearchParams` from an array of tuples.
  *
  * @example
@@ -67,6 +53,23 @@ export const fromRecord = (x: Record<string, string>): URLSearchParams =>
  */
 export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
   pipe([x], construct(URLSearchParams))
+
+/**
+ * Parse a `URLSearchParams` from a record.
+ *
+ * @example
+ * import { fromRecord } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = { a: 'b', c: 'd' }
+ *
+ * assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x))
+ *
+ * @since 0.2.0
+ */
+export const fromRecord: (x: Record<string, string>) => URLSearchParams = flow(
+  R.toArray,
+  fromTuples,
+)
 
 /**
  * Clone a `URLSearchParams`.
