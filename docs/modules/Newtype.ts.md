@@ -19,6 +19,7 @@ Added in v0.15.0
 
 - [utils](#utils)
   - [over](#over)
+  - [overF](#overf)
   - [pack](#pack)
   - [unpack](#unpack)
 
@@ -49,6 +50,40 @@ import { mkMilliseconds } from 'fp-ts-std/Date'
 import { multiply } from 'fp-ts-std/Number'
 
 assert.strictEqual(over(multiply(2))(mkMilliseconds(3)), mkMilliseconds(6))
+```
+
+Added in v0.15.0
+
+## overF
+
+Like `over`, but the lifted functions operates in a functorial context.
+
+**Signature**
+
+```ts
+export declare function overF<F extends URIS4>(
+  F: Functor4<F>
+): <S, R, E, A>(f: (x: A) => Kind4<F, S, R, E, A>) => <B extends Newtype<unknown, A>>(x: B) => Kind4<F, S, R, E, B>
+export declare function overF<F extends URIS3>(
+  F: Functor3<F>
+): <R, E, A>(f: (x: A) => Kind3<F, R, E, A>) => <B extends Newtype<unknown, A>>(x: B) => Kind3<F, R, E, B>
+export declare function overF<F extends URIS2>(
+  F: Functor2<F>
+): <E, A>(f: (x: A) => Kind2<F, E, A>) => <B extends Newtype<unknown, A>>(x: B) => Kind2<F, E, B>
+export declare function overF<F extends URIS>(
+  F: Functor1<F>
+): <A>(f: (x: A) => Kind<F, A>) => <B extends Newtype<unknown, A>>(x: B) => Kind<F, B>
+export declare function overF<F>(
+  F: Functor<F>
+): <A>(f: (x: A) => HKT<F, A>) => <B extends Newtype<unknown, A>>(x: B) => HKT<F, B>
+```
+
+```hs
+overF :: f extends URIS4, b extends (Newtype unknown a) => Functor4 f -> (a -> Kind4 f s r e a) -> b -> Kind4 f s r e b
+overF :: f extends URIS3, b extends (Newtype unknown a) => Functor3 f -> (a -> Kind3 f r e a) -> b -> Kind3 f r e b
+overF :: f extends URIS2, b extends (Newtype unknown a) => Functor2 f -> (a -> Kind2 f e a) -> b -> Kind2 f e b
+overF :: f extends URIS, b extends (Newtype unknown a) => Functor1 f -> (a -> Kind f a) -> b -> Kind f b
+overF :: b extends (Newtype unknown a) => Functor f -> (a -> HKT f a) -> b -> HKT f b
 ```
 
 Added in v0.15.0
