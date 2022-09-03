@@ -29,8 +29,8 @@ Added in v0.15.0
 
 ## over
 
-Convert an endomorphism on the type beneath a newtype to an endomorphism on
-the newtype itself.
+Apply an endomorphism over a newtype. Similar to functor map, but for
+newtypes.
 
 **Signature**
 
@@ -56,7 +56,7 @@ Added in v0.15.0
 
 ## overF
 
-Like `over`, but the lifted functions operates in a functorial context.
+Apply a effectful function over a newtype.
 
 **Signature**
 
@@ -84,6 +84,20 @@ overF :: f extends URIS3, b extends (Newtype unknown a) => Functor3 f -> (a -> K
 overF :: f extends URIS2, b extends (Newtype unknown a) => Functor2 f -> (a -> Kind2 f e a) -> b -> Kind2 f e b
 overF :: f extends URIS, b extends (Newtype unknown a) => Functor1 f -> (a -> Kind f a) -> b -> Kind f b
 overF :: b extends (Newtype unknown a) => Functor f -> (a -> HKT f a) -> b -> HKT f b
+```
+
+**Example**
+
+```ts
+import { overF } from 'fp-ts-std/Newtype'
+import * as O from 'fp-ts/Option'
+import { Milliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+
+const filterLongEnough =
+  overF(O.Functor)<number>(O.fromPredicate((n) => n > 1000)) <
+  Milliseconds >
+  assert.deepStrictEqual(filterLongEnough(mkMilliseconds(500)), O.none)
+assert.deepStrictEqual(filterLongEnough(mkMilliseconds(1500)), O.some(mkMilliseconds(1500)))
 ```
 
 Added in v0.15.0

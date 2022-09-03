@@ -59,7 +59,18 @@ export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
   iso<A>().unwrap(x)
 
 /**
- * Like `over`, but the lifted functions operates in a functorial context.
+ * Apply a effectful function over a newtype.
+ *
+ * @example
+ * import { overF } from 'fp-ts-std/Newtype'
+ * import * as O from 'fp-ts/Option'
+ * import { Milliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+ *
+ * const filterLongEnough =
+ *   overF(O.Functor)<number>(O.fromPredicate(n => n > 1000))<Milliseconds>
+ *
+ * assert.deepStrictEqual(filterLongEnough(mkMilliseconds(500)), O.none)
+ * assert.deepStrictEqual(filterLongEnough(mkMilliseconds(1500)), O.some(mkMilliseconds(1500)))
  *
  * @since 0.15.0
  */
@@ -99,8 +110,8 @@ export function overF<F>(
 }
 
 /**
- * Convert an endomorphism on the type beneath a newtype to an endomorphism on
- * the newtype itself.
+ * Apply an endomorphism over a newtype. Similar to functor map, but for
+ * newtypes.
  *
  * @example
  * import { over } from 'fp-ts-std/Newtype'
