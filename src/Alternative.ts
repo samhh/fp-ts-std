@@ -25,6 +25,8 @@ import {
   Alternative4,
 } from "fp-ts/Alternative"
 import { Lazy } from "./Lazy"
+import { pipe } from "fp-ts/function"
+import * as A from "fp-ts/Array"
 
 /**
  * Conditionally lifts a value to an `Alternative` context or returns
@@ -65,4 +67,60 @@ export function pureIf<F>(
   F: Alternative<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => HKT<F, A> {
   return x => y => x ? F.of(y()) : F.zero()
+}
+
+/**
+ * Like `altAll`, but flaps an input across an array of functions to produce
+ * the `Alternative` values, short-circuiting upon a non-empty value. Useful for
+ * `Alternative` types without inherent laziness.
+ *
+ * @example
+ * import { constant } from 'fp-ts/function';
+ * import { altAllBy } from 'fp-ts-std/Alternative';
+ * import * as O from 'fp-ts/Option';
+ *
+ * const f = altAllBy(O.Alternative);
+ *
+ * assert.deepStrictEqual(
+ *   f([constant(O.none), O.some])('foo'),
+ *   O.some('foo'),
+ * );
+ *
+ * @since 0.15.0
+ */
+export function altAllBy<F extends URIS4>(
+  F: Alternative4<F>,
+): <S, R, E, B, A>(
+  fs: Array<(x: A) => Kind4<F, S, R, E, B>>,
+) => (x: A) => Kind4<F, S, R, E, B>
+export function altAllBy<F extends URIS3>(
+  F: Alternative3<F>,
+): <R, E, B, A>(
+  fs: Array<(x: A) => Kind3<F, R, E, B>>,
+) => (x: A) => Kind3<F, R, E, B>
+export function altAllBy<F extends URIS3, E>(
+  F: Alternative3C<F, E>,
+): <R, B, A>(
+  fs: Array<(x: A) => Kind3<F, R, E, B>>,
+) => (x: A) => Kind3<F, R, E, B>
+export function altAllBy<F extends URIS2>(
+  F: Alternative2<F>,
+): <E, B, A>(fs: Array<(x: A) => Kind2<F, E, B>>) => (x: A) => Kind2<F, E, B>
+export function altAllBy<F extends URIS2, E>(
+  F: Alternative2C<F, E>,
+): <B, A>(fs: Array<(x: A) => Kind2<F, E, B>>) => (x: A) => Kind2<F, E, B>
+export function altAllBy<F extends URIS>(
+  F: Alternative1<F>,
+): <B, A>(fs: Array<(x: A) => Kind<F, B>>) => (x: A) => Kind<F, B>
+export function altAllBy<F>(
+  F: Alternative<F>,
+): <B, A>(fs: Array<(x: A) => HKT<F, B>>) => (x: A) => HKT<F, B>
+export function altAllBy<F>(
+  F: Alternative<F>,
+): <B, A>(fs: Array<(x: A) => HKT<F, B>>) => (x: A) => HKT<F, B> {
+  return fs => x =>
+    pipe(
+      fs,
+      A.reduce(F.zero(), (m, f) => F.alt(m, () => f(x))),
+    )
 }
