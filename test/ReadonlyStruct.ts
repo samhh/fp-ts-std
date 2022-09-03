@@ -111,12 +111,14 @@ describe("ReadonlyStruct", () => {
       const x: { a: number; b?: string } = { a: 1 }
       const y = pipe(x, f({ b: "foo" }))
 
+      /* eslint-disable functional/no-expression-statement */
       // @ts-expect-error -- missing an optional property of x
       pipe(x, f({}))
       // @ts-expect-error -- includes required properties
       pipe(x, f({ a: 2, b: "" }))
       // @ts-expect-error -- includes excess properties
       pipe(x, f({ b: "", c: "foo" }))
+      /* eslint-enable functional/no-expression-statement */
 
       expect(y).toEqual({ a: 1, b: "foo" })
     })
