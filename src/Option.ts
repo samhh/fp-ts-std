@@ -99,41 +99,44 @@ export const toMonoid = _toMonoid(O.Foldable)
 // need a redundant `Monoid<A>` input.
 /**
  * Conditionally returns the provided `Option` or `None`. The dual to
- * `memptyUnless`.
+ * `memptyUnless`. The lazy value is evaluated only if the condition passes.
  *
  * @example
+ * import { constant } from 'fp-ts/function';
  * import { memptyWhen } from 'fp-ts-std/Option';
  * import * as O from 'fp-ts/Option';
  *
- * assert.deepStrictEqual(memptyWhen(true)(O.some('x')), O.none);
- * assert.deepStrictEqual(memptyWhen(true)(O.none), O.none);
- * assert.deepStrictEqual(memptyWhen(false)(O.some('x')), O.some('x'));
- * assert.deepStrictEqual(memptyWhen(false)(O.none), O.none);
+ * assert.deepStrictEqual(memptyWhen(true)(constant(O.some('x'))), O.none);
+ * assert.deepStrictEqual(memptyWhen(true)(constant(O.none)), O.none);
+ * assert.deepStrictEqual(memptyWhen(false)(constant(O.some('x'))), O.some('x'));
+ * assert.deepStrictEqual(memptyWhen(false)(constant(O.none)), O.none);
  *
  * @since 0.13.0
  */
 export const memptyWhen =
   (x: boolean) =>
-  <A>(m: Option<A>): Option<A> =>
-    x ? O.none : m
+  <A>(m: Lazy<Option<A>>): Option<A> =>
+    x ? O.none : m()
 
 /**
  * Conditionally returns the provided `Option` or `None`. The dual to
- * `memptyWhen`.
+ * `memptyWhen`. The lazy value is evaluated only if the condition passes.
  *
  * @example
+ * import { constant } from 'fp-ts/function';
  * import { memptyUnless } from 'fp-ts-std/Option';
  * import * as O from 'fp-ts/Option';
  *
- * assert.deepStrictEqual(memptyUnless(true)(O.some('x')), O.some('x'));
- * assert.deepStrictEqual(memptyUnless(true)(O.none), O.none);
- * assert.deepStrictEqual(memptyUnless(false)(O.some('x')), O.none);
- * assert.deepStrictEqual(memptyUnless(false)(O.none), O.none);
+ * assert.deepStrictEqual(memptyUnless(true)(constant(O.some('x'))), O.some('x'));
+ * assert.deepStrictEqual(memptyUnless(true)(constant(O.none)), O.none);
+ * assert.deepStrictEqual(memptyUnless(false)(constant(O.some('x'))), O.none);
+ * assert.deepStrictEqual(memptyUnless(false)(constant(O.none)), O.none);
  *
  * @since 0.13.0
  */
-export const memptyUnless: (x: boolean) => <A>(m: Option<A>) => Option<A> =
-  flow(invertBool, memptyWhen)
+export const memptyUnless: (
+  x: boolean,
+) => <A>(m: Lazy<Option<A>>) => Option<A> = flow(invertBool, memptyWhen)
 
 /**
  * Conditionally lifts a value to `Some` or returns `None`. The lazy value is

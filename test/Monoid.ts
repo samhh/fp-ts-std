@@ -3,7 +3,8 @@ import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
-import { pipe } from "fp-ts/function"
+import { constant, pipe } from "fp-ts/function"
+import { Lazy } from "../src/Lazy"
 
 describe("Monoid", () => {
   describe("toMonoid", () => {
@@ -25,23 +26,59 @@ describe("Monoid", () => {
     const f = memptyWhen(S.Monoid)
 
     it("returns identity element on true condition", () => {
-      fc.assert(fc.property(fc.string(), x => f(true)(x) === S.Monoid.empty))
+      fc.assert(
+        fc.property(fc.string(), x => f(true)(constant(x)) === S.Monoid.empty),
+      )
     })
 
     it("returns identity on argument on false condition", () => {
-      fc.assert(fc.property(fc.string(), x => f(false)(x) === x))
+      fc.assert(fc.property(fc.string(), x => f(false)(constant(x)) === x))
     })
+
+    /* eslint-disable functional/no-expression-statement */
+    it("lazily evaluates value", () => {
+      let exe = false // eslint-disable-line functional/no-let
+      const g: Lazy<string> = () => {
+        exe = true
+        return "foo"
+      }
+
+      f(true)(g)
+      expect(exe).toBe(false)
+
+      f(false)(g)
+      expect(exe).toBe(true)
+    })
+    /* eslint-enable functional/no-expression-statement */
   })
 
   describe("memptyUnless", () => {
     const f = memptyUnless(S.Monoid)
 
     it("returns identity element on false condition", () => {
-      fc.assert(fc.property(fc.string(), x => f(false)(x) === S.Monoid.empty))
+      fc.assert(
+        fc.property(fc.string(), x => f(false)(constant(x)) === S.Monoid.empty),
+      )
     })
 
     it("returns identity on argument on true condition", () => {
-      fc.assert(fc.property(fc.string(), x => f(true)(x) === x))
+      fc.assert(fc.property(fc.string(), x => f(true)(constant(x)) === x))
     })
+
+    /* eslint-disable functional/no-expression-statement */
+    it("lazily evaluates value", () => {
+      let exe = false // eslint-disable-line functional/no-let
+      const g: Lazy<string> = () => {
+        exe = true
+        return "foo"
+      }
+
+      f(false)(g)
+      expect(exe).toBe(false)
+
+      f(true)(g)
+      expect(exe).toBe(true)
+    })
+    /* eslint-enable functional/no-expression-statement */
   })
 })

@@ -65,28 +65,29 @@ Added in v0.12.0
 ## memptyUnless
 
 Conditionally returns the provided `Option` or `None`. The dual to
-`memptyWhen`.
+`memptyWhen`. The lazy value is evaluated only if the condition passes.
 
 **Signature**
 
 ```ts
-export declare const memptyUnless: (x: boolean) => <A>(m: Option<A>) => Option<A>
+export declare const memptyUnless: (x: boolean) => <A>(m: Lazy<Option<A>>) => Option<A>
 ```
 
 ```hs
-memptyUnless :: boolean -> Option a -> Option a
+memptyUnless :: boolean -> Lazy (Option a) -> Option a
 ```
 
 **Example**
 
 ```ts
+import { constant } from 'fp-ts/function'
 import { memptyUnless } from 'fp-ts-std/Option'
 import * as O from 'fp-ts/Option'
 
-assert.deepStrictEqual(memptyUnless(true)(O.some('x')), O.some('x'))
-assert.deepStrictEqual(memptyUnless(true)(O.none), O.none)
-assert.deepStrictEqual(memptyUnless(false)(O.some('x')), O.none)
-assert.deepStrictEqual(memptyUnless(false)(O.none), O.none)
+assert.deepStrictEqual(memptyUnless(true)(constant(O.some('x'))), O.some('x'))
+assert.deepStrictEqual(memptyUnless(true)(constant(O.none)), O.none)
+assert.deepStrictEqual(memptyUnless(false)(constant(O.some('x'))), O.none)
+assert.deepStrictEqual(memptyUnless(false)(constant(O.none)), O.none)
 ```
 
 Added in v0.13.0
@@ -94,28 +95,29 @@ Added in v0.13.0
 ## memptyWhen
 
 Conditionally returns the provided `Option` or `None`. The dual to
-`memptyUnless`.
+`memptyUnless`. The lazy value is evaluated only if the condition passes.
 
 **Signature**
 
 ```ts
-export declare const memptyWhen: (x: boolean) => <A>(m: Option<A>) => Option<A>
+export declare const memptyWhen: (x: boolean) => <A>(m: Lazy<Option<A>>) => Option<A>
 ```
 
 ```hs
-memptyWhen :: boolean -> Option a -> Option a
+memptyWhen :: boolean -> Lazy (Option a) -> Option a
 ```
 
 **Example**
 
 ```ts
+import { constant } from 'fp-ts/function'
 import { memptyWhen } from 'fp-ts-std/Option'
 import * as O from 'fp-ts/Option'
 
-assert.deepStrictEqual(memptyWhen(true)(O.some('x')), O.none)
-assert.deepStrictEqual(memptyWhen(true)(O.none), O.none)
-assert.deepStrictEqual(memptyWhen(false)(O.some('x')), O.some('x'))
-assert.deepStrictEqual(memptyWhen(false)(O.none), O.none)
+assert.deepStrictEqual(memptyWhen(true)(constant(O.some('x'))), O.none)
+assert.deepStrictEqual(memptyWhen(true)(constant(O.none)), O.none)
+assert.deepStrictEqual(memptyWhen(false)(constant(O.some('x'))), O.some('x'))
+assert.deepStrictEqual(memptyWhen(false)(constant(O.none)), O.none)
 ```
 
 Added in v0.13.0

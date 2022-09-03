@@ -26,31 +26,32 @@ Added in v0.12.0
 ## memptyUnless
 
 Conditionally returns the provided monoidal value or its identity. The dual
-to `memptyWhen`.
+to `memptyWhen`. The lazy value is evaluated only if the condition passes.
 
 **Signature**
 
 ```ts
-export declare const memptyUnless: <A>(M: Monoid<A>) => (x: boolean) => Endomorphism<A>
+export declare const memptyUnless: <A>(M: Monoid<A>) => (x: boolean) => (y: Lazy<A>) => A
 ```
 
 ```hs
-memptyUnless :: Monoid a -> boolean -> Endomorphism a
+memptyUnless :: Monoid a -> boolean -> Lazy a -> a
 ```
 
 **Example**
 
 ```ts
+import { constant } from 'fp-ts/function'
 import { memptyUnless } from 'fp-ts-std/Monoid'
 import * as O from 'fp-ts/Option'
 import * as Str from 'fp-ts/string'
 
 const f = memptyUnless(O.getMonoid(Str.Monoid))
 
-assert.deepStrictEqual(f(true)(O.some('x')), O.some('x'))
-assert.deepStrictEqual(f(true)(O.none), O.none)
-assert.deepStrictEqual(f(false)(O.some('x')), O.none)
-assert.deepStrictEqual(f(false)(O.none), O.none)
+assert.deepStrictEqual(f(true)(constant(O.some('x'))), O.some('x'))
+assert.deepStrictEqual(f(true)(constant(O.none)), O.none)
+assert.deepStrictEqual(f(false)(constant(O.some('x'))), O.none)
+assert.deepStrictEqual(f(false)(constant(O.none)), O.none)
 ```
 
 Added in v0.13.0
@@ -58,31 +59,32 @@ Added in v0.13.0
 ## memptyWhen
 
 Conditionally returns the provided monoidal value or its identity. The dual
-to `memptyUnless`.
+to `memptyUnless`. The lazy value is evaluated only if the condition passes.
 
 **Signature**
 
 ```ts
-export declare const memptyWhen: <A>(M: Monoid<A>) => (x: boolean) => Endomorphism<A>
+export declare const memptyWhen: <A>(M: Monoid<A>) => (x: boolean) => (y: Lazy<A>) => A
 ```
 
 ```hs
-memptyWhen :: Monoid a -> boolean -> Endomorphism a
+memptyWhen :: Monoid a -> boolean -> Lazy a -> a
 ```
 
 **Example**
 
 ```ts
+import { constant } from 'fp-ts/function'
 import { memptyWhen } from 'fp-ts-std/Monoid'
 import * as O from 'fp-ts/Option'
 import * as Str from 'fp-ts/string'
 
 const f = memptyWhen(O.getMonoid(Str.Monoid))
 
-assert.deepStrictEqual(f(true)(O.some('x')), O.none)
-assert.deepStrictEqual(f(true)(O.none), O.none)
-assert.deepStrictEqual(f(false)(O.some('x')), O.some('x'))
-assert.deepStrictEqual(f(false)(O.none), O.none)
+assert.deepStrictEqual(f(true)(constant(O.some('x'))), O.none)
+assert.deepStrictEqual(f(true)(constant(O.none)), O.none)
+assert.deepStrictEqual(f(false)(constant(O.some('x'))), O.some('x'))
+assert.deepStrictEqual(f(false)(constant(O.none)), O.none)
 ```
 
 Added in v0.13.0

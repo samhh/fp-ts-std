@@ -8,7 +8,7 @@ This project adheres to semantic versioning.
 - Add `ReaderTaskEither` module.
 - Add `allM` and `anyM` to `Array` and `ReadonlyArray`.
 - Add `fanout` to `Tuple`.
-- Lazily evaluate the value in `pureIf`.
+- Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.
 
 ## 0.14.2 (2022-05-11)
 

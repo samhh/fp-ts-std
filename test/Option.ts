@@ -79,7 +79,7 @@ describe("Option", () => {
     it("returns identity element on true condition", () => {
       fc.assert(
         fc.property(arbOption(fc.string()), x =>
-          expect(f(true)(x)).toEqual(O.none),
+          expect(f(true)(constant(x))).toEqual(O.none),
         ),
       )
     })
@@ -87,7 +87,7 @@ describe("Option", () => {
     it("returns identity on argument on false condition", () => {
       fc.assert(
         fc.property(arbOption(fc.string()), x =>
-          expect(f(false)(x)).toEqual(x),
+          expect(f(false)(constant(x))).toEqual(x),
         ),
       )
     })
@@ -99,14 +99,16 @@ describe("Option", () => {
     it("returns identity element on false condition", () => {
       fc.assert(
         fc.property(arbOption(fc.string()), x =>
-          expect(f(false)(x)).toEqual(O.none),
+          expect(f(false)(constant(x))).toEqual(O.none),
         ),
       )
     })
 
     it("returns identity on argument on true condition", () => {
       fc.assert(
-        fc.property(arbOption(fc.string()), x => expect(f(true)(x)).toEqual(x)),
+        fc.property(arbOption(fc.string()), x =>
+          expect(f(true)(constant(x))).toEqual(x),
+        ),
       )
     })
   })

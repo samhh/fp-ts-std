@@ -26,8 +26,8 @@ import {
 } from "fp-ts/HKT"
 import { Monoid } from "fp-ts/Monoid"
 import { flow, identity } from "fp-ts/function"
-import { Endomorphism } from "fp-ts/Endomorphism"
 import { invert } from "./Boolean"
+import { Lazy } from "./Lazy"
 
 /**
  * Extracts the value from within a foldable, falling back to the monoidal
@@ -71,46 +71,48 @@ export function toMonoid<F>(
 
 /**
  * Conditionally returns the provided monoidal value or its identity. The dual
- * to `memptyUnless`.
+ * to `memptyUnless`. The lazy value is evaluated only if the condition passes.
  *
  * @example
+ * import { constant } from 'fp-ts/function';
  * import { memptyWhen } from 'fp-ts-std/Monoid';
  * import * as O from 'fp-ts/Option';
  * import * as Str from 'fp-ts/string';
  *
  * const f = memptyWhen(O.getMonoid(Str.Monoid));
  *
- * assert.deepStrictEqual(f(true)(O.some('x')), O.none);
- * assert.deepStrictEqual(f(true)(O.none), O.none);
- * assert.deepStrictEqual(f(false)(O.some('x')), O.some('x'));
- * assert.deepStrictEqual(f(false)(O.none), O.none);
+ * assert.deepStrictEqual(f(true)(constant(O.some('x'))), O.none);
+ * assert.deepStrictEqual(f(true)(constant(O.none)), O.none);
+ * assert.deepStrictEqual(f(false)(constant(O.some('x'))), O.some('x'));
+ * assert.deepStrictEqual(f(false)(constant(O.none)), O.none);
  *
  * @since 0.13.0
  */
 export const memptyWhen =
   <A>(M: Monoid<A>) =>
-  (x: boolean): Endomorphism<A> =>
-  y =>
-    x ? M.empty : y
+  (x: boolean) =>
+  (y: Lazy<A>): A =>
+    x ? M.empty : y()
 
 /**
  * Conditionally returns the provided monoidal value or its identity. The dual
- * to `memptyWhen`.
+ * to `memptyWhen`. The lazy value is evaluated only if the condition passes.
  *
  * @example
+ * import { constant } from 'fp-ts/function';
  * import { memptyUnless } from 'fp-ts-std/Monoid';
  * import * as O from 'fp-ts/Option';
  * import * as Str from 'fp-ts/string';
  *
  * const f = memptyUnless(O.getMonoid(Str.Monoid));
  *
- * assert.deepStrictEqual(f(true)(O.some('x')), O.some('x'));
- * assert.deepStrictEqual(f(true)(O.none), O.none);
- * assert.deepStrictEqual(f(false)(O.some('x')), O.none);
- * assert.deepStrictEqual(f(false)(O.none), O.none);
+ * assert.deepStrictEqual(f(true)(constant(O.some('x'))), O.some('x'));
+ * assert.deepStrictEqual(f(true)(constant(O.none)), O.none);
+ * assert.deepStrictEqual(f(false)(constant(O.some('x'))), O.none);
+ * assert.deepStrictEqual(f(false)(constant(O.none)), O.none);
  *
  * @since 0.13.0
  */
 export const memptyUnless = <A>(
   M: Monoid<A>,
-): ((x: boolean) => Endomorphism<A>) => flow(invert, memptyWhen(M))
+): ((x: boolean) => (y: Lazy<A>) => A) => flow(invert, memptyWhen(M))
