@@ -120,7 +120,7 @@ describe("Number", () => {
     it("returns some for floating point number", () => {
       expect(f("3.3")).toStrictEqual(O.some(3.3))
       fc.assert(
-        fc.property(fc.float(), x =>
+        fc.property(fc.float({ noNaN: true }), x =>
           expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
         ),
       )

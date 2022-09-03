@@ -224,15 +224,20 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), 1, 5) as fc.Arbitrary<NonEmptyArray<unknown>>,
-          fc.integer(0, 10),
+          fc.array(fc.anything(), {
+            minLength: 1,
+            maxLength: 5,
+          }) as fc.Arbitrary<NonEmptyArray<unknown>>,
+          fc.integer({ min: 0, max: 10 }),
           (xs, i) => O.isSome(f(i)(xs)(xs)) === i <= A.size(xs),
         ),
       )
 
       fc.assert(
-        fc.property(fc.array(fc.string(), 1, 20), xs =>
-          expect(pipe(g(xs), O.map(A.size))).toEqual(O.some(A.size(xs) + 2)),
+        fc.property(
+          fc.array(fc.string(), { minLength: 1, maxLength: 20 }),
+          xs =>
+            expect(pipe(g(xs), O.map(A.size))).toEqual(O.some(A.size(xs) + 2)),
         ),
       )
     })
@@ -405,13 +410,15 @@ describe("Array", () => {
     it("returns empty array for empty array input", () => {
       expect(f(0)([])).toEqual([])
 
-      fc.assert(fc.property(fc.integer(0, 100), n => !f(n)([]).length))
+      fc.assert(
+        fc.property(fc.integer({ min: 0, max: 100 }), n => !f(n)([]).length),
+      )
     })
 
     it("returns empty array for non-positive input number", () => {
       fc.assert(
         fc.property(
-          fc.integer(0),
+          fc.integer({ max: 0 }),
           fc.array(fc.anything()),
           (n, xs) => !f(n)(xs).length,
         ),
@@ -445,7 +452,7 @@ describe("Array", () => {
       fc.assert(
         fc.property(
           fc.array(fc.anything()),
-          fc.integer(1, 100),
+          fc.integer({ min: 1, max: 100 }),
           (xs, n) => f(n)(xs).length === max(N.Ord)(0, A.size(xs) - n + 1),
         ),
       )
@@ -501,8 +508,8 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), 1, n),
-          fc.integer(0, n - 1),
+          fc.array(fc.anything(), { minLength: 1, maxLength: n }),
+          fc.integer({ min: 0, max: n - 1 }),
           (xs, i) => i >= A.size(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
         ),
       )
@@ -532,9 +539,9 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), n, n),
-          fc.integer(0, n - 1),
-          fc.integer(0, n - 1),
+          fc.array(fc.anything(), { minLength: n, maxLength: n }),
+          fc.integer({ min: 0, max: n - 1 }),
+          fc.integer({ min: 0, max: n - 1 }),
           (xs, i, j) => O.isSome(f(i)(j)(xs)),
         ),
       )
@@ -545,9 +552,9 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), n, n),
-          fc.integer(0, n - 1),
-          fc.integer(0, n - 1),
+          fc.array(fc.anything(), { minLength: n, maxLength: n }),
+          fc.integer({ min: 0, max: n - 1 }),
+          fc.integer({ min: 0, max: n - 1 }),
           (xs, i, j) =>
             pipe(
               f(i)(j)(xs),
@@ -562,8 +569,8 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), n, n),
-          fc.integer(0, n - 2),
+          fc.array(fc.anything(), { minLength: n, maxLength: n }),
+          fc.integer({ min: 0, max: n - 2 }),
           (xs, i) => expect(f(i)(i + 1)(xs)).toEqual(f(i + 1)(i)(xs)),
         ),
       )
@@ -578,8 +585,8 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), 1, n),
-          fc.integer(0, n - 1),
+          fc.array(fc.anything(), { minLength: 1, maxLength: n }),
+          fc.integer({ min: 0, max: n - 1 }),
           (xs, i) => i >= A.size(xs) || expect(f(i)(i)(xs)).toEqual(O.some(xs)),
         ),
       )
@@ -609,9 +616,9 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), n, n),
-          fc.integer(0, n - 1),
-          fc.integer(0, n - 1),
+          fc.array(fc.anything(), { minLength: n, maxLength: n }),
+          fc.integer({ min: 0, max: n - 1 }),
+          fc.integer({ min: 0, max: n - 1 }),
           (xs, i, j) => O.isSome(f(i)(j)(xs)),
         ),
       )
@@ -622,9 +629,9 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), n, n),
-          fc.integer(0, n - 1),
-          fc.integer(0, n - 1),
+          fc.array(fc.anything(), { minLength: n, maxLength: n }),
+          fc.integer({ min: 0, max: n - 1 }),
+          fc.integer({ min: 0, max: n - 1 }),
           (xs, i, j) =>
             pipe(
               f(i)(j)(xs),
@@ -639,8 +646,8 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.array(fc.anything(), n, n),
-          fc.integer(0, n - 2),
+          fc.array(fc.anything(), { minLength: n, maxLength: n }),
+          fc.integer({ min: 0, max: n - 2 }),
           (xs, i) => expect(f(i)(i + 1)(xs)).toEqual(f(i + 1)(i)(xs)),
         ),
       )
@@ -721,7 +728,7 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.integer(1, 50),
+          fc.integer({ min: 1, max: 50 }),
           fc.integer(),
           (x, y) => f(A.replicate(x, y) as ReadonlyNonEmptyArray<number>) === y,
         ),
@@ -738,7 +745,7 @@ describe("Array", () => {
 
       fc.assert(
         fc.property(
-          fc.integer(1, 50),
+          fc.integer({ min: 1, max: 50 }),
           fc.integer(),
           (x, y) => f(A.replicate(x, y) as ReadonlyNonEmptyArray<number>) === y,
         ),

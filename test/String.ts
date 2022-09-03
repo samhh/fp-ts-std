@@ -145,7 +145,11 @@ describe("String", () => {
 
     it("returns empty string for non-positive number", () => {
       fc.assert(
-        fc.property(fc.integer(0), fc.string(), (n, x) => f(n)(x) === ""),
+        fc.property(
+          fc.integer({ max: 0 }),
+          fc.string(),
+          (n, x) => f(n)(x) === "",
+        ),
       )
     })
 
@@ -153,7 +157,7 @@ describe("String", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          fc.integer(0, Number.MAX_SAFE_INTEGER),
+          fc.integer({ min: 0, max: Number.MAX_SAFE_INTEGER }),
           (x, n) => f(x.length + n)(x) === x,
         ),
       )
@@ -177,7 +181,11 @@ describe("String", () => {
 
     it("returns empty string for non-positive number", () => {
       fc.assert(
-        fc.property(fc.integer(0), fc.string(), (n, x) => f(n)(x) === ""),
+        fc.property(
+          fc.integer({ max: 0 }),
+          fc.string(),
+          (n, x) => f(n)(x) === "",
+        ),
       )
     })
 
@@ -185,7 +193,7 @@ describe("String", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          fc.integer(0, Number.MAX_SAFE_INTEGER),
+          fc.integer({ min: 0, max: Number.MAX_SAFE_INTEGER }),
           (x, n) => f(x.length + n)(x) === x,
         ),
       )
@@ -367,7 +375,11 @@ describe("String", () => {
       expect(f(-1)("abc")).toBe("abc")
 
       fc.assert(
-        fc.property(fc.string(), fc.integer(0), (x, n) => f(n)(x) === x),
+        fc.property(
+          fc.string(),
+          fc.integer({ max: 0 }),
+          (x, n) => f(n)(x) === x,
+        ),
       )
     })
 
@@ -382,7 +394,7 @@ describe("String", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          fc.integer(0, Number.MAX_SAFE_INTEGER),
+          fc.integer({ min: 0, max: Number.MAX_SAFE_INTEGER }),
           (x, n) => f(n)(x).length === max(N.Ord)(0, x.length - n),
         ),
       )
@@ -412,7 +424,11 @@ describe("String", () => {
       expect(f(-1)("abc")).toBe("abc")
 
       fc.assert(
-        fc.property(fc.string(), fc.integer(0), (x, n) => f(n)(x) === x),
+        fc.property(
+          fc.string(),
+          fc.integer({ max: 0 }),
+          (x, n) => f(n)(x) === x,
+        ),
       )
     })
 
@@ -427,7 +443,7 @@ describe("String", () => {
       fc.assert(
         fc.property(
           fc.string(),
-          fc.integer(0, Number.MAX_SAFE_INTEGER),
+          fc.integer({ min: 0, max: Number.MAX_SAFE_INTEGER }),
           (x, n) => f(n)(x).length === max(N.Ord)(0, x.length - n),
         ),
       )
@@ -443,7 +459,9 @@ describe("String", () => {
 
     it("returns first character of non-empty string", () => {
       fc.assert(
-        fc.property(fc.string(1, 100), x => expect(f(x)).toEqual(O.some(x[0]))),
+        fc.property(fc.string({ minLength: 1, maxLength: 100 }), x =>
+          expect(f(x)).toEqual(O.some(x[0])),
+        ),
       )
     })
   })
@@ -457,7 +475,9 @@ describe("String", () => {
 
     it("returns empty string for string with one character", () => {
       fc.assert(
-        fc.property(fc.string(1, 1), x => expect(f(x)).toEqual(O.some(""))),
+        fc.property(fc.string({ minLength: 1, maxLength: 1 }), x =>
+          expect(f(x)).toEqual(O.some("")),
+        ),
       )
     })
 
@@ -468,7 +488,7 @@ describe("String", () => {
 
     it("returns string one character smaller", () => {
       fc.assert(
-        fc.property(fc.string(1, 100), x =>
+        fc.property(fc.string({ minLength: 1, maxLength: 100 }), x =>
           pipe(
             f(x),
             O.exists(y => y.length === x.length - 1),
@@ -487,7 +507,7 @@ describe("String", () => {
 
     it("returns last character of non-empty string", () => {
       fc.assert(
-        fc.property(fc.string(1, 100), x =>
+        fc.property(fc.string({ minLength: 1, maxLength: 100 }), x =>
           expect(f(x)).toEqual(O.some(x[x.length - 1])),
         ),
       )
@@ -503,7 +523,9 @@ describe("String", () => {
 
     it("returns empty string for string with one character", () => {
       fc.assert(
-        fc.property(fc.string(1, 1), x => expect(f(x)).toEqual(O.some(""))),
+        fc.property(fc.string({ minLength: 1, maxLength: 1 }), x =>
+          expect(f(x)).toEqual(O.some("")),
+        ),
       )
     })
 
@@ -514,7 +536,7 @@ describe("String", () => {
 
     it("returns string one character smaller", () => {
       fc.assert(
-        fc.property(fc.string(1, 100), x =>
+        fc.property(fc.string({ minLength: 1, maxLength: 100 }), x =>
           pipe(
             f(x),
             O.exists(y => y.length === x.length - 1),
@@ -539,7 +561,7 @@ describe("String", () => {
       expect(f(1)("abc")).toEqual(O.some("b"))
 
       fc.assert(
-        fc.property(fc.string(1, 100), x =>
+        fc.property(fc.string({ minLength: 1, maxLength: 100 }), x =>
           expect(f(0)(x)).toEqual(O.some(x[0])),
         ),
       )

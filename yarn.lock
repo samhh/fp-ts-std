@@ -1616,10 +1616,10 @@ extend-shallow@^2.0.1:
   dependencies:
     is-extendable "^0.1.0"
 
-fast-check@^2.5.0:
-  version "2.25.0"
-  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-2.25.0.tgz#5146601851bf3be0953bd17eb2b7d547936c6561"
-  integrity sha512-wRUT2KD2lAmT75WNIJIHECawoUUMHM0I5jrlLXGtGeqmPL8jl/EldUDjY1VCp6fDY8yflyfUeIOsOBrIbIiArg==
+fast-check@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-3.1.2.tgz#1b09c3d856d425e06be9d39e9e23d1f6fa4a6d0e"
+  integrity sha512-OZRPFXhZHpIhtG46XtAMzVW1jtuR7Clw13wOcfw1v//tNnPCvVuLLlT1bEqywCQXNXR4qGT3tk7z0MUMSTit3Q==
   dependencies:
     pure-rand "^5.0.1"
 
