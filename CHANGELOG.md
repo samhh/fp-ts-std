@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `ReaderTaskEither` module.
 - Add `altAllBy` to `Alternative` and `Option`.
 - Add `allM` and `anyM` to `Array` and `ReadonlyArray`.
+- Add `withDefaults` to `Struct` and `ReadonlyStruct`.
 - Add `fanout` to `Tuple`.
 - Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.
 

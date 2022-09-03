@@ -20,6 +20,7 @@ Added in v0.14.0
   - [omit](#omit)
   - [pick](#pick)
   - [pickFrom](#pickfrom)
+  - [withDefaults](#withdefaults)
 
 ---
 
@@ -133,3 +134,31 @@ assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] 
 ```
 
 Added in v0.14.0
+
+## withDefaults
+
+Provide default values for an object with optional properties.
+
+**Signature**
+
+```ts
+export declare const withDefaults: <
+  T extends Readonly<Record<string, unknown>>,
+  PT extends Exact<{ [K in OptionalKeys<T>]-?: Exclude<T[K], undefined> }, PT>
+>(
+  defaults: PT
+) => (t: T) => Readonly<PT & T>
+```
+
+**Example**
+
+```ts
+import { withDefaults } from 'fp-ts-std/ReadonlyStruct'
+import { pipe } from 'fp-ts/function'
+
+const aOptB: { a: number; b?: string } = { a: 1 }
+
+assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' })
+```
+
+Added in v0.15.0
