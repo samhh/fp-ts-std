@@ -12,6 +12,7 @@ This project adheres to semantic versioning.
 - Add `withDefaults` to `Struct` and `ReadonlyStruct`.
 - Add `fanout` to `Tuple`.
 - Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.
+- Bump minimum supported TypeScript version to 4.7.0.
 
 ## 0.14.2 (2022-05-11)
 
