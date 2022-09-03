@@ -21,6 +21,7 @@ Added in v0.14.0
   - [omitFrom](#omitfrom)
   - [pick](#pick)
   - [pickFrom](#pickfrom)
+  - [renameKey](#renamekey)
   - [withDefaults](#withdefaults)
 
 ---
@@ -164,6 +165,40 @@ assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] 
 ```
 
 Added in v0.14.0
+
+## renameKey
+
+Rename a key in a struct, preserving the value. If the new key already
+exists, the old key will be overwritten. Optionality is preserved.
+
+**Signature**
+
+```ts
+export declare const renameKey: <I extends string>(
+  oldK: I
+) => <J extends string>(
+  newK: J
+) => <A extends MaybePartial<Readonly<Record<I, unknown>>>>(
+  x: A
+) => Readonly<{ [K in keyof A as K extends I ? J : K]: A[K] }>
+```
+
+```hs
+renameKey :: i extends string, j extends string, a extends (MaybePartial (Readonly (Record i unknown))) => i -> j -> a -> Readonly { [k in (keyof a) as k extends i ? j : k]: a[k] }
+```
+
+**Example**
+
+```ts
+import { renameKey } from 'fp-ts-std/Struct'
+
+type Foo = { a: string; b: number }
+type Bar = { a: string; c: number }
+
+const fooBar: (x: Foo) => Bar = renameKey('b')('c')
+```
+
+Added in v0.15.0
 
 ## withDefaults
 

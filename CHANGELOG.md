@@ -10,7 +10,7 @@ This project adheres to semantic versioning.
 - Add `ReaderTaskEither` module.
 - Add `altAllBy` to `Alternative` and `Option`.
 - Add `allM` and `anyM` to `Array` and `ReadonlyArray`.
-- Add `omitFrom` and `withDefaults` to `Struct` and `ReadonlyStruct`.
+- Add `omitFrom`, `renameKey`, and `withDefaults` to `Struct` and `ReadonlyStruct`.
 - Add `fanout` to `Tuple`.
 - Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.
 - Bump minimum supported TypeScript version to 4.7.0.

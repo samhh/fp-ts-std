@@ -5,6 +5,7 @@ import {
   omitFrom,
   merge,
   withDefaults,
+  renameKey,
 } from "../src/ReadonlyStruct"
 import { pipe } from "fp-ts/function"
 
@@ -125,6 +126,32 @@ describe("ReadonlyStruct", () => {
       const y = pipe(x, f({ b: "bar" }))
 
       expect(y).toEqual(x)
+    })
+  })
+
+  describe("renameKey", () => {
+    const f = renameKey
+
+    it("adds non-preexisting key", () => {
+      expect(pipe({ a: "foo", b: "bar" }, f("a")("c"))).toEqual({
+        b: "bar",
+        c: "foo",
+      })
+    })
+
+    it("overwrites preexisting key", () => {
+      expect(pipe({ a: "foo", b: "bar" }, f("a")("b"))).toEqual({
+        b: "foo",
+      })
+    })
+
+    it("does not insert non-preexisting optional properties", () => {
+      const x = pipe({ a: "foo" } as { a: string; b?: string }, f("b")("c"))
+
+      expect(x).toEqual({
+        a: "foo",
+      })
+      expect(Object.keys(x)).toEqual(["a"])
     })
   })
 })

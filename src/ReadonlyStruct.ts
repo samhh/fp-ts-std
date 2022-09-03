@@ -8,6 +8,8 @@
 import { pipe } from "fp-ts/function"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
+import { fanout } from "./Tuple"
+import { uncurry2 } from "./Function"
 
 /**
  * Merge two records together. For merging many identical records, instead
@@ -155,3 +157,43 @@ export const withDefaults: <
 >(
   defaults: PT,
 ) => (t: T) => Readonly<PT & T> = merge
+
+type MaybePartial<A> = A | Partial<A>
+
+type RenameKey<
+  A extends RR.ReadonlyRecord<string, unknown>,
+  I extends keyof A,
+  J extends string,
+> = Readonly<{
+  [K in keyof A as K extends I ? J : K]: A[K]
+}>
+
+/**
+ * Rename a key in a struct, preserving the value. If the new key already
+ * exists, the old key will be overwritten. Optionality is preserved.
+ *
+ * @example
+ * import { renameKey } from 'fp-ts-std/Struct'
+ *
+ * type Foo = { a: string; b: number }
+ * type Bar = { a: string; c: number }
+ *
+ * const fooBar: (x: Foo) => Bar = renameKey('b')('c')
+ *
+ * @since 0.15.0
+ */
+export const renameKey =
+  <I extends string>(oldK: I) =>
+  <J extends string>(newK: J) =>
+  // Can't be pointfree, need references to `A`.
+  <A extends MaybePartial<RR.ReadonlyRecord<I, unknown>>>(
+    x: A,
+  ): RenameKey<A, I, J> => {
+    const newO = (x: A) => (oldK in x ? { [newK]: x[oldK] } : {})
+
+    return pipe(
+      x,
+      fanout(omitFrom<A>()([oldK]))(newO),
+      uncurry2(merge),
+    ) as unknown as RenameKey<A, I, J>
+  }
