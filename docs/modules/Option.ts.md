@@ -150,28 +150,30 @@ Added in v0.12.0
 
 ## pureIf
 
-Conditionally lifts a value to `Some` or returns `None`.
+Conditionally lifts a value to `Some` or returns `None`. The lazy value is
+evaluated only if the condition passes.
 
 **Signature**
 
 ```ts
-export declare const pureIf: (x: boolean) => <A>(y: A) => Option<A>
+export declare const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A>
 ```
 
 ```hs
-pureIf :: boolean -> a -> Option a
+pureIf :: boolean -> Lazy a -> Option a
 ```
 
 **Example**
 
 ```ts
+import { constant } from 'fp-ts/function'
 import { pureIf } from 'fp-ts-std/Option'
 import { Predicate } from 'fp-ts/Predicate'
 
 const person = { name: 'Hodor', age: 40 }
 const isMagicNumber: Predicate<number> = (n) => n === 42
 
-const mname = pureIf(isMagicNumber(person.age))(person.name)
+const mname = pureIf(isMagicNumber(person.age))(constant(person.name))
 ```
 
 Added in v0.13.0

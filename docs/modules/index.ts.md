@@ -29,11 +29,13 @@ Added in v0.5.1
   - [io](#io)
   - [json](#json)
   - [lazy](#lazy)
+  - [monad](#monad)
   - [monoid](#monoid)
   - [number](#number)
   - [option](#option)
   - [ordering](#ordering)
   - [predicate](#predicate)
+  - [readerTaskEither](#readertaskeither)
   - [readonlyArray](#readonlyarray)
   - [readonlyRecord](#readonlyrecord)
   - [readonlyStruct](#readonlystruct)
@@ -276,6 +278,22 @@ lazy :: typeof lazy
 
 Added in v0.12.0
 
+## monad
+
+A re-export of the `fp-ts-std/Monad` module.
+
+**Signature**
+
+```ts
+export declare const monad: typeof monad
+```
+
+```hs
+monad :: typeof monad
+```
+
+Added in v0.15.0
+
 ## monoid
 
 A re-export of the `fp-ts-std/Monoid` module.
@@ -355,6 +373,22 @@ predicate :: typeof predicate
 ```
 
 Added in v0.12.0
+
+## readerTaskEither
+
+A re-export of the `fp-ts-std/ReaderTaskEither` module.
+
+**Signature**
+
+```ts
+export declare const readerTaskEither: typeof readerTaskEither
+```
+
+```hs
+readerTaskEither :: typeof readerTaskEither
+```
+
+Added in v0.15.0
 
 ## readonlyArray
 

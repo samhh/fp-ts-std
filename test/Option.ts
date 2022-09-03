@@ -11,7 +11,7 @@ import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
-import { pipe } from "fp-ts/function"
+import { constant, pipe } from "fp-ts/function"
 
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
   fc.oneof(x.map(O.some), fc.constant(O.none))
@@ -116,13 +116,17 @@ describe("Option", () => {
 
     it("returns constant empty/zero on false", () => {
       fc.assert(
-        fc.property(fc.anything(), x => expect(f(false)(x)).toEqual(O.none)),
+        fc.property(fc.anything(), x =>
+          expect(f(false)(constant(x))).toEqual(O.none),
+        ),
       )
     })
 
     it("returns lifted input on true", () => {
       fc.assert(
-        fc.property(fc.anything(), x => expect(f(true)(x)).toEqual(O.some(x))),
+        fc.property(fc.anything(), x =>
+          expect(f(true)(constant(x))).toEqual(O.some(x)),
+        ),
       )
     })
   })
