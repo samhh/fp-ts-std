@@ -186,7 +186,7 @@ Lift a number to the `Milliseconds` newtype.
 **Signature**
 
 ```ts
-export declare const mkMilliseconds: (a: number) => Milliseconds
+export declare const mkMilliseconds: (n: number) => Milliseconds
 ```
 
 ```hs
@@ -316,7 +316,7 @@ Unwrap a `Milliseconds` newtype back to its underlying number representation.
 **Signature**
 
 ```ts
-export declare const unMilliseconds: (s: Milliseconds) => number
+export declare const unMilliseconds: (ms: Milliseconds) => number
 ```
 
 ```hs
