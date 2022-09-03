@@ -18,6 +18,7 @@ Added in v0.14.0
 - [utils](#utils)
   - [merge](#merge)
   - [omit](#omit)
+  - [omitFrom](#omitfrom)
   - [pick](#pick)
   - [pickFrom](#pickfrom)
   - [withDefaults](#withdefaults)
@@ -79,6 +80,35 @@ assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] }
 ```
 
 Added in v0.14.0
+
+## omitFrom
+
+Like `omit`, but allows you to specify the input record upfront.
+
+**Signature**
+
+```ts
+export declare const omitFrom: <A>() => <K extends keyof A & string>(
+  ks: readonly K[]
+) => (x: A) => Pick<A, Exclude<keyof A, K>>
+```
+
+```hs
+omitFrom :: k extends ((keyof a) & string) => () -> Array k -> a -> Pick a (Exclude (keyof a) k)
+```
+
+**Example**
+
+```ts
+import { omitFrom } from 'fp-ts-std/ReadonlyStruct'
+
+type MyType = { a: number; b: string; c: ReadonlyArray<boolean> }
+const sansB = omitFrom<MyType>()(['b'])
+
+assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
+```
+
+Added in v0.15.0
 
 ## pick
 

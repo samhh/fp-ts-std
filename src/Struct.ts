@@ -97,6 +97,23 @@ export const omit =
     return y as Omit<A, K>
   }
 
+/**
+ * Like `omit`, but allows you to specify the input record upfront.
+ *
+ * @example
+ * import { omitFrom } from 'fp-ts-std/Struct'
+ *
+ * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> }
+ * const sansB = omitFrom<MyType>()(['b'])
+ *
+ * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
+ *
+ * @since 0.15.0
+ */
+export const omitFrom = <A>(): (<K extends keyof A & string>(
+  ks: Array<K>,
+) => (x: A) => Omit<A, K>) => omit
+
 type OptionalKeys<O extends object> = {
   [K in keyof O]-?: Record<string, unknown> extends Pick<O, K> ? K : never
 }[keyof O]

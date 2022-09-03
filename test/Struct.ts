@@ -1,4 +1,11 @@
-import { pick, pickFrom, omit, merge, withDefaults } from "../src/Struct"
+import {
+  pick,
+  pickFrom,
+  omit,
+  omitFrom,
+  merge,
+  withDefaults,
+} from "../src/Struct"
 import { pipe } from "fp-ts/function"
 
 describe("Struct", () => {
@@ -62,6 +69,25 @@ describe("Struct", () => {
       const after: Omit<Thing, "id"> = { name: "Ragnor", foo: "Bar" }
 
       expect(f(["id", "bar"])(before)).toEqual(after)
+    })
+  })
+
+  describe("omitFrom", () => {
+    type Thing = { name: string; id: string; foo: string }
+    const f = omitFrom<Thing>()
+
+    it("omits multiple keys", () => {
+      const before: Thing = { name: "Ragnor", id: "789", foo: "Bar" }
+      const after: Omit<Thing, "id" | "foo"> = { name: "Ragnor" }
+
+      expect(f(["id", "foo"])(before)).toEqual(after)
+    })
+
+    it("typechecks missing keys", () => {
+      const before: Thing = { name: "Ragnor", id: "789", foo: "Bar" }
+      const after: Omit<Thing, "id"> = { name: "Ragnor", foo: "Bar" }
+
+      expect(omit(["id", "bar"])(before)).toEqual(after)
     })
   })
 
