@@ -96,3 +96,30 @@ export const omit =
 
     return y as Omit<A, K>
   }
+
+type OptionalKeys<O extends object> = {
+  [K in keyof O]-?: Record<string, unknown> extends Pick<O, K> ? K : never
+}[keyof O]
+
+type Exact<A extends object, B extends A> = A &
+  Record<Exclude<keyof B, keyof A>, never>
+
+/**
+ * Provide default values for an object with optional properties.
+ *
+ * @example
+ * import { withDefaults } from 'fp-ts-std/Struct';
+ * import { pipe } from 'fp-ts/function';
+ *
+ * const aOptB: { a: number; b?: string } = { a: 1 };
+ *
+ * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' });
+ *
+ * @since 0.15.0
+ */
+export const withDefaults: <
+  T extends object,
+  PT extends Exact<{ [K in OptionalKeys<T>]-?: Exclude<T[K], undefined> }, PT>,
+>(
+  defaults: PT,
+) => (t: T) => PT & T = merge
