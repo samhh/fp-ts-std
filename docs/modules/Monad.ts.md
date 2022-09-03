@@ -15,6 +15,7 @@ Added in v0.15.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [allPassM](#allpassm)
   - [andM](#andm)
   - [ifM](#ifm)
   - [orM](#orm)
@@ -22,6 +23,58 @@ Added in v0.15.0
 ---
 
 # utils
+
+## allPassM
+
+Monadic `allPass`. Short-circuits.
+
+**Signature**
+
+```ts
+export declare function allPassM<M extends URIS4>(
+  M: Monad4<M>
+): <S, R, E, A>(f: Array<(x: A) => Kind4<M, S, R, E, boolean>>) => (x: A) => Kind4<M, S, R, E, boolean>
+export declare function allPassM<M extends URIS3>(
+  M: Monad3<M>
+): <R, E, A>(f: Array<(x: A) => Kind3<M, R, E, boolean>>) => (x: A) => Kind3<M, R, E, boolean>
+export declare function allPassM<M extends URIS3, E>(
+  M: Monad3C<M, E>
+): <R, A>(f: Array<(x: A) => Kind3<M, R, E, boolean>>) => (x: A) => Kind3<M, R, E, boolean>
+export declare function allPassM<M extends URIS2>(
+  M: Monad2<M>
+): <E, A>(f: Array<(x: A) => Kind2<M, E, boolean>>) => (x: A) => Kind2<M, E, boolean>
+export declare function allPassM<M extends URIS2, E>(
+  M: Monad2C<M, E>
+): <A>(f: Array<(x: A) => Kind2<M, E, boolean>>) => (x: A) => Kind2<M, E, boolean>
+export declare function allPassM<M extends URIS>(
+  M: Monad1<M>
+): <A>(f: Array<(x: A) => Kind<M, boolean>>) => (x: A) => Kind<M, boolean>
+```
+
+```hs
+allPassM :: m extends URIS4 => Monad4 m -> Array (a -> (Kind4 m s r e boolean)) -> a -> Kind4 m s r e boolean
+allPassM :: m extends URIS3 => ((Monad3 m) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
+allPassM :: m extends URIS3 => ((Monad3C m e) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
+allPassM :: m extends URIS2 => ((Monad2 m) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
+allPassM :: m extends URIS2 => ((Monad2C m e) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
+allPassM :: m extends URIS => ((Monad1 m) -> Array (a -> (Kind m boolean)) -> a -> Kind m boolean)
+```
+
+**Example**
+
+```ts
+import { constant } from 'fp-ts/function'
+import { allPassM } from 'fp-ts-std/Monad'
+import * as IO from 'fp-ts/IO'
+import { execute } from 'fp-ts-std/IO'
+
+const f = allPassM(IO.Monad)
+
+assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(true))])('foo')), true)
+assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(false))])('foo')), false)
+```
+
+Added in v0.15.0
 
 ## andM
 

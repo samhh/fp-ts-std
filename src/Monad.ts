@@ -24,6 +24,8 @@ import {
   Monad3C,
   Monad4,
 } from "fp-ts/Monad"
+import { pipe } from "fp-ts/function"
+import * as A from "fp-ts/Array"
 
 /**
  * Monadic if/then/else. Only executes the relevant action.
@@ -177,4 +179,58 @@ export function orM<M>(
   // Can't reuse `ifM` here, unsure why:
   //   ifM(M)(x)(M.of(true))(y)
   return x => y => M.chain(x, b => (b ? M.of(true) : y))
+}
+
+/**
+ * Monadic `allPass`. Short-circuits.
+ *
+ * @example
+ * import { constant } from 'fp-ts/function'
+ * import { allPassM } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
+ *
+ * const f = allPassM(IO.Monad)
+ *
+ * assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(true))])('foo')), true)
+ * assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(false))])('foo')), false)
+ *
+ * @since 0.15.0
+ */
+export function allPassM<M extends URIS4>(
+  M: Monad4<M>,
+): <S, R, E, A>(
+  f: Array<(x: A) => Kind4<M, S, R, E, boolean>>,
+) => (x: A) => Kind4<M, S, R, E, boolean>
+export function allPassM<M extends URIS3>(
+  M: Monad3<M>,
+): <R, E, A>(
+  f: Array<(x: A) => Kind3<M, R, E, boolean>>,
+) => (x: A) => Kind3<M, R, E, boolean>
+export function allPassM<M extends URIS3, E>(
+  M: Monad3C<M, E>,
+): <R, A>(
+  f: Array<(x: A) => Kind3<M, R, E, boolean>>,
+) => (x: A) => Kind3<M, R, E, boolean>
+export function allPassM<M extends URIS2>(
+  M: Monad2<M>,
+): <E, A>(
+  f: Array<(x: A) => Kind2<M, E, boolean>>,
+) => (x: A) => Kind2<M, E, boolean>
+export function allPassM<M extends URIS2, E>(
+  M: Monad2C<M, E>,
+): <A>(
+  f: Array<(x: A) => Kind2<M, E, boolean>>,
+) => (x: A) => Kind2<M, E, boolean>
+export function allPassM<M extends URIS>(
+  M: Monad1<M>,
+): <A>(f: Array<(x: A) => Kind<M, boolean>>) => (x: A) => Kind<M, boolean>
+export function allPassM<M>(
+  M: Monad<M>,
+): <A>(f: Array<(x: A) => HKT<M, boolean>>) => (x: A) => HKT<M, boolean> {
+  return fs => x =>
+    pipe(
+      fs,
+      A.reduce(M.of(true), (m, f) => M.chain(m, b => (b ? f(x) : M.of(false)))),
+    )
 }
