@@ -344,7 +344,7 @@ describe("String", () => {
     it("does not modify the number at all", () => {
       fc.assert(
         fc.property(
-          fc.oneof(fc.integer(), fc.float()),
+          fc.oneof(fc.integer(), fc.float({ noNaN: true })),
           n => n === Number(f(n)),
         ),
       )
