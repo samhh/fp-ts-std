@@ -234,3 +234,57 @@ export function allPassM<M>(
       A.reduce(M.of(true), (m, f) => M.chain(m, b => (b ? f(x) : M.of(false)))),
     )
 }
+
+/**
+ * Monadic `anyPass`. Short-circuits.
+ *
+ * @example
+ * import { constant } from 'fp-ts/function'
+ * import { anyPassM } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
+ *
+ * const f = anyPassM(IO.Monad)
+ *
+ * assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(false))])('foo')), true)
+ * assert.strictEqual(execute(f([constant(IO.of(false)), constant(IO.of(false))])('foo')), false)
+ *
+ * @since 0.15.0
+ */
+export function anyPassM<M extends URIS4>(
+  M: Monad4<M>,
+): <S, R, E, A>(
+  f: Array<(x: A) => Kind4<M, S, R, E, boolean>>,
+) => (x: A) => Kind4<M, S, R, E, boolean>
+export function anyPassM<M extends URIS3>(
+  M: Monad3<M>,
+): <R, E, A>(
+  f: Array<(x: A) => Kind3<M, R, E, boolean>>,
+) => (x: A) => Kind3<M, R, E, boolean>
+export function anyPassM<M extends URIS3, E>(
+  M: Monad3C<M, E>,
+): <R, A>(
+  f: Array<(x: A) => Kind3<M, R, E, boolean>>,
+) => (x: A) => Kind3<M, R, E, boolean>
+export function anyPassM<M extends URIS2>(
+  M: Monad2<M>,
+): <E, A>(
+  f: Array<(x: A) => Kind2<M, E, boolean>>,
+) => (x: A) => Kind2<M, E, boolean>
+export function anyPassM<M extends URIS2, E>(
+  M: Monad2C<M, E>,
+): <A>(
+  f: Array<(x: A) => Kind2<M, E, boolean>>,
+) => (x: A) => Kind2<M, E, boolean>
+export function anyPassM<M extends URIS>(
+  M: Monad1<M>,
+): <A>(f: Array<(x: A) => Kind<M, boolean>>) => (x: A) => Kind<M, boolean>
+export function anyPassM<M>(
+  M: Monad<M>,
+): <A>(f: Array<(x: A) => HKT<M, boolean>>) => (x: A) => HKT<M, boolean> {
+  return fs => x =>
+    pipe(
+      fs,
+      A.reduce(M.of(false), (m, f) => M.chain(m, b => (b ? M.of(true) : f(x)))),
+    )
+}
