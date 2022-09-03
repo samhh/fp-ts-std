@@ -6,7 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `Monad` module.
 - Add `ReaderTaskEither` module.
-- Add `altAllBy` to `Alternative`.
+- Add `altAllBy` to `Alternative` and `Option`.
 - Add `allM` and `anyM` to `Array` and `ReadonlyArray`.
 - Add `fanout` to `Tuple`.
 - Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.

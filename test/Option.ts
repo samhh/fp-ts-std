@@ -6,12 +6,14 @@ import {
   memptyWhen,
   memptyUnless,
   pureIf,
+  altAllBy,
 } from "../src/Option"
 import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
+import { Lazy } from "../src/Lazy"
 
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
   fc.oneof(x.map(O.some), fc.constant(O.none))
@@ -131,5 +133,57 @@ describe("Option", () => {
         ),
       )
     })
+  })
+
+  describe("altAllBy", () => {
+    const f = altAllBy
+
+    it("returns constant empty on empty input", () => {
+      fc.assert(
+        fc.property(fc.anything(), x =>
+          expect(f([])(constant(x))).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("returns constant empty on all-empty input", () => {
+      fc.assert(
+        fc.property(fc.anything(), x =>
+          expect(
+            f([constant(O.none), constant(O.none), constant(O.none)])(
+              constant(x),
+            ),
+          ).toEqual(O.none),
+        ),
+      )
+    })
+
+    it("returns left-most non-empty value", () => {
+      fc.assert(
+        fc.property(fc.anything(), fc.anything(), fc.anything(), (x, y, z) =>
+          expect(
+            f([constant(O.none), constant(O.some(x)), constant(O.some(y))])(
+              constant(z),
+            ),
+          ).toEqual(O.some(x)),
+        ),
+      )
+    })
+
+    /* eslint-disable functional/no-expression-statement */
+    it("short-circuits", () => {
+      let exe = false // eslint-disable-line functional/no-let
+      const g: Lazy<O.Option<string>> = () => {
+        exe = true
+        return O.some("bar")
+      }
+
+      expect(f([constant(O.some("foo")), g])("baz")).toEqual(O.some("foo"))
+      expect(exe).toBe(false)
+
+      expect(f([g, constant(O.some("foo"))])("baz")).toEqual(O.some("bar"))
+      expect(exe).toBe(true)
+    })
+    /* eslint-enable functional/no-expression-statement */
   })
 })

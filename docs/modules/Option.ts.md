@@ -15,6 +15,7 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [altAllBy](#altallby)
   - [invert](#invert)
   - [memptyUnless](#memptyunless)
   - [memptyWhen](#memptywhen)
@@ -26,6 +27,34 @@ Added in v0.1.0
 ---
 
 # utils
+
+## altAllBy
+
+Like `altAll`, but flaps an input across an array of functions to produce
+the `Option` values, short-circuiting upon a non-empty value. Useful given
+`Option`'s eagerness.
+
+**Signature**
+
+```ts
+export declare const altAllBy: <A, B>(fs: ((x: A) => Option<B>)[]) => (x: A) => Option<B>
+```
+
+```hs
+altAllBy :: Array ((a -> Option b)) -> a -> Option b
+```
+
+**Example**
+
+```ts
+import { constant } from 'fp-ts/function'
+import { altAllBy } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+
+assert.deepStrictEqual(altAllBy([constant(O.none), O.some])('foo'), O.some('foo'))
+```
+
+Added in v0.15.0
 
 ## invert
 

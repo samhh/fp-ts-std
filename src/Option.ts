@@ -11,7 +11,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import { constant, flow } from "fp-ts/function"
 import * as B from "fp-ts/boolean"
 import { invert as invertBool } from "./Boolean"
-import { pureIf as _pureIf } from "./Alternative"
+import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative"
 import { toMonoid as _toMonoid } from "./Monoid"
 import { Lazy } from "./Lazy"
 
@@ -157,3 +157,24 @@ export const memptyUnless: (
 export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
   O.Alternative,
 )
+
+/**
+ * Like `altAll`, but flaps an input across an array of functions to produce
+ * the `Option` values, short-circuiting upon a non-empty value. Useful given
+ * `Option`'s eagerness.
+ *
+ * @example
+ * import { constant } from 'fp-ts/function';
+ * import { altAllBy } from 'fp-ts-std/Option';
+ * import * as O from 'fp-ts/Option';
+ *
+ * assert.deepStrictEqual(
+ *   altAllBy([constant(O.none), O.some])('foo'),
+ *   O.some('foo'),
+ * );
+ *
+ * @since 0.15.0
+ */
+export const altAllBy: <A, B>(
+  fs: Array<(x: A) => Option<B>>,
+) => (x: A) => Option<B> = _altAllBy(O.Alternative)
