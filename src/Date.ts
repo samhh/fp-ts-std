@@ -74,7 +74,7 @@ export const isoMilliseconds = iso<Milliseconds>()
  *
  * @since 0.7.0
  */
-export const mkMilliseconds: (n: number) => Milliseconds = pack<Milliseconds>
+export const mkMilliseconds: (n: number) => Milliseconds = pack
 
 /**
  * Unwrap a `Milliseconds` newtype back to its underlying number representation.
