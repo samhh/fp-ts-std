@@ -2,8 +2,8 @@
 
 import * as IO from "fp-ts/IO"
 import { constant, constVoid } from "fp-ts/function"
-import { ifM, andM, orM, allPassM, anyPassM } from "../src/Monad"
-import { allPass, anyPass } from "../src/Predicate"
+import { ifM, andM, orM, allPassM, anyPassM, nonePassM } from "../src/Monad"
+import { allPass, anyPass, nonePass } from "../src/Predicate"
 import { flip } from "../src/Function"
 
 type IO<A> = IO.IO<A>
@@ -137,6 +137,46 @@ describe("Monad", () => {
     it("equivalent to lifted anyPass", () => {
       const g = flip(f)("foo")
       const h = flip(anyPass)("foo")
+
+      expect(g([constant(IO.of(true)), constant(IO.of(true))])()).toBe(
+        h([constant(true), constant(true)]),
+      )
+      expect(g([constant(IO.of(true)), constant(IO.of(false))])()).toBe(
+        h([constant(true), constant(false)]),
+      )
+      expect(g([constant(IO.of(false)), constant(IO.of(true))])()).toBe(
+        h([constant(false), constant(true)]),
+      )
+      expect(g([constant(IO.of(false)), constant(IO.of(false))])()).toBe(
+        h([constant(false), constant(false)]),
+      )
+    })
+
+    it("short-circuits, including the predicate", () => {
+      let exe = false // eslint-disable-line functional/no-let
+
+      const set = (): IO<boolean> => {
+        exe = true
+        return () => {
+          exe = true
+          return false
+        }
+      }
+
+      f([constant(IO.of(true)), set])("foo")()
+      expect(exe).toBe(false)
+
+      f([set, constant(IO.of(true))])("foo")()
+      expect(exe).toBe(true)
+    })
+  })
+
+  describe("nonePassM", () => {
+    const f = nonePassM(IO.Monad)
+
+    it("equivalent to lifted nonePass", () => {
+      const g = flip(f)("foo")
+      const h = flip(nonePass)("foo")
 
       expect(g([constant(IO.of(true)), constant(IO.of(true))])()).toBe(
         h([constant(true), constant(true)]),
