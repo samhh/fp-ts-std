@@ -16,6 +16,7 @@ type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { construct, invokeOn, is } from "./Function"
+import { pack, unpack } from "./Newtype"
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an
@@ -73,14 +74,14 @@ export const isoMilliseconds = iso<Milliseconds>()
  *
  * @since 0.7.0
  */
-export const mkMilliseconds = isoMilliseconds.wrap
+export const mkMilliseconds: (n: number) => Milliseconds = pack<Milliseconds>
 
 /**
  * Unwrap a `Milliseconds` newtype back to its underlying number representation.
  *
  * @since 0.7.0
  */
-export const unMilliseconds = isoMilliseconds.unwrap
+export const unMilliseconds: (ms: Milliseconds) => number = unpack
 
 /**
  * Get a `Date` from `Milliseconds`.
