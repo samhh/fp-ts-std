@@ -18,11 +18,13 @@ import * as function_ from "./Function"
 import * as io from "./IO"
 import * as json from "./JSON"
 import * as lazy from "./Lazy"
+import * as monad from "./Monad"
 import * as monoid from "./Monoid"
 import * as number from "./Number"
 import * as option from "./Option"
 import * as ordering from "./Ordering"
 import * as predicate from "./Predicate"
+import * as readerTaskEither from "./ReaderTaskEither"
 import * as readonlyArray from "./ReadonlyArray"
 import * as readonlyRecord from "./ReadonlyRecord"
 import * as readonlyStruct from "./ReadonlyStruct"
@@ -123,6 +125,12 @@ export {
    */
   lazy,
   /**
+   * A re-export of the `fp-ts-std/Monad` module.
+   *
+   * @since 0.15.0
+   */
+  monad,
+  /**
    * A re-export of the `fp-ts-std/Monoid` module.
    *
    * @since 0.12.0
@@ -152,6 +160,12 @@ export {
    * @since 0.12.0
    */
   predicate,
+  /**
+   * A re-export of the `fp-ts-std/ReaderTaskEither` module.
+   *
+   * @since 0.15.0
+   */
+  readerTaskEither,
   /**
    * A re-export of the `fp-ts-std/ReadonlyArray` module.
    *
