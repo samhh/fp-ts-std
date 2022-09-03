@@ -23,6 +23,7 @@ import { fromNumber } from "../src/String"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import * as Pred from "fp-ts/Predicate"
+import { Predicate } from "fp-ts/Predicate"
 
 describe("Number", () => {
   describe("add", () => {
@@ -119,9 +120,16 @@ describe("Number", () => {
 
     it("returns some for floating point number", () => {
       expect(f("3.3")).toStrictEqual(O.some(3.3))
+
+      // Negative zero isn't reversible below via `fromNumber`.
+      const isNegativeZero: Predicate<number> = n => Object.is(n, -0)
+      expect(f("0")).toStrictEqual(O.some(0))
+      expect(f("-0")).toStrictEqual(O.some(-0))
+
       fc.assert(
-        fc.property(fc.float({ noNaN: true }), x =>
-          expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
+        fc.property(
+          fc.float({ noNaN: true }).filter(Pred.not(isNegativeZero)),
+          x => expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
         ),
       )
     })
