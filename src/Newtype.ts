@@ -22,6 +22,7 @@ import { Functor, Functor1, Functor2, Functor3, Functor4 } from "fp-ts/Functor"
 import { Newtype, iso } from "newtype-ts"
 import { pipe } from "fp-ts/function"
 import { Endomorphism } from "fp-ts/Endomorphism"
+import * as Id from "fp-ts/Identity"
 
 /**
  * Pack a value into a newtype.
@@ -113,7 +114,6 @@ export function overF<F>(
  *
  * @since 0.15.0
  */
-export const over =
-  <A>(f: Endomorphism<A>) =>
-  <B extends Newtype<unknown, A>>(x: B): B =>
-    pipe(x, unpack, f, pack<B>)
+export const over: <A>(
+  f: Endomorphism<A>,
+) => <B extends Newtype<unknown, A>>(x: B) => B = overF(Id.Functor)
