@@ -87,5 +87,12 @@ describe("Struct", () => {
 
       expect(y).toEqual({ a: 1, b: "foo" })
     })
+
+    it("preserves preexisting optional properties", () => {
+      const x: { a: number; b?: string } = { a: 1, b: "foo" }
+      const y = pipe(x, withDefaults({ b: "bar" }))
+
+      expect(y).toEqual(x)
+    })
   })
 })
