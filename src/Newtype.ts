@@ -34,7 +34,7 @@ import * as Id from "fp-ts/Identity"
  * assert.strictEqual(
  *   pack<Milliseconds>(123),
  *   mkMilliseconds(123),
- * );
+ * )
  *
  * @since 0.15.0
  */
@@ -51,7 +51,7 @@ export const pack = <A extends Newtype<unknown, unknown> = never>(x: A["_A"]) =>
  * assert.strictEqual(
  *   unpack(mkMilliseconds(123)),
  *   123,
- * );
+ * )
  *
  * @since 0.15.0
  */
