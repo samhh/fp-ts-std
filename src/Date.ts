@@ -22,13 +22,13 @@ import { construct, invokeOn, is } from "./Function"
  * invalid `Date` being returned.
  *
  * @example
- * import { unsafeParseDate } from 'fp-ts-std/Date';
+ * import { unsafeParseDate } from 'fp-ts-std/Date'
  *
- * const valid = 0;
- * const invalid = 'this will not parse';
+ * const valid = 0
+ * const invalid = 'this will not parse'
  *
- * assert.strictEqual(unsafeParseDate(valid).getTime(), 0);
- * assert.strictEqual(unsafeParseDate(invalid).getTime(), NaN);
+ * assert.strictEqual(unsafeParseDate(valid).getTime(), 0)
+ * assert.strictEqual(unsafeParseDate(invalid).getTime(), NaN)
  *
  * @since 0.1.0
  */
@@ -96,11 +96,11 @@ export const fromMilliseconds: (x: Milliseconds) => Date = flow(
  * Get the time in milliseconds from a `Date`.
  *
  * @example
- * import { getTime } from 'fp-ts-std/Date';
+ * import { getTime } from 'fp-ts-std/Date'
  *
- * const d = new Date();
+ * const d = new Date()
  *
- * assert.strictEqual(getTime(d), d.getTime());
+ * assert.strictEqual(getTime(d), d.getTime())
  *
  * @since 0.1.0
  */
@@ -113,11 +113,11 @@ export const getTime: (x: Date) => Milliseconds = flow(
  * Returns a date as a string value in ISO format.
  *
  * @example
- * import { toISOString } from 'fp-ts-std/Date';
+ * import { toISOString } from 'fp-ts-std/Date'
  *
- * const d = new Date();
+ * const d = new Date()
  *
- * assert.strictEqual(toISOString(d), d.toISOString());
+ * assert.strictEqual(toISOString(d), d.toISOString())
  *
  * @since 0.1.0
  */
@@ -129,11 +129,11 @@ export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
  * Returns a date converted to a string using Universal Coordinated Time (UTC).
  *
  * @example
- * import { toUTCString } from 'fp-ts-std/Date';
+ * import { toUTCString } from 'fp-ts-std/Date'
  *
- * const d = new Date();
+ * const d = new Date()
  *
- * assert.strictEqual(toUTCString(d), d.toUTCString());
+ * assert.strictEqual(toUTCString(d), d.toUTCString())
  *
  * @since 0.14.0
  */
@@ -145,10 +145,10 @@ export const toUTCString: (x: Date) => string = invokeOn<Date>()("toUTCString")(
  * Check if a foreign value is a `Date`.
  *
  * @example
- * import { isDate } from 'fp-ts-std/Date';
+ * import { isDate } from 'fp-ts-std/Date'
  *
- * assert.strictEqual(isDate(new Date()), true);
- * assert.strictEqual(isDate({ not: { a: 'date' } }), false);
+ * assert.strictEqual(isDate(new Date()), true)
+ * assert.strictEqual(isDate({ not: { a: 'date' } }), false)
  *
  * @since 0.1.0
  */
@@ -158,13 +158,13 @@ export const isDate: Refinement<unknown, Date> = is(Date)
  * Check if a `Date` is actually valid. (We all love JavaScript, don't we?)
  *
  * @example
- * import { isValid } from 'fp-ts-std/Date';
+ * import { isValid } from 'fp-ts-std/Date'
  *
- * const valid = new Date();
- * const invalid = new Date('this will not parse');
+ * const valid = new Date()
+ * const invalid = new Date('this will not parse')
  *
- * assert.strictEqual(isValid(valid), true);
- * assert.strictEqual(isValid(invalid), false);
+ * assert.strictEqual(isValid(valid), true)
+ * assert.strictEqual(isValid(invalid), false)
  *
  * @since 0.1.0
  */
@@ -178,14 +178,14 @@ export const isValid: Predicate<Date> = flow(
  * Safely parse a date.
  *
  * @example
- * import { parseDate } from 'fp-ts-std/Date';
- * import * as O from 'fp-ts/Option';
+ * import { parseDate } from 'fp-ts-std/Date'
+ * import * as O from 'fp-ts/Option'
  *
- * const valid = 0;
- * const invalid = 'this will not parse';
+ * const valid = 0
+ * const invalid = 'this will not parse'
  *
- * assert.deepStrictEqual(parseDate(valid), O.some(new Date(valid)));
- * assert.deepStrictEqual(parseDate(invalid), O.none);
+ * assert.deepStrictEqual(parseDate(valid), O.some(new Date(valid)))
+ * assert.deepStrictEqual(parseDate(invalid), O.none)
  *
  * @since 0.1.0
  */

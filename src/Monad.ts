@@ -29,15 +29,15 @@ import {
  * Monadic if/then/else. Only executes the relevant action.
  *
  * @example
- * import { ifM } from 'fp-ts-std/Monad';
- * import * as IO from 'fp-ts/IO';
- * import { execute } from 'fp-ts-std/IO';
+ * import { ifM } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
  *
  * const f =
  *   ifM(IO.Monad)(IO.of(true))
- *     (IO.of('foo'))(IO.of('bar'));
+ *     (IO.of('foo'))(IO.of('bar'))
  *
- * assert.strictEqual(execute(f), 'foo');
+ * assert.strictEqual(execute(f), 'foo')
  *
  * @since 0.15.0
  */
@@ -81,14 +81,14 @@ export function ifM<M>(
  * Monadic &&. Short-circuits.
  *
  * @example
- * import { andM } from 'fp-ts-std/Monad';
- * import * as IO from 'fp-ts/IO';
- * import { execute } from 'fp-ts-std/IO';
+ * import { andM } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
  *
- * const f = andM(IO.Monad)(IO.of(true));
+ * const f = andM(IO.Monad)(IO.of(true))
  *
- * assert.strictEqual(execute(f(IO.of(true))), true);
- * assert.strictEqual(execute(f(IO.of(false))), false);
+ * assert.strictEqual(execute(f(IO.of(true))), true)
+ * assert.strictEqual(execute(f(IO.of(false))), false)
  *
  * @since 0.15.0
  */
@@ -132,14 +132,14 @@ export function andM<M>(
  * Monadic ||. Short-circuits.
  *
  * @example
- * import { orM } from 'fp-ts-std/Monad';
- * import * as IO from 'fp-ts/IO';
- * import { execute } from 'fp-ts-std/IO';
+ * import { orM } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
  *
- * const f = orM(IO.Monad)(IO.of(false));
+ * const f = orM(IO.Monad)(IO.of(false))
  *
- * assert.strictEqual(execute(f(IO.of(true))), true);
- * assert.strictEqual(execute(f(IO.of(false))), false);
+ * assert.strictEqual(execute(f(IO.of(true))), true)
+ * assert.strictEqual(execute(f(IO.of(false))), false)
  *
  * @since 0.15.0
  */

@@ -28,13 +28,13 @@ import { Refinement } from "fp-ts/Refinement"
  * Flip the function/argument order of a curried function.
  *
  * @example
- * import { flip } from 'fp-ts-std/Function';
+ * import { flip } from 'fp-ts-std/Function'
  *
- * const prepend = (x: string) => (y: string): string => x + y;
- * const append = flip(prepend);
+ * const prepend = (x: string) => (y: string): string => x + y
+ * const append = flip(prepend)
  *
- * assert.strictEqual(prepend('x')('y'), 'xy');
- * assert.strictEqual(append('x')('y'), 'yx');
+ * assert.strictEqual(prepend('x')('y'), 'xy')
+ * assert.strictEqual(append('x')('y'), 'yx')
  *
  * @since 0.1.0
  */
@@ -50,11 +50,11 @@ export const flip =
  * each iteration of the callback.
  *
  * @example
- * import * as A from 'fp-ts/Array';
- * import { withIndex } from 'fp-ts-std/Function';
+ * import * as A from 'fp-ts/Array'
+ * import { withIndex } from 'fp-ts-std/Function'
  *
- * const mapWithIndex = withIndex<number, number, number>(A.map);
- * assert.deepStrictEqual(mapWithIndex(i => x => x + i)([1, 2, 3]), [1, 3, 5]);
+ * const mapWithIndex = withIndex<number, number, number>(A.map)
+ * assert.deepStrictEqual(mapWithIndex(i => x => x + i)([1, 2, 3]), [1, 3, 5])
  *
  * @since 0.5.0
  */
@@ -74,11 +74,11 @@ export const withIndex: <A, B, C>(
  * instead of more appropriately an array.
  *
  * @example
- * import { unary } from 'fp-ts-std/Function';
+ * import { unary } from 'fp-ts-std/Function'
  *
- * const max = unary(Math.max);
+ * const max = unary(Math.max)
  *
- * assert.strictEqual(max([1, 3, 2]), 3);
+ * assert.strictEqual(max([1, 3, 2]), 3)
  *
  * @since 0.6.0
  */
@@ -95,19 +95,19 @@ export const unary =
  * This is analagous to Haskell's guards.
  *
  * @example
- * import { guard } from 'fp-ts-std/Function';
- * import { constant } from 'fp-ts/function';
+ * import { guard } from 'fp-ts-std/Function'
+ * import { constant } from 'fp-ts/function'
  *
  * const numSize = guard<number, string>([
  *     [n => n > 100, n => `${n} is large!`],
  *     [n => n > 50, n => `${n} is medium.`],
  *     [n => n > 0, n => `${n} is small...`],
- * ])(n => `${n} is not a positive number.`);
+ * ])(n => `${n} is not a positive number.`)
  *
- * assert.strictEqual(numSize(101), '101 is large!');
- * assert.strictEqual(numSize(99), '99 is medium.');
- * assert.strictEqual(numSize(5), '5 is small...');
- * assert.strictEqual(numSize(-3), '-3 is not a positive number.');
+ * assert.strictEqual(numSize(101), '101 is large!')
+ * assert.strictEqual(numSize(99), '99 is medium.')
+ * assert.strictEqual(numSize(5), '5 is small...')
+ * assert.strictEqual(numSize(-3), '-3 is not a positive number.')
  *
  * @since 0.6.0
  */
@@ -128,15 +128,15 @@ export const guard =
  * succeeds, else the second morphism.
  *
  * @example
- * import { ifElse } from 'fp-ts-std/Function';
- * import { increment, decrement } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { ifElse } from 'fp-ts-std/Function'
+ * import { increment, decrement } from 'fp-ts-std/Number'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isPositive: Predicate<number> = n => n > 0;
- * const normalise = ifElse(decrement)(increment)(isPositive);
+ * const isPositive: Predicate<number> = n => n > 0
+ * const normalise = ifElse(decrement)(increment)(isPositive)
  *
- * assert.strictEqual(normalise(-3), -2);
- * assert.strictEqual(normalise(3), 2);
+ * assert.strictEqual(normalise(-3), -2)
+ * assert.strictEqual(normalise(3), 2)
  *
  * @since 0.6.0
  */
@@ -151,15 +151,15 @@ export const ifElse =
  * Runs the provided morphism on the input value if the predicate fails.
  *
  * @example
- * import { unless } from 'fp-ts-std/Function';
- * import { increment } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { unless } from 'fp-ts-std/Function'
+ * import { increment } from 'fp-ts-std/Number'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
- * const ensureEven = unless(isEven)(increment);
+ * const isEven: Predicate<number> = n => n % 2 === 0
+ * const ensureEven = unless(isEven)(increment)
  *
- * assert.strictEqual(ensureEven(1), 2);
- * assert.strictEqual(ensureEven(2), 2);
+ * assert.strictEqual(ensureEven(1), 2)
+ * assert.strictEqual(ensureEven(2), 2)
  *
  * @since 0.6.0
  */
@@ -173,15 +173,15 @@ export const unless =
  * Runs the provided morphism on the input value if the predicate holds.
  *
  * @example
- * import { when } from 'fp-ts-std/Function';
- * import { increment } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { when } from 'fp-ts-std/Function'
+ * import { increment } from 'fp-ts-std/Number'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
- * const ensureOdd = when(isEven)(increment);
+ * const isEven: Predicate<number> = n => n % 2 === 0
+ * const ensureOdd = when(isEven)(increment)
  *
- * assert.strictEqual(ensureOdd(1), 1);
- * assert.strictEqual(ensureOdd(2), 3);
+ * assert.strictEqual(ensureOdd(1), 1)
+ * assert.strictEqual(ensureOdd(2), 3)
  *
  * @since 0.6.0
  */
@@ -194,14 +194,14 @@ export const when: <A>(
  * holds.
  *
  * @example
- * import { until } from 'fp-ts-std/Function';
- * import { increment } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { until } from 'fp-ts-std/Function'
+ * import { increment } from 'fp-ts-std/Number'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isOver100: Predicate<number> = n => n > 100;
- * const doubleUntilOver100 = until(isOver100)(n => n * 2);
+ * const isOver100: Predicate<number> = n => n > 100
+ * const doubleUntilOver100 = until(isOver100)(n => n * 2)
  *
- * assert.strictEqual(doubleUntilOver100(1), 128);
+ * assert.strictEqual(doubleUntilOver100(1), 128)
  *
  * @since 0.6.0
  */
@@ -216,13 +216,13 @@ export const until =
  * Wraps a constructor function for functional invocation.
  *
  * @example
- * import { construct } from 'fp-ts-std/Function';
+ * import { construct } from 'fp-ts-std/Function'
  *
- * const mkURL = construct(URL);
+ * const mkURL = construct(URL)
  *
- * const xs: [string, string] = ['/x/y/z.html', 'https://samhh.com'];
+ * const xs: [string, string] = ['/x/y/z.html', 'https://samhh.com']
  *
- * assert.deepStrictEqual(mkURL(xs), new URL(...xs));
+ * assert.deepStrictEqual(mkURL(xs), new URL(...xs))
  *
  * @since 0.7.0
  */
@@ -239,11 +239,11 @@ export const construct =
  * To write your own bindings more conveniently, check out `invokeOn`.
  *
  * @example
- * import { invoke } from 'fp-ts-std/Function';
+ * import { invoke } from 'fp-ts-std/Function'
  *
- * const f = invoke('padStart')([8, '.']);
+ * const f = invoke('padStart')([8, '.'])
  *
- * assert.strictEqual(f('hello'), '...hello');
+ * assert.strictEqual(f('hello'), '...hello')
  *
  * @since 0.12.0
  */
@@ -257,11 +257,11 @@ export const invoke =
  * `invoke` specialised to nullary methods.
  *
  * @example
- * import { invokeNullary } from 'fp-ts-std/Function';
+ * import { invokeNullary } from 'fp-ts-std/Function'
  *
- * const f = invokeNullary('trim');
+ * const f = invokeNullary('trim')
  *
- * assert.strictEqual(f(' hello '), 'hello');
+ * assert.strictEqual(f(' hello '), 'hello')
  *
  * @since 0.14.0
  */
@@ -275,12 +275,12 @@ export const invokeNullary: <A extends string>(
  * object-oriented methods in tandem with the tuple*N*T range of functions.
  *
  * @example
- * import { invokeOn, curry2T } from 'fp-ts-std/Function';
+ * import { invokeOn, curry2T } from 'fp-ts-std/Function'
  *
- * const padStart = curry2T(invokeOn<string>()('padStart'));
- * const x = 'hello';
+ * const padStart = curry2T(invokeOn<string>()('padStart'))
+ * const x = 'hello'
  *
- * assert.strictEqual(padStart(8)('.')(x), x.padStart(8, '.'));
+ * assert.strictEqual(padStart(8)('.')(x), x.padStart(8, '.'))
  *
  * @since 0.12.0
  */
@@ -316,21 +316,21 @@ export const invokeOn =
  * cache entries can be cleared from memory.
  *
  * @example
- * import { memoize } from 'fp-ts-std/Function';
- * import { add } from 'fp-ts-std/Number';
- * import { eqNumber } from 'fp-ts/Eq';
+ * import { memoize } from 'fp-ts-std/Function'
+ * import { add } from 'fp-ts-std/Number'
+ * import { eqNumber } from 'fp-ts/Eq'
  *
- * let runs = 0;
+ * let runs = 0
  * const f = memoize(eqNumber)(n => {
- *     runs++;
- *     return add(5)(n);
- * });
+ *     runs++
+ *     return add(5)(n)
+ * })
  *
- * assert.strictEqual(runs, 0);
- * assert.strictEqual(f(2), 7);
- * assert.strictEqual(runs, 1);
- * assert.strictEqual(f(2), 7);
- * assert.strictEqual(runs, 1);
+ * assert.strictEqual(runs, 0)
+ * assert.strictEqual(f(2), 7)
+ * assert.strictEqual(runs, 1)
+ * assert.strictEqual(f(2), 7)
+ * assert.strictEqual(runs, 1)
  *
  * @since 0.7.0
  */
@@ -353,12 +353,12 @@ export const memoize =
  * Curry a function with binary tuple input.
  *
  * @example
- * import { curry2T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry2T } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat2 = ([a, b]: [string, string]): string =>
- *      a + b;
- * assert.strictEqual(curry2T(concat2)('a')('b'), concat2(['a', 'b']));
+ *      a + b
+ * assert.strictEqual(curry2T(concat2)('a')('b'), concat2(['a', 'b']))
  *
  * @since 0.7.0
  */
@@ -372,12 +372,12 @@ export const curry2T =
  * Curry a function with binary input.
  *
  * @example
- * import { curry2 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry2 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat2 = (a: string, b: string): string =>
- *      a + b;
- * assert.strictEqual(curry2(concat2)('a')('b'), concat2('a', 'b'));
+ *      a + b
+ * assert.strictEqual(curry2(concat2)('a')('b'), concat2('a', 'b'))
  *
  * @since 0.7.0
  */
@@ -388,12 +388,12 @@ export const curry2: <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B) => C =
  * Curry a function with ternary tuple input.
  *
  * @example
- * import { curry3T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry3T } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat3 = ([a, b, c]: [string, string, string]): string =>
- *      a + b + c;
- * assert.strictEqual(curry3T(concat3)('a')('b')('c'), concat3(['a', 'b', 'c']));
+ *      a + b + c
+ * assert.strictEqual(curry3T(concat3)('a')('b')('c'), concat3(['a', 'b', 'c']))
  *
  * @since 0.7.0
  */
@@ -408,12 +408,12 @@ export const curry3T =
  * Curry a function with ternary input.
  *
  * @example
- * import { curry3 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry3 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat3 = (a: string, b: string, c: string): string =>
- *      a + b + c;
- * assert.strictEqual(curry3(concat3)('a')('b')('c'), concat3('a', 'b', 'c'));
+ *      a + b + c
+ * assert.strictEqual(curry3(concat3)('a')('b')('c'), concat3('a', 'b', 'c'))
  *
  * @since 0.7.0
  */
@@ -425,12 +425,12 @@ export const curry3: <A, B, C, D>(
  * Curry a function with quaternary tuple input.
  *
  * @example
- * import { curry4T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry4T } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat4 = ([a, b, c, d]: [string, string, string, string]): string =>
- *      a + b + c + d;
- * assert.strictEqual(curry4T(concat4)('a')('b')('c')('d'), concat4(['a', 'b', 'c', 'd']));
+ *      a + b + c + d
+ * assert.strictEqual(curry4T(concat4)('a')('b')('c')('d'), concat4(['a', 'b', 'c', 'd']))
  *
  * @since 0.7.0
  */
@@ -446,12 +446,12 @@ export const curry4T =
  * Curry a function with quaternary input.
  *
  * @example
- * import { curry4 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry4 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat4 = (a: string, b: string, c: string, d: string): string =>
- *      a + b + c + d;
- * assert.strictEqual(curry4(concat4)('a')('b')('c')('d'), concat4('a', 'b', 'c', 'd'));
+ *      a + b + c + d
+ * assert.strictEqual(curry4(concat4)('a')('b')('c')('d'), concat4('a', 'b', 'c', 'd'))
  *
  * @since 0.7.0
  */
@@ -463,12 +463,12 @@ export const curry4: <A, B, C, D, E>(
  * Curry a function with quinary tuple input.
  *
  * @example
- * import { curry5T } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry5T } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat5 = ([a, b, c, d, e]: [string, string, string, string, string]): string =>
- *      a + b + c + d + e;
- * assert.strictEqual(curry5T(concat5)('a')('b')('c')('d')('e'), concat5(['a', 'b', 'c', 'd', 'e']));
+ *      a + b + c + d + e
+ * assert.strictEqual(curry5T(concat5)('a')('b')('c')('d')('e'), concat5(['a', 'b', 'c', 'd', 'e']))
  *
  * @since 0.7.0
  */
@@ -485,12 +485,12 @@ export const curry5T =
  * Curry a function with quinary input.
  *
  * @example
- * import { curry5 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { curry5 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat5 = (a: string, b: string, c: string, d: string, e: string): string =>
- *      a + b + c + d + e;
- * assert.strictEqual(curry5(concat5)('a')('b')('c')('d')('e'), concat5('a', 'b', 'c', 'd', 'e'));
+ *      a + b + c + d + e
+ * assert.strictEqual(curry5(concat5)('a')('b')('c')('d')('e'), concat5('a', 'b', 'c', 'd', 'e'))
  *
  * @since 0.7.0
  */
@@ -502,12 +502,12 @@ export const curry5: <A, B, C, D, E, F>(
  * Uncurry a binary function.
  *
  * @example
- * import { uncurry2 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { uncurry2 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat2 = (a: string): Endomorphism<string> => b =>
- *      a + b;
- * assert.strictEqual(uncurry2(concat2)(['a', 'b']), concat2('a')('b'));
+ *      a + b
+ * assert.strictEqual(uncurry2(concat2)(['a', 'b']), concat2('a')('b'))
  *
  * @since 0.7.0
  */
@@ -520,12 +520,12 @@ export const uncurry2 =
  * Uncurry a ternary function.
  *
  * @example
- * import { uncurry3 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { uncurry3 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat3 = (a: string) => (b: string): Endomorphism<string> => c =>
- *      a + b + c;
- * assert.strictEqual(uncurry3(concat3)(['a', 'b', 'c']), concat3('a')('b')('c'));
+ *      a + b + c
+ * assert.strictEqual(uncurry3(concat3)(['a', 'b', 'c']), concat3('a')('b')('c'))
  *
  * @since 0.7.0
  */
@@ -538,12 +538,12 @@ export const uncurry3 =
  * Uncurry a quaternary function.
  *
  * @example
- * import { uncurry4 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { uncurry4 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat4 = (a: string) => (b: string) => (c: string): Endomorphism<string> => d =>
- *      a + b + c + d;
- * assert.strictEqual(uncurry4(concat4)(['a', 'b', 'c', 'd']), concat4('a')('b')('c')('d'));
+ *      a + b + c + d
+ * assert.strictEqual(uncurry4(concat4)(['a', 'b', 'c', 'd']), concat4('a')('b')('c')('d'))
  *
  * @since 0.7.0
  */
@@ -556,12 +556,12 @@ export const uncurry4 =
  * Uncurry a quinary function.
  *
  * @example
- * import { uncurry5 } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
+ * import { uncurry5 } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
  *
  * const concat5 = (a: string) => (b: string) => (c: string) => (d: string): Endomorphism<string> => e =>
- *      a + b + c + d + e;
- * assert.strictEqual(uncurry5(concat5)(['a', 'b', 'c', 'd', 'e']), concat5('a')('b')('c')('d')('e'));
+ *      a + b + c + d + e
+ * assert.strictEqual(uncurry5(concat5)(['a', 'b', 'c', 'd', 'e']), concat5('a')('b')('c')('d')('e'))
  *
  * @since 0.7.0
  */
@@ -576,14 +576,14 @@ export const uncurry5 =
  * `fanout` but supporting variadic rather than binary tuples.
  *
  * @example
- * import { fork } from 'fp-ts-std/Function';
- * import { add } from 'fp-ts-std/Number';
- * import * as S from 'fp-ts-std/String';
+ * import { fork } from 'fp-ts-std/Function'
+ * import { add } from 'fp-ts-std/Number'
+ * import * as S from 'fp-ts-std/String'
  *
- * const add1 = add(1);
- * const add2 = add(2);
+ * const add1 = add(1)
+ * const add2 = add(2)
  *
- * assert.deepStrictEqual(fork([add1, S.fromNumber, add2])(0), [1, '0', 2]);
+ * assert.deepStrictEqual(fork([add1, S.fromNumber, add2])(0), [1, '0', 2])
  *
  * @since 0.11.0
  */
@@ -666,14 +666,14 @@ export function fork<A, B, C, D, E, F, G, H, I, J>(
  * return values are collected in a tuple and passed to the converging function.
  *
  * @example
- * import { converge } from 'fp-ts-std/Function';
- * import { flow, identity } from 'fp-ts/function';
- * import * as S from 'fp-ts-std/String';
- * import * as A from 'fp-ts-std/Array';
+ * import { converge } from 'fp-ts-std/Function'
+ * import { flow, identity } from 'fp-ts/function'
+ * import * as S from 'fp-ts-std/String'
+ * import * as A from 'fp-ts-std/Array'
  *
- * const f = converge(A.join(' '))([S.append('!'), identity, S.prepend('?')]);
+ * const f = converge(A.join(' '))([S.append('!'), identity, S.prepend('?')])
  *
- * assert.deepStrictEqual(f('hello'), 'hello! hello ?hello');
+ * assert.deepStrictEqual(f('hello'), 'hello! hello ?hello')
  *
  * @since 0.12.0
  */
@@ -692,12 +692,12 @@ export const converge =
  * absolutely must test a prototype.
  *
  * @example
- * import { is } from 'fp-ts-std/Function';
+ * import { is } from 'fp-ts-std/Function'
  *
- * const isString = is(String);
+ * const isString = is(String)
  *
- * assert.strictEqual(isString('ciao'), false);
- * assert.strictEqual(isString(new String('ciao')), true);
+ * assert.strictEqual(isString('ciao'), false)
+ * assert.strictEqual(isString(new String('ciao')), true)
  *
  * @since 0.12.0
  */
@@ -713,15 +713,15 @@ export const is =
  * Apply an array of endomorphisms from left-to-right.
  *
  * @example
- * import { applyEvery } from 'fp-ts-std/Function';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
- * import { increment, multiply } from 'fp-ts-std/Number';
+ * import { applyEvery } from 'fp-ts-std/Function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
+ * import { increment, multiply } from 'fp-ts-std/Number'
  *
- * const fs: Array<Endomorphism<number>> = [increment, multiply(3)];
- * const g = applyEvery(fs);
+ * const fs: Array<Endomorphism<number>> = [increment, multiply(3)]
+ * const g = applyEvery(fs)
  *
- * assert.deepStrictEqual(g(1), 6);
- * assert.deepStrictEqual(g(3), 12);
+ * assert.deepStrictEqual(g(1), 6)
+ * assert.deepStrictEqual(g(3), 12)
  *
  * @since 0.12.0
  */
@@ -733,17 +733,17 @@ export const applyEvery: <A>(fs: Array<Endomorphism<A>>) => Endomorphism<A> =
  * that are `None`.
  *
  * @example
- * import { applySomes } from 'fp-ts-std/Function';
- * import * as O from 'fp-ts/Option';
- * import { Option } from 'fp-ts/Option';
- * import { Endomorphism } from 'fp-ts/Endomorphism';
- * import { increment, multiply } from 'fp-ts-std/Number';
+ * import { applySomes } from 'fp-ts-std/Function'
+ * import * as O from 'fp-ts/Option'
+ * import { Option } from 'fp-ts/Option'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
+ * import { increment, multiply } from 'fp-ts-std/Number'
  *
- * const fs: Array<Option<Endomorphism<number>>> = [O.some(increment), O.none, O.some(multiply(3))];
- * const g = applySomes(fs);
+ * const fs: Array<Option<Endomorphism<number>>> = [O.some(increment), O.none, O.some(multiply(3))]
+ * const g = applySomes(fs)
  *
- * assert.deepStrictEqual(g(1), 6);
- * assert.deepStrictEqual(g(3), 12);
+ * assert.deepStrictEqual(g(1), 6)
+ * assert.deepStrictEqual(g(3), 12)
  *
  * @since 0.13.0
  */

@@ -16,9 +16,9 @@ import { construct, is } from "./Function"
  * Unsafely parse a `URL`, throwing on failure.
  *
  * @example
- * import { unsafeParse } from 'fp-ts-std/URL';
+ * import { unsafeParse } from 'fp-ts-std/URL'
  *
- * assert.deepStrictEqual(unsafeParse('https://samhh.com'), new URL('https://samhh.com'));
+ * assert.deepStrictEqual(unsafeParse('https://samhh.com'), new URL('https://samhh.com'))
  *
  * @since 0.1.0
  */
@@ -28,14 +28,14 @@ export const unsafeParse = (x: string): URL => pipe([x], construct(URL))
  * Safely parse a `URL`.
  *
  * @example
- * import { parse } from 'fp-ts-std/URL';
- * import * as E from 'fp-ts/Either';
- * import { constant } from 'fp-ts/function';
+ * import { parse } from 'fp-ts-std/URL'
+ * import * as E from 'fp-ts/Either'
+ * import { constant } from 'fp-ts/function'
  *
- * const f = parse(constant('e'));
+ * const f = parse(constant('e'))
  *
- * assert.deepStrictEqual(f('https://samhh.com'), E.right(new URL('https://samhh.com')));
- * assert.deepStrictEqual(f('invalid'), E.left('e'));
+ * assert.deepStrictEqual(f('https://samhh.com'), E.right(new URL('https://samhh.com')))
+ * assert.deepStrictEqual(f('invalid'), E.left('e'))
  *
  * @since 0.1.0
  */
@@ -55,11 +55,11 @@ export const parse =
  * Safely parse a `URL`, returning an `Option`.
  *
  * @example
- * import { parseO } from 'fp-ts-std/URL';
- * import * as O from 'fp-ts/Option';
+ * import { parseO } from 'fp-ts-std/URL'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(parseO('https://samhh.com'), O.some(new URL('https://samhh.com')));
- * assert.deepStrictEqual(parseO('invalid'), O.none);
+ * assert.deepStrictEqual(parseO('https://samhh.com'), O.some(new URL('https://samhh.com')))
+ * assert.deepStrictEqual(parseO('invalid'), O.none)
  *
  * @since 0.1.0
  */
@@ -72,10 +72,10 @@ export const parseO: (href: string) => Option<URL> = flow(
  * Refine a foreign value to `URL`.
  *
  * @example
- * import { isURL } from 'fp-ts-std/URL';
+ * import { isURL } from 'fp-ts-std/URL'
  *
- * assert.strictEqual(isURL(new URL('https://samhh.com')), true);
- * assert.strictEqual(isURL({ not: { a: 'url' } }), false);
+ * assert.strictEqual(isURL(new URL('https://samhh.com')), true)
+ * assert.strictEqual(isURL({ not: { a: 'url' } }), false)
  *
  * @since 0.1.0
  */

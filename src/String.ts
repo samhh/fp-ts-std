@@ -26,9 +26,9 @@ import { flip, invoke, when } from "./Function"
  * Convert a number to a string.
  *
  * @example
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * assert.strictEqual(fromNumber(3), '3');
+ * assert.strictEqual(fromNumber(3), '3')
  *
  * @since 0.1.0
  */
@@ -38,11 +38,11 @@ export const fromNumber: (x: number) => string = String
  * Prepend one string to another.
  *
  * @example
- * import { prepend } from 'fp-ts-std/String';
+ * import { prepend } from 'fp-ts-std/String'
  *
- * const prependShell = prepend('$ ');
+ * const prependShell = prepend('$ ')
  *
- * assert.strictEqual(prependShell('abc'), '$ abc');
+ * assert.strictEqual(prependShell('abc'), '$ abc')
  *
  * @since 0.1.0
  */
@@ -55,11 +55,11 @@ export const prepend =
  * Remove the beginning of a string, if it exists.
  *
  * @example
- * import { unprepend } from 'fp-ts-std/String';
+ * import { unprepend } from 'fp-ts-std/String'
  *
- * const unprependShell = unprepend('$ ');
+ * const unprependShell = unprepend('$ ')
  *
- * assert.strictEqual(unprependShell('$ abc'), 'abc');
+ * assert.strictEqual(unprependShell('$ abc'), 'abc')
  *
  * @since 0.1.0
  */
@@ -70,11 +70,11 @@ export const unprepend = (start: string): Endomorphism<string> =>
  * Append one string to another.
  *
  * @example
- * import { append } from 'fp-ts-std/String';
+ * import { append } from 'fp-ts-std/String'
  *
- * const withExt = append('.hs');
+ * const withExt = append('.hs')
  *
- * assert.strictEqual(withExt('File'), 'File.hs');
+ * assert.strictEqual(withExt('File'), 'File.hs')
  *
  * @since 0.1.0
  */
@@ -84,11 +84,11 @@ export const append: (appended: string) => Endomorphism<string> = flip(prepend)
  * Remove the end of a string, if it exists.
  *
  * @example
- * import { unappend } from 'fp-ts-std/String';
+ * import { unappend } from 'fp-ts-std/String'
  *
- * const withoutExt = unappend('.hs');
+ * const withoutExt = unappend('.hs')
  *
- * assert.strictEqual(withoutExt('File.hs'), 'File');
+ * assert.strictEqual(withoutExt('File.hs'), 'File')
  *
  * @since 0.1.0
  */
@@ -100,11 +100,11 @@ export const unappend = (end: string): Endomorphism<string> =>
  * same outer value.
  *
  * @example
- * import { surround } from 'fp-ts-std/String';
+ * import { surround } from 'fp-ts-std/String'
  *
- * const quote = surround('"');
+ * const quote = surround('"')
  *
- * assert.strictEqual(quote('abc'), '"abc"');
+ * assert.strictEqual(quote('abc'), '"abc"')
  *
  * @since 0.1.0
  */
@@ -115,11 +115,11 @@ export const surround = (x: string): Endomorphism<string> =>
  * Remove the start and end of a string, if they both exist.
  *
  * @example
- * import { unsurround } from 'fp-ts-std/String';
+ * import { unsurround } from 'fp-ts-std/String'
  *
- * const unquote = unsurround('"');
+ * const unquote = unsurround('"')
  *
- * assert.strictEqual(unquote('"abc"'), 'abc');
+ * assert.strictEqual(unquote('"abc"'), 'abc')
  *
  * @since 0.1.0
  */
@@ -137,9 +137,9 @@ export const unsurround = (x: string): Endomorphism<string> =>
  * If `n` is a float, it will be rounded down to the nearest integer.
  *
  * @example
- * import { takeLeft } from 'fp-ts-std/String';
+ * import { takeLeft } from 'fp-ts-std/String'
  *
- * assert.strictEqual(takeLeft(2)('abc'), 'ab');
+ * assert.strictEqual(takeLeft(2)('abc'), 'ab')
  *
  * @since 0.3.0
  */
@@ -157,9 +157,9 @@ export const takeLeft = (n: number): Endomorphism<string> =>
  * If `n` is a float, it will be rounded down to the nearest integer.
  *
  * @example
- * import { takeRight } from 'fp-ts-std/String';
+ * import { takeRight } from 'fp-ts-std/String'
  *
- * assert.strictEqual(takeRight(2)('abc'), 'bc');
+ * assert.strictEqual(takeRight(2)('abc'), 'bc')
  *
  * @since 0.3.0
  */
@@ -172,14 +172,14 @@ export const takeRight =
  * Functional wrapper around `String.prototype.match`.
  *
  * @example
- * import { match } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
- * import { flow } from 'fp-ts/function';
+ * import { match } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
+ * import { flow } from 'fp-ts/function'
  *
- * const f = flow(match(/^(\d)(\w)$/), O.map(xs => Array.from(xs)));
+ * const f = flow(match(/^(\d)(\w)$/), O.map(xs => Array.from(xs)))
  *
- * assert.deepStrictEqual(f('2e'), O.some(['2e', '2', 'e']));
- * assert.deepStrictEqual(f('foo'), O.none);
+ * assert.deepStrictEqual(f('2e'), O.some(['2e', '2', 'e']))
+ * assert.deepStrictEqual(f('foo'), O.none)
  *
  * @since 0.1.0
  */
@@ -192,17 +192,17 @@ export const match = (r: RegExp): ((x: string) => Option<RegExpMatchArray>) =>
  * If the provided `RegExp` is non-global, the function will return `None`.
  *
  * @example
- * import { matchAll } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
- * import * as NEA from 'fp-ts/NonEmptyArray';
- * import { flow } from 'fp-ts/function';
+ * import { matchAll } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
+ * import * as NEA from 'fp-ts/NonEmptyArray'
+ * import { flow } from 'fp-ts/function'
  *
  * const f = flow(
  *     matchAll(/t(e)(st(\d?))/g),
  *     O.map(NEA.map(xs => Array.from(xs))),
- * );
+ * )
  *
- * assert.deepStrictEqual(f('test1test2'), O.some([['test1', 'e', 'st1', '1'], ['test2', 'e', 'st2', '2']]));
+ * assert.deepStrictEqual(f('test1test2'), O.some([['test1', 'e', 'st1', '1'], ['test2', 'e', 'st2', '2']]))
  *
  * @since 0.5.0
  */
@@ -223,12 +223,12 @@ export const matchAll =
  * a string can be thought of merely as an array of characters.
  *
  * @example
- * import { under } from 'fp-ts-std/String';
- * import * as RA from 'fp-ts/ReadonlyArray';
+ * import { under } from 'fp-ts-std/String'
+ * import * as RA from 'fp-ts/ReadonlyArray'
  *
- * const filterOutX = under(RA.filter(x => x !== "x"));
+ * const filterOutX = under(RA.filter(x => x !== "x"))
  *
- * assert.strictEqual(filterOutX("axbxc"), "abc");
+ * assert.strictEqual(filterOutX("axbxc"), "abc")
  *
  * @since 0.7.0
  */
@@ -240,9 +240,9 @@ export const under = (
  * Reverse a string.
  *
  * @example
- * import { reverse } from 'fp-ts-std/String';
+ * import { reverse } from 'fp-ts-std/String'
  *
- * assert.strictEqual(reverse('abc'), 'cba');
+ * assert.strictEqual(reverse('abc'), 'cba')
  *
  * @since 0.3.0
  */
@@ -253,9 +253,9 @@ export const reverse: Endomorphism<string> = under(RA.reverse)
  * Split a string into substrings using any recognised newline as the separator.
  *
  * @example
- * import { lines } from 'fp-ts-std/String';
+ * import { lines } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(lines('a\nb\nc'), ['a', 'b', 'c']);
+ * assert.deepStrictEqual(lines('a\nb\nc'), ['a', 'b', 'c'])
  *
  * @since 0.1.0
  */
@@ -265,9 +265,9 @@ export const lines = S.split(/\r\n|\r|\n/)
  * Join newline-separated strings together.
  *
  * @example
- * import { unlines } from 'fp-ts-std/String';
+ * import { unlines } from 'fp-ts-std/String'
  *
- * assert.strictEqual(unlines(['a', 'b', 'c']), 'a\nb\nc');
+ * assert.strictEqual(unlines(['a', 'b', 'c']), 'a\nb\nc')
  *
  * @since 0.1.0
  */
@@ -277,12 +277,12 @@ export const unlines = join("\n")
  * A functional wrapper around `RegExp.prototype.test`.
  *
  * @example
- * import { test } from 'fp-ts-std/String';
+ * import { test } from 'fp-ts-std/String'
  *
- * const hasVowel = test(/(a|e|i|o|u)/);
+ * const hasVowel = test(/(a|e|i|o|u)/)
  *
- * assert.strictEqual(hasVowel('meow'), true);
- * assert.strictEqual(hasVowel('grrr'), false);
+ * assert.strictEqual(hasVowel('meow'), true)
+ * assert.strictEqual(hasVowel('grrr'), false)
  *
  * @since 0.1.0
  */
@@ -298,9 +298,9 @@ export const test =
  * `replace` in `fp-ts/string` instead.
  *
  * @example
- * import { replaceAll } from 'fp-ts-std/String';
+ * import { replaceAll } from 'fp-ts-std/String'
  *
- * assert.strictEqual(replaceAll('foo')('bar')('foo foo foo'), 'bar bar bar');
+ * assert.strictEqual(replaceAll('foo')('bar')('foo foo foo'), 'bar bar bar')
  *
  * @since 0.7.0
  */
@@ -322,9 +322,9 @@ export const replaceAll =
  * If `n` is a float, it will be rounded down to the nearest integer.
  *
  * @example
- * import { dropLeft } from 'fp-ts-std/String';
+ * import { dropLeft } from 'fp-ts-std/String'
  *
- * assert.strictEqual(dropLeft(2)('abc'), 'c');
+ * assert.strictEqual(dropLeft(2)('abc'), 'c')
  *
  * @since 0.6.0
  */
@@ -343,9 +343,9 @@ export const dropLeft = (n: number): Endomorphism<string> =>
  * If `n` is a float, it will be rounded down to the nearest integer.
  *
  * @example
- * import { dropRight } from 'fp-ts-std/String';
+ * import { dropRight } from 'fp-ts-std/String'
  *
- * assert.strictEqual(dropRight(2)('abc'), 'a');
+ * assert.strictEqual(dropRight(2)('abc'), 'a')
  *
  * @since 0.3.0
  */
@@ -359,9 +359,9 @@ export const dropRight =
  * specified predicate, creating a new string.
  *
  * @example
- * import { dropLeftWhile } from 'fp-ts-std/String';
+ * import { dropLeftWhile } from 'fp-ts-std/String'
  *
- * const dropFilename = dropLeftWhile(x => x !== '.');
+ * const dropFilename = dropLeftWhile(x => x !== '.')
  *
  * assert.strictEqual(dropFilename('File.hs'), '.hs')
  *
@@ -375,14 +375,14 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  * which all characters satisfy the specified predicate, creating a new string.
  *
  * @example
- * import { dropRightWhile } from 'fp-ts-std/String';
- * import { elemV } from 'fp-ts-std/Array';
- * import { eqString } from 'fp-ts/Eq';
+ * import { dropRightWhile } from 'fp-ts-std/String'
+ * import { elemV } from 'fp-ts-std/Array'
+ * import { eqString } from 'fp-ts/Eq'
  *
- * const isVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u']);
- * const dropRightVowels = dropRightWhile(isVowel);
+ * const isVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u'])
+ * const dropRightVowels = dropRightWhile(isVowel)
  *
- * assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell');
+ * assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
  *
  * @since 0.7.0
  */
@@ -393,11 +393,11 @@ export const dropRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  * Get the first character in a string, or `None` if the string is empty.
  *
  * @example
- * import { head } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
+ * import { head } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(head('abc'), O.some('a'));
- * assert.deepStrictEqual(head(''), O.none);
+ * assert.deepStrictEqual(head('abc'), O.some('a'))
+ * assert.deepStrictEqual(head(''), O.none)
  *
  * @since 0.6.0
  */
@@ -410,13 +410,13 @@ export const head: (x: string) => Option<string> = flow(
  * Get all but the first character of a string, or `None` if the string is empty.
  *
  * @example
- * import { tail } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
+ * import { tail } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(tail(''), O.none);
- * assert.deepStrictEqual(tail('a'), O.some(''));
- * assert.deepStrictEqual(tail('ab'), O.some('b'));
- * assert.deepStrictEqual(tail('abc'), O.some('bc'));
+ * assert.deepStrictEqual(tail(''), O.none)
+ * assert.deepStrictEqual(tail('a'), O.some(''))
+ * assert.deepStrictEqual(tail('ab'), O.some('b'))
+ * assert.deepStrictEqual(tail('abc'), O.some('bc'))
  *
  * @since 0.6.0
  */
@@ -429,11 +429,11 @@ export const tail: (x: string) => Option<string> = flow(
  * Get the last character in a string, or `None` if the string is empty.
  *
  * @example
- * import { last } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
+ * import { last } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(last('abc'), O.some('c'));
- * assert.deepStrictEqual(last(''), O.none);
+ * assert.deepStrictEqual(last('abc'), O.some('c'))
+ * assert.deepStrictEqual(last(''), O.none)
  *
  * @since 0.7.0
  */
@@ -446,13 +446,13 @@ export const last: (x: string) => Option<string> = flow(
  * Get all but the last character of a string, or `None` if the string is empty.
  *
  * @example
- * import { init } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
+ * import { init } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(init(''), O.none);
- * assert.deepStrictEqual(init('a'), O.some(''));
- * assert.deepStrictEqual(init('ab'), O.some('a'));
- * assert.deepStrictEqual(init('abc'), O.some('ab'));
+ * assert.deepStrictEqual(init(''), O.none)
+ * assert.deepStrictEqual(init('a'), O.some(''))
+ * assert.deepStrictEqual(init('ab'), O.some('a'))
+ * assert.deepStrictEqual(init('abc'), O.some('ab'))
  *
  * @since 0.7.0
  */
@@ -465,11 +465,11 @@ export const init: (x: string) => Option<string> = flow(
  * Attempt to access the character at the specified index of a string.
  *
  * @example
- * import { lookup } from 'fp-ts-std/String';
- * import * as O from 'fp-ts/Option';
+ * import { lookup } from 'fp-ts-std/String'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(lookup(0)(''), O.none);
- * assert.deepStrictEqual(lookup(0)('abc'), O.some('a'));
+ * assert.deepStrictEqual(lookup(0)(''), O.none)
+ * assert.deepStrictEqual(lookup(0)('abc'), O.some('a'))
  *
  * @since 0.7.0
  */
@@ -483,9 +483,9 @@ export const lookup =
  * specified predicate, creating a new string.
  *
  * @example
- * import { takeLeftWhile } from 'fp-ts-std/String';
+ * import { takeLeftWhile } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(takeLeftWhile(x => x !== 'c')('abcd'), 'ab');
+ * assert.deepStrictEqual(takeLeftWhile(x => x !== 'c')('abcd'), 'ab')
  *
  * @since 0.7.0
  */
@@ -499,9 +499,9 @@ export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
  * string.
  *
  * @example
- * import { takeRightWhile } from 'fp-ts-std/String';
+ * import { takeRightWhile } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(takeRightWhile(x => x !== 'b')('abcd'), 'cd');
+ * assert.deepStrictEqual(takeRightWhile(x => x !== 'b')('abcd'), 'cd')
  *
  * @since 0.7.0
  */
@@ -514,9 +514,9 @@ export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  *
  * @example
  *
- * import { splitAt } from 'fp-ts-std/String';
+ * import { splitAt } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(splitAt(1)("abc"), ["a", "bc"]);
+ * assert.deepStrictEqual(splitAt(1)("abc"), ["a", "bc"])
  *
  * @since 0.11.0
  */
@@ -531,11 +531,11 @@ export const splitAt =
  *
  * @example
  *
- * import { isAlpha } from 'fp-ts-std/String';
+ * import { isAlpha } from 'fp-ts-std/String'
  *
- * assert.strictEqual(isAlpha("abc"), true);
- * assert.strictEqual(isAlpha("123"), false);
- * assert.strictEqual(isAlpha("abc123"), false);
+ * assert.strictEqual(isAlpha("abc"), true)
+ * assert.strictEqual(isAlpha("123"), false)
+ * assert.strictEqual(isAlpha("abc123"), false)
  *
  * @since 0.11.0
  */
@@ -547,10 +547,10 @@ export const isAlpha: Predicate<string> = test(/^\p{Alpha}+$/u)
  *
  * @example
  *
- * import { isAlphaNum } from 'fp-ts-std/String';
+ * import { isAlphaNum } from 'fp-ts-std/String'
  *
- * assert.strictEqual(isAlphaNum("abc123"), true);
- * assert.strictEqual(isAlphaNum("abc123!"), false);
+ * assert.strictEqual(isAlphaNum("abc123"), true)
+ * assert.strictEqual(isAlphaNum("abc123!"), false)
  *
  * @since 0.11.0
  */
@@ -562,11 +562,11 @@ export const isAlphaNum: Predicate<string> = test(/^(\p{Alpha}|\p{Number})+$/u)
  *
  * @example
  *
- * import { isLower } from 'fp-ts-std/String';
+ * import { isLower } from 'fp-ts-std/String'
  *
- * assert.strictEqual(isLower("hello"), true);
- * assert.strictEqual(isLower("Hello"), false);
- * assert.strictEqual(isLower("hello1"), false);
+ * assert.strictEqual(isLower("hello"), true)
+ * assert.strictEqual(isLower("Hello"), false)
+ * assert.strictEqual(isLower("hello1"), false)
  *
  * @since 0.11.0
  */
@@ -578,11 +578,11 @@ export const isLower: Predicate<string> = test(/^\p{Lower}+$/u)
  *
  * @example
  *
- * import { isUpper } from 'fp-ts-std/String';
+ * import { isUpper } from 'fp-ts-std/String'
  *
- * assert.strictEqual(isUpper("HELLO"), true);
- * assert.strictEqual(isUpper("Hello"), false);
- * assert.strictEqual(isUpper("HELLO1"), false);
+ * assert.strictEqual(isUpper("HELLO"), true)
+ * assert.strictEqual(isUpper("Hello"), false)
+ * assert.strictEqual(isUpper("HELLO1"), false)
  *
  * @since 0.11.0
  */
@@ -594,11 +594,11 @@ export const isUpper: Predicate<string> = test(/^\p{Upper}+$/u)
  *
  * @example
  *
- * import { isSpace } from 'fp-ts-std/String';
+ * import { isSpace } from 'fp-ts-std/String'
  *
- * assert.strictEqual(isSpace(" "), true);
- * assert.strictEqual(isSpace("x"), false);
- * assert.strictEqual(isSpace("\n\t"), true);
+ * assert.strictEqual(isSpace(" "), true)
+ * assert.strictEqual(isSpace("x"), false)
+ * assert.strictEqual(isSpace("\n\t"), true)
  *
  * @since 0.13.0
  */
@@ -609,9 +609,9 @@ export const isSpace: Predicate<string> = test(/^\s+$/)
  * separator.
  *
  * @example
- * import { words } from 'fp-ts-std/String';
+ * import { words } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c']);
+ * assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c'])
  *
  * @since 0.14.0
  */
@@ -621,9 +621,9 @@ export const words = S.split(/\s/)
  * Join whitespace-separated strings together.
  *
  * @example
- * import { unwords } from 'fp-ts-std/String';
+ * import { unwords } from 'fp-ts-std/String'
  *
- * assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c');
+ * assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c')
  *
  * @since 0.14.0
  */

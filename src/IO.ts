@@ -16,22 +16,22 @@ type IO<A> = IO.IO<A>
  * value.
  *
  * @example
- * import { tap } from 'fp-ts-std/IO';
- * import * as IO from 'fp-ts/IO';
- * import { flow } from 'fp-ts/function';
+ * import { tap } from 'fp-ts-std/IO'
+ * import * as IO from 'fp-ts/IO'
+ * import { flow } from 'fp-ts/function'
  *
- * let x = 0;
+ * let x = 0
  * const mutate = (y: number): IO.IO<void> => () => { x = y }
  *
- * const double = (n: number): number => n * 2;
- * const toString = (n: number): string => String(n);
+ * const double = (n: number): number => n * 2
+ * const toString = (n: number): string => String(n)
  *
  * const doubledString: (n: number) => IO.IO<string> =
- *     flow(double, tap(mutate), IO.map(toString));
+ *     flow(double, tap(mutate), IO.map(toString))
  *
- * assert.strictEqual(x, 0);
- * assert.strictEqual(doubledString(2)(), '4');
- * assert.strictEqual(x, 4);
+ * assert.strictEqual(x, 0)
+ * assert.strictEqual(doubledString(2)(), '4')
+ * assert.strictEqual(x, 4)
  *
  * @since 0.7.0
  */
@@ -49,14 +49,14 @@ export const tap =
  * value of its first invocation.
  *
  * @example
- * import { once } from 'fp-ts-std/IO';
- * import * as IO from 'fp-ts/IO';
- * import { add } from 'fp-ts-std/Number';
+ * import { once } from 'fp-ts-std/IO'
+ * import * as IO from 'fp-ts/IO'
+ * import { add } from 'fp-ts-std/Number'
  *
  * const f = once(add(5))
  *
- * assert.strictEqual(f(2)(), 7);
- * assert.strictEqual(f(3)(), 7);
+ * assert.strictEqual(f(2)(), 7)
+ * assert.strictEqual(f(3)(), 7)
  *
  * @since 0.7.0
  */
@@ -82,9 +82,9 @@ export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
  * Invocations start at the number one.
  *
  * @example
- * import { IO } from 'fp-ts/IO';
- * import { Predicate } from 'fp-ts/Predicate';
- * import { whenInvocationCount } from 'fp-ts-std/IO';
+ * import { IO } from 'fp-ts/IO'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import { whenInvocationCount } from 'fp-ts-std/IO'
  *
  * const isUnderThree: Predicate<number> = n => n < 3
  *
@@ -121,10 +121,10 @@ export const whenInvocationCount =
  * function application and composition pipelines.
  *
  * @example
- * import { execute } from 'fp-ts-std/IO';
- * import * as IO from 'fp-ts/IO';
+ * import { execute } from 'fp-ts-std/IO'
+ * import * as IO from 'fp-ts/IO'
  *
- * assert.strictEqual(execute(IO.of(5)), 5);
+ * assert.strictEqual(execute(IO.of(5)), 5)
  *
  * @since 0.12.0
  */
@@ -134,19 +134,19 @@ export const execute = <A>(x: IO<A>): A => x()
  * Conditional execution of an `IO`. Helpful for things like logging.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { Predicate } from 'fp-ts/Predicate';
- * import { when } from 'fp-ts-std/IO';
- * import * as IOE from 'fp-ts/IOEither';
- * import { log } from 'fp-ts/Console';
+ * import { pipe } from 'fp-ts/function'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import { when } from 'fp-ts-std/IO'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import { log } from 'fp-ts/Console'
  *
- * const isInvalid: Predicate<number> = n => n !== 42;
+ * const isInvalid: Predicate<number> = n => n !== 42
  *
  * pipe(
  *   IOE.of(123),
  *   IOE.chainFirstIOK(n =>
  *     when(isInvalid(n))(log(n))),
- * );
+ * )
  *
  * @since 0.12.0
  */
@@ -158,19 +158,19 @@ export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
  * The reverse of `when`.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { Predicate } from 'fp-ts/Predicate';
- * import { unless } from 'fp-ts-std/IO';
- * import * as IOE from 'fp-ts/IOEither';
- * import { log } from 'fp-ts/Console';
+ * import { pipe } from 'fp-ts/function'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import { unless } from 'fp-ts-std/IO'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import { log } from 'fp-ts/Console'
  *
- * const isValid: Predicate<number> = n => n === 42;
+ * const isValid: Predicate<number> = n => n === 42
  *
  * pipe(
  *   IOE.of(123),
  *   IOE.chainFirstIOK(n =>
  *     unless(isValid(n))(log(n))),
- * );
+ * )
  *
  * @since 0.12.0
  */
@@ -182,12 +182,12 @@ export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
  * Memoize an `IO`, reusing the result of its first execution.
  *
  * @example
- * import { memoize } from 'fp-ts-std/IO';
- * import { now } from 'fp-ts-std/Date';
+ * import { memoize } from 'fp-ts-std/IO'
+ * import { now } from 'fp-ts-std/Date'
  *
- * const then = memoize(now);
+ * const then = memoize(now)
  *
- * assert.strictEqual(then(), then());
+ * assert.strictEqual(then(), then())
  *
  * @since 0.14.0
  */

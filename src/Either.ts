@@ -13,10 +13,10 @@ import { mapBoth as _mapBoth } from "./Bifunctor"
  * if `Left`.
  *
  * @example
- * import { unsafeUnwrap } from 'fp-ts-std/Either';
- * import * as E from 'fp-ts/Either';
+ * import { unsafeUnwrap } from 'fp-ts-std/Either'
+ * import * as E from 'fp-ts/Either'
  *
- * assert.deepStrictEqual(unsafeUnwrap(E.right(5)), 5);
+ * assert.deepStrictEqual(unsafeUnwrap(E.right(5)), 5)
  *
  * @since 0.1.0
  */
@@ -32,10 +32,10 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
  * if `Right`.
  *
  * @example
- * import { unsafeUnwrapLeft } from 'fp-ts-std/Either';
- * import * as E from 'fp-ts/Either';
+ * import { unsafeUnwrapLeft } from 'fp-ts-std/Either'
+ * import * as E from 'fp-ts/Either'
  *
- * assert.deepStrictEqual(unsafeUnwrapLeft(E.left(5)), 5);
+ * assert.deepStrictEqual(unsafeUnwrapLeft(E.left(5)), 5)
  *
  * @since 0.5.0
  */
@@ -50,14 +50,14 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
  * Apply a function to both elements of an `Either`.
  *
  * @example
- * import * as E from 'fp-ts/Either';
- * import { mapBoth } from 'fp-ts-std/Either';
- * import { multiply } from 'fp-ts-std/Number';
+ * import * as E from 'fp-ts/Either'
+ * import { mapBoth } from 'fp-ts-std/Either'
+ * import { multiply } from 'fp-ts-std/Number'
  *
- * const f = mapBoth(multiply(2));
+ * const f = mapBoth(multiply(2))
  *
- * assert.deepStrictEqual(f(E.left(3)), E.left(6));
- * assert.deepStrictEqual(f(E.right(3)), E.right(6));
+ * assert.deepStrictEqual(f(E.left(3)), E.left(6))
+ * assert.deepStrictEqual(f(E.right(3)), E.right(6))
  *
  * @since 0.14.0
  */

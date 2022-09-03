@@ -14,12 +14,12 @@ import {
  * value of `Left` if `Left`.
  *
  * @example
- * import { unsafeUnwrap } from 'fp-ts-std/ReaderTaskEither';
- * import * as RTE from 'fp-ts/ReaderTaskEither';
+ * import { unsafeUnwrap } from 'fp-ts-std/ReaderTaskEither'
+ * import * as RTE from 'fp-ts/ReaderTaskEither'
  *
  * unsafeUnwrap(RTE.right(5))({}).then((x) => {
- *   assert.strictEqual(x, 5);
- * });
+ *   assert.strictEqual(x, 5)
+ * })
  *
  * @since 0.15.0
  */
@@ -33,12 +33,12 @@ export const unsafeUnwrap =
  * value of `Right` if `Right`.
  *
  * @example
- * import { unsafeUnwrapLeft } from 'fp-ts-std/ReaderTaskEither';
- * import * as RTE from 'fp-ts/ReaderTaskEither';
+ * import { unsafeUnwrapLeft } from 'fp-ts-std/ReaderTaskEither'
+ * import * as RTE from 'fp-ts/ReaderTaskEither'
  *
  * unsafeUnwrapLeft(RTE.left(5))({}).then((x) => {
- *   assert.strictEqual(x, 5);
- * });
+ *   assert.strictEqual(x, 5)
+ * })
  *
  * @since 0.15.0
  */

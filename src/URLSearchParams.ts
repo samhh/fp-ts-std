@@ -15,9 +15,9 @@ import { construct, invoke, is } from "./Function"
  * An empty `URLSearchParams`.
  *
  * @example
- * import { empty } from 'fp-ts-std/URLSearchParams';
+ * import { empty } from 'fp-ts-std/URLSearchParams'
  *
- * assert.deepStrictEqual(empty, new URLSearchParams());
+ * assert.deepStrictEqual(empty, new URLSearchParams())
  *
  * @since 0.2.0
  */
@@ -27,11 +27,11 @@ export const empty: URLSearchParams = construct(URLSearchParams)([])
  * Parse a `URLSearchParams` from a string.
  *
  * @example
- * import { fromString } from 'fp-ts-std/URLSearchParams';
+ * import { fromString } from 'fp-ts-std/URLSearchParams'
  *
- * const x = 'a=b&c=d';
+ * const x = 'a=b&c=d'
  *
- * assert.deepStrictEqual(fromString(x), new URLSearchParams(x));
+ * assert.deepStrictEqual(fromString(x), new URLSearchParams(x))
  *
  * @since 0.2.0
  */
@@ -42,11 +42,11 @@ export const fromString = (x: string): URLSearchParams =>
  * Parse a `URLSearchParams` from a record.
  *
  * @example
- * import { fromRecord } from 'fp-ts-std/URLSearchParams';
+ * import { fromRecord } from 'fp-ts-std/URLSearchParams'
  *
- * const x = { a: 'b', c: 'd' };
+ * const x = { a: 'b', c: 'd' }
  *
- * assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x));
+ * assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x))
  *
  * @since 0.2.0
  */
@@ -57,11 +57,11 @@ export const fromRecord = (x: Record<string, string>): URLSearchParams =>
  * Parse a `URLSearchParams` from an array of tuples.
  *
  * @example
- * import { fromTuples } from 'fp-ts-std/URLSearchParams';
+ * import { fromTuples } from 'fp-ts-std/URLSearchParams'
  *
- * const x: Array<[string, string]> = [['a', 'b'], ['c', 'd']];
+ * const x: Array<[string, string]> = [['a', 'b'], ['c', 'd']]
  *
- * assert.deepStrictEqual(fromTuples(x), new URLSearchParams(x));
+ * assert.deepStrictEqual(fromTuples(x), new URLSearchParams(x))
  *
  * @since 0.2.0
  */
@@ -72,12 +72,12 @@ export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
  * Clone a `URLSearchParams`.
  *
  * @example
- * import { clone, fromString } from 'fp-ts-std/URLSearchParams';
+ * import { clone, fromString } from 'fp-ts-std/URLSearchParams'
  *
- * const x = fromString('a=b&c=d');
+ * const x = fromString('a=b&c=d')
  *
- * assert.strictEqual(x === clone(x), false);
- * assert.deepStrictEqual(x, clone(x));
+ * assert.strictEqual(x === clone(x), false)
+ * assert.deepStrictEqual(x, clone(x))
  *
  * @since 0.2.0
  */
@@ -88,12 +88,12 @@ export const clone = (x: URLSearchParams): URLSearchParams =>
  * Refine a foreign value to `URLSearchParams`.
  *
  * @example
- * import { isURLSearchParams, fromString } from 'fp-ts-std/URLSearchParams';
+ * import { isURLSearchParams, fromString } from 'fp-ts-std/URLSearchParams'
  *
- * const x = fromString('a=b&c=d');
+ * const x = fromString('a=b&c=d')
  *
- * assert.deepStrictEqual(isURLSearchParams(x), true);
- * assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), false);
+ * assert.deepStrictEqual(isURLSearchParams(x), true)
+ * assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), false)
  *
  * @since 0.1.0
  */
@@ -104,13 +104,13 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
  * Attempt to get a URL parameter from a `URLSearchParams`.
  *
  * @example
- * import { getParam, fromString } from 'fp-ts-std/URLSearchParams';
- * import * as O from 'fp-ts/Option';
+ * import { getParam, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
  *
- * const x = fromString('a=b&c=d');
+ * const x = fromString('a=b&c=d')
  *
- * assert.deepStrictEqual(getParam('c')(x), O.some('d'));
- * assert.deepStrictEqual(getParam('e')(x), O.none);
+ * assert.deepStrictEqual(getParam('c')(x), O.some('d'))
+ * assert.deepStrictEqual(getParam('e')(x), O.none)
  *
  * @since 0.1.0
  */
@@ -123,16 +123,16 @@ export const getParam = (
  * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
  *
  * @example
- * import { setParam, getParam, fromString } from 'fp-ts-std/URLSearchParams';
- * import * as O from 'fp-ts/Option';
+ * import { setParam, getParam, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
  *
- * const x = fromString('a=b&c=d');
- * const y = setParam('c')('e')(x);
+ * const x = fromString('a=b&c=d')
+ * const y = setParam('c')('e')(x)
  *
- * const f = getParam('c');
+ * const f = getParam('c')
  *
- * assert.deepStrictEqual(f(x), O.some('d'));
- * assert.deepStrictEqual(f(y), O.some('e'));
+ * assert.deepStrictEqual(f(x), O.some('d'))
+ * assert.deepStrictEqual(f(y), O.some('e'))
  *
  * @since 0.1.0
  */

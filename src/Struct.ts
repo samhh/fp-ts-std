@@ -13,9 +13,9 @@ import * as A from "fp-ts/Array"
  * consider defining a semigroup.
  *
  * @example
- * import { merge } from 'fp-ts-std/Struct';
+ * import { merge } from 'fp-ts-std/Struct'
  *
- * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true });
+ * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true })
  *
  * @since 0.14.0
  */
@@ -28,15 +28,15 @@ export const merge =
  * type.
  *
  * @example
- * import { pick } from 'fp-ts-std/Struct';
+ * import { pick } from 'fp-ts-std/Struct'
  * import { pipe } from 'fp-ts/function'
  *
  * const picked = pipe(
  *   { a: 1, b: 'two', c: [true] },
  *   pick(['a', 'c'])
- * );
+ * )
  *
- * assert.deepStrictEqual(picked, { a: 1, c: [true] });
+ * assert.deepStrictEqual(picked, { a: 1, c: [true] })
  *
  * @since 0.14.0
  */
@@ -57,12 +57,12 @@ export const pick =
  * Like `pick`, but allows you to specify the input record upfront.
  *
  * @example
- * import { pickFrom } from 'fp-ts-std/Struct';
+ * import { pickFrom } from 'fp-ts-std/Struct'
  *
- * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> };
- * const picked = pickFrom<MyType>()(['a', 'c']);
+ * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> }
+ * const picked = pickFrom<MyType>()(['a', 'c'])
  *
- * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
+ * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
  * @since 0.14.0
  */
@@ -75,11 +75,11 @@ export const pickFrom = <A>(): (<K extends keyof A>(
  * type.
  *
  * @example
- * import { omit } from 'fp-ts-std/Struct';
+ * import { omit } from 'fp-ts-std/Struct'
  *
- * const sansB = omit(['b']);
+ * const sansB = omit(['b'])
  *
- * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
+ * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
  * @since 0.14.0
  */
@@ -108,12 +108,12 @@ type Exact<A extends object, B extends A> = A &
  * Provide default values for an object with optional properties.
  *
  * @example
- * import { withDefaults } from 'fp-ts-std/Struct';
- * import { pipe } from 'fp-ts/function';
+ * import { withDefaults } from 'fp-ts-std/Struct'
+ * import { pipe } from 'fp-ts/function'
  *
- * const aOptB: { a: number; b?: string } = { a: 1 };
+ * const aOptB: { a: number; b?: string } = { a: 1 }
  *
- * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' });
+ * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' })
  *
  * @since 0.15.0
  */

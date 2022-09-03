@@ -19,9 +19,9 @@ import { unsafeUnwrap } from "./Option"
  * well.
  *
  * @example
- * import { randomExtract } from 'fp-ts-std/Random';
+ * import { randomExtract } from 'fp-ts-std/Random'
  *
- * assert.deepStrictEqual(randomExtract(['x'])(), ['x', []]);
+ * assert.deepStrictEqual(randomExtract(['x'])(), ['x', []])
  *
  * @since 0.12.0
  */

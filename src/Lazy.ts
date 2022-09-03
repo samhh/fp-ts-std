@@ -331,9 +331,9 @@ export const sequenceArray: <A>(
  * function application and composition pipelines.
  *
  * @example
- * import * as Lazy from 'fp-ts-std/Lazy';
+ * import * as Lazy from 'fp-ts-std/Lazy'
  *
- * assert.strictEqual(Lazy.execute(Lazy.of(5)), 5);
+ * assert.strictEqual(Lazy.execute(Lazy.of(5)), 5)
  *
  * @since 0.12.0
  */
@@ -346,9 +346,9 @@ export const execute = <A>(x: Lazy<A>): A => x()
  * use `constant`.
  *
  * @example
- * import { lazy } from 'fp-ts-std/Lazy';
+ * import { lazy } from 'fp-ts-std/Lazy'
  *
- * const calc = lazy(() => 'do something expensive here');
+ * const calc = lazy(() => 'do something expensive here')
  *
  * @since 0.13.0
  */
@@ -358,12 +358,12 @@ export const lazy: <A>(f: () => A) => Lazy<A> = identity
  * Memoize a `Lazy`. Provided the input function is pure, this function is too.
  *
  * @example
- * import { lazy, memoize } from 'fp-ts-std/Lazy';
+ * import { lazy, memoize } from 'fp-ts-std/Lazy'
  *
- * const expensive = lazy(() => 42);
- * const payOnce = memoize(expensive);
+ * const expensive = lazy(() => 42)
+ * const payOnce = memoize(expensive)
  *
- * assert.strictEqual(payOnce(), payOnce());
+ * assert.strictEqual(payOnce(), payOnce())
  *
  * @since 0.14.0
  */

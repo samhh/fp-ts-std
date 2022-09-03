@@ -30,20 +30,20 @@ import {
  * like logging.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { Predicate } from 'fp-ts/Predicate';
- * import { when } from 'fp-ts-std/Applicative';
- * import * as IO from 'fp-ts/IO';
- * import * as IOE from 'fp-ts/IOEither';
- * import { log } from 'fp-ts/Console';
+ * import { pipe } from 'fp-ts/function'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import { when } from 'fp-ts-std/Applicative'
+ * import * as IO from 'fp-ts/IO'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import { log } from 'fp-ts/Console'
  *
- * const isInvalid: Predicate<number> = n => n !== 42;
+ * const isInvalid: Predicate<number> = n => n !== 42
  *
  * pipe(
  *   IOE.of(123),
  *   IOE.chainFirstIOK(n =>
  *     when(IO.Applicative)(isInvalid(n))(log(n))),
- * );
+ * )
  *
  * @since 0.12.0
  */
@@ -77,20 +77,20 @@ export function when<F>(
  * The reverse of `when`.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { Predicate } from 'fp-ts/Predicate';
- * import { unless } from 'fp-ts-std/Applicative';
- * import * as IO from 'fp-ts/IO';
- * import * as IOE from 'fp-ts/IOEither';
- * import { log } from 'fp-ts/Console';
+ * import { pipe } from 'fp-ts/function'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import { unless } from 'fp-ts-std/Applicative'
+ * import * as IO from 'fp-ts/IO'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import { log } from 'fp-ts/Console'
  *
- * const isValid: Predicate<number> = n => n === 42;
+ * const isValid: Predicate<number> = n => n === 42
  *
  * pipe(
  *   IOE.of(123),
  *   IOE.chainFirstIOK(n =>
  *     unless(IO.Applicative)(isValid(n))(log(n))),
- * );
+ * )
  *
  * @since 0.12.0
  */

@@ -20,14 +20,14 @@ import { invoke } from "./Function"
  * Convert a `NodeList` into an `Array`.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { fromNodeList } from 'fp-ts-std/DOM';
+ * import { JSDOM } from 'jsdom'
+ * import { fromNodeList } from 'fp-ts-std/DOM'
  *
- * const { window: { document } } = new JSDOM('irrelevant');
- * const xs = document.querySelectorAll('div');
+ * const { window: { document } } = new JSDOM('irrelevant')
+ * const xs = document.querySelectorAll('div')
  *
- * assert.strictEqual(Array.isArray(xs), false);
- * assert.strictEqual(Array.isArray(fromNodeList(xs)), true);
+ * assert.strictEqual(Array.isArray(xs), false)
+ * assert.strictEqual(Array.isArray(fromNodeList(xs)), true)
  *
  * @since 0.12.0
  */
@@ -39,19 +39,19 @@ export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
  * selector.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { querySelector, getTextContent } from 'fp-ts-std/DOM';
- * import { pipe } from 'fp-ts/function';
- * import * as IOO from 'fp-ts-contrib/IOOption';
- * import * as O from 'fp-ts/Option';
+ * import { JSDOM } from 'jsdom'
+ * import { querySelector, getTextContent } from 'fp-ts-std/DOM'
+ * import { pipe } from 'fp-ts/function'
+ * import * as IOO from 'fp-ts-contrib/IOOption'
+ * import * as O from 'fp-ts/Option'
  *
- * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>');
+ * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>')
  * const f = (x: string) =>
  *   pipe(document, querySelector(x), IOO.chain(getTextContent))
  *
- * assert.deepStrictEqual(f('li:nth-child(1)')(), O.some('x'));
- * assert.deepStrictEqual(f('li:nth-child(2)')(), O.some('y'));
- * assert.deepStrictEqual(f('li:nth-child(3)')(), O.none);
+ * assert.deepStrictEqual(f('li:nth-child(1)')(), O.some('x'))
+ * assert.deepStrictEqual(f('li:nth-child(2)')(), O.some('y'))
+ * assert.deepStrictEqual(f('li:nth-child(3)')(), O.none)
  * @since 0.12.0
  */
 export const querySelector =
@@ -65,17 +65,17 @@ export const querySelector =
  * selector.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { querySelectorAll } from 'fp-ts-std/DOM';
- * import { pipe } from 'fp-ts/function';
- * import * as IOO from 'fp-ts-contrib/IOOption';
- * import * as O from 'fp-ts/Option';
- * import * as A from 'fp-ts/Array';
+ * import { JSDOM } from 'jsdom'
+ * import { querySelectorAll } from 'fp-ts-std/DOM'
+ * import { pipe } from 'fp-ts/function'
+ * import * as IOO from 'fp-ts-contrib/IOOption'
+ * import * as O from 'fp-ts/Option'
+ * import * as A from 'fp-ts/Array'
  *
- * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>');
+ * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>')
  * const getNumListItems = pipe(document, querySelectorAll('li'), IOO.map(A.size))
  *
- * assert.deepStrictEqual(getNumListItems(), O.some(2));
+ * assert.deepStrictEqual(getNumListItems(), O.some(2))
  *
  * @since 0.12.0
  */
@@ -89,19 +89,19 @@ export const querySelectorAll =
  * Returns all child nodes, if any, of a node.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { querySelector, childNodes } from 'fp-ts-std/DOM';
- * import { pipe } from 'fp-ts/function';
- * import * as IOO from 'fp-ts-contrib/IOOption';
- * import * as IO from 'fp-ts/IO';
- * import * as O from 'fp-ts/Option';
- * import * as A from 'fp-ts/Array';
+ * import { JSDOM } from 'jsdom'
+ * import { querySelector, childNodes } from 'fp-ts-std/DOM'
+ * import { pipe } from 'fp-ts/function'
+ * import * as IOO from 'fp-ts-contrib/IOOption'
+ * import * as IO from 'fp-ts/IO'
+ * import * as O from 'fp-ts/Option'
+ * import * as A from 'fp-ts/Array'
  *
- * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>');
+ * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>')
  * const getNumChildren =
- *     pipe(document, querySelector('ul'), IOO.chain(childNodes), IOO.map(A.size));
+ *     pipe(document, querySelector('ul'), IOO.chain(childNodes), IOO.map(A.size))
  *
- * assert.deepStrictEqual(getNumChildren(), O.some(2));
+ * assert.deepStrictEqual(getNumChildren(), O.some(2))
  *
  * @since 0.12.0
  */
@@ -114,21 +114,21 @@ export const childNodes =
  * Removes a child node from the tree.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { remove } from 'fp-ts-std/DOM';
- * import { IO } from 'fp-ts/IO';
+ * import { JSDOM } from 'jsdom'
+ * import { remove } from 'fp-ts-std/DOM'
+ * import { IO } from 'fp-ts/IO'
  *
- * const before = '<p>x</p><p>y</p>';
- * const after = '<p>y</p>';
+ * const before = '<p>x</p><p>y</p>'
+ * const after = '<p>y</p>'
  *
- * const { window: { document } } = new JSDOM(before);
+ * const { window: { document } } = new JSDOM(before)
  *
- * const check: IO<string> = () => document.body.innerHTML;
- * const removeFirstPara: IO<void> = remove(document.querySelector('p')!);
+ * const check: IO<string> = () => document.body.innerHTML
+ * const removeFirstPara: IO<void> = remove(document.querySelector('p')!)
  *
- * assert.strictEqual(check(), before);
- * removeFirstPara();
- * assert.strictEqual(check(), after);
+ * assert.strictEqual(check(), before)
+ * removeFirstPara()
+ * assert.strictEqual(check(), after)
  *
  * @since 0.12.0
  */
@@ -141,21 +141,21 @@ export const remove =
  * Appends a node as a child of another.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { appendChild } from 'fp-ts-std/DOM';
- * import { IO } from 'fp-ts/IO';
+ * import { JSDOM } from 'jsdom'
+ * import { appendChild } from 'fp-ts-std/DOM'
+ * import { IO } from 'fp-ts/IO'
  *
- * const before = '<p>x</p><p>y</p>';
- * const after = '<p>x</p><p>y</p><div></div>';
+ * const before = '<p>x</p><p>y</p>'
+ * const after = '<p>x</p><p>y</p><div></div>'
  *
- * const { window: { document } } = new JSDOM(before);
+ * const { window: { document } } = new JSDOM(before)
  *
- * const check: IO<string> = () => document.body.innerHTML;
- * const addDiv: IO<void> = appendChild(document.createElement('div'))(document.body);
+ * const check: IO<string> = () => document.body.innerHTML
+ * const addDiv: IO<void> = appendChild(document.createElement('div'))(document.body)
  *
- * assert.strictEqual(check(), before);
- * addDiv();
- * assert.strictEqual(check(), after);
+ * assert.strictEqual(check(), before)
+ * addDiv()
+ * assert.strictEqual(check(), after)
  *
  * @since 0.12.0
  */
@@ -169,21 +169,21 @@ export const appendChild =
  * Removes all the child nodes, if any, of a given node.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { emptyChildren } from 'fp-ts-std/DOM';
- * import { IO } from 'fp-ts/IO';
+ * import { JSDOM } from 'jsdom'
+ * import { emptyChildren } from 'fp-ts-std/DOM'
+ * import { IO } from 'fp-ts/IO'
  *
- * const before = '<div><span>x</span><p>y</p></div>';
- * const after = '<div></div>';
+ * const before = '<div><span>x</span><p>y</p></div>'
+ * const after = '<div></div>'
  *
- * const { window: { document } } = new JSDOM(before);
+ * const { window: { document } } = new JSDOM(before)
  *
- * const check: IO<string> = () => document.body.innerHTML;
- * const emptyFirstDiv: IO<void> = emptyChildren(document.querySelector('div')!);
+ * const check: IO<string> = () => document.body.innerHTML
+ * const emptyFirstDiv: IO<void> = emptyChildren(document.querySelector('div')!)
  *
- * assert.strictEqual(check(), before);
- * emptyFirstDiv();
- * assert.strictEqual(check(), after);
+ * assert.strictEqual(check(), before)
+ * emptyFirstDiv()
+ * assert.strictEqual(check(), after)
  *
  * @since 0.12.0
  */
@@ -196,17 +196,17 @@ export const emptyChildren: (x: Node) => IO<void> = flow(
  * Gets the text content, if any, of a node.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { getTextContent, setTextContent } from 'fp-ts-std/DOM';
- * import * as O from 'fp-ts/Option';
+ * import { JSDOM } from 'jsdom'
+ * import { getTextContent, setTextContent } from 'fp-ts-std/DOM'
+ * import * as O from 'fp-ts/Option'
  *
- * const { window: { document } } = new JSDOM();
- * const el = document.createElement('div');
- * const check = getTextContent(el);
+ * const { window: { document } } = new JSDOM()
+ * const el = document.createElement('div')
+ * const check = getTextContent(el)
  *
- * assert.deepStrictEqual(check(), O.some(''));
- * setTextContent('x')(el)();
- * assert.deepStrictEqual(check(), O.some('x'));
+ * assert.deepStrictEqual(check(), O.some(''))
+ * setTextContent('x')(el)()
+ * assert.deepStrictEqual(check(), O.some('x'))
  *
  * @since 0.12.0
  */
@@ -219,17 +219,17 @@ export const getTextContent =
  * Sets the text content of a node.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { getTextContent, setTextContent } from 'fp-ts-std/DOM';
- * import * as O from 'fp-ts/Option';
+ * import { JSDOM } from 'jsdom'
+ * import { getTextContent, setTextContent } from 'fp-ts-std/DOM'
+ * import * as O from 'fp-ts/Option'
  *
- * const { window: { document } } = new JSDOM();
- * const el = document.createElement('div');
- * const check = getTextContent(el);
+ * const { window: { document } } = new JSDOM()
+ * const el = document.createElement('div')
+ * const check = getTextContent(el)
  *
- * assert.deepStrictEqual(check(), O.some(''));
- * setTextContent('x')(el)();
- * assert.deepStrictEqual(check(), O.some('x'));
+ * assert.deepStrictEqual(check(), O.some(''))
+ * setTextContent('x')(el)()
+ * assert.deepStrictEqual(check(), O.some('x'))
  *
  * @since 0.12.0
  */
@@ -245,25 +245,25 @@ export const setTextContent =
  * Adds an event listener to a node.
  *
  * @example
- * import { JSDOM } from 'jsdom';
- * import { addEventListener } from 'fp-ts-std/DOM';
+ * import { JSDOM } from 'jsdom'
+ * import { addEventListener } from 'fp-ts-std/DOM'
  *
- * const { window: { document } } = new JSDOM();
- * const el = document.createElement('div');
- * let clicks = 0;
- * const listen = addEventListener('click')(() => () => clicks++)(el);
+ * const { window: { document } } = new JSDOM()
+ * const el = document.createElement('div')
+ * let clicks = 0
+ * const listen = addEventListener('click')(() => () => clicks++)(el)
  *
- * assert.strictEqual(clicks, 0);
+ * assert.strictEqual(clicks, 0)
  *
- * el.click();
- * assert.strictEqual(clicks, 0);
+ * el.click()
+ * assert.strictEqual(clicks, 0)
  *
- * listen();
- * el.click();
- * assert.strictEqual(clicks, 1);
+ * listen()
+ * el.click()
+ * assert.strictEqual(clicks, 1)
  *
- * el.click();
- * assert.strictEqual(clicks, 2);
+ * el.click()
+ * assert.strictEqual(clicks, 2)
  *
  * @since 0.12.0
  */

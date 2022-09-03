@@ -20,12 +20,12 @@ import { mapBoth as _mapBoth } from "./Bifunctor"
  * value of `Left` if `Left`.
  *
  * @example
- * import { unsafeUnwrap } from 'fp-ts-std/TaskEither';
- * import * as TE from 'fp-ts/TaskEither';
+ * import { unsafeUnwrap } from 'fp-ts-std/TaskEither'
+ * import * as TE from 'fp-ts/TaskEither'
  *
  * unsafeUnwrap(TE.right(5)).then((x) => {
- *   assert.strictEqual(x, 5);
- * });
+ *   assert.strictEqual(x, 5)
+ * })
  *
  * @since 0.12.0
  */
@@ -39,12 +39,12 @@ export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
  * `Right` if `Right`.
  *
  * @example
- * import { unsafeUnwrapLeft } from 'fp-ts-std/TaskEither';
- * import * as TE from 'fp-ts/TaskEither';
+ * import { unsafeUnwrapLeft } from 'fp-ts-std/TaskEither'
+ * import * as TE from 'fp-ts/TaskEither'
  *
  * unsafeUnwrapLeft(TE.left(5)).then((x) => {
- *   assert.strictEqual(x, 5);
- * });
+ *   assert.strictEqual(x, 5)
+ * })
  *
  * @since 0.12.0
  */
@@ -56,19 +56,19 @@ export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
  * Apply a function to both elements of an `TaskEither`.
  *
  * @example
- * import * as TE from 'fp-ts/TaskEither';
- * import * as E from 'fp-ts/Either';
- * import { mapBoth } from 'fp-ts-std/TaskEither';
- * import { multiply } from 'fp-ts-std/Number';
+ * import * as TE from 'fp-ts/TaskEither'
+ * import * as E from 'fp-ts/Either'
+ * import { mapBoth } from 'fp-ts-std/TaskEither'
+ * import { multiply } from 'fp-ts-std/Number'
  *
- * const f = mapBoth(multiply(2));
+ * const f = mapBoth(multiply(2))
  *
  * f(TE.left(3))().then((x) => {
- *   assert.deepStrictEqual(x, E.left(6));
- * });
+ *   assert.deepStrictEqual(x, E.left(6))
+ * })
  * f(TE.right(3))().then((x) => {
- *   assert.deepStrictEqual(x, E.right(6));
- * });
+ *   assert.deepStrictEqual(x, E.right(6))
+ * })
  *
  * @since 0.14.0
  */

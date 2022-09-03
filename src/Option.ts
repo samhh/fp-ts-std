@@ -19,10 +19,10 @@ import { Lazy } from "./Lazy"
  * Unwrap the value from within an `Option`, throwing if `None`.
  *
  * @example
- * import { unsafeUnwrap } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
+ * import { unsafeUnwrap } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(unsafeUnwrap(O.some(5)), 5);
+ * assert.deepStrictEqual(unsafeUnwrap(O.some(5)), 5)
  *
  * @since 0.1.0
  */
@@ -40,10 +40,10 @@ export const unsafeUnwrap = <A>(x: Option<A>): A => {
  * standard `None` constructor.
  *
  * @example
- * import { noneAs } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
+ * import { noneAs } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(noneAs<any>(), O.none);
+ * assert.deepStrictEqual(noneAs<any>(), O.none)
  *
  * @since 0.12.0
  */
@@ -58,15 +58,15 @@ export const noneAs = <A>(): Option<A> => O.none
  * an `Option` value.
  *
  * @example
- * import { invert } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
- * import * as S from 'fp-ts/string';
+ * import { invert } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
+ * import * as S from 'fp-ts/string'
  *
- * const f = invert(S.Eq)('x');
+ * const f = invert(S.Eq)('x')
  *
- * assert.deepStrictEqual(f(O.none), O.some('x'));
- * assert.deepStrictEqual(f(O.some('y')), O.some('x'));
- * assert.deepStrictEqual(f(O.some('x')), O.none);
+ * assert.deepStrictEqual(f(O.none), O.some('x'))
+ * assert.deepStrictEqual(f(O.some('y')), O.some('x'))
+ * assert.deepStrictEqual(f(O.some('x')), O.none)
  *
  * @since 0.12.0
  */
@@ -82,14 +82,14 @@ export const invert =
  * Extracts monoidal identity if `None`.
  *
  * @example
- * import { toMonoid } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
- * import * as Str from 'fp-ts/string';
+ * import { toMonoid } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
+ * import * as Str from 'fp-ts/string'
  *
  * const f = toMonoid(Str.Monoid)
  *
- * assert.deepStrictEqual(f(O.some('x')), 'x');
- * assert.deepStrictEqual(f(O.none), '');
+ * assert.deepStrictEqual(f(O.some('x')), 'x')
+ * assert.deepStrictEqual(f(O.none), '')
  *
  * @since 0.12.0
  */
@@ -102,14 +102,14 @@ export const toMonoid = _toMonoid(O.Foldable)
  * `memptyUnless`. The lazy value is evaluated only if the condition passes.
  *
  * @example
- * import { constant } from 'fp-ts/function';
- * import { memptyWhen } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
+ * import { constant } from 'fp-ts/function'
+ * import { memptyWhen } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(memptyWhen(true)(constant(O.some('x'))), O.none);
- * assert.deepStrictEqual(memptyWhen(true)(constant(O.none)), O.none);
- * assert.deepStrictEqual(memptyWhen(false)(constant(O.some('x'))), O.some('x'));
- * assert.deepStrictEqual(memptyWhen(false)(constant(O.none)), O.none);
+ * assert.deepStrictEqual(memptyWhen(true)(constant(O.some('x'))), O.none)
+ * assert.deepStrictEqual(memptyWhen(true)(constant(O.none)), O.none)
+ * assert.deepStrictEqual(memptyWhen(false)(constant(O.some('x'))), O.some('x'))
+ * assert.deepStrictEqual(memptyWhen(false)(constant(O.none)), O.none)
  *
  * @since 0.13.0
  */
@@ -123,14 +123,14 @@ export const memptyWhen =
  * `memptyWhen`. The lazy value is evaluated only if the condition passes.
  *
  * @example
- * import { constant } from 'fp-ts/function';
- * import { memptyUnless } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
+ * import { constant } from 'fp-ts/function'
+ * import { memptyUnless } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(memptyUnless(true)(constant(O.some('x'))), O.some('x'));
- * assert.deepStrictEqual(memptyUnless(true)(constant(O.none)), O.none);
- * assert.deepStrictEqual(memptyUnless(false)(constant(O.some('x'))), O.none);
- * assert.deepStrictEqual(memptyUnless(false)(constant(O.none)), O.none);
+ * assert.deepStrictEqual(memptyUnless(true)(constant(O.some('x'))), O.some('x'))
+ * assert.deepStrictEqual(memptyUnless(true)(constant(O.none)), O.none)
+ * assert.deepStrictEqual(memptyUnless(false)(constant(O.some('x'))), O.none)
+ * assert.deepStrictEqual(memptyUnless(false)(constant(O.none)), O.none)
  *
  * @since 0.13.0
  */
@@ -143,14 +143,14 @@ export const memptyUnless: (
  * evaluated only if the condition passes.
  *
  * @example
- * import { constant } from 'fp-ts/function';
- * import { pureIf } from 'fp-ts-std/Option';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { constant } from 'fp-ts/function'
+ * import { pureIf } from 'fp-ts-std/Option'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const person = { name: 'Hodor', age: 40 };
- * const isMagicNumber: Predicate<number> = n => n === 42;
+ * const person = { name: 'Hodor', age: 40 }
+ * const isMagicNumber: Predicate<number> = n => n === 42
  *
- * const mname = pureIf(isMagicNumber(person.age))(constant(person.name));
+ * const mname = pureIf(isMagicNumber(person.age))(constant(person.name))
  *
  * @since 0.13.0
  */
@@ -164,14 +164,14 @@ export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
  * `Option`'s eagerness.
  *
  * @example
- * import { constant } from 'fp-ts/function';
- * import { altAllBy } from 'fp-ts-std/Option';
- * import * as O from 'fp-ts/Option';
+ * import { constant } from 'fp-ts/function'
+ * import { altAllBy } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
  *
  * assert.deepStrictEqual(
  *   altAllBy([constant(O.none), O.some])('foo'),
  *   O.some('foo'),
- * );
+ * )
  *
  * @since 0.15.0
  */

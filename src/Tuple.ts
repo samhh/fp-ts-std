@@ -32,9 +32,9 @@ import { mapBoth as _mapBoth } from "./Bifunctor"
  * Duplicate a value into a tuple.
  *
  * @example
- * import { dup } from 'fp-ts-std/Tuple';
+ * import { dup } from 'fp-ts-std/Tuple'
  *
- * assert.deepStrictEqual(dup('x'), ['x', 'x']);
+ * assert.deepStrictEqual(dup('x'), ['x', 'x'])
  *
  * @since 0.12.0
  */
@@ -45,10 +45,10 @@ export const dup: <A>(x: A) => [A, A] = fork([identity, identity])
  * `toSnd`.
  *
  * @example
- * import { toFst } from 'fp-ts-std/Tuple';
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { toFst } from 'fp-ts-std/Tuple'
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(toFst(fromNumber)(5), ['5', 5]);
+ * assert.deepStrictEqual(toFst(fromNumber)(5), ['5', 5])
  *
  * @since 0.12.0
  */
@@ -60,10 +60,10 @@ export const toFst = <A, B>(f: (x: A) => B): ((x: A) => [B, A]) =>
  * `toFst`.
  *
  * @example
- * import { toFst } from 'fp-ts-std/Tuple';
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { toFst } from 'fp-ts-std/Tuple'
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(toFst(fromNumber)(5), ['5', 5]);
+ * assert.deepStrictEqual(toFst(fromNumber)(5), ['5', 5])
  *
  * @since 0.12.0
  */
@@ -75,16 +75,16 @@ export const toSnd = <A, B>(f: (x: A) => B): ((x: A) => [A, B]) =>
  * dual to `traverseToSnd`.
  *
  * @example
- * import { traverseToFst } from 'fp-ts-std/Tuple';
- * import * as O from 'fp-ts/Option';
- * import { flow, constant } from 'fp-ts/function';
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { traverseToFst } from 'fp-ts-std/Tuple'
+ * import * as O from 'fp-ts/Option'
+ * import { flow, constant } from 'fp-ts/function'
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * const traverseToFstO = traverseToFst(O.Functor);
- * const fromNumberO = flow(fromNumber, O.some);
+ * const traverseToFstO = traverseToFst(O.Functor)
+ * const fromNumberO = flow(fromNumber, O.some)
  *
- * assert.deepStrictEqual(traverseToFstO(fromNumberO)(5), O.some(['5', 5]));
- * assert.deepStrictEqual(traverseToFstO(constant(O.none))(5), O.none);
+ * assert.deepStrictEqual(traverseToFstO(fromNumberO)(5), O.some(['5', 5]))
+ * assert.deepStrictEqual(traverseToFstO(constant(O.none))(5), O.none)
  *
  * @since 0.12.0
  */
@@ -121,16 +121,16 @@ export function traverseToFst<F>(
  * dual to `traverseToFst`.
  *
  * @example
- * import { traverseToSnd } from 'fp-ts-std/Tuple';
- * import * as O from 'fp-ts/Option';
- * import { flow, constant } from 'fp-ts/function';
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { traverseToSnd } from 'fp-ts-std/Tuple'
+ * import * as O from 'fp-ts/Option'
+ * import { flow, constant } from 'fp-ts/function'
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * const traverseToSndO = traverseToSnd(O.Functor);
- * const fromNumberO = flow(fromNumber, O.some);
+ * const traverseToSndO = traverseToSnd(O.Functor)
+ * const fromNumberO = flow(fromNumber, O.some)
  *
- * assert.deepStrictEqual(traverseToSndO(fromNumberO)(5), O.some([5, '5']));
- * assert.deepStrictEqual(traverseToSndO(constant(O.none))(5), O.none);
+ * assert.deepStrictEqual(traverseToSndO(fromNumberO)(5), O.some([5, '5']))
+ * assert.deepStrictEqual(traverseToSndO(constant(O.none))(5), O.none)
  *
  * @since 0.12.0
  */
@@ -167,10 +167,10 @@ export function traverseToSnd<F>(
  * tuple sections.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { withFst } from 'fp-ts-std/Tuple';
+ * import { pipe } from 'fp-ts/function'
+ * import { withFst } from 'fp-ts-std/Tuple'
  *
- * assert.deepStrictEqual(pipe('x', withFst('y')), ['y', 'x']);
+ * assert.deepStrictEqual(pipe('x', withFst('y')), ['y', 'x'])
  *
  * @since 0.12.0
  */
@@ -184,10 +184,10 @@ export const withFst =
  * tuple sections.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { withSnd } from 'fp-ts-std/Tuple';
+ * import { pipe } from 'fp-ts/function'
+ * import { withSnd } from 'fp-ts-std/Tuple'
  *
- * assert.deepStrictEqual(pipe('x', withSnd('y')), ['x', 'y']);
+ * assert.deepStrictEqual(pipe('x', withSnd('y')), ['x', 'y'])
  *
  * @since 0.12.0
  */
@@ -201,9 +201,9 @@ export const withSnd =
  * having to repeat yourself or use `as const`.
  *
  * @example
- * import { create } from 'fp-ts-std/Tuple';
+ * import { create } from 'fp-ts-std/Tuple'
  *
- * assert.deepStrictEqual(create(['x', 'y']), ['x', 'y']);
+ * assert.deepStrictEqual(create(['x', 'y']), ['x', 'y'])
  *
  * @since 0.12.0
  */
@@ -213,13 +213,13 @@ export const create: <A, B>(xs: [A, B]) => [A, B] = identity
  * Apply a function to both elements of a tuple.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { mapBoth } from 'fp-ts-std/Tuple';
- * import { multiply } from 'fp-ts-std/Number';
+ * import { pipe } from 'fp-ts/function'
+ * import { mapBoth } from 'fp-ts-std/Tuple'
+ * import { multiply } from 'fp-ts-std/Number'
  *
- * const xs = pipe([3, 5], mapBoth(multiply(2)));
+ * const xs = pipe([3, 5], mapBoth(multiply(2)))
  *
- * assert.deepStrictEqual(xs, [6, 10]);
+ * assert.deepStrictEqual(xs, [6, 10])
  *
  * @since 0.14.0
  */
@@ -231,13 +231,13 @@ export const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B] =
  * variadic version, consider `fork` in `Function`.
  *
  * @example
- * import { fanout } from 'fp-ts-std/Tuple';
- * import { add } from 'fp-ts-std/Number';
- * import * as S from 'fp-ts-std/String';
+ * import { fanout } from 'fp-ts-std/Tuple'
+ * import { add } from 'fp-ts-std/Number'
+ * import * as S from 'fp-ts-std/String'
  *
- * const add2 = add(2);
+ * const add2 = add(2)
  *
- * assert.deepStrictEqual(fanout(S.fromNumber)(add2)(0), ['0', 2]);
+ * assert.deepStrictEqual(fanout(S.fromNumber)(add2)(0), ['0', 2])
  *
  * @since 0.15.0
  */

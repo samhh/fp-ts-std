@@ -13,10 +13,10 @@ import { curry2 } from "./Function"
  * Invert a boolean.
  *
  * @example
- * import { invert } from 'fp-ts-std/Boolean';
+ * import { invert } from 'fp-ts-std/Boolean'
  *
- * assert.strictEqual(invert(true), false);
- * assert.strictEqual(invert(false), true);
+ * assert.strictEqual(invert(true), false)
+ * assert.strictEqual(invert(false), true)
  *
  * @since 0.4.0
  */
@@ -27,10 +27,10 @@ export const invert: Endomorphism<boolean> = x => !x
  * logical conjunction.
  *
  * @example
- * import { and } from 'fp-ts-std/Boolean';
+ * import { and } from 'fp-ts-std/Boolean'
  *
- * assert.strictEqual(and(true)(true), true);
- * assert.strictEqual(and(true)(false), false);
+ * assert.strictEqual(and(true)(true), true)
+ * assert.strictEqual(and(true)(false), false)
  *
  * @since 0.4.0
  */
@@ -43,10 +43,10 @@ export const and: (x: boolean) => Endomorphism<boolean> = curry2(
  * to logical disjunction.
  *
  * @example
- * import { or } from 'fp-ts-std/Boolean';
+ * import { or } from 'fp-ts-std/Boolean'
  *
- * assert.strictEqual(or(true)(false), true);
- * assert.strictEqual(or(false)(false), false);
+ * assert.strictEqual(or(true)(false), true)
+ * assert.strictEqual(or(false)(false), false)
  *
  * @since 0.4.0
  */
@@ -59,10 +59,10 @@ export const or: (x: boolean) => Endomorphism<boolean> = curry2(
  * `false`. Equivalent to exclusive logical disjunction.
  *
  * @example
- * import { xor } from 'fp-ts-std/Boolean';
+ * import { xor } from 'fp-ts-std/Boolean'
  *
- * assert.strictEqual(xor(true)(false), true);
- * assert.strictEqual(xor(true)(true), false);
+ * assert.strictEqual(xor(true)(false), true)
+ * assert.strictEqual(xor(true)(true), false)
  *
  * @since 0.4.0
  */

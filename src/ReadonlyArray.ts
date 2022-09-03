@@ -58,13 +58,13 @@ import {
  * Like `fp-ts/ReadonlyArray::elem` but flipped, which the "V" suffix denotes.
  *
  * @example
- * import { elemV } from 'fp-ts-std/ReadonlyArray';
- * import { eqString } from 'fp-ts/Eq';
+ * import { elemV } from 'fp-ts-std/ReadonlyArray'
+ * import { eqString } from 'fp-ts/Eq'
  *
- * const isLowerVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u']);
+ * const isLowerVowel = elemV(eqString)(['a', 'e', 'i', 'o', 'u'])
  *
- * assert.strictEqual(isLowerVowel('a'), true);
- * assert.strictEqual(isLowerVowel('b'), false);
+ * assert.strictEqual(isLowerVowel('a'), true)
+ * assert.strictEqual(isLowerVowel('b'), false)
  *
  * @since 0.10.0
  */
@@ -78,14 +78,14 @@ export const elemV =
  * Check if a predicate does not hold for any array member.
  *
  * @example
- * import { none } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { none } from 'fp-ts-std/ReadonlyArray'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isFive: Predicate<number> = n => n === 5;
- * const noneAreFive = none(isFive);
+ * const isFive: Predicate<number> = n => n === 5
+ * const noneAreFive = none(isFive)
  *
- * assert.strictEqual(noneAreFive([4, 4, 4]), true);
- * assert.strictEqual(noneAreFive([4, 5, 4]), false);
+ * assert.strictEqual(noneAreFive([4, 4, 4]), true)
+ * assert.strictEqual(noneAreFive([4, 5, 4]), false)
  *
  * @since 0.10.0
  */
@@ -100,13 +100,13 @@ export const none: <A>(f: Predicate<A>) => Predicate<ReadonlyArray<A>> = flow(
  * separator.
  *
  * @example
- * import { join } from 'fp-ts-std/ReadonlyArray';
+ * import { join } from 'fp-ts-std/ReadonlyArray'
  *
- * const commaSepd = join(',');
+ * const commaSepd = join(',')
  *
- * assert.strictEqual(commaSepd([]), '');
- * assert.strictEqual(commaSepd(['a']), 'a');
- * assert.strictEqual(commaSepd(['a', 'b', 'c']), 'a,b,c');
+ * assert.strictEqual(commaSepd([]), '')
+ * assert.strictEqual(commaSepd(['a']), 'a')
+ * assert.strictEqual(commaSepd(['a', 'b', 'c']), 'a,b,c')
  *
  * @since 0.10.0
  */
@@ -119,15 +119,15 @@ export const join = (x: string): ((ys: ReadonlyArray<string>) => string) =>
  * and `getEq` should be preferred on ordered data.
  *
  * @example
- * import { getEq } from 'fp-ts/Array';
- * import { getDisorderedEq } from 'fp-ts-std/ReadonlyArray';
- * import { ordNumber } from 'fp-ts/Ord';
+ * import { getEq } from 'fp-ts/Array'
+ * import { getDisorderedEq } from 'fp-ts-std/ReadonlyArray'
+ * import { ordNumber } from 'fp-ts/Ord'
  *
- * const f = getEq(ordNumber);
- * const g = getDisorderedEq(ordNumber);
+ * const f = getEq(ordNumber)
+ * const g = getDisorderedEq(ordNumber)
  *
- * assert.strictEqual(f.equals([1, 2, 3], [1, 3, 2]), false);
- * assert.strictEqual(g.equals([1, 2, 3], [1, 3, 2]), true);
+ * assert.strictEqual(f.equals([1, 2, 3], [1, 3, 2]), false)
+ * assert.strictEqual(g.equals([1, 2, 3], [1, 3, 2]), true)
  *
  * @since 0.10.0
  */
@@ -147,15 +147,15 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<ReadonlyArray<A>> => ({
  * the remaining items, sans the match (if any), are returned as well.
  *
  * @example
- * import { pluckFirst } from 'fp-ts-std/ReadonlyArray';
- * import * as O from 'fp-ts/Option';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { pluckFirst } from 'fp-ts-std/ReadonlyArray'
+ * import * as O from 'fp-ts/Option'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isOverFive: Predicate<number> = n => n > 5;
- * const pluckFirstOverFive = pluckFirst(isOverFive);
+ * const isOverFive: Predicate<number> = n => n > 5
+ * const pluckFirstOverFive = pluckFirst(isOverFive)
  *
- * assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5]), [O.none, [1, 3, 5]]);
- * assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5, 7, 9]), [O.some(7), [1, 3, 5, 9]]);
+ * assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5]), [O.none, [1, 3, 5]])
+ * assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5, 7, 9]), [O.some(7), [1, 3, 5, 9]])
  *
  * @since 0.10.0
  */
@@ -178,15 +178,15 @@ export const pluckFirst =
  * the array is checked is unspecified.
  *
  * @example
- * import { upsert } from 'fp-ts-std/ReadonlyArray';
- * import { eqString, contramap } from 'fp-ts/Eq';
+ * import { upsert } from 'fp-ts-std/ReadonlyArray'
+ * import { eqString, contramap } from 'fp-ts/Eq'
  *
  * type Account = {
- *     id: string;
- *     name: string;
- * };
+ *     id: string
+ *     name: string
+ * }
  *
- * const eqAccount = contramap<string, Account>(acc => acc.id)(eqString);
+ * const eqAccount = contramap<string, Account>(acc => acc.id)(eqString)
  *
  * const accounts: ReadonlyArray<Account> = [{
  *     id: 'a',
@@ -194,22 +194,22 @@ export const pluckFirst =
  * }, {
  *     id: 'b',
  *     name: 'another account',
- * }];
+ * }]
  *
  * const created: Account = {
  *     id: 'c',
  *     name: 'yet another account',
- * };
+ * }
  *
  * const updated: Account = {
  *     id: 'b',
  *     name: 'renamed account name',
- * };
+ * }
  *
- * const upsertAccount = upsert(eqAccount);
+ * const upsertAccount = upsert(eqAccount)
  *
- * assert.deepStrictEqual(upsertAccount(created)(accounts), [accounts[0], accounts[1], created]);
- * assert.deepStrictEqual(upsertAccount(updated)(accounts), [accounts[0], updated]);
+ * assert.deepStrictEqual(upsertAccount(created)(accounts), [accounts[0], accounts[1], created])
+ * assert.deepStrictEqual(upsertAccount(updated)(accounts), [accounts[0], updated])
  *
  * @since 0.10.0
  */
@@ -231,13 +231,13 @@ export const upsert =
  * The array of elements to insert must be non-empty.
  *
  * @example
- * import { insertMany } from 'fp-ts-std/ReadonlyArray';
- * import * as O from 'fp-ts/Option';
+ * import { insertMany } from 'fp-ts-std/ReadonlyArray'
+ * import * as O from 'fp-ts/Option'
  *
- * const f = insertMany(1)(['a', 'b']);
- * assert.deepStrictEqual(f([]), O.none);
- * assert.deepStrictEqual(f(['x']), O.some(['x', 'a', 'b']));
- * assert.deepStrictEqual(f(['x', 'y']), O.some(['x', 'a', 'b', 'y']));
+ * const f = insertMany(1)(['a', 'b'])
+ * assert.deepStrictEqual(f([]), O.none)
+ * assert.deepStrictEqual(f(['x']), O.some(['x', 'a', 'b']))
+ * assert.deepStrictEqual(f(['x', 'y']), O.some(['x', 'a', 'b', 'y']))
  *
  * @since 0.5.0
  */
@@ -256,10 +256,10 @@ export const insertMany =
  * Filter a list, removing any elements that repeat that directly precede them.
  *
  * @example
- * import { dropRepeats } from 'fp-ts-std/ReadonlyArray';
+ * import { dropRepeats } from 'fp-ts-std/ReadonlyArray'
  * import { eqNumber } from 'fp-ts/Eq'
  *
- * assert.deepStrictEqual(dropRepeats(eqNumber)([1, 2, 2, 3, 2, 4, 4]), [1, 2, 3, 2, 4]);
+ * assert.deepStrictEqual(dropRepeats(eqNumber)([1, 2, 2, 3, 2, 4, 4]), [1, 2, 3, 2, 4])
  *
  * @since 0.10.0
  */
@@ -274,13 +274,13 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<ReadonlyArray<A>> =
  * Check if an array starts with the specified subarray.
  *
  * @example
- * import { startsWith } from 'fp-ts-std/ReadonlyArray';
+ * import { startsWith } from 'fp-ts-std/ReadonlyArray'
  * import { eqString } from 'fp-ts/Eq'
  *
- * const startsXyz = startsWith(eqString)(['x', 'y', 'z']);
+ * const startsXyz = startsWith(eqString)(['x', 'y', 'z'])
  *
- * assert.strictEqual(startsXyz(['x', 'y', 'z', 'a']), true);
- * assert.strictEqual(startsXyz(['a', 'x', 'y', 'z']), false);
+ * assert.strictEqual(startsXyz(['x', 'y', 'z', 'a']), true)
+ * assert.strictEqual(startsXyz(['a', 'x', 'y', 'z']), false)
  *
  * @since 0.10.0
  */
@@ -293,13 +293,13 @@ export const startsWith =
  * Check if an array ends with the specified subarray.
  *
  * @example
- * import { endsWith } from 'fp-ts-std/ReadonlyArray';
+ * import { endsWith } from 'fp-ts-std/ReadonlyArray'
  * import { eqString } from 'fp-ts/Eq'
  *
- * const endsXyz = endsWith(eqString)(['x', 'y', 'z']);
+ * const endsXyz = endsWith(eqString)(['x', 'y', 'z'])
  *
- * assert.strictEqual(endsXyz(['a', 'x', 'y', 'z']), true);
- * assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false);
+ * assert.strictEqual(endsXyz(['a', 'x', 'y', 'z']), true)
+ * assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false)
  *
  * @since 0.10.0
  */
@@ -312,16 +312,16 @@ export const endsWith =
  * Returns a new array without the values present in the first input array.
  *
  * @example
- * import { without } from 'fp-ts-std/ReadonlyArray';
- * import { eqNumber } from 'fp-ts/Eq';
+ * import { without } from 'fp-ts-std/ReadonlyArray'
+ * import { eqNumber } from 'fp-ts/Eq'
  *
- * const withoutFourOrFive = without(eqNumber)([4, 5]);
+ * const withoutFourOrFive = without(eqNumber)([4, 5])
  *
- * assert.deepStrictEqual(withoutFourOrFive([3, 4]), [3]);
- * assert.deepStrictEqual(withoutFourOrFive([4, 5]), []);
- * assert.deepStrictEqual(withoutFourOrFive([4, 5, 6]), [6]);
- * assert.deepStrictEqual(withoutFourOrFive([3, 4, 5, 6]), [3, 6]);
- * assert.deepStrictEqual(withoutFourOrFive([4, 3, 4, 5, 6, 5]), [3, 6]);
+ * assert.deepStrictEqual(withoutFourOrFive([3, 4]), [3])
+ * assert.deepStrictEqual(withoutFourOrFive([4, 5]), [])
+ * assert.deepStrictEqual(withoutFourOrFive([4, 5, 6]), [6])
+ * assert.deepStrictEqual(withoutFourOrFive([3, 4, 5, 6]), [3, 6])
+ * assert.deepStrictEqual(withoutFourOrFive([4, 3, 4, 5, 6, 5]), [3, 6])
  *
  * @since 0.10.0
  */
@@ -336,12 +336,12 @@ export const without =
  * possible ordered combination of the two input arrays.
  *
  * @example
- * import { cartesian } from 'fp-ts-std/ReadonlyArray';
+ * import { cartesian } from 'fp-ts-std/ReadonlyArray'
  *
  * assert.deepStrictEqual(
  *     cartesian([1, 2])(['a', 'b', 'c']),
  *     [[1, 'a'], [1, 'b'], [1, 'c'], [2, 'a'], [2, 'b'], [2, 'c']],
- * );
+ * )
  *
  * @since 0.10.0
  */
@@ -362,10 +362,10 @@ export const cartesian =
  * Adds together all the numbers in the input array.
  *
  * @example
- * import { sum } from 'fp-ts-std/ReadonlyArray';
+ * import { sum } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.strictEqual(sum([]), 0);
- * assert.strictEqual(sum([25, 3, 10]), 38);
+ * assert.strictEqual(sum([]), 0)
+ * assert.strictEqual(sum([25, 3, 10]), 38)
  *
  * @since 0.10.0
  */
@@ -375,11 +375,11 @@ export const sum: (xs: ReadonlyArray<number>) => number = concatAll(MonoidSum)
  * Multiplies together all the numbers in the input array.
  *
  * @example
- * import { product } from 'fp-ts-std/ReadonlyArray';
+ * import { product } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.strictEqual(product([]), 1);
- * assert.strictEqual(product([5]), 5);
- * assert.strictEqual(product([4, 2, 3]), 24);
+ * assert.strictEqual(product([]), 1)
+ * assert.strictEqual(product([5]), 5)
+ * assert.strictEqual(product([4, 2, 3]), 24)
  *
  * @since 0.10.0
  */
@@ -390,9 +390,9 @@ export const product: (xs: ReadonlyArray<number>) => number =
  * Calculate the mean of an array of numbers.
  *
  * @example
- * import { mean } from 'fp-ts-std/ReadonlyArray';
+ * import { mean } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.deepStrictEqual(mean([2, 7, 9]), 6);
+ * assert.deepStrictEqual(mean([2, 7, 9]), 6)
  *
  * @since 0.10.0
  */
@@ -403,10 +403,10 @@ export const mean = (xs: ReadonlyNonEmptyArray<number>): number =>
  * Calculate the median of an array of numbers.
  *
  * @example
- * import { median } from 'fp-ts-std/ReadonlyArray';
+ * import { median } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.deepStrictEqual(median([2, 9, 7]), 7);
- * assert.deepStrictEqual(median([7, 2, 10, 9]), 8);
+ * assert.deepStrictEqual(median([2, 9, 7]), 7)
+ * assert.deepStrictEqual(median([7, 2, 10, 9]), 8)
  *
  * @since 0.10.0
  */
@@ -427,12 +427,12 @@ export const median: (xs: ReadonlyNonEmptyArray<number>) => number = flow(
  * If `n` is greater than the length of the array, an empty array is returned.
  *
  * @example
- * import { aperture } from 'fp-ts-std/ReadonlyArray';
+ * import { aperture } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.deepStrictEqual(aperture(1)([1, 2, 3, 4]), [[1], [2], [3], [4]]);
- * assert.deepStrictEqual(aperture(2)([1, 2, 3, 4]), [[1, 2], [2, 3], [3, 4]]);
- * assert.deepStrictEqual(aperture(3)([1, 2, 3, 4]), [[1, 2, 3], [2, 3, 4]]);
- * assert.deepStrictEqual(aperture(4)([1, 2, 3, 4]), [[1, 2, 3, 4]]);
+ * assert.deepStrictEqual(aperture(1)([1, 2, 3, 4]), [[1], [2], [3], [4]])
+ * assert.deepStrictEqual(aperture(2)([1, 2, 3, 4]), [[1, 2], [2, 3], [3, 4]])
+ * assert.deepStrictEqual(aperture(3)([1, 2, 3, 4]), [[1, 2, 3], [2, 3, 4]])
+ * assert.deepStrictEqual(aperture(4)([1, 2, 3, 4]), [[1, 2, 3, 4]])
  *
  * @since 0.10.0
  */
@@ -454,14 +454,14 @@ export const aperture =
  * This is merely a functional wrapper around `Array.prototype.slice`.
  *
  * @example
- * import { slice } from 'fp-ts-std/ReadonlyArray';
+ * import { slice } from 'fp-ts-std/ReadonlyArray'
  *
- * const xs = ['a', 'b', 'c', 'd'];
+ * const xs = ['a', 'b', 'c', 'd']
  *
- * assert.deepStrictEqual(slice(1)(3)(xs), ['b', 'c']);
- * assert.deepStrictEqual(slice(1)(Infinity)(xs), ['b', 'c', 'd']);
- * assert.deepStrictEqual(slice(0)(-1)(xs), ['a', 'b', 'c']);
- * assert.deepStrictEqual(slice(-3)(-1)(xs), ['b', 'c']);
+ * assert.deepStrictEqual(slice(1)(3)(xs), ['b', 'c'])
+ * assert.deepStrictEqual(slice(1)(Infinity)(xs), ['b', 'c', 'd'])
+ * assert.deepStrictEqual(slice(0)(-1)(xs), ['a', 'b', 'c'])
+ * assert.deepStrictEqual(slice(-3)(-1)(xs), ['b', 'c'])
  *
  * @since 0.10.0
  */
@@ -475,12 +475,12 @@ export const slice =
  * thought of as the inverse of ordinary array filtering.
  *
  * @example
- * import { reject } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { reject } from 'fp-ts-std/ReadonlyArray'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
+ * const isEven: Predicate<number> = n => n % 2 === 0
  *
- * assert.deepStrictEqual(reject(isEven)([1, 2, 3, 4]), [1, 3]);
+ * assert.deepStrictEqual(reject(isEven)([1, 2, 3, 4]), [1, 3])
  *
  * @since 0.10.0
  */
@@ -497,14 +497,14 @@ export const reject = <A>(
  * If both indices are the same, the array is returned unchanged.
  *
  * @example
- * import { moveFrom } from 'fp-ts-std/ReadonlyArray';
- * import * as O from 'fp-ts/Option';
+ * import { moveFrom } from 'fp-ts-std/ReadonlyArray'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(moveFrom(0)(1)(['a', 'b', 'c']), O.some(['b', 'a', 'c']));
- * assert.deepStrictEqual(moveFrom(1)(1)(['a', 'b', 'c']), O.some(['a', 'b', 'c']));
- * assert.deepStrictEqual(moveFrom(0)(0)([]), O.none);
- * assert.deepStrictEqual(moveFrom(0)(1)(['a']), O.none);
- * assert.deepStrictEqual(moveFrom(1)(0)(['a']), O.none);
+ * assert.deepStrictEqual(moveFrom(0)(1)(['a', 'b', 'c']), O.some(['b', 'a', 'c']))
+ * assert.deepStrictEqual(moveFrom(1)(1)(['a', 'b', 'c']), O.some(['a', 'b', 'c']))
+ * assert.deepStrictEqual(moveFrom(0)(0)([]), O.none)
+ * assert.deepStrictEqual(moveFrom(0)(1)(['a']), O.none)
+ * assert.deepStrictEqual(moveFrom(1)(0)(['a']), O.none)
  *
  * @since 0.10.0
  */
@@ -532,14 +532,14 @@ export const moveFrom =
  * If both indices are the same, the array is returned unchanged.
  *
  * @example
- * import { moveTo } from 'fp-ts-std/ReadonlyArray';
- * import * as O from 'fp-ts/Option';
+ * import { moveTo } from 'fp-ts-std/ReadonlyArray'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(moveTo(1)(0)(['a', 'b', 'c']), O.some(['b', 'a', 'c']));
- * assert.deepStrictEqual(moveTo(1)(1)(['a', 'b', 'c']), O.some(['a', 'b', 'c']));
- * assert.deepStrictEqual(moveTo(0)(0)([]), O.none);
- * assert.deepStrictEqual(moveTo(0)(1)(['a']), O.none);
- * assert.deepStrictEqual(moveTo(1)(0)(['a']), O.none);
+ * assert.deepStrictEqual(moveTo(1)(0)(['a', 'b', 'c']), O.some(['b', 'a', 'c']))
+ * assert.deepStrictEqual(moveTo(1)(1)(['a', 'b', 'c']), O.some(['a', 'b', 'c']))
+ * assert.deepStrictEqual(moveTo(0)(0)([]), O.none)
+ * assert.deepStrictEqual(moveTo(0)(1)(['a']), O.none)
+ * assert.deepStrictEqual(moveTo(1)(0)(['a']), O.none)
  *
  * @since 0.10.0
  */
@@ -549,13 +549,13 @@ export const moveTo = flip(moveFrom)
  * Map each item of an array to a key, and count how many map to each key.
  *
  * @example
- * import { countBy } from 'fp-ts-std/ReadonlyArray';
- * import * as S from 'fp-ts/string';
+ * import { countBy } from 'fp-ts-std/ReadonlyArray'
+ * import * as S from 'fp-ts/string'
  *
- * const f = countBy(S.toLowerCase);
- * const xs = ['A', 'b', 'C', 'a', 'e', 'A'];
+ * const f = countBy(S.toLowerCase)
+ * const xs = ['A', 'b', 'C', 'a', 'e', 'A']
  *
- * assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 });
+ * assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 })
  *
  * @since 0.10.0
  */
@@ -569,13 +569,13 @@ export const countBy =
  * which all elements satisfy the specified predicate, creating a new array.
  *
  * @example
- * import { dropRightWhile } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { dropRightWhile } from 'fp-ts-std/ReadonlyArray'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
- * const dropRightEvens = dropRightWhile(isEven);
+ * const isEven: Predicate<number> = n => n % 2 === 0
+ * const dropRightEvens = dropRightWhile(isEven)
  *
- * assert.deepStrictEqual(dropRightEvens([6, 7, 3, 4, 2]), [6, 7, 3]);
+ * assert.deepStrictEqual(dropRightEvens([6, 7, 3, 4, 2]), [6, 7, 3])
  *
  * @since 0.10.0
  */
@@ -600,12 +600,12 @@ export const dropRightWhile = <A>(
  * If `n` is a float, it will be rounded down to the nearest integer.
  *
  * @example
- * import { dropAt } from 'fp-ts-std/ReadonlyArray';
- * import * as O from 'fp-ts/Option';
+ * import { dropAt } from 'fp-ts-std/ReadonlyArray'
+ * import * as O from 'fp-ts/Option'
  *
- * assert.deepStrictEqual(dropAt(2)(0)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'c', 'd', 'e', 'f', 'g']));
- * assert.deepStrictEqual(dropAt(2)(3)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'f', 'g']));
- * assert.deepStrictEqual(dropAt(2)(Infinity)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b']));
+ * assert.deepStrictEqual(dropAt(2)(0)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'c', 'd', 'e', 'f', 'g']))
+ * assert.deepStrictEqual(dropAt(2)(3)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'f', 'g']))
+ * assert.deepStrictEqual(dropAt(2)(Infinity)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b']))
  *
  * @since 0.10.0
  */
@@ -636,11 +636,11 @@ export const dropAt =
  * than the following rows, their elements are skipped.
  *
  * @example
- * import { transpose } from 'fp-ts-std/ReadonlyArray';
+ * import { transpose } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.deepStrictEqual(transpose([[1, 2, 3], [4, 5, 6]]), [[1, 4], [2, 5], [3, 6]]);
- * assert.deepStrictEqual(transpose([[1, 4], [2, 5], [3, 6]]), [[1, 2, 3], [4, 5, 6]]);
- * assert.deepStrictEqual(transpose([[10, 11], [20], [], [30, 31,32]]), [[10, 20, 30], [11, 31], [32]]);
+ * assert.deepStrictEqual(transpose([[1, 2, 3], [4, 5, 6]]), [[1, 4], [2, 5], [3, 6]])
+ * assert.deepStrictEqual(transpose([[1, 4], [2, 5], [3, 6]]), [[1, 2, 3], [4, 5, 6]])
+ * assert.deepStrictEqual(transpose([[10, 11], [20], [], [30, 31,32]]), [[10, 20, 30], [11, 31], [32]])
  *
  * @since 0.10.0
  */
@@ -663,13 +663,13 @@ export const transpose = <A>(
  * which all elements satisfy the specified predicate, creating a new array.
  *
  * @example
- * import { takeRightWhile } from 'fp-ts-std/ReadonlyArray';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { takeRightWhile } from 'fp-ts-std/ReadonlyArray'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
- * const takeRightEvens = takeRightWhile(isEven);
+ * const isEven: Predicate<number> = n => n % 2 === 0
+ * const takeRightEvens = takeRightWhile(isEven)
  *
- * assert.deepStrictEqual(takeRightEvens([6, 7, 3, 4, 2]), [4, 2]);
+ * assert.deepStrictEqual(takeRightEvens([6, 7, 3, 4, 2]), [4, 2])
  *
  * @since 0.10.0
  */
@@ -684,11 +684,11 @@ export const takeRightWhile = <A>(
  * duplicate values present only in one input array are maintained.
  *
  * @example
- * import { symmetricDifference } from 'fp-ts-std/ReadonlyArray';
- * import { eqNumber } from 'fp-ts/Eq';
+ * import { symmetricDifference } from 'fp-ts-std/ReadonlyArray'
+ * import { eqNumber } from 'fp-ts/Eq'
  *
- * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 2, 3, 4])([3, 4, 5, 6]), [1, 2, 5, 6]);
- * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 7, 7, 4, 3])([3, 4, 9, 6]), [1, 7, 7, 9, 6]);
+ * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 2, 3, 4])([3, 4, 5, 6]), [1, 2, 5, 6])
+ * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 7, 7, 4, 3])([3, 4, 9, 6]), [1, 7, 7, 9, 6])
  *
  * @since 0.10.0
  */
@@ -707,14 +707,14 @@ export const symmetricDifference =
  * short-circuits and returns the current accumulator value.
  *
  * @example
- * import { reduceWhile } from 'fp-ts-std/ReadonlyArray';
- * import { add } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { reduceWhile } from 'fp-ts-std/ReadonlyArray'
+ * import { add } from 'fp-ts-std/Number'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
- * const reduceUntilOdd = reduceWhile(isEven);
+ * const isEven: Predicate<number> = n => n % 2 === 0
+ * const reduceUntilOdd = reduceWhile(isEven)
  *
- * assert.strictEqual(reduceUntilOdd(add)(0)([2, 4, 6, 9, 10]), 12);
+ * assert.strictEqual(reduceUntilOdd(add)(0)([2, 4, 6, 9, 10]), 12)
  *
  * @since 0.10.0
  */
@@ -742,14 +742,14 @@ export const reduceWhile =
  * short-circuits and returns the current accumulator value.
  *
  * @example
- * import { reduceRightWhile } from 'fp-ts-std/ReadonlyArray';
- * import { add } from 'fp-ts-std/Number';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { reduceRightWhile } from 'fp-ts-std/ReadonlyArray'
+ * import { add } from 'fp-ts-std/Number'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
- * const reduceRightUntilOdd = reduceRightWhile(isEven);
+ * const isEven: Predicate<number> = n => n % 2 === 0
+ * const reduceRightUntilOdd = reduceRightWhile(isEven)
  *
- * assert.strictEqual(reduceRightUntilOdd(add)(0)([2, 4, 7, 8, 10]), 18);
+ * assert.strictEqual(reduceRightUntilOdd(add)(0)([2, 4, 7, 8, 10]), 18)
  *
  * @since 0.10.0
  */
@@ -763,10 +763,10 @@ export const reduceRightWhile =
  * Obtain the minimum value from a non-empty array.
  *
  * @example
- * import { minimum } from 'fp-ts-std/ReadonlyArray';
- * import { ordNumber } from 'fp-ts/Ord';
+ * import { minimum } from 'fp-ts-std/ReadonlyArray'
+ * import { ordNumber } from 'fp-ts/Ord'
  *
- * assert.strictEqual(minimum(ordNumber)([2, 3, 1, 5, 4]), 1);
+ * assert.strictEqual(minimum(ordNumber)([2, 3, 1, 5, 4]), 1)
  *
  * @since 0.10.0
  */
@@ -777,10 +777,10 @@ export const minimum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
  * Obtain the maximum value from a non-empty array.
  *
  * @example
- * import { maximum } from 'fp-ts-std/ReadonlyArray';
- * import { ordNumber } from 'fp-ts/Ord';
+ * import { maximum } from 'fp-ts-std/ReadonlyArray'
+ * import { ordNumber } from 'fp-ts/Ord'
  *
- * assert.strictEqual(maximum(ordNumber)([2, 3, 1, 5, 4]), 5);
+ * assert.strictEqual(maximum(ordNumber)([2, 3, 1, 5, 4]), 5)
  *
  * @since 0.10.0
  */
@@ -792,7 +792,7 @@ export const maximum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
  * input sizes via the `These` type.
  *
  * @example
- * import { zipAll } from 'fp-ts-std/ReadonlyArray';
+ * import { zipAll } from 'fp-ts-std/ReadonlyArray'
  * import * as T from 'fp-ts/These'
  *
  * assert.deepStrictEqual(zipAll([3, 4, 5, 6])([1, 2]), [T.both(1, 3), T.both(2, 4), T.right(5), T.right(6)])
@@ -827,15 +827,15 @@ export const zipAll =
  * and therefore `Task`-based, for example.
  *
  * @example
- * import * as T from "fp-ts/Task";
- * import { Task } from "fp-ts/Task";
- * import { filterA } from "fp-ts-std/ReadonlyArray";
+ * import * as T from "fp-ts/Task"
+ * import { Task } from "fp-ts/Task"
+ * import { filterA } from "fp-ts-std/ReadonlyArray"
  *
- * const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0);
+ * const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0)
  *
  * filterA(T.ApplicativePar)(asyncIsEven)([1, 2, 3, 4, 5])().then((xs) => {
- *     assert.deepStrictEqual(xs, [2, 4]);
- * });
+ *     assert.deepStrictEqual(xs, [2, 4])
+ * })
  *
  * @since 0.12.0
  */
@@ -883,13 +883,13 @@ export function filterA<F>(
  * the remaining array. Returns `None` if the index is out of bounds.
  *
  * @example
- * import { extractAt } from 'fp-ts-std/ReadonlyArray';
- * import * as O from 'fp-ts/Option';
+ * import { extractAt } from 'fp-ts-std/ReadonlyArray'
+ * import * as O from 'fp-ts/Option'
  *
- * const f = extractAt(1);
- * assert.deepStrictEqual(f(['x']), O.none);
- * assert.deepStrictEqual(f(['x', 'y']), O.some(['y', ['x']]));
- * assert.deepStrictEqual(f(['x', 'y', 'z']), O.some(['y', ['x', 'z']]));
+ * const f = extractAt(1)
+ * assert.deepStrictEqual(f(['x']), O.none)
+ * assert.deepStrictEqual(f(['x', 'y']), O.some(['y', ['x']]))
+ * assert.deepStrictEqual(f(['x', 'y', 'z']), O.some(['y', ['x', 'z']]))
  *
  * @since 0.12.0
  */
@@ -906,9 +906,9 @@ export const extractAt =
  * Convert an `Iterable` to a `ReadonlyArray`.
  *
  * @example
- * import { fromIterable } from 'fp-ts-std/ReadonlyArray';
+ * import { fromIterable } from 'fp-ts-std/ReadonlyArray'
  *
- * assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o']);
+ * assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o'])
  *
  * @since 0.14.0
  */
@@ -919,14 +919,14 @@ export const fromIterable: <A>(xs: Iterable<A>) => ReadonlyArray<A> = Array.from
  * Short-circuits.
  *
  * @example
- * import { allM } from 'fp-ts-std/ReadonlyArray';
- * import * as IO from 'fp-ts/IO';
- * import { execute } from 'fp-ts-std/IO';
+ * import { allM } from 'fp-ts-std/ReadonlyArray'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
  *
- * const f = allM(IO.Monad);
+ * const f = allM(IO.Monad)
  *
- * assert.strictEqual(execute(f([IO.of(true), IO.of(true), IO.of(true)])), true);
- * assert.strictEqual(execute(f([IO.of(true), IO.of(false), IO.of(true)])), false);
+ * assert.strictEqual(execute(f([IO.of(true), IO.of(true), IO.of(true)])), true)
+ * assert.strictEqual(execute(f([IO.of(true), IO.of(false), IO.of(true)])), false)
  *
  * @since 0.15.0
  */
@@ -964,14 +964,14 @@ export function allM<M>(
  * Short-circuits.
  *
  * @example
- * import { anyM } from 'fp-ts-std/ReadonlyArray';
- * import * as IO from 'fp-ts/IO';
- * import { execute } from 'fp-ts-std/IO';
+ * import { anyM } from 'fp-ts-std/ReadonlyArray'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
  *
- * const f = anyM(IO.Monad);
+ * const f = anyM(IO.Monad)
  *
- * assert.strictEqual(execute(f([IO.of(false), IO.of(false), IO.of(false)])), false);
- * assert.strictEqual(execute(f([IO.of(false), IO.of(true), IO.of(false)])), true);
+ * assert.strictEqual(execute(f([IO.of(false), IO.of(false), IO.of(false)])), false)
+ * assert.strictEqual(execute(f([IO.of(false), IO.of(true), IO.of(false)])), true)
  *
  * @since 0.15.0
  */

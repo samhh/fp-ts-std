@@ -16,18 +16,18 @@
  * it has the side effect of outputting the trace message.
  *
  * @example
- * import { trace } from 'fp-ts-std/Debug';
- * import { flow } from 'fp-ts/function';
+ * import { trace } from 'fp-ts-std/Debug'
+ * import { flow } from 'fp-ts/function'
  *
- * const double = (n: number): number => n * 2;
- * const toString = (n: number): string => String(n);
+ * const double = (n: number): number => n * 2
+ * const toString = (n: number): string => String(n)
  *
  * // Will log: "my log message"
  * const doubledString: (n: number) => string =
- *     flow(double, trace('my log message'), toString);
+ *     flow(double, trace('my log message'), toString)
  *
  * // Actual function/pipeline behaviour is unaffected:
- * assert.strictEqual(doubledString(2), '4');
+ * assert.strictEqual(doubledString(2), '4')
  *
  * @since 0.2.0
  */
@@ -42,18 +42,18 @@ export const trace =
  * Like `trace`, but logs the generic value too.
  *
  * @example
- * import { traceWithValue } from 'fp-ts-std/Debug';
- * import { flow } from 'fp-ts/function';
+ * import { traceWithValue } from 'fp-ts-std/Debug'
+ * import { flow } from 'fp-ts/function'
  *
- * const double = (n: number): number => n * 2;
- * const toString = (n: number): string => String(n);
+ * const double = (n: number): number => n * 2
+ * const toString = (n: number): string => String(n)
  *
  * // Will log: "my log message: <value>"
  * const doubledString: (n: number) => string =
- *     flow(double, traceWithValue('my log message: '), toString);
+ *     flow(double, traceWithValue('my log message: '), toString)
  *
  * // Actual function/pipeline behaviour is unaffected:
- * assert.strictEqual(doubledString(2), '4');
+ * assert.strictEqual(doubledString(2), '4')
  *
  * @since 0.2.0
  */

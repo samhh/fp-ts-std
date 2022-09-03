@@ -18,14 +18,14 @@ import {
  * Apply a function to both elements of a bifunctor.
  *
  * @example
- * import { pipe } from 'fp-ts/function';
- * import { mapBoth } from 'fp-ts-std/Bifunctor';
- * import * as Tuple from 'fp-ts/Tuple';
- * import { multiply } from 'fp-ts-std/Number';
+ * import { pipe } from 'fp-ts/function'
+ * import { mapBoth } from 'fp-ts-std/Bifunctor'
+ * import * as Tuple from 'fp-ts/Tuple'
+ * import { multiply } from 'fp-ts-std/Number'
  *
- * const xs = pipe([3, 5], mapBoth(Tuple.Bifunctor)(multiply(2)));
+ * const xs = pipe([3, 5], mapBoth(Tuple.Bifunctor)(multiply(2)))
  *
- * assert.deepStrictEqual(xs, [6, 10]);
+ * assert.deepStrictEqual(xs, [6, 10])
  *
  * @since 0.14.0
  */

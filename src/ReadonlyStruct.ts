@@ -14,9 +14,9 @@ import * as RA from "fp-ts/ReadonlyArray"
  * consider defining a semigroup.
  *
  * @example
- * import { merge } from 'fp-ts-std/ReadonlyStruct';
+ * import { merge } from 'fp-ts-std/ReadonlyStruct'
  *
- * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true });
+ * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true })
  *
  * @since 0.14.0
  */
@@ -29,15 +29,15 @@ export const merge =
  * type.
  *
  * @example
- * import { pick } from 'fp-ts-std/ReadonlyStruct';
+ * import { pick } from 'fp-ts-std/ReadonlyStruct'
  * import { pipe } from 'fp-ts/function'
  *
  * const picked = pipe(
  *   { a: 1, b: 'two', c: [true] },
  *   pick(['a', 'c'])
- * );
+ * )
  *
- * assert.deepStrictEqual(picked, { a: 1, c: [true] });
+ * assert.deepStrictEqual(picked, { a: 1, c: [true] })
  *
  * @since 0.14.0
  */
@@ -70,12 +70,12 @@ export const pick =
  * Like `pick`, but allows you to specify the input record upfront.
  *
  * @example
- * import { pickFrom } from 'fp-ts-std/ReadonlyStruct';
+ * import { pickFrom } from 'fp-ts-std/ReadonlyStruct'
  *
- * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> };
- * const picked = pickFrom<MyType>()(['a', 'c']);
+ * type MyType = { a: number; b: string; c: ReadonlyArray<boolean> }
+ * const picked = pickFrom<MyType>()(['a', 'c'])
  *
- * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
+ * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
  * @since 0.14.0
  */
@@ -88,11 +88,11 @@ export const pickFrom = <A>(): (<K extends keyof A>(
  * type.
  *
  * @example
- * import { omit } from 'fp-ts-std/ReadonlyStruct';
+ * import { omit } from 'fp-ts-std/ReadonlyStruct'
  *
- * const sansB = omit(['b']);
+ * const sansB = omit(['b'])
  *
- * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] });
+ * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
  * @since 0.14.0
  */
@@ -123,12 +123,12 @@ type Exact<A extends Readonly<object>, B extends A> = A &
  * Provide default values for an object with optional properties.
  *
  * @example
- * import { withDefaults } from 'fp-ts-std/ReadonlyStruct';
- * import { pipe } from 'fp-ts/function';
+ * import { withDefaults } from 'fp-ts-std/ReadonlyStruct'
+ * import { pipe } from 'fp-ts/function'
  *
- * const aOptB: { a: number; b?: string } = { a: 1 };
+ * const aOptB: { a: number; b?: string } = { a: 1 }
  *
- * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' });
+ * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' })
  *
  * @since 0.15.0
  */

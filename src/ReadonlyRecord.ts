@@ -17,11 +17,11 @@ import { last } from "fp-ts/Semigroup"
  * Get the values from a `Record`.
  *
  * @example
- * import { values } from 'fp-ts-std/ReadonlyRecord';
+ * import { values } from 'fp-ts-std/ReadonlyRecord'
  *
- * const x = { a: 1, b: 'two' };
+ * const x = { a: 1, b: 'two' }
  *
- * assert.deepStrictEqual(values(x), [1, 'two']);
+ * assert.deepStrictEqual(values(x), [1, 'two'])
  *
  * @since 0.10.0
  */
@@ -33,13 +33,13 @@ export const values: <A>(x: RR.ReadonlyRecord<string, A>) => ReadonlyArray<A> =
  * denotes.
  *
  * @example
- * import { lookupV } from 'fp-ts-std/ReadonlyRecord';
- * import * as A from 'fp-ts/Array';
+ * import { lookupV } from 'fp-ts-std/ReadonlyRecord'
+ * import * as A from 'fp-ts/Array'
  *
- * const x = { a: 1, b: 'two', c: [true] };
- * const ks = ['a', 'c'];
+ * const x = { a: 1, b: 'two', c: [true] }
+ * const ks = ['a', 'c']
  *
- * assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]]);
+ * assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]])
  *
  * @since 0.10.0
  */
@@ -54,12 +54,12 @@ export const lookupV =
  * filtering.
  *
  * @example
- * import { reject } from 'fp-ts-std/ReadonlyRecord';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { reject } from 'fp-ts-std/ReadonlyRecord'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const isEven: Predicate<number> = n => n % 2 === 0;
+ * const isEven: Predicate<number> = n => n % 2 === 0
  *
- * assert.deepStrictEqual(reject(isEven)({ a: 1, b: 2, c: 3, d: 4 }), { a: 1, c: 3 });
+ * assert.deepStrictEqual(reject(isEven)({ a: 1, b: 2, c: 3, d: 4 }), { a: 1, c: 3 })
  *
  * @since 0.10.0
  */
@@ -75,10 +75,10 @@ export const reject = <A>(
  * lost, see instead `invertAll`.
  *
  * @example
- * import { invertLast } from 'fp-ts-std/ReadonlyRecord';
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { invertLast } from 'fp-ts-std/ReadonlyRecord'
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(invertLast(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': 'a', '2': 'c', '3': 'd' });
+ * assert.deepStrictEqual(invertLast(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': 'a', '2': 'c', '3': 'd' })
  *
  * @since 0.10.0
  */
@@ -97,10 +97,10 @@ export const invertLast = <A>(
  * duplicate keys, see instead `invertLast`.
  *
  * @example
- * import { invertAll } from 'fp-ts-std/ReadonlyRecord';
- * import { fromNumber } from 'fp-ts-std/String';
+ * import { invertAll } from 'fp-ts-std/ReadonlyRecord'
+ * import { fromNumber } from 'fp-ts-std/String'
  *
- * assert.deepStrictEqual(invertAll(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': ['a'], '2': ['b', 'c'], '3': ['d'] });
+ * assert.deepStrictEqual(invertAll(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': ['a'], '2': ['b', 'c'], '3': ['d'] })
  *
  * @since 0.10.0
  */

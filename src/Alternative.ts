@@ -33,15 +33,15 @@ import * as A from "fp-ts/Array"
  * empty/zero. The lazy value is evaluated only if the condition passes.
  *
  * @example
- * import { constant } from 'fp-ts/function';
- * import { pureIf } from 'fp-ts-std/Alternative';
- * import * as O from 'fp-ts/Option';
- * import { Predicate } from 'fp-ts/Predicate';
+ * import { constant } from 'fp-ts/function'
+ * import { pureIf } from 'fp-ts-std/Alternative'
+ * import * as O from 'fp-ts/Option'
+ * import { Predicate } from 'fp-ts/Predicate'
  *
- * const person = { name: 'Hodor', age: 40 };
- * const isMagicNumber: Predicate<number> = n => n === 42;
+ * const person = { name: 'Hodor', age: 40 }
+ * const isMagicNumber: Predicate<number> = n => n === 42
  *
- * const mname = pureIf(O.Alternative)(isMagicNumber(person.age))(constant(person.name));
+ * const mname = pureIf(O.Alternative)(isMagicNumber(person.age))(constant(person.name))
  *
  * @since 0.13.0
  */
@@ -75,16 +75,16 @@ export function pureIf<F>(
  * `Alternative` types without inherent laziness.
  *
  * @example
- * import { constant } from 'fp-ts/function';
- * import { altAllBy } from 'fp-ts-std/Alternative';
- * import * as O from 'fp-ts/Option';
+ * import { constant } from 'fp-ts/function'
+ * import { altAllBy } from 'fp-ts-std/Alternative'
+ * import * as O from 'fp-ts/Option'
  *
- * const f = altAllBy(O.Alternative);
+ * const f = altAllBy(O.Alternative)
  *
  * assert.deepStrictEqual(
  *   f([constant(O.none), O.some])('foo'),
  *   O.some('foo'),
- * );
+ * )
  *
  * @since 0.15.0
  */
