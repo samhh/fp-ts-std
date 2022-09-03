@@ -31,6 +31,7 @@ Added in v0.5.1
   - [lazy](#lazy)
   - [monad](#monad)
   - [monoid](#monoid)
+  - [newtype](#newtype)
   - [number](#number)
   - [option](#option)
   - [ordering](#ordering)
@@ -309,6 +310,22 @@ monoid :: typeof monoid
 ```
 
 Added in v0.12.0
+
+## newtype
+
+A re-export of the `fp-ts-std/Number` module.
+
+**Signature**
+
+```ts
+export declare const newtype: typeof newtype
+```
+
+```hs
+newtype :: typeof newtype
+```
+
+Added in v0.15.0
 
 ## number
 
