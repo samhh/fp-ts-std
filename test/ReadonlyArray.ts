@@ -56,11 +56,13 @@ import { concatAll } from "fp-ts/Monoid"
 import { split } from "fp-ts/string"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import { values } from "../src/Record"
+import * as R from "fp-ts/Record"
 import { add, decrement } from "../src/Number"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"
 import { fst, snd } from "fp-ts/Tuple"
+import { Endomorphism } from "fp-ts/Endomorphism"
 
 type IO<A> = IO.IO<A>
 
@@ -663,10 +665,17 @@ describe("Array", () => {
     })
 
     it("counts the same summed number as the length of the array", () => {
+      // fast-check generates keys that fp-ts internals won't iterate over,
+      // meaning without this the keys below won't necessarily add up.
+      const filterSpecialKeys: Endomorphism<ReadonlyArray<string>> = A.chain(
+        flow(k => R.singleton(k, null), R.keys),
+      )
+
       fc.assert(
         fc.property(
           fc.array(fc.string()),
-          xs => pipe(xs, f(identity), values, sum) === xs.length,
+          xs =>
+            pipe(xs, f(identity), values, sum) === filterSpecialKeys(xs).length,
         ),
       )
     })
