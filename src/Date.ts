@@ -36,15 +36,14 @@ import { pack, unpack } from "./Newtype"
 export const unsafeParseDate = (x: string | number): Date =>
   construct(Date)([x])
 
+type MillisecondsSymbol = { readonly Milliseconds: unique symbol }
+
 /**
  * Newtype representing milliseconds.
  *
  * @since 0.7.0
  */
-export type Milliseconds = Newtype<
-  { readonly Milliseconds: unique symbol },
-  number
->
+export type Milliseconds = Newtype<MillisecondsSymbol, number>
 
 /**
  * `Ord` instance for `Milliseconds`, enabling comparison between different

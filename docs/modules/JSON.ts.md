@@ -35,11 +35,11 @@ Newtype representing stringified JSON.
 **Signature**
 
 ```ts
-export type JSONString = Newtype<{ readonly JSONString: unique symbol }, string>
+export type JSONString = Newtype<JSONStringSymbol, string>
 ```
 
 ```hs
-newtype JSONString = string
+type JSONString = Newtype JSONStringSymbol string
 ```
 
 Added in v0.5.0

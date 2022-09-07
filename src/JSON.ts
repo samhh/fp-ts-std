@@ -13,12 +13,14 @@ import { Json } from "fp-ts/Json"
 import { flow, identity, pipe } from "fp-ts/function"
 import { isString } from "fp-ts/string"
 
+type JSONStringSymbol = { readonly Milliseconds: unique symbol }
+
 /**
  * Newtype representing stringified JSON.
  *
  * @since 0.5.0
  */
-export type JSONString = Newtype<{ readonly JSONString: unique symbol }, string>
+export type JSONString = Newtype<JSONStringSymbol, string>
 
 const isoJSONString = iso<JSONString>()
 

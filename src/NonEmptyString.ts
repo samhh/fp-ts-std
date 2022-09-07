@@ -35,6 +35,8 @@ import type { Show as TShow } from "fp-ts/Show"
 
 type Show<A> = TShow<A>
 
+type NonEmptyStringSymbol = { readonly Milliseconds: unique symbol }
+
 /**
  * Newtype representing a non-empty string. Non-emptiness is only guaranteed so
  * long as interaction with the newtype is confined to exports from this module,
@@ -42,10 +44,7 @@ type Show<A> = TShow<A>
  *
  * @since 0.15.0
  */
-export type NonEmptyString = Newtype<
-  { readonly NonEmptyString: unique symbol },
-  string
->
+export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 
 /**
  * Unsafely lift a string to `NonEmptyString`. Can be useful for static values.

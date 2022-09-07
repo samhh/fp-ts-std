@@ -66,11 +66,11 @@ as unlike `NonEmptyArray` it's only protected by a smart constructor.
 **Signature**
 
 ```ts
-export type NonEmptyString = Newtype<{ readonly NonEmptyString: unique symbol }, string>
+export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 ```
 
 ```hs
-newtype NonEmptyString = string
+type NonEmptyString = Newtype NonEmptyStringSymbol string
 ```
 
 Added in v0.15.0

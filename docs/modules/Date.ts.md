@@ -42,11 +42,11 @@ Newtype representing milliseconds.
 **Signature**
 
 ```ts
-export type Milliseconds = Newtype<{ readonly Milliseconds: unique symbol }, number>
+export type Milliseconds = Newtype<MillisecondsSymbol, number>
 ```
 
 ```hs
-newtype Milliseconds = number
+type Milliseconds = Newtype MillisecondsSymbol number
 ```
 
 Added in v0.7.0
