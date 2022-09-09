@@ -8,6 +8,7 @@ import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
 import { when as _when, unless as _unless } from "./Applicative"
+import { constVoid, flow } from "fp-ts/function"
 
 type IO<A> = IO.IO<A>
 
@@ -198,3 +199,23 @@ export const memoize = <A>(f: IO<A>): IO<A> => {
 
   return () => (res === empty ? (res = f()) : res)
 }
+
+/**
+ * Sequence an array of effects, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const sequenceArray_: <A>(xs: ReadonlyArray<IO<A>>) => IO<void> = flow(
+  IO.sequenceArray,
+  IO.map(constVoid),
+)
+
+/**
+ * Map to and sequence an array of effects, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const traverseArray_: <A, B>(
+  f: (x: A) => IO<B>,
+) => (xs: ReadonlyArray<A>) => IO<void> = f =>
+  flow(IO.traverseArray(f), IO.map(constVoid))

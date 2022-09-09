@@ -18,7 +18,9 @@ Added in v0.7.0
   - [execute](#execute)
   - [memoize](#memoize)
   - [once](#once)
+  - [sequenceArray\_](#sequencearray_)
   - [tap](#tap)
+  - [traverseArray\_](#traversearray_)
   - [unless](#unless)
   - [when](#when)
   - [whenInvocationCount](#wheninvocationcount)
@@ -110,6 +112,22 @@ assert.strictEqual(f(3)(), 7)
 
 Added in v0.7.0
 
+## sequenceArray\_
+
+Sequence an array of effects, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const sequenceArray_: <A>(xs: readonly IO<A>[]) => IO<void>
+```
+
+```hs
+sequenceArray_ :: Array (IO a) -> IO void
+```
+
+Added in v0.15.0
+
 ## tap
 
 Performs the side effect with the input value and then returns said input
@@ -150,6 +168,22 @@ assert.strictEqual(x, 4)
 ```
 
 Added in v0.7.0
+
+## traverseArray\_
+
+Map to and sequence an array of effects, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const traverseArray_: <A, B>(f: (x: A) => IO<B>) => (xs: readonly A[]) => IO<void>
+```
+
+```hs
+traverseArray_ :: (a -> IO b) -> Array a -> IO void
+```
+
+Added in v0.15.0
 
 ## unless
 

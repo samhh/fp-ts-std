@@ -4,6 +4,7 @@ import {
   constFalse,
   constTrue,
   constVoid,
+  identity,
   pipe,
 } from "fp-ts/function"
 import {
@@ -14,6 +15,8 @@ import {
   when,
   unless,
   memoize,
+  sequenceArray_,
+  traverseArray_,
 } from "../src/IO"
 import { add } from "../src/Number"
 import fc from "fast-check"
@@ -237,4 +240,38 @@ describe("IO", () => {
     })
   })
   /* eslint-enable */
+
+  describe("sequenceArray_", () => {
+    const f = sequenceArray_
+
+    /* eslint-disable */
+    it("sequences from left to right", () => {
+      let n = 0
+
+      const g: IO<void> = () => (n += 5)
+      const h: IO<void> = () => (n *= 2)
+
+      pipe(f([g, h]), execute)
+
+      expect(n).toBe(10)
+    })
+    /* eslint-enable */
+  })
+
+  describe("traverseArray_", () => {
+    const f = traverseArray_
+
+    /* eslint-disable */
+    it("traverses from left to right", () => {
+      let n = 0
+
+      const g: IO<void> = () => (n += 5)
+      const h: IO<void> = () => (n *= 2)
+
+      pipe(f(identity<IO<void>>)([g, h]), execute)
+
+      expect(n).toBe(10)
+    })
+    /* eslint-enable */
+  })
 })
