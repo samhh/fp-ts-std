@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `NonEmptyString` module.
 - Add `Monad` module.
 - Add `ReaderTaskEither` module.
+- Add `TaskOption` module.
 - Add `altAllBy` to `Alternative` and `Option`.
 - Add `allM` and `anyM` to `Array` and `ReadonlyArray`.
 - Add `omitFrom`, `renameKey`, and `withDefaults` to `Struct` and `ReadonlyStruct`.
