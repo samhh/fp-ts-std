@@ -87,7 +87,7 @@ export const pickFrom = <A>(): (<K extends keyof A>(
  */
 export const omit =
   <K extends string>(ks: Array<K>) =>
-  <V, A extends Record<K, V>>(x: Partial<A>): Omit<A, K> => {
+  <V, A extends Record<K, V>>(x: A): Omit<A, K> => {
     const y = { ...x }
 
     /* eslint-disable */

@@ -63,11 +63,11 @@ type.
 ```ts
 export declare const omit: <K extends string>(
   ks: K[]
-) => <V, A extends Record<K, V>>(x: Partial<A>) => Pick<A, Exclude<keyof A, K>>
+) => <V, A extends Record<K, V>>(x: A) => Pick<A, Exclude<keyof A, K>>
 ```
 
 ```hs
-omit :: k extends string, a extends (Record k v) => Array k -> Partial a -> Pick a (Exclude (keyof a) k)
+omit :: k extends string, a extends (Record k v) => Array k -> a -> Pick a (Exclude (keyof a) k)
 ```
 
 **Example**
