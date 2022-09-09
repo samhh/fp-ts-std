@@ -1,6 +1,6 @@
 ---
 title: ReaderTaskEither.ts
-nav_order: 27
+nav_order: 30
 parent: Modules
 ---
 
@@ -15,12 +15,40 @@ Added in v0.14.3
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [runReaderTaskEither](#runreadertaskeither)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
 
 ---
 
 # utils
+
+## runReaderTaskEither
+
+Runs a ReaderTaskEither and extracts the final TaskEither from it.
+
+**Signature**
+
+```ts
+export declare const runReaderTaskEither: <R, E, A>(r: R) => (reader: RTE.ReaderTaskEither<R, E, A>) => TaskEither<E, A>
+```
+
+**Example**
+
+```ts
+import { runReaderTaskEither } from 'fp-ts-std/ReaderTaskEither'
+import { pipe } from 'fp-ts/function'
+import * as RTE from 'fp-ts/ReaderTaskEither'
+import * as E from 'fp-ts/Either'
+
+type Env = { dependency: string }
+const env: Env = { dependency: 'dependency' }
+pipe(E.right(1), RTE.fromEither, runReaderTaskEither(env))().then((extractedValue) =>
+  assert.deepStrictEqual(extractedValue, E.right(1))
+)
+```
+
+Added in v0.15.0
 
 ## unsafeUnwrap
 
