@@ -21,6 +21,7 @@ This project adheres to semantic versioning.
 - Add `Functor`, `Applicative`, and `Monad` instances to `Function`.
 - Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.
 - Stop permitting unknown keys in `omit`, reverting a change in 0.5.1.
+- Add missing re-exports to index module.
 - Bump minimum supported TypeScript version to 4.7.0.
 
 ## 0.14.2 (2022-05-11)

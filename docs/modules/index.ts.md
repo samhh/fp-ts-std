@@ -27,6 +27,8 @@ Added in v0.5.1
   - [env](#env)
   - [function](#function)
   - [io](#io)
+  - [ioEither](#ioeither)
+  - [isomorphism](#isomorphism)
   - [json](#json)
   - [lazy](#lazy)
   - [monad](#monad)
@@ -37,6 +39,10 @@ Added in v0.5.1
   - [option](#option)
   - [ordering](#ordering)
   - [predicate](#predicate)
+  - [random](#random)
+  - [reader](#reader)
+  - [readerEither](#readereither)
+  - [readerTask](#readertask)
   - [readerTaskEither](#readertaskeither)
   - [readonlyArray](#readonlyarray)
   - [readonlyRecord](#readonlyrecord)
@@ -47,6 +53,7 @@ Added in v0.5.1
   - [struct](#struct)
   - [task](#task)
   - [taskEither](#taskeither)
+  - [taskOption](#taskoption)
   - [tuple](#tuple)
   - [url](#url)
   - [urlSearchParams](#urlsearchparams)
@@ -248,6 +255,38 @@ io :: typeof io
 
 Added in v0.8.0
 
+## ioEither
+
+A re-export of the `fp-ts-std/IOEither` module.
+
+**Signature**
+
+```ts
+export declare const ioEither: typeof ioEither
+```
+
+```hs
+ioEither :: typeof ioEither
+```
+
+Added in v0.15.0
+
+## isomorphism
+
+A re-export of the `fp-ts-std/Isomorphism` module.
+
+**Signature**
+
+```ts
+export declare const isomorphism: typeof isomorphism
+```
+
+```hs
+isomorphism :: typeof isomorphism
+```
+
+Added in v0.15.0
+
 ## json
 
 A re-export of the `fp-ts-std/JSON` module.
@@ -408,6 +447,70 @@ predicate :: typeof predicate
 
 Added in v0.12.0
 
+## random
+
+A re-export of the `fp-ts-std/Random` module.
+
+**Signature**
+
+```ts
+export declare const random: typeof random
+```
+
+```hs
+random :: typeof random
+```
+
+Added in v0.15.0
+
+## reader
+
+A re-export of the `fp-ts-std/Reader` module.
+
+**Signature**
+
+```ts
+export declare const reader: typeof reader
+```
+
+```hs
+reader :: typeof reader
+```
+
+Added in v0.15.0
+
+## readerEither
+
+A re-export of the `fp-ts-std/ReaderEither` module.
+
+**Signature**
+
+```ts
+export declare const readerEither: typeof readerEither
+```
+
+```hs
+readerEither :: typeof readerEither
+```
+
+Added in v0.15.0
+
+## readerTask
+
+A re-export of the `fp-ts-std/ReaderTask` module.
+
+**Signature**
+
+```ts
+export declare const readerTask: typeof readerTask
+```
+
+```hs
+readerTask :: typeof readerTask
+```
+
+Added in v0.15.0
+
 ## readerTaskEither
 
 A re-export of the `fp-ts-std/ReaderTaskEither` module.
@@ -564,6 +667,22 @@ export declare const taskEither: typeof taskEither
 
 ```hs
 taskEither :: typeof taskEither
+```
+
+Added in v0.12.0
+
+## taskOption
+
+A re-export of the `fp-ts-std/TaskOption` module.
+
+**Signature**
+
+```ts
+export declare const taskOption: typeof taskOption
+```
+
+```hs
+taskOption :: typeof taskOption
 ```
 
 Added in v0.12.0

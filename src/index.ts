@@ -16,6 +16,8 @@ import * as either from "./Either"
 import * as env from "./Env"
 import * as function_ from "./Function"
 import * as io from "./IO"
+import * as ioEither from "./IOEither"
+import * as isomorphism from "./Isomorphism"
 import * as json from "./JSON"
 import * as lazy from "./Lazy"
 import * as monad from "./Monad"
@@ -26,6 +28,10 @@ import * as number from "./Number"
 import * as option from "./Option"
 import * as ordering from "./Ordering"
 import * as predicate from "./Predicate"
+import * as random from "./Random"
+import * as reader from "./Reader"
+import * as readerEither from "./ReaderEither"
+import * as readerTask from "./ReaderTask"
 import * as readerTaskEither from "./ReaderTaskEither"
 import * as readonlyArray from "./ReadonlyArray"
 import * as readonlyRecord from "./ReadonlyRecord"
@@ -36,6 +42,7 @@ import * as string from "./String"
 import * as struct from "./Struct"
 import * as task from "./Task"
 import * as taskEither from "./TaskEither"
+import * as taskOption from "./TaskOption"
 import * as tuple from "./Tuple"
 import * as url from "./URL"
 import * as urlSearchParams from "./URLSearchParams"
@@ -115,6 +122,18 @@ export {
    */
   io,
   /**
+   * A re-export of the `fp-ts-std/IOEither` module.
+   *
+   * @since 0.15.0
+   */
+  ioEither,
+  /**
+   * A re-export of the `fp-ts-std/Isomorphism` module.
+   *
+   * @since 0.15.0
+   */
+  isomorphism,
+  /**
    * A re-export of the `fp-ts-std/JSON` module.
    *
    * @since 0.5.1
@@ -175,6 +194,30 @@ export {
    */
   predicate,
   /**
+   * A re-export of the `fp-ts-std/Random` module.
+   *
+   * @since 0.15.0
+   */
+  random,
+  /**
+   * A re-export of the `fp-ts-std/Reader` module.
+   *
+   * @since 0.15.0
+   */
+  reader,
+  /**
+   * A re-export of the `fp-ts-std/ReaderEither` module.
+   *
+   * @since 0.15.0
+   */
+  readerEither,
+  /**
+   * A re-export of the `fp-ts-std/ReaderTask` module.
+   *
+   * @since 0.15.0
+   */
+  readerTask,
+  /**
    * A re-export of the `fp-ts-std/ReaderTaskEither` module.
    *
    * @since 0.15.0
@@ -234,6 +277,12 @@ export {
    * @since 0.12.0
    */
   taskEither,
+  /**
+   * A re-export of the `fp-ts-std/TaskOption` module.
+   *
+   * @since 0.12.0
+   */
+  taskOption,
   /**
    * A re-export of the `fp-ts-std/Tuple` module.
    *
