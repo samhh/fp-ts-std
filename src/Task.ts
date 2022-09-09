@@ -10,6 +10,7 @@ import { IO } from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
 import { when as _when, unless as _unless } from "./Applicative"
+import { constVoid, flow } from "fp-ts/function"
 
 /**
  * Wait for the specified number of milliseconds before resolving.
@@ -149,3 +150,39 @@ export const when: (x: boolean) => Endomorphism<Task<void>> = _when(
 export const unless: (x: boolean) => Endomorphism<Task<void>> = _unless(
   T.ApplicativePar,
 )
+
+/**
+ * Sequence an array of tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const sequenceArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
+  flow(T.sequenceArray, T.map(constVoid))
+
+/**
+ * Sequentially sequence an array of tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const sequenceSeqArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
+  flow(T.sequenceSeqArray, T.map(constVoid))
+
+/**
+ * Map to and sequence an array of tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const traverseArray_: <A, B>(
+  f: (x: A) => Task<B>,
+) => (xs: ReadonlyArray<A>) => Task<void> = f =>
+  flow(T.traverseArray(f), T.map(constVoid))
+
+/**
+ * Sequentially map to and sequence an array of tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const traverseSeqArray_: <A, B>(
+  f: (x: A) => Task<B>,
+) => (xs: ReadonlyArray<A>) => Task<void> = f =>
+  flow(T.traverseSeqArray(f), T.map(constVoid))

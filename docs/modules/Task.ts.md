@@ -17,7 +17,11 @@ Added in v0.1.0
 - [utils](#utils)
   - [elapsed](#elapsed)
   - [execute](#execute)
+  - [sequenceArray\_](#sequencearray_)
+  - [sequenceSeqArray\_](#sequenceseqarray_)
   - [sleep](#sleep)
+  - [traverseArray\_](#traversearray_)
+  - [traverseSeqArray\_](#traverseseqarray_)
   - [unless](#unless)
   - [when](#when)
 
@@ -88,6 +92,38 @@ execute(T.of(5)).then((x) => {
 
 Added in v0.12.0
 
+## sequenceArray\_
+
+Sequence an array of tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const sequenceArray_: <A>(xs: readonly Task<A>[]) => Task<void>
+```
+
+```hs
+sequenceArray_ :: Array (Task a) -> Task void
+```
+
+Added in v0.15.0
+
+## sequenceSeqArray\_
+
+Sequentially sequence an array of tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const sequenceSeqArray_: <A>(xs: readonly Task<A>[]) => Task<void>
+```
+
+```hs
+sequenceSeqArray_ :: Array (Task a) -> Task void
+```
+
+Added in v0.15.0
+
 ## sleep
 
 Wait for the specified number of milliseconds before resolving.
@@ -138,6 +174,38 @@ sequenceT(T.ApplicativePar)(instant, slowest, slow)().then(() => {
 ```
 
 Added in v0.1.0
+
+## traverseArray\_
+
+Map to and sequence an array of tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const traverseArray_: <A, B>(f: (x: A) => Task<B>) => (xs: readonly A[]) => Task<void>
+```
+
+```hs
+traverseArray_ :: (a -> Task b) -> Array a -> Task void
+```
+
+Added in v0.15.0
+
+## traverseSeqArray\_
+
+Sequentially map to and sequence an array of tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const traverseSeqArray_: <A, B>(f: (x: A) => Task<B>) => (xs: readonly A[]) => Task<void>
+```
+
+```hs
+traverseSeqArray_ :: (a -> Task b) -> Array a -> Task void
+```
+
+Added in v0.15.0
 
 ## unless
 
