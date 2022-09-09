@@ -15,6 +15,7 @@ This project adheres to semantic versioning.
 - Add `omitFrom`, `renameKey`, and `withDefaults` to `Struct` and `ReadonlyStruct`.
 - Add `fanout` to `Tuple`.
 - Add various voided sequencing functions.
+- Add `Functor`, `Applicative`, and `Monad` instances to `Function`.
 - Lazily evaluate the values in `memptyWhen`, `memptyUnless`, and `pureIf`.
 - Stop permitting unknown keys in `omit`, reverting a change in 0.5.1.
 - Bump minimum supported TypeScript version to 4.7.0.

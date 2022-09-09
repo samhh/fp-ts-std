@@ -1,3 +1,4 @@
+import * as F from "../src/Function"
 import {
   flip,
   withIndex,
@@ -36,19 +37,224 @@ import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
 import {
+  apply,
   constant,
   constFalse,
   constTrue,
+  flow,
   identity,
   increment,
+  pipe,
 } from "fp-ts/function"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as N from "fp-ts/number"
 import fc from "fast-check"
 import * as S from "../src/String"
 import { join } from "../src/Array"
+import * as laws from "fp-ts-laws"
+import * as Eq from "fp-ts/Eq"
+type Eq<A> = Eq.Eq<A>
+import { sequenceS } from "fp-ts/Apply"
+
+const getArb: <A>(x: fc.Arbitrary<A>) => fc.Arbitrary<<B>(x: B) => A> = x =>
+  x.map(constant)
+
+const getEq: <A>(x: Eq<A>) => Eq<<B>(x: B) => A> = Eq.contramap(apply("foo"))
 
 describe("Function", () => {
+  describe("Functor", () => {
+    // fmap id = id
+    describe("is lawful", () => {
+      laws.functor(F.Functor)(getArb, getEq)
+
+      it("identity", () => {
+        fc.assert(
+          fc.property(fc.anything(), fc.anything(), (x, y) => {
+            const left = pipe(F.of(x), F.map(identity), apply(y))
+            const right = pipe(F.of(x), identity, apply(y))
+
+            expect(left).toEqual(right)
+          }),
+        )
+      })
+
+      // fmap (g . f) == fmap g . fmap f
+      it("composition", () => {
+        fc.assert(
+          fc.property(
+            fc.integer(),
+            fc.integer(),
+            fc.integer(),
+            fc.anything(),
+            (x, y, z, zz) => {
+              const f = add(y)
+              const g = multiply(z)
+
+              const left = pipe(F.of(x), F.map(flow(f, g)), apply(zz))
+              const right = pipe(F.of(x), F.map(f), F.map(g), apply(zz))
+
+              return expect(left).toEqual(right)
+            },
+          ),
+        )
+      })
+    })
+  })
+
+  describe("Applicative", () => {
+    laws.applicative(F.Applicative)(getArb, getEq)
+
+    describe("is lawful", () => {
+      // pure id <*> x = x
+      it("identity", () => {
+        fc.assert(
+          fc.property(fc.anything(), fc.anything(), (x, y) => {
+            const left = pipe(F.of(identity), F.ap(F.of(x)), apply(y))
+            const right = pipe(F.of(x), apply(y))
+
+            return expect(left).toEqual(right)
+          }),
+        )
+      })
+
+      // pure f <*> pure x = pure (f x)
+      it("homomorphism", () => {
+        fc.assert(
+          fc.property(fc.integer(), fc.integer(), fc.anything(), (x, y, z) => {
+            const f = add(y)
+
+            const left = pipe(F.of(f), F.ap(F.of(x)), apply(z))
+            const right = pipe(F.of(f(x)), apply(z))
+
+            return expect(left).toEqual(right)
+          }),
+        )
+      })
+
+      // x <*> pure y = pure ($ y) <*> x
+      it("interchange", () => {
+        fc.assert(
+          fc.property(fc.integer(), fc.integer(), fc.anything(), (x, y, z) => {
+            const f = add(y)
+
+            const left = pipe(F.of(f), F.ap(F.of(x)), apply(z))
+            const right = pipe(F.of(apply(x)), F.ap(F.of(f)), apply(z))
+
+            return expect(left).toEqual(right)
+          }),
+        )
+      })
+
+      // pure (.) <*> x <*> y <*> y = x <*> (y <*> y)
+      it("composition", () => {
+        fc.assert(
+          fc.property(
+            fc.integer(),
+            fc.integer(),
+            fc.integer(),
+            fc.anything(),
+            (x, y, z, zz) => {
+              const f = add(y)
+              const g = multiply(z)
+
+              const compose: <B, C>(
+                bc: (x: B) => C,
+              ) => <A>(ab: (x: A) => B) => (x: A) => C = bc => ab =>
+                flow(ab, bc)
+
+              // The type system struggles to follow polymorphic compose below, so we'll fix the
+              // types here.
+              const composeMono: (
+                bc: Endomorphism<number>,
+              ) => (ab: Endomorphism<number>) => Endomorphism<number> = compose
+
+              const left = pipe(
+                F.of(composeMono),
+                F.ap(F.of(f)),
+                F.ap(F.of(g)),
+                F.ap(F.of(x)),
+                apply(zz),
+              )
+              const right = pipe(
+                F.of(f),
+                F.ap(pipe(F.of(g), F.ap(F.of(x)))),
+                apply(zz),
+              )
+
+              return expect(left).toEqual(right)
+            },
+          ),
+        )
+      })
+    })
+
+    it("works with sequencing utilities", () => {
+      const f = sequenceS(F.Applicative)({
+        x: S.fromNumber,
+        y: flow(add(2), S.fromNumber),
+      })
+
+      expect(f(5)).toEqual({ x: "5", y: "7" })
+    })
+  })
+
+  describe("Monad", () => {
+    laws.monad(F.Monad)(getEq)
+
+    describe("is lawful", () => {
+      // return x >>= f = f x
+      it("left identity", () => {
+        fc.assert(
+          fc.property(fc.integer(), fc.integer(), fc.anything(), (x, y, z) => {
+            const f = flow(add(y), F.of)
+
+            const left = pipe(F.of(x), F.chain(f), apply(z))
+            const right = pipe(f(x), apply(z))
+
+            return expect(left).toEqual(right)
+          }),
+        )
+      })
+
+      // x >>= return = x
+      it("right identity", () => {
+        fc.assert(
+          fc.property(fc.anything(), fc.anything(), (x, y) => {
+            const left = pipe(F.of(x), F.chain(F.of), apply(y))
+            const right = pipe(F.of(x), apply(y))
+
+            return expect(left).toEqual(right)
+          }),
+        )
+      })
+
+      // (x >>= f) >>= g = x >>= (\y -> f y >>= g)
+      it("associativity", () => {
+        fc.assert(
+          fc.property(
+            fc.integer(),
+            fc.integer(),
+            fc.integer(),
+            fc.anything(),
+            (x, y, z, zz) => {
+              const f = flow(add(y), F.of)
+              const g = flow(multiply(z), F.of)
+
+              const left = pipe(F.of(x), F.chain(f), F.chain(g), apply(zz))
+              const right = pipe(
+                F.of(x),
+                F.chain(flow(f, F.chain(g))),
+                apply(zz),
+              )
+
+              return expect(left).toEqual(right)
+            },
+          ),
+        )
+      })
+    })
+  })
+
   describe("flip", () => {
     it("flips curried arguments", () => {
       expect(prepend("x")("y")).toBe("xy")

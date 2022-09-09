@@ -23,6 +23,100 @@ import { concatAll } from "fp-ts/Monoid"
 import { first } from "fp-ts/Semigroup"
 import { Eq } from "fp-ts/Eq"
 import { Refinement } from "fp-ts/Refinement"
+import { Functor2 } from "fp-ts/Functor"
+import { Applicative2 } from "fp-ts/Applicative"
+import { Monad2 } from "fp-ts/Monad"
+
+/**
+ * Typeclass machinery.
+ *
+ * @since 0.15.0
+ */
+export const URI = "Function"
+
+/**
+ * Typeclass machinery.
+ *
+ * @since 0.15.0
+ */
+export type URI = typeof URI
+
+declare module "fp-ts/HKT" {
+  interface URItoKind2<E, A> {
+    readonly [URI]: (x: E) => A
+  }
+}
+
+/**
+ * Map a unary function's output. Equivalent to function composition.
+ *
+ * @since 0.15.0
+ */
+export const map: <B, C>(
+  f: (x: B) => C,
+) => <A>(g: (x: A) => B) => (x: A) => C = f => g => flow(g, f)
+
+/**
+ * Formal `Functor` instance for unary functions to be provided to
+ * higher-kinded functions that require it.
+ *
+ * @since 0.15.0
+ */
+export const Functor: Functor2<URI> = {
+  URI,
+  map: (f, g) => map(g)(f),
+}
+
+/**
+ * Lift a value to a function from any other value. Equivalent to `constant`.
+ *
+ * @since 0.15.0
+ */
+export const of: <A>(x: A) => <B>(y: B) => A = constant
+
+/**
+ * Fork an input across a binary and a tertiary function, applying the output
+ * of the former to the latter.
+ *
+ * @since 0.15.0
+ */
+export const ap: <A, B>(
+  f: (x: A) => B,
+) => <C>(g: (x: A) => (y: B) => C) => (x: A) => C = f => g => x => g(x)(f(x))
+
+/**
+ * Formal `Applicative` instance for unary functions to be provided to
+ * higher-kinded functions that require it.
+ *
+ * @since 0.15.0
+ */
+export const Applicative: Applicative2<URI> = {
+  ...Functor,
+  of,
+  ap: (f, g) => ap(g)(f),
+}
+
+/**
+ * Fork an input across a binary and a tertiary function, applying the output of
+ * the former to the latter. As it applies to functions this is essentially
+ * `ap` with some flips thrown in.
+ *
+ * @since 0.15.0
+ */
+export const chain: <A, B, C>(
+  f: (x: B) => (y: A) => C,
+) => (g: (x: A) => B) => (x: A) => C = f => g => x => f(g(x))(x)
+
+/**
+ * Formal `Monad` instance for unary functions to be provided to higher-kinded
+ * functions that require it.
+ *
+ * @since 0.15.0
+ */
+export const Monad: Monad2<URI> = {
+  ...Applicative,
+  chain: (f, g) => chain(g)(f),
+}
 
 /**
  * Flip the function/argument order of a curried function.

@@ -18,8 +18,15 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [Applicative](#applicative)
+  - [Functor](#functor)
+  - [Monad](#monad)
+  - [URI](#uri)
+  - [URI (type alias)](#uri-type-alias)
+  - [ap](#ap)
   - [applyEvery](#applyevery)
   - [applySomes](#applysomes)
+  - [chain](#chain)
   - [construct](#construct)
   - [converge](#converge)
   - [curry2](#curry2)
@@ -38,7 +45,9 @@ Added in v0.1.0
   - [invokeNullary](#invokenullary)
   - [invokeOn](#invokeon)
   - [is](#is)
+  - [map](#map)
   - [memoize](#memoize)
+  - [of](#of)
   - [unary](#unary)
   - [uncurry2](#uncurry2)
   - [uncurry3](#uncurry3)
@@ -52,6 +61,106 @@ Added in v0.1.0
 ---
 
 # utils
+
+## Applicative
+
+Formal `Applicative` instance for unary functions to be provided to
+higher-kinded functions that require it.
+
+**Signature**
+
+```ts
+export declare const Applicative: Applicative2<'Function'>
+```
+
+```hs
+Applicative :: Applicative2 "Function"
+```
+
+Added in v0.15.0
+
+## Functor
+
+Formal `Functor` instance for unary functions to be provided to
+higher-kinded functions that require it.
+
+**Signature**
+
+```ts
+export declare const Functor: Functor2<'Function'>
+```
+
+```hs
+Functor :: Functor2 "Function"
+```
+
+Added in v0.15.0
+
+## Monad
+
+Formal `Monad` instance for unary functions to be provided to higher-kinded
+functions that require it.
+
+**Signature**
+
+```ts
+export declare const Monad: Monad2<'Function'>
+```
+
+```hs
+Monad :: Monad2 "Function"
+```
+
+Added in v0.15.0
+
+## URI
+
+Typeclass machinery.
+
+**Signature**
+
+```ts
+export declare const URI: 'Function'
+```
+
+```hs
+URI :: "Function"
+```
+
+Added in v0.15.0
+
+## URI (type alias)
+
+Typeclass machinery.
+
+**Signature**
+
+```ts
+export type URI = typeof URI
+```
+
+```hs
+type URI = typeof URI
+```
+
+Added in v0.15.0
+
+## ap
+
+Fork an input across a binary and a tertiary function, applying the output
+of the former to the latter.
+
+**Signature**
+
+```ts
+export declare const ap: <A, B>(f: (x: A) => B) => <C>(g: (x: A) => (y: B) => C) => (x: A) => C
+```
+
+```hs
+ap :: (a -> b) -> (a -> b -> c) -> a -> c
+```
+
+Added in v0.15.0
 
 ## applyEvery
 
@@ -111,6 +220,24 @@ assert.deepStrictEqual(g(3), 12)
 ```
 
 Added in v0.13.0
+
+## chain
+
+Fork an input across a binary and a tertiary function, applying the output of
+the former to the latter. As it applies to functions this is essentially
+`ap` with some flips thrown in.
+
+**Signature**
+
+```ts
+export declare const chain: <A, B, C>(f: (x: B) => (y: A) => C) => (g: (x: A) => B) => (x: A) => C
+```
+
+```hs
+chain :: (b -> a -> c) -> (a -> b) -> a -> c
+```
+
+Added in v0.15.0
 
 ## construct
 
@@ -652,6 +779,22 @@ assert.strictEqual(isString(new String('ciao')), true)
 
 Added in v0.12.0
 
+## map
+
+Map a unary function's output. Equivalent to function composition.
+
+**Signature**
+
+```ts
+export declare const map: <B, C>(f: (x: B) => C) => <A>(g: (x: A) => B) => (x: A) => C
+```
+
+```hs
+map :: (b -> c) -> (a -> b) -> a -> c
+```
+
+Added in v0.15.0
+
 ## memoize
 
 Given a function and an `Eq` instance for determining input equivalence,
@@ -695,6 +838,22 @@ assert.strictEqual(runs, 1)
 ```
 
 Added in v0.7.0
+
+## of
+
+Lift a value to a function from any other value. Equivalent to `constant`.
+
+**Signature**
+
+```ts
+export declare const of: <A>(x: A) => <B>(y: B) => A
+```
+
+```hs
+of :: a -> b -> a
+```
+
+Added in v0.15.0
 
 ## unary
 
