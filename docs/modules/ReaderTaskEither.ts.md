@@ -8,7 +8,7 @@ parent: Modules
 
 Utility functions to accommodate `fp-ts/ReaderTaskEither`.
 
-Added in v0.14.3
+Added in v0.15.0
 
 ---
 

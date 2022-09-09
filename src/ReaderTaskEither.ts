@@ -1,7 +1,7 @@
 /**
  * Utility functions to accommodate `fp-ts/ReaderTaskEither`.
  *
- * @since 0.14.3
+ * @since 0.15.0
  */
 import * as RTE from "fp-ts/ReaderTaskEither"
 import { TaskEither } from "fp-ts/TaskEither"
