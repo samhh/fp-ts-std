@@ -121,28 +121,28 @@ describe("TaskEither", () => {
       expect(n).toBe(5)
     })
     /* eslint-enable */
+  })
 
-    describe("traverseArray_", () => {
-      const f = traverseArray_
+  describe("traverseArray_", () => {
+    const f = traverseArray_
 
-      /* eslint-disable */
-      it("sequences in parallel", async () => {
-        let n = 0
-        const g = pipe(
-          TE.fromTask(T.sleep(mkMilliseconds(1))),
-          TE.chainFirstIOK(() => () => (n = n * 2)),
-        )
-        const h = pipe(
-          TE.fromIO(() => (n += 5)),
-          TE.map(constVoid),
-        )
+    /* eslint-disable */
+    it("sequences in parallel", async () => {
+      let n = 0
+      const g = pipe(
+        TE.fromTask(T.sleep(mkMilliseconds(1))),
+        TE.chainFirstIOK(() => () => (n = n * 2)),
+      )
+      const h = pipe(
+        TE.fromIO(() => (n += 5)),
+        TE.map(constVoid),
+      )
 
-        await pipe(f(identity<TE.TaskEither<unknown, void>>)([g, h]), T.execute)
+      await pipe(f(identity<TE.TaskEither<unknown, void>>)([g, h]), T.execute)
 
-        expect(n).toBe(10)
-      })
-      /* eslint-enable */
+      expect(n).toBe(10)
     })
+    /* eslint-enable */
   })
 
   describe("traverseSeqArray_", () => {
