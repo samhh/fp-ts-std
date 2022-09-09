@@ -41,7 +41,7 @@ describe("Either", () => {
       )
     })
 
-    it("maps both sides of a tuple", () => {
+    it("maps both sides", () => {
       const g = Str.append("!")
 
       fc.assert(

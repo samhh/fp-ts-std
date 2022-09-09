@@ -140,7 +140,7 @@ describe("Tuple", () => {
       )
     })
 
-    it("maps both sides of a tuple", () => {
+    it("maps both sides", () => {
       const g = O.some
 
       fc.assert(

@@ -52,7 +52,7 @@ describe("TaskEither", () => {
       )
     })
 
-    it("maps both sides of a tuple", async () => {
+    it("maps both sides", async () => {
       const g = Str.append("!")
 
       await fc.assert(
