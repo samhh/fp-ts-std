@@ -1,9 +1,19 @@
-import { mapBoth, unsafeUnwrap, unsafeUnwrapLeft } from "../src/TaskEither"
+import {
+  mapBoth,
+  unsafeUnwrap,
+  unsafeUnwrapLeft,
+  sequenceArray_,
+  sequenceSeqArray_,
+  traverseArray_,
+  traverseSeqArray_,
+} from "../src/TaskEither"
 import * as TE from "fp-ts/TaskEither"
+import * as T from "../src/Task"
 import * as E from "fp-ts/Either"
-import { identity } from "fp-ts/function"
+import { constVoid, identity, pipe } from "fp-ts/function"
 import * as Str from "../src/String"
 import fc from "fast-check"
+import { mkMilliseconds } from "../src/Date"
 
 describe("TaskEither", () => {
   describe("unsafeUnwrap", () => {
@@ -67,5 +77,93 @@ describe("TaskEither", () => {
         }),
       )
     })
+
+    describe("sequenceArray_", () => {
+      const f = sequenceArray_
+
+      /* eslint-disable */
+      it("sequences in parallel", async () => {
+        let n = 0
+        const g = pipe(
+          TE.fromTask(T.sleep(mkMilliseconds(1))),
+          TE.chainFirstIOK(() => () => (n = n * 2)),
+        )
+        const h = pipe(
+          TE.fromIO(() => (n += 5)),
+          TE.map(constVoid),
+        )
+
+        await pipe(f([g, h]), T.execute)
+
+        expect(n).toBe(10)
+      })
+      /* eslint-enable */
+    })
+  })
+
+  describe("sequenceSeqArray_", () => {
+    const f = sequenceSeqArray_
+
+    /* eslint-disable */
+    it("sequences sequentially", async () => {
+      let n = 0
+      const g = pipe(
+        TE.fromTask(T.sleep(mkMilliseconds(1))),
+        TE.chainFirstIOK(() => () => (n = n * 2)),
+      )
+      const h = pipe(
+        TE.fromIO(() => (n += 5)),
+        TE.map(constVoid),
+      )
+
+      await pipe(f([g, h]), T.execute)
+
+      expect(n).toBe(5)
+    })
+    /* eslint-enable */
+
+    describe("traverseArray_", () => {
+      const f = traverseArray_
+
+      /* eslint-disable */
+      it("sequences in parallel", async () => {
+        let n = 0
+        const g = pipe(
+          TE.fromTask(T.sleep(mkMilliseconds(1))),
+          TE.chainFirstIOK(() => () => (n = n * 2)),
+        )
+        const h = pipe(
+          TE.fromIO(() => (n += 5)),
+          TE.map(constVoid),
+        )
+
+        await pipe(f(identity<TE.TaskEither<unknown, void>>)([g, h]), T.execute)
+
+        expect(n).toBe(10)
+      })
+      /* eslint-enable */
+    })
+  })
+
+  describe("traverseSeqArray_", () => {
+    const f = traverseSeqArray_
+
+    /* eslint-disable */
+    it("sequences in parallel", async () => {
+      let n = 0
+      const g = pipe(
+        TE.fromTask(T.sleep(mkMilliseconds(1))),
+        TE.chainFirstIOK(() => () => (n = n * 2)),
+      )
+      const h = pipe(
+        TE.fromIO(() => (n += 5)),
+        TE.map(constVoid),
+      )
+
+      await pipe(f(identity<TE.TaskEither<unknown, void>>)([g, h]), T.execute)
+
+      expect(n).toBe(5)
+    })
+    /* eslint-enable */
   })
 })

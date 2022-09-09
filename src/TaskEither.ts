@@ -12,7 +12,7 @@ import {
   unsafeUnwrap as unsafeUnwrapE,
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
-import { flow } from "fp-ts/function"
+import { constVoid, flow } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 
 /**
@@ -75,3 +75,42 @@ export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
 export const mapBoth: <A, B>(
   f: (x: A) => B,
 ) => (xs: TaskEither<A, A>) => TaskEither<B, B> = _mapBoth(TE.Bifunctor)
+
+/**
+ * Sequence an array of fallible tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const sequenceArray_: <E, A>(
+  xs: ReadonlyArray<TaskEither<E, A>>,
+) => TaskEither<E, void> = flow(TE.sequenceArray, TE.map(constVoid))
+
+/**
+ * Sequentially sequence an array of fallible tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const sequenceSeqArray_: <E, A>(
+  xs: ReadonlyArray<TaskEither<E, A>>,
+) => TaskEither<E, void> = flow(TE.sequenceSeqArray, TE.map(constVoid))
+
+/**
+ * Map to and sequence an array of fallible tasks, ignoring the results.
+ *
+ * @since 0.15.0
+ */
+export const traverseArray_: <E, A, B>(
+  f: (x: A) => TaskEither<E, B>,
+) => (xs: ReadonlyArray<A>) => TaskEither<E, void> = f =>
+  flow(TE.traverseArray(f), TE.map(constVoid))
+
+/**
+ * Sequentially map to and sequence an array of fallible tasks, ignoring the
+ * results.
+ *
+ * @since 0.15.0
+ */
+export const traverseSeqArray_: <E, A, B>(
+  f: (x: A) => TaskEither<E, B>,
+) => (xs: ReadonlyArray<A>) => TaskEither<E, void> = f =>
+  flow(TE.traverseSeqArray(f), TE.map(constVoid))

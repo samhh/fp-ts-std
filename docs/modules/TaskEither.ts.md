@@ -16,6 +16,10 @@ Added in v0.12.0
 
 - [utils](#utils)
   - [mapBoth](#mapboth)
+  - [sequenceArray\_](#sequencearray_)
+  - [sequenceSeqArray\_](#sequenceseqarray_)
+  - [traverseArray\_](#traversearray_)
+  - [traverseSeqArray\_](#traverseseqarray_)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
 
@@ -56,6 +60,75 @@ f(TE.right(3))().then((x) => {
 ```
 
 Added in v0.14.0
+
+## sequenceArray\_
+
+Sequence an array of fallible tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const sequenceArray_: <E, A>(xs: readonly TaskEither<E, A>[]) => TaskEither<E, void>
+```
+
+```hs
+sequenceArray_ :: Array (TaskEither e a) -> TaskEither e void
+```
+
+Added in v0.15.0
+
+## sequenceSeqArray\_
+
+Sequentially sequence an array of fallible tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const sequenceSeqArray_: <E, A>(xs: readonly TaskEither<E, A>[]) => TaskEither<E, void>
+```
+
+```hs
+sequenceSeqArray_ :: Array (TaskEither e a) -> TaskEither e void
+```
+
+Added in v0.15.0
+
+## traverseArray\_
+
+Map to and sequence an array of fallible tasks, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const traverseArray_: <E, A, B>(
+  f: (x: A) => TaskEither<E, B>
+) => (xs: readonly A[]) => TaskEither<E, void>
+```
+
+```hs
+traverseArray_ :: (a -> TaskEither e b) -> Array a -> TaskEither e void
+```
+
+Added in v0.15.0
+
+## traverseSeqArray\_
+
+Sequentially map to and sequence an array of fallible tasks, ignoring the
+results.
+
+**Signature**
+
+```ts
+export declare const traverseSeqArray_: <E, A, B>(
+  f: (x: A) => TaskEither<E, B>
+) => (xs: readonly A[]) => TaskEither<E, void>
+```
+
+```hs
+traverseSeqArray_ :: (a -> TaskEither e b) -> Array a -> TaskEither e void
+```
+
+Added in v0.15.0
 
 ## unsafeUnwrap
 
