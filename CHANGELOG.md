@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.15.0 (_Unreleased_)
+## 0.15.0 (2022-09-11)
 
 - Add `IOEither` module.
 - Add `Monad` module.
