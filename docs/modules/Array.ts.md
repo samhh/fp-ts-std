@@ -774,7 +774,7 @@ If both indices are the same, the array is returned unchanged.
 **Signature**
 
 ```ts
-export declare const moveTo: (x: number) => (y: number) => <A>(xs: A[]) => Option<A[]>
+export declare const moveTo: (b: number) => (a: number) => <A>(xs: A[]) => Option<A[]>
 ```
 
 ```hs

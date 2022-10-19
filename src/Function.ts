@@ -16,6 +16,7 @@ import {
   getMonoid as getFunctionMonoid,
   apply,
   constant,
+  flip,
 } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
@@ -117,26 +118,6 @@ export const Monad: Monad2<URI> = {
   ...Applicative,
   chain: (f, g) => chain(g)(f),
 }
-
-/**
- * Flip the function/argument order of a curried function.
- *
- * @example
- * import { flip } from 'fp-ts-std/Function'
- *
- * const prepend = (x: string) => (y: string): string => x + y
- * const append = flip(prepend)
- *
- * assert.strictEqual(prepend('x')('y'), 'xy')
- * assert.strictEqual(append('x')('y'), 'yx')
- *
- * @since 0.1.0
- */
-export const flip =
-  <A, B, C>(f: (x: A) => (y: B) => C) =>
-  (x: B) =>
-  (y: A): C =>
-    f(y)(x)
 
 /**
  * Given a curried function with an iterative callback, this returns a new

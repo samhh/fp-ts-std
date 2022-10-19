@@ -12,7 +12,7 @@ import fc from "fast-check"
 import { keys } from "fp-ts/Record"
 import * as O from "fp-ts/Option"
 import * as T from "fp-ts/Tuple"
-import { flip } from "../src/Function"
+import { flip } from "fp-ts/function"
 
 describe("URLSearchParams", () => {
   describe("empty", () => {

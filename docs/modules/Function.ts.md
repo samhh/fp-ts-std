@@ -37,7 +37,6 @@ Added in v0.1.0
   - [curry4T](#curry4t)
   - [curry5](#curry5)
   - [curry5T](#curry5t)
-  - [flip](#flip)
   - [fork](#fork)
   - [guard](#guard)
   - [ifElse](#ifelse)
@@ -508,37 +507,6 @@ assert.strictEqual(curry5T(concat5)('a')('b')('c')('d')('e'), concat5(['a', 'b',
 ```
 
 Added in v0.7.0
-
-## flip
-
-Flip the function/argument order of a curried function.
-
-**Signature**
-
-```ts
-export declare const flip: <A, B, C>(f: (x: A) => (y: B) => C) => (x: B) => (y: A) => C
-```
-
-```hs
-flip :: (a -> b -> c) -> b -> a -> c
-```
-
-**Example**
-
-```ts
-import { flip } from 'fp-ts-std/Function'
-
-const prepend =
-  (x: string) =>
-  (y: string): string =>
-    x + y
-const append = flip(prepend)
-
-assert.strictEqual(prepend('x')('y'), 'xy')
-assert.strictEqual(append('x')('y'), 'yx')
-```
-
-Added in v0.1.0
 
 ## fork
 

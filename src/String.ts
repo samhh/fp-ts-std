@@ -4,7 +4,7 @@
  * @since 0.1.0
  */
 
-import { pipe, flow } from "fp-ts/function"
+import { pipe, flow, flip } from "fp-ts/function"
 import { Predicate, and, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Option } from "fp-ts/Option"
@@ -20,7 +20,7 @@ import {
 } from "./ReadonlyArray"
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
-import { flip, invoke, when } from "./Function"
+import { invoke, when } from "./Function"
 
 /**
  * Convert a number to a string.

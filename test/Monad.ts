@@ -1,10 +1,9 @@
 /* eslint-disable functional/no-expression-statement */
 
 import * as IO from "fp-ts/IO"
-import { constant, constVoid } from "fp-ts/function"
+import { constant, constVoid, flip } from "fp-ts/function"
 import { ifM, andM, orM, allPassM, anyPassM, nonePassM } from "../src/Monad"
 import { allPass, anyPass, nonePass } from "../src/Predicate"
-import { flip } from "../src/Function"
 
 type IO<A> = IO.IO<A>
 

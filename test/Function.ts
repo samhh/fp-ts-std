@@ -1,6 +1,5 @@
 import * as F from "../src/Function"
 import {
-  flip,
   withIndex,
   unary,
   guard,
@@ -31,7 +30,7 @@ import {
   applyEvery,
   applySomes,
 } from "../src/Function"
-import { fromNumber, prepend } from "../src/String"
+import { fromNumber } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
@@ -41,6 +40,7 @@ import {
   constant,
   constFalse,
   constTrue,
+  flip,
   flow,
   identity,
   increment,
@@ -252,13 +252,6 @@ describe("Function", () => {
           ),
         )
       })
-    })
-  })
-
-  describe("flip", () => {
-    it("flips curried arguments", () => {
-      expect(prepend("x")("y")).toBe("xy")
-      expect(flip(prepend)("x")("y")).toBe("yx")
     })
   })
 

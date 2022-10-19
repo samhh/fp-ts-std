@@ -4,7 +4,7 @@
  * @since 0.10.0
  */
 
-import { constant, pipe, flow } from "fp-ts/function"
+import { constant, pipe, flow, flip } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Eq } from "fp-ts/Eq"
@@ -22,7 +22,7 @@ import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
 import { concatAll } from "fp-ts/Monoid"
 import { max, min } from "fp-ts/Semigroup"
-import { flip, invoke } from "./Function"
+import { invoke } from "./Function"
 import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 import {

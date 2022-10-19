@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.16.0 (_Unreleased_)
 
+- Remove `flip`. [fp-ts/function::flip](https://gcanti.github.io/fp-ts/modules/function.ts.html#flip) is now curried.
 - Bump minimum supported fp-ts version to 2.13.1.
 
 ## 0.15.0 (2022-09-11)
