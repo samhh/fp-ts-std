@@ -59,7 +59,6 @@
     "eslint-plugin-functional": "^4.0.0",
     "fast-check": "^3.1.2",
     "fp-ts": "^2.11.0",
-    "fp-ts-contrib": "^0.1.26",
     "fp-ts-laws": "^0.3.0",
     "jest": "^28.1.0",
     "jsdom": "^19.0.0",
