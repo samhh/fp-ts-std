@@ -42,7 +42,7 @@ export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
  * import { JSDOM } from 'jsdom'
  * import { querySelector, getTextContent } from 'fp-ts-std/DOM'
  * import { pipe } from 'fp-ts/function'
- * import * as IOO from 'fp-ts-contrib/IOOption'
+ * import * as IOO from 'fp-ts/IOOption'
  * import * as O from 'fp-ts/Option'
  *
  * const { window: { document } } = new JSDOM('<ul><li>x</li><li>y</li></ul>')
@@ -68,7 +68,7 @@ export const querySelector =
  * import { JSDOM } from 'jsdom'
  * import { querySelectorAll } from 'fp-ts-std/DOM'
  * import { pipe } from 'fp-ts/function'
- * import * as IOO from 'fp-ts-contrib/IOOption'
+ * import * as IOO from 'fp-ts/IOOption'
  * import * as O from 'fp-ts/Option'
  * import * as A from 'fp-ts/Array'
  *
@@ -92,7 +92,7 @@ export const querySelectorAll =
  * import { JSDOM } from 'jsdom'
  * import { querySelector, childNodes } from 'fp-ts-std/DOM'
  * import { pipe } from 'fp-ts/function'
- * import * as IOO from 'fp-ts-contrib/IOOption'
+ * import * as IOO from 'fp-ts/IOOption'
  * import * as IO from 'fp-ts/IO'
  * import * as O from 'fp-ts/Option'
  * import * as A from 'fp-ts/Array'

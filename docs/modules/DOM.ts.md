@@ -133,7 +133,7 @@ childNodes :: Node -> IO (Option (NonEmptyArray ChildNode))
 import { JSDOM } from 'jsdom'
 import { querySelector, childNodes } from 'fp-ts-std/DOM'
 import { pipe } from 'fp-ts/function'
-import * as IOO from 'fp-ts-contrib/IOOption'
+import * as IOO from 'fp-ts/IOOption'
 import * as IO from 'fp-ts/IO'
 import * as O from 'fp-ts/Option'
 import * as A from 'fp-ts/Array'
@@ -272,7 +272,7 @@ querySelector :: string -> ParentNode -> IO (Option Element)
 import { JSDOM } from 'jsdom'
 import { querySelector, getTextContent } from 'fp-ts-std/DOM'
 import { pipe } from 'fp-ts/function'
-import * as IOO from 'fp-ts-contrib/IOOption'
+import * as IOO from 'fp-ts/IOOption'
 import * as O from 'fp-ts/Option'
 
 const {
@@ -308,7 +308,7 @@ querySelectorAll :: string -> ParentNode -> IO (Option (NonEmptyArray Element))
 import { JSDOM } from 'jsdom'
 import { querySelectorAll } from 'fp-ts-std/DOM'
 import { pipe } from 'fp-ts/function'
-import * as IOO from 'fp-ts-contrib/IOOption'
+import * as IOO from 'fp-ts/IOOption'
 import * as O from 'fp-ts/Option'
 import * as A from 'fp-ts/Array'
 
