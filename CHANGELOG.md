@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.16.0 (_Unreleased_)
+
+- Bump minimum supported fp-ts version to 2.13.1.
+
 ## 0.15.0 (2022-09-11)
 
 - Add `IOEither` module.
