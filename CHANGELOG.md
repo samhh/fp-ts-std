@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.15.1 (2022-11-18)
+
+- Fix symbol property name of `NonEmptyString` newtype.
+
 ## 0.15.0 (2022-09-11)
 
 - Add `IOEither` module.
