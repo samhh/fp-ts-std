@@ -35,7 +35,7 @@ import type { Show as TShow } from "fp-ts/Show"
 
 type Show<A> = TShow<A>
 
-type NonEmptyStringSymbol = { readonly Milliseconds: unique symbol }
+type NonEmptyStringSymbol = { readonly NonEmptyString: unique symbol }
 
 /**
  * Newtype representing a non-empty string. Non-emptiness is only guaranteed so
