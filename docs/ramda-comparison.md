@@ -111,7 +111,7 @@ Note that some functions are not one-to-one replacements, but rather bequeath a 
 - [x] invert - [fp-ts-std/Record::invertAll](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#invertall)
 - [x] invertObj - [fp-ts-std/Record::invertLast](https://samhh.github.io/fp-ts-std/modules/Record.ts.html#invertlast)
 - [x] invoker - [fp-ts-std/Function::invoke](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#invoke)
-- [x] is - [io-ts](https://gcanti.github.io/io-ts/) / [fp-ts-std/Function::is](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#is)
+- [x] is - [io-ts](https://gcanti.github.io/io-ts/) / [fp-ts-std/Function::isInstanceOf](https://samhh.github.io/fp-ts-std/modules/Function.ts.html#isInstanceOf)
 - [x] isEmpty - [fp-ts/Array::isEmpty](https://gcanti.github.io/fp-ts/modules/Array.ts.html#isempty)/[fp-ts/Record::isEmpty](https://gcanti.github.io/fp-ts/modules/Record.ts.html#isempty)/[fp-ts/string::isEmpty](https://gcanti.github.io/fp-ts/modules/string.ts.html#isempty)
 - ~~[ ] isNil~~ Prefer `Option` type. Failing that, create `Eq` instances for `null` and `undefined`.
 - [x] join - [fp-ts-std/Array::join](https://samhh.github.io/fp-ts-std/modules/Array.ts.html#join)

@@ -15,7 +15,7 @@ import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { construct, invokeOn, is } from "./Function"
+import { construct, invokeOn, isInstanceOf } from "./Function"
 import { pack, unpack } from "./Newtype"
 
 /**
@@ -152,7 +152,7 @@ export const toUTCString: (x: Date) => string = invokeOn<Date>()("toUTCString")(
  *
  * @since 0.1.0
  */
-export const isDate: Refinement<unknown, Date> = is(Date)
+export const isDate: Refinement<unknown, Date> = isInstanceOf(Date)
 
 /**
  * Check if a `Date` is actually valid. (We all love JavaScript, don't we?)

@@ -26,7 +26,7 @@ import {
   uncurry5,
   fork,
   converge,
-  is,
+  isInstanceOf,
   applyEvery,
   applySomes,
 } from "../src/Function"
@@ -641,15 +641,16 @@ describe("Function", () => {
     })
   })
 
-  describe("is", () => {
+  describe("isInstanceOf", () => {
     it("is equivalent to instanceof operator", () => {
       // eslint-disable-next-line functional/no-class
       class X {}
       const x = new X()
 
-      expect(is(X)(x)).toBe(true)
-      expect(is(Object)(x)).toBe(true)
-      expect(is(Function)(x)).toBe(false)
+      expect(isInstanceOf(X)(x)).toBe(true)
+      expect(isInstanceOf(Object)(x)).toBe(true)
+      expect(isInstanceOf(Function)(x)).toBe(false)
+      expect(isInstanceOf(String)("abcd")).toBe(false)
     })
   })
 

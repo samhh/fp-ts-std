@@ -767,16 +767,16 @@ export const converge =
  * absolutely must test a prototype.
  *
  * @example
- * import { is } from 'fp-ts-std/Function'
+ * import { isInstanceOf } from 'fp-ts-std/Function'
  *
- * const isString = is(String)
+ * const isStringInstance = isInstanceOf(String)
  *
- * assert.strictEqual(isString('ciao'), false)
- * assert.strictEqual(isString(new String('ciao')), true)
+ * assert.strictEqual(isStringInstance('ciao'), false)
+ * assert.strictEqual(isStringInstance(new String('ciao')), true)
  *
- * @since 0.12.0
+ * @since 0.16.0
  */
-export const is =
+export const isInstanceOf =
   <A>(x: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     new (...args: Array<any>): unknown
