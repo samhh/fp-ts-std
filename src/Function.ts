@@ -774,7 +774,7 @@ export const converge =
  * assert.strictEqual(isStringInstance('ciao'), false)
  * assert.strictEqual(isStringInstance(new String('ciao')), true)
  *
- * @since 0.16.0
+ * @since 0.12.0
  */
 export const isInstanceOf =
   <A>(x: {
