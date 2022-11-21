@@ -43,7 +43,7 @@ Added in v0.1.0
   - [invoke](#invoke)
   - [invokeNullary](#invokenullary)
   - [invokeOn](#invokeon)
-  - [is](#is)
+  - [isInstanceOf](#isinstanceof)
   - [map](#map)
   - [memoize](#memoize)
   - [of](#of)
@@ -719,7 +719,7 @@ assert.strictEqual(padStart(8)('.')(x), x.padStart(8, '.'))
 
 Added in v0.12.0
 
-## is
+## isInstanceOf
 
 A curried function equivalent to the `instanceof` operator, for when you
 absolutely must test a prototype.
@@ -727,22 +727,22 @@ absolutely must test a prototype.
 **Signature**
 
 ```ts
-export declare const is: <A>(x: new (...args: Array<any>) => unknown) => Refinement<unknown, A>
+export declare const isInstanceOf: <A>(x: new (...args: Array<any>) => unknown) => Refinement<unknown, A>
 ```
 
 ```hs
-is :: (...Array any -> unknown) -> Refinement unknown a
+isInstanceOf :: (...Array any -> unknown) -> Refinement unknown a
 ```
 
 **Example**
 
 ```ts
-import { is } from 'fp-ts-std/Function'
+import { isInstanceOf } from 'fp-ts-std/Function'
 
-const isString = is(String)
+const isStringInstance = isInstanceOf(String)
 
-assert.strictEqual(isString('ciao'), false)
-assert.strictEqual(isString(new String('ciao')), true)
+assert.strictEqual(isStringInstance('ciao'), false)
+assert.strictEqual(isStringInstance(new String('ciao')), true)
 ```
 
 Added in v0.12.0
