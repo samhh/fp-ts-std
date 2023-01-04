@@ -44,13 +44,13 @@ export const merge =
  */
 export const pick =
   <A, K extends keyof A>(ks: Array<K>) =>
-  (x: A): Pick<A, K> =>
+  (x: A): Pick<A, Extract<keyof A, K>> =>
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
     // it's in a single reused place.
     pipe(
       ks,
-      A.reduce({} as Pick<A, K>, (ys, k) =>
+      A.reduce({} as Pick<A, Extract<keyof A, K>>, (ys, k) =>
         merge(ys)(k in x ? { [k]: x[k] } : {}),
       ),
     )
@@ -70,7 +70,7 @@ export const pick =
  */
 export const pickFrom = <A>(): (<K extends keyof A>(
   ks: Array<K>,
-) => (x: A) => Pick<A, K>) => pick
+) => (x: A) => Pick<A, Extract<keyof A, K>>) => pick
 
 /**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
