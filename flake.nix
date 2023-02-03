@@ -14,7 +14,7 @@
             pkgs.mkShell {
               buildInputs = with pkgs; [
                 git
-                nodejs-18_x
+                nodejs-19_x
                 yarn
               ];
             };

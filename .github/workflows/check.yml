@@ -33,14 +33,14 @@ jobs:
     strategy:
       matrix:
         # Latest released and oldest supported.
-        node: [18, 14]
+        node: [19, 14]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node }}
       - run: yarn test
-        if: matrix.node == 18
+        if: matrix.node == 19
       - run: yarn test --coverage=false
         if: matrix.node == 14
 
