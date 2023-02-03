@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   transform: {
-    ".ts$": [
+    "\\.ts$": [
       "ts-jest",
       {
         tsconfig: "./tsconfig.test.json",
