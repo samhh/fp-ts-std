@@ -13,10 +13,13 @@ module.exports = {
       statements: 100,
     },
   },
-  globals: {
-    "ts-jest": {
-      tsconfig: "./tsconfig.test.json",
-      diagnostics: false,
-    },
+  transform: {
+    ".ts$": [
+      "ts-jest",
+      {
+        tsconfig: "./tsconfig.test.json",
+        diagnostics: false,
+      },
+    ],
   },
 }
