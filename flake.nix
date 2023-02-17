@@ -12,7 +12,7 @@
         {
           devShells.default =
             pkgs.mkShell {
-              buildInputs = with pkgs; [
+              nativeBuildInputs = with pkgs; [
                 git
                 nodejs-19_x
                 yarn
