@@ -23,7 +23,7 @@ import { uncurry2 } from "./Function"
  */
 export const merge =
   <A, B>(x: A) =>
-  (y: B): A & B => ({ ...x, ...y })
+  <C extends B>(y: C): A & C => ({ ...x, ...y })
 
 /**
  * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
