@@ -22,6 +22,7 @@ Added in v0.1.0
   - [noneAs](#noneas)
   - [pureIf](#pureif)
   - [toMonoid](#tomonoid)
+  - [unsafeExpect](#unsafeexpect)
   - [unsafeUnwrap](#unsafeunwrap)
 
 ---
@@ -237,6 +238,31 @@ assert.deepStrictEqual(f(O.none), '')
 ```
 
 Added in v0.12.0
+
+## unsafeExpect
+
+Unwrap the value from within an `Option`, throwing `msg` if `None`.
+
+**Signature**
+
+```ts
+export declare const unsafeExpect: (msg: string) => <A>(x: Option<A>) => A
+```
+
+```hs
+unsafeExpect :: string -> Option a -> a
+```
+
+**Example**
+
+```ts
+import { unsafeExpect } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+
+assert.throws(() => unsafeExpect('foo')(O.none), /^foo$/)
+```
+
+Added in v0.16.0
 
 ## unsafeUnwrap
 

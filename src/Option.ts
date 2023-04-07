@@ -16,6 +16,29 @@ import { toMonoid as _toMonoid } from "./Monoid"
 import { Lazy } from "./Lazy"
 
 /**
+ * Unwrap the value from within an `Option`, throwing `msg` if `None`.
+ *
+ * @example
+ * import { unsafeExpect } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
+ *
+ * assert.throws(
+ *   () => unsafeExpect('foo')(O.none),
+ *   /^foo$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpect =
+  (msg: string) =>
+  <A>(x: Option<A>): A => {
+    // eslint-disable-next-line functional/no-conditional-statement, functional/no-throw-statement
+    if (O.isNone(x)) throw msg
+
+    return x.value
+  }
+
+/**
  * Unwrap the value from within an `Option`, throwing if `None`.
  *
  * @example
@@ -26,12 +49,9 @@ import { Lazy } from "./Lazy"
  *
  * @since 0.1.0
  */
-export const unsafeUnwrap = <A>(x: Option<A>): A => {
-  // eslint-disable-next-line functional/no-conditional-statement, functional/no-throw-statement
-  if (O.isNone(x)) throw "Unsafe attempt to unwrap Option failed"
-
-  return x.value
-}
+export const unsafeUnwrap: <A>(x: Option<A>) => A = unsafeExpect(
+  "Unsafe attempt to unwrap Option failed",
+)
 
 /**
  * A thunked `None` constructor. Enables specifying the type of the `Option`

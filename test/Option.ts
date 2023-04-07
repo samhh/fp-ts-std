@@ -1,5 +1,6 @@
 import {
   unsafeUnwrap,
+  unsafeExpect,
   noneAs,
   invert,
   toMonoid,
@@ -28,6 +29,18 @@ describe("Option", () => {
 
     it("throws None", () => {
       expect(() => f(O.none)).toThrow()
+    })
+  })
+
+  describe("unsafeExpect", () => {
+    const f = unsafeExpect("foo")
+
+    it("unwraps Some", () => {
+      expect(f(O.some(123))).toBe(123)
+    })
+
+    it("throws None with provided message", () => {
+      expect(() => f(O.none)).toThrow("foo")
     })
   })
 
