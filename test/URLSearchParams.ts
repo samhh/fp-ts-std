@@ -127,10 +127,10 @@ describe("URLSearchParams", () => {
   })
 
   describe("getParam", () => {
-    const f = flip(getParam)(fromRecord({ a: "b" }))
+    const f = flip(getParam)(fromString("a=b1&a=b2"))
 
     it("works", () => {
-      expect(f("a")).toEqual(O.some("b"))
+      expect(f("a")).toEqual(O.some("b1"))
       expect(f("b")).toEqual(O.none)
     })
   })

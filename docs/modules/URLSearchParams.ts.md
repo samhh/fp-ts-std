@@ -163,7 +163,7 @@ Added in v0.2.0
 
 ## getParam
 
-Attempt to get a URL parameter from a `URLSearchParams`.
+Attempt to get the first match for a URL parameter from a `URLSearchParams`.
 
 **Signature**
 
@@ -181,9 +181,9 @@ getParam :: string -> URLSearchParams -> Option string
 import { getParam, fromString } from 'fp-ts-std/URLSearchParams'
 import * as O from 'fp-ts/Option'
 
-const x = fromString('a=b&c=d')
+const x = fromString('a=b&c=d1&c=d2')
 
-assert.deepStrictEqual(getParam('c')(x), O.some('d'))
+assert.deepStrictEqual(getParam('c')(x), O.some('d1'))
 assert.deepStrictEqual(getParam('e')(x), O.none)
 ```
 
