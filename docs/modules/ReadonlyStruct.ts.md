@@ -36,11 +36,11 @@ consider defining a semigroup.
 **Signature**
 
 ```ts
-export declare const merge: <A>(x: A) => <B>(y: B) => A & B
+export declare const merge: <A, B>(x: A) => <C extends B>(y: C) => A & C
 ```
 
 ```hs
-merge :: a -> b -> a & b
+merge :: c extends b => a -> c -> a & c
 ```
 
 **Example**
