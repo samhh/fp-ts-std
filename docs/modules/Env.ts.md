@@ -33,10 +33,6 @@ Attempt to get an environment parameter.
 export declare const getParam: (k: string) => IO<Option<string>>
 ```
 
-```hs
-getParam :: string -> IO (Option string)
-```
-
 **Example**
 
 ```ts
@@ -58,10 +54,6 @@ Attempt to get an environment parameter, filtering out empty strings.
 
 ```ts
 export declare const getParamNonEmpty: (k: string) => IO<Option<string>>
-```
-
-```hs
-getParamNonEmpty :: string -> IO (Option string)
 ```
 
 **Example**

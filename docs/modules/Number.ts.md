@@ -49,10 +49,6 @@ Add two numbers together.
 export declare const add: (x: number) => Endomorphism<number>
 ```
 
-```hs
-add :: number -> Endomorphism number
-```
-
 **Example**
 
 ```ts
@@ -71,10 +67,6 @@ Decrement a number.
 
 ```ts
 export declare const decrement: Endomorphism<number>
-```
-
-```hs
-decrement :: Endomorphism number
 ```
 
 **Example**
@@ -98,10 +90,6 @@ _divisor_).
 export declare const divide: (divisor: number) => Endomorphism<number>
 ```
 
-```hs
-divide :: number -> Endomorphism number
-```
-
 **Example**
 
 ```ts
@@ -121,10 +109,6 @@ Convert a string to a floating point number.
 
 ```ts
 export declare const floatFromString: (x: string) => Option<number>
-```
-
-```hs
-floatFromString :: string -> Option number
 ```
 
 **Example**
@@ -149,10 +133,6 @@ Convert a string to a number.
 export declare const fromString: (string: string) => Option<number>
 ```
 
-```hs
-fromString :: string -> Option number
-```
-
 **Example**
 
 ```ts
@@ -173,10 +153,6 @@ Convert a string to a number.
 
 ```ts
 export declare const fromStringWithRadix: (radix: number) => (string: string) => Option<number>
-```
-
-```hs
-fromStringWithRadix :: number -> string -> Option number
 ```
 
 **Example**
@@ -201,10 +177,6 @@ Increment a number.
 export declare const increment: Endomorphism<number>
 ```
 
-```hs
-increment :: Endomorphism number
-```
-
 **Example**
 
 ```ts
@@ -223,10 +195,6 @@ Check if a number is finite.
 
 ```ts
 export declare const isFinite: Predicate<number>
-```
-
-```hs
-isFinite :: Predicate number
 ```
 
 **Example**
@@ -252,10 +220,6 @@ Check if a number is negative.
 export declare const isNegative: Predicate<number>
 ```
 
-```hs
-isNegative :: Predicate number
-```
-
 **Example**
 
 ```ts
@@ -276,10 +240,6 @@ Check if a number is non-negative.
 
 ```ts
 export declare const isNonNegative: Predicate<number>
-```
-
-```hs
-isNonNegative :: Predicate number
 ```
 
 **Example**
@@ -304,10 +264,6 @@ Check if a number is non-positive.
 export declare const isNonPositive: Predicate<number>
 ```
 
-```hs
-isNonPositive :: Predicate number
-```
-
 **Example**
 
 ```ts
@@ -328,10 +284,6 @@ Check if a number is positive.
 
 ```ts
 export declare const isPositive: Predicate<number>
-```
-
-```hs
-isPositive :: Predicate number
 ```
 
 **Example**
@@ -355,10 +307,6 @@ doing is checking whether or not the number is `NaN`.
 
 ```ts
 export declare const isValid: Predicate<number>
-```
-
-```hs
-isValid :: Predicate number
 ```
 
 **Example**
@@ -385,10 +333,6 @@ Calculate the modulus. See also `rem`.
 export declare const mod: (divisor: number) => Endomorphism<number>
 ```
 
-```hs
-mod :: number -> Endomorphism number
-```
-
 **Example**
 
 ```ts
@@ -411,10 +355,6 @@ Multiply two numbers together.
 export declare const multiply: (x: number) => Endomorphism<number>
 ```
 
-```hs
-multiply :: number -> Endomorphism number
-```
-
 **Example**
 
 ```ts
@@ -433,10 +373,6 @@ Unary negation.
 
 ```ts
 export declare const negate: Endomorphism<number>
-```
-
-```hs
-negate :: Endomorphism number
 ```
 
 **Example**
@@ -458,10 +394,6 @@ Calculates the remainder. See also `mod`.
 
 ```ts
 export declare const rem: (divisor: number) => Endomorphism<number>
-```
-
-```hs
-rem :: number -> Endomorphism number
 ```
 
 **Example**
@@ -487,10 +419,6 @@ _minuend_).
 export declare const subtract: (subtrahend: number) => Endomorphism<number>
 ```
 
-```hs
-subtract :: number -> Endomorphism number
-```
-
 **Example**
 
 ```ts
@@ -511,10 +439,6 @@ nearest safe finite number.
 
 ```ts
 export declare const toFinite: Endomorphism<number>
-```
-
-```hs
-toFinite :: Endomorphism number
 ```
 
 **Example**

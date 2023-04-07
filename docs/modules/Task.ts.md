@@ -40,10 +40,6 @@ took for the task to complete. The task otherwise operates as per usual.
 export declare const elapsed: (f: (n: Milliseconds) => IO<void>) => <A>(x: Task<A>) => Task<A>
 ```
 
-```hs
-elapsed :: (Milliseconds -> IO void) -> Task a -> Task a
-```
-
 **Example**
 
 ```ts
@@ -75,10 +71,6 @@ function application and composition pipelines.
 export declare const execute: <A>(x: Task<A>) => Promise<A>
 ```
 
-```hs
-execute :: Task a -> Promise a
-```
-
 **Example**
 
 ```ts
@@ -102,10 +94,6 @@ Sequence an array of tasks, ignoring the results.
 export declare const sequenceArray_: <A>(xs: readonly Task<A>[]) => Task<void>
 ```
 
-```hs
-sequenceArray_ :: Array (Task a) -> Task void
-```
-
 Added in v0.15.0
 
 ## sequenceSeqArray\_
@@ -116,10 +104,6 @@ Sequentially sequence an array of tasks, ignoring the results.
 
 ```ts
 export declare const sequenceSeqArray_: <A>(xs: readonly Task<A>[]) => Task<void>
-```
-
-```hs
-sequenceSeqArray_ :: Array (Task a) -> Task void
 ```
 
 Added in v0.15.0
@@ -135,10 +119,6 @@ resolves with void. Can also be useful with async/await (`await sleep(n)()`).
 
 ```ts
 export declare const sleep: (n: Milliseconds) => Task<void>
-```
-
-```hs
-sleep :: Milliseconds -> Task void
 ```
 
 **Example**
@@ -185,10 +165,6 @@ Map to and sequence an array of tasks, ignoring the results.
 export declare const traverseArray_: <A, B>(f: (x: A) => Task<B>) => (xs: readonly A[]) => Task<void>
 ```
 
-```hs
-traverseArray_ :: (a -> Task b) -> Array a -> Task void
-```
-
 Added in v0.15.0
 
 ## traverseSeqArray\_
@@ -201,10 +177,6 @@ Sequentially map to and sequence an array of tasks, ignoring the results.
 export declare const traverseSeqArray_: <A, B>(f: (x: A) => Task<B>) => (xs: readonly A[]) => Task<void>
 ```
 
-```hs
-traverseSeqArray_ :: (a -> Task b) -> Array a -> Task void
-```
-
 Added in v0.15.0
 
 ## unless
@@ -215,10 +187,6 @@ The reverse of `when`.
 
 ```ts
 export declare const unless: (x: boolean) => Endomorphism<Task<void>>
-```
-
-```hs
-unless :: boolean -> Endomorphism (Task void)
 ```
 
 **Example**
@@ -251,10 +219,6 @@ logging.
 
 ```ts
 export declare const when: (x: boolean) => Endomorphism<Task<void>>
-```
-
-```hs
-when :: boolean -> Endomorphism (Task void)
 ```
 
 **Example**

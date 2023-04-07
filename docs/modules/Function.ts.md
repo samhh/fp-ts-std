@@ -73,10 +73,6 @@ higher-kinded functions that require it.
 export declare const Applicative: Applicative2<'Function'>
 ```
 
-```hs
-Applicative :: Applicative2 "Function"
-```
-
 Added in v0.15.0
 
 ## Functor
@@ -88,10 +84,6 @@ higher-kinded functions that require it.
 
 ```ts
 export declare const Functor: Functor2<'Function'>
-```
-
-```hs
-Functor :: Functor2 "Function"
 ```
 
 Added in v0.15.0
@@ -107,10 +99,6 @@ functions that require it.
 export declare const Monad: Monad2<'Function'>
 ```
 
-```hs
-Monad :: Monad2 "Function"
-```
-
 Added in v0.15.0
 
 ## URI
@@ -123,10 +111,6 @@ Typeclass machinery.
 export declare const URI: 'Function'
 ```
 
-```hs
-URI :: "Function"
-```
-
 Added in v0.15.0
 
 ## URI (type alias)
@@ -137,10 +121,6 @@ Typeclass machinery.
 
 ```ts
 export type URI = typeof URI
-```
-
-```hs
-type URI = typeof URI
 ```
 
 Added in v0.15.0
@@ -156,10 +136,6 @@ of the former to the latter.
 export declare const ap: <A, B>(f: (x: A) => B) => <C>(g: (x: A) => (y: B) => C) => (x: A) => C
 ```
 
-```hs
-ap :: (a -> b) -> (a -> b -> c) -> a -> c
-```
-
 Added in v0.15.0
 
 ## applyEvery
@@ -170,10 +146,6 @@ Apply an array of endomorphisms from left-to-right.
 
 ```ts
 export declare const applyEvery: <A>(fs: Endomorphism<A>[]) => Endomorphism<A>
-```
-
-```hs
-applyEvery :: Array (Endomorphism a) -> Endomorphism a
 ```
 
 **Example**
@@ -233,10 +205,6 @@ the former to the latter. As it applies to functions this is essentially
 export declare const chain: <A, B, C>(f: (x: B) => (y: A) => C) => (g: (x: A) => B) => (x: A) => C
 ```
 
-```hs
-chain :: (b -> a -> c) -> (a -> b) -> a -> c
-```
-
 Added in v0.15.0
 
 ## construct
@@ -247,10 +215,6 @@ Wraps a constructor function for functional invocation.
 
 ```ts
 export declare const construct: <A extends unknown[], B>(x: new (...xs: A) => B) => (xs: A) => B
-```
-
-```hs
-construct :: a extends (Array unknown) => (...a -> b) -> a -> b
 ```
 
 **Example**
@@ -305,10 +269,6 @@ Curry a function with binary input.
 export declare const curry2: <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B) => C
 ```
 
-```hs
-curry2 :: ((a, b) -> c) -> a -> b -> c
-```
-
 **Example**
 
 ```ts
@@ -329,10 +289,6 @@ Curry a function with binary tuple input.
 
 ```ts
 export declare const curry2T: <A, B, C>(f: (xs: [A, B]) => C) => (a: A) => (b: B) => C
-```
-
-```hs
-curry2T :: ([a, b] -> c) -> a -> b -> c
 ```
 
 **Example**
@@ -357,10 +313,6 @@ Curry a function with ternary input.
 export declare const curry3: <A, B, C, D>(f: (a: A, b: B, c: C) => D) => (a: A) => (b: B) => (c: C) => D
 ```
 
-```hs
-curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
-```
-
 **Example**
 
 ```ts
@@ -381,10 +333,6 @@ Curry a function with ternary tuple input.
 
 ```ts
 export declare const curry3T: <A, B, C, D>(f: (xs: [A, B, C]) => D) => (a: A) => (b: B) => (c: C) => D
-```
-
-```hs
-curry3T :: ([a, b, c] -> d) -> a -> b -> c -> d
 ```
 
 **Example**
@@ -411,10 +359,6 @@ export declare const curry4: <A, B, C, D, E>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => E
 ```
 
-```hs
-curry4 :: ((a, b, c, d) -> e) -> a -> b -> c -> d -> e
-```
-
 **Example**
 
 ```ts
@@ -435,10 +379,6 @@ Curry a function with quaternary tuple input.
 
 ```ts
 export declare const curry4T: <A, B, C, D, E>(f: (xs: [A, B, C, D]) => E) => (a: A) => (b: B) => (c: C) => (d: D) => E
-```
-
-```hs
-curry4T :: ([a, b, c, d] -> e) -> a -> b -> c -> d -> e
 ```
 
 **Example**
@@ -465,10 +405,6 @@ export declare const curry5: <A, B, C, D, E, F>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
 ```
 
-```hs
-curry5 :: ((a, b, c, d, e) -> f) -> a -> b -> c -> d -> e -> f
-```
-
 **Example**
 
 ```ts
@@ -493,10 +429,6 @@ export declare const curry5T: <A, B, C, D, E, F>(
 ) => (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => F
 ```
 
-```hs
-curry5T :: ([a, b, c, d, e] -> f) -> a -> b -> c -> d -> e -> f
-```
-
 **Example**
 
 ```ts
@@ -517,10 +449,6 @@ Flip the function/argument order of a curried function.
 
 ```ts
 export declare const flip: <A, B, C>(f: (x: A) => (y: B) => C) => (x: B) => (y: A) => C
-```
-
-```hs
-flip :: (a -> b -> c) -> b -> a -> c
 ```
 
 **Example**
@@ -612,10 +540,6 @@ export declare const guard: <A, B>(
 ) => (fallback: (x: A) => B) => (input: A) => B
 ```
 
-```hs
-guard :: Array [(Predicate a), a -> b] -> (a -> b) -> a -> b
-```
-
 **Example**
 
 ```ts
@@ -645,10 +569,6 @@ succeeds, else the second morphism.
 
 ```ts
 export declare const ifElse: <A, B>(onTrue: (x: A) => B) => (onFalse: (x: A) => B) => (f: Predicate<A>) => (x: A) => B
-```
-
-```hs
-ifElse :: (a -> b) -> (a -> b) -> Predicate a -> a -> b
 ```
 
 **Example**
@@ -705,10 +625,6 @@ Added in v0.12.0
 export declare const invokeNullary: <A extends string>(x: A) => <B>(y: Record<A, () => B>) => B
 ```
 
-```hs
-invokeNullary :: a extends string => a -> Record a (() -> b) -> b
-```
-
 **Example**
 
 ```ts
@@ -762,10 +678,6 @@ absolutely must test a prototype.
 export declare const is: <A>(x: new (...args: Array<any>) => unknown) => Refinement<unknown, A>
 ```
 
-```hs
-is :: (...Array any -> unknown) -> Refinement unknown a
-```
-
 **Example**
 
 ```ts
@@ -789,10 +701,6 @@ Map a unary function's output. Equivalent to function composition.
 export declare const map: <B, C>(f: (x: B) => C) => <A>(g: (x: A) => B) => (x: A) => C
 ```
 
-```hs
-map :: (b -> c) -> (a -> b) -> a -> c
-```
-
 Added in v0.15.0
 
 ## memoize
@@ -811,10 +719,6 @@ cache entries can be cleared from memory.
 
 ```ts
 export declare const memoize: <A>(eq: Eq<A>) => <B>(f: (x: A) => B) => (x: A) => B
-```
-
-```hs
-memoize :: Eq a -> (a -> b) -> a -> b
 ```
 
 **Example**
@@ -849,10 +753,6 @@ Lift a value to a function from any other value. Equivalent to `constant`.
 export declare const of: <A>(x: A) => <B>(y: B) => A
 ```
 
-```hs
-of :: a -> b -> a
-```
-
 Added in v0.15.0
 
 ## unary
@@ -867,10 +767,6 @@ instead of more appropriately an array.
 
 ```ts
 export declare const unary: <A extends unknown[], B>(f: (...xs: A) => B) => (xs: A) => B
-```
-
-```hs
-unary :: a extends (Array unknown) => (...a -> b) -> a -> b
 ```
 
 **Example**
@@ -893,10 +789,6 @@ Uncurry a binary function.
 
 ```ts
 export declare const uncurry2: <A, B, C>(f: (a: A) => (b: B) => C) => ([a, b]: [A, B]) => C
-```
-
-```hs
-uncurry2 :: (a -> b -> c) -> [a, b] -> c
 ```
 
 **Example**
@@ -922,10 +814,6 @@ Uncurry a ternary function.
 
 ```ts
 export declare const uncurry3: <A, B, C, D>(f: (a: A) => (b: B) => (c: C) => D) => ([a, b, c]: [A, B, C]) => D
-```
-
-```hs
-uncurry3 :: (a -> b -> c -> d) -> [a, b, c] -> d
 ```
 
 **Example**
@@ -954,10 +842,6 @@ Uncurry a quaternary function.
 export declare const uncurry4: <A, B, C, D, E>(
   f: (a: A) => (b: B) => (c: C) => (d: D) => E
 ) => ([a, b, c, d]: [A, B, C, D]) => E
-```
-
-```hs
-uncurry4 :: (a -> b -> c -> d -> e) -> [a, b, c, d] -> e
 ```
 
 **Example**
@@ -989,10 +873,6 @@ export declare const uncurry5: <A, B, C, D, E, F>(
 ) => ([a, b, c, d, e]: [A, B, C, D, E]) => F
 ```
 
-```hs
-uncurry5 :: (a -> b -> c -> d -> e -> f) -> [a, b, c, d, e] -> f
-```
-
 **Example**
 
 ```ts
@@ -1019,10 +899,6 @@ Runs the provided morphism on the input value if the predicate fails.
 
 ```ts
 export declare const unless: <A>(f: Predicate<A>) => (onFalse: Endomorphism<A>) => Endomorphism<A>
-```
-
-```hs
-unless :: Predicate a -> Endomorphism a -> Endomorphism a
 ```
 
 **Example**
@@ -1052,10 +928,6 @@ holds.
 export declare const until: <A>(f: Predicate<A>) => (g: Endomorphism<A>) => Endomorphism<A>
 ```
 
-```hs
-until :: Predicate a -> Endomorphism a -> Endomorphism a
-```
-
 **Example**
 
 ```ts
@@ -1079,10 +951,6 @@ Runs the provided morphism on the input value if the predicate holds.
 
 ```ts
 export declare const when: <A>(f: Predicate<A>) => (onTrue: Endomorphism<A>) => Endomorphism<A>
-```
-
-```hs
-when :: Predicate a -> Endomorphism a -> Endomorphism a
 ```
 
 **Example**
@@ -1113,10 +981,6 @@ each iteration of the callback.
 export declare const withIndex: <A, B, C>(
   f: (g: (x: A) => B) => (ys: A[]) => C[]
 ) => (g: (i: number) => (x: A) => B) => (ys: A[]) => C[]
-```
-
-```hs
-withIndex :: ((a -> b) -> Array a -> Array c) -> (number -> a -> b) -> Array a -> Array c
 ```
 
 **Example**

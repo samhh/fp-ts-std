@@ -31,10 +31,6 @@ Runs a ReaderTask and extracts the final Task from it.
 export declare const runReaderTask: <R, A>(r: R) => (reader: ReaderTask<R, A>) => Task<A>
 ```
 
-```hs
-runReaderTask :: r -> ReaderTask r a -> Task a
-```
-
 **Example**
 
 ```ts

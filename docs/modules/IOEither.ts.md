@@ -35,10 +35,6 @@ Apply a function to both elements of an `IOEither`.
 export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: IOEither<A, A>) => IOEither<B, B>
 ```
 
-```hs
-mapBoth :: (a -> b) -> IOEither a a -> IOEither b b
-```
-
 **Example**
 
 ```ts
@@ -65,10 +61,6 @@ Sequence an array of fallible effects, ignoring the results.
 export declare const sequenceArray_: <E, A>(xs: readonly IOEither<E, A>[]) => IOEither<E, void>
 ```
 
-```hs
-sequenceArray_ :: Array (IOEither e a) -> IOEither e void
-```
-
 Added in v0.15.0
 
 ## traverseArray\_
@@ -79,10 +71,6 @@ Map to and sequence an array of fallible effects, ignoring the results.
 
 ```ts
 export declare const traverseArray_: <E, A, B>(f: (x: A) => IOEither<E, B>) => (xs: readonly A[]) => IOEither<E, void>
-```
-
-```hs
-traverseArray_ :: (a -> IOEither e b) -> Array a -> IOEither e void
 ```
 
 Added in v0.15.0
@@ -96,10 +84,6 @@ Unwrap the value from within an `IOEither`, throwing with the inner value of
 
 ```ts
 export declare const unsafeUnwrap: <A>(x: IOEither<unknown, A>) => A
-```
-
-```hs
-unsafeUnwrap :: IOEither unknown a -> a
 ```
 
 **Example**
@@ -122,10 +106,6 @@ Unwrap the value from within an `IOEither`, throwing the inner value of
 
 ```ts
 export declare const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E
-```
-
-```hs
-unsafeUnwrapLeft :: IOEither e unknown -> e
 ```
 
 **Example**

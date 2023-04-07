@@ -38,10 +38,6 @@ newtypes.
 export declare const over: <A>(f: Endomorphism<A>) => <B extends Newtype<unknown, A>>(x: B) => B
 ```
 
-```hs
-over :: b extends (Newtype unknown a) => Endomorphism a -> b -> b
-```
-
 **Example**
 
 ```ts
@@ -78,14 +74,6 @@ export declare function overF<F>(
 ): <A>(f: (x: A) => HKT<F, A>) => <B extends Newtype<unknown, A>>(x: B) => HKT<F, B>
 ```
 
-```hs
-overF :: f extends URIS4, b extends (Newtype unknown a) => Functor4 f -> (a -> Kind4 f s r e a) -> b -> Kind4 f s r e b
-overF :: f extends URIS3, b extends (Newtype unknown a) => Functor3 f -> (a -> Kind3 f r e a) -> b -> Kind3 f r e b
-overF :: f extends URIS2, b extends (Newtype unknown a) => Functor2 f -> (a -> Kind2 f e a) -> b -> Kind2 f e b
-overF :: f extends URIS, b extends (Newtype unknown a) => Functor1 f -> (a -> Kind f a) -> b -> Kind f b
-overF :: b extends (Newtype unknown a) => Functor f -> (a -> HKT f a) -> b -> HKT f b
-```
-
 **Example**
 
 ```ts
@@ -112,10 +100,6 @@ Pack a value into a newtype.
 export declare const pack: <A extends Newtype<unknown, unknown> = never>(x: A['_A']) => A
 ```
 
-```hs
-pack :: a extends (Newtype unknown unknown) => a["_A"] -> a
-```
-
 **Example**
 
 ```ts
@@ -135,10 +119,6 @@ Unpack a value from a newtype.
 
 ```ts
 export declare const unpack: <A extends Newtype<unknown, unknown>>(x: A) => A['_A']
-```
-
-```hs
-unpack :: a extends (Newtype unknown unknown) => a -> a["_A"]
 ```
 
 **Example**

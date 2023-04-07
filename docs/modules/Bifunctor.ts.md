@@ -48,15 +48,6 @@ export declare function mapBoth<F extends URIS2>(
 ): <A, B>(f: (x: A) => B) => (x: Kind2<F, A, A>) => Kind2<F, B, B>
 ```
 
-```hs
-mapBoth :: f extends URIS4 => Bifunctor4 f -> (a -> b) -> Kind4 f s r a a -> Kind4 f s r b b
-mapBoth :: f extends URIS3 => ((Bifunctor3 f) -> (a -> b) -> Kind3 f r a a -> Kind3 f r b b)
-mapBoth :: f extends URIS3 => ((Bifunctor3C f e) -> (e -> b) -> Kind3 f r e e -> Kind3 f r b b)
-mapBoth :: f extends URIS2 => ((Bifunctor2 f) -> (a -> b) -> Kind2 f a a -> Kind2 f b b)
-mapBoth :: f extends URIS2 => ((Bifunctor2C f e) -> (e -> b) -> Kind2 f e e -> Kind2 f b b)
-mapBoth :: f extends URIS2 => ((Bifunctor f) -> (a -> b) -> Kind2 f a a -> Kind2 f b b)
-```
-
 **Example**
 
 ```ts

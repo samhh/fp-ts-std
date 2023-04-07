@@ -38,10 +38,6 @@ duplicate keys, see instead `invertLast`.
 export declare const invertAll: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, Array<string>>
 ```
 
-```hs
-invertAll :: (a -> string) -> Record string a -> Record string (Array string)
-```
-
 **Example**
 
 ```ts
@@ -65,10 +61,6 @@ lost, see instead `invertAll`.
 export declare const invertLast: <A>(f: (x: A) => string) => (x: Record<string, A>) => Record<string, string>
 ```
 
-```hs
-invertLast :: (a -> string) -> Record string a -> Record string string
-```
-
 **Example**
 
 ```ts
@@ -88,10 +80,6 @@ Like `fp-ts/Record::lookup` but flipped, which the "V" suffix denotes.
 
 ```ts
 export declare const lookupV: <A>(x: Record<string, A>) => (k: string) => Option<A>
-```
-
-```hs
-lookupV :: Record string a -> string -> Option a
 ```
 
 **Example**
@@ -120,10 +108,6 @@ filtering.
 export declare const reject: <A>(f: Predicate<A>) => <B extends A>(x: Record<string, B>) => Record<string, B>
 ```
 
-```hs
-reject :: b extends a => Predicate a -> Record string b -> Record string b
-```
-
 **Example**
 
 ```ts
@@ -145,10 +129,6 @@ Get the values from a `Record`.
 
 ```ts
 export declare const values: <A>(x: Record<string, A>) => A[]
-```
-
-```hs
-values :: Record string a -> Array a
 ```
 
 **Example**

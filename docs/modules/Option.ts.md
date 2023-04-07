@@ -40,10 +40,6 @@ the `Option` values, short-circuiting upon a non-empty value. Useful given
 export declare const altAllBy: <A, B>(fs: ((x: A) => Option<B>)[]) => (x: A) => Option<B>
 ```
 
-```hs
-altAllBy :: Array ((a -> Option b)) -> a -> Option b
-```
-
 **Example**
 
 ```ts
@@ -69,10 +65,6 @@ an `Option` value.
 
 ```ts
 export declare const invert: <A>(eq: Eq<A>) => (val: A) => Endomorphism<Option<A>>
-```
-
-```hs
-invert :: Eq a -> a -> Endomorphism (Option a)
 ```
 
 **Example**
@@ -102,10 +94,6 @@ Conditionally returns the provided `Option` or `None`. The dual to
 export declare const memptyUnless: (x: boolean) => <A>(m: Lazy<Option<A>>) => Option<A>
 ```
 
-```hs
-memptyUnless :: boolean -> Lazy (Option a) -> Option a
-```
-
 **Example**
 
 ```ts
@@ -130,10 +118,6 @@ Conditionally returns the provided `Option` or `None`. The dual to
 
 ```ts
 export declare const memptyWhen: (x: boolean) => <A>(m: Lazy<Option<A>>) => Option<A>
-```
-
-```hs
-memptyWhen :: boolean -> Lazy (Option a) -> Option a
 ```
 
 **Example**
@@ -164,10 +148,6 @@ standard `None` constructor.
 export declare const noneAs: <A>() => Option<A>
 ```
 
-```hs
-noneAs :: () -> Option a
-```
-
 **Example**
 
 ```ts
@@ -188,10 +168,6 @@ evaluated only if the condition passes.
 
 ```ts
 export declare const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A>
-```
-
-```hs
-pureIf :: boolean -> Lazy a -> Option a
 ```
 
 **Example**
@@ -219,10 +195,6 @@ Extracts monoidal identity if `None`.
 export declare const toMonoid: <A>(G: Monoid<A>) => (x: Option<A>) => A
 ```
 
-```hs
-toMonoid :: Monoid a -> Option a -> a
-```
-
 **Example**
 
 ```ts
@@ -246,10 +218,6 @@ Unwrap the value from within an `Option`, throwing if `None`.
 
 ```ts
 export declare const unsafeUnwrap: <A>(x: Option<A>) => A
-```
-
-```hs
-unsafeUnwrap :: Option a -> a
 ```
 
 **Example**

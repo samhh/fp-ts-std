@@ -51,10 +51,6 @@ Added in v0.15.0
 export declare const Eq: Eq<NonEmptyString>
 ```
 
-```hs
-Eq :: Eq NonEmptyString
-```
-
 Added in v0.15.0
 
 ## NonEmptyString (type alias)
@@ -69,10 +65,6 @@ as unlike `NonEmptyArray` it's only protected by a smart constructor.
 export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 ```
 
-```hs
-type NonEmptyString = Newtype NonEmptyStringSymbol string
-```
-
 Added in v0.15.0
 
 ## Ord
@@ -83,10 +75,6 @@ Added in v0.15.0
 
 ```ts
 export declare const Ord: Ord<NonEmptyString>
-```
-
-```hs
-Ord :: Ord NonEmptyString
 ```
 
 Added in v0.15.0
@@ -101,10 +89,6 @@ Added in v0.15.0
 export declare const Semigroup: Semigroup<NonEmptyString>
 ```
 
-```hs
-Semigroup :: Semigroup NonEmptyString
-```
-
 Added in v0.15.0
 
 ## Show
@@ -115,10 +99,6 @@ Added in v0.15.0
 
 ```ts
 export declare const Show: Show<NonEmptyString>
-```
-
-```hs
-Show :: Show NonEmptyString
 ```
 
 Added in v0.15.0
@@ -133,10 +113,6 @@ Append a string to a `NonEmptyString`.
 export declare const append: (x: string) => Endomorphism<NonEmptyString>
 ```
 
-```hs
-append :: string -> Endomorphism NonEmptyString
-```
-
 Added in v0.15.0
 
 ## fromNumber
@@ -147,10 +123,6 @@ Safely derive a `NonEmptyString` from any number.
 
 ```ts
 export declare const fromNumber: (x: number) => NonEmptyString
-```
-
-```hs
-fromNumber :: number -> NonEmptyString
 ```
 
 Added in v0.15.0
@@ -177,10 +149,6 @@ Get the first character in a `NonEmptyString`.
 export declare const head: Endomorphism<NonEmptyString>
 ```
 
-```hs
-head :: Endomorphism NonEmptyString
-```
-
 Added in v0.15.0
 
 ## last
@@ -191,10 +159,6 @@ Get the last character in a `NonEmptyString`.
 
 ```ts
 export declare const last: Endomorphism<NonEmptyString>
-```
-
-```hs
-last :: Endomorphism NonEmptyString
 ```
 
 Added in v0.15.0
@@ -209,10 +173,6 @@ Prepend a string to a `NonEmptyString`.
 export declare const prepend: (x: string) => Endomorphism<NonEmptyString>
 ```
 
-```hs
-prepend :: string -> Endomorphism NonEmptyString
-```
-
 Added in v0.15.0
 
 ## reverse
@@ -223,10 +183,6 @@ Reverse a `NonEmptyString`.
 
 ```ts
 export declare const reverse: Endomorphism<NonEmptyString>
-```
-
-```hs
-reverse :: Endomorphism NonEmptyString
 ```
 
 Added in v0.15.0
@@ -242,10 +198,6 @@ with the same outer value.
 export declare const surround: (x: string) => Endomorphism<NonEmptyString>
 ```
 
-```hs
-surround :: string -> Endomorphism NonEmptyString
-```
-
 Added in v0.15.0
 
 ## toLowerCase
@@ -256,10 +208,6 @@ Convert a `NonEmptyString` to lowercase.
 
 ```ts
 export declare const toLowerCase: Endomorphism<NonEmptyString>
-```
-
-```hs
-toLowerCase :: Endomorphism NonEmptyString
 ```
 
 Added in v0.15.0
@@ -274,10 +222,6 @@ An alias of `unNonEmptyString`.
 export declare const toString: (x: NonEmptyString) => string
 ```
 
-```hs
-toString :: NonEmptyString -> string
-```
-
 Added in v0.15.0
 
 ## toUpperCase
@@ -288,10 +232,6 @@ Convert a `NonEmptyString` to uppercase.
 
 ```ts
 export declare const toUpperCase: Endomorphism<NonEmptyString>
-```
-
-```hs
-toUpperCase :: Endomorphism NonEmptyString
 ```
 
 Added in v0.15.0
@@ -307,10 +247,6 @@ representation.
 export declare const unNonEmptyString: (x: NonEmptyString) => string
 ```
 
-```hs
-unNonEmptyString :: NonEmptyString -> string
-```
-
 Added in v0.15.0
 
 ## unsafeFromString
@@ -322,10 +258,6 @@ Try to use `fromString` instead.
 
 ```ts
 export declare const unsafeFromString: (x: string) => NonEmptyString
-```
-
-```hs
-unsafeFromString :: string -> NonEmptyString
 ```
 
 Added in v0.15.0

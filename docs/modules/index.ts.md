@@ -72,10 +72,6 @@ A re-export of the `fp-ts-std/Alternative` module.
 export declare const alternative: typeof alternative
 ```
 
-```hs
-alternative :: typeof alternative
-```
-
 Added in v0.13.0
 
 ## applicative
@@ -86,10 +82,6 @@ A re-export of the `fp-ts-std/Applicative` module.
 
 ```ts
 export declare const applicative: typeof applicative
-```
-
-```hs
-applicative :: typeof applicative
 ```
 
 Added in v0.12.0
@@ -104,10 +96,6 @@ A re-export of the `fp-ts-std/Array` module.
 export declare const array: typeof array
 ```
 
-```hs
-array :: typeof array
-```
-
 Added in v0.5.1
 
 ## bifunctor
@@ -118,10 +106,6 @@ A re-export of the `fp-ts-std/Bifunctor` module.
 
 ```ts
 export declare const bifunctor: typeof bifunctor
-```
-
-```hs
-bifunctor :: typeof bifunctor
 ```
 
 Added in v0.14.0
@@ -136,10 +120,6 @@ A re-export of the `fp-ts-std/Boolean` module.
 export declare const boolean: typeof boolean
 ```
 
-```hs
-boolean :: typeof boolean
-```
-
 Added in v0.5.1
 
 ## date
@@ -150,10 +130,6 @@ A re-export of the `fp-ts-std/Date` module.
 
 ```ts
 export declare const date: typeof date
-```
-
-```hs
-date :: typeof date
 ```
 
 Added in v0.5.1
@@ -168,10 +144,6 @@ A re-export of the `fp-ts-std/Debug` module.
 export declare const debug: typeof debug
 ```
 
-```hs
-debug :: typeof debug
-```
-
 Added in v0.8.0
 
 ## dom
@@ -182,10 +154,6 @@ A re-export of the `fp-ts-std/DOM` module.
 
 ```ts
 export declare const dom: typeof dom
-```
-
-```hs
-dom :: typeof dom
 ```
 
 Added in v0.10.0
@@ -201,10 +169,6 @@ A re-export of the `fp-ts-std/Either` module.
 export declare const either: typeof either
 ```
 
-```hs
-either :: typeof either
-```
-
 Added in v0.5.1
 
 ## env
@@ -215,10 +179,6 @@ A re-export of the `fp-ts-std/Env` module.
 
 ```ts
 export declare const env: typeof env
-```
-
-```hs
-env :: typeof env
 ```
 
 Added in v0.12.0
@@ -233,10 +193,6 @@ A re-export of the `fp-ts-std/Function` module.
 export declare const function: typeof function_
 ```
 
-```hs
-function :: typeof function_
-```
-
 Added in v0.5.1
 
 ## io
@@ -247,10 +203,6 @@ A re-export of the `fp-ts-std/IO` module.
 
 ```ts
 export declare const io: typeof io
-```
-
-```hs
-io :: typeof io
 ```
 
 Added in v0.8.0
@@ -265,10 +217,6 @@ A re-export of the `fp-ts-std/IOEither` module.
 export declare const ioEither: typeof ioEither
 ```
 
-```hs
-ioEither :: typeof ioEither
-```
-
 Added in v0.15.0
 
 ## isomorphism
@@ -279,10 +227,6 @@ A re-export of the `fp-ts-std/Isomorphism` module.
 
 ```ts
 export declare const isomorphism: typeof isomorphism
-```
-
-```hs
-isomorphism :: typeof isomorphism
 ```
 
 Added in v0.15.0
@@ -297,10 +241,6 @@ A re-export of the `fp-ts-std/JSON` module.
 export declare const json: typeof json
 ```
 
-```hs
-json :: typeof json
-```
-
 Added in v0.5.1
 
 ## lazy
@@ -311,10 +251,6 @@ A re-export of the `fp-ts-std/Lazy` module.
 
 ```ts
 export declare const lazy: typeof lazy
-```
-
-```hs
-lazy :: typeof lazy
 ```
 
 Added in v0.12.0
@@ -329,10 +265,6 @@ A re-export of the `fp-ts-std/Monad` module.
 export declare const monad: typeof monad
 ```
 
-```hs
-monad :: typeof monad
-```
-
 Added in v0.15.0
 
 ## monoid
@@ -343,10 +275,6 @@ A re-export of the `fp-ts-std/Monoid` module.
 
 ```ts
 export declare const monoid: typeof monoid
-```
-
-```hs
-monoid :: typeof monoid
 ```
 
 Added in v0.12.0
@@ -361,10 +289,6 @@ A re-export of the `fp-ts-std/Number` module.
 export declare const newtype: typeof newtype
 ```
 
-```hs
-newtype :: typeof newtype
-```
-
 Added in v0.15.0
 
 ## nonEmptyString
@@ -375,10 +299,6 @@ A re-export of the `fp-ts-std/NonEmptyString` module.
 
 ```ts
 export declare const nonEmptyString: typeof nonEmptyString
-```
-
-```hs
-nonEmptyString :: typeof nonEmptyString
 ```
 
 Added in v0.15.0
@@ -393,10 +313,6 @@ A re-export of the `fp-ts-std/Number` module.
 export declare const number: typeof number
 ```
 
-```hs
-number :: typeof number
-```
-
 Added in v0.5.1
 
 ## option
@@ -407,10 +323,6 @@ A re-export of the `fp-ts-std/Option` module.
 
 ```ts
 export declare const option: typeof option
-```
-
-```hs
-option :: typeof option
 ```
 
 Added in v0.5.1
@@ -425,10 +337,6 @@ A re-export of the `fp-ts-std/Ordering` module.
 export declare const ordering: typeof ordering
 ```
 
-```hs
-ordering :: typeof ordering
-```
-
 Added in v0.12.0
 
 ## predicate
@@ -439,10 +347,6 @@ A re-export of the `fp-ts-std/Predicate` module.
 
 ```ts
 export declare const predicate: typeof predicate
-```
-
-```hs
-predicate :: typeof predicate
 ```
 
 Added in v0.12.0
@@ -457,10 +361,6 @@ A re-export of the `fp-ts-std/Random` module.
 export declare const random: typeof random
 ```
 
-```hs
-random :: typeof random
-```
-
 Added in v0.15.0
 
 ## reader
@@ -471,10 +371,6 @@ A re-export of the `fp-ts-std/Reader` module.
 
 ```ts
 export declare const reader: typeof reader
-```
-
-```hs
-reader :: typeof reader
 ```
 
 Added in v0.15.0
@@ -489,10 +385,6 @@ A re-export of the `fp-ts-std/ReaderEither` module.
 export declare const readerEither: typeof readerEither
 ```
 
-```hs
-readerEither :: typeof readerEither
-```
-
 Added in v0.15.0
 
 ## readerTask
@@ -503,10 +395,6 @@ A re-export of the `fp-ts-std/ReaderTask` module.
 
 ```ts
 export declare const readerTask: typeof readerTask
-```
-
-```hs
-readerTask :: typeof readerTask
 ```
 
 Added in v0.15.0
@@ -521,10 +409,6 @@ A re-export of the `fp-ts-std/ReaderTaskEither` module.
 export declare const readerTaskEither: typeof readerTaskEither
 ```
 
-```hs
-readerTaskEither :: typeof readerTaskEither
-```
-
 Added in v0.15.0
 
 ## readonlyArray
@@ -535,10 +419,6 @@ A re-export of the `fp-ts-std/ReadonlyArray` module.
 
 ```ts
 export declare const readonlyArray: typeof readonlyArray
-```
-
-```hs
-readonlyArray :: typeof readonlyArray
 ```
 
 Added in v0.10.0
@@ -553,10 +433,6 @@ A re-export of the `fp-ts-std/ReadonlyRecord` module.
 export declare const readonlyRecord: typeof readonlyRecord
 ```
 
-```hs
-readonlyRecord :: typeof readonlyRecord
-```
-
 Added in v0.10.0
 
 ## readonlyStruct
@@ -567,10 +443,6 @@ A re-export of the `fp-ts-std/ReadonlyStruct` module.
 
 ```ts
 export declare const readonlyStruct: typeof readonlyStruct
-```
-
-```hs
-readonlyStruct :: typeof readonlyStruct
 ```
 
 Added in v0.14.0
@@ -585,10 +457,6 @@ A re-export of the `fp-ts-std/Record` module.
 export declare const record: typeof record
 ```
 
-```hs
-record :: typeof record
-```
-
 Added in v0.5.1
 
 ## show
@@ -599,10 +467,6 @@ A re-export of the `fp-ts-std/Show` module.
 
 ```ts
 export declare const show: typeof show
-```
-
-```hs
-show :: typeof show
 ```
 
 Added in v0.12.0
@@ -617,10 +481,6 @@ A re-export of the `fp-ts-std/String` module.
 export declare const string: typeof string
 ```
 
-```hs
-string :: typeof string
-```
-
 Added in v0.5.1
 
 ## struct
@@ -631,10 +491,6 @@ A re-export of the `fp-ts-std/Struct` module.
 
 ```ts
 export declare const struct: typeof struct
-```
-
-```hs
-struct :: typeof struct
 ```
 
 Added in v0.14.0
@@ -649,10 +505,6 @@ A re-export of the `fp-ts-std/Task` module.
 export declare const task: typeof task
 ```
 
-```hs
-task :: typeof task
-```
-
 Added in v0.5.1
 
 ## taskEither
@@ -663,10 +515,6 @@ A re-export of the `fp-ts-std/TaskEither` module.
 
 ```ts
 export declare const taskEither: typeof taskEither
-```
-
-```hs
-taskEither :: typeof taskEither
 ```
 
 Added in v0.12.0
@@ -681,10 +529,6 @@ A re-export of the `fp-ts-std/TaskOption` module.
 export declare const taskOption: typeof taskOption
 ```
 
-```hs
-taskOption :: typeof taskOption
-```
-
 Added in v0.12.0
 
 ## tuple
@@ -695,10 +539,6 @@ A re-export of the `fp-ts-std/Tuple` module.
 
 ```ts
 export declare const tuple: typeof tuple
-```
-
-```hs
-tuple :: typeof tuple
 ```
 
 Added in v0.12.0
@@ -713,10 +553,6 @@ A re-export of the `fp-ts-std/URL` module.
 export declare const url: typeof url
 ```
 
-```hs
-url :: typeof url
-```
-
 Added in v0.5.1
 
 ## urlSearchParams
@@ -727,10 +563,6 @@ A re-export of the `fp-ts-std/URLSearchParams` module.
 
 ```ts
 export declare const urlSearchParams: typeof urlSearchParams
-```
-
-```hs
-urlSearchParams :: typeof urlSearchParams
 ```
 
 Added in v0.5.1

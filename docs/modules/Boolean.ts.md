@@ -36,10 +36,6 @@ logical conjunction.
 export declare const and: (x: boolean) => Endomorphism<boolean>
 ```
 
-```hs
-and :: boolean -> Endomorphism boolean
-```
-
 **Example**
 
 ```ts
@@ -59,10 +55,6 @@ Invert a boolean.
 
 ```ts
 export declare const invert: Endomorphism<boolean>
-```
-
-```hs
-invert :: Endomorphism boolean
 ```
 
 **Example**
@@ -87,10 +79,6 @@ to logical disjunction.
 export declare const or: (x: boolean) => Endomorphism<boolean>
 ```
 
-```hs
-or :: boolean -> Endomorphism boolean
-```
-
 **Example**
 
 ```ts
@@ -111,10 +99,6 @@ Returns `true` if one argument is `true` and the other is `false`, else
 
 ```ts
 export declare const xor: (x: boolean) => Endomorphism<boolean>
-```
-
-```hs
-xor :: boolean -> Endomorphism boolean
 ```
 
 **Example**

@@ -39,10 +39,6 @@ consider defining a semigroup.
 export declare const merge: <A>(x: A) => <B>(y: B) => A & B
 ```
 
-```hs
-merge :: a -> b -> a & b
-```
-
 **Example**
 
 ```ts
@@ -64,10 +60,6 @@ type.
 export declare const omit: <K extends string>(
   ks: readonly K[]
 ) => <V, A extends Readonly<Record<K, V>>>(x: A) => Pick<A, Exclude<keyof A, K>>
-```
-
-```hs
-omit :: k extends string, a extends (Readonly (Record k v)) => Array k -> a -> Pick a (Exclude (keyof a) k)
 ```
 
 **Example**
@@ -94,10 +86,6 @@ export declare const omitFrom: <A>() => <K extends keyof A & string>(
 ) => (x: A) => Pick<A, Exclude<keyof A, K>>
 ```
 
-```hs
-omitFrom :: k extends ((keyof a) & string) => () -> Array k -> a -> Pick a (Exclude (keyof a) k)
-```
-
 **Example**
 
 ```ts
@@ -122,10 +110,6 @@ type.
 export declare const pick: <A, K extends keyof A>(ks: readonly K[]) => (x: A) => Pick<A, K>
 ```
 
-```hs
-pick :: k extends (keyof a) => Array k -> a -> Pick a k
-```
-
 **Example**
 
 ```ts
@@ -147,10 +131,6 @@ Like `pick`, but allows you to specify the input record upfront.
 
 ```ts
 export declare const pickFrom: <A>() => <K extends keyof A>(ks: readonly K[]) => (x: A) => Pick<A, K>
-```
-
-```hs
-pickFrom :: k extends (keyof a) => () -> Array k -> a -> Pick a k
 ```
 
 **Example**
@@ -181,10 +161,6 @@ export declare const renameKey: <I extends string>(
 ) => <A extends MaybePartial<Readonly<Record<I, unknown>>>>(
   x: A
 ) => Readonly<{ [K in keyof A as K extends I ? J : K]: A[K] }>
-```
-
-```hs
-renameKey :: i extends string, j extends string, a extends (MaybePartial (Readonly (Record i unknown))) => i -> j -> a -> Readonly { [k in (keyof a) as k extends i ? j : k]: a[k] }
 ```
 
 **Example**

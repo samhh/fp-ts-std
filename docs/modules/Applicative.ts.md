@@ -47,15 +47,6 @@ export declare function unless<F extends URIS2, E>(
 export declare function unless<F extends URIS>(F: Applicative1<F>): (b: boolean) => (x: Kind<F, void>) => Kind<F, void>
 ```
 
-```hs
-unless :: f extends URIS4 => Applicative4 f -> boolean -> Kind4 f s r e void -> Kind4 f s r e void
-unless :: f extends URIS3 => ((Applicative3 f) -> boolean -> Kind3 f r e void -> Kind3 f r e void)
-unless :: f extends URIS3 => ((Applicative3C f e) -> boolean -> Kind3 f r e void -> Kind3 f r e void)
-unless :: f extends URIS2 => ((Applicative2 f) -> boolean -> Kind2 f e void -> Kind2 f e void)
-unless :: f extends URIS2 => ((Applicative2C f e) -> boolean -> Kind2 f e void -> Kind2 f e void)
-unless :: f extends URIS => ((Applicative1 f) -> boolean -> Kind f void -> Kind f void)
-```
-
 **Example**
 
 ```ts
@@ -100,15 +91,6 @@ export declare function when<F extends URIS2, E>(
   F: Applicative2C<F, E>
 ): (b: boolean) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
 export declare function when<F extends URIS>(F: Applicative1<F>): (b: boolean) => (x: Kind<F, void>) => Kind<F, void>
-```
-
-```hs
-when :: f extends URIS4 => Applicative4 f -> boolean -> Kind4 f s r e void -> Kind4 f s r e void
-when :: f extends URIS3 => ((Applicative3 f) -> boolean -> Kind3 f r e void -> Kind3 f r e void)
-when :: f extends URIS3 => ((Applicative3C f e) -> boolean -> Kind3 f r e void -> Kind3 f r e void)
-when :: f extends URIS2 => ((Applicative2 f) -> boolean -> Kind2 f e void -> Kind2 f e void)
-when :: f extends URIS2 => ((Applicative2C f e) -> boolean -> Kind2 f e void -> Kind2 f e void)
-when :: f extends URIS => ((Applicative1 f) -> boolean -> Kind f void -> Kind f void)
 ```
 
 **Example**

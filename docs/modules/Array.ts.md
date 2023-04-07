@@ -85,15 +85,6 @@ export declare function allM<M extends URIS2, E>(
 export declare function allM<M extends URIS>(M: Monad1<M>): (xs: Array<Kind<M, boolean>>) => Kind<M, boolean>
 ```
 
-```hs
-allM :: m extends URIS4 => Monad4 m -> Array (Kind4 m s r e boolean) -> Kind4 m s r e boolean
-allM :: m extends URIS3 => ((Monad3 m) -> Array (Kind3 m r e boolean) -> Kind3 m r e boolean)
-allM :: m extends URIS3 => ((Monad3C m e) -> Array (Kind3 m r e boolean) -> Kind3 m r e boolean)
-allM :: m extends URIS2 => ((Monad2 m) -> Array (Kind2 m e boolean) -> Kind2 m e boolean)
-allM :: m extends URIS2 => ((Monad2C m e) -> Array (Kind2 m e boolean) -> Kind2 m e boolean)
-allM :: m extends URIS => ((Monad1 m) -> Array (Kind m boolean) -> Kind m boolean)
-```
-
 **Example**
 
 ```ts
@@ -135,15 +126,6 @@ export declare function anyM<M extends URIS2, E>(
 export declare function anyM<M extends URIS>(M: Monad1<M>): (xs: Array<Kind<M, boolean>>) => Kind<M, boolean>
 ```
 
-```hs
-anyM :: m extends URIS4 => Monad4 m -> Array (Kind4 m s r e boolean) -> Kind4 m s r e boolean
-anyM :: m extends URIS3 => ((Monad3 m) -> Array (Kind3 m r e boolean) -> Kind3 m r e boolean)
-anyM :: m extends URIS3 => ((Monad3C m e) -> Array (Kind3 m r e boolean) -> Kind3 m r e boolean)
-anyM :: m extends URIS2 => ((Monad2 m) -> Array (Kind2 m e boolean) -> Kind2 m e boolean)
-anyM :: m extends URIS2 => ((Monad2C m e) -> Array (Kind2 m e boolean) -> Kind2 m e boolean)
-anyM :: m extends URIS => ((Monad1 m) -> Array (Kind m boolean) -> Kind m boolean)
-```
-
 **Example**
 
 ```ts
@@ -172,10 +154,6 @@ If `n` is greater than the length of the array, an empty array is returned.
 
 ```ts
 export declare const aperture: (n: number) => <A>(xs: A[]) => A[][]
-```
-
-```hs
-aperture :: number -> Array a -> Array (Array a)
 ```
 
 **Example**
@@ -210,10 +188,6 @@ possible ordered combination of the two input arrays.
 export declare const cartesian: <A>(xs: A[]) => <B>(ys: B[]) => [A, B][]
 ```
 
-```hs
-cartesian :: Array a -> Array b -> Array [a, b]
-```
-
 **Example**
 
 ```ts
@@ -239,10 +213,6 @@ Map each item of an array to a key, and count how many map to each key.
 
 ```ts
 export declare const countBy: <A>(f: (x: A) => string) => (xs: A[]) => Record<string, number>
-```
-
-```hs
-countBy :: (a -> string) -> Array a -> Record string number
 ```
 
 **Example**
@@ -281,10 +251,6 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const dropAt: (i: number) => (n: number) => <A>(xs: A[]) => Option<A[]>
 ```
 
-```hs
-dropAt :: number -> number -> Array a -> Option (Array a)
-```
-
 **Example**
 
 ```ts
@@ -308,10 +274,6 @@ Filter a list, removing any elements that repeat that directly precede them.
 export declare const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<A[]>
 ```
 
-```hs
-dropRepeats :: Eq a -> Endomorphism (Array a)
-```
-
 **Example**
 
 ```ts
@@ -332,10 +294,6 @@ which all elements satisfy the specified predicate, creating a new array.
 
 ```ts
 export declare const dropRightWhile: <A>(f: Predicate<A>) => <B extends A>(xs: B[]) => B[]
-```
-
-```hs
-dropRightWhile :: b extends a => Predicate a -> Array b -> Array b
 ```
 
 **Example**
@@ -362,10 +320,6 @@ Like `fp-ts/Array::elem` but flipped, which the "V" suffix denotes.
 export declare const elemV: <A>(eq: Eq<A>) => (xs: A[]) => Predicate<A>
 ```
 
-```hs
-elemV :: Eq a -> Array a -> Predicate a
-```
-
 **Example**
 
 ```ts
@@ -388,10 +342,6 @@ Check if an array ends with the specified subarray.
 
 ```ts
 export declare const endsWith: <A>(eq: Eq<A>) => (end: A[]) => Predicate<A[]>
-```
-
-```hs
-endsWith :: Eq a -> Array a -> Predicate (Array a)
 ```
 
 **Example**
@@ -417,10 +367,6 @@ the remaining array. Returns `None` if the index is out of bounds.
 
 ```ts
 export declare const extractAt: (i: number) => <A>(xs: A[]) => Option<[A, A[]]>
-```
-
-```hs
-extractAt :: number -> Array a -> Option [a, (Array a)]
 ```
 
 **Example**
@@ -466,15 +412,6 @@ export declare function filterA<F>(
 ): <A>(p: (x: A) => HKT<F, boolean>) => (xs: Array<A>) => HKT<F, Array<A>>
 ```
 
-```hs
-filterA :: f extends URIS4 => Applicative4 f -> (a -> Kind4 f s r e boolean) -> Array a -> Kind4 f s r e (Array a)
-filterA :: f extends URIS3 => ((Applicative3 f) -> (a -> Kind3 f r e boolean) -> Array a -> Kind3 f r e (Array a))
-filterA :: f extends URIS2 => ((Applicative2 f) -> (a -> Kind2 f e boolean) -> Array a -> Kind2 f e (Array a))
-filterA :: f extends URIS2 => ((Applicative2C f e) -> (a -> Kind2 f e boolean) -> Array a -> Kind2 f e (Array a))
-filterA :: f extends URIS => ((Applicative1 f) -> (a -> Kind f boolean) -> Array a -> Kind f (Array a))
-filterA :: ((Applicative f) -> (a -> HKT f boolean) -> Array a -> HKT f (Array a))
-```
-
 **Example**
 
 ```ts
@@ -501,10 +438,6 @@ Convert an `Iterable` to an `Array`.
 export declare const fromIterable: <A>(xs: Iterable<A>) => A[]
 ```
 
-```hs
-fromIterable :: Iterable a -> Array a
-```
-
 **Example**
 
 ```ts
@@ -523,10 +456,6 @@ Copy a readonly array to a non-readonly array.
 
 ```ts
 export declare const fromReadonly: <A>(xs: readonly A[]) => A[]
-```
-
-```hs
-fromReadonly :: Array a -> Array a
 ```
 
 **Example**
@@ -549,10 +478,6 @@ and `getEq` should be preferred on ordered data.
 
 ```ts
 export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<A[]>
-```
-
-```hs
-getDisorderedEq :: Ord a -> Eq (Array a)
 ```
 
 **Example**
@@ -584,10 +509,6 @@ The array of elements to insert must be non-empty.
 export declare const insertMany: (i: number) => <A>(xs: NonEmptyArray<A>) => (ys: A[]) => Option<NonEmptyArray<A>>
 ```
 
-```hs
-insertMany :: number -> NonEmptyArray a -> Array a -> Option (NonEmptyArray a)
-```
-
 **Example**
 
 ```ts
@@ -611,10 +532,6 @@ separator.
 
 ```ts
 export declare const join: (x: string) => (ys: Array<string>) => string
-```
-
-```hs
-join :: string -> Array string -> string
 ```
 
 **Example**
@@ -641,10 +558,6 @@ Obtain the maximum value from a non-empty array.
 export declare const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A
 ```
 
-```hs
-maximum :: Ord a -> NonEmptyArray a -> a
-```
-
 **Example**
 
 ```ts
@@ -664,10 +577,6 @@ Calculate the mean of an array of numbers.
 
 ```ts
 export declare const mean: (xs: NonEmptyArray<number>) => number
-```
-
-```hs
-mean :: NonEmptyArray number -> number
 ```
 
 **Example**
@@ -690,10 +599,6 @@ Calculate the median of an array of numbers.
 export declare const median: (xs: NonEmptyArray<number>) => number
 ```
 
-```hs
-median :: NonEmptyArray number -> number
-```
-
 **Example**
 
 ```ts
@@ -713,10 +618,6 @@ Obtain the minimum value from a non-empty array.
 
 ```ts
 export declare const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A
-```
-
-```hs
-minimum :: Ord a -> NonEmptyArray a -> a
 ```
 
 **Example**
@@ -742,10 +643,6 @@ If both indices are the same, the array is returned unchanged.
 
 ```ts
 export declare const moveFrom: (from: number) => (to: number) => <A>(xs: A[]) => Option<A[]>
-```
-
-```hs
-moveFrom :: number -> number -> Array a -> Option (Array a)
 ```
 
 **Example**
@@ -777,10 +674,6 @@ If both indices are the same, the array is returned unchanged.
 export declare const moveTo: (x: number) => (y: number) => <A>(xs: A[]) => Option<A[]>
 ```
 
-```hs
-moveTo :: number -> number -> Array a -> Option (Array a)
-```
-
 **Example**
 
 ```ts
@@ -804,10 +697,6 @@ Check if a predicate does not hold for any array member.
 
 ```ts
 export declare const none: <A>(f: Predicate<A>) => Predicate<A[]>
-```
-
-```hs
-none :: Predicate a -> Predicate (Array a)
 ```
 
 **Example**
@@ -839,10 +728,6 @@ the remaining items, sans the match (if any), are returned as well.
 export declare const pluckFirst: <A>(p: Predicate<A>) => (xs: A[]) => [Option<A>, A[]]
 ```
 
-```hs
-pluckFirst :: Predicate a -> Array a -> [Option a, Array a]
-```
-
 **Example**
 
 ```ts
@@ -869,10 +754,6 @@ Multiplies together all the numbers in the input array.
 export declare const product: (xs: Array<number>) => number
 ```
 
-```hs
-product :: Array number -> number
-```
-
 **Example**
 
 ```ts
@@ -895,10 +776,6 @@ short-circuits and returns the current accumulator value.
 
 ```ts
 export declare const reduceRightWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => (y: B) => B) => (x: B) => (ys: A[]) => B
-```
-
-```hs
-reduceRightWhile :: Predicate a -> (a -> b -> b) -> b -> Array a -> b
 ```
 
 **Example**
@@ -928,10 +805,6 @@ short-circuits and returns the current accumulator value.
 export declare const reduceWhile: <A>(p: Predicate<A>) => <B>(f: (x: A) => (y: B) => B) => (x: B) => (ys: A[]) => B
 ```
 
-```hs
-reduceWhile :: Predicate a -> (a -> b -> b) -> b -> Array a -> b
-```
-
 **Example**
 
 ```ts
@@ -956,10 +829,6 @@ thought of as the inverse of ordinary array filtering.
 
 ```ts
 export declare const reject: <A>(f: Predicate<A>) => <B extends A>(xs: B[]) => B[]
-```
-
-```hs
-reject :: b extends a => Predicate a -> Array b -> Array b
 ```
 
 **Example**
@@ -988,10 +857,6 @@ This is merely a functional wrapper around `Array.prototype.slice`.
 export declare const slice: (start: number) => (end: number) => <A>(xs: A[]) => A[]
 ```
 
-```hs
-slice :: number -> number -> Array a -> Array a
-```
-
 **Example**
 
 ```ts
@@ -1015,10 +880,6 @@ Check if an array starts with the specified subarray.
 
 ```ts
 export declare const startsWith: <A>(eq: Eq<A>) => (start: A[]) => Predicate<A[]>
-```
-
-```hs
-startsWith :: Eq a -> Array a -> Predicate (Array a)
 ```
 
 **Example**
@@ -1045,10 +906,6 @@ Adds together all the numbers in the input array.
 export declare const sum: (xs: Array<number>) => number
 ```
 
-```hs
-sum :: Array number -> number
-```
-
 **Example**
 
 ```ts
@@ -1072,10 +929,6 @@ duplicate values present only in one input array are maintained.
 export declare const symmetricDifference: <A>(eq: Eq<A>) => (xs: A[]) => Endomorphism<A[]>
 ```
 
-```hs
-symmetricDifference :: Eq a -> Array a -> Endomorphism (Array a)
-```
-
 **Example**
 
 ```ts
@@ -1097,10 +950,6 @@ which all elements satisfy the specified predicate, creating a new array.
 
 ```ts
 export declare const takeRightWhile: <A>(f: Predicate<A>) => <B extends A>(xs: B[]) => B[]
-```
-
-```hs
-takeRightWhile :: b extends a => Predicate a -> Array b -> Array b
 ```
 
 **Example**
@@ -1127,10 +976,6 @@ Copy a non-readonly array to a readonly array.
 export declare const toReadonly: <A>(xs: A[]) => readonly A[]
 ```
 
-```hs
-toReadonly :: Array a -> Array a
-```
-
 **Example**
 
 ```ts
@@ -1150,10 +995,6 @@ than the following rows, their elements are skipped.
 
 ```ts
 export declare const transpose: <A>(xs: A[][]) => A[][]
-```
-
-```hs
-transpose :: Array (Array a) -> Array (Array a)
 ```
 
 **Example**
@@ -1200,10 +1041,6 @@ the array is checked is unspecified.
 
 ```ts
 export declare const upsert: <A>(eqA: Eq<A>) => (x: A) => (ys: A[]) => NonEmptyArray<A>
-```
-
-```hs
-upsert :: Eq a -> a -> Array a -> NonEmptyArray a
 ```
 
 **Example**
@@ -1258,10 +1095,6 @@ Returns a new array without the values present in the first input array.
 export declare const without: <A>(eq: Eq<A>) => (xs: A[]) => Endomorphism<A[]>
 ```
 
-```hs
-without :: Eq a -> Array a -> Endomorphism (Array a)
-```
-
 **Example**
 
 ```ts
@@ -1288,10 +1121,6 @@ input sizes via the `These` type.
 
 ```ts
 export declare const zipAll: <A>(xs: A[]) => <B>(ys: B[]) => These<B, A>[]
-```
-
-```hs
-zipAll :: Array a -> Array b -> Array (These b a)
 ```
 
 **Example**

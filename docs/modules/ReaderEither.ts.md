@@ -31,10 +31,6 @@ Runs a ReaderEither and extracts the final Either from it.
 export declare const runReaderEither: <R, E, A>(r: R) => (reader: ReaderEither<R, E, A>) => Either<E, A>
 ```
 
-```hs
-runReaderEither :: r -> ReaderEither r e a -> Either e a
-```
-
 **Example**
 
 ```ts

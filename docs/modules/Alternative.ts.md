@@ -52,16 +52,6 @@ export declare function altAllBy<F extends URIS>(
 export declare function altAllBy<F>(F: Alternative<F>): <B, A>(fs: Array<(x: A) => HKT<F, B>>) => (x: A) => HKT<F, B>
 ```
 
-```hs
-altAllBy :: f extends URIS4 => Alternative4 f -> Array (a -> (Kind4 f s r e b)) -> a -> Kind4 f s r e b
-altAllBy :: f extends URIS3 => ((Alternative3 f) -> Array (a -> (Kind3 f r e b)) -> a -> Kind3 f r e b)
-altAllBy :: f extends URIS3 => ((Alternative3C f e) -> Array (a -> (Kind3 f r e b)) -> a -> Kind3 f r e b)
-altAllBy :: f extends URIS2 => ((Alternative2 f) -> Array (a -> (Kind2 f e b)) -> a -> Kind2 f e b)
-altAllBy :: f extends URIS2 => ((Alternative2C f e) -> Array (a -> (Kind2 f e b)) -> a -> Kind2 f e b)
-altAllBy :: f extends URIS => ((Alternative1 f) -> Array (a -> (Kind f b)) -> a -> Kind f b)
-altAllBy :: ((Alternative f) -> Array (a -> (HKT f b)) -> a -> HKT f b)
-```
-
 **Example**
 
 ```ts
@@ -100,15 +90,6 @@ export declare function pureIf<F extends URIS2, E>(
   F: Alternative2C<F, E>
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind2<F, E, A>
 export declare function pureIf<F extends URIS>(F: Alternative1<F>): (x: boolean) => <A>(y: Lazy<A>) => Kind<F, A>
-```
-
-```hs
-pureIf :: f extends URIS4 => Alternative4 f -> boolean -> Lazy a -> Kind4 f s r e a
-pureIf :: f extends URIS3 => ((Alternative3 f) -> boolean -> Lazy a -> Kind3 f r e a)
-pureIf :: f extends URIS3 => ((Alternative3C f e) -> boolean -> Lazy a -> Kind3 f r e a)
-pureIf :: f extends URIS2 => ((Alternative2 f) -> boolean -> Lazy a -> Kind2 f e a)
-pureIf :: f extends URIS2 => ((Alternative2C f e) -> boolean -> Lazy a -> Kind2 f e a)
-pureIf :: f extends URIS => ((Alternative1 f) -> boolean -> Lazy a -> Kind f a)
 ```
 
 **Example**

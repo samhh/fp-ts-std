@@ -34,10 +34,6 @@ to `memptyWhen`. The lazy value is evaluated only if the condition passes.
 export declare const memptyUnless: <A>(M: Monoid<A>) => (x: boolean) => (y: Lazy<A>) => A
 ```
 
-```hs
-memptyUnless :: Monoid a -> boolean -> Lazy a -> a
-```
-
 **Example**
 
 ```ts
@@ -65,10 +61,6 @@ to `memptyUnless`. The lazy value is evaluated only if the condition passes.
 
 ```ts
 export declare const memptyWhen: <A>(M: Monoid<A>) => (x: boolean) => (y: Lazy<A>) => A
-```
-
-```hs
-memptyWhen :: Monoid a -> boolean -> Lazy a -> a
 ```
 
 **Example**
@@ -109,15 +101,6 @@ export declare function toMonoid<F extends URIS3, E>(
 export declare function toMonoid<F extends URIS2>(F: Foldable2<F>): <A, E>(G: Monoid<A>) => (x: Kind2<F, E, A>) => A
 export declare function toMonoid<F extends URIS2, E>(F: Foldable2C<F, E>): <A>(G: Monoid<A>) => (x: Kind2<F, E, A>) => A
 export declare function toMonoid<F extends URIS>(F: Foldable1<F>): <A>(G: Monoid<A>) => (x: Kind<F, A>) => A
-```
-
-```hs
-toMonoid :: f extends URIS4 => Foldable4 f -> Monoid a -> Kind4 f s r e a -> a
-toMonoid :: f extends URIS3 => ((Foldable3 f) -> Monoid a -> Kind3 f r e a -> a)
-toMonoid :: f extends URIS3 => ((Foldable3C f e) -> Monoid a -> Kind3 f r e a -> a)
-toMonoid :: f extends URIS2 => ((Foldable2 f) -> Monoid a -> Kind2 f e a -> a)
-toMonoid :: f extends URIS2 => ((Foldable2C f e) -> Monoid a -> Kind2 f e a -> a)
-toMonoid :: f extends URIS => ((Foldable1 f) -> Monoid a -> Kind f a -> a)
 ```
 
 **Example**

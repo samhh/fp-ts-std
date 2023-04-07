@@ -32,10 +32,6 @@ well.
 export declare const randomExtract: <A>(xs: NonEmptyArray<A>) => IO<[A, A[]]>
 ```
 
-```hs
-randomExtract :: NonEmptyArray a -> IO [a, (Array a)]
-```
-
 **Example**
 
 ```ts

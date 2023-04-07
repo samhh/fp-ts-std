@@ -40,10 +40,6 @@ function application and composition pipelines.
 export declare const execute: <A>(x: IO<A>) => A
 ```
 
-```hs
-execute :: IO a -> a
-```
-
 **Example**
 
 ```ts
@@ -63,10 +59,6 @@ Memoize an `IO`, reusing the result of its first execution.
 
 ```ts
 export declare const memoize: <A>(f: IO<A>) => IO<A>
-```
-
-```hs
-memoize :: IO a -> IO a
 ```
 
 **Example**
@@ -91,10 +83,6 @@ value of its first invocation.
 
 ```ts
 export declare const once: <A, B>(f: (x: A) => B) => (x: A) => IO<B>
-```
-
-```hs
-once :: (a -> b) -> a -> IO b
 ```
 
 **Example**
@@ -122,10 +110,6 @@ Sequence an array of effects, ignoring the results.
 export declare const sequenceArray_: <A>(xs: readonly IO<A>[]) => IO<void>
 ```
 
-```hs
-sequenceArray_ :: Array (IO a) -> IO void
-```
-
 Added in v0.15.0
 
 ## tap
@@ -137,10 +121,6 @@ value.
 
 ```ts
 export declare const tap: <A>(f: (x: A) => IO<void>) => (x: A) => IO<A>
-```
-
-```hs
-tap :: (a -> IO void) -> a -> IO a
 ```
 
 **Example**
@@ -179,10 +159,6 @@ Map to and sequence an array of effects, ignoring the results.
 export declare const traverseArray_: <A, B>(f: (x: A) => IO<B>) => (xs: readonly A[]) => IO<void>
 ```
 
-```hs
-traverseArray_ :: (a -> IO b) -> Array a -> IO void
-```
-
 Added in v0.15.0
 
 ## unless
@@ -193,10 +169,6 @@ The reverse of `when`.
 
 ```ts
 export declare const unless: (x: boolean) => Endomorphism<IO<void>>
-```
-
-```hs
-unless :: boolean -> Endomorphism (IO void)
 ```
 
 **Example**
@@ -226,10 +198,6 @@ Conditional execution of an `IO`. Helpful for things like logging.
 
 ```ts
 export declare const when: (x: boolean) => Endomorphism<IO<void>>
-```
-
-```hs
-when :: boolean -> Endomorphism (IO void)
 ```
 
 **Example**
@@ -265,10 +233,6 @@ Invocations start at the number one.
 
 ```ts
 export declare const whenInvocationCount: (p: Predicate<number>) => Endomorphism<IO<void>>
-```
-
-```hs
-whenInvocationCount :: Predicate number -> Endomorphism (IO void)
 ```
 
 **Example**

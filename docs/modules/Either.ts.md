@@ -33,10 +33,6 @@ Apply a function to both elements of an `Either`.
 export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: Either<A, A>) => Either<B, B>
 ```
 
-```hs
-mapBoth :: (a -> b) -> Either a a -> Either b b
-```
-
 **Example**
 
 ```ts
@@ -63,10 +59,6 @@ if `Left`.
 export declare const unsafeUnwrap: <A>(x: Either<unknown, A>) => A
 ```
 
-```hs
-unsafeUnwrap :: Either unknown a -> a
-```
-
 **Example**
 
 ```ts
@@ -87,10 +79,6 @@ if `Right`.
 
 ```ts
 export declare const unsafeUnwrapLeft: <E>(x: Either<E, unknown>) => E
-```
-
-```hs
-unsafeUnwrapLeft :: Either e unknown -> e
 ```
 
 **Example**

@@ -36,15 +36,14 @@ Added in v0.12.0
 ## addEventListener
 
 Adds an event listener to a node.
+Returns a cleanup function for removing the event listener.
 
 **Signature**
 
 ```ts
-export declare const addEventListener: (type: string) => (f: (evt: Event) => IO<void>) => (x: Node) => IO<void>
-```
-
-```hs
-addEventListener :: string -> (Event -> IO void) -> Node -> IO void
+export declare const addEventListener: (
+  type: EventTarget
+) => (listener: EventListener) => (el: Node | Window) => () => IO<void>
 ```
 
 **Example**
@@ -65,10 +64,14 @@ assert.strictEqual(clicks, 0)
 el.click()
 assert.strictEqual(clicks, 0)
 
-listen()
+const cleanupClick = listen()
 el.click()
 assert.strictEqual(clicks, 1)
 
+el.click()
+assert.strictEqual(clicks, 2)
+
+cleanupClick()
 el.click()
 assert.strictEqual(clicks, 2)
 ```
@@ -83,10 +86,6 @@ Appends a node as a child of another.
 
 ```ts
 export declare const appendChild: (child: Node) => (parent: Node) => IO<void>
-```
-
-```hs
-appendChild :: Node -> Node -> IO void
 ```
 
 **Example**
@@ -123,10 +122,6 @@ Returns all child nodes, if any, of a node.
 export declare const childNodes: (x: Node) => IO<Option<NonEmptyArray<ChildNode>>>
 ```
 
-```hs
-childNodes :: Node -> IO (Option (NonEmptyArray ChildNode))
-```
-
 **Example**
 
 ```ts
@@ -156,10 +151,6 @@ Removes all the child nodes, if any, of a given node.
 
 ```ts
 export declare const emptyChildren: (x: Node) => IO<void>
-```
-
-```hs
-emptyChildren :: Node -> IO void
 ```
 
 **Example**
@@ -196,10 +187,6 @@ Convert a `NodeList` into an `Array`.
 export declare const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => A[]
 ```
 
-```hs
-fromNodeList :: a extends Node => NodeListOf a -> Array a
-```
-
 **Example**
 
 ```ts
@@ -225,10 +212,6 @@ Gets the text content, if any, of a node.
 
 ```ts
 export declare const getTextContent: (x: Node) => IO<Option<string>>
-```
-
-```hs
-getTextContent :: Node -> IO (Option string)
 ```
 
 **Example**
@@ -260,10 +243,6 @@ selector.
 
 ```ts
 export declare const querySelector: (q: string) => (x: ParentNode) => IO<Option<Element>>
-```
-
-```hs
-querySelector :: string -> ParentNode -> IO (Option Element)
 ```
 
 **Example**
@@ -298,10 +277,6 @@ selector.
 export declare const querySelectorAll: (q: string) => (x: ParentNode) => IO<Option<NonEmptyArray<Element>>>
 ```
 
-```hs
-querySelectorAll :: string -> ParentNode -> IO (Option (NonEmptyArray Element))
-```
-
 **Example**
 
 ```ts
@@ -330,10 +305,6 @@ Removes a child node from the tree.
 
 ```ts
 export declare const remove: (x: ChildNode) => IO<void>
-```
-
-```hs
-remove :: ChildNode -> IO void
 ```
 
 **Example**
@@ -368,10 +339,6 @@ Sets the text content of a node.
 
 ```ts
 export declare const setTextContent: (x: string) => (y: Node) => IO<void>
-```
-
-```hs
-setTextContent :: string -> Node -> IO void
 ```
 
 **Example**

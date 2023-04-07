@@ -87,10 +87,6 @@ denotes.
 export declare const lookupV: <A>(x: Readonly<Record<string, A>>) => (k: string) => Option<A>
 ```
 
-```hs
-lookupV :: Readonly (Record string a) -> string -> Option a
-```
-
 **Example**
 
 ```ts
@@ -119,10 +115,6 @@ export declare const reject: <A>(
 ) => <B extends A>(x: Readonly<Record<string, B>>) => Readonly<Record<string, B>>
 ```
 
-```hs
-reject :: b extends a => Predicate a -> Readonly (Record string b) -> Readonly (Record string b)
-```
-
 **Example**
 
 ```ts
@@ -144,10 +136,6 @@ Get the values from a `Record`.
 
 ```ts
 export declare const values: <A>(x: Readonly<Record<string, A>>) => readonly A[]
-```
-
-```hs
-values :: Readonly (Record string a) -> Array a
 ```
 
 **Example**

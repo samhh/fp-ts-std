@@ -39,10 +39,6 @@ consider defining a semigroup.
 export declare const merge: <A>(x: A) => <B>(y: B) => A & B
 ```
 
-```hs
-merge :: a -> b -> a & b
-```
-
 **Example**
 
 ```ts
@@ -66,10 +62,6 @@ export declare const omit: <K extends string>(
 ) => <V, A extends Record<K, V>>(x: A) => Pick<A, Exclude<keyof A, K>>
 ```
 
-```hs
-omit :: k extends string, a extends (Record k v) => Array k -> a -> Pick a (Exclude (keyof a) k)
-```
-
 **Example**
 
 ```ts
@@ -90,10 +82,6 @@ Like `omit`, but allows you to specify the input record upfront.
 
 ```ts
 export declare const omitFrom: <A>() => <K extends keyof A & string>(ks: K[]) => (x: A) => Pick<A, Exclude<keyof A, K>>
-```
-
-```hs
-omitFrom :: k extends ((keyof a) & string) => () -> Array k -> a -> Pick a (Exclude (keyof a) k)
 ```
 
 **Example**
@@ -120,10 +108,6 @@ type.
 export declare const pick: <A, K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
 ```
 
-```hs
-pick :: k extends (keyof a) => Array k -> a -> Pick a k
-```
-
 **Example**
 
 ```ts
@@ -145,10 +129,6 @@ Like `pick`, but allows you to specify the input record upfront.
 
 ```ts
 export declare const pickFrom: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
-```
-
-```hs
-pickFrom :: k extends (keyof a) => () -> Array k -> a -> Pick a k
 ```
 
 **Example**
@@ -175,10 +155,6 @@ exists, the old key will be overwritten. Optionality is preserved.
 export declare const renameKey: <I extends string>(
   oldK: I
 ) => <J extends string>(newK: J) => <A extends MaybePartial<Record<I, unknown>>>(x: A) => RenameKey<A, I, J>
-```
-
-```hs
-renameKey :: i extends string, j extends string, a extends (MaybePartial (Record i unknown)) => i -> j -> a -> RenameKey a i j
 ```
 
 **Example**

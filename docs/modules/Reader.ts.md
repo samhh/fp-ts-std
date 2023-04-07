@@ -31,10 +31,6 @@ Runs a Reader and extracts the final value from it.
 export declare const runReader: <R, A>(r: R) => (reader: Reader<R, A>) => A
 ```
 
-```hs
-runReader :: r -> Reader r a -> a
-```
-
 **Example**
 
 ```ts

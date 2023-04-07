@@ -15,7 +15,6 @@ import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import { flow, pipe } from "fp-ts/function"
 import { invoke } from "./Function"
-
 /**
  * Convert a `NodeList` into an `Array`.
  *
@@ -241,8 +240,12 @@ export const setTextContent =
     y.textContent = x
   }
 
+type EventTarget = keyof WindowEventMap
+type EventListener = (e: Event) => IO<void>
+type EventListenerCleanup = IO<void>
 /**
  * Adds an event listener to a node.
+ * Returns a cleanup function for removing the event listener.
  *
  * @example
  * import { JSDOM } from 'jsdom'
@@ -258,18 +261,27 @@ export const setTextContent =
  * el.click()
  * assert.strictEqual(clicks, 0)
  *
- * listen()
+ * const cleanupClick = listen()
  * el.click()
  * assert.strictEqual(clicks, 1)
  *
  * el.click()
  * assert.strictEqual(clicks, 2)
  *
+ * cleanupClick()
+ * el.click()
+ * assert.strictEqual(clicks, 2)
+ *
  * @since 0.12.0
  */
+
 export const addEventListener =
-  (type: string) =>
-  (f: (evt: Event) => IO<void>) =>
-  (x: Node): IO<void> =>
-  () =>
-    pipe(x, invoke("addEventListener")([type, evt => f(evt)()]))
+  (type: EventTarget) =>
+  (listener: EventListener) =>
+  (el: Node | Window) =>
+  (): EventListenerCleanup => {
+    const _listener = (e: Event) => listener(e)()
+    // eslint-disable-next-line functional/no-expression-statement
+    pipe(el, invoke("addEventListener")([type, _listener]))
+    return () => pipe(el, invoke("removeEventListener")([type, _listener]))
+  }

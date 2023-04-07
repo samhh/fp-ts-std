@@ -41,10 +41,6 @@ having to repeat yourself or use `as const`.
 export declare const create: <A, B>(xs: [A, B]) => [A, B]
 ```
 
-```hs
-create :: [a, b] -> [a, b]
-```
-
 **Example**
 
 ```ts
@@ -63,10 +59,6 @@ Duplicate a value into a tuple.
 
 ```ts
 export declare const dup: <A>(x: A) => [A, A]
-```
-
-```hs
-dup :: a -> [a, a]
 ```
 
 **Example**
@@ -88,10 +80,6 @@ variadic version, consider `fork` in `Function`.
 
 ```ts
 export declare const fanout: <A, B>(f: (x: A) => B) => <C>(g: (x: A) => C) => (x: A) => [B, C]
-```
-
-```hs
-fanout :: (a -> b) -> (a -> c) -> a -> [b, c]
 ```
 
 **Example**
@@ -116,10 +104,6 @@ Apply a function to both elements of a tuple.
 
 ```ts
 export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B]
-```
-
-```hs
-mapBoth :: (a -> b) -> [a, a] -> [b, b]
 ```
 
 **Example**
@@ -147,10 +131,6 @@ Apply a function, collecting the output alongside the input. A dual to
 export declare const toFst: <A, B>(f: (x: A) => B) => (x: A) => [B, A]
 ```
 
-```hs
-toFst :: (a -> b) -> a -> [b, a]
-```
-
 **Example**
 
 ```ts
@@ -171,10 +151,6 @@ Apply a function, collecting the input alongside the output. A dual to
 
 ```ts
 export declare const toSnd: <A, B>(f: (x: A) => B) => (x: A) => [A, B]
-```
-
-```hs
-toSnd :: (a -> b) -> a -> [a, b]
 ```
 
 **Example**
@@ -212,15 +188,6 @@ export declare function traverseToFst<F extends URIS>(
   F: Functor1<F>
 ): <A, B>(g: (x: A) => Kind<F, B>) => (x: A) => Kind<F, [B, A]>
 export declare function traverseToFst<F>(F: Functor<F>): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [B, A]>
-```
-
-```hs
-traverseToFst :: f extends URIS4 => Functor4 f -> (a -> Kind4 f s r e b) -> a -> Kind4 f s r e [b, a]
-traverseToFst :: f extends URIS3 => ((Functor3 f) -> (a -> Kind3 f r e b) -> a -> Kind3 f r e [b, a])
-traverseToFst :: f extends URIS2 => ((Functor2 f) -> (a -> Kind2 f e b) -> a -> Kind2 f e [b, a])
-traverseToFst :: f extends URIS2 => ((Functor2C f e) -> (a -> Kind2 f e b) -> a -> Kind2 f e [b, a])
-traverseToFst :: f extends URIS => ((Functor1 f) -> (a -> Kind f b) -> a -> Kind f [b, a])
-traverseToFst :: ((Functor f) -> (a -> HKT f b) -> a -> HKT f [b, a])
 ```
 
 **Example**
@@ -266,15 +233,6 @@ export declare function traverseToSnd<F extends URIS>(
 export declare function traverseToSnd<F>(F: Functor<F>): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [A, B]>
 ```
 
-```hs
-traverseToSnd :: f extends URIS4 => Functor4 f -> (a -> Kind4 f s r e b) -> a -> Kind4 f s r e [a, b]
-traverseToSnd :: f extends URIS3 => ((Functor3 f) -> (a -> Kind3 f r e b) -> a -> Kind3 f r e [a, b])
-traverseToSnd :: f extends URIS2 => ((Functor2 f) -> (a -> Kind2 f e b) -> a -> Kind2 f e [a, b])
-traverseToSnd :: f extends URIS2 => ((Functor2C f e) -> (a -> Kind2 f e b) -> a -> Kind2 f e [a, b])
-traverseToSnd :: f extends URIS => ((Functor1 f) -> (a -> Kind f b) -> a -> Kind f [a, b])
-traverseToSnd :: ((Functor f) -> (a -> HKT f b) -> a -> HKT f [a, b])
-```
-
 **Example**
 
 ```ts
@@ -303,10 +261,6 @@ tuple sections.
 export declare const withFst: <A>(x: A) => <B>(y: B) => [A, B]
 ```
 
-```hs
-withFst :: a -> b -> [a, b]
-```
-
 **Example**
 
 ```ts
@@ -327,10 +281,6 @@ tuple sections.
 
 ```ts
 export declare const withSnd: <A>(x: A) => <B>(y: B) => [B, A]
-```
-
-```hs
-withSnd :: a -> b -> [b, a]
 ```
 
 **Example**

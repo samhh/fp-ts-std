@@ -67,10 +67,6 @@ Identity for `Lazy` as applied to `sequenceT`.
 export declare const ApT: Lazy<readonly []>
 ```
 
-```hs
-ApT :: Lazy []
-```
-
 Added in v0.12.0
 
 ## Applicative
@@ -82,10 +78,6 @@ functions that require it.
 
 ```ts
 export declare const Applicative: Applicative1<'Lazy'>
-```
-
-```hs
-Applicative :: Applicative1 "Lazy"
 ```
 
 Added in v0.12.0
@@ -101,10 +93,6 @@ that require it.
 export declare const Apply: Apply1<'Lazy'>
 ```
 
-```hs
-Apply :: Apply1 "Lazy"
-```
-
 Added in v0.12.0
 
 ## Chain
@@ -116,10 +104,6 @@ that require it.
 
 ```ts
 export declare const Chain: Chain1<'Lazy'>
-```
-
-```hs
-Chain :: Chain1 "Lazy"
 ```
 
 Added in v0.12.0
@@ -135,10 +119,6 @@ functions that require it.
 export declare const ChainRec: ChainRec1<'Lazy'>
 ```
 
-```hs
-ChainRec :: ChainRec1 "Lazy"
-```
-
 Added in v0.12.0
 
 ## Do
@@ -149,10 +129,6 @@ Initiate do notation in the context of `Lazy`.
 
 ```ts
 export declare const Do: Lazy<{}>
-```
-
-```hs
-Do :: Lazy {}
 ```
 
 Added in v0.12.0
@@ -168,10 +144,6 @@ functions that require it.
 export declare const Functor: Functor1<'Lazy'>
 ```
 
-```hs
-Functor :: Functor1 "Lazy"
-```
-
 Added in v0.12.0
 
 ## Lazy
@@ -182,10 +154,6 @@ Re-exported from fp-ts for convenience.
 
 ```ts
 export declare const Lazy: any
-```
-
-```hs
-Lazy :: any
 ```
 
 Added in v0.12.0
@@ -201,10 +169,6 @@ that require it.
 export declare const Monad: Monad1<'Lazy'>
 ```
 
-```hs
-Monad :: Monad1 "Lazy"
-```
-
 Added in v0.12.0
 
 ## Pointed
@@ -216,10 +180,6 @@ functions that require it.
 
 ```ts
 export declare const Pointed: Pointed1<'Lazy'>
-```
-
-```hs
-Pointed :: Pointed1 "Lazy"
 ```
 
 Added in v0.12.0
@@ -234,10 +194,6 @@ Typeclass machinery.
 export declare const URI: 'Lazy'
 ```
 
-```hs
-URI :: "Lazy"
-```
-
 Added in v0.12.0
 
 ## URI (type alias)
@@ -248,10 +204,6 @@ Typeclass machinery.
 
 ```ts
 export type URI = typeof URI
-```
-
-```hs
-type URI = typeof URI
 ```
 
 Added in v0.12.0
@@ -266,10 +218,6 @@ Apply a function within a `Lazy`.
 export declare const ap: <A>(fa: Lazy<A>) => <B>(fab: Lazy<(a: A) => B>) => Lazy<B>
 ```
 
-```hs
-ap :: Lazy a -> Lazy (a -> b) -> Lazy b
-```
-
 Added in v0.12.0
 
 ## apFirst
@@ -280,10 +228,6 @@ Sequence actions, discarding the value of the first argument.
 
 ```ts
 export declare const apFirst: <B>(second: Lazy<B>) => <A>(first: Lazy<A>) => Lazy<A>
-```
-
-```hs
-apFirst :: Lazy b -> Lazy a -> Lazy a
 ```
 
 Added in v0.12.0
@@ -301,10 +245,6 @@ export declare const apS: <N, A, B>(
 ) => (fa: Lazy<A>) => Lazy<{ readonly [K in N | keyof A]: K extends keyof A ? A[K] : B }>
 ```
 
-```hs
-apS :: (Exclude n (keyof a), Lazy b) -> Lazy a -> Lazy { [k in (n | (keyof a))]: k extends (keyof a) ? a[k] : b }
-```
-
 Added in v0.12.0
 
 ## apSecond
@@ -315,10 +255,6 @@ Sequence actions, discarding the value of the second argument.
 
 ```ts
 export declare const apSecond: <B>(second: Lazy<B>) => <A>(first: Lazy<A>) => Lazy<B>
-```
-
-```hs
-apSecond :: Lazy b -> Lazy a -> Lazy b
 ```
 
 Added in v0.12.0
@@ -336,10 +272,6 @@ export declare const bind: <N, A, B>(
 ) => (ma: Lazy<A>) => Lazy<{ readonly [K in N | keyof A]: K extends keyof A ? A[K] : B }>
 ```
 
-```hs
-bind :: (Exclude n (keyof a), (a -> Lazy b)) -> Lazy a -> Lazy { [k in (n | (keyof a))]: k extends (keyof a) ? a[k] : b }
-```
-
 Added in v0.12.0
 
 ## bindTo
@@ -351,10 +283,6 @@ specified key in do notation.
 
 ```ts
 export declare const bindTo: <N>(name: N) => <A>(fa: Lazy<A>) => Lazy<{ readonly [K in N]: A }>
-```
-
-```hs
-bindTo :: n -> Lazy a -> Lazy { [k in n]: a }
 ```
 
 Added in v0.12.0
@@ -369,10 +297,6 @@ Map and flatten the output of a `Lazy`.
 export declare const chain: <A, B>(f: (a: A) => Lazy<B>) => (ma: Lazy<A>) => Lazy<B>
 ```
 
-```hs
-chain :: (a -> Lazy b) -> Lazy a -> Lazy b
-```
-
 Added in v0.12.0
 
 ## chainFirst
@@ -383,10 +307,6 @@ Like `chain`, but discards the new output.
 
 ```ts
 export declare const chainFirst: <A, B>(f: (a: A) => Lazy<B>) => (first: Lazy<A>) => Lazy<A>
-```
-
-```hs
-chainFirst :: (a -> Lazy b) -> Lazy a -> Lazy a
 ```
 
 Added in v0.12.0
@@ -400,10 +320,6 @@ function application and composition pipelines.
 
 ```ts
 export declare const execute: <A>(x: Lazy<A>) => A
-```
-
-```hs
-execute :: Lazy a -> a
 ```
 
 **Example**
@@ -427,10 +343,6 @@ ordinary value.
 export declare const flap: <A>(a: A) => <B>(fab: Lazy<(a: A) => B>) => Lazy<B>
 ```
 
-```hs
-flap :: a -> Lazy (a -> b) -> Lazy b
-```
-
 Added in v0.12.0
 
 ## flatten
@@ -441,10 +353,6 @@ Flatten a nested `Lazy`.
 
 ```ts
 export declare const flatten: <A>(mma: Lazy<Lazy<A>>) => Lazy<A>
-```
-
-```hs
-flatten :: Lazy (Lazy a) -> Lazy a
 ```
 
 Added in v0.12.0
@@ -460,10 +368,6 @@ use `constant`.
 
 ```ts
 export declare const lazy: <A>(f: () => A) => Lazy<A>
-```
-
-```hs
-lazy :: (() -> a) -> Lazy a
 ```
 
 **Example**
@@ -486,10 +390,6 @@ Map the output of a `Lazy`.
 export declare const map: <A, B>(f: (x: A) => B) => (fa: Lazy<A>) => Lazy<B>
 ```
 
-```hs
-map :: (a -> b) -> Lazy a -> Lazy b
-```
-
 Added in v0.12.0
 
 ## memoize
@@ -500,10 +400,6 @@ Memoize a `Lazy`. Provided the input function is pure, this function is too.
 
 ```ts
 export declare const memoize: <A>(f: Lazy<A>) => Lazy<A>
-```
-
-```hs
-memoize :: Lazy a -> Lazy a
 ```
 
 **Example**
@@ -529,10 +425,6 @@ Raise any value to a `Lazy`.
 export declare const of: <A>(a: A) => Lazy<A>
 ```
 
-```hs
-of :: a -> Lazy a
-```
-
 Added in v0.12.0
 
 ## sequenceArray
@@ -545,10 +437,6 @@ Equivalent to `Array#sequence(Applicative)`.
 export declare const sequenceArray: <A>(arr: readonly Lazy<A>[]) => Lazy<readonly A[]>
 ```
 
-```hs
-sequenceArray :: Array (Lazy a) -> Lazy (Array a)
-```
-
 Added in v2.9.0
 
 ## traverseArray
@@ -559,10 +447,6 @@ Equivalent to `Array#traverse(Applicative)`.
 
 ```ts
 export declare const traverseArray: <A, B>(f: (a: A) => Lazy<B>) => (as: readonly A[]) => Lazy<readonly B[]>
-```
-
-```hs
-traverseArray :: (a -> Lazy b) -> Array a -> Lazy (Array b)
 ```
 
 Added in v0.12.0
@@ -579,10 +463,6 @@ export declare const traverseArrayWithIndex: <A, B>(
 ) => (as: readonly A[]) => Lazy<readonly B[]>
 ```
 
-```hs
-traverseArrayWithIndex :: ((number, a) -> Lazy b) -> Array a -> Lazy (Array b)
-```
-
 Added in v0.12.0
 
 ## traverseReadonlyArrayWithIndex
@@ -597,10 +477,6 @@ export declare const traverseReadonlyArrayWithIndex: <A, B>(
 ) => (as: readonly A[]) => Lazy<readonly B[]>
 ```
 
-```hs
-traverseReadonlyArrayWithIndex :: ((number, a) -> Lazy b) -> Array a -> Lazy (Array b)
-```
-
 Added in v0.12.0
 
 ## traverseReadonlyNonEmptyArrayWithIndex
@@ -613,10 +489,6 @@ Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
 export declare const traverseReadonlyNonEmptyArrayWithIndex: <A, B>(
   f: (index: number, a: A) => Lazy<B>
 ) => (as: ReadonlyNonEmptyArray<A>) => Lazy<ReadonlyNonEmptyArray<B>>
-```
-
-```hs
-traverseReadonlyNonEmptyArrayWithIndex :: ((number, a) -> Lazy b) -> ReadonlyNonEmptyArray a -> Lazy (ReadonlyNonEmptyArray b)
 ```
 
 Added in v0.12.0

@@ -35,10 +35,6 @@ functions that require it.
 export declare const Contravariant: Contravariant1<'Show'>
 ```
 
-```hs
-Contravariant :: Contravariant1 "Show"
-```
-
 Added in v0.12.0
 
 ## URI
@@ -49,10 +45,6 @@ Typeclass machinery.
 
 ```ts
 export declare const URI: 'Show'
-```
-
-```hs
-URI :: "Show"
 ```
 
 Added in v0.12.0
@@ -67,10 +59,6 @@ Typeclass machinery.
 export type URI = typeof URI
 ```
 
-```hs
-type URI = typeof URI
-```
-
 Added in v0.12.0
 
 ## contramap
@@ -82,10 +70,6 @@ a `Show<A>` instance.
 
 ```ts
 export declare const contramap: <B, A>(f: (b: B) => A) => (m: Show<A>) => Show<B>
-```
-
-```hs
-contramap :: (b -> a) -> Show a -> Show b
 ```
 
 Added in v0.12.0

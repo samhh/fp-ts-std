@@ -46,10 +46,6 @@ export type Isomorphism<A, B> = {
 }
 ```
 
-```hs
-type Isomorphism a b = { to: a -> b, from: b -> a }
-```
-
 Added in v0.13.0
 
 ## compose
@@ -61,10 +57,6 @@ type signature a window into category theory!
 
 ```ts
 export declare const compose: <A, B>(F: Isomorphism<A, B>) => <C>(G: Isomorphism<B, C>) => Isomorphism<A, C>
-```
-
-```hs
-compose :: Isomorphism a b -> Isomorphism b c -> Isomorphism a c
 ```
 
 **Example**
@@ -109,10 +101,6 @@ Derive a `Monoid` for `B` given a `Monoid` for `A` and an
 export declare const deriveMonoid: <A, B>(I: Isomorphism<A, B>) => (M: Monoid<A>) => Monoid<B>
 ```
 
-```hs
-deriveMonoid :: Isomorphism a b -> Monoid a -> Monoid b
-```
-
 **Example**
 
 ```ts
@@ -147,10 +135,6 @@ Derive a `Semigroup` for `B` given a `Semigroup` for `A` and an
 export declare const deriveSemigroup: <A, B>(I: Isomorphism<A, B>) => (S: Semigroup<A>) => Semigroup<B>
 ```
 
-```hs
-deriveSemigroup :: Isomorphism a b -> Semigroup a -> Semigroup b
-```
-
 **Example**
 
 ```ts
@@ -183,10 +167,6 @@ Convert a monocle-ts `Iso` to an `Isomorphism`.
 export declare const fromIso: <A, B>(I: Iso<A, B>) => Isomorphism<A, B>
 ```
 
-```hs
-fromIso :: Iso a b -> Isomorphism a b
-```
-
 Added in v0.13.0
 
 ## reverse
@@ -199,10 +179,6 @@ Reverse the order of the types in an `Isomorphism`.
 export declare const reverse: <A, B>(I: Isomorphism<A, B>) => Isomorphism<B, A>
 ```
 
-```hs
-reverse :: Isomorphism a b -> Isomorphism b a
-```
-
 Added in v0.13.0
 
 ## toIso
@@ -213,10 +189,6 @@ Convert an `Isomorphism` to a monocle-ts `Iso`.
 
 ```ts
 export declare const toIso: <A, B>(I: Isomorphism<A, B>) => Iso<A, B>
-```
-
-```hs
-toIso :: Isomorphism a b -> Iso a b
 ```
 
 Added in v0.13.0

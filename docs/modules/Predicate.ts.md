@@ -35,10 +35,6 @@ argument passes all of the predicates.
 export declare const allPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
-```hs
-allPass :: Array (Predicate a) -> Predicate a
-```
-
 **Example**
 
 ```ts
@@ -66,10 +62,6 @@ argument passes any of the predicates.
 export declare const anyPass: <A>(fs: Predicate<A>[]) => Predicate<A>
 ```
 
-```hs
-anyPass :: Array (Predicate a) -> Predicate a
-```
-
 **Example**
 
 ```ts
@@ -95,10 +87,6 @@ argument passes none of the predicates.
 
 ```ts
 export declare const nonePass: <A>(fs: Predicate<A>[]) => Predicate<A>
-```
-
-```hs
-nonePass :: Array (Predicate a) -> Predicate a
 ```
 
 **Example**

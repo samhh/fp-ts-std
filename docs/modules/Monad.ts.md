@@ -53,15 +53,6 @@ export declare function allPassM<M extends URIS>(
 ): <A>(f: Array<(x: A) => Kind<M, boolean>>) => (x: A) => Kind<M, boolean>
 ```
 
-```hs
-allPassM :: m extends URIS4 => Monad4 m -> Array (a -> (Kind4 m s r e boolean)) -> a -> Kind4 m s r e boolean
-allPassM :: m extends URIS3 => ((Monad3 m) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
-allPassM :: m extends URIS3 => ((Monad3C m e) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
-allPassM :: m extends URIS2 => ((Monad2 m) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
-allPassM :: m extends URIS2 => ((Monad2C m e) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
-allPassM :: m extends URIS => ((Monad1 m) -> Array (a -> (Kind m boolean)) -> a -> Kind m boolean)
-```
-
 **Example**
 
 ```ts
@@ -105,15 +96,6 @@ export declare function andM<M extends URIS>(
 ): (x: Kind<M, boolean>) => (y: Kind<M, boolean>) => Kind<M, boolean>
 ```
 
-```hs
-andM :: m extends URIS4 => Monad4 m -> Kind4 m s r e boolean -> Kind4 m s r e boolean -> Kind4 m s r e boolean
-andM :: m extends URIS3 => ((Monad3 m) -> Kind3 m r e boolean -> Kind3 m r e boolean -> Kind3 m r e boolean)
-andM :: m extends URIS3 => ((Monad3C m e) -> Kind3 m r e boolean -> Kind3 m r e boolean -> Kind3 m r e boolean)
-andM :: m extends URIS2 => ((Monad2 m) -> Kind2 m e boolean -> Kind2 m e boolean -> Kind2 m e boolean)
-andM :: m extends URIS2 => ((Monad2C m e) -> Kind2 m e boolean -> Kind2 m e boolean -> Kind2 m e boolean)
-andM :: m extends URIS => ((Monad1 m) -> Kind m boolean -> Kind m boolean -> Kind m boolean)
-```
-
 **Example**
 
 ```ts
@@ -154,15 +136,6 @@ export declare function anyPassM<M extends URIS2, E>(
 export declare function anyPassM<M extends URIS>(
   M: Monad1<M>
 ): <A>(f: Array<(x: A) => Kind<M, boolean>>) => (x: A) => Kind<M, boolean>
-```
-
-```hs
-anyPassM :: m extends URIS4 => Monad4 m -> Array (a -> (Kind4 m s r e boolean)) -> a -> Kind4 m s r e boolean
-anyPassM :: m extends URIS3 => ((Monad3 m) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
-anyPassM :: m extends URIS3 => ((Monad3C m e) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
-anyPassM :: m extends URIS2 => ((Monad2 m) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
-anyPassM :: m extends URIS2 => ((Monad2C m e) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
-anyPassM :: m extends URIS => ((Monad1 m) -> Array (a -> (Kind m boolean)) -> a -> Kind m boolean)
 ```
 
 **Example**
@@ -210,15 +183,6 @@ export declare function ifM<M extends URIS>(
 ): (p: Kind<M, boolean>) => <A>(x: Kind<M, A>) => (y: Kind<M, A>) => Kind<M, A>
 ```
 
-```hs
-ifM :: m extends URIS4 => Monad4 m -> Kind4 m s r e boolean -> Kind4 m s r e a -> Kind4 m s r e a -> Kind4 m s r e a
-ifM :: m extends URIS3 => ((Monad3 m) -> Kind3 m r e boolean -> Kind3 m r e a -> Kind3 m r e a -> Kind3 m r e a)
-ifM :: m extends URIS3 => ((Monad3C m e) -> Kind3 m r e boolean -> Kind3 m r e a -> Kind3 m r e a -> Kind3 m r e a)
-ifM :: m extends URIS2 => ((Monad2 m) -> Kind2 m e boolean -> Kind2 m e a -> Kind2 m e a -> Kind2 m e a)
-ifM :: m extends URIS2 => ((Monad2C m e) -> Kind2 m e boolean -> Kind2 m e a -> Kind2 m e a -> Kind2 m e a)
-ifM :: m extends URIS => ((Monad1 m) -> Kind m boolean -> Kind m a -> Kind m a -> Kind m a)
-```
-
 **Example**
 
 ```ts
@@ -258,15 +222,6 @@ export declare function nonePassM<M extends URIS2, E>(
 export declare function nonePassM<M extends URIS>(
   M: Monad1<M>
 ): <A>(f: Array<(x: A) => Kind<M, boolean>>) => (x: A) => Kind<M, boolean>
-```
-
-```hs
-nonePassM :: m extends URIS4 => Monad4 m -> Array (a -> (Kind4 m s r e boolean)) -> a -> Kind4 m s r e boolean
-nonePassM :: m extends URIS3 => ((Monad3 m) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
-nonePassM :: m extends URIS3 => ((Monad3C m e) -> Array (a -> (Kind3 m r e boolean)) -> a -> Kind3 m r e boolean)
-nonePassM :: m extends URIS2 => ((Monad2 m) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
-nonePassM :: m extends URIS2 => ((Monad2C m e) -> Array (a -> (Kind2 m e boolean)) -> a -> Kind2 m e boolean)
-nonePassM :: m extends URIS => ((Monad1 m) -> Array (a -> (Kind m boolean)) -> a -> Kind m boolean)
 ```
 
 **Example**
@@ -310,15 +265,6 @@ export declare function orM<M extends URIS2, E>(
 export declare function orM<M extends URIS>(
   M: Monad1<M>
 ): (x: Kind<M, boolean>) => (y: Kind<M, boolean>) => Kind<M, boolean>
-```
-
-```hs
-orM :: m extends URIS4 => Monad4 m -> Kind4 m s r e boolean -> Kind4 m s r e boolean -> Kind4 m s r e boolean
-orM :: m extends URIS3 => ((Monad3 m) -> Kind3 m r e boolean -> Kind3 m r e boolean -> Kind3 m r e boolean)
-orM :: m extends URIS3 => ((Monad3C m e) -> Kind3 m r e boolean -> Kind3 m r e boolean -> Kind3 m r e boolean)
-orM :: m extends URIS2 => ((Monad2 m) -> Kind2 m e boolean -> Kind2 m e boolean -> Kind2 m e boolean)
-orM :: m extends URIS2 => ((Monad2C m e) -> Kind2 m e boolean -> Kind2 m e boolean -> Kind2 m e boolean)
-orM :: m extends URIS => ((Monad1 m) -> Kind m boolean -> Kind m boolean -> Kind m boolean)
 ```
 
 **Example**

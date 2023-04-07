@@ -37,10 +37,6 @@ Apply a function to both elements of an `TaskEither`.
 export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: TaskEither<A, A>) => TaskEither<B, B>
 ```
 
-```hs
-mapBoth :: (a -> b) -> TaskEither a a -> TaskEither b b
-```
-
 **Example**
 
 ```ts
@@ -71,10 +67,6 @@ Sequence an array of fallible tasks, ignoring the results.
 export declare const sequenceArray_: <E, A>(xs: readonly TaskEither<E, A>[]) => TaskEither<E, void>
 ```
 
-```hs
-sequenceArray_ :: Array (TaskEither e a) -> TaskEither e void
-```
-
 Added in v0.15.0
 
 ## sequenceSeqArray\_
@@ -85,10 +77,6 @@ Sequentially sequence an array of fallible tasks, ignoring the results.
 
 ```ts
 export declare const sequenceSeqArray_: <E, A>(xs: readonly TaskEither<E, A>[]) => TaskEither<E, void>
-```
-
-```hs
-sequenceSeqArray_ :: Array (TaskEither e a) -> TaskEither e void
 ```
 
 Added in v0.15.0
@@ -103,10 +91,6 @@ Map to and sequence an array of fallible tasks, ignoring the results.
 export declare const traverseArray_: <E, A, B>(
   f: (x: A) => TaskEither<E, B>
 ) => (xs: readonly A[]) => TaskEither<E, void>
-```
-
-```hs
-traverseArray_ :: (a -> TaskEither e b) -> Array a -> TaskEither e void
 ```
 
 Added in v0.15.0
@@ -124,10 +108,6 @@ export declare const traverseSeqArray_: <E, A, B>(
 ) => (xs: readonly A[]) => TaskEither<E, void>
 ```
 
-```hs
-traverseSeqArray_ :: (a -> TaskEither e b) -> Array a -> TaskEither e void
-```
-
 Added in v0.15.0
 
 ## unsafeUnwrap
@@ -139,10 +119,6 @@ value of `Left` if `Left`.
 
 ```ts
 export declare const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A>
-```
-
-```hs
-unsafeUnwrap :: TaskEither unknown a -> Promise a
 ```
 
 **Example**
@@ -167,10 +143,6 @@ Unwrap the promise from within a `TaskEither`, throwing the inner value of
 
 ```ts
 export declare const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E>
-```
-
-```hs
-unsafeUnwrapLeft :: TaskEither e unknown -> Promise e
 ```
 
 **Example**

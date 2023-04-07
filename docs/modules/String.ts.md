@@ -66,10 +66,6 @@ Append one string to another.
 export declare const append: (appended: string) => Endomorphism<string>
 ```
 
-```hs
-append :: string -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -100,10 +96,6 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const dropLeft: (n: number) => Endomorphism<string>
 ```
 
-```hs
-dropLeft :: number -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -123,10 +115,6 @@ specified predicate, creating a new string.
 
 ```ts
 export declare const dropLeftWhile: (f: Predicate<string>) => Endomorphism<string>
-```
-
-```hs
-dropLeftWhile :: Predicate string -> Endomorphism string
 ```
 
 **Example**
@@ -159,10 +147,6 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const dropRight: (n: number) => Endomorphism<string>
 ```
 
-```hs
-dropRight :: number -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -182,10 +166,6 @@ which all characters satisfy the specified predicate, creating a new string.
 
 ```ts
 export declare const dropRightWhile: (f: Predicate<string>) => Endomorphism<string>
-```
-
-```hs
-dropRightWhile :: Predicate string -> Endomorphism string
 ```
 
 **Example**
@@ -213,10 +193,6 @@ Convert a number to a string.
 export declare const fromNumber: (x: number) => string
 ```
 
-```hs
-fromNumber :: number -> string
-```
-
 **Example**
 
 ```ts
@@ -235,10 +211,6 @@ Get the first character in a string, or `None` if the string is empty.
 
 ```ts
 export declare const head: (x: string) => Option<string>
-```
-
-```hs
-head :: string -> Option string
 ```
 
 **Example**
@@ -261,10 +233,6 @@ Get all but the last character of a string, or `None` if the string is empty.
 
 ```ts
 export declare const init: (x: string) => Option<string>
-```
-
-```hs
-init :: string -> Option string
 ```
 
 **Example**
@@ -292,10 +260,6 @@ in case of an empty string is unspecified.
 export declare const isAlpha: Predicate<string>
 ```
 
-```hs
-isAlpha :: Predicate string
-```
-
 **Example**
 
 ```ts
@@ -319,10 +283,6 @@ Behaviour in case of an empty string is unspecified.
 export declare const isAlphaNum: Predicate<string>
 ```
 
-```hs
-isAlphaNum :: Predicate string
-```
-
 **Example**
 
 ```ts
@@ -343,10 +303,6 @@ Behaviour in case of an empty string is unspecified.
 
 ```ts
 export declare const isLower: Predicate<string>
-```
-
-```hs
-isLower :: Predicate string
 ```
 
 **Example**
@@ -372,10 +328,6 @@ an empty string is unspecified.
 export declare const isSpace: Predicate<string>
 ```
 
-```hs
-isSpace :: Predicate string
-```
-
 **Example**
 
 ```ts
@@ -397,10 +349,6 @@ Behaviour in case of an empty string is unspecified.
 
 ```ts
 export declare const isUpper: Predicate<string>
-```
-
-```hs
-isUpper :: Predicate string
 ```
 
 **Example**
@@ -425,10 +373,6 @@ Get the last character in a string, or `None` if the string is empty.
 export declare const last: (x: string) => Option<string>
 ```
 
-```hs
-last :: string -> Option string
-```
-
 **Example**
 
 ```ts
@@ -451,10 +395,6 @@ Split a string into substrings using any recognised newline as the separator.
 export declare const lines: (s: string) => ReadonlyNonEmptyArray<string>
 ```
 
-```hs
-lines :: string -> ReadonlyNonEmptyArray string
-```
-
 **Example**
 
 ```ts
@@ -473,10 +413,6 @@ Attempt to access the character at the specified index of a string.
 
 ```ts
 export declare const lookup: (i: number) => (x: string) => Option<string>
-```
-
-```hs
-lookup :: number -> string -> Option string
 ```
 
 **Example**
@@ -499,10 +435,6 @@ Functional wrapper around `String.prototype.match`.
 
 ```ts
 export declare const match: (r: RegExp) => (x: string) => Option<RegExpMatchArray>
-```
-
-```hs
-match :: RegExp -> string -> Option RegExpMatchArray
 ```
 
 **Example**
@@ -533,10 +465,6 @@ If the provided `RegExp` is non-global, the function will return `None`.
 
 ```ts
 export declare const matchAll: (r: RegExp) => (x: string) => Option<NonEmptyArray<RegExpMatchArray>>
-```
-
-```hs
-matchAll :: RegExp -> string -> Option (NonEmptyArray RegExpMatchArray)
 ```
 
 **Example**
@@ -570,10 +498,6 @@ Prepend one string to another.
 export declare const prepend: (prepended: string) => Endomorphism<string>
 ```
 
-```hs
-prepend :: string -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -599,10 +523,6 @@ To use a `RegExp` (with a global flag) instead of a string to match, use
 export declare const replaceAll: (r: string) => (s: string) => Endomorphism<string>
 ```
 
-```hs
-replaceAll :: string -> string -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -621,10 +541,6 @@ Reverse a string.
 
 ```ts
 export declare const reverse: Endomorphism<string>
-```
-
-```hs
-reverse :: Endomorphism string
 ```
 
 **Example**
@@ -648,10 +564,6 @@ Resulting parts can then be handled using fp-ts/Tuple.
 export declare const splitAt: (index: number) => (str: string) => [string, string]
 ```
 
-```hs
-splitAt :: number -> string -> [string, string]
-```
-
 **Example**
 
 ```ts
@@ -671,10 +583,6 @@ same outer value.
 
 ```ts
 export declare const surround: (x: string) => Endomorphism<string>
-```
-
-```hs
-surround :: string -> Endomorphism string
 ```
 
 **Example**
@@ -697,10 +605,6 @@ Get all but the first character of a string, or `None` if the string is empty.
 
 ```ts
 export declare const tail: (x: string) => Option<string>
-```
-
-```hs
-tail :: string -> Option string
 ```
 
 **Example**
@@ -734,10 +638,6 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const takeLeft: (n: number) => Endomorphism<string>
 ```
 
-```hs
-takeLeft :: number -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -757,10 +657,6 @@ specified predicate, creating a new string.
 
 ```ts
 export declare const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string>
-```
-
-```hs
-takeLeftWhile :: Predicate string -> Endomorphism string
 ```
 
 **Example**
@@ -790,10 +686,6 @@ If `n` is a float, it will be rounded down to the nearest integer.
 export declare const takeRight: (n: number) => Endomorphism<string>
 ```
 
-```hs
-takeRight :: number -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -816,10 +708,6 @@ string.
 export declare const takeRightWhile: (f: Predicate<string>) => Endomorphism<string>
 ```
 
-```hs
-takeRightWhile :: Predicate string -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -838,10 +726,6 @@ A functional wrapper around `RegExp.prototype.test`.
 
 ```ts
 export declare const test: (r: RegExp) => Predicate<string>
-```
-
-```hs
-test :: RegExp -> Predicate string
 ```
 
 **Example**
@@ -865,10 +749,6 @@ Remove the end of a string, if it exists.
 
 ```ts
 export declare const unappend: (end: string) => Endomorphism<string>
-```
-
-```hs
-unappend :: string -> Endomorphism string
 ```
 
 **Example**
@@ -898,10 +778,6 @@ a string can be thought of merely as an array of characters.
 export declare const under: (f: Endomorphism<ReadonlyArray<string>>) => Endomorphism<string>
 ```
 
-```hs
-under :: Endomorphism (ReadonlyArray string) -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -925,10 +801,6 @@ Join newline-separated strings together.
 export declare const unlines: (ys: readonly string[]) => string
 ```
 
-```hs
-unlines :: Array string -> string
-```
-
 **Example**
 
 ```ts
@@ -947,10 +819,6 @@ Remove the beginning of a string, if it exists.
 
 ```ts
 export declare const unprepend: (start: string) => Endomorphism<string>
-```
-
-```hs
-unprepend :: string -> Endomorphism string
 ```
 
 **Example**
@@ -975,10 +843,6 @@ Remove the start and end of a string, if they both exist.
 export declare const unsurround: (x: string) => Endomorphism<string>
 ```
 
-```hs
-unsurround :: string -> Endomorphism string
-```
-
 **Example**
 
 ```ts
@@ -1001,10 +865,6 @@ Join whitespace-separated strings together.
 export declare const unwords: (ys: readonly string[]) => string
 ```
 
-```hs
-unwords :: Array string -> string
-```
-
 **Example**
 
 ```ts
@@ -1024,10 +884,6 @@ separator.
 
 ```ts
 export declare const words: (s: string) => ReadonlyNonEmptyArray<string>
-```
-
-```hs
-words :: string -> ReadonlyNonEmptyArray string
 ```
 
 **Example**

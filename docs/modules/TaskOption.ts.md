@@ -31,10 +31,6 @@ Unwrap the promise from within a `TaskOption`, rejecting if `None`.
 export declare const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A>
 ```
 
-```hs
-unsafeUnwrap :: TaskOption a -> Promise a
-```
-
 **Example**
 
 ```ts
