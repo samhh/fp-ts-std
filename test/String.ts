@@ -358,13 +358,21 @@ describe("String", () => {
   })
 
   describe("test", () => {
-    const f = test(/x.z/)
-
     it("works", () => {
+      const f = test(/x.z/)
+
       expect(f("xyz")).toBe(true)
       expect(f("axyzb")).toBe(true)
       expect(f("ayz")).toBe(false)
       expect(f("xya")).toBe(false)
+    })
+
+    it("is not stateful", () => {
+      const f = test(/foo/g)
+      const x = "foobar"
+
+      expect(f(x)).toBe(true)
+      expect(f(x)).toBe(true)
     })
   })
 
