@@ -3,8 +3,11 @@
  *
  * @since 0.15.0
  */
+import { flow } from "fp-ts/function"
 import * as RTE from "fp-ts/ReaderTaskEither"
+import * as TE from "fp-ts/TaskEither"
 import { TaskEither } from "fp-ts/TaskEither"
+import { Task } from "fp-ts/Task"
 import { runReader } from "./Reader"
 import {
   unsafeUnwrap as unsafeUnwrapTE,
@@ -72,3 +75,24 @@ export const unsafeUnwrapLeft =
   <R, E>(rte: RTE.ReaderTaskEither<R, E, unknown>) =>
   (r: R): Promise<E> =>
     unsafeUnwrapLeftTE(rte(r))
+
+/**
+ * Effectfully accesses the environment outside of the `Reader` and `Either`
+ * layers.
+ *
+ * @example
+ * import { asksTask } from 'fp-ts-std/ReaderTaskEither'
+ * import * as E from 'fp-ts/Either'
+ *
+ * const lucky = asksTask<number, unknown, boolean>(n => () => Promise.resolve(n === Date.now()))
+ *
+ * assert.deepEqual(
+ *   lucky(42)(),
+ *   Promise.resolve(E.right(false)),
+ * )
+ *
+ * @since 0.16.0
+ */
+export const asksTask = <R, E, A>(
+  f: (r: R) => Task<A>,
+): RTE.ReaderTaskEither<R, E, A> => flow(f, TE.fromTask)

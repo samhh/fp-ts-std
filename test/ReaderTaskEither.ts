@@ -2,11 +2,14 @@ import {
   unsafeUnwrap,
   unsafeUnwrapLeft,
   runReaderTaskEither,
+  asksTask,
 } from "../src/ReaderTaskEither"
 import * as RTE from "fp-ts/ReaderTaskEither"
+import * as T from "fp-ts/Task"
 import * as E from "fp-ts/Either"
-import { pipe } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
+import * as Str from "../src/String"
 
 describe("ReaderTaskEither", () => {
   describe("unsafeUnwrap", () => {
@@ -62,6 +65,14 @@ describe("ReaderTaskEither", () => {
           await expect(extractedLeft).resolves.toStrictEqual(E.left(_))
         }),
       )
+    })
+  })
+
+  describe("asksTask", () => {
+    it("runs action and lifts to a Reader", () => {
+      return expect(
+        asksTask(flow(Str.prepend("foo"), T.of))("bar")(),
+      ).resolves.toEqual(E.right("foobar"))
     })
   })
 })

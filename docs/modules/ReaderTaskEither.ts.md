@@ -15,6 +15,7 @@ Added in v0.15.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [asksTask](#askstask)
   - [runReaderTaskEither](#runreadertaskeither)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
@@ -23,6 +24,30 @@ Added in v0.15.0
 
 # utils
 
+## asksTask
+
+Effectfully accesses the environment outside of the `Reader` and `Either`
+layers.
+
+**Signature**
+
+```ts
+export declare const asksTask: <R, E, A>(f: (r: R) => Task<A>) => RTE.ReaderTaskEither<R, E, A>
+```
+
+**Example**
+
+```ts
+import { asksTask } from 'fp-ts-std/ReaderTaskEither'
+import * as E from 'fp-ts/Either'
+
+const lucky = asksTask<number, unknown, boolean>((n) => () => Promise.resolve(n === Date.now()))
+
+assert.deepEqual(lucky(42)(), Promise.resolve(E.right(false)))
+```
+
+Added in v0.16.0
+
 ## runReaderTaskEither
 
 Runs a ReaderTaskEither and extracts the final TaskEither from it.
@@ -30,7 +55,9 @@ Runs a ReaderTaskEither and extracts the final TaskEither from it.
 **Signature**
 
 ```ts
-export declare const runReaderTaskEither: <R, E, A>(r: R) => (reader: RTE.ReaderTaskEither<R, E, A>) => TaskEither<E, A>
+export declare const runReaderTaskEither: <R, E, A>(
+  r: R
+) => (reader: RTE.ReaderTaskEither<R, E, A>) => TE.TaskEither<E, A>
 ```
 
 **Example**
