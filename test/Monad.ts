@@ -2,7 +2,16 @@
 
 import * as IO from "fp-ts/IO"
 import { constant, constVoid, flip } from "fp-ts/function"
-import { ifM, andM, orM, allPassM, anyPassM, nonePassM } from "../src/Monad"
+import {
+  ifM,
+  andM,
+  orM,
+  allPassM,
+  anyPassM,
+  nonePassM,
+  whenM,
+} from "../src/Monad"
+import { when } from "../src/Applicative"
 import { allPass, anyPass, nonePass } from "../src/Predicate"
 
 type IO<A> = IO.IO<A>
@@ -207,6 +216,47 @@ describe("Monad", () => {
 
       f([set, constant(IO.of(true))])("foo")()
       expect(exe).toBe(true)
+    })
+  })
+
+  describe("whenM", () => {
+    const f = whenM(IO.Monad)
+
+    it("doesn't execute action if condition fails", () => {
+      let exe = false // eslint-disable-line functional/no-let
+
+      const set: IO<boolean> = () => (exe = true)
+
+      expect(exe).toBe(false)
+
+      f(IO.of(false))(set)()
+      expect(exe).toBe(false)
+
+      f(IO.of(true))(set)()
+      expect(exe).toBe(true)
+    })
+
+    it("equivalent to lifted applicative when", () => {
+      // eslint-disable-next-line functional/no-let
+      let n = 0
+
+      const inc: IO<void> = () => n++
+      const g = flip(f)(inc)
+      const h = flip(when(IO.Applicative))(inc)
+
+      expect(n).toBe(0)
+
+      g(IO.of(true))()
+      h(true)()
+      expect(n).toBe(2)
+
+      g(IO.of(false))()
+      h(false)()
+      expect(n).toBe(2)
+
+      g(IO.of(true))()
+      h(true)()
+      expect(n).toBe(4)
     })
   })
 })

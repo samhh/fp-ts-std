@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `traceShowWithValue` to `Debug`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `Either`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `IOEither`.
+- Add `whenM` to `Monad`.
 - Add `unsafeExpect` to `Option`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `TaskEither`.
 - Add `unsafeExpect` to `TaskOption`.
