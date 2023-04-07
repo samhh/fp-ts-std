@@ -15,11 +15,38 @@ Added in v0.16.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [asksIO](#asksio)
   - [runReaderIO](#runreaderio)
 
 ---
 
 # utils
+
+## asksIO
+
+Effectfully accesses the environment outside of the `Reader` layer.
+
+**Signature**
+
+```ts
+export declare const asksIO: <R, A>(f: (r: R) => IO<A>) => ReaderIO<R, A>
+```
+
+```hs
+asksIO :: (r -> IO a) -> ReaderIO r a
+```
+
+**Example**
+
+```ts
+import { asksIO } from 'fp-ts-std/ReaderIO'
+
+const lucky = asksIO<number, boolean>((n) => () => n === Date.now())
+
+assert.strictEqual(lucky(42)(), false)
+```
+
+Added in v0.16.0
 
 ## runReaderIO
 

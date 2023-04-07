@@ -1,7 +1,9 @@
-import { runReaderIO } from "../src/ReaderIO"
+import { runReaderIO, asksIO } from "../src/ReaderIO"
 import * as RIO from "fp-ts/ReaderIO"
-import { pipe } from "fp-ts/function"
+import * as IO from "fp-ts/IO"
+import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
+import * as Str from "../src/String"
 
 describe("ReaderIO", () => {
   describe("runReaderIO", () => {
@@ -16,6 +18,12 @@ describe("ReaderIO", () => {
           expect(extractedIO).toBe(n)
         }),
       )
+    })
+  })
+
+  describe("asksIO", () => {
+    it("runs action and lifts to a Reader", () => {
+      expect(asksIO(flow(Str.prepend("foo"), IO.of))("bar")()).toBe("foobar")
     })
   })
 })
