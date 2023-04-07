@@ -21,6 +21,7 @@ Added in v0.2.0
   - [fromRecord](#fromrecord)
   - [fromString](#fromstring)
   - [fromTuples](#fromtuples)
+  - [getAllForParam](#getallforparam)
   - [getParam](#getparam)
   - [isURLSearchParams](#isurlsearchparams)
   - [setParam](#setparam)
@@ -160,6 +161,35 @@ assert.deepStrictEqual(fromTuples(x), new URLSearchParams(x))
 ```
 
 Added in v0.2.0
+
+## getAllForParam
+
+Attempt to get all matches for a URL parameter from a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const getAllForParam: (k: string) => (ps: URLSearchParams) => Option<NonEmptyArray<string>>
+```
+
+```hs
+getAllForParam :: string -> URLSearchParams -> Option (NonEmptyArray string)
+```
+
+**Example**
+
+```ts
+import { getAllForParam, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d1&c=d2')
+
+assert.deepStrictEqual(getAllForParam('a')(x), O.some(['b']))
+assert.deepStrictEqual(getAllForParam('c')(x), O.some(['d1', 'd2']))
+assert.deepStrictEqual(getAllForParam('e')(x), O.none)
+```
+
+Added in v0.16.0
 
 ## getParam
 

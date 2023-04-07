@@ -6,6 +6,7 @@ import {
   clone,
   isURLSearchParams,
   getParam,
+  getAllForParam,
   setParam,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
@@ -131,6 +132,15 @@ describe("URLSearchParams", () => {
 
     it("works", () => {
       expect(f("a")).toEqual(O.some("b1"))
+      expect(f("b")).toEqual(O.none)
+    })
+  })
+
+  describe("getAllForParam", () => {
+    const f = flip(getAllForParam)(fromString("a=b1&a=b2"))
+
+    it("works", () => {
+      expect(f("a")).toEqual(O.some(["b1", "b2"]))
       expect(f("b")).toEqual(O.none)
     })
   })

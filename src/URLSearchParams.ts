@@ -11,6 +11,8 @@ import * as R from "fp-ts/Record"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { construct, invoke, isInstanceOf } from "./Function"
+import * as NEA from "fp-ts/NonEmptyArray"
+import NonEmptyArray = NEA.NonEmptyArray
 
 /**
  * An empty `URLSearchParams`.
@@ -121,6 +123,26 @@ export const getParam = (
   k: string,
 ): ((ps: URLSearchParams) => Option<string>) =>
   flow(invoke("get")([k]), O.fromNullable)
+
+/**
+ * Attempt to get all matches for a URL parameter from a `URLSearchParams`.
+ *
+ * @example
+ * import { getAllForParam, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const x = fromString('a=b&c=d1&c=d2')
+ *
+ * assert.deepStrictEqual(getAllForParam('a')(x), O.some(['b']))
+ * assert.deepStrictEqual(getAllForParam('c')(x), O.some(['d1', 'd2']))
+ * assert.deepStrictEqual(getAllForParam('e')(x), O.none)
+ *
+ * @since 0.16.0
+ */
+export const getAllForParam = (
+  k: string,
+): ((ps: URLSearchParams) => Option<NonEmptyArray<string>>) =>
+  flow(invoke("getAll")([k]), NEA.fromArray)
 
 /**
  * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
