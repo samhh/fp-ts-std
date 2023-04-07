@@ -23,6 +23,7 @@ Added in v0.2.0
   - [fromTuples](#fromtuples)
   - [getAllForParam](#getallforparam)
   - [getParam](#getparam)
+  - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
   - [setParam](#setparam)
 
@@ -218,6 +219,31 @@ assert.deepStrictEqual(getParam('e')(x), O.none)
 ```
 
 Added in v0.1.0
+
+## isEmpty
+
+Test if there are any search params.
+
+**Signature**
+
+```ts
+export declare const isEmpty: Predicate<URLSearchParams>
+```
+
+```hs
+isEmpty :: Predicate URLSearchParams
+```
+
+**Example**
+
+```ts
+import { isEmpty } from 'fp-ts-std/URLSearchParams'
+
+assert.strictEqual(isEmpty(new URLSearchParams()), true)
+assert.strictEqual(isEmpty(new URLSearchParams({ k: 'v' })), false)
+```
+
+Added in v0.16.0
 
 ## isURLSearchParams
 

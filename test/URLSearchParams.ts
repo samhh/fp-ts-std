@@ -5,6 +5,7 @@ import {
   fromTuples,
   clone,
   isURLSearchParams,
+  isEmpty,
   getParam,
   getAllForParam,
   setParam,
@@ -124,6 +125,15 @@ describe("URLSearchParams", () => {
       expect(f(new URL("https://samhh.com"))).toBe(false)
       expect(f(empty)).toBe(true)
       expect(f(fromRecord({ a: "b" }))).toBe(true)
+    })
+  })
+
+  describe("isEmpty", () => {
+    const f = isEmpty
+
+    it("works", () => {
+      expect(f(new URLSearchParams())).toBe(true)
+      expect(f(new URLSearchParams({ a: "b" }))).toBe(false)
     })
   })
 

@@ -17,7 +17,7 @@ This project adheres to semantic versioning.
 - Add `asksEither`, `asksTask`, and `asksTaskEither` to `ReaderTaskEither`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `TaskEither`.
 - Add `unsafeExpect` to `TaskOption`.
-- Add `getAllForParam` to `URLSearchParams`.
+- Add `getAllForParam` and `isEmpty` to `URLSearchParams`.
 - Remove `flip`. [fp-ts/function::flip](https://gcanti.github.io/fp-ts/modules/function.ts.html#flip) is now curried.
 - Fix statefulness of `Str.test`.
 - Throw upon attempting to unsafely lift an empty string to `NonEmptyString`.

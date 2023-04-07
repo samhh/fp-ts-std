@@ -11,6 +11,7 @@ import * as R from "fp-ts/Record"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { construct, invoke, isInstanceOf } from "./Function"
+import { Predicate } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
 
@@ -25,6 +26,20 @@ import NonEmptyArray = NEA.NonEmptyArray
  * @since 0.2.0
  */
 export const empty: URLSearchParams = construct(URLSearchParams)([])
+
+/**
+ * Test if there are any search params.
+ *
+ * @example
+ * import { isEmpty } from 'fp-ts-std/URLSearchParams'
+ *
+ * assert.strictEqual(isEmpty(new URLSearchParams()), true)
+ * assert.strictEqual(isEmpty(new URLSearchParams({ k: 'v' })), false)
+ *
+ * @since 0.16.0
+ */
+export const isEmpty: Predicate<URLSearchParams> = u =>
+  Array.from(u.keys()).length === 0
 
 /**
  * Parse a `URLSearchParams` from a string.
