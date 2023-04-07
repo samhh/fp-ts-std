@@ -18,6 +18,8 @@ Added in v0.15.0
   - [mapBoth](#mapboth)
   - [sequenceArray\_](#sequencearray_)
   - [traverseArray\_](#traversearray_)
+  - [unsafeExpect](#unsafeexpect)
+  - [unsafeExpectLeft](#unsafeexpectleft)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
 
@@ -86,6 +88,60 @@ traverseArray_ :: (a -> IOEither e b) -> Array a -> IOEither e void
 ```
 
 Added in v0.15.0
+
+## unsafeExpect
+
+Unwrap the value from within an `IOEither`, throwing the inner value of
+`Left` via `Show` if `Left`.
+
+**Signature**
+
+```ts
+export declare const unsafeExpect: <E>(S: Show<E>) => <A>(x: IOEither<E, A>) => A
+```
+
+```hs
+unsafeExpect :: Show e -> IOEither e a -> a
+```
+
+**Example**
+
+```ts
+import { unsafeExpect } from 'fp-ts-std/IOEither'
+import * as IOE from 'fp-ts/IOEither'
+import * as Str from 'fp-ts/string'
+
+assert.throws(() => unsafeExpect(Str.Show)(IOE.left('foo')), /^"foo"$/)
+```
+
+Added in v0.16.0
+
+## unsafeExpectLeft
+
+Unwrap the value from within an `IOEither`, throwing the inner value of
+`Right` via `Show` if `Right`.
+
+**Signature**
+
+```ts
+export declare const unsafeExpectLeft: <A>(S: Show<A>) => <E>(x: IOEither<E, A>) => E
+```
+
+```hs
+unsafeExpectLeft :: Show a -> IOEither e a -> e
+```
+
+**Example**
+
+```ts
+import { unsafeExpectLeft } from 'fp-ts-std/IOEither'
+import * as IOE from 'fp-ts/IOEither'
+import * as Str from 'fp-ts/string'
+
+assert.throws(() => unsafeExpectLeft(Str.Show)(IOE.right('foo')), /^"foo"$/)
+```
+
+Added in v0.16.0
 
 ## unsafeUnwrap
 

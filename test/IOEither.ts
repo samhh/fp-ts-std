@@ -2,6 +2,8 @@ import {
   mapBoth,
   unsafeUnwrap,
   unsafeUnwrapLeft,
+  unsafeExpect,
+  unsafeExpectLeft,
   sequenceArray_,
   traverseArray_,
 } from "../src/IOEither"
@@ -10,6 +12,7 @@ import * as IO from "../src/IO"
 import * as E from "fp-ts/Either"
 import { identity, pipe } from "fp-ts/function"
 import * as Str from "../src/String"
+import { Show as StrShow } from "fp-ts/string"
 import fc from "fast-check"
 
 describe("IOEither", () => {
@@ -34,6 +37,30 @@ describe("IOEither", () => {
 
     it("throws Right", () => {
       expect(() => f(IOE.right("r"))).toThrow("r")
+    })
+  })
+
+  describe("unsafeExpect", () => {
+    const f = unsafeExpect(StrShow)
+
+    it("unwraps Right", () => {
+      expect(f(IOE.right(123))).toBe(123)
+    })
+
+    it("throws Left via Show", () => {
+      expect(() => f(IOE.left("l"))).toThrow('"l"')
+    })
+  })
+
+  describe("unsafeExpectLeft", () => {
+    const f = unsafeExpectLeft(StrShow)
+
+    it("unwraps Left", () => {
+      expect(f(IOE.left(123))).toBe(123)
+    })
+
+    it("throws Right via Show", () => {
+      expect(() => f(IOE.right("r"))).toThrow('"r"')
     })
   })
 

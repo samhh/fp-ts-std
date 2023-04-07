@@ -14,6 +14,7 @@ import {
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
+import { Show } from "fp-ts/Show"
 
 /**
  * Unwrap the value from within an `IOEither`, throwing with the inner value of
@@ -48,6 +49,45 @@ export const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E = flow(
   IO.map(unsafeUnwrapLeftE),
   executeIO,
 )
+
+/**
+ * Unwrap the value from within an `IOEither`, throwing the inner value of
+ * `Left` via `Show` if `Left`.
+ *
+ * @example
+ * import { unsafeExpect } from 'fp-ts-std/IOEither'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import * as Str from 'fp-ts/string'
+ *
+ * assert.throws(
+ *   () => unsafeExpect(Str.Show)(IOE.left('foo')),
+ *   /^"foo"$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
+  flow(IOE.mapLeft(S.show), unsafeUnwrap)
+
+/**
+ * Unwrap the value from within an `IOEither`, throwing the inner value of
+ * `Right` via `Show` if `Right`.
+ *
+ * @example
+ * import { unsafeExpectLeft } from 'fp-ts-std/IOEither'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import * as Str from 'fp-ts/string'
+ *
+ * assert.throws(
+ *   () => unsafeExpectLeft(Str.Show)(IOE.right('foo')),
+ *   /^"foo"$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpectLeft = <A>(
+  S: Show<A>,
+): (<E>(x: IOEither<E, A>) => E) => flow(IOE.map(S.show), unsafeUnwrapLeft)
 
 /**
  * Apply a function to both elements of an `IOEither`.
