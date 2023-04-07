@@ -24,7 +24,7 @@ import {
   Monad3C,
   Monad4,
 } from "fp-ts/Monad"
-import { pipe } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 import { invert } from "./Boolean"
 
@@ -394,4 +394,54 @@ export function whenM<F>(
   M: Monad<F>,
 ): (b: HKT<F, boolean>) => (x: HKT<F, void>) => HKT<F, void> {
   return b => x => M.chain(b, bb => (bb ? x : M.of(undefined)))
+}
+
+/**
+ * The reverse of `whenM`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { unlessM } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import * as IOE from 'fp-ts/IOEither'
+ * import { log } from 'fp-ts/Console'
+ *
+ * const isValid = (n: number): IO.IO<boolean> => () => Date.now() === 42
+ *
+ * pipe(
+ *   IOE.of(123),
+ *   IOE.chainFirstIOK(n =>
+ *     unlessM(IO.Monad)(isValid(n))(log(n))),
+ * )
+ *
+ * @since 0.16.0
+ */
+export function unlessM<F extends URIS4>(
+  M: Monad4<F>,
+): <S, R, E>(
+  b: Kind4<F, S, R, E, boolean>,
+) => (x: Kind4<F, S, R, E, void>) => Kind4<F, S, R, E, void>
+export function unlessM<F extends URIS3>(
+  M: Monad3<F>,
+): <R, E>(
+  b: Kind3<F, R, E, boolean>,
+) => (x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
+export function unlessM<F extends URIS3, E>(
+  M: Monad3C<F, E>,
+): <R>(
+  b: Kind3<F, R, E, boolean>,
+) => (x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
+export function unlessM<F extends URIS2>(
+  M: Monad2<F>,
+): <E>(b: Kind2<F, E, boolean>) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
+export function unlessM<F extends URIS2, E>(
+  M: Monad2C<F, E>,
+): (b: Kind2<F, E, boolean>) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
+export function unlessM<F extends URIS>(
+  M: Monad1<F>,
+): (b: Kind<F, boolean>) => (x: Kind<F, void>) => Kind<F, void>
+export function unlessM<F>(
+  M: Monad<F>,
+): (b: HKT<F, boolean>) => (x: HKT<F, void>) => HKT<F, void> {
+  return b => x => M.chain(b, bb => (bb ? M.of(undefined) : x))
 }

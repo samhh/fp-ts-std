@@ -21,6 +21,7 @@ Added in v0.15.0
   - [ifM](#ifm)
   - [nonePassM](#nonepassm)
   - [orM](#orm)
+  - [unlessM](#unlessm)
   - [whenM](#whenm)
 
 ---
@@ -336,6 +337,64 @@ assert.strictEqual(execute(f(IO.of(false))), false)
 ```
 
 Added in v0.15.0
+
+## unlessM
+
+The reverse of `whenM`.
+
+**Signature**
+
+```ts
+export declare function unlessM<F extends URIS4>(
+  M: Monad4<F>
+): <S, R, E>(b: Kind4<F, S, R, E, boolean>) => (x: Kind4<F, S, R, E, void>) => Kind4<F, S, R, E, void>
+export declare function unlessM<F extends URIS3>(
+  M: Monad3<F>
+): <R, E>(b: Kind3<F, R, E, boolean>) => (x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
+export declare function unlessM<F extends URIS3, E>(
+  M: Monad3C<F, E>
+): <R>(b: Kind3<F, R, E, boolean>) => (x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
+export declare function unlessM<F extends URIS2>(
+  M: Monad2<F>
+): <E>(b: Kind2<F, E, boolean>) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
+export declare function unlessM<F extends URIS2, E>(
+  M: Monad2C<F, E>
+): (b: Kind2<F, E, boolean>) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
+export declare function unlessM<F extends URIS>(
+  M: Monad1<F>
+): (b: Kind<F, boolean>) => (x: Kind<F, void>) => Kind<F, void>
+```
+
+```hs
+unlessM :: f extends URIS4 => Monad4 f -> Kind4 f s r e boolean -> Kind4 f s r e void -> Kind4 f s r e void
+unlessM :: f extends URIS3 => ((Monad3 f) -> Kind3 f r e boolean -> Kind3 f r e void -> Kind3 f r e void)
+unlessM :: f extends URIS3 => ((Monad3C f e) -> Kind3 f r e boolean -> Kind3 f r e void -> Kind3 f r e void)
+unlessM :: f extends URIS2 => ((Monad2 f) -> Kind2 f e boolean -> Kind2 f e void -> Kind2 f e void)
+unlessM :: f extends URIS2 => ((Monad2C f e) -> Kind2 f e boolean -> Kind2 f e void -> Kind2 f e void)
+unlessM :: f extends URIS => ((Monad1 f) -> Kind f boolean -> Kind f void -> Kind f void)
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { unlessM } from 'fp-ts-std/Monad'
+import * as IO from 'fp-ts/IO'
+import * as IOE from 'fp-ts/IOEither'
+import { log } from 'fp-ts/Console'
+
+const isValid =
+  (n: number): IO.IO<boolean> =>
+  () =>
+    Date.now() === 42
+
+pipe(
+  IOE.of(123),
+  IOE.chainFirstIOK((n) => unlessM(IO.Monad)(isValid(n))(log(n)))
+)
+```
+
+Added in v0.16.0
 
 ## whenM
 
