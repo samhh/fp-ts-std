@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.16.0 (_Unreleased_)
 
+- Add `IOOption` module.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `Either`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `IOEither`.
 - Add `unsafeExpect` to `Option`.
