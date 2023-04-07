@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.16.0 (_Unreleased_)
 
 - Add `IOOption` module.
+- Add `ReaderIO` module.
 - Add `traceShowWithValue` to `Debug`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `Either`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `IOEither`.
