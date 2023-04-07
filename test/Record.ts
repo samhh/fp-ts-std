@@ -1,4 +1,11 @@
-import { values, lookupV, reject, invertLast, invertAll } from "../src/Record"
+import {
+  values,
+  lookupV,
+  reject,
+  invertLast,
+  invertAll,
+  pick,
+} from "../src/Record"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
@@ -134,6 +141,18 @@ describe("Record", () => {
           ),
         ),
       )
+    })
+  })
+
+  describe("pick", () => {
+    const f = pick
+
+    const x: Record<string, string> = { a: "Red", b: "Green", c: "Blue" }
+
+    it("picks selected keys", () => {
+      expect(pipe(x, f([]))).toEqual({})
+      expect(pipe(x, f(["a"]))).toEqual({ a: "Red" })
+      expect(pipe(x, f(["a", "c"]))).toEqual({ a: "Red", c: "Blue" })
     })
   })
 })

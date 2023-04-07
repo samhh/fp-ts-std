@@ -12,6 +12,8 @@ import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
 import * as T from "fp-ts/Tuple"
 import { last } from "fp-ts/Semigroup"
+import { elemV } from "./Array"
+import * as Str from "fp-ts/string"
 
 /**
  * Get the values from a `Record`.
@@ -109,3 +111,26 @@ export const invertAll = <A>(
     A.map(flow(T.bimap(f, A.of), T.swap)),
     R.fromFoldable(A.getMonoid<string>(), A.Foldable),
   )
+
+/**
+ * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
+ * type. For picking records with typed keys, instead look at the `Struct`
+ * module.
+ *
+ * @example
+ * import { pick } from 'fp-ts-std/Record'
+ * import { pipe } from 'fp-ts/function'
+ *
+ * const picked = pipe(
+ *   { a: 1, b: 'two', c: [true] },
+ *   pick(['a', 'c'])
+ * )
+ *
+ * assert.deepStrictEqual(picked, { a: 1, c: [true] })
+ *
+ * @since 0.16.0
+ */
+export const pick = (
+  ks: Array<string>,
+): (<A>(y: Record<string, A>) => Record<string, A>) =>
+  R.filterWithIndex(elemV(Str.Eq)(ks))

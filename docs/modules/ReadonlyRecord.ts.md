@@ -19,6 +19,7 @@ Added in v0.10.0
   - [invertAll](#invertall)
   - [invertLast](#invertlast)
   - [lookupV](#lookupv)
+  - [pick](#pick)
   - [reject](#reject)
   - [values](#values)
 
@@ -104,6 +105,37 @@ assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]])
 ```
 
 Added in v0.10.0
+
+## pick
+
+Pick a set of keys from a `ReadonlyRecord`. The value-level equivalent of
+the `Pick` type. For picking records with typed keys, instead look at the
+`ReadonlyStruct` module.
+
+**Signature**
+
+```ts
+export declare const pick: (
+  ks: ReadonlyArray<string>
+) => <A>(y: Readonly<Record<string, A>>) => Readonly<Record<string, A>>
+```
+
+```hs
+pick :: ReadonlyArray string -> Readonly (Record string a) -> Readonly (Record string a)
+```
+
+**Example**
+
+```ts
+import { pick } from 'fp-ts-std/ReadonlyRecord'
+import { pipe } from 'fp-ts/function'
+
+const picked = pipe({ a: 1, b: 'two', c: [true] }, pick(['a', 'c']))
+
+assert.deepStrictEqual(picked, { a: 1, c: [true] })
+```
+
+Added in v0.16.0
 
 ## reject
 

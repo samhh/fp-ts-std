@@ -12,6 +12,8 @@ import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as RT from "fp-ts/ReadonlyTuple"
 import { last } from "fp-ts/Semigroup"
+import { elemV } from "./ReadonlyArray"
+import * as Str from "fp-ts/string"
 
 /**
  * Get the values from a `Record`.
@@ -114,3 +116,26 @@ export const invertAll = <A>(
     RA.map(flow(RT.bimap(f, RA.of), RT.swap)),
     RR.fromFoldable(RA.getMonoid<string>(), RA.Foldable),
   )
+
+/**
+ * Pick a set of keys from a `ReadonlyRecord`. The value-level equivalent of
+ * the `Pick` type. For picking records with typed keys, instead look at the
+ * `ReadonlyStruct` module.
+ *
+ * @example
+ * import { pick } from 'fp-ts-std/ReadonlyRecord'
+ * import { pipe } from 'fp-ts/function'
+ *
+ * const picked = pipe(
+ *   { a: 1, b: 'two', c: [true] },
+ *   pick(['a', 'c'])
+ * )
+ *
+ * assert.deepStrictEqual(picked, { a: 1, c: [true] })
+ *
+ * @since 0.16.0
+ */
+export const pick = (
+  ks: ReadonlyArray<string>,
+): (<A>(y: RR.ReadonlyRecord<string, A>) => RR.ReadonlyRecord<string, A>) =>
+  RR.filterWithIndex(elemV(Str.Eq)(ks))
