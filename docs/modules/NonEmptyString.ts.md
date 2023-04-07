@@ -315,8 +315,8 @@ Added in v0.15.0
 
 ## unsafeFromString
 
-Unsafely lift a string to `NonEmptyString`. Can be useful for static values.
-Try to use `fromString` instead.
+Unsafely lift a string to `NonEmptyString`, throwing upon failure. Can be
+useful for static values. Try to use `fromString` instead.
 
 **Signature**
 

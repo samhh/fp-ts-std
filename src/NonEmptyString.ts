@@ -16,7 +16,7 @@
 import { flow } from "fp-ts/function"
 import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
 import * as O from "fp-ts/Option"
-import { unsafeUnwrap } from "./Option"
+import { unsafeExpect, unsafeUnwrap } from "./Option"
 import {
   Show as _Show,
   Eq as _Eq,
@@ -47,21 +47,24 @@ type NonEmptyStringSymbol = { readonly NonEmptyString: unique symbol }
 export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 
 /**
- * Unsafely lift a string to `NonEmptyString`. Can be useful for static values.
- * Try to use `fromString` instead.
- *
- * @since 0.15.0
- */
-export const unsafeFromString: (x: string) => NonEmptyString = pack
-
-/**
  * Smart constructor from strings.
  *
  * @since 0.15.0
  */
 export const fromString: (x: string) => O.Option<NonEmptyString> = flow(
   O.fromPredicate(not(_isEmpty)),
-  O.map(unsafeFromString),
+  O.map(pack<NonEmptyString>),
+)
+
+/**
+ * Unsafely lift a string to `NonEmptyString`, throwing upon failure. Can be
+ * useful for static values. Try to use `fromString` instead.
+ *
+ * @since 0.15.0
+ */
+export const unsafeFromString: (x: string) => NonEmptyString = flow(
+  fromString,
+  unsafeExpect("Failed to lift an empty string to NonEmptyString"),
 )
 
 /**
