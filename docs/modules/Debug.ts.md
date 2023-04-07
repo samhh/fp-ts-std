@@ -17,6 +17,7 @@ Added in v0.2.0
 
 - [utils](#utils)
   - [trace](#trace)
+  - [traceShowWithValue](#traceshowwithvalue)
   - [traceWithValue](#tracewithvalue)
 
 ---
@@ -59,6 +60,39 @@ assert.strictEqual(doubledString(2), '4')
 ```
 
 Added in v0.2.0
+
+## traceShowWithValue
+
+Like `traceWithValue`, but first processes the value via `Show`.
+
+**Signature**
+
+```ts
+export declare const traceShowWithValue: <A>(S: Show<A>) => (msg: string) => (x: A) => A
+```
+
+```hs
+traceShowWithValue :: Show a -> string -> a -> a
+```
+
+**Example**
+
+```ts
+import { traceShowWithValue } from 'fp-ts-std/Debug'
+import { flow } from 'fp-ts/function'
+import * as Num from 'fp-ts/number'
+
+const double = (n: number): number => n * 2
+const toString = (n: number): string => String(n)
+
+// Will log: "my log message: <Shown value>"
+const doubledString: (n: number) => string = flow(double, traceShowWithValue(Num.Show)('my log message: '), toString)
+
+// Actual function/pipeline behaviour is unaffected:
+assert.strictEqual(doubledString(2), '4')
+```
+
+Added in v0.16.0
 
 ## traceWithValue
 

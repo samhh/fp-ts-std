@@ -5,6 +5,8 @@
  * @since 0.2.0
  */
 
+import { Show } from "fp-ts/Show"
+
 /* eslint-disable functional/no-expression-statement */
 
 /**
@@ -61,5 +63,33 @@ export const traceWithValue =
   (msg: string) =>
   <A>(x: A): A => {
     console.log(msg, x)
+    return x
+  }
+
+/**
+ * Like `traceWithValue`, but first processes the value via `Show`.
+ *
+ * @example
+ * import { traceShowWithValue } from 'fp-ts-std/Debug'
+ * import { flow } from 'fp-ts/function'
+ * import * as Num from 'fp-ts/number'
+ *
+ * const double = (n: number): number => n * 2
+ * const toString = (n: number): string => String(n)
+ *
+ * // Will log: "my log message: <Shown value>"
+ * const doubledString: (n: number) => string =
+ *     flow(double, traceShowWithValue(Num.Show)('my log message: '), toString)
+ *
+ * // Actual function/pipeline behaviour is unaffected:
+ * assert.strictEqual(doubledString(2), '4')
+ *
+ * @since 0.16.0
+ */
+export const traceShowWithValue =
+  <A>(S: Show<A>) =>
+  (msg: string) =>
+  (x: A): A => {
+    console.log(msg, S.show(x))
     return x
   }
