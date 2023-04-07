@@ -11,6 +11,7 @@ This project adheres to semantic versioning.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `IOEither`.
 - Add `whenM` and `unlessM` to `Monad`.
 - Add `unsafeExpect` to `Option`.
+- Add `asksEither` to `ReaderEither`.
 - Add `asksTask` to `ReaderTask`.
 - Add `asksEither`, `asksTask`, and `asksTaskEither` to `ReaderTaskEither`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `TaskEither`.

@@ -1,8 +1,9 @@
-import { runReaderEither } from "../src/ReaderEither"
+import { runReaderEither, asksEither } from "../src/ReaderEither"
 import * as RE from "fp-ts/ReaderEither"
 import * as E from "fp-ts/Either"
-import { pipe } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
+import * as Str from "../src/String"
 
 describe("ReaderEither", () => {
   describe("runReaderEither", () => {
@@ -33,6 +34,14 @@ describe("ReaderEither", () => {
           const extractedLeft = pipe(re, runReaderEither(env))
           expect(extractedLeft).toStrictEqual(E.left(_))
         }),
+      )
+    })
+  })
+
+  describe("asksEither", () => {
+    it("runs action and lifts to a Reader", () => {
+      expect(asksEither(flow(Str.prepend("foo"), E.of))("bar")).toEqual(
+        E.right("foobar"),
       )
     })
   })

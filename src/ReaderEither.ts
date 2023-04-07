@@ -6,6 +6,7 @@
 import { ReaderEither } from "fp-ts/ReaderEither"
 import { Either } from "fp-ts/Either"
 import { runReader } from "./Reader"
+import { identity } from "fp-ts/function"
 
 /**
  * Runs a ReaderEither and extracts the final Either from it.
@@ -33,3 +34,23 @@ import { runReader } from "./Reader"
 export const runReaderEither: <R, E, A>(
   r: R,
 ) => (reader: ReaderEither<R, E, A>) => Either<E, A> = runReader
+
+/**
+ * Effectfully accesses the environment outside of the `Reader` layer.
+ *
+ * @example
+ * import { asksEither } from 'fp-ts-std/ReaderEither'
+ * import * as E from 'fp-ts/Either'
+ *
+ * const lucky = asksEither<number, unknown, boolean>(n => E.right(n === Date.now()))
+ *
+ * assert.deepStrictEqual(
+ *   lucky(42),
+ *   E.right(false),
+ * )
+ *
+ * @since 0.16.0
+ */
+export const asksEither: <R, E, A>(
+  f: (r: R) => Either<E, A>,
+) => ReaderEither<R, E, A> = identity
