@@ -44,6 +44,7 @@ Added in v0.1.0
   - [reduceRightWhile](#reducerightwhile)
   - [reduceWhile](#reducewhile)
   - [reject](#reject)
+  - [separateNE](#separatene)
   - [slice](#slice)
   - [startsWith](#startswith)
   - [sum](#sum)
@@ -974,6 +975,35 @@ assert.deepStrictEqual(reject(isEven)([1, 2, 3, 4]), [1, 3])
 ```
 
 Added in v0.7.0
+
+## separateNE
+
+Like `separate`, but records via `These` which of the partitions are
+non-empty.
+
+**Signature**
+
+```ts
+export declare const separateNE: <A, B>(xs: NonEmptyArray<Either<A, B>>) => These<NonEmptyArray<A>, NonEmptyArray<B>>
+```
+
+```hs
+separateNE :: NonEmptyArray (Either a b) -> These (NonEmptyArray a) (NonEmptyArray b)
+```
+
+**Example**
+
+```ts
+import { separateNE } from 'fp-ts-std/Array'
+import * as E from 'fp-ts/Either'
+import * as T from 'fp-ts/These'
+
+assert.deepStrictEqual(separateNE([E.left(1), E.right('two')]), T.both([1], ['two']))
+
+assert.deepStrictEqual(separateNE([E.right('one')]), T.right(['one']))
+```
+
+Added in v0.16.0
 
 ## slice
 

@@ -53,6 +53,7 @@ import {
   Monad3C,
   Monad4,
 } from "fp-ts/Monad"
+import { Either } from "fp-ts/Either"
 
 /**
  * Like `fp-ts/Array::elem` but flipped, which the "V" suffix denotes.
@@ -1013,3 +1014,36 @@ export function anyM<M>(
     M.chain(x, b => (b ? M.of(true) : y)),
   )
 }
+
+/**
+ * Like `separate`, but records via `These` which of the partitions are
+ * non-empty.
+ *
+ * @example
+ * import { separateNE } from 'fp-ts-std/Array'
+ * import * as E from 'fp-ts/Either'
+ * import * as T from 'fp-ts/These'
+ *
+ * assert.deepStrictEqual(
+ *   separateNE([E.left(1), E.right('two')]),
+ *   T.both([1], ['two']),
+ * )
+ *
+ * assert.deepStrictEqual(
+ *   separateNE([E.right('one')]),
+ *   T.right(['one']),
+ * )
+ *
+ * @since 0.16.0
+ */
+export const separateNE = <A, B>(
+  xs: NonEmptyArray<Either<A, B>>,
+): These<NonEmptyArray<A>, NonEmptyArray<B>> =>
+  pipe(xs, A.separate, ({ left, right }) => {
+    /* eslint-disable functional/no-conditional-statement */
+    if (A.isEmpty(left)) return T.right(right as NonEmptyArray<B>)
+    else if (A.isEmpty(right)) return T.left(left as NonEmptyArray<A>)
+    /* eslint-enable functional/no-conditional-statement */
+    // They can't both be empty as per the non-empty input.
+    else return T.both(left as NonEmptyArray<A>, right as NonEmptyArray<B>)
+  })

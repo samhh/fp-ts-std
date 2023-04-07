@@ -38,6 +38,7 @@ import {
   toReadonly,
   allM,
   anyM,
+  separateNE,
 } from "../src/Array"
 import * as O from "fp-ts/Option"
 import * as RA from "fp-ts/ReadonlyArray"
@@ -57,6 +58,7 @@ import { Predicate } from "fp-ts/Predicate"
 import fc from "fast-check"
 import { concatAll } from "fp-ts/Monoid"
 import { split } from "fp-ts/string"
+import * as NEA from "fp-ts/NonEmptyArray"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import { values } from "../src/Record"
 import * as R from "fp-ts/Record"
@@ -65,6 +67,7 @@ import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"
 import { fst, snd } from "fp-ts/Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
+import * as E from "fp-ts/Either"
 
 type IO<A> = IO.IO<A>
 
@@ -1215,5 +1218,96 @@ describe("Array", () => {
       expect(exe).toBe(true)
     })
     /* eslint-enable functional/no-expression-statement */
+  })
+
+  describe("separateNE", () => {
+    const f = separateNE
+
+    it("returns These Left for only Either Lefts", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything(), { minLength: 1 }), xs => {
+          const ys = pipe(xs as NonEmptyArray<unknown>, NEA.map(E.left))
+
+          expect(f(ys)).toEqual(T.left(xs))
+        }),
+      )
+    })
+
+    it("returns These Right for only Either Rights", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything(), { minLength: 1 }), xs => {
+          const ys = pipe(xs as NonEmptyArray<unknown>, NEA.map(E.right))
+
+          expect(f(ys)).toEqual(T.right(xs))
+        }),
+      )
+    })
+
+    it("returns These Both for only mixed Eithers", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), { minLength: 1 }),
+          fc.array(fc.anything(), { minLength: 1 }),
+          (xs, ys) => {
+            const zs = NEA.concat(
+              pipe(
+                xs as NonEmptyArray<unknown>,
+                NEA.map(E.left<unknown, unknown>),
+              ),
+            )(pipe(ys as NonEmptyArray<unknown>, NEA.map(E.right)))
+
+            expect(f(zs)).toEqual(T.both(xs, ys))
+            expect(f(NEA.reverse(zs))).toEqual(
+              T.both(A.reverse(xs), A.reverse(ys)),
+            )
+          },
+        ),
+      )
+    })
+
+    it("always returns a non-empty output", () => {
+      fc.assert(
+        fc.property(fc.array(fc.boolean(), { minLength: 1 }), xs => {
+          const ys: NonEmptyArray<E.Either<boolean, boolean>> = pipe(
+            xs as NonEmptyArray<boolean>,
+            NEA.map(b => (b ? E.right(b) : E.left(b))),
+          )
+
+          const zs: NonEmptyArray<boolean> = pipe(
+            ys,
+            f,
+            T.match(identity, identity, (ls, rs) => NEA.concat(ls)(rs)),
+          )
+
+          expect(A.size(zs)).toBeGreaterThan(0)
+          expect(A.size(zs)).toBe(A.size(xs))
+        }),
+      )
+    })
+
+    it("equivaent to stricter separate", () => {
+      const g = A.separate
+
+      fc.assert(
+        fc.property(fc.array(fc.boolean(), { minLength: 1 }), xs => {
+          const ys: NonEmptyArray<E.Either<boolean, boolean>> = pipe(
+            xs as NonEmptyArray<boolean>,
+            NEA.map(b => (b ? E.right(b) : E.left(b))),
+          )
+
+          const nea: NonEmptyArray<boolean> = pipe(
+            ys,
+            f,
+            T.match(identity, identity, (ls, rs) => NEA.concat(ls)(rs)),
+          )
+
+          const notNea: Array<boolean> = pipe(ys, g, ({ left, right }) =>
+            A.concat(left)(right),
+          )
+
+          expect(nea).toEqual(notNea)
+        }),
+      )
+    })
   })
 })
