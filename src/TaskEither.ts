@@ -14,6 +14,7 @@ import {
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
+import { Show } from "fp-ts/Show"
 
 /**
  * Unwrap the promise from within a `TaskEither`, rejecting with the inner
@@ -50,6 +51,48 @@ export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
  */
 export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
   flow(T.map(unsafeUnwrapLeftE), executeT)
+
+/**
+ * Unwrap the promise from within a `TaskEither`, rejecting with the inner
+ * value of `Left` via `Show` if `Left`.
+ *
+ * @example
+ * import { unsafeExpect } from 'fp-ts-std/TaskEither'
+ * import * as TE from 'fp-ts/TaskEither'
+ * import * as Str from 'fp-ts/string'
+ *
+ * assert.rejects(
+ *   unsafeExpect(Str.Show)(TE.left('foo')),
+ *   /^"foo"$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpect = <E>(
+  S: Show<E>,
+): (<A>(x: TaskEither<E, A>) => Promise<A>) =>
+  flow(TE.mapLeft(S.show), unsafeUnwrap)
+
+/**
+ * Unwrap the promise from within a `TaskEither`, rejecting with the inner
+ * value of `Right` via `Show` if `Right`.
+ *
+ * @example
+ * import { unsafeExpectLeft } from 'fp-ts-std/TaskEither'
+ * import * as TE from 'fp-ts/TaskEither'
+ * import * as Str from 'fp-ts/string'
+ *
+ * assert.rejects(
+ *   unsafeExpectLeft(Str.Show)(TE.right('foo')),
+ *   /^"foo"$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpectLeft = <A>(
+  S: Show<A>,
+): (<E>(x: TaskEither<E, A>) => Promise<E>) =>
+  flow(TE.map(S.show), unsafeUnwrapLeft)
 
 /**
  * Apply a function to both elements of an `TaskEither`.

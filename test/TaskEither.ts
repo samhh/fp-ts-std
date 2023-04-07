@@ -2,6 +2,8 @@ import {
   mapBoth,
   unsafeUnwrap,
   unsafeUnwrapLeft,
+  unsafeExpect,
+  unsafeExpectLeft,
   sequenceArray_,
   sequenceSeqArray_,
   traverseArray_,
@@ -12,6 +14,7 @@ import * as T from "../src/Task"
 import * as E from "fp-ts/Either"
 import { constVoid, identity, pipe } from "fp-ts/function"
 import * as Str from "../src/String"
+import { Show as StrShow } from "fp-ts/string"
 import fc from "fast-check"
 import { mkMilliseconds } from "../src/Date"
 
@@ -37,6 +40,30 @@ describe("TaskEither", () => {
 
     it("rejects Right", () => {
       return expect(f(TE.right("r"))).rejects.toBe("r")
+    })
+  })
+
+  describe("unsafeExpect", () => {
+    const f = unsafeExpect(StrShow)
+
+    it("resolves Right", () => {
+      return expect(f(TE.right(123))).resolves.toBe(123)
+    })
+
+    it("rejects Left via Show", () => {
+      return expect(f(TE.left("l"))).rejects.toBe('"l"')
+    })
+  })
+
+  describe("unsafeExpectLeft", () => {
+    const f = unsafeExpectLeft(StrShow)
+
+    it("resolves Left", () => {
+      return expect(f(TE.left(123))).resolves.toBe(123)
+    })
+
+    it("rejects Right via Show", () => {
+      return expect(f(TE.right("r"))).rejects.toBe('"r"')
     })
   })
 
