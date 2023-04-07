@@ -15,8 +15,9 @@ import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
 import { JSDOM } from "jsdom"
-import { constant, pipe } from "fp-ts/function"
+import { constVoid, constant, pipe } from "fp-ts/function"
 import { unsafeUnwrap } from "../src/Option"
+import { execute as IOexecute } from "../src/IO"
 
 describe("DOM", () => {
   describe("fromNodeList", () => {
@@ -286,6 +287,46 @@ describe("DOM", () => {
       // eslint-disable-next-line functional/no-expression-statement
       parent().click()
       expect(clicks).toBe(2)
+    })
+
+    it("returns an IO for removing the mounted event listener", () => {
+      const someFunction: IO.IO<void> = IO.of(constVoid)
+      const someEventFunction: (e: Event) => IO.IO<void> = () => someFunction
+
+      const mockSomeEventFunction = jest.fn(someEventFunction)
+
+      const {
+        window: { document },
+      } = new JSDOM("<div></div>")
+
+      const findElement = pipe(
+        querySelector("div")(document),
+        IO.map(unsafeUnwrap),
+        IO.map(el => el as HTMLElement),
+      )
+
+      // eslint-disable-next-line functional/no-expression-statement
+      const eventListenerCleanup = pipe(
+        findElement,
+        IO.chain(addEventListener("click")(mockSomeEventFunction)),
+        IOexecute,
+      )
+      expect(mockSomeEventFunction).toBeCalledTimes(0)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      findElement().click()
+      expect(mockSomeEventFunction).toBeCalledTimes(1)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      findElement().click()
+      expect(mockSomeEventFunction).toBeCalledTimes(2)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      IOexecute(eventListenerCleanup)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      findElement().click()
+      expect(mockSomeEventFunction).toBeCalledTimes(2)
     })
   })
 
