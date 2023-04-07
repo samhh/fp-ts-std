@@ -19,6 +19,7 @@ Added in v0.1.0
   - [invertAll](#invertall)
   - [invertLast](#invertlast)
   - [lookupV](#lookupv)
+  - [omit](#omit)
   - [pick](#pick)
   - [reject](#reject)
   - [values](#values)
@@ -108,6 +109,35 @@ assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]])
 ```
 
 Added in v0.1.0
+
+## omit
+
+Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
+type. For omitting from records with typed keys, instead look at the `Struct`
+module.
+
+**Signature**
+
+```ts
+export declare const omit: (ks: Array<string>) => <A>(y: Record<string, A>) => Record<string, A>
+```
+
+```hs
+omit :: Array string -> Record string a -> Record string a
+```
+
+**Example**
+
+```ts
+import { omit } from 'fp-ts-std/Record'
+import { pipe } from 'fp-ts/function'
+
+const remaining = pipe({ a: 1, b: 'two', c: [true] }, omit(['b']))
+
+assert.deepStrictEqual(remaining, { a: 1, c: [true] })
+```
+
+Added in v0.16.0
 
 ## pick
 

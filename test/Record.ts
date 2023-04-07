@@ -5,6 +5,7 @@ import {
   invertLast,
   invertAll,
   pick,
+  omit,
 } from "../src/Record"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
@@ -153,6 +154,18 @@ describe("Record", () => {
       expect(pipe(x, f([]))).toEqual({})
       expect(pipe(x, f(["a"]))).toEqual({ a: "Red" })
       expect(pipe(x, f(["a", "c"]))).toEqual({ a: "Red", c: "Blue" })
+    })
+  })
+
+  describe("omit", () => {
+    const f = omit
+
+    const x: Record<string, string> = { a: "Red", b: "Green", c: "Blue" }
+
+    it("omits selected keys", () => {
+      expect(pipe(x, f([]))).toEqual(x)
+      expect(pipe(x, f(["a"]))).toEqual({ b: "Green", c: "Blue" })
+      expect(pipe(x, f(["a", "c"]))).toEqual({ b: "Green" })
     })
   })
 })

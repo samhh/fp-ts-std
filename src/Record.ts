@@ -134,3 +134,26 @@ export const pick = (
   ks: Array<string>,
 ): (<A>(y: Record<string, A>) => Record<string, A>) =>
   R.filterWithIndex(elemV(Str.Eq)(ks))
+
+/**
+ * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
+ * type. For omitting from records with typed keys, instead look at the `Struct`
+ * module.
+ *
+ * @example
+ * import { omit } from 'fp-ts-std/Record'
+ * import { pipe } from 'fp-ts/function'
+ *
+ * const remaining = pipe(
+ *   { a: 1, b: 'two', c: [true] },
+ *   omit(['b'])
+ * )
+ *
+ * assert.deepStrictEqual(remaining, { a: 1, c: [true] })
+ *
+ * @since 0.16.0
+ */
+export const omit = (
+  ks: Array<string>,
+): (<A>(y: Record<string, A>) => Record<string, A>) =>
+  R.filterWithIndex(not(elemV(Str.Eq)(ks)))

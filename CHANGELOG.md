@@ -15,7 +15,7 @@ This project adheres to semantic versioning.
 - Add `asksEither` to `ReaderEither`.
 - Add `asksTask` to `ReaderTask`.
 - Add `asksEither`, `asksTask`, and `asksTaskEither` to `ReaderTaskEither`.
-- Add `pick` to `Record` and `ReadonlyRecord`.
+- Add `pick` and `omit` to `Record` and `ReadonlyRecord`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `TaskEither`.
 - Add `unsafeExpect` to `TaskOption`.
 - Add `getAllForParam` and `isEmpty` to `URLSearchParams`.
