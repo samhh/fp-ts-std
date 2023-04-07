@@ -48,7 +48,6 @@ export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
  *
  * @since 0.12.0
  */
-
 export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
   flow(T.map(unsafeUnwrapLeftE), executeT)
 
