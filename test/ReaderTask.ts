@@ -1,7 +1,9 @@
-import { runReaderTask } from "../src/ReaderTask"
+import { runReaderTask, asksTask } from "../src/ReaderTask"
 import * as RT from "fp-ts/ReaderTask"
-import { pipe } from "fp-ts/function"
+import * as T from "fp-ts/Task"
+import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
+import * as Str from "../src/String"
 
 describe("ReaderTask", () => {
   describe("runReaderTask", () => {
@@ -17,6 +19,14 @@ describe("ReaderTask", () => {
           await expect(extractedTask).resolves.toBe(_)
         }),
       )
+    })
+  })
+
+  describe("asksTask", () => {
+    it("runs action and lifts to a Reader", () => {
+      return expect(
+        asksTask(flow(Str.prepend("foo"), T.of))("bar")(),
+      ).resolves.toBe("foobar")
     })
   })
 })

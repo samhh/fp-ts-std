@@ -3,6 +3,7 @@
  *
  * @since 0.15.0
  */
+import { identity } from "fp-ts/function"
 import { ReaderTask } from "fp-ts/ReaderTask"
 import { Task } from "fp-ts/Task"
 import { runReader } from "./Reader"
@@ -28,3 +29,21 @@ import { runReader } from "./Reader"
 export const runReaderTask: <R, A>(
   r: R,
 ) => (reader: ReaderTask<R, A>) => Task<A> = runReader
+
+/**
+ * Effectfully accesses the environment outside of the `Reader` layer.
+ *
+ * @example
+ * import { asksTask } from 'fp-ts-std/ReaderTask'
+ *
+ * const lucky = asksTask<number, boolean>(n => () => Promise.resolve(n === Date.now()))
+ *
+ * assert.deepEqual(
+ *   lucky(42)(),
+ *   Promise.resolve(false),
+ * )
+ *
+ * @since 0.16.0
+ */
+export const asksTask: <R, A>(f: (r: R) => Task<A>) => ReaderTask<R, A> =
+  identity

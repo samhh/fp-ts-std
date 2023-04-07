@@ -15,11 +15,38 @@ Added in v0.15.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [asksTask](#askstask)
   - [runReaderTask](#runreadertask)
 
 ---
 
 # utils
+
+## asksTask
+
+Effectfully accesses the environment outside of the `Reader` layer.
+
+**Signature**
+
+```ts
+export declare const asksTask: <R, A>(f: (r: R) => Task<A>) => ReaderTask<R, A>
+```
+
+```hs
+asksTask :: (r -> Task a) -> ReaderTask r a
+```
+
+**Example**
+
+```ts
+import { asksTask } from 'fp-ts-std/ReaderTask'
+
+const lucky = asksTask<number, boolean>((n) => () => Promise.resolve(n === Date.now()))
+
+assert.deepEqual(lucky(42)(), Promise.resolve(false))
+```
+
+Added in v0.16.0
 
 ## runReaderTask
 
