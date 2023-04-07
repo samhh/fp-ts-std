@@ -2,6 +2,7 @@ import {
   unsafeUnwrap,
   unsafeUnwrapLeft,
   runReaderTaskEither,
+  asksEither,
   asksTask,
   asksTaskEither,
 } from "../src/ReaderTaskEither"
@@ -67,6 +68,14 @@ describe("ReaderTaskEither", () => {
           await expect(extractedLeft).resolves.toStrictEqual(E.left(_))
         }),
       )
+    })
+  })
+
+  describe("asksEither", () => {
+    it("runs action and lifts to a Reader", () => {
+      return expect(
+        asksEither(flow(Str.prepend("foo"), E.of))("bar")(),
+      ).resolves.toEqual(E.right("foobar"))
     })
   })
 

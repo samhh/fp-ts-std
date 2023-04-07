@@ -15,6 +15,7 @@ Added in v0.15.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [asksEither](#askseither)
   - [asksTask](#askstask)
   - [asksTaskEither](#askstaskeither)
   - [runReaderTaskEither](#runreadertaskeither)
@@ -24,6 +25,30 @@ Added in v0.15.0
 ---
 
 # utils
+
+## asksEither
+
+Effectfully accesses the environment outside of the `Reader` and `Task`
+layers.
+
+**Signature**
+
+```ts
+export declare const asksEither: <R, E, A>(f: (r: R) => Either<E, A>) => RTE.ReaderTaskEither<R, E, A>
+```
+
+**Example**
+
+```ts
+import { asksEither } from 'fp-ts-std/ReaderTaskEither'
+import * as E from 'fp-ts/Either'
+
+const lucky = asksEither<number, unknown, boolean>((n) => E.right(n === Date.now()))
+
+assert.deepEqual(lucky(42)(), Promise.resolve(E.right(false)))
+```
+
+Added in v0.16.0
 
 ## asksTask
 
