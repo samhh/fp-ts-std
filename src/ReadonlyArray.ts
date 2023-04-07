@@ -53,6 +53,8 @@ import {
   Monad3C,
   Monad4,
 } from "fp-ts/Monad"
+import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import { Either } from "fp-ts/Either"
 
 /**
  * Like `fp-ts/ReadonlyArray::elem` but flipped, which the "V" suffix denotes.
@@ -1003,3 +1005,37 @@ export function anyM<M>(
     M.chain(x, b => (b ? M.of(true) : y)),
   )
 }
+
+/**
+ * Like `separate`, but records via `These` which of the partitions are
+ * non-empty.
+ *
+ * @example
+ * import { separateNE } from 'fp-ts-std/ReadonlyArray'
+ * import * as E from 'fp-ts/Either'
+ * import * as T from 'fp-ts/These'
+ *
+ * assert.deepStrictEqual(
+ *   separateNE([E.left(1), E.right('two')]),
+ *   T.both([1], ['two']),
+ * )
+ *
+ * assert.deepStrictEqual(
+ *   separateNE([E.right('one')]),
+ *   T.right(['one']),
+ * )
+ *
+ * @since 0.16.0
+ */
+export const separateNE = <A, B>(
+  xs: ReadonlyNonEmptyArray<Either<A, B>>,
+): These<ReadonlyNonEmptyArray<A>, ReadonlyNonEmptyArray<B>> =>
+  pipe(xs, RA.separate, ({ left, right }) => {
+    /* eslint-disable functional/no-conditional-statement */
+    if (RA.isEmpty(left)) return T.right(right as ReadonlyNonEmptyArray<B>)
+    else if (RA.isEmpty(right)) return T.left(left as ReadonlyNonEmptyArray<A>)
+    /* eslint-enable functional/no-conditional-statement */
+    // They can't both be empty as per the non-empty input.
+    else
+      return T.both(left as NonEmptyArray<A>, right as ReadonlyNonEmptyArray<B>)
+  })

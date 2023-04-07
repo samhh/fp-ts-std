@@ -36,6 +36,7 @@ import {
   fromIterable,
   allM,
   anyM,
+  separateNE,
 } from "../src/ReadonlyArray"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
@@ -54,7 +55,8 @@ import { Predicate } from "fp-ts/Predicate"
 import fc from "fast-check"
 import { concatAll } from "fp-ts/Monoid"
 import { split } from "fp-ts/string"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
+import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
+import ReadonlyNonEmptyArray = RNEA.ReadonlyNonEmptyArray
 import { values } from "../src/Record"
 import * as R from "fp-ts/Record"
 import { add, decrement } from "../src/Number"
@@ -63,6 +65,7 @@ import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"
 import { fst, snd } from "fp-ts/Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
+import * as E from "fp-ts/Either"
 
 type IO<A> = IO.IO<A>
 
@@ -1171,5 +1174,109 @@ describe("Array", () => {
       expect(exe).toBe(true)
     })
     /* eslint-enable functional/no-expression-statement */
+  })
+
+  describe("separateNE", () => {
+    const f = separateNE
+
+    it("returns These Left for only Either Lefts", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything(), { minLength: 1 }), xs => {
+          const ys = pipe(
+            xs as ReadonlyArray<unknown> as ReadonlyNonEmptyArray<unknown>,
+            RNEA.map(E.left),
+          )
+
+          expect(f(ys)).toEqual(T.left(xs))
+        }),
+      )
+    })
+
+    it("returns These Right for only Either Rights", () => {
+      fc.assert(
+        fc.property(fc.array(fc.anything(), { minLength: 1 }), xs => {
+          const ys = pipe(
+            xs as ReadonlyArray<unknown> as ReadonlyNonEmptyArray<unknown>,
+            RNEA.map(E.right),
+          )
+
+          expect(f(ys)).toEqual(T.right(xs))
+        }),
+      )
+    })
+
+    it("returns These Both for only mixed Eithers", () => {
+      fc.assert(
+        fc.property(
+          fc.array(fc.anything(), { minLength: 1 }),
+          fc.array(fc.anything(), { minLength: 1 }),
+          (xs, ys) => {
+            const zs = RNEA.concat(
+              pipe(
+                xs as ReadonlyArray<unknown> as ReadonlyNonEmptyArray<unknown>,
+                RNEA.map(E.left<unknown, unknown>),
+              ),
+            )(
+              pipe(
+                ys as ReadonlyArray<unknown> as ReadonlyNonEmptyArray<unknown>,
+                RNEA.map(E.right),
+              ),
+            )
+
+            expect(f(zs)).toEqual(T.both(xs, ys))
+            expect(f(RNEA.reverse(zs))).toEqual(
+              T.both(A.reverse(xs), A.reverse(ys)),
+            )
+          },
+        ),
+      )
+    })
+
+    it("always returns a non-empty output", () => {
+      fc.assert(
+        fc.property(fc.array(fc.boolean(), { minLength: 1 }), xs => {
+          const ys: ReadonlyNonEmptyArray<E.Either<boolean, boolean>> = pipe(
+            xs as ReadonlyArray<unknown> as ReadonlyNonEmptyArray<boolean>,
+            RNEA.map(b => (b ? E.right(b) : E.left(b))),
+          )
+
+          const zs: ReadonlyNonEmptyArray<boolean> = pipe(
+            ys,
+            f,
+            T.match(identity, identity, (ls, rs) => RNEA.concat(ls)(rs)),
+          )
+
+          expect(A.size(zs)).toBeGreaterThan(0)
+          expect(A.size(zs)).toBe(A.size(xs))
+        }),
+      )
+    })
+
+    it("equivaent to stricter separate", () => {
+      const g = A.separate
+
+      fc.assert(
+        fc.property(fc.array(fc.boolean(), { minLength: 1 }), xs => {
+          const ys: ReadonlyNonEmptyArray<E.Either<boolean, boolean>> = pipe(
+            xs as ReadonlyArray<unknown> as ReadonlyNonEmptyArray<boolean>,
+            RNEA.map(b => (b ? E.right(b) : E.left(b))),
+          )
+
+          const nea: ReadonlyNonEmptyArray<boolean> = pipe(
+            ys,
+            f,
+            T.match(identity, identity, (ls, rs) => RNEA.concat(ls)(rs)),
+          )
+
+          const notNea: ReadonlyArray<boolean> = pipe(
+            ys,
+            g,
+            ({ left, right }) => A.concat(left)(right),
+          )
+
+          expect(nea).toEqual(notNea)
+        }),
+      )
+    })
   })
 })

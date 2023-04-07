@@ -6,7 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `IOOption` module.
 - Add `ReaderIO` module.
-- Add `separateNE` to `Array`.
+- Add `separateNE` to `Array` and `ReadonlyArray`.
 - Add `traceShowWithValue` to `Debug`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `Either`.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `IOEither`.
