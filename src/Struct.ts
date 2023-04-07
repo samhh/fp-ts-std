@@ -21,6 +21,8 @@ import { uncurry2 } from "./Function"
  *
  * @since 0.14.0
  */
+// This combination of type arguments works with both partial application and
+// the likes of `uncurry2`.
 export const merge =
   <A, B>(x: A) =>
   <C extends B>(y: C): A & C => ({ ...x, ...y })
