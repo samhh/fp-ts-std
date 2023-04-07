@@ -288,8 +288,13 @@ export const unlines = join("\n")
  */
 export const test =
   (r: RegExp): Predicate<string> =>
-  x =>
-    pipe(r, invoke("test")([x]))
+  x => {
+    const lastIndex = r.lastIndex
+    const res = r.test(x)
+    // eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+    r.lastIndex = lastIndex
+    return res
+  }
 
 /**
  * Replace every occurrence of a matched substring with a replacement.

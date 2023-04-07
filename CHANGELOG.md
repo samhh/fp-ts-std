@@ -12,6 +12,7 @@ This project adheres to semantic versioning.
 - Add `unsafeExpect` and `unsafeExpectLeft` to `TaskEither`.
 - Add `unsafeExpect` to `TaskOption`.
 - Remove `flip`. [fp-ts/function::flip](https://gcanti.github.io/fp-ts/modules/function.ts.html#flip) is now curried.
+- Fix statefulness of `Str.test`.
 - Bump minimum supported fp-ts version to 2.13.1.
 - Rename `is` in `Function` to `isInstanceOf` for readability.
 - Bump minimum supported Node LTS to v18.
