@@ -16,6 +16,8 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [mapBoth](#mapboth)
+  - [unsafeExpect](#unsafeexpect)
+  - [unsafeExpectLeft](#unsafeexpectleft)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
 
@@ -51,6 +53,60 @@ assert.deepStrictEqual(f(E.right(3)), E.right(6))
 ```
 
 Added in v0.14.0
+
+## unsafeExpect
+
+Unwrap the value from within an `Either`, throwing the inner value of `Left`
+via `Show` if `Left`.
+
+**Signature**
+
+```ts
+export declare const unsafeExpect: <E>(S: Show<E>) => <A>(x: Either<E, A>) => A
+```
+
+```hs
+unsafeExpect :: Show e -> Either e a -> a
+```
+
+**Example**
+
+```ts
+import { unsafeExpect } from 'fp-ts-std/Either'
+import * as E from 'fp-ts/Either'
+import * as Str from 'fp-ts/string'
+
+assert.throws(() => unsafeExpect(Str.Show)(E.left('foo')), /^"foo"$/)
+```
+
+Added in v0.16.0
+
+## unsafeExpectLeft
+
+Unwrap the value from within an `Either`, throwing the inner value of `Right`
+via `Show` if `Right`.
+
+**Signature**
+
+```ts
+export declare const unsafeExpectLeft: <A>(S: Show<A>) => <E>(x: Either<E, A>) => E
+```
+
+```hs
+unsafeExpectLeft :: Show a -> Either e a -> e
+```
+
+**Example**
+
+```ts
+import { unsafeExpectLeft } from 'fp-ts-std/Either'
+import * as E from 'fp-ts/Either'
+import * as Str from 'fp-ts/string'
+
+assert.throws(() => unsafeExpectLeft(Str.Show)(E.right('foo')), /^"foo"$/)
+```
+
+Added in v0.16.0
 
 ## unsafeUnwrap
 

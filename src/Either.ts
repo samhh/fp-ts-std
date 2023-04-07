@@ -7,6 +7,8 @@
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { mapBoth as _mapBoth } from "./Bifunctor"
+import { Show } from "fp-ts/Show"
+import { flow } from "fp-ts/function"
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Left`
@@ -45,6 +47,44 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
 
   return x.left
 }
+
+/**
+ * Unwrap the value from within an `Either`, throwing the inner value of `Left`
+ * via `Show` if `Left`.
+ *
+ * @example
+ * import { unsafeExpect } from 'fp-ts-std/Either'
+ * import * as E from 'fp-ts/Either'
+ * import * as Str from 'fp-ts/string'
+ *
+ * assert.throws(
+ *   () => unsafeExpect(Str.Show)(E.left('foo')),
+ *   /^"foo"$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpect = <E>(S: Show<E>): (<A>(x: Either<E, A>) => A) =>
+  flow(E.mapLeft(S.show), unsafeUnwrap)
+
+/**
+ * Unwrap the value from within an `Either`, throwing the inner value of `Right`
+ * via `Show` if `Right`.
+ *
+ * @example
+ * import { unsafeExpectLeft } from 'fp-ts-std/Either'
+ * import * as E from 'fp-ts/Either'
+ * import * as Str from 'fp-ts/string'
+ *
+ * assert.throws(
+ *   () => unsafeExpectLeft(Str.Show)(E.right('foo')),
+ *   /^"foo"$/,
+ * )
+ *
+ * @since 0.16.0
+ */
+export const unsafeExpectLeft = <A>(S: Show<A>): (<E>(x: Either<E, A>) => E) =>
+  flow(E.map(S.show), unsafeUnwrapLeft)
 
 /**
  * Apply a function to both elements of an `Either`.

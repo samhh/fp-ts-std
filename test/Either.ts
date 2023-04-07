@@ -1,7 +1,14 @@
-import { unsafeUnwrap, unsafeUnwrapLeft, mapBoth } from "../src/Either"
+import {
+  unsafeUnwrap,
+  unsafeUnwrapLeft,
+  unsafeExpect,
+  unsafeExpectLeft,
+  mapBoth,
+} from "../src/Either"
 import * as E from "fp-ts/Either"
 import { identity } from "fp-ts/function"
 import * as Str from "../src/String"
+import { Show as StrShow } from "fp-ts/string"
 import fc from "fast-check"
 
 describe("Either", () => {
@@ -26,6 +33,30 @@ describe("Either", () => {
 
     it("throws Right", () => {
       expect(() => f(E.right("r"))).toThrow("r")
+    })
+  })
+
+  describe("unsafeExpect", () => {
+    const f = unsafeExpect(StrShow)
+
+    it("unwraps Right", () => {
+      expect(f(E.right(123))).toBe(123)
+    })
+
+    it("throws Left via Show", () => {
+      expect(() => f(E.left("l"))).toThrow('"l"')
+    })
+  })
+
+  describe("unsafeExpectLeft", () => {
+    const f = unsafeExpectLeft(StrShow)
+
+    it("unwraps Left", () => {
+      expect(f(E.left(123))).toBe(123)
+    })
+
+    it("throws Right", () => {
+      expect(() => f(E.right("r"))).toThrow('"r"')
     })
   })
 
