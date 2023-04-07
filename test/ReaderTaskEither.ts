@@ -3,9 +3,11 @@ import {
   unsafeUnwrapLeft,
   runReaderTaskEither,
   asksTask,
+  asksTaskEither,
 } from "../src/ReaderTaskEither"
 import * as RTE from "fp-ts/ReaderTaskEither"
 import * as T from "fp-ts/Task"
+import * as TE from "fp-ts/TaskEither"
 import * as E from "fp-ts/Either"
 import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
@@ -72,6 +74,14 @@ describe("ReaderTaskEither", () => {
     it("runs action and lifts to a Reader", () => {
       return expect(
         asksTask(flow(Str.prepend("foo"), T.of))("bar")(),
+      ).resolves.toEqual(E.right("foobar"))
+    })
+  })
+
+  describe("asksTaskEither", () => {
+    it("runs action and lifts to a Reader", () => {
+      return expect(
+        asksTaskEither(flow(Str.prepend("foo"), TE.of))("bar")(),
       ).resolves.toEqual(E.right("foobar"))
     })
   })

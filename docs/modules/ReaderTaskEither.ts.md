@@ -16,6 +16,7 @@ Added in v0.15.0
 
 - [utils](#utils)
   - [asksTask](#askstask)
+  - [asksTaskEither](#askstaskeither)
   - [runReaderTaskEither](#runreadertaskeither)
   - [unsafeUnwrap](#unsafeunwrap)
   - [unsafeUnwrapLeft](#unsafeunwrapleft)
@@ -42,6 +43,29 @@ import { asksTask } from 'fp-ts-std/ReaderTaskEither'
 import * as E from 'fp-ts/Either'
 
 const lucky = asksTask<number, unknown, boolean>((n) => () => Promise.resolve(n === Date.now()))
+
+assert.deepEqual(lucky(42)(), Promise.resolve(E.right(false)))
+```
+
+Added in v0.16.0
+
+## asksTaskEither
+
+Effectfully accesses the environment outside of the `Reader` layer.
+
+**Signature**
+
+```ts
+export declare const asksTaskEither: <R, E, A>(f: (r: R) => TE.TaskEither<E, A>) => RTE.ReaderTaskEither<R, E, A>
+```
+
+**Example**
+
+```ts
+import { asksTaskEither } from 'fp-ts-std/ReaderTaskEither'
+import * as E from 'fp-ts/Either'
+
+const lucky = asksTaskEither<number, unknown, boolean>((n) => () => Promise.resolve(E.right(n === Date.now())))
 
 assert.deepEqual(lucky(42)(), Promise.resolve(E.right(false)))
 ```
