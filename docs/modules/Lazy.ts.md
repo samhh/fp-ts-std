@@ -27,7 +27,7 @@ Added in v0.12.0
   - [ChainRec](#chainrec)
   - [Do](#do)
   - [Functor](#functor)
-  - [Lazy](#lazy)
+  - [Lazy (type alias)](#lazy-type-alias)
   - [Monad](#monad)
   - [Pointed](#pointed)
   - [URI](#uri)
@@ -174,18 +174,18 @@ Functor :: Functor1 "Lazy"
 
 Added in v0.12.0
 
-## Lazy
+## Lazy (type alias)
 
 Re-exported from fp-ts for convenience.
 
 **Signature**
 
 ```ts
-export declare const Lazy: any
+export type Lazy<A> = () => A
 ```
 
 ```hs
-Lazy :: any
+type Lazy a = () -> a
 ```
 
 Added in v0.12.0

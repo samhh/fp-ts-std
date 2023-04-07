@@ -11,7 +11,7 @@
 
 // All the typeclass stuff was copied from fp-ts/IO almost identically.
 
-import { Lazy, constant, identity } from "fp-ts/function"
+import { constant, identity } from "fp-ts/function"
 import { Functor1, flap as flap_, bindTo as bindTo_ } from "fp-ts/Functor"
 import { Applicative1 } from "fp-ts/Applicative"
 import { Monad1 } from "fp-ts/Monad"
@@ -29,14 +29,13 @@ import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as RA from "fp-ts/ReadonlyArray"
 
-export {
-  /**
-   * Re-exported from fp-ts for convenience.
-   *
-   * @since 0.12.0
-   */
-  Lazy,
-} from "fp-ts/function"
+/**
+ * Re-exported from fp-ts for convenience.
+ *
+ * @since 0.12.0
+ */
+// docs-ts output will be bad if we "export from".
+export type Lazy<A> = () => A
 
 /**
  * Typeclass machinery.
