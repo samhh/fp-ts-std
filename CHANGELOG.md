@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.16.0 (_Unreleased_)
+## 0.16.0 (2023-04-10)
 
 - Add `IOOption` module.
 - Add `ReaderIO` module.
