@@ -13,7 +13,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { flow, pipe } from "fp-ts/function"
+import { constVoid, flow, pipe } from "fp-ts/function"
 import { invoke } from "./Function"
 /**
  * Convert a `NodeList` into an `Array`.
@@ -274,14 +274,42 @@ type EventListenerCleanup = IO<void>
  *
  * @since 0.12.0
  */
-
 export const addEventListener =
   (type: EventTarget) =>
   (listener: EventListener) =>
-  (el: Node | Window) =>
-  (): EventListenerCleanup => {
+  (el: Node | Window): IO<EventListenerCleanup> =>
+  () => {
     const _listener = (e: Event) => listener(e)()
     // eslint-disable-next-line functional/no-expression-statement
     pipe(el, invoke("addEventListener")([type, _listener]))
     return () => pipe(el, invoke("removeEventListener")([type, _listener]))
   }
+
+/**
+ * Adds an event listener to a node.
+ *
+ * @example
+ * import { JSDOM } from 'jsdom'
+ * import { addEventListener_ } from 'fp-ts-std/DOM'
+ *
+ * const { window: { document } } = new JSDOM()
+ * const el = document.createElement('div')
+ * let clicks = 0
+ * const listen = addEventListener_('click')(() => () => clicks++)(el)
+ *
+ * assert.strictEqual(clicks, 0)
+ *
+ * el.click()
+ * assert.strictEqual(clicks, 0)
+ *
+ * listen()
+ * el.click()
+ * assert.strictEqual(clicks, 1)
+ *
+ * @since 0.12.0
+ */
+export const addEventListener_ =
+  (type: EventTarget) =>
+  (listener: EventListener) =>
+  (el: Node | Window): IO<void> =>
+    flow(addEventListener(type)(listener)(el), IO.map(constVoid))

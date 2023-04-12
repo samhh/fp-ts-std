@@ -7,6 +7,7 @@ import {
   appendChild,
   emptyChildren,
   addEventListener,
+  addEventListener_,
   getTextContent,
   setTextContent,
 } from "../src/DOM"
@@ -327,6 +328,44 @@ describe("DOM", () => {
       // eslint-disable-next-line functional/no-expression-statement
       findElement().click()
       expect(mockSomeEventFunction).toBeCalledTimes(2)
+    })
+  })
+
+  describe("addEventListener_", () => {
+    const f = addEventListener_
+
+    it("calls callback on event trigger", () => {
+      const {
+        window: { document },
+      } = new JSDOM("<div></div>")
+
+      const parent = pipe(
+        querySelector("div")(document),
+        IO.map(unsafeUnwrap),
+        IO.map(el => el as HTMLElement),
+      )
+
+      // eslint-disable-next-line functional/no-let
+      let clicks = 0
+      expect(clicks).toBe(0)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      parent().click()
+      expect(clicks).toBe(0)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      f("click")(() => () => {
+        // eslint-disable-next-line functional/no-expression-statement
+        clicks++
+      })(parent())()
+
+      // eslint-disable-next-line functional/no-expression-statement
+      parent().click()
+      expect(clicks).toBe(1)
+
+      // eslint-disable-next-line functional/no-expression-statement
+      parent().click()
+      expect(clicks).toBe(2)
     })
   })
 
