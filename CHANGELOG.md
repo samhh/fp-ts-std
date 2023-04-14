@@ -115,7 +115,7 @@ This project adheres to semantic versioning.
 - Add `when`, `unless`, and `execute` to `Task`.
 - Add `isFinite` and `toFinite` to `Number`.
 - Add `noneAs`, `invert`, and `toMonoid` to `Option`.
-- Add `extractAt` to `Array` and `ReadonlyArray`..
+- Add `extractAt` to `Array` and `ReadonlyArray`.
 - Duplicate `filterA` from fp-ts-contrib into `Array` and `ReadonlyArray`.
 - Replace `pick` in `Record` and `ReadonlyRecord` with a non-thunked version. The old implementation is now called `pickFrom`.
 - Narrow the type of the first parameter in `replaceAll`. This reverts the change made in 0.10.1.
@@ -124,7 +124,7 @@ This project adheres to semantic versioning.
 ## 0.11.0 (2021-08-09)
 
 - Add `isAlpha`, `isAlphaNum`, `isLower`, `isUpper`, and `splitAt` to `String`.
-- Add `zipAll` to `Array` and `ReadonlyArray`..
+- Add `zipAll` to `Array` and `ReadonlyArray`.
 - Add `fork` to `Function`.
 - A few function signatures now use readonly arrays as opposed to regular arrays as a result of the following supercessions.
 - Remove `contains`, `endsWith`, `isString`, `replace`, `slice`, `split`, `startsWith`, `toLower`, `toUpper`, `trim`, `trimLeft`, and `trimRight` from `String` as they've been superceded by new additions to [fp-ts/string](https://gcanti.github.io/fp-ts/modules/string.ts.html).
