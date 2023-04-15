@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.16.1 (*Unreleased*)
+## 0.16.1 (_Unreleased_)
 
 - Support TypeScript's `node16`/`nodenext` module resolutions.
 
