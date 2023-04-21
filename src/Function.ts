@@ -779,7 +779,7 @@ export const converge =
 export const isInstanceOf =
   <A>(x: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    new (...args: Array<any>): unknown
+    new (...args: Array<any>): A
   }): Refinement<unknown, A> =>
   (y: unknown): y is A =>
     y instanceof x

@@ -727,11 +727,11 @@ absolutely must test a prototype.
 **Signature**
 
 ```ts
-export declare const isInstanceOf: <A>(x: new (...args: Array<any>) => unknown) => Refinement<unknown, A>
+export declare const isInstanceOf: <A>(x: new (...args: Array<any>) => A) => Refinement<unknown, A>
 ```
 
 ```hs
-isInstanceOf :: (...Array any -> unknown) -> Refinement unknown a
+isInstanceOf :: (...Array any -> a) -> Refinement unknown a
 ```
 
 **Example**
