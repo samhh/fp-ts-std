@@ -312,4 +312,4 @@ export const addEventListener_ =
   (type: EventTarget) =>
   (listener: EventListener) =>
   (el: Node | Window): IO<void> =>
-    flow(addEventListener(type)(listener)(el), IO.map(constVoid))
+    pipe(addEventListener(type)(listener)(el), IO.map(constVoid))
