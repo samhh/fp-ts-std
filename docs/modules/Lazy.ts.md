@@ -69,7 +69,7 @@ export declare const ApT: Lazy<readonly []>
 ```
 
 ```hs
-ApT :: Lazy []
+ApT :: Lazy ([])
 ```
 
 Added in v0.12.0

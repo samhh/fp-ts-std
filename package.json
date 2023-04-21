@@ -42,8 +42,7 @@
     "lint": "eslint ./src/ ./test/ --ext ts",
     "fmt": "prettier .",
     "test": "jest",
-    "docs": "docs-ts",
-    "tshm": "tshm-docs-ts ./docs/modules/*",
+    "docs": "docs-ts && tshm-docs-ts ./docs/modules/*",
     "prepublish": "yarn run build"
   },
   "devDependencies": {

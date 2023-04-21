@@ -7,7 +7,14 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem
       (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
+        let
+          overlay = _final: super: {
+            tshm-docs-ts = super.callPackage ./tshm-docs-ts.nix {};
+          };
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ overlay ];
+          };
         in
         {
           devShells.default =
@@ -16,6 +23,7 @@
                 git
                 nodejs-19_x
                 yarn
+                tshm-docs-ts
               ];
             };
         }
