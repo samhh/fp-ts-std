@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.17.0 (_Unreleased_)
 
+- Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.
 - Remove index module. It's unfriendly to tree-shaking and less flexible than the [facades pattern](https://samhh.github.io/fp-ts-std/facades.html).
 - Improve safety and inference of `isInstanceOf`.
 - Narrow return type of `getParamNonEmpty` in `Env` to `NonEmptyString`.

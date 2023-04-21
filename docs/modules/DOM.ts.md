@@ -19,6 +19,7 @@ Added in v0.12.0
 
 - [utils](#utils)
   - [addEventListener](#addeventlistener)
+  - [addEventListener\_](#addeventlistener_)
   - [appendChild](#appendchild)
   - [childNodes](#childnodes)
   - [emptyChildren](#emptychildren)
@@ -36,15 +37,18 @@ Added in v0.12.0
 ## addEventListener
 
 Adds an event listener to a node.
+Returns a cleanup function for removing the event listener.
 
 **Signature**
 
 ```ts
-export declare const addEventListener: (type: string) => (f: (evt: Event) => IO<void>) => (x: Node) => IO<void>
+export declare const addEventListener: (
+  type: EventTarget
+) => (listener: EventListener) => (el: Node | Window) => IO<EventListenerCleanup>
 ```
 
 ```hs
-addEventListener :: string -> (Event -> IO void) -> Node -> IO void
+addEventListener :: EventTarget -> EventListener -> Node | Window -> IO EventListenerCleanup
 ```
 
 **Example**
@@ -65,12 +69,57 @@ assert.strictEqual(clicks, 0)
 el.click()
 assert.strictEqual(clicks, 0)
 
-listen()
+const cleanupClickHandler = listen()
 el.click()
 assert.strictEqual(clicks, 1)
 
 el.click()
 assert.strictEqual(clicks, 2)
+
+cleanupClickHandler()
+el.click()
+assert.strictEqual(clicks, 2)
+```
+
+Added in v0.12.0
+
+## addEventListener\_
+
+Adds an event listener to a node.
+
+**Signature**
+
+```ts
+export declare const addEventListener_: (
+  type: EventTarget
+) => (listener: EventListener) => (el: Node | Window) => IO<void>
+```
+
+```hs
+addEventListener_ :: EventTarget -> EventListener -> Node | Window -> IO void
+```
+
+**Example**
+
+```ts
+import { JSDOM } from 'jsdom'
+import { addEventListener_ } from 'fp-ts-std/DOM'
+
+const {
+  window: { document },
+} = new JSDOM()
+const el = document.createElement('div')
+let clicks = 0
+const listen = addEventListener_('click')(() => () => clicks++)(el)
+
+assert.strictEqual(clicks, 0)
+
+el.click()
+assert.strictEqual(clicks, 0)
+
+listen()
+el.click()
+assert.strictEqual(clicks, 1)
 ```
 
 Added in v0.12.0
