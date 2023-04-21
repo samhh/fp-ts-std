@@ -24,7 +24,7 @@ import {
   Monad3C,
   Monad4,
 } from "fp-ts/Monad"
-import { flow, pipe } from "fp-ts/function"
+import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 import { invert } from "./Boolean"
 
