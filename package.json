@@ -18,21 +18,13 @@
   "engines": {
     "node": ">=18"
   },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
   "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js"
-    },
     "./*": {
       "types": "./dist/types/*.d.ts",
       "require": "./dist/cjs/*.js",
       "import": "./dist/esm/*.js"
     }
   },
-  "types": "index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
