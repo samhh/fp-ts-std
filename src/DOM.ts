@@ -306,7 +306,7 @@ export const addEventListener =
  * el.click()
  * assert.strictEqual(clicks, 1)
  *
- * @since 0.12.0
+ * @since 0.17.0
  */
 export const addEventListener_ =
   (type: EventTarget) =>

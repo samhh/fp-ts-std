@@ -122,7 +122,7 @@ el.click()
 assert.strictEqual(clicks, 1)
 ```
 
-Added in v0.12.0
+Added in v0.17.0
 
 ## appendChild
 
