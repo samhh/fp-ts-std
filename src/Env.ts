@@ -6,12 +6,12 @@
  */
 
 import { pipe, flow } from "fp-ts/function"
-import { not } from "fp-ts/Predicate"
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import * as S from "fp-ts/string"
+import * as NES from "./NonEmptyString"
+import NonEmptyString = NES.NonEmptyString
 
 /**
  * Attempt to get an environment parameter.
@@ -48,7 +48,7 @@ export const getParam =
  *
  * @since 0.9.0
  */
-export const getParamNonEmpty: (k: string) => IO<Option<string>> = flow(
+export const getParamNonEmpty: (k: string) => IO<Option<NonEmptyString>> = flow(
   getParam,
-  IO.map(O.filter(not(S.isEmpty))),
+  IO.map(O.chain(NES.fromString)),
 )

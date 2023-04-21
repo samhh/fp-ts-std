@@ -57,11 +57,11 @@ Attempt to get an environment parameter, filtering out empty strings.
 **Signature**
 
 ```ts
-export declare const getParamNonEmpty: (k: string) => IO<Option<string>>
+export declare const getParamNonEmpty: (k: string) => IO<Option<NonEmptyString>>
 ```
 
 ```hs
-getParamNonEmpty :: string -> IO (Option string)
+getParamNonEmpty :: string -> IO (Option NonEmptyString)
 ```
 
 **Example**

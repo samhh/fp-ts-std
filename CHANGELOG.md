@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.16.1 (_Unreleased_)
 
+- Narrow return type of `getParamNonEmpty` in `Env` to `NonEmptyString`.
 - Support TypeScript's `node16`/`nodenext` module resolutions.
 
 ## 0.16.0 (2023-04-10)
