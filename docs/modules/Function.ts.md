@@ -37,6 +37,7 @@ Added in v0.1.0
   - [curry4T](#curry4t)
   - [curry5](#curry5)
   - [curry5T](#curry5t)
+  - [flatMap](#flatmap)
   - [fork](#fork)
   - [guard](#guard)
   - [ifElse](#ifelse)
@@ -507,6 +508,22 @@ assert.strictEqual(curry5T(concat5)('a')('b')('c')('d')('e'), concat5(['a', 'b',
 ```
 
 Added in v0.7.0
+
+## flatMap
+
+Alias of `chain`.
+
+**Signature**
+
+```ts
+export declare const flatMap: <A, B, C>(f: (x: B) => (y: A) => C) => (g: (x: A) => B) => (x: A) => C
+```
+
+```hs
+flatMap :: (b -> a -> c) -> (a -> b) -> a -> c
+```
+
+Added in v0.17.0
 
 ## fork
 

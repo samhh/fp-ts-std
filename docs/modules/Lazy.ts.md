@@ -42,6 +42,7 @@ Added in v0.12.0
   - [chainFirst](#chainfirst)
   - [execute](#execute)
   - [flap](#flap)
+  - [flatMap](#flatmap)
   - [flatten](#flatten)
   - [lazy](#lazy)
   - [map](#map)
@@ -432,6 +433,22 @@ flap :: a -> Lazy (a -> b) -> Lazy b
 ```
 
 Added in v0.12.0
+
+## flatMap
+
+Alias of `chain`.
+
+**Signature**
+
+```ts
+export declare const flatMap: <A, B>(f: (a: A) => Lazy<B>) => (ma: Lazy<A>) => Lazy<B>
+```
+
+```hs
+flatMap :: (a -> Lazy b) -> Lazy a -> Lazy b
+```
+
+Added in v0.17.0
 
 ## flatten
 

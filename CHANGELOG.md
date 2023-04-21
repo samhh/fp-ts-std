@@ -7,6 +7,7 @@ This project adheres to semantic versioning.
 - Remove index module. It's unfriendly to tree-shaking and less flexible than the [facades pattern](https://samhh.github.io/fp-ts-std/facades.html).
 - Improve safety and inference of `isInstanceOf`.
 - Narrow return type of `getParamNonEmpty` in `Env` to `NonEmptyString`.
+- Add `flatMap` aliases.
 - Support TypeScript's `node16`/`nodenext` module resolutions.
 - Bump minimum supported fp-ts version to 2.14.0.
 

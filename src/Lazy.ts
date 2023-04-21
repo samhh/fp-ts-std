@@ -106,6 +106,13 @@ export const chain: <A, B>(f: (a: A) => Lazy<B>) => (ma: Lazy<A>) => Lazy<B> =
     _chain(ma, f)
 
 /**
+ * Alias of `chain`.
+ *
+ * @since 0.17.0
+ */
+export const flatMap = chain
+
+/**
  * Flatten a nested `Lazy`.
  *
  * @since 0.12.0

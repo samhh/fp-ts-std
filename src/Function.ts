@@ -109,6 +109,13 @@ export const chain: <A, B, C>(
 ) => (g: (x: A) => B) => (x: A) => C = f => g => x => f(g(x))(x)
 
 /**
+ * Alias of `chain`.
+ *
+ * @since 0.17.0
+ */
+export const flatMap = chain
+
+/**
  * Formal `Monad` instance for unary functions to be provided to higher-kinded
  * functions that require it.
  *
