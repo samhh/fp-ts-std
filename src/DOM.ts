@@ -9,8 +9,8 @@
 
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
-import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
+import { IOOption } from "fp-ts/IOOption"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import { flow, pipe } from "fp-ts/function"
@@ -56,7 +56,7 @@ export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
  */
 export const querySelector =
   (q: string) =>
-  (x: ParentNode): IO<Option<Element>> =>
+  (x: ParentNode): IOOption<Element> =>
   () =>
     pipe(x, invoke("querySelector")([q]), O.fromNullable)
 
@@ -81,7 +81,7 @@ export const querySelector =
  */
 export const querySelectorAll =
   (q: string) =>
-  (x: ParentNode): IO<Option<NonEmptyArray<Element>>> =>
+  (x: ParentNode): IOOption<NonEmptyArray<Element>> =>
   () =>
     pipe(x, invoke("querySelectorAll")([q]), fromNodeList, NEA.fromArray)
 
@@ -106,7 +106,7 @@ export const querySelectorAll =
  * @since 0.12.0
  */
 export const childNodes =
-  (x: Node): IO<Option<NonEmptyArray<ChildNode>>> =>
+  (x: Node): IOOption<NonEmptyArray<ChildNode>> =>
   () =>
     pipe(x.childNodes, fromNodeList, NEA.fromArray)
 
@@ -211,7 +211,7 @@ export const emptyChildren: (x: Node) => IO<void> = flow(
  * @since 0.12.0
  */
 export const getTextContent =
-  (x: Node): IO<Option<string>> =>
+  (x: Node): IOOption<string> =>
   () =>
     pipe(x.textContent, O.fromNullable)
 

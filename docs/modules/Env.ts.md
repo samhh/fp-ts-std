@@ -30,11 +30,11 @@ Attempt to get an environment parameter.
 **Signature**
 
 ```ts
-export declare const getParam: (k: string) => IO<Option<string>>
+export declare const getParam: (k: string) => IOOption<string>
 ```
 
 ```hs
-getParam :: string -> IO (Option string)
+getParam :: string -> IOOption string
 ```
 
 **Example**
@@ -57,11 +57,11 @@ Attempt to get an environment parameter, filtering out empty strings.
 **Signature**
 
 ```ts
-export declare const getParamNonEmpty: (k: string) => IO<Option<NonEmptyString>>
+export declare const getParamNonEmpty: (k: string) => IOOption<NonEmptyString>
 ```
 
 ```hs
-getParamNonEmpty :: string -> IO (Option NonEmptyString)
+getParamNonEmpty :: string -> IOOption NonEmptyString
 ```
 
 **Example**

@@ -6,10 +6,9 @@
  */
 
 import { pipe, flow } from "fp-ts/function"
-import * as IO from "fp-ts/IO"
-type IO<A> = IO.IO<A>
-import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
+import * as IOO from "fp-ts/IOOption"
+import IOOption = IOO.IOOption
 import * as NES from "./NonEmptyString"
 import NonEmptyString = NES.NonEmptyString
 
@@ -27,7 +26,7 @@ import NonEmptyString = NES.NonEmptyString
  * @since 0.9.0
  */
 export const getParam =
-  (k: string): IO<Option<string>> =>
+  (k: string): IOOption<string> =>
   () =>
     pipe(process.env[k], O.fromNullable)
 
@@ -48,7 +47,7 @@ export const getParam =
  *
  * @since 0.9.0
  */
-export const getParamNonEmpty: (k: string) => IO<Option<NonEmptyString>> = flow(
+export const getParamNonEmpty: (k: string) => IOOption<NonEmptyString> = flow(
   getParam,
-  IO.map(O.chain(NES.fromString)),
+  IOO.chainOptionK(NES.fromString),
 )

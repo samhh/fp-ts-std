@@ -120,11 +120,11 @@ Returns all child nodes, if any, of a node.
 **Signature**
 
 ```ts
-export declare const childNodes: (x: Node) => IO<Option<NonEmptyArray<ChildNode>>>
+export declare const childNodes: (x: Node) => IOOption<NonEmptyArray<ChildNode>>
 ```
 
 ```hs
-childNodes :: Node -> IO (Option (NonEmptyArray ChildNode))
+childNodes :: Node -> IOOption (NonEmptyArray ChildNode)
 ```
 
 **Example**
@@ -224,11 +224,11 @@ Gets the text content, if any, of a node.
 **Signature**
 
 ```ts
-export declare const getTextContent: (x: Node) => IO<Option<string>>
+export declare const getTextContent: (x: Node) => IOOption<string>
 ```
 
 ```hs
-getTextContent :: Node -> IO (Option string)
+getTextContent :: Node -> IOOption string
 ```
 
 **Example**
@@ -259,11 +259,11 @@ selector.
 **Signature**
 
 ```ts
-export declare const querySelector: (q: string) => (x: ParentNode) => IO<Option<Element>>
+export declare const querySelector: (q: string) => (x: ParentNode) => IOOption<Element>
 ```
 
 ```hs
-querySelector :: string -> ParentNode -> IO (Option Element)
+querySelector :: string -> ParentNode -> IOOption Element
 ```
 
 **Example**
@@ -295,11 +295,11 @@ selector.
 **Signature**
 
 ```ts
-export declare const querySelectorAll: (q: string) => (x: ParentNode) => IO<Option<NonEmptyArray<Element>>>
+export declare const querySelectorAll: (q: string) => (x: ParentNode) => IOOption<NonEmptyArray<Element>>
 ```
 
 ```hs
-querySelectorAll :: string -> ParentNode -> IO (Option (NonEmptyArray Element))
+querySelectorAll :: string -> ParentNode -> IOOption (NonEmptyArray Element)
 ```
 
 **Example**
