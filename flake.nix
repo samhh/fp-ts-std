@@ -21,7 +21,7 @@
             pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 git
-                nodejs-19_x
+                nodejs_20
                 yarn
                 tshm-docs-ts
               ];

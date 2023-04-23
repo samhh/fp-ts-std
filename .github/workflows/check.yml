@@ -33,7 +33,7 @@ jobs:
     strategy:
       matrix:
         # Latest released and oldest supported.
-        node: [19, 18]
+        node: [20, 18]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
