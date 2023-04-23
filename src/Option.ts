@@ -32,7 +32,7 @@ import { Lazy } from "./Lazy"
 export const unsafeExpect =
   (msg: string) =>
   <A>(x: Option<A>): A => {
-    // eslint-disable-next-line functional/no-conditional-statement, functional/no-throw-statement
+    // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
     if (O.isNone(x)) throw msg
 
     return x.value

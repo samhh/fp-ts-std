@@ -291,7 +291,7 @@ export const test =
   x => {
     const lastIndex = r.lastIndex
     const res = r.test(x)
-    // eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+    // eslint-disable-next-line functional/no-expression-statements, functional/immutable-data
     r.lastIndex = lastIndex
     return res
   }

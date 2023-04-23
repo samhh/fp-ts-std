@@ -39,7 +39,7 @@ type IO<A> = IO.IO<A>
 export const tap =
   <A>(f: (x: A) => IO<void>) =>
   (x: A): IO<A> => {
-    // eslint-disable-next-line functional/no-expression-statement
+    // eslint-disable-next-line functional/no-expression-statements
     f(x)()
 
     return IO.of(x)
@@ -66,8 +66,8 @@ export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
   let val: typeof uncalled | B = uncalled // eslint-disable-line functional/no-let
 
   return x => {
-    // eslint-disable-next-line functional/no-conditional-statement
-    if (val === uncalled) val = f(x) // eslint-disable-line functional/no-expression-statement
+    // eslint-disable-next-line functional/no-conditional-statements
+    if (val === uncalled) val = f(x) // eslint-disable-line functional/no-expression-statements
 
     return IO.of(val)
   }

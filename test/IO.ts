@@ -32,11 +32,11 @@ describe("IO", () => {
       const g =
         (y: boolean): IO<void> =>
         () => {
-          x = y // eslint-disable-line functional/no-expression-statement
+          x = y // eslint-disable-line functional/no-expression-statements
         }
 
       expect(x).toBe(false)
-      f(g)(true)() // eslint-disable-line functional/no-expression-statement
+      f(g)(true)() // eslint-disable-line functional/no-expression-statements
       expect(x).toBe(true)
     })
 
@@ -60,7 +60,7 @@ describe("IO", () => {
     it("only calls function once", () => {
       let runs = 0 // eslint-disable-line functional/no-let
       const g = f<number, number>(n => {
-        runs++ // eslint-disable-line functional/no-expression-statement
+        runs++ // eslint-disable-line functional/no-expression-statements
         return add(5)(n)
       })
 

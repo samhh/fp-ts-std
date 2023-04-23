@@ -59,7 +59,7 @@ declare module "fp-ts/HKT" {
 
 const _map: Functor1<URI>["map"] = (f, g) => () => g(f())
 const _ap: Applicative1<URI>["ap"] = (f, g) => () => f()(g())
-const _chain: Monad1<URI>["chain"] = (f, g) => () => g(f())()
+const _chain: Monad1<URI>["chain"] = (f, g) => g(f())
 const _chainRec: ChainRec1<URI>["chainRec"] = (a, f) => () => {
   /* eslint-disable */
   let e = f(a)()

@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statement */
+/* eslint-disable functional/no-expression-statements */
 
 import * as IO from "fp-ts/IO"
 import { constant, constVoid, flip } from "fp-ts/function"

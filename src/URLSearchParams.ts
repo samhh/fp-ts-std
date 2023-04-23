@@ -181,6 +181,6 @@ export const setParam =
   (v: string) =>
   (x: URLSearchParams): URLSearchParams => {
     const y = clone(x)
-    y.set(k, v) // eslint-disable-line functional/no-expression-statement
+    y.set(k, v) // eslint-disable-line functional/no-expression-statements
     return y
   }

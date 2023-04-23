@@ -32,7 +32,7 @@ describe("URL", () => {
     it("never throws", () => {
       fc.assert(
         fc.property(fc.string(), x => {
-          // eslint-disable-next-line functional/no-expression-statement
+          // eslint-disable-next-line functional/no-expression-statements
           f(x)
         }),
       )
@@ -53,7 +53,7 @@ describe("URL", () => {
     it("never throws", () => {
       fc.assert(
         fc.property(fc.string(), x => {
-          // eslint-disable-next-line functional/no-expression-statement
+          // eslint-disable-next-line functional/no-expression-statements
           f(x)
         }),
       )

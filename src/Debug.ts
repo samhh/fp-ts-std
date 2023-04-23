@@ -7,7 +7,7 @@
 
 import { Show } from "fp-ts/Show"
 
-/* eslint-disable functional/no-expression-statement */
+/* eslint-disable functional/no-expression-statements */
 
 /**
  * Log the provided string to the console and immediately return the generic

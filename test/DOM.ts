@@ -70,7 +70,7 @@ describe("DOM", () => {
 
       expect(lastText()).toEqual(O.some("2"))
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       document.querySelector("li:last-child")?.remove()
 
       expect(lastText()).toEqual(O.some("1"))
@@ -110,7 +110,7 @@ describe("DOM", () => {
 
       expect(len()).toEqual(2)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       document.querySelector("li:last-child")?.remove()
 
       expect(len()).toEqual(1)
@@ -150,7 +150,7 @@ describe("DOM", () => {
 
       expect(len()).toBe(2)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       document.querySelector("li:last-child")?.remove()
 
       expect(len()).toBe(1)
@@ -175,7 +175,7 @@ describe("DOM", () => {
 
       expect(len()).toBe(2)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f(child)()
 
       expect(len()).toBe(1)
@@ -196,12 +196,12 @@ describe("DOM", () => {
 
       expect(len()).toBe(2)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f(child)()
 
       expect(len()).toBe(1)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f(child)()
 
       expect(len()).toBe(1)
@@ -221,12 +221,12 @@ describe("DOM", () => {
 
       const parent = pipe(querySelector("ul")(document), IO.map(unsafeUnwrap))
       const child = unsafeUnwrap(querySelector("li")(parent())()).cloneNode()
-      // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
+      // eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
       child.textContent = "3"
 
       expect(parent().outerHTML).toBe(pre + post)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f(child)(parent())()
 
       expect(parent().outerHTML).toBe(pre + "<li>3</li>" + post)
@@ -246,7 +246,7 @@ describe("DOM", () => {
 
       expect(parent().innerHTML).toBe(inner)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f(parent())()
 
       expect(parent().innerHTML).toBe("")
@@ -271,21 +271,21 @@ describe("DOM", () => {
       let clicks = 0
       expect(clicks).toBe(0)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       parent().click()
       expect(clicks).toBe(0)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f("click")(() => () => {
-        // eslint-disable-next-line functional/no-expression-statement
+        // eslint-disable-next-line functional/no-expression-statements
         clicks++
       })(parent())()
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       parent().click()
       expect(clicks).toBe(1)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       parent().click()
       expect(clicks).toBe(2)
     })
@@ -306,7 +306,7 @@ describe("DOM", () => {
         IO.map(el => el as HTMLElement),
       )
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       const eventListenerCleanup = pipe(
         findElement,
         IO.chain(addEventListener("click")(mockSomeEventFunction)),
@@ -314,18 +314,18 @@ describe("DOM", () => {
       )
       expect(mockSomeEventFunction).toBeCalledTimes(0)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       findElement().click()
       expect(mockSomeEventFunction).toBeCalledTimes(1)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       findElement().click()
       expect(mockSomeEventFunction).toBeCalledTimes(2)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       IOexecute(eventListenerCleanup)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       findElement().click()
       expect(mockSomeEventFunction).toBeCalledTimes(2)
     })
@@ -349,21 +349,21 @@ describe("DOM", () => {
       let clicks = 0
       expect(clicks).toBe(0)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       parent().click()
       expect(clicks).toBe(0)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f("click")(() => () => {
-        // eslint-disable-next-line functional/no-expression-statement
+        // eslint-disable-next-line functional/no-expression-statements
         clicks++
       })(parent())()
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       parent().click()
       expect(clicks).toBe(1)
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       parent().click()
       expect(clicks).toBe(2)
     })
@@ -395,11 +395,11 @@ describe("DOM", () => {
       const el = document.querySelector("div")!
       expect(el.textContent).toBe("")
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f("x")(el)()
       expect(el.textContent).toBe("x")
 
-      // eslint-disable-next-line functional/no-expression-statement
+      // eslint-disable-next-line functional/no-expression-statements
       f("yz")(el)()
       expect(el.textContent).toBe("yz")
     })

@@ -106,6 +106,7 @@ export const Applicative: Applicative2<URI> = {
  */
 export const chain: <A, B, C>(
   f: (x: B) => (y: A) => C,
+  // eslint-disable-next-line functional/prefer-tacit
 ) => (g: (x: A) => B) => (x: A) => C = f => g => x => f(g(x))(x)
 
 /**
@@ -144,7 +145,9 @@ export const withIndex: <A, B, C>(
   f: (g: (x: A) => B) => (ys: Array<A>) => Array<C>,
 ) => (g: (i: number) => (x: A) => B) => (ys: Array<A>) => Array<C> =
   f => g => xs => {
-    let i = 0 // eslint-disable-line functional/no-let
+    // eslint-disable-next-line functional/no-let
+    let i = 0
+    // eslint-disable-next-line functional/prefer-tacit
     return f(y => g(i++)(y))(xs)
   }
 
@@ -423,10 +426,10 @@ export const memoize =
 
     return k => {
       const cached = M.lookup(eq)(k)(cache)
-      if (O.isSome(cached)) return cached.value // eslint-disable-line functional/no-conditional-statement
+      if (O.isSome(cached)) return cached.value // eslint-disable-line functional/no-conditional-statements
 
       const val = f(k)
-      cache.set(k, val) // eslint-disable-line functional/no-expression-statement
+      cache.set(k, val) // eslint-disable-line functional/no-expression-statements
       return val
     }
   }

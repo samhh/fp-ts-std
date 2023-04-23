@@ -37,7 +37,7 @@ describe("URLSearchParams", () => {
     it("never throws", () => {
       fc.assert(
         fc.property(fc.string(), x => {
-          // eslint-disable-next-line functional/no-expression-statement
+          // eslint-disable-next-line functional/no-expression-statements
           f(x)
         }),
       )
@@ -65,7 +65,7 @@ describe("URLSearchParams", () => {
     it("never throws", () => {
       fc.assert(
         fc.property(fc.dictionary(fc.string(), fc.string()), x => {
-          // eslint-disable-next-line functional/no-expression-statement
+          // eslint-disable-next-line functional/no-expression-statements
           f(x)
         }),
       )
@@ -98,7 +98,7 @@ describe("URLSearchParams", () => {
     it("never throws", () => {
       fc.assert(
         fc.property(fc.array(fc.tuple(fc.string(), fc.string())), x => {
-          // eslint-disable-next-line functional/no-expression-statement
+          // eslint-disable-next-line functional/no-expression-statements
           f(x)
         }),
       )
@@ -111,7 +111,7 @@ describe("URLSearchParams", () => {
     it("does not mutate input", () => {
       const x = new URLSearchParams()
       const y = f(x)
-      y.set("a", "b") // eslint-disable-line functional/no-expression-statement
+      y.set("a", "b") // eslint-disable-line functional/no-expression-statements
 
       expect(y.has("a")).toBe(true)
       expect(x.has("a")).toBe(false)

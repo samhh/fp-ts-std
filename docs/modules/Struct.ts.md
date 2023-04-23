@@ -117,11 +117,11 @@ type.
 **Signature**
 
 ```ts
-export declare const pick: <A, K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+export declare const pick: <A extends object, K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
 ```
 
 ```hs
-pick :: k extends (keyof a) => Array k -> a -> Pick a k
+pick :: a extends object, k extends (keyof a) => Array k -> a -> Pick a k
 ```
 
 **Example**
@@ -144,11 +144,11 @@ Like `pick`, but allows you to specify the input record upfront.
 **Signature**
 
 ```ts
-export declare const pickFrom: <A>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
+export declare const pickFrom: <A extends object>() => <K extends keyof A>(ks: K[]) => (x: A) => Pick<A, K>
 ```
 
 ```hs
-pickFrom :: k extends (keyof a) => () -> Array k -> a -> Pick a k
+pickFrom :: a extends object, k extends (keyof a) => () -> Array k -> a -> Pick a k
 ```
 
 **Example**

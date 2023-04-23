@@ -1,4 +1,4 @@
-/* eslint-disable functional/no-expression-statement */
+/* eslint-disable functional/no-expression-statements */
 
 import { trace, traceWithValue, traceShowWithValue } from "../src/Debug"
 import fc from "fast-check"

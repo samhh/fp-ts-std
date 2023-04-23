@@ -615,7 +615,7 @@ export const dropAt =
           pipe(
             A.copy(xs),
             ys => {
-              // eslint-disable-next-line functional/immutable-data, functional/no-expression-statement
+              // eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
               ys.splice(i, n)
               return ys
             },
@@ -639,10 +639,10 @@ export const dropAt =
  * @since 0.7.0
  */
 export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
-  /* eslint-disable functional/no-conditional-statement */
+  /* eslint-disable functional/no-conditional-statements */
   if (A.isEmpty(xs)) return []
   if (A.isEmpty(xs[0])) return transpose(A.dropLeft(1)(xs))
-  /* eslint-enable functional/no-conditional-statement */
+  /* eslint-enable functional/no-conditional-statements */
 
   const [[y, ...ys], ...yss] = xs
   const zs = [y, ...A.filterMap(A.head)(yss)]
@@ -1040,10 +1040,10 @@ export const separateNE = <A, B>(
   xs: NonEmptyArray<Either<A, B>>,
 ): These<NonEmptyArray<A>, NonEmptyArray<B>> =>
   pipe(xs, A.separate, ({ left, right }) => {
-    /* eslint-disable functional/no-conditional-statement */
+    /* eslint-disable functional/no-conditional-statements */
     if (A.isEmpty(left)) return T.right(right as NonEmptyArray<B>)
     else if (A.isEmpty(right)) return T.left(left as NonEmptyArray<A>)
-    /* eslint-enable functional/no-conditional-statement */
+    /* eslint-enable functional/no-conditional-statements */
     // They can't both be empty as per the non-empty input.
     else return T.both(left as NonEmptyArray<A>, right as NonEmptyArray<B>)
   })

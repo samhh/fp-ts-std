@@ -93,10 +93,9 @@ import { overF } from 'fp-ts-std/Newtype'
 import * as O from 'fp-ts/Option'
 import { Milliseconds, mkMilliseconds } from 'fp-ts-std/Date'
 
-const filterLongEnough =
-  overF(O.Functor)<number>(O.fromPredicate((n) => n > 1000)) <
-  Milliseconds >
-  assert.deepStrictEqual(filterLongEnough(mkMilliseconds(500)), O.none)
+const filterLongEnough = overF(O.Functor)<number>(O.fromPredicate((n) => n > 1000))<Milliseconds>
+
+assert.deepStrictEqual(filterLongEnough(mkMilliseconds(500)), O.none)
 assert.deepStrictEqual(filterLongEnough(mkMilliseconds(1500)), O.some(mkMilliseconds(1500)))
 ```
 
