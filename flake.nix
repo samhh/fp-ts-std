@@ -9,23 +9,26 @@
       (system:
         let
           overlay = _final: super: {
-            tshm-docs-ts = super.callPackage ./tshm-docs-ts.nix {};
+            tshm-docs-ts = super.callPackage ./tshm-docs-ts.nix { };
           };
+
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ overlay ];
           };
+
+          common = with pkgs; [ git yarn tshm-docs-ts ];
         in
         {
-          devShells.default =
-            pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [
-                git
-                nodejs_20
-                yarn
-                tshm-docs-ts
-              ];
+          devShells = {
+            default = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [ nodejs_20 ] ++ common;
             };
+
+            lts = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [ nodejs ] ++ common;
+            };
+          };
         }
       );
 }
