@@ -1,5 +1,4 @@
 module.exports = {
-  preset: "ts-jest",
   testRegex: "/test/",
   collectCoverage: true,
   collectCoverageFrom: ["./src/**/*"],
@@ -14,12 +13,6 @@ module.exports = {
     },
   },
   transform: {
-    "\\.ts$": [
-      "ts-jest",
-      {
-        tsconfig: "./tsconfig.test.json",
-        diagnostics: false,
-      },
-    ],
+    "\\.ts$": ["@swc/jest"],
   },
 }
