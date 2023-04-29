@@ -61,13 +61,11 @@ export const unsafeParse = (x: string): URL => pipe([x], construct(URL))
 export const parse =
   <E>(f: (e: TypeError) => E) =>
   (x: string): Either<E, URL> =>
-    pipe(
-      // It should only throw some sort of `TypeError`:
-      // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
-      E.tryCatch(
-        () => unsafeParse(x),
-        e => f(e as TypeError),
-      ),
+    // It should only throw some sort of `TypeError`:
+    // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
+    E.tryCatch(
+      () => unsafeParse(x),
+      e => f(e as TypeError),
     )
 
 /**
