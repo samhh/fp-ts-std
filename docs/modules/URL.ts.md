@@ -15,6 +15,7 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [clone](#clone)
   - [isURL](#isurl)
   - [parse](#parse)
   - [parseO](#parseo)
@@ -23,6 +24,36 @@ Added in v0.1.0
 ---
 
 # utils
+
+## clone
+
+Clone a `URL` object.
+
+**Signature**
+
+```ts
+export declare const clone: Endomorphism<URL>
+```
+
+```hs
+clone :: Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { clone } from 'fp-ts-std/URL'
+
+const x = new URL('https://samhh.com/foo')
+const y = clone(x)
+
+x.pathname = '/bar'
+
+assert.strictEqual(x.pathname, '/bar')
+assert.strictEqual(y.pathname, '/foo')
+```
+
+Added in v0.17.0
 
 ## isURL
 
