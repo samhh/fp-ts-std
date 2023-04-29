@@ -4,7 +4,7 @@ import { constant } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 
-const validUrl = "https://subdomain.samhh.com/a/b.c"
+const validUrl = "https://a:b@c.d.e:1/f/g.h?i=j&k=l&i=m#n"
 
 describe("URL", () => {
   describe("unsafeParse", () => {
