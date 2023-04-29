@@ -27,6 +27,7 @@ Added in v0.2.0
   - [isURLSearchParams](#isurlsearchparams)
   - [setParam](#setparam)
   - [toString](#tostring)
+  - [toTuples](#totuples)
 
 ---
 
@@ -326,6 +327,36 @@ import { toString } from 'fp-ts-std/URLSearchParams'
 const x = new URLSearchParams('a=b&c=d')
 
 assert.strictEqual(toString(x), 'a=b&c=d')
+```
+
+Added in v0.17.0
+
+## toTuples
+
+Losslessly convert a `URLSearchParams` to an array of tuples.
+
+**Signature**
+
+```ts
+export declare const toTuples: (x: URLSearchParams) => Array<[string, string]>
+```
+
+```hs
+toTuples :: URLSearchParams -> Array [string, string]
+```
+
+**Example**
+
+```ts
+import { toTuples } from 'fp-ts-std/URLSearchParams'
+
+const x = new URLSearchParams('a=b&c=d&a=e')
+
+assert.deepStrictEqual(toTuples(x), [
+  ['a', 'b'],
+  ['c', 'd'],
+  ['a', 'e'],
+])
 ```
 
 Added in v0.17.0

@@ -4,6 +4,7 @@ import {
   toString,
   fromRecord,
   fromTuples,
+  toTuples,
   clone,
   isURLSearchParams,
   isEmpty,
@@ -114,6 +115,21 @@ describe("URLSearchParams", () => {
           f(x)
         }),
       )
+    })
+  })
+
+  describe("toTuples", () => {
+    const f = toTuples
+
+    it("returns all key/value pairs", () => {
+      const xs: Array<[string, string]> = [
+        ["a", "b"],
+        ["c", "d"],
+        ["a", "e"],
+      ]
+      const y = new URLSearchParams(xs)
+
+      expect(f(y)).toEqual(xs)
     })
   })
 

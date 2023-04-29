@@ -14,6 +14,7 @@ import { construct, invoke, isInstanceOf } from "./Function"
 import { Predicate } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
+import { fromIterable } from "./Array"
 
 /**
  * An empty `URLSearchParams`.
@@ -84,6 +85,21 @@ export const toString = (x: URLSearchParams): string => x.toString()
  */
 export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
   pipe([x], construct(URLSearchParams))
+
+/**
+ * Losslessly convert a `URLSearchParams` to an array of tuples.
+ *
+ * @example
+ * import { toTuples } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = new URLSearchParams('a=b&c=d&a=e')
+ *
+ * assert.deepStrictEqual(toTuples(x), [['a', 'b'], ['c', 'd'], ['a', 'e']])
+ *
+ * @since 0.17.0
+ */
+export const toTuples = (x: URLSearchParams): Array<[string, string]> =>
+  pipe(x.entries(), fromIterable)
 
 /**
  * Parse a `URLSearchParams` from a record.
