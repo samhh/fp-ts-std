@@ -62,23 +62,31 @@ describe("URLSearchParams", () => {
     const f = fromRecord
 
     it("parses roughly as expected", () => {
-      expect(f({ a: "b" }).get("a")).toEqual("b")
-      expect(f({ "a,b": "c" }).get("a,b")).toEqual("c")
-      expect(f({ x: "y", a: "b" }).get("a")).toEqual("b")
+      expect(f({ a: ["b"] }).get("a")).toBe("b")
+      expect(f({ "a,b": ["c"] }).get("a,b")).toBe("c")
+      expect(f({ x: ["y"], a: ["b"] }).get("a")).toBe("b")
+
+      const x = f({ x: [], y: ["y1"], z: ["z1", "z2"] })
+      expect(x.getAll("x")).toEqual([])
+      expect(x.getAll("y")).toEqual(["y1"])
+      expect(x.getAll("z")).toEqual(["z1", "z2"])
     })
 
     it("migrates every key", () => {
       fc.assert(
-        fc.property(fc.dictionary(fc.string(), fc.string()), x => {
-          const y = f(x)
-          return keys(x).every(z => y.has(z))
-        }),
+        fc.property(
+          fc.dictionary(fc.string(), fc.array(fc.string(), { minLength: 1 })),
+          x => {
+            const y = f(x)
+            return keys(x).every(z => y.has(z))
+          },
+        ),
       )
     })
 
     it("never throws", () => {
       fc.assert(
-        fc.property(fc.dictionary(fc.string(), fc.string()), x => {
+        fc.property(fc.dictionary(fc.string(), fc.array(fc.string())), x => {
           // eslint-disable-next-line functional/no-expression-statements
           f(x)
         }),
@@ -163,7 +171,7 @@ describe("URLSearchParams", () => {
     it("works", () => {
       expect(f(new URL("https://samhh.com"))).toBe(false)
       expect(f(empty)).toBe(true)
-      expect(f(fromRecord({ a: "b" }))).toBe(true)
+      expect(f(fromRecord({ a: ["b"] }))).toBe(true)
     })
   })
 

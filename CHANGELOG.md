@@ -9,6 +9,7 @@ This project adheres to semantic versioning.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.
 - Remove index module. It's unfriendly to tree-shaking and less flexible than the [facades pattern](https://samhh.github.io/fp-ts-std/facades.html).
 - Improve safety and inference of `isInstanceOf`.
+- Adjust the input type of `fromRecord` in `URLSearchParams`.
 - Narrow return type of `getParamNonEmpty` in `Env` to `NonEmptyString`.
 - Add `flatMap` aliases.
 - Support TypeScript's `node16`/`nodenext` module resolutions.

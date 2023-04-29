@@ -92,11 +92,11 @@ Parse a `URLSearchParams` from a record.
 **Signature**
 
 ```ts
-export declare const fromRecord: (x: Record<string, string>) => URLSearchParams
+export declare const fromRecord: (x: Record<string, Array<string>>) => URLSearchParams
 ```
 
 ```hs
-fromRecord :: Record string string -> URLSearchParams
+fromRecord :: Record string (Array string) -> URLSearchParams
 ```
 
 **Example**
@@ -104,9 +104,10 @@ fromRecord :: Record string string -> URLSearchParams
 ```ts
 import { fromRecord } from 'fp-ts-std/URLSearchParams'
 
-const x = { a: 'b', c: 'd' }
+const r = { a: ['b', 'c'], d: ['e'] }
+const s = 'a=b&a=c&d=e'
 
-assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x))
+assert.deepStrictEqual(fromRecord(r), new URLSearchParams(s))
 ```
 
 Added in v0.2.0

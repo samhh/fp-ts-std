@@ -17,6 +17,8 @@ import NonEmptyArray = NEA.NonEmptyArray
 import * as A from "fp-ts/Array"
 import { fromIterable } from "./Array"
 import { mapSnd } from "fp-ts/Tuple"
+import * as Str from "fp-ts/string"
+import { withFst } from "./Tuple"
 
 /**
  * An empty `URLSearchParams`.
@@ -109,16 +111,20 @@ export const toTuples = (x: URLSearchParams): Array<[string, string]> =>
  * @example
  * import { fromRecord } from 'fp-ts-std/URLSearchParams'
  *
- * const x = { a: 'b', c: 'd' }
+ * const r = { a: ['b', 'c'], d: ['e'] }
+ * const s = 'a=b&a=c&d=e'
  *
- * assert.deepStrictEqual(fromRecord(x), new URLSearchParams(x))
+ * assert.deepStrictEqual(fromRecord(r), new URLSearchParams(s))
  *
  * @since 0.2.0
  */
-export const fromRecord: (x: Record<string, string>) => URLSearchParams = flow(
-  R.toArray,
-  fromTuples,
-)
+export const fromRecord: (x: Record<string, Array<string>>) => URLSearchParams =
+  flow(
+    R.foldMapWithIndex(Str.Ord)(A.getMonoid<[string, string]>())((k, vs) =>
+      pipe(vs, A.map(withFst(k))),
+    ),
+    fromTuples,
+  )
 
 /**
  * Convert a `URLSearchParams` to a record, grouping values by keys.
