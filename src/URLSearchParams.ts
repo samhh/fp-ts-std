@@ -57,6 +57,20 @@ export const fromString = (x: string): URLSearchParams =>
   pipe([x], construct(URLSearchParams))
 
 /**
+ * Returns a query string suitable for use in a URL, absent a question mark.
+ *
+ * @example
+ * import { toString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = new URLSearchParams('a=b&c=d')
+ *
+ * assert.strictEqual(toString(x), 'a=b&c=d')
+ *
+ * @since 0.17.0
+ */
+export const toString = (x: URLSearchParams): string => x.toString()
+
+/**
  * Parse a `URLSearchParams` from an array of tuples.
  *
  * @example

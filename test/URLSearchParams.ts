@@ -1,6 +1,7 @@
 import {
   empty,
   fromString,
+  toString,
   fromRecord,
   fromTuples,
   clone,
@@ -41,6 +42,17 @@ describe("URLSearchParams", () => {
           f(x)
         }),
       )
+    })
+  })
+
+  describe("toString", () => {
+    const f = toString
+
+    it("returns query string without a question mark", () => {
+      const s = "a=b&c=d&a=e"
+      const u = new URLSearchParams(s)
+
+      expect(f(u)).toBe(s)
     })
   })
 

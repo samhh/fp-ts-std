@@ -26,6 +26,7 @@ Added in v0.2.0
   - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
   - [setParam](#setparam)
+  - [toString](#tostring)
 
 ---
 
@@ -302,3 +303,29 @@ assert.deepStrictEqual(f(y), O.some('e'))
 ```
 
 Added in v0.1.0
+
+## toString
+
+Returns a query string suitable for use in a URL, absent a question mark.
+
+**Signature**
+
+```ts
+export declare const toString: (x: URLSearchParams) => string
+```
+
+```hs
+toString :: URLSearchParams -> string
+```
+
+**Example**
+
+```ts
+import { toString } from 'fp-ts-std/URLSearchParams'
+
+const x = new URLSearchParams('a=b&c=d')
+
+assert.strictEqual(toString(x), 'a=b&c=d')
+```
+
+Added in v0.17.0
