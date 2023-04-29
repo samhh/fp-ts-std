@@ -3,6 +3,7 @@ import {
   fromString,
   toString,
   fromRecord,
+  toRecord,
   fromTuples,
   toTuples,
   clone,
@@ -82,6 +83,16 @@ describe("URLSearchParams", () => {
           f(x)
         }),
       )
+    })
+  })
+
+  describe("toRecord", () => {
+    const f = toRecord
+
+    it("returns all values grouped by key", () => {
+      const x = new URLSearchParams("a=b&c=d&a=e")
+
+      expect(f(x)).toEqual({ a: ["b", "e"], c: ["d"] })
     })
   })
 

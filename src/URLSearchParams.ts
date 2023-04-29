@@ -14,7 +14,9 @@ import { construct, invoke, isInstanceOf } from "./Function"
 import { Predicate } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
+import * as A from "fp-ts/Array"
 import { fromIterable } from "./Array"
+import { mapSnd } from "fp-ts/Tuple"
 
 /**
  * An empty `URLSearchParams`.
@@ -117,6 +119,26 @@ export const fromRecord: (x: Record<string, string>) => URLSearchParams = flow(
   R.toArray,
   fromTuples,
 )
+
+/**
+ * Convert a `URLSearchParams` to a record, grouping values by keys.
+ *
+ * @example
+ * import { toRecord } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = new URLSearchParams('a=b&c=d&a=e')
+ *
+ * assert.deepStrictEqual(toRecord(x), { a: ['b', 'e'], c: ['d'] })
+ *
+ * @since 0.17.0
+ */
+export const toRecord = (
+  x: URLSearchParams,
+): Record<string, NonEmptyArray<string>> =>
+  R.fromFoldableMap(NEA.getSemigroup<string>(), A.Foldable)(
+    toTuples(x),
+    mapSnd(NEA.of),
+  )
 
 /**
  * Clone a `URLSearchParams`.

@@ -26,6 +26,7 @@ Added in v0.2.0
   - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
   - [setParam](#setparam)
+  - [toRecord](#torecord)
   - [toString](#tostring)
   - [toTuples](#totuples)
 
@@ -304,6 +305,32 @@ assert.deepStrictEqual(f(y), O.some('e'))
 ```
 
 Added in v0.1.0
+
+## toRecord
+
+Convert a `URLSearchParams` to a record, grouping values by keys.
+
+**Signature**
+
+```ts
+export declare const toRecord: (x: URLSearchParams) => Record<string, NonEmptyArray<string>>
+```
+
+```hs
+toRecord :: URLSearchParams -> Record string (NonEmptyArray string)
+```
+
+**Example**
+
+```ts
+import { toRecord } from 'fp-ts-std/URLSearchParams'
+
+const x = new URLSearchParams('a=b&c=d&a=e')
+
+assert.deepStrictEqual(toRecord(x), { a: ['b', 'e'], c: ['d'] })
+```
+
+Added in v0.17.0
 
 ## toString
 
