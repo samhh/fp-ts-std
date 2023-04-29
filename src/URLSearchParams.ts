@@ -19,6 +19,7 @@ import { fromIterable } from "./Array"
 import { mapSnd } from "fp-ts/Tuple"
 import * as Str from "fp-ts/string"
 import { withFst } from "./Tuple"
+import { Endomorphism } from "fp-ts/Endomorphism"
 
 /**
  * An empty `URLSearchParams`.
@@ -236,8 +237,8 @@ export const getAllForParam = (
  */
 export const setParam =
   (k: string) =>
-  (v: string) =>
-  (x: URLSearchParams): URLSearchParams => {
+  (v: string): Endomorphism<URLSearchParams> =>
+  (x): URLSearchParams => {
     const y = clone(x)
     y.set(k, v) // eslint-disable-line functional/no-expression-statements
     return y

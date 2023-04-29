@@ -283,11 +283,11 @@ Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
 **Signature**
 
 ```ts
-export declare const setParam: (k: string) => (v: string) => (x: URLSearchParams) => URLSearchParams
+export declare const setParam: (k: string) => (v: string) => Endomorphism<URLSearchParams>
 ```
 
 ```hs
-setParam :: string -> string -> URLSearchParams -> URLSearchParams
+setParam :: string -> string -> Endomorphism URLSearchParams
 ```
 
 **Example**
