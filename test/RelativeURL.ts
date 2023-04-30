@@ -39,7 +39,7 @@ const invalidBase = "samhh.com"
 const validRelativeUrl = "/f/g.h?i=j&k=l&i=m#n"
 const invalidRelativeUrl = "//"
 
-describe("URL", () => {
+describe("RelativeURL", () => {
   describe("isRelativeURL", () => {
     const f = isRelativeURL
 
