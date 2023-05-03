@@ -18,6 +18,8 @@ Added in v0.12.0
   - [create](#create)
   - [dup](#dup)
   - [fanout](#fanout)
+  - [getBounded](#getbounded)
+  - [getEnum](#getenum)
   - [getEq](#geteq)
   - [getOrd](#getord)
   - [mapBoth](#mapboth)
@@ -109,6 +111,57 @@ assert.deepStrictEqual(fanout(S.fromNumber)(add2)(0), ['0', 2])
 ```
 
 Added in v0.15.0
+
+## getBounded
+
+Derive a `Bounded` instance for a tuple in which the top and bottom
+bounds are `[A.top, B.top]` and `[A.bottom, B.bottom]` respectively.
+
+**Signature**
+
+```ts
+export declare const getBounded: <A>(BA: Bounded<A>) => <B>(BB: Bounded<B>) => Bounded<[A, B]>
+```
+
+```hs
+getBounded :: Bounded a -> Bounded b -> Bounded [a, b]
+```
+
+Added in v0.17.0
+
+## getEnum
+
+Derive an `Enum` instance for a tuple given an `Enum` instance for each
+member.
+
+**Signature**
+
+```ts
+export declare const getEnum: <A>(EA: Enum<A>) => <B>(EB: Enum<B>) => Enum<[A, B]>
+```
+
+```hs
+getEnum :: Enum a -> Enum b -> Enum [a, b]
+```
+
+**Example**
+
+```ts
+import { universe } from 'fp-ts-std/Enum'
+import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+import { getEnum } from 'fp-ts-std/Tuple'
+
+const E = getEnum(EnumBool)(EnumBool)
+
+assert.deepStrictEqual(universe(E), [
+  [false, false],
+  [true, false],
+  [false, true],
+  [true, true],
+])
+```
+
+Added in v0.17.0
 
 ## getEq
 

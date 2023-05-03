@@ -11,6 +11,7 @@ import {
   fanout,
   getEq,
   getOrd,
+  getEnum,
 } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, identity, pipe } from "fp-ts/function"
@@ -19,6 +20,8 @@ import * as O from "fp-ts/Option"
 import fc from "fast-check"
 import * as Str from "fp-ts/string"
 import { LT, EQ, GT } from "../src/Ordering"
+import { Enum as EnumBool } from "../src/Boolean"
+import { universe } from "../src/Enum"
 
 const nonMaxNumber = fc.integer({ max: Number.MAX_SAFE_INTEGER - 1 })
 
@@ -219,6 +222,82 @@ describe("Tuple", () => {
       })
 
       expect(f(["foo", "foo"], ["bar", "foo"])).toBe(GT)
+    })
+  })
+
+  describe("getEnum", () => {
+    const E = getEnum(EnumBool)(EnumBool)
+
+    describe("pred", () => {
+      it("retracts succ", () => {
+        const f = flow(E.pred, O.chain(E.succ), O.chain(E.pred))
+        const g = E.pred
+
+        fc.assert(
+          fc.property(fc.tuple(fc.boolean(), fc.boolean()), x =>
+            expect(f(x)).toEqual(g(x)),
+          ),
+        )
+      })
+    })
+
+    describe("succ", () => {
+      it("retracts pred", () => {
+        const f = flow(E.succ, O.chain(E.pred), O.chain(E.succ))
+        const g = E.succ
+
+        fc.assert(
+          fc.property(fc.tuple(fc.boolean(), fc.boolean()), x =>
+            expect(f(x)).toEqual(g(x)),
+          ),
+        )
+      })
+    })
+
+    describe("fromEnum", () => {
+      const f = E.fromEnum
+
+      it("works", () => {
+        expect(f([false, false])).toBe(0)
+        expect(f([true, false])).toBe(1)
+        expect(f([false, true])).toBe(2)
+        expect(f([true, true])).toBe(3)
+      })
+    })
+
+    describe("toEnum", () => {
+      const f = E.toEnum
+
+      it("succeeds for input in range", () => {
+        expect(f(0)).toEqual(O.some([false, false]))
+        expect(f(1)).toEqual(O.some([true, false]))
+        expect(f(2)).toEqual(O.some([false, true]))
+        expect(f(3)).toEqual(O.some([true, true]))
+      })
+
+      it("fails gracefully for invalid input", () => {
+        expect(f(-Infinity)).toEqual(O.none)
+        expect(f(-1)).toEqual(O.none)
+        expect(f(2.5)).toEqual(O.none)
+        expect(f(4)).toEqual(O.none)
+        expect(f(1e6)).toEqual(O.none)
+        expect(f(Infinity)).toEqual(O.none)
+        expect(f(NaN)).toEqual(O.none)
+      })
+    })
+
+    it("can build all values bottom to top, left to right", () => {
+      expect(universe(E)).toEqual([
+        [false, false],
+        [true, false],
+        [false, true],
+        [true, true],
+      ])
+    })
+
+    it("cardinality is a * b", () => {
+      expect(E.cardinality()).toBe(4)
+      expect(getEnum(E)(E).cardinality()).toBe(16)
     })
   })
 })

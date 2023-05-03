@@ -11,7 +11,7 @@ This project adheres to semantic versioning.
 - Add `applyN` to `Function`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.
-- Add `getEq` and `getOrd` to `Tuple`.
+- Add `getEq`, `getOrd`, and `getBounded` to `Tuple`.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.

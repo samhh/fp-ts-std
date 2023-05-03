@@ -24,12 +24,18 @@ import {
   Functor2C,
 } from "fp-ts/Functor"
 import * as Tuple from "fp-ts/Tuple"
-import { fork } from "./Function"
-import { identity } from "fp-ts/function"
+import { applyN, fork } from "./Function"
+import { flow, identity, pipe } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Eq, fromEquals } from "fp-ts/Eq"
 import { Ord, fromCompare } from "fp-ts/Ord"
 import { EQ } from "./Ordering"
+import { Bounded } from "fp-ts/Bounded"
+import { Enum } from "./Enum"
+import * as L from "./Lazy"
+import { isNonNegative, isValid, multiply } from "./Number"
+import * as O from "fp-ts/Option"
+import { allPass } from "./Predicate"
 
 /**
  * Duplicate a value into a tuple.
@@ -294,3 +300,81 @@ export const getOrd =
       const a = OA.compare(xa, ya)
       return a === EQ ? OB.compare(xb, yb) : a
     })
+
+/**
+ * Derive a `Bounded` instance for a tuple in which the top and bottom
+ * bounds are `[A.top, B.top]` and `[A.bottom, B.bottom]` respectively.
+ *
+ * @since 0.17.0
+ */
+export const getBounded =
+  <A>(BA: Bounded<A>) =>
+  <B>(BB: Bounded<B>): Bounded<[A, B]> => ({
+    ...getOrd(BA)(BB),
+    top: [BA.top, BB.top],
+    bottom: [BA.bottom, BB.bottom],
+  })
+
+/**
+ * Derive an `Enum` instance for a tuple given an `Enum` instance for each
+ * member.
+ *
+ * @example
+ * import { universe } from 'fp-ts-std/Enum'
+ * import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+ * import { getEnum } from 'fp-ts-std/Tuple'
+ *
+ * const E = getEnum(EnumBool)(EnumBool)
+ *
+ * assert.deepStrictEqual(
+ *   universe(E),
+ *   [[false, false], [true, false], [false, true], [true, true]],
+ * )
+ *
+ * @since 0.17.0
+ */
+export const getEnum =
+  <A>(EA: Enum<A>) =>
+  <B>(EB: Enum<B>): Enum<[A, B]> => ({
+    ...getBounded(EA)(EB),
+    succ: ([a, b]) =>
+      EA.equals(a, EA.top)
+        ? pipe(EB.succ(b), O.map(withFst(EA.bottom)))
+        : pipe(EA.succ(a), O.map(withSnd(b))),
+    pred: ([a, b]) =>
+      EA.equals(a, EA.bottom)
+        ? pipe(EB.pred(b), O.map(withFst(EA.top)))
+        : pipe(EA.pred(a), O.map(withSnd(b))),
+    toEnum: flow(
+      O.fromPredicate(allPass([isValid, isNonNegative, Number.isInteger])),
+      O.chain(n => {
+        const ac = L.execute(EA.cardinality)
+        const bc = L.execute(EB.cardinality)
+        if (n > ac + bc) return O.none // eslint-disable-line functional/no-conditional-statements
+
+        type AB = (x: A) => (y: B) => [A, B]
+        return pipe(
+          O.of<AB>(withFst),
+          O.ap(pipe(EA.bottom, O.some, applyN(n % ac)(O.chain(EA.succ)))),
+          O.ap(
+            pipe(
+              EB.bottom,
+              O.some,
+              applyN(Math.floor(n / ac))(O.chain(EB.succ)),
+            ),
+          ),
+        )
+      }),
+    ),
+    fromEnum: ([a, b]) => {
+      const ai = EA.fromEnum(a)
+      const bi = EB.fromEnum(b)
+      const ac = L.execute(EA.cardinality)
+      return (ac - 1) * bi + ai + bi
+    },
+    cardinality: pipe(
+      L.of(multiply),
+      L.ap(EA.cardinality),
+      L.ap(EB.cardinality),
+    ),
+  })
