@@ -25,6 +25,7 @@ Added in v0.1.0
   - [URI (type alias)](#uri-type-alias)
   - [ap](#ap)
   - [applyEvery](#applyevery)
+  - [applyN](#applyn)
   - [applySomes](#applysomes)
   - [chain](#chain)
   - [construct](#construct)
@@ -191,6 +192,34 @@ assert.deepStrictEqual(g(3), 12)
 ```
 
 Added in v0.12.0
+
+## applyN
+
+Apply a function the specified number of times. `n` will be normalised to a
+non-negative integer according to the semantics of `A.replicate`.
+
+**Signature**
+
+```ts
+export declare const applyN: (n: number) => <A>(f: Endomorphism<A>) => Endomorphism<A>
+```
+
+```hs
+applyN :: number -> Endomorphism a -> Endomorphism a
+```
+
+**Example**
+
+```ts
+import { applyN } from 'fp-ts-std/Function'
+import { increment } from 'fp-ts-std/Number'
+
+const add3 = applyN(3)(increment)
+
+assert.strictEqual(add3(2), 5)
+```
+
+Added in v0.17.0
 
 ## applySomes
 

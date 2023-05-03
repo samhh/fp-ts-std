@@ -8,6 +8,7 @@ This project adheres to semantic versioning.
 - Add `Enum` module.
 - Add `Bounded` instance to `Boolean`.
 - Add `match2`, `getBounded`, and `getOrd` to `Either`.
+- Add `applyN` to `Function`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.
 - Add `getEq` and `getOrd` to `Tuple`.

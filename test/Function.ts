@@ -29,6 +29,7 @@ import {
   isInstanceOf,
   applyEvery,
   applySomes,
+  applyN,
 } from "../src/Function"
 import { fromNumber } from "../src/String"
 import { Option } from "fp-ts/Option"
@@ -691,6 +692,23 @@ describe("Function", () => {
       ]
       expect(f(fs)(1)).not.toBe(4)
       expect(f(fs)(1)).toBe(6)
+    })
+  })
+
+  describe("applyN", () => {
+    const f: Endomorphism<number> = n => applyN(n)(increment)(2)
+
+    it("applies the function the specified number of times", () => {
+      expect(f(3)).toBe(5)
+
+      fc.assert(
+        fc.property(fc.integer({ min: 1, max: 50 }), n => f(n) === n + 2),
+      )
+    })
+
+    it("returns identity on non-positive number", () => {
+      expect(f(0)).toBe(2)
+      expect(f(-1)).toBe(2)
     })
   })
 })
