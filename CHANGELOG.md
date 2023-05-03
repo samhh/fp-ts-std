@@ -5,6 +5,10 @@ This project adheres to semantic versioning.
 ## 0.17.0 (_Unreleased_)
 
 - Add `URLPath` module.
+- Add `Enum` module.
+- Add `Bounded` instance to `Boolean`.
+- Add alternative "Safe" `Bounded` instance to `Number`.
+- Add `getBounded` to `Option`.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.

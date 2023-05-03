@@ -1,6 +1,6 @@
 ---
 title: Number.ts
-nav_order: 22
+nav_order: 23
 parent: Modules
 ---
 
@@ -15,6 +15,8 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [BoundedSafe](#boundedsafe)
+  - [EnumInt](#enumint)
   - [add](#add)
   - [decrement](#decrement)
   - [divide](#divide)
@@ -38,6 +40,57 @@ Added in v0.1.0
 ---
 
 # utils
+
+## BoundedSafe
+
+An alternative `Bounded` instance for numbers which defines top and bottom
+as `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER` respectively.
+
+**Signature**
+
+```ts
+export declare const BoundedSafe: Bounded<number>
+```
+
+```hs
+BoundedSafe :: Bounded number
+```
+
+Added in v0.17.0
+
+## EnumInt
+
+An unlawful but predictable instance of `Enum` for numbers, representing
+integers between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`.
+
+Invalid inputs will return `None` for both `succ` and `pred`.
+
+`toEnum` and `fromEnum` do not modify the input.
+
+**Signature**
+
+```ts
+export declare const EnumInt: Enum<number>
+```
+
+```hs
+EnumInt :: Enum number
+```
+
+**Example**
+
+```ts
+import * as O from 'fp-ts/Option'
+import { EnumInt } from 'fp-ts-std/Number'
+
+assert.deepStrictEqual(EnumInt.succ(123), O.some(124))
+assert.deepStrictEqual(EnumInt.succ(123.5), O.none)
+
+assert.deepStrictEqual(EnumInt.pred(123), O.some(122))
+assert.deepStrictEqual(EnumInt.pred(123.5), O.none)
+```
+
+Added in v0.17.0
 
 ## add
 

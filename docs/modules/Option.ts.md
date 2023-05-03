@@ -1,6 +1,6 @@
 ---
 title: Option.ts
-nav_order: 23
+nav_order: 24
 parent: Modules
 ---
 
@@ -16,6 +16,8 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [altAllBy](#altallby)
+  - [getBounded](#getbounded)
+  - [getEnum](#getenum)
   - [invert](#invert)
   - [memptyUnless](#memptyunless)
   - [memptyWhen](#memptywhen)
@@ -56,6 +58,53 @@ assert.deepStrictEqual(altAllBy([constant(O.none), O.some])('foo'), O.some('foo'
 ```
 
 Added in v0.15.0
+
+## getBounded
+
+Derive a `Bounded` instance for `Option<A>` in which the top and bottom
+bounds are `Some(B.top)` and `None` respectively.
+
+**Signature**
+
+```ts
+export declare const getBounded: <A>(Ord: Ord<A>) => (B: Bounded<A>) => Bounded<Option<A>>
+```
+
+```hs
+getBounded :: Ord a -> Bounded a -> Bounded (Option a)
+```
+
+Added in v0.17.0
+
+## getEnum
+
+Derive an `Enum` instance for `Option<A>` given an `Enum` instance for `A`.
+
+**Signature**
+
+```ts
+export declare const getEnum: <A>(Ord: Ord<A>) => (E: Enum<A>) => Enum<Option<A>>
+```
+
+```hs
+getEnum :: Ord a -> Enum a -> Enum (Option a)
+```
+
+**Example**
+
+```ts
+import { universe } from 'fp-ts-std/Enum'
+import { Ord as OrdBool } from 'fp-ts/boolean'
+import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+import * as O from 'fp-ts/Option'
+import { getEnum as getEnumO } from 'fp-ts-std/Option'
+
+const EnumBoolO = getEnumO(OrdBool)(EnumBool)
+
+assert.deepStrictEqual(universe(EnumBoolO), [O.none, O.some(false), O.some(true)])
+```
+
+Added in v0.17.0
 
 ## invert
 
@@ -100,11 +149,7 @@ Conditionally returns the provided `Option` or `None`. The dual to
 **Signature**
 
 ```ts
-export declare const memptyUnless: (x: boolean) => <A>(m: Lazy<Option<A>>) => Option<A>
-```
-
-```hs
-memptyUnless :: boolean -> Lazy (Option a) -> Option a
+export declare const memptyUnless: (x: boolean) => <A>(m: L.Lazy<Option<A>>) => Option<A>
 ```
 
 **Example**
@@ -130,11 +175,7 @@ Conditionally returns the provided `Option` or `None`. The dual to
 **Signature**
 
 ```ts
-export declare const memptyWhen: (x: boolean) => <A>(m: Lazy<Option<A>>) => Option<A>
-```
-
-```hs
-memptyWhen :: boolean -> Lazy (Option a) -> Option a
+export declare const memptyWhen: (x: boolean) => <A>(m: L.Lazy<Option<A>>) => Option<A>
 ```
 
 **Example**
@@ -188,11 +229,7 @@ evaluated only if the condition passes.
 **Signature**
 
 ```ts
-export declare const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A>
-```
-
-```hs
-pureIf :: boolean -> Lazy a -> Option a
+export declare const pureIf: (x: boolean) => <A>(y: L.Lazy<A>) => Option<A>
 ```
 
 **Example**

@@ -8,12 +8,17 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Eq } from "fp-ts/Eq"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { constant, flow } from "fp-ts/function"
+import { constant, flow, pipe } from "fp-ts/function"
 import * as B from "fp-ts/boolean"
 import { invert as invertBool } from "./Boolean"
 import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative"
 import { toMonoid as _toMonoid } from "./Monoid"
-import { Lazy } from "./Lazy"
+import * as L from "./Lazy"
+import Lazy = L.Lazy
+import { Ord } from "fp-ts/Ord"
+import { Bounded } from "fp-ts/Bounded"
+import { Enum } from "./Enum"
+import { increment, decrement } from "./Number"
 
 /**
  * Unwrap the value from within an `Option`, throwing `msg` if `None`.
@@ -198,3 +203,51 @@ export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
 export const altAllBy: <A, B>(
   fs: Array<(x: A) => Option<B>>,
 ) => (x: A) => Option<B> = _altAllBy(O.Alternative)
+
+/**
+ * Derive a `Bounded` instance for `Option<A>` in which the top and bottom
+ * bounds are `Some(B.top)` and `None` respectively.
+ *
+ * @since 0.17.0
+ */
+export const getBounded =
+  <A>(Ord: Ord<A>) =>
+  (B: Bounded<A>): Bounded<Option<A>> => ({
+    ...O.getOrd(Ord),
+    top: O.some(B.top),
+    bottom: O.none,
+  })
+
+/**
+ * Derive an `Enum` instance for `Option<A>` given an `Enum` instance for `A`.
+ *
+ * @example
+ * import { universe } from 'fp-ts-std/Enum'
+ * import { Ord as OrdBool } from 'fp-ts/boolean'
+ * import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+ * import * as O from 'fp-ts/Option'
+ * import { getEnum as getEnumO } from 'fp-ts-std/Option'
+ *
+ * const EnumBoolO = getEnumO(OrdBool)(EnumBool)
+ *
+ * assert.deepStrictEqual(
+ *   universe(EnumBoolO),
+ *   [O.none, O.some(false), O.some(true)],
+ * )
+ *
+ * @since 0.17.0
+ */
+export const getEnum =
+  <A>(Ord: Ord<A>) =>
+  (E: Enum<A>): Enum<Option<A>> => ({
+    ...getBounded(Ord)(E),
+    succ: O.match(
+      L.lazy(() => O.some(O.some(E.bottom))),
+      flow(E.succ, O.map(O.some)),
+    ),
+    pred: O.map(E.pred),
+    toEnum: n =>
+      n === 0 ? O.some(O.none) : pipe(n, decrement, E.toEnum, O.map(O.some)),
+    fromEnum: O.match(constant(0), flow(E.fromEnum, increment)),
+    cardinality: pipe(E.cardinality, L.map(increment)),
+  })

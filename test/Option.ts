@@ -8,6 +8,8 @@ import {
   memptyUnless,
   pureIf,
   altAllBy,
+  getBounded,
+  getEnum,
 } from "../src/Option"
 import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
@@ -15,6 +17,9 @@ import * as S from "fp-ts/string"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
 import { Lazy } from "../src/Lazy"
+import { Ord as OrdBool } from "fp-ts/boolean"
+import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
+import { universe } from "../src/Enum"
 
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
   fc.oneof(x.map(O.some), fc.constant(O.none))
@@ -198,5 +203,25 @@ describe("Option", () => {
       expect(exe).toBe(true)
     })
     /* eslint-enable functional/no-expression-statements */
+  })
+
+  describe("getBounded", () => {
+    const B = getBounded(OrdBool)(BoundedBool)
+
+    it("None is bottom", () => {
+      expect(B.bottom).toEqual(O.none)
+    })
+
+    it("Some(top) is top", () => {
+      expect(B.top).toEqual(O.some(true))
+    })
+  })
+
+  describe("getEnum", () => {
+    const E = getEnum(OrdBool)(EnumBool)
+
+    it("universe mx = (None : (pure <$> universe x))", () => {
+      expect(universe(E)).toEqual([O.none, O.some(false), O.some(true)])
+    })
   })
 })

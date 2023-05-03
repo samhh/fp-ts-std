@@ -4,11 +4,18 @@
  * @since 0.1.0
  */
 
-import { flow, pipe } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
+import { flow, identity, pipe } from "fp-ts/function"
+import { Predicate, not, and } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { Option, fromPredicate } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import Option = O.Option
 import { unless } from "./Function"
+import { Bounded as BoundedInfinity } from "fp-ts/number"
+import { Enum } from "./Enum"
+import { Bounded } from "fp-ts/Bounded"
+import * as NEA from "fp-ts/NonEmptyArray"
+import NonEmptyArray = NEA.NonEmptyArray
+import * as L from "./Lazy"
 
 /**
  * Check if a number is actually valid. Specifically, all this function is
@@ -42,7 +49,7 @@ export const isValid: Predicate<number> = not(Number.isNaN)
 export const fromStringWithRadix =
   (radix: number) =>
   (string: string): Option<number> =>
-    pipe(Number.parseInt(string, radix), fromPredicate(isValid))
+    pipe(Number.parseInt(string, radix), O.fromPredicate(isValid))
 
 /**
  * Convert a string to a number.
@@ -73,7 +80,7 @@ export const fromString: (string: string) => Option<number> =
  */
 export const floatFromString: (x: string) => Option<number> = flow(
   Number.parseFloat,
-  fromPredicate(isValid),
+  O.fromPredicate(isValid),
 )
 
 /**
@@ -299,3 +306,54 @@ export const isNonNegative: Predicate<number> = n => Math.sign(n) !== -1
  * @since 0.13.0
  */
 export const isNonPositive: Predicate<number> = n => Math.sign(n) !== 1
+
+/**
+ * An alternative `Bounded` instance for numbers which defines top and bottom
+ * as `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER` respectively.
+ *
+ * @since 0.17.0
+ */
+export const BoundedSafe: Bounded<number> = {
+  ...BoundedInfinity,
+  top: Number.MAX_SAFE_INTEGER,
+  bottom: Number.MIN_SAFE_INTEGER,
+}
+
+/**
+ * An unlawful but predictable instance of `Enum` for numbers, representing
+ * integers between `Number.MIN_SAFE_INTEGER` and `Number.MAX_SAFE_INTEGER`.
+ *
+ * Invalid inputs will return `None` for both `succ` and `pred`.
+ *
+ * `toEnum` and `fromEnum` do not modify the input.
+ *
+ * @example
+ * import * as O from 'fp-ts/Option'
+ * import { EnumInt } from 'fp-ts-std/Number'
+ *
+ * assert.deepStrictEqual(EnumInt.succ(123), O.some(124))
+ * assert.deepStrictEqual(EnumInt.succ(123.5), O.none)
+ *
+ * assert.deepStrictEqual(EnumInt.pred(123), O.some(122))
+ * assert.deepStrictEqual(EnumInt.pred(123.5), O.none)
+ *
+ * @since 0.17.0
+ */
+export const EnumInt: Enum<number> = {
+  ...BoundedSafe,
+  succ: flow(
+    O.fromPredicate(
+      and((n: number) => n < Number.MAX_SAFE_INTEGER)(Number.isInteger),
+    ),
+    O.map(increment),
+  ),
+  pred: flow(
+    O.fromPredicate(
+      and((n: number) => n > Number.MIN_SAFE_INTEGER)(Number.isInteger),
+    ),
+    O.map(decrement),
+  ),
+  toEnum: O.some,
+  fromEnum: identity,
+  cardinality: L.of(Infinity),
+}

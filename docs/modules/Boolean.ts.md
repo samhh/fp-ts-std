@@ -16,6 +16,8 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [Bounded](#bounded)
+  - [Enum](#enum)
   - [and](#and)
   - [invert](#invert)
   - [or](#or)
@@ -24,6 +26,56 @@ Added in v0.1.0
 ---
 
 # utils
+
+## Bounded
+
+A `Bounded` instance for booleans.
+
+**Signature**
+
+```ts
+export declare const Bounded: Bounded<boolean>
+```
+
+```hs
+Bounded :: Bounded boolean
+```
+
+**Example**
+
+```ts
+import { Bounded } from 'fp-ts-std/Boolean'
+
+assert.strictEqual(Bounded.top, true)
+assert.strictEqual(Bounded.bottom, false)
+```
+
+Added in v0.17.0
+
+## Enum
+
+An `Enum` instance for booleans.
+
+**Signature**
+
+```ts
+export declare const Enum: Enum_.Enum<boolean>
+```
+
+**Example**
+
+```ts
+import * as O from 'fp-ts/Option'
+import { Enum } from 'fp-ts-std/Boolean'
+
+assert.deepStrictEqual(Enum.succ(false), O.some(true))
+assert.deepStrictEqual(Enum.succ(true), O.none)
+
+assert.deepStrictEqual(Enum.pred(true), O.some(false))
+assert.deepStrictEqual(Enum.pred(false), O.none)
+```
+
+Added in v0.17.0
 
 ## and
 

@@ -18,12 +18,14 @@ import {
   isNegative,
   isNonNegative,
   isNonPositive,
+  EnumInt,
 } from "../src/Number"
 import { fromNumber } from "../src/String"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import * as Pred from "fp-ts/Predicate"
 import { Predicate } from "fp-ts/Predicate"
+import { flow } from "fp-ts/function"
 
 describe("Number", () => {
   describe("add", () => {
@@ -303,6 +305,72 @@ describe("Number", () => {
       expect(f(-Infinity)).toBe(true)
 
       fc.assert(fc.property(fc.integer({ max: -1 }), f))
+    })
+  })
+
+  describe("EnumInt", () => {
+    describe("succ", () => {
+      const f = EnumInt.succ
+
+      it("retracts pred", () => {
+        const g = flow(
+          EnumInt.pred,
+          O.chain(EnumInt.succ),
+          O.chain(EnumInt.pred),
+        )
+        const h = EnumInt.pred
+
+        fc.assert(fc.property(fc.integer(), n => expect(g(n)).toEqual(h(n))))
+      })
+
+      it("returns incremented number", () => {
+        expect(f(-123)).toEqual(O.some(-122))
+        expect(f(0)).toEqual(O.some(1))
+        expect(f(123)).toEqual(O.some(124))
+      })
+
+      it("rejects number more than or equal to max", () => {
+        expect(f(Number.MAX_SAFE_INTEGER)).toEqual(O.none)
+        expect(f(Number.MAX_SAFE_INTEGER + 1)).toEqual(O.none)
+        expect(f(Infinity)).toEqual(O.none)
+      })
+
+      it("rejects float", () => {
+        expect(f(-123.5)).toEqual(O.none)
+        expect(f(123.5)).toEqual(O.none)
+      })
+    })
+
+    describe("pred", () => {
+      const f = EnumInt.pred
+
+      it("retracts succ", () => {
+        const g = flow(
+          EnumInt.succ,
+          O.chain(EnumInt.pred),
+          O.chain(EnumInt.succ),
+        )
+        const h = EnumInt.succ
+
+        fc.assert(fc.property(fc.integer(), n => expect(g(n)).toEqual(h(n))))
+      })
+
+      it("returns decremented number", () => {
+        expect(f(-123)).toEqual(O.some(-124))
+        expect(f(0)).toEqual(O.some(-1))
+        expect(f(123)).toEqual(O.some(122))
+      })
+
+      it("rejects number less than or equal to min", () => {
+        expect(f(Number.MIN_SAFE_INTEGER)).toEqual(O.none)
+        expect(f(Number.MIN_SAFE_INTEGER - 1)).toEqual(O.none)
+        expect(f(-Infinity)).toEqual(O.none)
+      })
+
+      it("rejects float", () => {
+        expect(f(-123.5)).toEqual(O.none)
+        expect(f(123.5)).toEqual(O.none)
+      })
     })
   })
 })
