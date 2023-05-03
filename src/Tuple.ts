@@ -28,6 +28,8 @@ import { fork } from "./Function"
 import { identity } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Eq, fromEquals } from "fp-ts/Eq"
+import { Ord, fromCompare } from "fp-ts/Ord"
+import { EQ } from "./Ordering"
 
 /**
  * Duplicate a value into a tuple.
@@ -267,3 +269,28 @@ export const getEq =
   <A>(EA: Eq<A>) =>
   <B>(EB: Eq<B>): Eq<[A, B]> =>
     fromEquals(([xa, xb], [ya, yb]) => EA.equals(xa, ya) && EB.equals(xb, yb))
+
+/**
+ * Derive `Ord` for a tuple given `Ord` instances for its members. The first
+ * component is compared first.
+ *
+ * @example
+ * import { getOrd } from 'fp-ts-std/Tuple'
+ * import * as Str from 'fp-ts/string'
+ * import * as Num from 'fp-ts/number'
+ * import { LT, EQ, GT } from 'fp-ts-std/Ordering'
+ *
+ * const Ord = getOrd(Str.Ord)(Num.Ord)
+ *
+ * assert.strictEqual(Ord.compare(['foo', 123], ['foo', 123]), EQ)
+ * assert.strictEqual(Ord.compare(['foo', 123], ['bar', 123]), GT)
+ *
+ * @since 0.17.0
+ */
+export const getOrd =
+  <A>(OA: Ord<A>) =>
+  <B>(OB: Ord<B>): Ord<[A, B]> =>
+    fromCompare(([xa, xb], [ya, yb]) => {
+      const a = OA.compare(xa, ya)
+      return a === EQ ? OB.compare(xb, yb) : a
+    })

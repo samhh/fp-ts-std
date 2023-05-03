@@ -19,6 +19,7 @@ Added in v0.12.0
   - [dup](#dup)
   - [fanout](#fanout)
   - [getEq](#geteq)
+  - [getOrd](#getord)
   - [mapBoth](#mapboth)
   - [toFst](#tofst)
   - [toSnd](#tosnd)
@@ -134,6 +135,37 @@ const Eq = getEq(Str.Eq)(Num.Eq)
 
 assert.strictEqual(Eq.equals(['foo', 123], ['foo', 123]), true)
 assert.strictEqual(Eq.equals(['foo', 123], ['bar', 123]), false)
+```
+
+Added in v0.17.0
+
+## getOrd
+
+Derive `Ord` for a tuple given `Ord` instances for its members. The first
+component is compared first.
+
+**Signature**
+
+```ts
+export declare const getOrd: <A>(OA: Ord<A>) => <B>(OB: Ord<B>) => Ord<[A, B]>
+```
+
+```hs
+getOrd :: Ord a -> Ord b -> Ord [a, b]
+```
+
+**Example**
+
+```ts
+import { getOrd } from 'fp-ts-std/Tuple'
+import * as Str from 'fp-ts/string'
+import * as Num from 'fp-ts/number'
+import { LT, EQ, GT } from 'fp-ts-std/Ordering'
+
+const Ord = getOrd(Str.Ord)(Num.Ord)
+
+assert.strictEqual(Ord.compare(['foo', 123], ['foo', 123]), EQ)
+assert.strictEqual(Ord.compare(['foo', 123], ['bar', 123]), GT)
 ```
 
 Added in v0.17.0

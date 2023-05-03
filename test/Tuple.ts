@@ -10,6 +10,7 @@ import {
   mapBoth,
   fanout,
   getEq,
+  getOrd,
 } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, identity, pipe } from "fp-ts/function"
@@ -17,6 +18,7 @@ import { bimap, swap } from "fp-ts/Tuple"
 import * as O from "fp-ts/Option"
 import fc from "fast-check"
 import * as Str from "fp-ts/string"
+import { LT, EQ, GT } from "../src/Ordering"
 
 const nonMaxNumber = fc.integer({ max: Number.MAX_SAFE_INTEGER - 1 })
 
@@ -195,6 +197,28 @@ describe("Tuple", () => {
       })
 
       expect(f(["foo", "foo"], ["bar", "foo"])).toBe(false)
+    })
+  })
+
+  describe("getOrd", () => {
+    const { compare: f } = getOrd(Str.Ord)(Str.Ord)
+
+    it("compares first component first", () => {
+      expect(f(["foo", "bar"], ["foo", "bar"])).toBe(EQ)
+      expect(f(["foo", "bar"], ["abc", "baz"])).toBe(GT)
+      expect(f(["foo", "bar"], ["foo", "baz"])).toBe(LT)
+    })
+
+    it("compares second component lazily", () => {
+      const { compare: f } = getOrd(Str.Ord)({
+        ...Str.Eq,
+        compare: () => {
+          // eslint-disable-next-line functional/no-throw-statements
+          throw "evaluated second component"
+        },
+      })
+
+      expect(f(["foo", "foo"], ["bar", "foo"])).toBe(GT)
     })
   })
 })
