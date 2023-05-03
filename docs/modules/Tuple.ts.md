@@ -18,6 +18,7 @@ Added in v0.12.0
   - [create](#create)
   - [dup](#dup)
   - [fanout](#fanout)
+  - [getEq](#geteq)
   - [mapBoth](#mapboth)
   - [toFst](#tofst)
   - [toSnd](#tosnd)
@@ -107,6 +108,35 @@ assert.deepStrictEqual(fanout(S.fromNumber)(add2)(0), ['0', 2])
 ```
 
 Added in v0.15.0
+
+## getEq
+
+Derive `Eq` for a tuple given `Eq` instances for its members.
+
+**Signature**
+
+```ts
+export declare const getEq: <A>(EA: Eq<A>) => <B>(EB: Eq<B>) => Eq<[A, B]>
+```
+
+```hs
+getEq :: Eq a -> Eq b -> Eq [a, b]
+```
+
+**Example**
+
+```ts
+import { getEq } from 'fp-ts-std/Tuple'
+import * as Str from 'fp-ts/string'
+import * as Num from 'fp-ts/number'
+
+const Eq = getEq(Str.Eq)(Num.Eq)
+
+assert.strictEqual(Eq.equals(['foo', 123], ['foo', 123]), true)
+assert.strictEqual(Eq.equals(['foo', 123], ['bar', 123]), false)
+```
+
+Added in v0.17.0
 
 ## mapBoth
 

@@ -10,6 +10,7 @@ This project adheres to semantic versioning.
 - Add `match2`, `getBounded`, and `getOrd` to `Either`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.
+- Add `getEq` to `Tuple`.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.

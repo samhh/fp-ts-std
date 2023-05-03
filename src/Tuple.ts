@@ -27,6 +27,7 @@ import * as Tuple from "fp-ts/Tuple"
 import { fork } from "./Function"
 import { identity } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
+import { Eq, fromEquals } from "fp-ts/Eq"
 
 /**
  * Duplicate a value into a tuple.
@@ -246,3 +247,23 @@ export const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B] =
 export const fanout: <A, B>(
   f: (x: A) => B,
 ) => <C>(g: (x: A) => C) => (x: A) => [B, C] = f => g => fork([f, g])
+
+/**
+ * Derive `Eq` for a tuple given `Eq` instances for its members.
+ *
+ * @example
+ * import { getEq } from 'fp-ts-std/Tuple'
+ * import * as Str from 'fp-ts/string'
+ * import * as Num from 'fp-ts/number'
+ *
+ * const Eq = getEq(Str.Eq)(Num.Eq)
+ *
+ * assert.strictEqual(Eq.equals(['foo', 123], ['foo', 123]), true)
+ * assert.strictEqual(Eq.equals(['foo', 123], ['bar', 123]), false)
+ *
+ * @since 0.17.0
+ */
+export const getEq =
+  <A>(EA: Eq<A>) =>
+  <B>(EB: Eq<B>): Eq<[A, B]> =>
+    fromEquals(([xa, xb], [ya, yb]) => EA.equals(xa, ya) && EB.equals(xb, yb))
