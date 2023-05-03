@@ -246,3 +246,50 @@ export const getEnum = <A>(E: Enum<A>): Enum<Option<A>> => ({
   fromEnum: O.match(constant(0), flow(E.fromEnum, increment)),
   cardinality: pipe(E.cardinality, L.map(increment)),
 })
+
+/**
+ * Pattern match against two `Option`s simultaneously.
+ *
+ * @example
+ * import { constant, flow } from 'fp-ts/function'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import { match2 } from 'fp-ts-std/Option'
+ * import * as Str from 'fp-ts-std/String'
+ *
+ * const f: (x: Option<string>) => (y: Option<number>) => string = match2(
+ *   constant('Who are you?'),
+ *   Str.prepend('Your name is '),
+ *   flow(Str.fromNumber, Str.prepend('Your age is ')),
+ *   name => age => `You are ${name}, ${age}`,
+ * )
+ *
+ * assert.strictEqual(f(O.none)(O.some(40)), 'Your age is 40')
+ * assert.strictEqual(f(O.some("Hodor"))(O.some(40)), 'You are Hodor, 40')
+ *
+ * @since 0.17.0
+ */
+export const match2 =
+  <A, B, C>(
+    onNone: Lazy<C>,
+    onSomeFst: (x: A) => C,
+    onSomeSnd: (x: B) => C,
+    onSomeBoth: (x: A) => (y: B) => C,
+  ) =>
+  (mx: Option<A>) =>
+  (my: Option<B>): C =>
+    pipe(
+      mx,
+      O.match(
+        L.lazy(() => pipe(my, O.match(onNone, onSomeSnd))),
+        x =>
+          pipe(
+            my,
+            O.match(
+              L.lazy(() => onSomeFst(x)),
+              // eslint-disable-next-line functional/prefer-tacit
+              y => onSomeBoth(x)(y),
+            ),
+          ),
+      ),
+    )

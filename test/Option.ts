@@ -10,15 +10,17 @@ import {
   altAllBy,
   getBounded,
   getEnum,
+  match2,
 } from "../src/Option"
 import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
-import { constant, pipe } from "fp-ts/function"
+import { constant, identity, pipe } from "fp-ts/function"
 import { Lazy } from "../src/Lazy"
 import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
+import { curry2 } from "../src/Function"
 
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
   fc.oneof(x.map(O.some), fc.constant(O.none))
@@ -221,6 +223,59 @@ describe("Option", () => {
 
     it("universe mx = (None : (pure <$> universe x))", () => {
       expect(universe(E)).toEqual([O.none, O.some(false), O.some(true)])
+    })
+  })
+
+  describe("match2", () => {
+    const f = match2
+
+    it("calls appropriate callbacks", () => {
+      const g = f<string, string, string>(
+        constant("none"),
+        identity,
+        identity,
+        curry2(S.Semigroup.concat),
+      )
+
+      expect(g(O.none)(O.none)).toBe("none")
+      expect(g(O.some("some"))(O.none)).toBe("some")
+      expect(g(O.none)(O.some("some"))).toBe("some")
+      expect(g(O.some("some "))(O.some("some"))).toBe("some some")
+    })
+
+    it("is as lazy as possible", () => {
+      // eslint-disable-next-line functional/no-let
+      let n = 0
+
+      /* eslint-disable functional/no-expression-statements */
+      const inc1 = () => {
+        n++
+      }
+
+      const inc2 = () => {
+        n++
+        return inc1
+      }
+
+      expect(n).toBe(0)
+
+      const g = f(inc1, inc1, inc1, inc2)
+      expect(n).toBe(0)
+
+      g(O.none)(O.none)
+      expect(n).toBe(1)
+
+      g(O.some(null))(O.none)
+      expect(n).toBe(2)
+
+      g(O.none)(O.some(null))
+      expect(n).toBe(3)
+
+      const h = g(O.some(null))
+      expect(n).toBe(3)
+      h(O.some(null))
+      expect(n).toBe(5)
+      /* eslint-enable functional/no-expression-statements */
     })
   })
 })

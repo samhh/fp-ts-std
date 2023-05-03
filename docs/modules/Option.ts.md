@@ -19,6 +19,7 @@ Added in v0.1.0
   - [getBounded](#getbounded)
   - [getEnum](#getenum)
   - [invert](#invert)
+  - [match2](#match2)
   - [memptyUnless](#memptyunless)
   - [memptyWhen](#memptywhen)
   - [noneAs](#noneas)
@@ -139,6 +140,43 @@ assert.deepStrictEqual(f(O.some('x')), O.none)
 ```
 
 Added in v0.12.0
+
+## match2
+
+Pattern match against two `Option`s simultaneously.
+
+**Signature**
+
+```ts
+export declare const match2: <A, B, C>(
+  onNone: L.Lazy<C>,
+  onSomeFst: (x: A) => C,
+  onSomeSnd: (x: B) => C,
+  onSomeBoth: (x: A) => (y: B) => C
+) => (mx: Option<A>) => (my: Option<B>) => C
+```
+
+**Example**
+
+```ts
+import { constant, flow } from 'fp-ts/function'
+import * as O from 'fp-ts/Option'
+import Option = O.Option
+import { match2 } from 'fp-ts-std/Option'
+import * as Str from 'fp-ts-std/String'
+
+const f: (x: Option<string>) => (y: Option<number>) => string = match2(
+  constant('Who are you?'),
+  Str.prepend('Your name is '),
+  flow(Str.fromNumber, Str.prepend('Your age is ')),
+  (name) => (age) => `You are ${name}, ${age}`
+)
+
+assert.strictEqual(f(O.none)(O.some(40)), 'Your age is 40')
+assert.strictEqual(f(O.some('Hodor'))(O.some(40)), 'You are Hodor, 40')
+```
+
+Added in v0.17.0
 
 ## memptyUnless
 

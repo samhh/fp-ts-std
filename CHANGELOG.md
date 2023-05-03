@@ -8,7 +8,7 @@ This project adheres to semantic versioning.
 - Add `Enum` module.
 - Add `Bounded` instance to `Boolean`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
-- Add `getBounded` to `Option`.
+- Add `match2` and `getBounded` to `Option`.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.
