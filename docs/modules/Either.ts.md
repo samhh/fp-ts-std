@@ -16,6 +16,7 @@ Added in v0.1.0
 
 - [utils](#utils)
   - [mapBoth](#mapboth)
+  - [match2](#match2)
   - [unsafeExpect](#unsafeexpect)
   - [unsafeExpectLeft](#unsafeexpectleft)
   - [unsafeUnwrap](#unsafeunwrap)
@@ -53,6 +54,45 @@ assert.deepStrictEqual(f(E.right(3)), E.right(6))
 ```
 
 Added in v0.14.0
+
+## match2
+
+Pattern match against two `Either`s simultaneously.
+
+**Signature**
+
+```ts
+export declare const match2: <A, B, C, D, E>(
+  onLeftLeft: (x: A) => (y: C) => E,
+  onLeftRight: (x: A) => (y: D) => E,
+  onRightLeft: (x: B) => (y: C) => E,
+  onRightRight: (x: B) => (y: D) => E
+) => (mab: Either<A, B>) => (mcd: Either<C, D>) => E
+```
+
+```hs
+match2 :: ((a -> c -> e), (a -> d -> e), (b -> c -> e), (b -> d -> e)) -> Either a b -> Either c d -> e
+```
+
+**Example**
+
+```ts
+import { withFst } from 'fp-ts-std/Tuple'
+import * as E from 'fp-ts/Either'
+import Either = E.Either
+import { match2 } from 'fp-ts-std/Either'
+
+const pair: (x: string) => (y: string) => [string, string] = withFst
+
+const f: (x: Either<string, string>) => (y: Either<string, string>) => [string, string] = match2(pair, pair, pair, pair)
+
+assert.deepStrictEqual(f(E.left('l'))(E.left('l')), ['l', 'l'])
+assert.deepStrictEqual(f(E.left('l'))(E.right('r')), ['l', 'r'])
+assert.deepStrictEqual(f(E.left('r'))(E.right('l')), ['r', 'l'])
+assert.deepStrictEqual(f(E.left('r'))(E.right('r')), ['r', 'r'])
+```
+
+Added in v0.17.0
 
 ## unsafeExpect
 

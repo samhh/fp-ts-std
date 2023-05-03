@@ -8,7 +8,7 @@ import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Show } from "fp-ts/Show"
-import { flow } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Left`
@@ -104,3 +104,57 @@ export const unsafeExpectLeft = <A>(S: Show<A>): (<E>(x: Either<E, A>) => E) =>
 export const mapBoth: <A, B>(
   f: (x: A) => B,
 ) => (xs: Either<A, A>) => Either<B, B> = _mapBoth(E.Bifunctor)
+
+/**
+ * Pattern match against two `Either`s simultaneously.
+ *
+ * @example
+ * import { withFst } from 'fp-ts-std/Tuple'
+ * import * as E from 'fp-ts/Either'
+ * import Either = E.Either
+ * import { match2 } from 'fp-ts-std/Either'
+ *
+ * const pair: (x: string) => (y: string) => [string, string] = withFst
+ *
+ * const f: (x: Either<string, string>) => (y: Either<string, string>) => [string, string] =
+ *   match2(pair, pair, pair, pair)
+ *
+ * assert.deepStrictEqual(f(E.left('l'))(E.left('l')), ['l', 'l'])
+ * assert.deepStrictEqual(f(E.left('l'))(E.right('r')), ['l', 'r'])
+ * assert.deepStrictEqual(f(E.left('r'))(E.right('l')), ['r', 'l'])
+ * assert.deepStrictEqual(f(E.left('r'))(E.right('r')), ['r', 'r'])
+ *
+ * @since 0.17.0
+ */
+/* eslint-disable functional/prefer-tacit */
+export const match2 =
+  <A, B, C, D, E>(
+    onLeftLeft: (x: A) => (y: C) => E,
+    onLeftRight: (x: A) => (y: D) => E,
+    onRightLeft: (x: B) => (y: C) => E,
+    onRightRight: (x: B) => (y: D) => E,
+  ) =>
+  (mab: Either<A, B>) =>
+  (mcd: Either<C, D>): E =>
+    pipe(
+      mab,
+      E.match(
+        a =>
+          pipe(
+            mcd,
+            E.match(
+              c => onLeftLeft(a)(c),
+              d => onLeftRight(a)(d),
+            ),
+          ),
+        b =>
+          pipe(
+            mcd,
+            E.match(
+              c => onRightLeft(b)(c),
+              d => onRightRight(b)(d),
+            ),
+          ),
+      ),
+    )
+/* eslint-enable functional/prefer-tacit */

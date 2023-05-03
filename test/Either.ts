@@ -4,12 +4,14 @@ import {
   unsafeExpect,
   unsafeExpectLeft,
   mapBoth,
+  match2,
 } from "../src/Either"
 import * as E from "fp-ts/Either"
 import { identity } from "fp-ts/function"
 import * as Str from "../src/String"
-import { Show as StrShow } from "fp-ts/string"
+import { Show as StrShow, Semigroup as StrSemigroup } from "fp-ts/string"
 import fc from "fast-check"
+import { curry2 } from "../src/Function"
 
 describe("Either", () => {
   describe("unsafeUnwrap", () => {
@@ -92,6 +94,65 @@ describe("Either", () => {
           expect(f(g)(E.right(x))).toEqual(E.bimap(g, g)(E.right(x)))
         }),
       )
+    })
+  })
+
+  describe("match2", () => {
+    const f = match2
+
+    it("calls appropriate callbacks", () => {
+      const concat = curry2(StrSemigroup.concat)
+
+      const g = f<string, string, string, string, string>(
+        concat,
+        concat,
+        concat,
+        concat,
+      )
+
+      expect(g(E.left("l "))(E.left("l"))).toBe("l l")
+      expect(g(E.left("l "))(E.right("r"))).toBe("l r")
+      expect(g(E.right("r "))(E.left("l"))).toBe("r l")
+      expect(g(E.right("r "))(E.right("r"))).toBe("r r")
+    })
+
+    it("is as lazy as possible", () => {
+      // eslint-disable-next-line functional/no-let
+      let n = 0
+
+      /* eslint-disable functional/no-expression-statements */
+      const inc = () => {
+        n++
+        return () => {
+          n++
+        }
+      }
+
+      expect(n).toBe(0)
+
+      const g = f(inc, inc, inc, inc)
+      expect(n).toBe(0)
+
+      const ll = g(E.left(null))
+      expect(n).toBe(0)
+      ll(E.left(null))
+      expect(n).toBe(2)
+
+      const lr = g(E.left(null))
+      expect(n).toBe(2)
+      lr(E.right(null))
+      expect(n).toBe(4)
+
+      const rl = g(E.right(null))
+      expect(n).toBe(4)
+      rl(E.left(null))
+      expect(n).toBe(6)
+
+      const rr = g(E.right(null))
+      expect(n).toBe(6)
+      rr(E.right(null))
+      expect(n).toBe(8)
+      /* eslint-enable functional/no-expression-statements */
     })
   })
 })
