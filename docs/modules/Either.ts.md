@@ -15,6 +15,8 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [getBounded](#getbounded)
+  - [getEnum](#getenum)
   - [getOrd](#getord)
   - [mapBoth](#mapboth)
   - [match2](#match2)
@@ -26,6 +28,53 @@ Added in v0.1.0
 ---
 
 # utils
+
+## getBounded
+
+Derive a `Bounded` instance for `Either<E, A>` in which the top and bottom
+bounds are `Right(A.top)` and `Left(E.bottom)` respectively.
+
+**Signature**
+
+```ts
+export declare const getBounded: <E>(BE: Bounded<E>) => <A>(BA: Bounded<A>) => Bounded<Either<E, A>>
+```
+
+```hs
+getBounded :: Bounded e -> Bounded a -> Bounded (Either e a)
+```
+
+Added in v0.17.0
+
+## getEnum
+
+Derive an `Enum` instance for `Either<E, A>` given an `Enum` instance for `E`
+and `A`.
+
+**Signature**
+
+```ts
+export declare const getEnum: <E>(EE: Enum<E>) => <A>(EA: Enum<A>) => Enum<Either<E, A>>
+```
+
+```hs
+getEnum :: Enum e -> Enum a -> Enum (Either e a)
+```
+
+**Example**
+
+```ts
+import { universe } from 'fp-ts-std/Enum'
+import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+import * as E from 'fp-ts/Either'
+import { getEnum as getEnumE } from 'fp-ts-std/Either'
+
+const EnumBoolE = getEnumE(EnumBool)(EnumBool)
+
+assert.deepStrictEqual(universe(EnumBoolE), [E.left(false), E.left(true), E.right(false), E.right(true)])
+```
+
+Added in v0.17.0
 
 ## getOrd
 

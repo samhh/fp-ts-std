@@ -6,6 +6,7 @@ import {
   mapBoth,
   match2,
   getOrd,
+  getEnum,
 } from "../src/Either"
 import * as E from "fp-ts/Either"
 import { identity } from "fp-ts/function"
@@ -15,6 +16,8 @@ import fc from "fast-check"
 import { curry2 } from "../src/Function"
 import * as Num from "fp-ts/number"
 import { LT, EQ, GT } from "../src/Ordering"
+import { Enum as EnumBool } from "../src/Boolean"
+import { universe } from "../src/Enum"
 
 describe("Either", () => {
   describe("unsafeUnwrap", () => {
@@ -184,6 +187,23 @@ describe("Either", () => {
       expect(f(E.right(1), E.right(2))).toBe(LT)
       expect(f(E.right(1), E.right(1))).toBe(EQ)
       expect(f(E.right(2), E.right(1))).toBe(GT)
+    })
+  })
+
+  describe("getEnum", () => {
+    const EB = getEnum(EnumBool)(EnumBool)
+
+    it("can build all values in order", () => {
+      expect(universe(EB)).toEqual([
+        E.left(false),
+        E.left(true),
+        E.right(false),
+        E.right(true),
+      ])
+    })
+
+    it("cardinality is a + b", () => {
+      expect(EB.cardinality()).toBe(4)
     })
   })
 })

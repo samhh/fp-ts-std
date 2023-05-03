@@ -6,10 +6,15 @@
 
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
+import * as O from "fp-ts/Option"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Show } from "fp-ts/Show"
 import { constant, flow, pipe } from "fp-ts/function"
+import * as L from "./Lazy"
 import { Ord } from "fp-ts/Ord"
+import { Bounded } from "fp-ts/Bounded"
+import { Enum } from "./Enum"
+import { add } from "./Number"
 import { curry2 } from "./Function"
 import { Ordering } from "fp-ts/Ordering"
 import { LT, GT } from "./Ordering"
@@ -192,4 +197,76 @@ export const getOrd =
         constant(constant(GT)),
         curry2(AO.compare),
       )(x)(y),
+  })
+
+/**
+ * Derive a `Bounded` instance for `Either<E, A>` in which the top and bottom
+ * bounds are `Right(A.top)` and `Left(E.bottom)` respectively.
+ *
+ * @since 0.17.0
+ */
+export const getBounded =
+  <E>(BE: Bounded<E>) =>
+  <A>(BA: Bounded<A>): Bounded<Either<E, A>> => ({
+    ...getOrd(BE)(BA),
+    top: E.right(BA.top),
+    bottom: E.left(BE.bottom),
+  })
+
+/**
+ * Derive an `Enum` instance for `Either<E, A>` given an `Enum` instance for `E`
+ * and `A`.
+ *
+ * @example
+ * import { universe } from 'fp-ts-std/Enum'
+ * import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+ * import * as E from 'fp-ts/Either'
+ * import { getEnum as getEnumE } from 'fp-ts-std/Either'
+ *
+ * const EnumBoolE = getEnumE(EnumBool)(EnumBool)
+ *
+ * assert.deepStrictEqual(
+ *   universe(EnumBoolE),
+ *   [E.left(false), E.left(true), E.right(false), E.right(true)],
+ * )
+ *
+ * @since 0.17.0
+ */
+export const getEnum =
+  <E>(EE: Enum<E>) =>
+  <A>(EA: Enum<A>): Enum<Either<E, A>> => ({
+    ...getBounded(EE)(EA),
+    succ: E.match(
+      flow(
+        EE.succ,
+        O.matchW(
+          L.lazy(() => E.right(EA.bottom)),
+          E.left,
+        ),
+        O.some,
+      ),
+      flow(EA.succ, O.map(E.right)),
+    ),
+    pred: E.match(
+      flow(EE.pred, O.map(E.left)),
+      flow(
+        EA.pred,
+        O.matchW(
+          L.lazy(() => E.left(EE.top)),
+          E.right,
+        ),
+        O.some,
+      ),
+    ),
+    toEnum: n => {
+      const ec = L.execute(EE.cardinality)
+      return n < ec
+        ? pipe(n, EE.toEnum, O.map(E.left))
+        : pipe(n - ec, EA.toEnum, O.map(E.right))
+    },
+    fromEnum: E.match(
+      EE.fromEnum,
+      flow(EA.fromEnum, n => n + L.execute(EE.cardinality)),
+    ),
+    cardinality: pipe(L.of(add), L.ap(EE.cardinality), L.ap(EA.cardinality)),
   })
