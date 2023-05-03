@@ -19,6 +19,7 @@ import {
   isNonNegative,
   isNonPositive,
   EnumInt,
+  digits,
 } from "../src/Number"
 import { fromNumber } from "../src/String"
 import fc from "fast-check"
@@ -371,6 +372,64 @@ describe("Number", () => {
         expect(f(-123.5)).toEqual(O.none)
         expect(f(123.5)).toEqual(O.none)
       })
+    })
+  })
+
+  describe("digits", () => {
+    const f = digits
+
+    it("works for positive integers", () => {
+      expect(f(1)).toEqual([1])
+      expect(f(123)).toEqual([1, 2, 3])
+      expect(f(101)).toEqual([1, 0, 1])
+
+      fc.assert(
+        fc.property(fc.integer({ min: 1 }), n =>
+          expect(f(n)).toHaveLength(String(n).length),
+        ),
+      )
+    })
+
+    it("strips _ separators", () => {
+      expect(f(1_234_567)).toEqual([1, 2, 3, 4, 5, 6, 7])
+    })
+
+    it("strips - from negative numbers", () => {
+      expect(f(-0)).toEqual([0])
+      expect(f(-123)).toEqual([1, 2, 3])
+
+      fc.assert(
+        fc.property(fc.integer({ max: 0 }), n =>
+          expect(f(n).length).toBeGreaterThan(0),
+        ),
+      )
+    })
+
+    it("strips . from floats", () => {
+      expect(f(1.2)).toEqual([1, 2])
+
+      fc.assert(
+        fc.property(fc.float({ noDefaultInfinity: true }), n =>
+          expect(f(n).length).toBeGreaterThan(0),
+        ),
+      )
+    })
+
+    it("returns empty output for NaN", () => {
+      expect(f(NaN)).toEqual([])
+      expect(f(-NaN)).toEqual([])
+    })
+
+    it("returns empty output for infinities", () => {
+      expect(f(Infinity)).toEqual([])
+      expect(f(-Infinity)).toEqual([])
+    })
+
+    it("alternative notations are implicitly converted to decimals", () => {
+      expect(f(0b101010)).toEqual([4, 2])
+      expect(f(0o52)).toEqual([4, 2])
+      expect(f(0x2a)).toEqual([4, 2])
+      expect(f(2e3)).toEqual([2, 0, 0, 0])
     })
   })
 })

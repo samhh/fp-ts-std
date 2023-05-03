@@ -15,6 +15,7 @@ import { Enum } from "./Enum"
 import { Bounded } from "fp-ts/Bounded"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
+import * as A from "fp-ts/Array"
 import * as L from "./Lazy"
 
 /**
@@ -357,3 +358,25 @@ export const EnumInt: Enum<number> = {
   fromEnum: identity,
   cardinality: L.of(Infinity),
 }
+
+/**
+ * Returns the individual digits of a number.
+ *
+ * Non-numeric characters like `-`, `.`, and `_` are supported in the input and
+ * will be removed.
+ *
+ * Values in non-decimal notations are implicitly converted to decimal notation
+ * in JavaScript.
+ *
+ * An empty array is returned for values like `NaN` and `Infinity`.
+ *
+ * @example
+ * import { digits } from 'fp-ts-std/Number'
+ *
+ * assert.deepStrictEqual(digits(123), [1, 2, 3])
+ *
+ * @since 0.17.0
+ */
+export const digits = (n: number): Array<number> =>
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+  pipe([...(n + "")], A.filterMap(fromString))

@@ -19,6 +19,7 @@ Added in v0.1.0
   - [EnumInt](#enumint)
   - [add](#add)
   - [decrement](#decrement)
+  - [digits](#digits)
   - [divide](#divide)
   - [floatFromString](#floatfromstring)
   - [fromString](#fromstring)
@@ -139,6 +140,38 @@ assert.strictEqual(decrement(3), 2)
 ```
 
 Added in v0.1.0
+
+## digits
+
+Returns the individual digits of a number.
+
+Non-numeric characters like `-`, `.`, and `_` are supported in the input and
+will be removed.
+
+Values in non-decimal notations are implicitly converted to decimal notation
+in JavaScript.
+
+An empty array is returned for values like `NaN` and `Infinity`.
+
+**Signature**
+
+```ts
+export declare const digits: (n: number) => Array<number>
+```
+
+```hs
+digits :: number -> Array number
+```
+
+**Example**
+
+```ts
+import { digits } from 'fp-ts-std/Number'
+
+assert.deepStrictEqual(digits(123), [1, 2, 3])
+```
+
+Added in v0.17.0
 
 ## divide
 
