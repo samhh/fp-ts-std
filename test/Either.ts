@@ -9,7 +9,8 @@ import {
   getEnum,
 } from "../src/Either"
 import * as E from "fp-ts/Either"
-import { identity } from "fp-ts/function"
+import * as O from "fp-ts/Option"
+import { flow, identity } from "fp-ts/function"
 import * as Str from "../src/String"
 import { Show as StrShow, Semigroup as StrSemigroup } from "fp-ts/string"
 import fc from "fast-check"
@@ -192,6 +193,62 @@ describe("Either", () => {
 
   describe("getEnum", () => {
     const EB = getEnum(EnumBool)(EnumBool)
+
+    describe("pred", () => {
+      it("retracts succ", () => {
+        const f = flow(EB.pred, O.chain(EB.succ), O.chain(EB.pred))
+        const g = EB.pred
+
+        expect(f(E.left(false))).toEqual(g(E.left(false)))
+        expect(f(E.left(true))).toEqual(g(E.left(true)))
+        expect(f(E.right(false))).toEqual(g(E.right(false)))
+        expect(f(E.right(true))).toEqual(g(E.right(true)))
+      })
+    })
+
+    describe("succ", () => {
+      it("retracts pred", () => {
+        const f = flow(EB.succ, O.chain(EB.pred), O.chain(EB.succ))
+        const g = EB.succ
+
+        expect(f(E.left(false))).toEqual(g(E.left(false)))
+        expect(f(E.left(true))).toEqual(g(E.left(true)))
+        expect(f(E.right(false))).toEqual(g(E.right(false)))
+        expect(f(E.right(true))).toEqual(g(E.right(true)))
+      })
+    })
+
+    describe("fromEnum", () => {
+      const f = EB.fromEnum
+
+      it("works", () => {
+        expect(f(E.left(false))).toBe(0)
+        expect(f(E.left(true))).toBe(1)
+        expect(f(E.right(false))).toBe(2)
+        expect(f(E.right(true))).toBe(3)
+      })
+    })
+
+    describe("toEnum", () => {
+      const f = EB.toEnum
+
+      it("succeeds for input in range", () => {
+        expect(f(0)).toEqual(O.some(E.left(false)))
+        expect(f(1)).toEqual(O.some(E.left(true)))
+        expect(f(2)).toEqual(O.some(E.right(false)))
+        expect(f(3)).toEqual(O.some(E.right(true)))
+      })
+
+      it("fails gracefully for invalid input", () => {
+        expect(f(-Infinity)).toEqual(O.none)
+        expect(f(-1)).toEqual(O.none)
+        expect(f(2.5)).toEqual(O.none)
+        expect(f(4)).toEqual(O.none)
+        expect(f(1e6)).toEqual(O.none)
+        expect(f(Infinity)).toEqual(O.none)
+        expect(f(NaN)).toEqual(O.none)
+      })
+    })
 
     it("can build all values in order", () => {
       expect(universe(EB)).toEqual([
