@@ -19,7 +19,7 @@ import {
   setHash,
 } from "../src/RelativeURL"
 import fc from "fast-check"
-import { constant, identity, pipe } from "fp-ts/function"
+import { constant, flow, identity, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 import { unpack } from "../src/Newtype"
@@ -164,6 +164,21 @@ describe("RelativeURL", () => {
       )
 
       expect(u.pathname).toBe("/foo%20bar%3F")
+    })
+
+    it("trims relative paths beyond root", () => {
+      const g = flow(
+        f,
+        toURL(identity)(validBase),
+        unsafeUnwrapRight,
+        x => x.pathname,
+      )
+
+      expect(g("/foo/bar/../baz")).toBe("/foo/baz")
+      expect(g("/foo/bar/../../baz")).toBe("/baz")
+      expect(g("/foo/bar/../../../baz")).toBe("/baz")
+      expect(g("/../baz")).toBe("/baz")
+      expect(g("./baz")).toBe("/baz")
     })
 
     it("never throws", () => {
