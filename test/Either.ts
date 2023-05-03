@@ -204,6 +204,7 @@ describe("Either", () => {
 
     it("cardinality is a + b", () => {
       expect(EB.cardinality()).toBe(4)
+      expect(getEnum(EB)(EB).cardinality()).toBe(8)
     })
   })
 })
