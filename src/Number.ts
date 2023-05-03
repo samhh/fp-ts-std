@@ -13,8 +13,6 @@ import { unless } from "./Function"
 import { Bounded as BoundedInfinity } from "fp-ts/number"
 import { Enum } from "./Enum"
 import { Bounded } from "fp-ts/Bounded"
-import * as NEA from "fp-ts/NonEmptyArray"
-import NonEmptyArray = NEA.NonEmptyArray
 import * as A from "fp-ts/Array"
 import * as L from "./Lazy"
 
