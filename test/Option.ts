@@ -224,6 +224,10 @@ describe("Option", () => {
     it("universe mx = (None : (pure <$> universe x))", () => {
       expect(universe(E)).toEqual([O.none, O.some(false), O.some(true)])
     })
+
+    it("cardinality is a + 1", () => {
+      expect(E.cardinality()).toBe(3)
+    })
   })
 
   describe("match2", () => {
