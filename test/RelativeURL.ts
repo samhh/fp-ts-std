@@ -45,7 +45,7 @@ describe("RelativeURL", () => {
 
     it("succeeds only for URLs with phony base", () => {
       expect(f("foo")).toBe(false)
-      expect(f(new URL("https://samhh.com"))).toBe(false)
+      expect(f(new URL(validBase))).toBe(false)
       expect(f(new URL(phonyBase))).toBe(true)
       expect(f(new URL(phonyBase + validRelativeUrl))).toBe(true)
     })
@@ -55,7 +55,7 @@ describe("RelativeURL", () => {
     const f = fromURL
 
     it("retains the path, params, and hash", () => {
-      const x = new URL("https://samhh.com" + validRelativeUrl)
+      const x = new URL(validBase + validRelativeUrl)
       const y = pipe(x, f, unpack)
 
       expect(y.pathname).toEqual(x.pathname)
@@ -159,7 +159,7 @@ describe("RelativeURL", () => {
       const u = pipe(
         "foo bar?",
         f,
-        toURL(identity)("https://samhh.com"),
+        toURL(identity)(validBase),
         unsafeUnwrapRight,
       )
 
