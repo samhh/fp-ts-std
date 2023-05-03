@@ -17,7 +17,6 @@ import * as S from "fp-ts/string"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
 import { Lazy } from "../src/Lazy"
-import { Ord as OrdBool } from "fp-ts/boolean"
 import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
 
@@ -206,7 +205,7 @@ describe("Option", () => {
   })
 
   describe("getBounded", () => {
-    const B = getBounded(OrdBool)(BoundedBool)
+    const B = getBounded(BoundedBool)
 
     it("None is bottom", () => {
       expect(B.bottom).toEqual(O.none)
@@ -218,7 +217,7 @@ describe("Option", () => {
   })
 
   describe("getEnum", () => {
-    const E = getEnum(OrdBool)(EnumBool)
+    const E = getEnum(EnumBool)
 
     it("universe mx = (None : (pure <$> universe x))", () => {
       expect(universe(E)).toEqual([O.none, O.some(false), O.some(true)])

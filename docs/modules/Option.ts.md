@@ -67,11 +67,11 @@ bounds are `Some(B.top)` and `None` respectively.
 **Signature**
 
 ```ts
-export declare const getBounded: <A>(Ord: Ord<A>) => (B: Bounded<A>) => Bounded<Option<A>>
+export declare const getBounded: <A>(B: Bounded<A>) => Bounded<Option<A>>
 ```
 
 ```hs
-getBounded :: Ord a -> Bounded a -> Bounded (Option a)
+getBounded :: Bounded a -> Bounded (Option a)
 ```
 
 Added in v0.17.0
@@ -83,23 +83,22 @@ Derive an `Enum` instance for `Option<A>` given an `Enum` instance for `A`.
 **Signature**
 
 ```ts
-export declare const getEnum: <A>(Ord: Ord<A>) => (E: Enum<A>) => Enum<Option<A>>
+export declare const getEnum: <A>(E: Enum<A>) => Enum<Option<A>>
 ```
 
 ```hs
-getEnum :: Ord a -> Enum a -> Enum (Option a)
+getEnum :: Enum a -> Enum (Option a)
 ```
 
 **Example**
 
 ```ts
 import { universe } from 'fp-ts-std/Enum'
-import { Ord as OrdBool } from 'fp-ts/boolean'
 import { Enum as EnumBool } from 'fp-ts-std/Boolean'
 import * as O from 'fp-ts/Option'
 import { getEnum as getEnumO } from 'fp-ts-std/Option'
 
-const EnumBoolO = getEnumO(OrdBool)(EnumBool)
+const EnumBoolO = getEnumO(EnumBool)
 
 assert.deepStrictEqual(universe(EnumBoolO), [O.none, O.some(false), O.some(true)])
 ```

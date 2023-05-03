@@ -210,25 +210,22 @@ export const altAllBy: <A, B>(
  *
  * @since 0.17.0
  */
-export const getBounded =
-  <A>(Ord: Ord<A>) =>
-  (B: Bounded<A>): Bounded<Option<A>> => ({
-    ...O.getOrd(Ord),
-    top: O.some(B.top),
-    bottom: O.none,
-  })
+export const getBounded = <A>(B: Bounded<A>): Bounded<Option<A>> => ({
+  ...O.getOrd(B),
+  top: O.some(B.top),
+  bottom: O.none,
+})
 
 /**
  * Derive an `Enum` instance for `Option<A>` given an `Enum` instance for `A`.
  *
  * @example
  * import { universe } from 'fp-ts-std/Enum'
- * import { Ord as OrdBool } from 'fp-ts/boolean'
  * import { Enum as EnumBool } from 'fp-ts-std/Boolean'
  * import * as O from 'fp-ts/Option'
  * import { getEnum as getEnumO } from 'fp-ts-std/Option'
  *
- * const EnumBoolO = getEnumO(OrdBool)(EnumBool)
+ * const EnumBoolO = getEnumO(EnumBool)
  *
  * assert.deepStrictEqual(
  *   universe(EnumBoolO),
@@ -237,17 +234,15 @@ export const getBounded =
  *
  * @since 0.17.0
  */
-export const getEnum =
-  <A>(Ord: Ord<A>) =>
-  (E: Enum<A>): Enum<Option<A>> => ({
-    ...getBounded(Ord)(E),
-    succ: O.match(
-      L.lazy(() => O.some(O.some(E.bottom))),
-      flow(E.succ, O.map(O.some)),
-    ),
-    pred: O.map(E.pred),
-    toEnum: n =>
-      n === 0 ? O.some(O.none) : pipe(n, decrement, E.toEnum, O.map(O.some)),
-    fromEnum: O.match(constant(0), flow(E.fromEnum, increment)),
-    cardinality: pipe(E.cardinality, L.map(increment)),
-  })
+export const getEnum = <A>(E: Enum<A>): Enum<Option<A>> => ({
+  ...getBounded(E),
+  succ: O.match(
+    L.lazy(() => O.some(O.some(E.bottom))),
+    flow(E.succ, O.map(O.some)),
+  ),
+  pred: O.map(E.pred),
+  toEnum: n =>
+    n === 0 ? O.some(O.none) : pipe(n, decrement, E.toEnum, O.map(O.some)),
+  fromEnum: O.match(constant(0), flow(E.fromEnum, increment)),
+  cardinality: pipe(E.cardinality, L.map(increment)),
+})
