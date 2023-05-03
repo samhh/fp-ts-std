@@ -4,7 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.17.0 (_Unreleased_)
 
-- Add `RelativeURL` module.
+- Add `URLPath` module.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.

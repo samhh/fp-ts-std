@@ -1,9 +1,9 @@
 /**
- * A wrapper around the `URL` interface for relative URLs, which `URL` doesn't
- * natively support.
+ * A wrapper around the `URL` interface for URL paths absent an origin, which
+ * `URL` doesn't natively support.
  *
- * A relative URL is made up of three parts: the pathname, the search params,
- * and the hash.
+ * A path is made up of three parts: the pathname, the search params, and the
+ * hash.
  *
  * @since 0.17.0
  */
@@ -19,31 +19,29 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import { clone as cloneURL, isURL } from "./URL"
 import { Refinement } from "fp-ts/Refinement"
 
-type RelativeURLSymbol = { readonly RelativeURLSymbol: unique symbol }
+type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
 
 /**
  * Newtype wrapper around `URL`.
  *
  * @since 0.17.0
  */
-export type RelativeURL = Newtype<RelativeURLSymbol, URL>
+export type URLPath = Newtype<URLPathSymbol, URL>
 
-const phonyBase = "https://relativeurl.fp-ts-std.samhh.com"
+const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
 
 /**
- * Check if a foreign value is a `RelativeURL`.
+ * Check if a foreign value is a `URLPath`.
  *
  * @example
- * import { isRelativeURL, fromPath } from 'fp-ts-std/RelativeURL'
+ * import { isURLPath, fromPathname } from 'fp-ts-std/URLPath'
  *
- * assert.strictEqual(isRelativeURL(new URL('https://samhh.com/foo')), false)
- * assert.strictEqual(isRelativeURL(fromPath('/foo')), true)
+ * assert.strictEqual(isURLPath(new URL('https://samhh.com/foo')), false)
+ * assert.strictEqual(isURLPath(fromPathname('/foo')), true)
  *
  * @since 0.17.0
  */
-export const isRelativeURL: Refinement<unknown, RelativeURL> = (
-  u,
-): u is RelativeURL =>
+export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
   // If someone is really setting their base to the same as our phony base
   // then, well, firstly I'm flattered. But secondly that's on them.
   //
@@ -51,12 +49,12 @@ export const isRelativeURL: Refinement<unknown, RelativeURL> = (
   isURL(u) && u.origin === phonyBase
 
 /**
- * Convert a `URL` to a `RelativeURL`. Anything not applicable to relative URLs
+ * Convert a `URL` to a `URLPath`. Anything prior to the path such as the origin
  * will be lost.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, toString } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, toString } from 'fp-ts-std/URLPath'
  *
  * const x = fromURL(new URL('https://samhh.com/foo?bar=baz'))
  *
@@ -64,18 +62,18 @@ export const isRelativeURL: Refinement<unknown, RelativeURL> = (
  *
  * @since 0.17.0
  */
-export const fromURL = (x: URL): RelativeURL =>
-  pipe(new URL(x.href, phonyBase), pack<RelativeURL>)
+export const fromURL = (x: URL): URLPath =>
+  pipe(new URL(x.href, phonyBase), pack<URLPath>)
 
 /**
- * Convert a `RelativeURL` to a `URL` with the provided `baseUrl`.
+ * Convert a `URLPath` to a `URL` with the provided `baseUrl`.
  *
  * @example
  * import { constant } from 'fp-ts/function';
  * import * as E from 'fp-ts/Either';
- * import { toURL, fromPath } from 'fp-ts-std/RelativeURL'
+ * import { toURL, fromPathname } from 'fp-ts-std/URLPath'
  *
- * const x = fromPath('/foo')
+ * const x = fromPathname('/foo')
  * const f = toURL(constant('oops'))
  *
  * assert.deepStrictEqual(
@@ -92,7 +90,7 @@ export const fromURL = (x: URL): RelativeURL =>
 export const toURL =
   <E>(f: (e: TypeError) => E) =>
   (baseUrl: string) =>
-  (x: RelativeURL): Either<E, URL> =>
+  (x: URLPath): Either<E, URL> =>
     // It should only throw some sort of `TypeError`:
     // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
     E.tryCatch(
@@ -101,14 +99,14 @@ export const toURL =
     )
 
 /**
- * Convert a `RelativeURL` to a `URL` with the provided `baseUrl`, forgoing the
+ * Convert a `URLPath` to a `URL` with the provided `baseUrl`, forgoing the
  * error.
  *
  * @example
  * import * as O from 'fp-ts/Option';
- * import { toURLO, fromPath } from 'fp-ts-std/RelativeURL'
+ * import { toURLO, fromPathname } from 'fp-ts-std/URLPath'
  *
- * const x = fromPath('/foo')
+ * const x = fromPathname('/foo')
  *
  * assert.deepStrictEqual(
  *   toURLO('https://samhh.com')(x),
@@ -121,22 +119,22 @@ export const toURL =
  *
  * @since 0.17.0
  */
-export const toURLO = (baseUrl: string): ((x: RelativeURL) => Option<URL>) =>
+export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
   flow(toURL(identity)(baseUrl), O.fromEither)
 
 // fallible: example "//"
 /**
- * Build a `RelativeURL` from a string containing any parts. For an infallible
- * alternative taking only a path, consider `fromPath`.
+ * Build a `URLPath` from a string containing any parts. For an infallible
+ * alternative taking only a pathname, consider `fromPathnamename`.
  *
  * @example
  * import { pipe, constant } from 'fp-ts/function';
  * import * as E from 'fp-ts/Either';
- * import { fromString, fromPath, setHash } from 'fp-ts-std/RelativeURL'
+ * import { fromString, fromPathname, setHash } from 'fp-ts-std/URLPath'
  *
  * const f = fromString(constant('oops'))
  *
- * const expected = pipe('/foo', fromPath, setHash('bar'))
+ * const expected = pipe('/foo', fromPathname, setHash('bar'))
  *
  * assert.deepStrictEqual(f('/foo#bar'), E.right(expected))
  * assert.deepStrictEqual(f('//'), E.left('oops'))
@@ -145,7 +143,7 @@ export const toURLO = (baseUrl: string): ((x: RelativeURL) => Option<URL>) =>
  */
 export const fromString =
   <E>(f: (e: TypeError) => E) =>
-  (x: string): Either<E, RelativeURL> =>
+  (x: string): Either<E, URLPath> =>
     pipe(
       // It should only throw some sort of `TypeError`:
       // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
@@ -153,43 +151,43 @@ export const fromString =
         () => new URL(x, phonyBase),
         e => f(e as TypeError),
       ),
-      E.map(pack<RelativeURL>),
+      E.map(pack<URLPath>),
     )
 
 /**
- * Build a `RelativeURL` from a string containing any parts, forgoing the error.
+ * Build a `URLPath` from a string containing any parts, forgoing the error.
  *
  * @example
  * import { pipe } from 'fp-ts/function';
  * import * as O from 'fp-ts/Option';
- * import { fromStringO, fromPath, setHash } from 'fp-ts-std/RelativeURL'
+ * import { fromStringO, fromPathname, setHash } from 'fp-ts-std/URLPath'
  *
- * const expected = pipe('/foo', fromPath, setHash('bar'))
+ * const expected = pipe('/foo', fromPathname, setHash('bar'))
  *
  * assert.deepStrictEqual(fromStringO('/foo#bar'), O.some(expected))
  * assert.deepStrictEqual(fromStringO('//'), O.none)
  *
  * @since 0.17.0
  */
-export const fromStringO: (x: string) => Option<RelativeURL> = flow(
+export const fromStringO: (x: string) => Option<URLPath> = flow(
   fromString(identity),
   O.fromEither,
 )
 
 /**
- * Build a `RelativeURL` from a path. Characters such as `?` will be encoded.
+ * Build a `URLPath` from a path. Characters such as `?` will be encoded.
  *
  * @example
  * import { flow } from 'fp-ts/function'
- * import { fromPath, getPath } from 'fp-ts-std/RelativeURL'
+ * import { fromPathname, getPathname } from 'fp-ts-std/URLPath'
  *
- * const f = flow(fromPath, getPath)
+ * const f = flow(fromPathname, getPathname)
  *
  * assert.strictEqual(f('/foo?bar=baz'), '/foo%3Fbar=baz')
  *
  * @since 0.17.0
  */
-export const fromPath = (x: string): RelativeURL => {
+export const fromPathname = (x: string): URLPath => {
   const y = new URL("", phonyBase)
   // eslint-disable-next-line
   y.pathname = x
@@ -197,14 +195,14 @@ export const fromPath = (x: string): RelativeURL => {
 }
 
 /**
- * Deconstruct a `RelativeURL` to a string.
+ * Deconstruct a `URLPath` to a string.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { toString, fromPath, setParams, setHash } from 'fp-ts-std/RelativeURL'
+ * import { toString, fromPathname, setParams, setHash } from 'fp-ts-std/URLPath'
  *
  * const x = pipe(
- *   fromPath('/foo'),
+ *   fromPathname('/foo'),
  *   setParams(new URLSearchParams('bar=2000')),
  *   setHash('baz')
  * )
@@ -213,42 +211,42 @@ export const fromPath = (x: string): RelativeURL => {
  *
  * @since 0.17.0
  */
-export const toString: (x: RelativeURL) => string = flow(
+export const toString: (x: URLPath) => string = flow(
   unpack,
   x => x.pathname + x.search + x.hash,
 )
 
 /**
- * Get the path component of a `RelativeURL`.
+ * Get the pathname component of a `URLPath`.
  *
  * @example
  * import { flow } from 'fp-ts/function'
- * import { fromPath, getPath } from 'fp-ts-std/RelativeURL'
+ * import { fromPathname, getPathname } from 'fp-ts-std/URLPath'
  *
- * const f = flow(fromPath, getPath)
+ * const f = flow(fromPathname, getPathname)
  *
  * assert.strictEqual(f('/foo'), '/foo')
  *
  * @since 0.17.0
  */
-export const getPath: (x: RelativeURL) => string = flow(unpack, x => x.pathname)
+export const getPathname: (x: URLPath) => string = flow(unpack, x => x.pathname)
 
 /**
- * Modify the path component of a `RelativeURL`.
+ * Modify the pathname component of a `URLPath`.
  *
  * @example
  * import { flow } from 'fp-ts/function'
- * import { fromPath, modifyPath, getPath } from 'fp-ts-std/RelativeURL'
+ * import { fromPathname, modifyPathname, getPathname } from 'fp-ts-std/URLPath'
  *
- * const f = flow(fromPath, modifyPath(s => s + 'bar'), getPath)
+ * const f = flow(fromPathname, modifyPathname(s => s + 'bar'), getPathname)
  *
  * assert.strictEqual(f('/foo'), '/foobar')
  *
  * @since 0.17.0
  */
-export const modifyPath = (
+export const modifyPathname = (
   f: Endomorphism<string>,
-): Endomorphism<RelativeURL> =>
+): Endomorphism<URLPath> =>
   over(
     flow(cloneURL, x => {
       // eslint-disable-next-line
@@ -258,27 +256,27 @@ export const modifyPath = (
   )
 
 /**
- * Set the path component of a `RelativeURL`.
+ * Set the pathname component of a `URLPath`.
  *
  * @example
  * import { flow } from 'fp-ts/function'
- * import { fromPath, setPath, getPath } from 'fp-ts-std/RelativeURL'
+ * import { fromPathname, setPathname, getPathname } from 'fp-ts-std/URLPath'
  *
- * const f = flow(fromPath, setPath('/bar'), getPath)
+ * const f = flow(fromPathname, setPathname('/bar'), getPathname)
  *
  * assert.strictEqual(f('/foo'), '/bar')
  *
  * @since 0.17.0
  */
-export const setPath = (x: string): Endomorphism<RelativeURL> =>
-  modifyPath(constant(x))
+export const setPathname = (x: string): Endomorphism<URLPath> =>
+  modifyPathname(constant(x))
 
 /**
- * Get the search params component of a `RelativeURL`.
+ * Get the search params component of a `URLPath`.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, getParams } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, getParams } from 'fp-ts-std/URLPath'
  *
  * const x = pipe(new URL('https://samhh.com/foo?a=b&c=d'), fromURL)
  *
@@ -286,17 +284,17 @@ export const setPath = (x: string): Endomorphism<RelativeURL> =>
  *
  * @since 0.17.0
  */
-export const getParams: (x: RelativeURL) => URLSearchParams = flow(
+export const getParams: (x: URLPath) => URLSearchParams = flow(
   unpack,
   x => x.searchParams,
 )
 
 /**
- * Modify the search params component of a `RelativeURL`.
+ * Modify the search params component of a `URLPath`.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, modifyParams, getParams } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, modifyParams, getParams } from 'fp-ts-std/URLPath'
  * import { setParam } from 'fp-ts-std/URLSearchParams'
  *
  * const x = pipe(
@@ -311,7 +309,7 @@ export const getParams: (x: RelativeURL) => URLSearchParams = flow(
  */
 export const modifyParams = (
   f: Endomorphism<URLSearchParams>,
-): Endomorphism<RelativeURL> =>
+): Endomorphism<URLPath> =>
   over(
     flow(cloneURL, x => {
       // eslint-disable-next-line
@@ -321,11 +319,11 @@ export const modifyParams = (
   )
 
 /**
- * Set the search params component of a `RelativeURL`.
+ * Set the search params component of a `URLPath`.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, setParams, getParams } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, setParams, getParams } from 'fp-ts-std/URLPath'
  *
  * const ps = new URLSearchParams('?c=d')
  *
@@ -339,15 +337,15 @@ export const modifyParams = (
  *
  * @since 0.17.0
  */
-export const setParams = (x: URLSearchParams): Endomorphism<RelativeURL> =>
+export const setParams = (x: URLSearchParams): Endomorphism<URLPath> =>
   modifyParams(constant(x))
 
 /**
- * Get the hash component of a `RelativeURL`.
+ * Get the hash component of a `URLPath`.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, getHash } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, getHash } from 'fp-ts-std/URLPath'
  *
  * const x = pipe(new URL('https://samhh.com#anchor'), fromURL)
  *
@@ -355,14 +353,14 @@ export const setParams = (x: URLSearchParams): Endomorphism<RelativeURL> =>
  *
  * @since 0.17.0
  */
-export const getHash: (x: RelativeURL) => string = flow(unpack, x => x.hash)
+export const getHash: (x: URLPath) => string = flow(unpack, x => x.hash)
 
 /**
- * Modify the hash component of a `RelativeURL`.
+ * Modify the hash component of a `URLPath`.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, modifyHash, getHash } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, modifyHash, getHash } from 'fp-ts-std/URLPath'
  *
  * const x = pipe(
  *   new URL('https://samhh.com#anchor'),
@@ -374,9 +372,7 @@ export const getHash: (x: RelativeURL) => string = flow(unpack, x => x.hash)
  *
  * @since 0.17.0
  */
-export const modifyHash = (
-  f: Endomorphism<string>,
-): Endomorphism<RelativeURL> =>
+export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
   over(
     flow(cloneURL, x => {
       // eslint-disable-next-line
@@ -386,11 +382,11 @@ export const modifyHash = (
   )
 
 /**
- * Set the hash component of a `RelativeURL`.
+ * Set the hash component of a `URLPath`.
  *
  * @example
  * import { pipe } from 'fp-ts/function'
- * import { fromURL, setHash, getHash } from 'fp-ts-std/RelativeURL'
+ * import { fromURL, setHash, getHash } from 'fp-ts-std/URLPath'
  *
  * const x = pipe(
  *   new URL('https://samhh.com#anchor'),
@@ -402,5 +398,5 @@ export const modifyHash = (
  *
  * @since 0.17.0
  */
-export const setHash = (x: string): Endomorphism<RelativeURL> =>
+export const setHash = (x: string): Endomorphism<URLPath> =>
   modifyHash(constant(x))

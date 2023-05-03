@@ -1,23 +1,23 @@
 import {
-  RelativeURL,
-  isRelativeURL,
+  URLPath,
+  isURLPath,
   fromURL,
   fromString,
   fromStringO,
-  fromPath,
+  fromPathname,
   toURL,
   toURLO,
   toString,
-  getPath,
-  modifyPath,
-  setPath,
+  getPathname,
+  modifyPathname,
+  setPathname,
   getParams,
   modifyParams,
   setParams,
   getHash,
   modifyHash,
   setHash,
-} from "../src/RelativeURL"
+} from "../src/URLPath"
 import fc from "fast-check"
 import { constant, flow, identity, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
@@ -31,23 +31,23 @@ import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
 import { setParam } from "../src/URLSearchParams"
 
 // Prefer not to export this.
-const phonyBase = "https://relativeurl.fp-ts-std.samhh.com"
+const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
 
 const validBase = "https://samhh.com"
 const invalidBase = "samhh.com"
 
-const validRelativeUrl = "/f/g.h?i=j&k=l&i=m#n"
-const invalidRelativeUrl = "//"
+const validPath = "/f/g.h?i=j&k=l&i=m#n"
+const invalidPath = "//"
 
-describe("RelativeURL", () => {
-  describe("isRelativeURL", () => {
-    const f = isRelativeURL
+describe("URLPath", () => {
+  describe("isURLPath", () => {
+    const f = isURLPath
 
     it("succeeds only for URLs with phony base", () => {
       expect(f("foo")).toBe(false)
       expect(f(new URL(validBase))).toBe(false)
       expect(f(new URL(phonyBase))).toBe(true)
-      expect(f(new URL(phonyBase + validRelativeUrl))).toBe(true)
+      expect(f(new URL(phonyBase + validPath))).toBe(true)
     })
   })
 
@@ -55,7 +55,7 @@ describe("RelativeURL", () => {
     const f = fromURL
 
     it("retains the path, params, and hash", () => {
-      const x = new URL(validBase + validRelativeUrl)
+      const x = new URL(validBase + validPath)
       const y = pipe(x, f, unpack)
 
       expect(y.pathname).toEqual(x.pathname)
@@ -68,7 +68,7 @@ describe("RelativeURL", () => {
     const f = toURL(identity)
 
     it("succeeds for valid base URLs", () => {
-      const u = pipe("foo", fromPath, f(validBase), unsafeUnwrapRight)
+      const u = pipe("foo", fromPathname, f(validBase), unsafeUnwrapRight)
 
       expect(u.href).toBe(validBase + "/foo")
     })
@@ -76,7 +76,7 @@ describe("RelativeURL", () => {
     it("passes a TypeError to the callback on failure", () => {
       const e = pipe(
         "foo",
-        fromPath,
+        fromPathname,
         toURL(identity)(invalidBase),
         unsafeUnwrapLeft,
       )
@@ -92,13 +92,13 @@ describe("RelativeURL", () => {
     const f = toURLO
 
     it("succeeds for valid base URLs", () => {
-      const u = pipe("foo", fromPath, f(validBase), unsafeUnwrapO)
+      const u = pipe("foo", fromPathname, f(validBase), unsafeUnwrapO)
 
       expect(u.href).toBe(validBase + "/foo")
     })
 
     it("fails for invalid base URLs", () => {
-      const x = pipe("foo", fromPath, f(invalidBase))
+      const x = pipe("foo", fromPathname, f(invalidBase))
 
       expect(x).toEqual(O.none)
     })
@@ -107,15 +107,13 @@ describe("RelativeURL", () => {
   describe("fromString", () => {
     const f = fromString(constant("e"))
 
-    it("succeeds for valid relative URLs", () => {
+    it("succeeds for valid paths", () => {
       expect(f("")).toEqual(E.right(new URL("", phonyBase)))
-      expect(f(validRelativeUrl)).toEqual(
-        E.right(new URL(validRelativeUrl, phonyBase)),
-      )
+      expect(f(validPath)).toEqual(E.right(new URL(validPath, phonyBase)))
     })
 
     it("passes a TypeError to the callback on failure", () => {
-      const e = pipe(invalidRelativeUrl, fromString(identity), unsafeUnwrapLeft)
+      const e = pipe(invalidPath, fromString(identity), unsafeUnwrapLeft)
 
       // This doesn't work. I suspect a tooling bug. Sanity check in the REPL.
       // expect(e).toBeInstanceOf(TypeError)
@@ -127,15 +125,13 @@ describe("RelativeURL", () => {
   describe("fromStringO", () => {
     const f = fromStringO
 
-    it("succeeds for valid relative URLs", () => {
+    it("succeeds for valid paths", () => {
       expect(f("")).toEqual(O.some(new URL("", phonyBase)))
-      expect(f(validRelativeUrl)).toEqual(
-        O.some(new URL(validRelativeUrl, phonyBase)),
-      )
+      expect(f(validPath)).toEqual(O.some(new URL(validPath, phonyBase)))
     })
 
-    it("fails for invalid relative URLs", () => {
-      expect(f(invalidRelativeUrl)).toEqual(O.none)
+    it("fails for invalid paths", () => {
+      expect(f(invalidPath)).toEqual(O.none)
     })
   })
 
@@ -144,14 +140,14 @@ describe("RelativeURL", () => {
 
     it("returns all concatenated parts", () => {
       const x = "/a/b.c?d=e&f=g&d=h#i"
-      const y: RelativeURL = fromURL(new URL(validBase + x))
+      const y: URLPath = fromURL(new URL(validBase + x))
 
       expect(f(y)).toBe(x)
     })
   })
 
-  describe("fromPath", () => {
-    const f = fromPath
+  describe("fromPathname", () => {
+    const f = fromPathname
 
     // Putting aside the prefixed `/`, the pathname setter doesn't seem to
     // encode to the rules of either `encodeURI` or `encodeURIComponent`.
@@ -191,36 +187,36 @@ describe("RelativeURL", () => {
     })
   })
 
-  describe("getPath", () => {
-    const f = getPath
+  describe("getPathname", () => {
+    const f = getPathname
 
     it("returns the path", () => {
       const x = "/foo/bar.baz"
-      expect(pipe(x, fromPath, f)).toBe(x)
+      expect(pipe(x, fromPathname, f)).toBe(x)
     })
   })
 
-  describe("setPath", () => {
-    const f = setPath
+  describe("setPathname", () => {
+    const f = setPathname
 
     it("sets the path without mutating input", () => {
-      const x = fromPath("foo")
+      const x = fromPathname("foo")
       const y = f("bar")(x)
 
-      expect(getPath(x)).toBe("/foo")
-      expect(getPath(y)).toBe("/bar")
+      expect(getPathname(x)).toBe("/foo")
+      expect(getPathname(y)).toBe("/bar")
     })
   })
 
-  describe("modifyPath", () => {
-    const f = modifyPath
+  describe("modifyPathname", () => {
+    const f = modifyPathname
 
     it("modifies the path with the provided function without mutating input", () => {
-      const x = fromPath("foo")
+      const x = fromPathname("foo")
       const y = f(s => s + "bar")(x)
 
-      expect(getPath(x)).toBe("/foo")
-      expect(getPath(y)).toBe("/foobar")
+      expect(getPathname(x)).toBe("/foo")
+      expect(getPathname(y)).toBe("/foobar")
     })
   })
 
