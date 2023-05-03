@@ -871,7 +871,7 @@ Added in v0.15.0
 
 ## unary
 
-Converts a variadic function to a unary function.
+Converts a variadic function to a unary function. Alias of `tupled`.
 
 Whilst this isn't very useful for functions that ought to be curried,
 it is helpful for functions which take an indefinite number of arguments

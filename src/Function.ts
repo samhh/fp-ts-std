@@ -17,6 +17,7 @@ import {
   apply,
   constant,
   flip,
+  tupled,
 } from "fp-ts/function"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
@@ -152,7 +153,7 @@ export const withIndex: <A, B, C>(
   }
 
 /**
- * Converts a variadic function to a unary function.
+ * Converts a variadic function to a unary function. Alias of `tupled`.
  *
  * Whilst this isn't very useful for functions that ought to be curried,
  * it is helpful for functions which take an indefinite number of arguments
@@ -167,10 +168,9 @@ export const withIndex: <A, B, C>(
  *
  * @since 0.6.0
  */
-export const unary =
-  <A extends Array<unknown>, B>(f: (...xs: A) => B) =>
-  (xs: A): B =>
-    f(...xs)
+export const unary: <A extends Array<unknown>, B>(
+  f: (...xs: A) => B,
+) => (xs: A) => B = tupled
 
 /**
  * Given an array of predicates and morphisms, returns the first morphism output
