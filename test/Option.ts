@@ -16,7 +16,7 @@ import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
-import { constant, identity, pipe } from "fp-ts/function"
+import { constant, flow, identity, pipe } from "fp-ts/function"
 import { Lazy } from "../src/Lazy"
 import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
@@ -221,12 +221,65 @@ describe("Option", () => {
   describe("getEnum", () => {
     const E = getEnum(EnumBool)
 
+    describe("pred", () => {
+      it("retracts succ", () => {
+        const f = flow(E.pred, O.chain(E.succ), O.chain(E.pred))
+        const g = E.pred
+
+        expect(f(O.some(true))).toEqual(g(O.some(true)))
+        expect(f(O.some(false))).toEqual(g(O.some(false)))
+        expect(f(O.none)).toEqual(g(O.none))
+      })
+    })
+
+    describe("succ", () => {
+      it("retracts pred", () => {
+        const f = flow(E.succ, O.chain(E.pred), O.chain(E.succ))
+        const g = E.succ
+
+        expect(f(O.some(true))).toEqual(g(O.some(true)))
+        expect(f(O.some(false))).toEqual(g(O.some(false)))
+        expect(f(O.none)).toEqual(g(O.none))
+      })
+    })
+
+    describe("fromEnum", () => {
+      const f = E.fromEnum
+
+      it("works", () => {
+        expect(f(O.none)).toBe(0)
+        expect(f(O.some(false))).toBe(1)
+        expect(f(O.some(true))).toBe(2)
+      })
+    })
+
+    describe("toEnum", () => {
+      const f = E.toEnum
+
+      it("succeeds for input in range", () => {
+        expect(f(0)).toEqual(O.some(O.none))
+        expect(f(1)).toEqual(O.some(O.some(false)))
+        expect(f(2)).toEqual(O.some(O.some(true)))
+      })
+
+      it("fails gracefully for invalid input", () => {
+        expect(f(-Infinity)).toEqual(O.none)
+        expect(f(-1)).toEqual(O.none)
+        expect(f(1.5)).toEqual(O.none)
+        expect(f(3)).toEqual(O.none)
+        expect(f(1e6)).toEqual(O.none)
+        expect(f(Infinity)).toEqual(O.none)
+        expect(f(NaN)).toEqual(O.none)
+      })
+    })
+
     it("universe mx = (None : (pure <$> universe x))", () => {
       expect(universe(E)).toEqual([O.none, O.some(false), O.some(true)])
     })
 
     it("cardinality is a + 1", () => {
       expect(E.cardinality()).toBe(3)
+      expect(getEnum(E).cardinality()).toBe(4)
     })
   })
 
