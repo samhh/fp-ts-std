@@ -65,7 +65,6 @@ export const isRelativeURL: Refinement<unknown, RelativeURL> = (
  * @since 0.17.0
  */
 export const fromURL = (x: URL): RelativeURL =>
-  // TODO I think this is iffy...
   pipe(new URL(x.href, phonyBase), pack<RelativeURL>)
 
 /**
