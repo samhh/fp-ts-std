@@ -10,12 +10,14 @@ import {
   universe,
   inverseMap,
   getUnsafeConstantEnum,
+  fromProductEnumFormula,
 } from "../src/Enum"
 import fc from "fast-check"
-import { constant } from "fp-ts/function"
+import { constant, flow, pipe } from "fp-ts/function"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
+import * as A from "fp-ts/Array"
 import { EnumInt } from "../src/Number"
 import { Show as ShowBool, Ord as OrdBool } from "fp-ts/boolean"
 import { Enum as EnumBool } from "../src/Boolean"
@@ -376,6 +378,40 @@ describe("Enum", () => {
       const E = f(Str.Ord)(["foo"])
 
       expect(() => E.fromEnum("bar")).toThrow(/getUnsafeConstantEnum/)
+    })
+  })
+
+  describe("fromProductEnumFormula", () => {
+    const f = (radices: Array<number>): ((values: Array<number>) => number) =>
+      flow(A.zip(radices), fromProductEnumFormula)
+
+    it("tolerates empty inputs", () => {
+      expect(f([])([])).toEqual(0)
+      expect(f([1, 2, 3])([])).toEqual(0)
+      expect(f([])([1, 2, 3])).toEqual(0)
+    })
+
+    // TODO bad inputs e.g. negative
+
+    it("works", () => {
+      expect(f([3, 2])([0, 0])).toBe(0)
+      expect(f([3, 2])([2, 0])).toBe(4)
+      expect(f([3, 3, 3])([2, 2, 0])).toBe(24)
+      expect(f([11, 5, 13, 9])([3, 4, 3, 7])).toBe(2257)
+      expect(f([19, 12, 16, 13])([12, 0, 0, 5])).toBe(29957)
+    })
+
+    it("calculates Gregorian calendrical seconds", () => {
+      const g = f([7, 24, 60, 60])
+
+      expect(g([0, 0, 0, 0])).toBe(0)
+      expect(g([0, 0, 0, 1])).toBe(1)
+      expect(g([0, 0, 1, 0])).toBe(60)
+      expect(g([0, 1, 0, 0])).toBe(60 * 60)
+      expect(g([1, 0, 0, 0])).toBe(24 * 60 * 60)
+      expect(g([0, 2, 14, 27])).toBe(2 * 60 * 60 + 14 * 60 + 27)
+      expect(g([0, 12, 59, 0])).toBe(12 * 60 * 60 + 59 * 60)
+      expect(g([1, 0, 0, 1])).toBe(24 * 60 * 60 + 1)
     })
   })
 })

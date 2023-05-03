@@ -6,8 +6,21 @@ import {
   merge,
   withDefaults,
   renameKey,
+  getEq,
+  getOrd,
+  getBounded,
+  getEnum,
 } from "../src/Struct"
 import { pipe } from "fp-ts/function"
+import { Enum as EnumBool, Bounded as BoundedBool } from "../src/Boolean"
+import { universe } from "../src/Enum"
+import * as A from "fp-ts/Array"
+import * as O from "fp-ts/Option"
+import Option = O.Option
+import * as Bool from "fp-ts/boolean"
+import * as Str from "fp-ts/string"
+import * as Num from "fp-ts/number"
+import { LT, EQ, GT } from "../src/Ordering"
 
 describe("Struct", () => {
   describe("pick", () => {
@@ -140,6 +153,125 @@ describe("Struct", () => {
         a: "foo",
       })
       expect(Object.keys(x)).toEqual(["a"])
+    })
+  })
+
+  describe("getEq", () => {
+    const f = getEq
+
+    it("checks across all properties", () => {
+      type T = { foo: boolean; bar: number; baz: Option<string> }
+      const { equals: g } = f<T>({
+        foo: Bool.Eq,
+        bar: Num.Eq,
+        baz: O.getEq(Str.Eq),
+      })
+
+      expect(
+        g(
+          { foo: true, bar: 123, baz: O.some("ciao") },
+          { foo: true, bar: 123, baz: O.some("ciao") },
+        ),
+      ).toBe(true)
+
+      expect(
+        g(
+          { foo: true, bar: 123, baz: O.some("ciao") },
+          { foo: false, bar: 123, baz: O.some("ciao") },
+        ),
+      ).toBe(false)
+
+      expect(
+        g(
+          { foo: true, bar: 123, baz: O.some("ciao") },
+          { foo: true, bar: 124, baz: O.some("ciao") },
+        ),
+      ).toBe(false)
+
+      expect(
+        g(
+          { foo: true, bar: 123, baz: O.some("ciao") },
+          { foo: true, bar: 123, baz: O.some("bonjour") },
+        ),
+      ).toBe(false)
+
+      expect(
+        g(
+          { foo: true, bar: 123, baz: O.some("ciao") },
+          { foo: true, bar: 123, baz: O.none },
+        ),
+      ).toBe(false)
+    })
+  })
+
+  describe("getOrd", () => {
+    const f = getOrd
+
+    it("compares across all properties", () => {
+      type T = { foo: boolean; bar: number; baz: boolean }
+      const { compare: g } = f<T>({
+        foo: Bool.Ord,
+        bar: Num.Ord,
+        baz: Bool.Ord,
+      })
+
+      const x: T = { foo: true, bar: 123, baz: true }
+
+      expect(g(x, x)).toBe(EQ)
+      expect(g(x, { ...x, bar: 124 })).toBe(LT)
+      expect(g(x, { ...x, foo: false })).toBe(GT)
+      expect(g(x, { ...x, baz: false })).toBe(GT)
+      expect(g(x, { ...x, foo: false, baz: true })).toBe(GT)
+    })
+  })
+
+  describe("getBounded", () => {
+    const f = getBounded
+    type T = { foo: boolean; bar: 0 | 1 | 2 }
+    const B = f<T>({ foo: BoundedBool, bar: { ...Num.Ord, top: 2, bottom: 0 } })
+
+    it("top is combined top of each property", () => {
+      expect(B.top).toEqual({ foo: true, bar: 2 })
+    })
+
+    it("bottom is combined bottom of each property", () => {
+      expect(B.bottom).toEqual({ foo: false, bar: 0 })
+    })
+  })
+
+  describe.only("getEnum", () => {
+    const f = getEnum
+
+    describe.only('toEnum', () => {
+      it('TODO pls', () => {
+        type T = { foo: boolean; bar: boolean; baz: boolean }
+        const E = f<T>({ foo: EnumBool, bar: EnumBool, baz: EnumBool })
+
+        expect(E.toEnum(-1)).toEqual(O.none)
+        expect(E.toEnum(0)).toEqual(O.some({ foo: false, bar: false, baz: false }))
+        expect(E.toEnum(1)).toEqual(O.some({ foo: true, bar: false, baz: false }))
+        expect(E.toEnum(7)).toEqual(O.some({ foo: true, bar: true, baz: true }))
+        expect(E.toEnum(8)).toEqual(O.none)
+      })
+    })
+
+    describe("fromEnum", () => {
+      it("calculates for product of equal cardinalities", () => {
+        type T = { foo: boolean; bar: boolean; baz: boolean }
+        const E = f<T>({ foo: EnumBool, bar: EnumBool, baz: EnumBool })
+
+        // TODO broken universe. key order looks good in the first log I think
+        // console.log(
+        //   E.bottom,
+        //   E.succ(E.bottom),
+        //   pipe(E.bottom, E.succ, O.chain(E.succ)),
+        // )
+        console.log("broken universe: ", universe(E))
+        // const pls = pipe(universe(E), A.map(E.fromEnum))
+
+        // TODO add many more. remember order is alphabetical on keys
+        expect(E.fromEnum({ foo: true, bar: true, baz: false })).toBe(5)
+      })
     })
   })
 })

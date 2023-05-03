@@ -21,9 +21,11 @@ import { dup, toFst, toSnd } from "./Tuple"
 import * as Map from "fp-ts/Map"
 import { Eq } from "fp-ts/Eq"
 import * as Semigroup from "fp-ts/Semigroup"
-import { increment, decrement, add } from "./Number"
+import { increment, decrement, add, digits } from "./Number"
 import * as L from "./Lazy"
 import Lazy = L.Lazy
+import * as Num from "fp-ts/number"
+import { fst } from "fp-ts/Tuple"
 
 /**
  * Typeclass for finite enumerations.
@@ -325,3 +327,55 @@ export const getUnsafeConstantEnum =
       cardinality: L.of(xs.length),
     }
   }
+
+// http://www.opimedia.be/mixed-radix/?radix-all=2&radix-remain=2&radix-1=3&radix-0=2&length-1=3&length-0=2&general=0:3:2&disable=all,right,01,1,0
+// https://demonstrations.wolfram.com/MixedRadixNumberRepresentations/
+// I guess ideally this becomes NonEmptyArray<[number, number]>, which should be trivial with the actual use case
+// cardinality maps to radix
+
+/**
+ * Calculate the enum index of a variadic product type given a zipped array
+ * of indices and associated cardinalities.
+ *
+ * Mathematically the cardinalities act as radices, so this problem looks
+ * similar to mixed radix numbers. For example, given this function, it's
+ * possible to calculate calendrical denominations without this function having
+ * any inherent knowledge of said calendar.
+ *
+ * @example
+ * import { fromProductEnum } from 'fp-ts-std/Enum'
+ * import { zip } from 'fp-ts/Array'
+ *
+ * const radices = [7, 24, 60, 60]
+ * const values = [1, 0, 0, 1]
+ *
+ * const oneDayAndOneSecInSecs = 86401
+ *
+ * assert.strictEqual(fromProductEnum(zip(values, radices)), oneDayAndOneSecInSecs)
+ *
+ * @internal
+ */
+export const fromProductEnumFormula: (
+  xs: Array<[enumIndex: number, cardinality: number]>,
+) => number = flow(A.unzip, ([values, radices]) =>
+  pipe(
+    values,
+    A.reverse,
+    A.reduceWithIndex<number, [number, number]>([0, 1], (vi, [acc, m], v) => {
+      const ds = digits(v)
+      const radix = radices[radices.length - 1 - vi]
+
+      const sum = pipe(
+        ds,
+        A.foldMapWithIndex(Num.MonoidSum)(
+          (di, d) => d * (di === 0 ? 1 : di * radix ** di),
+        ),
+      )
+
+      const mm = m * radix * ds.length
+
+      return [acc + sum * m, mm]
+    }),
+    fst,
+  ),
+)
