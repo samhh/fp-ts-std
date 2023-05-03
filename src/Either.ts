@@ -8,7 +8,11 @@ import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Show } from "fp-ts/Show"
-import { flow, pipe } from "fp-ts/function"
+import { constant, flow, pipe } from "fp-ts/function"
+import { Ord } from "fp-ts/Ord"
+import { curry2 } from "./Function"
+import { Ordering } from "fp-ts/Ordering"
+import { LT, GT } from "./Ordering"
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Left`
@@ -158,3 +162,34 @@ export const match2 =
       ),
     )
 /* eslint-enable functional/prefer-tacit */
+
+/**
+ * Derive an `Ord` instance for `Either<E, A>` in which `Left` values are
+ * considered less than `Right` values.
+ *
+ * @example
+ * import * as E from 'fp-ts/Either'
+ * import { getOrd } from 'fp-ts-std/Either'
+ * import * as Num from 'fp-ts/number'
+ * import { LT, EQ, GT } from 'fp-ts-std/Ordering'
+ *
+ * const O = getOrd(Num.Ord)(Num.Ord)
+ *
+ * assert.strictEqual(O.compare(E.left(1), E.left(1)), EQ)
+ * assert.strictEqual(O.compare(E.left(1), E.left(2)), LT)
+ * assert.strictEqual(O.compare(E.right(1), E.left(2)), GT)
+ *
+ * @since 0.17.0
+ */
+export const getOrd =
+  <E>(EO: Ord<E>) =>
+  <A>(AO: Ord<A>): Ord<Either<E, A>> => ({
+    ...E.getEq(EO, AO),
+    compare: (x, y) =>
+      match2<E, A, E, A, Ordering>(
+        curry2(EO.compare),
+        constant(constant(LT)),
+        constant(constant(GT)),
+        curry2(AO.compare),
+      )(x)(y),
+  })

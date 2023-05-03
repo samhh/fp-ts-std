@@ -5,6 +5,7 @@ import {
   unsafeExpectLeft,
   mapBoth,
   match2,
+  getOrd,
 } from "../src/Either"
 import * as E from "fp-ts/Either"
 import { identity } from "fp-ts/function"
@@ -12,6 +13,8 @@ import * as Str from "../src/String"
 import { Show as StrShow, Semigroup as StrSemigroup } from "fp-ts/string"
 import fc from "fast-check"
 import { curry2 } from "../src/Function"
+import * as Num from "fp-ts/number"
+import { LT, EQ, GT } from "../src/Ordering"
 
 describe("Either", () => {
   describe("unsafeUnwrap", () => {
@@ -153,6 +156,34 @@ describe("Either", () => {
       rr(E.right(null))
       expect(n).toBe(8)
       /* eslint-enable functional/no-expression-statements */
+    })
+  })
+
+  describe("getOrd", () => {
+    const { compare: f } = getOrd(Num.Ord)(Num.Ord)
+
+    it("considers any Left less than any Right", () => {
+      // For reference.
+      expect(Num.Ord.compare(1, 2)).toBe(LT)
+
+      fc.assert(
+        fc.property(fc.anything(), fc.anything(), (x, y) => {
+          /* eslint-disable @typescript-eslint/no-explicit-any */
+          expect(f(E.left<any, any>(x), E.right<any, any>(y))).toBe(LT)
+          expect(f(E.right<any, any>(x), E.left<any, any>(y))).toBe(GT)
+          /* eslint-enable @typescript-eslint/no-explicit-any */
+        }),
+      )
+    })
+
+    it("tests values in same constructors with given Ords", () => {
+      expect(f(E.left(1), E.left(2))).toBe(LT)
+      expect(f(E.left(1), E.left(1))).toBe(EQ)
+      expect(f(E.left(2), E.left(1))).toBe(GT)
+
+      expect(f(E.right(1), E.right(2))).toBe(LT)
+      expect(f(E.right(1), E.right(1))).toBe(EQ)
+      expect(f(E.right(2), E.right(1))).toBe(GT)
     })
   })
 })

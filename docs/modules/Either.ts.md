@@ -15,6 +15,7 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [utils](#utils)
+  - [getOrd](#getord)
   - [mapBoth](#mapboth)
   - [match2](#match2)
   - [unsafeExpect](#unsafeexpect)
@@ -25,6 +26,38 @@ Added in v0.1.0
 ---
 
 # utils
+
+## getOrd
+
+Derive an `Ord` instance for `Either<E, A>` in which `Left` values are
+considered less than `Right` values.
+
+**Signature**
+
+```ts
+export declare const getOrd: <E>(EO: Ord<E>) => <A>(AO: Ord<A>) => Ord<Either<E, A>>
+```
+
+```hs
+getOrd :: Ord e -> Ord a -> Ord (Either e a)
+```
+
+**Example**
+
+```ts
+import * as E from 'fp-ts/Either'
+import { getOrd } from 'fp-ts-std/Either'
+import * as Num from 'fp-ts/number'
+import { LT, EQ, GT } from 'fp-ts-std/Ordering'
+
+const O = getOrd(Num.Ord)(Num.Ord)
+
+assert.strictEqual(O.compare(E.left(1), E.left(1)), EQ)
+assert.strictEqual(O.compare(E.left(1), E.left(2)), LT)
+assert.strictEqual(O.compare(E.right(1), E.left(2)), GT)
+```
+
+Added in v0.17.0
 
 ## mapBoth
 

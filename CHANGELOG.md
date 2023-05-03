@@ -7,7 +7,7 @@ This project adheres to semantic versioning.
 - Add `URLPath` module.
 - Add `Enum` module.
 - Add `Bounded` instance to `Boolean`.
-- Add `match2` to `Either`.
+- Add `match2` and `getOrd` to `Either`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.
 - Add `clone` to `URL`.
