@@ -31,6 +31,7 @@ import { pack, unpack } from "./Newtype"
  * assert.strictEqual(unsafeParseDate(valid).getTime(), 0)
  * assert.strictEqual(unsafeParseDate(invalid).getTime(), NaN)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unsafeParseDate = (x: string | number): Date =>
@@ -41,6 +42,7 @@ type MillisecondsSymbol = { readonly Milliseconds: unique symbol }
 /**
  * Newtype representing milliseconds.
  *
+ * @category 0 Types
  * @since 0.7.0
  */
 export type Milliseconds = Newtype<MillisecondsSymbol, number>
@@ -49,6 +51,7 @@ export type Milliseconds = Newtype<MillisecondsSymbol, number>
  * `Ord` instance for `Milliseconds`, enabling comparison between different
  * instances of the type.
  *
+ * @category 1 Typeclass Instances
  * @since 0.7.0
  */
 export const ordMilliseconds = getOrd<Milliseconds>(ordNumber)
@@ -56,6 +59,7 @@ export const ordMilliseconds = getOrd<Milliseconds>(ordNumber)
 /**
  * `Field` instance for `Milliseconds`, enabling arithmetic over the type.
  *
+ * @category 1 Typeclass Instances
  * @since 0.7.0
  */
 export const fieldMilliseconds = getField<Milliseconds>(fieldNumber)
@@ -64,6 +68,7 @@ export const fieldMilliseconds = getField<Milliseconds>(fieldNumber)
  * `Iso` instance for `Milliseconds`, enabling the use of lenses over the
  * newtype pertaining to its isomorphic nature.
  *
+ * @category 1 Typeclass Instances
  * @since 0.7.0
  */
 export const isoMilliseconds = iso<Milliseconds>()
@@ -71,6 +76,7 @@ export const isoMilliseconds = iso<Milliseconds>()
 /**
  * Lift a number to the `Milliseconds` newtype.
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const mkMilliseconds: (n: number) => Milliseconds = pack
@@ -78,6 +84,7 @@ export const mkMilliseconds: (n: number) => Milliseconds = pack
 /**
  * Unwrap a `Milliseconds` newtype back to its underlying number representation.
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const unMilliseconds: (ms: Milliseconds) => number = unpack
@@ -85,6 +92,7 @@ export const unMilliseconds: (ms: Milliseconds) => number = unpack
 /**
  * Get a `Date` from `Milliseconds`.
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const fromMilliseconds: (x: Milliseconds) => Date = flow(
@@ -102,6 +110,7 @@ export const fromMilliseconds: (x: Milliseconds) => Date = flow(
  *
  * assert.strictEqual(getTime(d), d.getTime())
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const getTime: (x: Date) => Milliseconds = flow(
@@ -119,6 +128,7 @@ export const getTime: (x: Date) => Milliseconds = flow(
  *
  * assert.strictEqual(toISOString(d), d.toISOString())
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
@@ -135,6 +145,7 @@ export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
  *
  * assert.strictEqual(toUTCString(d), d.toUTCString())
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const toUTCString: (x: Date) => string = invokeOn<Date>()("toUTCString")(
@@ -150,6 +161,7 @@ export const toUTCString: (x: Date) => string = invokeOn<Date>()("toUTCString")(
  * assert.strictEqual(isDate(new Date()), true)
  * assert.strictEqual(isDate({ not: { a: 'date' } }), false)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const isDate: Refinement<unknown, Date> = isInstanceOf(Date)
@@ -166,6 +178,7 @@ export const isDate: Refinement<unknown, Date> = isInstanceOf(Date)
  * assert.strictEqual(isValid(valid), true)
  * assert.strictEqual(isValid(invalid), false)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const isValid: Predicate<Date> = flow(
@@ -187,6 +200,7 @@ export const isValid: Predicate<Date> = flow(
  * assert.deepStrictEqual(parseDate(valid), O.some(new Date(valid)))
  * assert.deepStrictEqual(parseDate(invalid), O.none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const parseDate: (ts: string | number) => Option<Date> = flow(
@@ -197,6 +211,7 @@ export const parseDate: (ts: string | number) => Option<Date> = flow(
 /**
  * Get the time since the Unix Epoch in `Milliseconds` from a `Date`.
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const now: IO<Milliseconds> = pipe(nownum, IO.map(mkMilliseconds))

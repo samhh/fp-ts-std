@@ -14,13 +14,13 @@ Added in v0.16.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [asksIO](#asksio)
   - [runReaderIO](#runreaderio)
 
 ---
 
-# utils
+# 3 Functions
 
 ## asksIO
 

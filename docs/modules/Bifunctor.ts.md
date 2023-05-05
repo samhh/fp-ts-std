@@ -14,12 +14,12 @@ Added in v0.14.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [mapBoth](#mapboth)
 
 ---
 
-# utils
+# 2 Typeclass Methods
 
 ## mapBoth
 

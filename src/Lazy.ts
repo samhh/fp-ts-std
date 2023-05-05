@@ -32,6 +32,7 @@ import * as RA from "fp-ts/ReadonlyArray"
 /**
  * Re-exported from fp-ts for convenience.
  *
+ * @category 0 Types
  * @since 0.12.0
  */
 // docs-ts output will be bad if we "export from".
@@ -40,6 +41,7 @@ export type Lazy<A> = () => A
 /**
  * Typeclass machinery.
  *
+ * @category 4 Minutiae
  * @since 0.12.0
  */
 export const URI = "Lazy"
@@ -47,6 +49,7 @@ export const URI = "Lazy"
 /**
  * Typeclass machinery.
  *
+ * @category 4 Minutiae
  * @since 0.12.0
  */
 export type URI = typeof URI
@@ -73,6 +76,7 @@ const _chainRec: ChainRec1<URI>["chainRec"] = (a, f) => () => {
 /**
  * Map the output of a `Lazy`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const map =
@@ -83,6 +87,7 @@ export const map =
 /**
  * Apply a function within a `Lazy`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const ap: <A>(fa: Lazy<A>) => <B>(fab: Lazy<(a: A) => B>) => Lazy<B> =
@@ -92,6 +97,7 @@ export const ap: <A>(fa: Lazy<A>) => <B>(fab: Lazy<(a: A) => B>) => Lazy<B> =
 /**
  * Raise any value to a `Lazy`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const of: Pointed1<URI>["of"] = constant
@@ -99,6 +105,7 @@ export const of: Pointed1<URI>["of"] = constant
 /**
  * Map and flatten the output of a `Lazy`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const chain: <A, B>(f: (a: A) => Lazy<B>) => (ma: Lazy<A>) => Lazy<B> =
@@ -108,6 +115,7 @@ export const chain: <A, B>(f: (a: A) => Lazy<B>) => (ma: Lazy<A>) => Lazy<B> =
 /**
  * Alias of `chain`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const flatMap = chain
@@ -115,6 +123,7 @@ export const flatMap = chain
 /**
  * Flatten a nested `Lazy`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const flatten: <A>(mma: Lazy<Lazy<A>>) => Lazy<A> = chain(identity)
@@ -123,6 +132,7 @@ export const flatten: <A>(mma: Lazy<Lazy<A>>) => Lazy<A> = chain(identity)
  * Formal `Functor` instance for `Lazy` to be provided to higher-kinded
  * functions that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Functor: Functor1<URI> = {
@@ -134,6 +144,7 @@ export const Functor: Functor1<URI> = {
  * Takes a function in a functorial `Lazy` context and applies it to an
  * ordinary value.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const flap = flap_(Functor)
@@ -142,6 +153,7 @@ export const flap = flap_(Functor)
  * Formal `Pointed` instance for `Lazy` to be provided to higher-kinded
  * functions that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Pointed: Pointed1<URI> = {
@@ -153,6 +165,7 @@ export const Pointed: Pointed1<URI> = {
  * Formal `Apply` instance for `Lazy` to be provided to higher-kinded functions
  * that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Apply: Apply1<URI> = {
@@ -164,6 +177,7 @@ export const Apply: Apply1<URI> = {
 /**
  * Sequence actions, discarding the value of the first argument.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const apFirst = apFirst_(Apply)
@@ -171,6 +185,7 @@ export const apFirst = apFirst_(Apply)
 /**
  * Sequence actions, discarding the value of the second argument.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const apSecond = apSecond_(Apply)
@@ -179,6 +194,7 @@ export const apSecond = apSecond_(Apply)
  * Formal `Applicative` instance for `Lazy` to be provided to higher-kinded
  * functions that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Applicative: Applicative1<URI> = {
@@ -192,6 +208,7 @@ export const Applicative: Applicative1<URI> = {
  * Formal `Chain` instance for `Lazy` to be provided to higher-kinded functions
  * that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Chain: Chain1<URI> = {
@@ -205,6 +222,7 @@ export const Chain: Chain1<URI> = {
  * Formal `Monad` instance for `Lazy` to be provided to higher-kinded functions
  * that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Monad: Monad1<URI> = {
@@ -218,6 +236,7 @@ export const Monad: Monad1<URI> = {
 /**
  * Like `chain`, but discards the new output.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const chainFirst = chainFirst_(Chain)
@@ -226,6 +245,7 @@ export const chainFirst = chainFirst_(Chain)
  * Formal `ChainRec` instance for `Lazy` to be provided to higher-kinded
  * functions that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const ChainRec: ChainRec1<URI> = {
@@ -239,6 +259,7 @@ export const ChainRec: ChainRec1<URI> = {
 /**
  * Initiate do notation in the context of `Lazy`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -248,6 +269,7 @@ export const Do: Lazy<{}> = of({})
  * Bind the provided value, typically preceding it in a pipeline, to the
  * specified key in do notation.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const bindTo = bindTo_(Functor)
@@ -255,6 +277,7 @@ export const bindTo = bindTo_(Functor)
 /**
  * Bind the output of the provided function to the specified key in do notation.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const bind = bind_(Chain)
@@ -262,6 +285,7 @@ export const bind = bind_(Chain)
 /**
  * Bind the provided value to the specified key in do notation.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const apS = apS_(Apply)
@@ -269,6 +293,7 @@ export const apS = apS_(Apply)
 /**
  * Identity for `Lazy` as applied to `sequenceT`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const ApT: Lazy<readonly []> = of([])
@@ -276,6 +301,7 @@ export const ApT: Lazy<readonly []> = of([])
 /**
  * Equivalent to `ReadonlyNonEmptyArray#traverseWithIndex(Applicative)`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const traverseReadonlyNonEmptyArrayWithIndex =
@@ -294,6 +320,7 @@ export const traverseReadonlyNonEmptyArrayWithIndex =
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const traverseReadonlyArrayWithIndex = <A, B>(
@@ -306,6 +333,7 @@ export const traverseReadonlyArrayWithIndex = <A, B>(
 /**
  * Equivalent to `Array#traverseWithIndex(Applicative)`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const traverseArrayWithIndex: <A, B>(
@@ -316,6 +344,7 @@ export const traverseArrayWithIndex: <A, B>(
 /**
  * Equivalent to `Array#traverse(Applicative)`.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const traverseArray = <A, B>(
@@ -326,6 +355,7 @@ export const traverseArray = <A, B>(
 /**
  * Equivalent to `Array#sequence(Applicative)`.
  *
+ * @category 2 Typeclass Methods
  * @since 2.9.0
  */
 export const sequenceArray: <A>(
@@ -341,6 +371,7 @@ export const sequenceArray: <A>(
  *
  * assert.strictEqual(Lazy.execute(Lazy.of(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const execute = <A>(x: Lazy<A>): A => x()
@@ -356,6 +387,7 @@ export const execute = <A>(x: Lazy<A>): A => x()
  *
  * const calc = lazy(() => 'do something expensive here')
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const lazy: <A>(f: () => A) => Lazy<A> = identity
@@ -371,6 +403,7 @@ export const lazy: <A>(f: () => A) => Lazy<A> = identity
  *
  * assert.strictEqual(payOnce(), payOnce())
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const memoize = <A>(f: Lazy<A>): Lazy<A> => {

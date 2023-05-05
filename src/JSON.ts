@@ -18,6 +18,7 @@ type JSONStringSymbol = { readonly Milliseconds: unique symbol }
 /**
  * Newtype representing stringified JSON.
  *
+ * @category 0 Types
  * @since 0.5.0
  */
 export type JSONString = Newtype<JSONStringSymbol, string>
@@ -29,6 +30,7 @@ const mkJSONString = isoJSONString.wrap
 /**
  * Unwrap a `JSONString` newtype back to its underlying string representation.
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const unJSONString = isoJSONString.unwrap
@@ -49,6 +51,7 @@ export const unJSONString = isoJSONString.unwrap
  * assert.deepStrictEqual(f(valid), E.right('"abc"'))
  * assert.deepStrictEqual(f(invalid), E.left('e'))
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const stringify =
@@ -80,6 +83,7 @@ export const stringify =
  * assert.deepStrictEqual(stringifyO(valid), O.some('"abc"'))
  * assert.deepStrictEqual(stringifyO(invalid), O.none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const stringifyO: (data: unknown) => Option<JSONString> = flow(
@@ -95,6 +99,7 @@ export const stringifyO: (data: unknown) => Option<JSONString> = flow(
  *
  * assert.strictEqual(stringifyPrimitive('abc'), '"abc"')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const stringifyPrimitive = (
@@ -113,6 +118,7 @@ export const stringifyPrimitive = (
  *
  * assert.strictEqual(f('abc'), 'abc')
  *
+ * @category 3 Functions
  * @since 0.5.0
  */
 export const unstringify: (x: JSONString) => unknown = flow(
@@ -137,6 +143,7 @@ export const unstringify: (x: JSONString) => unknown = flow(
  * assert.deepStrictEqual(f(valid), E.right('abc'))
  * assert.deepStrictEqual(f(invalid), E.left('e'))
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const parse =
@@ -162,6 +169,7 @@ export const parse =
  * assert.deepStrictEqual(parseO(valid), O.some('abc'))
  * assert.deepStrictEqual(parseO(invalid), O.none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const parseO: (stringified: string) => Option<unknown> = flow(

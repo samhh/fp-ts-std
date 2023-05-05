@@ -23,6 +23,7 @@ import NonEmptyString = NES.NonEmptyString
  * process.env['example'] = 'ciao'
  * assert.deepStrictEqual(getParam('example')(), O.some('ciao'))
  *
+ * @category 3 Functions
  * @since 0.9.0
  */
 export const getParam =
@@ -45,6 +46,7 @@ export const getParam =
  * process.env['empty'] = ''
  * assert.deepStrictEqual(getParamNonEmpty('empty')(), O.none)
  *
+ * @category 3 Functions
  * @since 0.9.0
  */
 export const getParamNonEmpty: (k: string) => IOOption<NonEmptyString> = flow(

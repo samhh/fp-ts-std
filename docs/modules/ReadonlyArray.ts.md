@@ -14,9 +14,13 @@ Added in v0.10.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [1 Typeclass Instances](#1-typeclass-instances)
+  - [getDisorderedEq](#getdisorderedeq)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [allM](#allm)
   - [anyM](#anym)
+  - [filterA](#filtera)
+- [3 Functions](#3-functions)
   - [aperture](#aperture)
   - [cartesian](#cartesian)
   - [countBy](#countby)
@@ -26,9 +30,7 @@ Added in v0.10.0
   - [elemV](#elemv)
   - [endsWith](#endswith)
   - [extractAt](#extractat)
-  - [filterA](#filtera)
   - [fromIterable](#fromiterable)
-  - [getDisorderedEq](#getdisorderedeq)
   - [insertMany](#insertmany)
   - [join](#join)
   - [maximum](#maximum)
@@ -56,7 +58,41 @@ Added in v0.10.0
 
 ---
 
-# utils
+# 1 Typeclass Instances
+
+## getDisorderedEq
+
+Like `fp-ts/Array::getEq`, but items are not required to be in the same
+order to determine equivalence. This function is therefore less efficient,
+and `getEq` should be preferred on ordered data.
+
+**Signature**
+
+```ts
+export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<readonly A[]>
+```
+
+```hs
+getDisorderedEq :: Ord a -> Eq (Array a)
+```
+
+**Example**
+
+```ts
+import { getEq } from 'fp-ts/Array'
+import { getDisorderedEq } from 'fp-ts-std/ReadonlyArray'
+import { ordNumber } from 'fp-ts/Ord'
+
+const f = getEq(ordNumber)
+const g = getDisorderedEq(ordNumber)
+
+assert.strictEqual(f.equals([1, 2, 3], [1, 3, 2]), false)
+assert.strictEqual(g.equals([1, 2, 3], [1, 3, 2]), true)
+```
+
+Added in v0.10.0
+
+# 2 Typeclass Methods
 
 ## allM
 
@@ -157,6 +193,64 @@ assert.strictEqual(execute(f([IO.of(false), IO.of(true), IO.of(false)])), true)
 ```
 
 Added in v0.15.0
+
+## filterA
+
+Filter an array based upon a predicate whose boolean is returned in an
+applicative context. This can be helpful if your predicate is asynchronous
+and therefore `Task`-based, for example.
+
+**Signature**
+
+```ts
+export declare function filterA<F extends URIS4>(
+  F: Applicative4<F>
+): <S, R, E, A>(
+  p: (x: A) => Kind4<F, S, R, E, boolean>
+) => (xs: ReadonlyArray<A>) => Kind4<F, S, R, E, ReadonlyArray<A>>
+export declare function filterA<F extends URIS3>(
+  F: Applicative3<F>
+): <R, E, A>(p: (x: A) => Kind3<F, R, E, boolean>) => (xs: ReadonlyArray<A>) => Kind3<F, R, E, ReadonlyArray<A>>
+export declare function filterA<F extends URIS2>(
+  F: Applicative2<F>
+): <E, A>(p: (x: A) => Kind2<F, E, boolean>) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
+export declare function filterA<F extends URIS2, E>(
+  F: Applicative2C<F, E>
+): <A>(p: (x: A) => Kind2<F, E, boolean>) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
+export declare function filterA<F extends URIS>(
+  F: Applicative1<F>
+): <A>(p: (x: A) => Kind<F, boolean>) => (xs: ReadonlyArray<A>) => Kind<F, ReadonlyArray<A>>
+export declare function filterA<F>(
+  F: Applicative<F>
+): <A>(p: (x: A) => HKT<F, boolean>) => (xs: ReadonlyArray<A>) => HKT<F, ReadonlyArray<A>>
+```
+
+```hs
+filterA :: f extends URIS4 => Applicative4 f -> (a -> Kind4 f s r e boolean) -> ReadonlyArray a -> Kind4 f s r e (ReadonlyArray a)
+filterA :: f extends URIS3 => ((Applicative3 f) -> (a -> Kind3 f r e boolean) -> ReadonlyArray a -> Kind3 f r e (ReadonlyArray a))
+filterA :: f extends URIS2 => ((Applicative2 f) -> (a -> Kind2 f e boolean) -> ReadonlyArray a -> Kind2 f e (ReadonlyArray a))
+filterA :: f extends URIS2 => ((Applicative2C f e) -> (a -> Kind2 f e boolean) -> ReadonlyArray a -> Kind2 f e (ReadonlyArray a))
+filterA :: f extends URIS => ((Applicative1 f) -> (a -> Kind f boolean) -> ReadonlyArray a -> Kind f (ReadonlyArray a))
+filterA :: ((Applicative f) -> (a -> HKT f boolean) -> ReadonlyArray a -> HKT f (ReadonlyArray a))
+```
+
+**Example**
+
+```ts
+import * as T from 'fp-ts/Task'
+import { Task } from 'fp-ts/Task'
+import { filterA } from 'fp-ts-std/ReadonlyArray'
+
+const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0)
+
+filterA(T.ApplicativePar)(asyncIsEven)([1, 2, 3, 4, 5])().then((xs) => {
+  assert.deepStrictEqual(xs, [2, 4])
+})
+```
+
+Added in v0.12.0
+
+# 3 Functions
 
 ## aperture
 
@@ -436,62 +530,6 @@ assert.deepStrictEqual(f(['x', 'y', 'z']), O.some(['y', ['x', 'z']]))
 
 Added in v0.12.0
 
-## filterA
-
-Filter an array based upon a predicate whose boolean is returned in an
-applicative context. This can be helpful if your predicate is asynchronous
-and therefore `Task`-based, for example.
-
-**Signature**
-
-```ts
-export declare function filterA<F extends URIS4>(
-  F: Applicative4<F>
-): <S, R, E, A>(
-  p: (x: A) => Kind4<F, S, R, E, boolean>
-) => (xs: ReadonlyArray<A>) => Kind4<F, S, R, E, ReadonlyArray<A>>
-export declare function filterA<F extends URIS3>(
-  F: Applicative3<F>
-): <R, E, A>(p: (x: A) => Kind3<F, R, E, boolean>) => (xs: ReadonlyArray<A>) => Kind3<F, R, E, ReadonlyArray<A>>
-export declare function filterA<F extends URIS2>(
-  F: Applicative2<F>
-): <E, A>(p: (x: A) => Kind2<F, E, boolean>) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
-export declare function filterA<F extends URIS2, E>(
-  F: Applicative2C<F, E>
-): <A>(p: (x: A) => Kind2<F, E, boolean>) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
-export declare function filterA<F extends URIS>(
-  F: Applicative1<F>
-): <A>(p: (x: A) => Kind<F, boolean>) => (xs: ReadonlyArray<A>) => Kind<F, ReadonlyArray<A>>
-export declare function filterA<F>(
-  F: Applicative<F>
-): <A>(p: (x: A) => HKT<F, boolean>) => (xs: ReadonlyArray<A>) => HKT<F, ReadonlyArray<A>>
-```
-
-```hs
-filterA :: f extends URIS4 => Applicative4 f -> (a -> Kind4 f s r e boolean) -> ReadonlyArray a -> Kind4 f s r e (ReadonlyArray a)
-filterA :: f extends URIS3 => ((Applicative3 f) -> (a -> Kind3 f r e boolean) -> ReadonlyArray a -> Kind3 f r e (ReadonlyArray a))
-filterA :: f extends URIS2 => ((Applicative2 f) -> (a -> Kind2 f e boolean) -> ReadonlyArray a -> Kind2 f e (ReadonlyArray a))
-filterA :: f extends URIS2 => ((Applicative2C f e) -> (a -> Kind2 f e boolean) -> ReadonlyArray a -> Kind2 f e (ReadonlyArray a))
-filterA :: f extends URIS => ((Applicative1 f) -> (a -> Kind f boolean) -> ReadonlyArray a -> Kind f (ReadonlyArray a))
-filterA :: ((Applicative f) -> (a -> HKT f boolean) -> ReadonlyArray a -> HKT f (ReadonlyArray a))
-```
-
-**Example**
-
-```ts
-import * as T from 'fp-ts/Task'
-import { Task } from 'fp-ts/Task'
-import { filterA } from 'fp-ts-std/ReadonlyArray'
-
-const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0)
-
-filterA(T.ApplicativePar)(asyncIsEven)([1, 2, 3, 4, 5])().then((xs) => {
-  assert.deepStrictEqual(xs, [2, 4])
-})
-```
-
-Added in v0.12.0
-
 ## fromIterable
 
 Convert an `Iterable` to a `ReadonlyArray`.
@@ -515,38 +553,6 @@ assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o'])
 ```
 
 Added in v0.14.0
-
-## getDisorderedEq
-
-Like `fp-ts/Array::getEq`, but items are not required to be in the same
-order to determine equivalence. This function is therefore less efficient,
-and `getEq` should be preferred on ordered data.
-
-**Signature**
-
-```ts
-export declare const getDisorderedEq: <A>(ordA: Ord<A>) => Eq<readonly A[]>
-```
-
-```hs
-getDisorderedEq :: Ord a -> Eq (Array a)
-```
-
-**Example**
-
-```ts
-import { getEq } from 'fp-ts/Array'
-import { getDisorderedEq } from 'fp-ts-std/ReadonlyArray'
-import { ordNumber } from 'fp-ts/Ord'
-
-const f = getEq(ordNumber)
-const g = getDisorderedEq(ordNumber)
-
-assert.strictEqual(f.equals([1, 2, 3], [1, 3, 2]), false)
-assert.strictEqual(g.equals([1, 2, 3], [1, 3, 2]), true)
-```
-
-Added in v0.10.0
 
 ## insertMany
 

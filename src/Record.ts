@@ -25,6 +25,7 @@ import * as Str from "fp-ts/string"
  *
  * assert.deepStrictEqual(values(x), [1, 'two'])
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const values: <A>(x: Record<string, A>) => Array<A> = Object.values
@@ -41,6 +42,7 @@ export const values: <A>(x: Record<string, A>) => Array<A> = Object.values
  *
  * assert.deepStrictEqual(A.filterMap(lookupV(x))(ks), [1, [true]])
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const lookupV =
@@ -61,6 +63,7 @@ export const lookupV =
  *
  * assert.deepStrictEqual(reject(isEven)({ a: 1, b: 2, c: 3, d: 4 }), { a: 1, c: 3 })
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const reject = <A>(
@@ -79,6 +82,7 @@ export const reject = <A>(
  *
  * assert.deepStrictEqual(invertLast(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': 'a', '2': 'c', '3': 'd' })
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const invertLast = <A>(
@@ -101,6 +105,7 @@ export const invertLast = <A>(
  *
  * assert.deepStrictEqual(invertAll(fromNumber)({ a: 1, b: 2, c: 2, d: 3 }), { '1': ['a'], '2': ['b', 'c'], '3': ['d'] })
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const invertAll = <A>(
@@ -128,6 +133,7 @@ export const invertAll = <A>(
  *
  * assert.deepStrictEqual(picked, { a: 1, c: [true] })
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const pick = (
@@ -151,6 +157,7 @@ export const pick = (
  *
  * assert.deepStrictEqual(remaining, { a: 1, c: [true] })
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const omit = (

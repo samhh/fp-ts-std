@@ -36,6 +36,7 @@ import * as Id from "fp-ts/Identity"
  *   mkMilliseconds(123),
  * )
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const pack = <A extends Newtype<unknown, unknown> = never>(x: A["_A"]) =>
@@ -53,6 +54,7 @@ export const pack = <A extends Newtype<unknown, unknown> = never>(x: A["_A"]) =>
  *   123,
  * )
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
@@ -72,6 +74,7 @@ export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
  * assert.deepStrictEqual(filterLongEnough(mkMilliseconds(500)), O.none)
  * assert.deepStrictEqual(filterLongEnough(mkMilliseconds(1500)), O.some(mkMilliseconds(1500)))
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function overF<F extends URIS4>(
@@ -123,6 +126,7 @@ export function overF<F>(
  *   mkMilliseconds(6),
  * )
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const over: <A>(

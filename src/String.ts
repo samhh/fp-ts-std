@@ -30,6 +30,7 @@ import { invoke, when } from "./Function"
  *
  * assert.strictEqual(fromNumber(3), '3')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const fromNumber: (x: number) => string = String
@@ -44,6 +45,7 @@ export const fromNumber: (x: number) => string = String
  *
  * assert.strictEqual(prependShell('abc'), '$ abc')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const prepend =
@@ -61,6 +63,7 @@ export const prepend =
  *
  * assert.strictEqual(unprependShell('$ abc'), 'abc')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unprepend = (start: string): Endomorphism<string> =>
@@ -76,6 +79,7 @@ export const unprepend = (start: string): Endomorphism<string> =>
  *
  * assert.strictEqual(withExt('File'), 'File.hs')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const append: (appended: string) => Endomorphism<string> = flip(prepend)
@@ -90,6 +94,7 @@ export const append: (appended: string) => Endomorphism<string> = flip(prepend)
  *
  * assert.strictEqual(withoutExt('File.hs'), 'File')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unappend = (end: string): Endomorphism<string> =>
@@ -106,6 +111,7 @@ export const unappend = (end: string): Endomorphism<string> =>
  *
  * assert.strictEqual(quote('abc'), '"abc"')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const surround = (x: string): Endomorphism<string> =>
@@ -121,6 +127,7 @@ export const surround = (x: string): Endomorphism<string> =>
  *
  * assert.strictEqual(unquote('"abc"'), 'abc')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unsurround = (x: string): Endomorphism<string> =>
@@ -141,6 +148,7 @@ export const unsurround = (x: string): Endomorphism<string> =>
  *
  * assert.strictEqual(takeLeft(2)('abc'), 'ab')
  *
+ * @category 3 Functions
  * @since 0.3.0
  */
 export const takeLeft = (n: number): Endomorphism<string> =>
@@ -161,6 +169,7 @@ export const takeLeft = (n: number): Endomorphism<string> =>
  *
  * assert.strictEqual(takeRight(2)('abc'), 'bc')
  *
+ * @category 3 Functions
  * @since 0.3.0
  */
 export const takeRight =
@@ -181,6 +190,7 @@ export const takeRight =
  * assert.deepStrictEqual(f('2e'), O.some(['2e', '2', 'e']))
  * assert.deepStrictEqual(f('foo'), O.none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const match = (r: RegExp): ((x: string) => Option<RegExpMatchArray>) =>
@@ -204,6 +214,7 @@ export const match = (r: RegExp): ((x: string) => Option<RegExpMatchArray>) =>
  *
  * assert.deepStrictEqual(f('test1test2'), O.some([['test1', 'e', 'st1', '1'], ['test2', 'e', 'st2', '2']]))
  *
+ * @category 3 Functions
  * @since 0.5.0
  */
 export const matchAll =
@@ -230,6 +241,7 @@ export const matchAll =
  *
  * assert.strictEqual(filterOutX("axbxc"), "abc")
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const under = (
@@ -244,6 +256,7 @@ export const under = (
  *
  * assert.strictEqual(reverse('abc'), 'cba')
  *
+ * @category 3 Functions
  * @since 0.3.0
  */
 export const reverse: Endomorphism<string> = under(RA.reverse)
@@ -257,6 +270,7 @@ export const reverse: Endomorphism<string> = under(RA.reverse)
  *
  * assert.deepStrictEqual(lines('a\nb\nc'), ['a', 'b', 'c'])
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const lines = S.split(/\r\n|\r|\n/)
@@ -269,6 +283,7 @@ export const lines = S.split(/\r\n|\r|\n/)
  *
  * assert.strictEqual(unlines(['a', 'b', 'c']), 'a\nb\nc')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unlines = join("\n")
@@ -284,6 +299,7 @@ export const unlines = join("\n")
  * assert.strictEqual(hasVowel('meow'), true)
  * assert.strictEqual(hasVowel('grrr'), false)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const test =
@@ -307,6 +323,7 @@ export const test =
  *
  * assert.strictEqual(replaceAll('foo')('bar')('foo foo foo'), 'bar bar bar')
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const replaceAll =
@@ -331,6 +348,7 @@ export const replaceAll =
  *
  * assert.strictEqual(dropLeft(2)('abc'), 'c')
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const dropLeft = (n: number): Endomorphism<string> =>
@@ -352,6 +370,7 @@ export const dropLeft = (n: number): Endomorphism<string> =>
  *
  * assert.strictEqual(dropRight(2)('abc'), 'a')
  *
+ * @category 3 Functions
  * @since 0.3.0
  */
 export const dropRight =
@@ -370,6 +389,7 @@ export const dropRight =
  *
  * assert.strictEqual(dropFilename('File.hs'), '.hs')
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
@@ -389,6 +409,7 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  *
  * assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const dropRightWhile: (f: Predicate<string>) => Endomorphism<string> =
@@ -404,6 +425,7 @@ export const dropRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  * assert.deepStrictEqual(head('abc'), O.some('a'))
  * assert.deepStrictEqual(head(''), O.none)
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const head: (x: string) => Option<string> = flow(
@@ -423,6 +445,7 @@ export const head: (x: string) => Option<string> = flow(
  * assert.deepStrictEqual(tail('ab'), O.some('b'))
  * assert.deepStrictEqual(tail('abc'), O.some('bc'))
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const tail: (x: string) => Option<string> = flow(
@@ -440,6 +463,7 @@ export const tail: (x: string) => Option<string> = flow(
  * assert.deepStrictEqual(last('abc'), O.some('c'))
  * assert.deepStrictEqual(last(''), O.none)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const last: (x: string) => Option<string> = flow(
@@ -459,6 +483,7 @@ export const last: (x: string) => Option<string> = flow(
  * assert.deepStrictEqual(init('ab'), O.some('a'))
  * assert.deepStrictEqual(init('abc'), O.some('ab'))
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const init: (x: string) => Option<string> = flow(
@@ -476,6 +501,7 @@ export const init: (x: string) => Option<string> = flow(
  * assert.deepStrictEqual(lookup(0)(''), O.none)
  * assert.deepStrictEqual(lookup(0)('abc'), O.some('a'))
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const lookup =
@@ -492,6 +518,7 @@ export const lookup =
  *
  * assert.deepStrictEqual(takeLeftWhile(x => x !== 'c')('abcd'), 'ab')
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 // The pointful first function is needed to typecheck for some reason
@@ -508,6 +535,7 @@ export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
  *
  * assert.deepStrictEqual(takeRightWhile(x => x !== 'b')('abcd'), 'cd')
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
@@ -523,6 +551,7 @@ export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  *
  * assert.deepStrictEqual(splitAt(1)("abc"), ["a", "bc"])
  *
+ * @category 3 Functions
  * @since 0.11.0
  */
 export const splitAt =
@@ -542,6 +571,7 @@ export const splitAt =
  * assert.strictEqual(isAlpha("123"), false)
  * assert.strictEqual(isAlpha("abc123"), false)
  *
+ * @category 3 Functions
  * @since 0.11.0
  */
 export const isAlpha: Predicate<string> = test(/^\p{Alpha}+$/u)
@@ -557,6 +587,7 @@ export const isAlpha: Predicate<string> = test(/^\p{Alpha}+$/u)
  * assert.strictEqual(isAlphaNum("abc123"), true)
  * assert.strictEqual(isAlphaNum("abc123!"), false)
  *
+ * @category 3 Functions
  * @since 0.11.0
  */
 export const isAlphaNum: Predicate<string> = test(/^(\p{Alpha}|\p{Number})+$/u)
@@ -573,6 +604,7 @@ export const isAlphaNum: Predicate<string> = test(/^(\p{Alpha}|\p{Number})+$/u)
  * assert.strictEqual(isLower("Hello"), false)
  * assert.strictEqual(isLower("hello1"), false)
  *
+ * @category 3 Functions
  * @since 0.11.0
  */
 export const isLower: Predicate<string> = test(/^\p{Lower}+$/u)
@@ -589,6 +621,7 @@ export const isLower: Predicate<string> = test(/^\p{Lower}+$/u)
  * assert.strictEqual(isUpper("Hello"), false)
  * assert.strictEqual(isUpper("HELLO1"), false)
  *
+ * @category 3 Functions
  * @since 0.11.0
  */
 export const isUpper: Predicate<string> = test(/^\p{Upper}+$/u)
@@ -605,6 +638,7 @@ export const isUpper: Predicate<string> = test(/^\p{Upper}+$/u)
  * assert.strictEqual(isSpace("x"), false)
  * assert.strictEqual(isSpace("\n\t"), true)
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const isSpace: Predicate<string> = test(/^\s+$/)
@@ -618,6 +652,7 @@ export const isSpace: Predicate<string> = test(/^\s+$/)
  *
  * assert.deepStrictEqual(words('a b\nc'), ['a', 'b', 'c'])
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const words = S.split(/\s/)
@@ -630,6 +665,7 @@ export const words = S.split(/\s/)
  *
  * assert.strictEqual(unwords(['a', 'b', 'c']), 'a b c')
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const unwords = join(" ")

@@ -14,12 +14,12 @@ Added in v0.15.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [runReader](#runreader)
 
 ---
 
-# utils
+# 3 Functions
 
 ## runReader
 

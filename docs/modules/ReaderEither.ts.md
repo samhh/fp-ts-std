@@ -14,13 +14,13 @@ Added in v0.15.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [asksEither](#askseither)
   - [runReaderEither](#runreadereither)
 
 ---
 
-# utils
+# 3 Functions
 
 ## asksEither
 

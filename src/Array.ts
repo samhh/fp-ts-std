@@ -67,6 +67,7 @@ import { Either } from "fp-ts/Either"
  * assert.strictEqual(isLowerVowel('a'), true)
  * assert.strictEqual(isLowerVowel('b'), false)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const elemV =
@@ -88,6 +89,7 @@ export const elemV =
  * assert.strictEqual(noneAreFive([4, 4, 4]), true)
  * assert.strictEqual(noneAreFive([4, 5, 4]), false)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 // tsc doesn't like pointfree here. /shrug
@@ -108,6 +110,7 @@ export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(not, p =>
  * assert.strictEqual(commaSepd(['a']), 'a')
  * assert.strictEqual(commaSepd(['a', 'b', 'c']), 'a,b,c')
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const join = (x: string): ((ys: Array<string>) => string) =>
@@ -129,6 +132,7 @@ export const join = (x: string): ((ys: Array<string>) => string) =>
  * assert.strictEqual(f.equals([1, 2, 3], [1, 3, 2]), false)
  * assert.strictEqual(g.equals([1, 2, 3], [1, 3, 2]), true)
  *
+ * @category 1 Typeclass Instances
  * @since 0.1.0
  */
 export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
@@ -157,6 +161,7 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
  * assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5]), [O.none, [1, 3, 5]])
  * assert.deepStrictEqual(pluckFirstOverFive([1, 3, 5, 7, 9]), [O.some(7), [1, 3, 5, 9]])
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const pluckFirst =
@@ -211,6 +216,7 @@ export const pluckFirst =
  * assert.deepStrictEqual(upsertAccount(created)(accounts), [accounts[0], accounts[1], created])
  * assert.deepStrictEqual(upsertAccount(updated)(accounts), [accounts[0], updated])
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const upsert =
@@ -239,6 +245,7 @@ export const upsert =
  * assert.deepStrictEqual(f(['x']), O.some(['x', 'a', 'b']))
  * assert.deepStrictEqual(f(['x', 'y']), O.some(['x', 'a', 'b', 'y']))
  *
+ * @category 3 Functions
  * @since 0.5.0
  */
 export const insertMany =
@@ -261,6 +268,7 @@ export const insertMany =
  *
  * assert.deepStrictEqual(dropRepeats(eqNumber)([1, 2, 2, 3, 2, 4, 4]), [1, 2, 3, 2, 4])
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
@@ -281,6 +289,7 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
  * assert.strictEqual(startsXyz(['x', 'y', 'z', 'a']), true)
  * assert.strictEqual(startsXyz(['a', 'x', 'y', 'z']), false)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const startsWith =
@@ -300,6 +309,7 @@ export const startsWith =
  * assert.strictEqual(endsXyz(['a', 'x', 'y', 'z']), true)
  * assert.strictEqual(endsXyz(['a', 'x', 'b', 'z']), false)
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const endsWith =
@@ -322,6 +332,7 @@ export const endsWith =
  * assert.deepStrictEqual(withoutFourOrFive([3, 4, 5, 6]), [3, 6])
  * assert.deepStrictEqual(withoutFourOrFive([4, 3, 4, 5, 6, 5]), [3, 6])
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const without =
@@ -342,6 +353,7 @@ export const without =
  *     [[1, 'a'], [1, 'b'], [1, 'c'], [2, 'a'], [2, 'b'], [2, 'c']],
  * )
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const cartesian =
@@ -366,6 +378,7 @@ export const cartesian =
  * assert.strictEqual(sum([]), 0)
  * assert.strictEqual(sum([25, 3, 10]), 38)
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const sum: (xs: Array<number>) => number = concatAll(MonoidSum)
@@ -380,6 +393,7 @@ export const sum: (xs: Array<number>) => number = concatAll(MonoidSum)
  * assert.strictEqual(product([5]), 5)
  * assert.strictEqual(product([4, 2, 3]), 24)
  *
+ * @category 3 Functions
  * @since 0.6.0
  */
 export const product: (xs: Array<number>) => number = concatAll(MonoidProduct)
@@ -392,6 +406,7 @@ export const product: (xs: Array<number>) => number = concatAll(MonoidProduct)
  *
  * assert.deepStrictEqual(mean([2, 7, 9]), 6)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const mean = (xs: NonEmptyArray<number>): number => sum(xs) / xs.length
@@ -405,6 +420,7 @@ export const mean = (xs: NonEmptyArray<number>): number => sum(xs) / xs.length
  * assert.deepStrictEqual(median([2, 9, 7]), 7)
  * assert.deepStrictEqual(median([7, 2, 10, 9]), 8)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const median: (xs: NonEmptyArray<number>) => number = flow(
@@ -431,6 +447,7 @@ export const median: (xs: NonEmptyArray<number>) => number = flow(
  * assert.deepStrictEqual(aperture(3)([1, 2, 3, 4]), [[1, 2, 3], [2, 3, 4]])
  * assert.deepStrictEqual(aperture(4)([1, 2, 3, 4]), [[1, 2, 3, 4]])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const aperture =
@@ -460,6 +477,7 @@ export const aperture =
  * assert.deepStrictEqual(slice(0)(-1)(xs), ['a', 'b', 'c'])
  * assert.deepStrictEqual(slice(-3)(-1)(xs), ['b', 'c'])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const slice =
@@ -479,6 +497,7 @@ export const slice =
  *
  * assert.deepStrictEqual(reject(isEven)([1, 2, 3, 4]), [1, 3])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const reject = <A>(
@@ -502,6 +521,7 @@ export const reject = <A>(
  * assert.deepStrictEqual(moveFrom(0)(1)(['a']), O.none)
  * assert.deepStrictEqual(moveFrom(1)(0)(['a']), O.none)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const moveFrom =
@@ -535,6 +555,7 @@ export const moveFrom =
  * assert.deepStrictEqual(moveTo(0)(1)(['a']), O.none)
  * assert.deepStrictEqual(moveTo(1)(0)(['a']), O.none)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const moveTo = flip(moveFrom)
@@ -551,6 +572,7 @@ export const moveTo = flip(moveFrom)
  *
  * assert.deepStrictEqual(f(xs), { a: 3, b: 1, c: 1, e: 1 })
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const countBy =
@@ -571,6 +593,7 @@ export const countBy =
  *
  * assert.deepStrictEqual(dropRightEvens([6, 7, 3, 4, 2]), [6, 7, 3])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const dropRightWhile = <A>(
@@ -601,6 +624,7 @@ export const dropRightWhile = <A>(
  * assert.deepStrictEqual(dropAt(2)(3)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b', 'f', 'g']))
  * assert.deepStrictEqual(dropAt(2)(Infinity)(['a', 'b', 'c', 'd', 'e', 'f', 'g']), O.some(['a', 'b']))
  *
+ * @category 3 Functions
  * @since 0.3.0
  */
 
@@ -636,6 +660,7 @@ export const dropAt =
  * assert.deepStrictEqual(transpose([[1, 4], [2, 5], [3, 6]]), [[1, 2, 3], [4, 5, 6]])
  * assert.deepStrictEqual(transpose([[10, 11], [20], [], [30, 31,32]]), [[10, 20, 30], [11, 31], [32]])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
@@ -663,6 +688,7 @@ export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
  *
  * assert.deepStrictEqual(takeRightEvens([6, 7, 3, 4, 2]), [4, 2])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const takeRightWhile = <A>(
@@ -682,6 +708,7 @@ export const takeRightWhile = <A>(
  * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 2, 3, 4])([3, 4, 5, 6]), [1, 2, 5, 6])
  * assert.deepStrictEqual(symmetricDifference(eqNumber)([1, 7, 7, 4, 3])([3, 4, 9, 6]), [1, 7, 7, 9, 6])
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const symmetricDifference =
@@ -705,6 +732,7 @@ export const symmetricDifference =
  *
  * assert.strictEqual(reduceUntilOdd(add)(0)([2, 4, 6, 9, 10]), 12)
  *
+ * @category 3 Functions
  * @since 0.8.0
  */
 export const reduceWhile =
@@ -740,6 +768,7 @@ export const reduceWhile =
  *
  * assert.strictEqual(reduceRightUntilOdd(add)(0)([2, 4, 7, 8, 10]), 18)
  *
+ * @category 3 Functions
  * @since 0.8.0
  */
 export const reduceRightWhile =
@@ -757,6 +786,7 @@ export const reduceRightWhile =
  *
  * assert.strictEqual(minimum(ordNumber)([2, 3, 1, 5, 4]), 1)
  *
+ * @category 3 Functions
  * @since 0.9.0
  */
 export const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
@@ -773,6 +803,7 @@ export const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
  *
  * assert.strictEqual(maximum(ordNumber)([2, 3, 1, 5, 4]), 5)
  *
+ * @category 3 Functions
  * @since 0.9.0
  */
 export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
@@ -790,6 +821,7 @@ export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
  *
  * assert.deepStrictEqual(zipAll([3, 4, 5, 6])([1, 2]), [T.both(1, 3), T.both(2, 4), T.right(5), T.right(6)])
  *
+ * @category 3 Functions
  * @since 0.11.0
  */
 export const zipAll =
@@ -830,6 +862,7 @@ export const zipAll =
  *     assert.deepStrictEqual(xs, [2, 4])
  * })
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export function filterA<F extends URIS4>(
@@ -878,6 +911,7 @@ export function filterA<F>(
  * assert.deepStrictEqual(f(['x', 'y']), O.some(['y', ['x']]))
  * assert.deepStrictEqual(f(['x', 'y', 'z']), O.some(['y', ['x', 'z']]))
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const extractAt =
@@ -897,6 +931,7 @@ export const extractAt =
  *
  * assert.deepStrictEqual(fromIterable('hello'), ['h', 'e', 'l', 'l', 'o'])
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const fromIterable: <A>(xs: Iterable<A>) => Array<A> = Array.from
@@ -909,6 +944,7 @@ export const fromIterable: <A>(xs: Iterable<A>) => Array<A> = Array.from
  *
  * assert.deepStrictEqual([1, 2, 3], fromReadonly([1, 2, 3]))
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const fromReadonly: <A>(xs: ReadonlyArray<A>) => Array<A> = RA.toArray
@@ -921,6 +957,7 @@ export const fromReadonly: <A>(xs: ReadonlyArray<A>) => Array<A> = RA.toArray
  *
  * assert.deepStrictEqual([1, 2, 3], toReadonly([1, 2, 3]))
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const toReadonly: <A>(xs: Array<A>) => ReadonlyArray<A> = RA.fromArray
@@ -939,6 +976,7 @@ export const toReadonly: <A>(xs: Array<A>) => ReadonlyArray<A> = RA.fromArray
  * assert.strictEqual(execute(f([IO.of(true), IO.of(true), IO.of(true)])), true)
  * assert.strictEqual(execute(f([IO.of(true), IO.of(false), IO.of(true)])), false)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function allM<M extends URIS4>(
@@ -984,6 +1022,7 @@ export function allM<M>(
  * assert.strictEqual(execute(f([IO.of(false), IO.of(false), IO.of(false)])), false)
  * assert.strictEqual(execute(f([IO.of(false), IO.of(true), IO.of(false)])), true)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function anyM<M extends URIS4>(
@@ -1034,6 +1073,7 @@ export function anyM<M>(
  *   T.right(['one']),
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const separateNE = <A, B>(

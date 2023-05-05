@@ -17,42 +17,16 @@ Added in v0.15.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
-  - [over](#over)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [overF](#overf)
+- [3 Functions](#3-functions)
+  - [over](#over)
   - [pack](#pack)
   - [unpack](#unpack)
 
 ---
 
-# utils
-
-## over
-
-Apply an endomorphism over a newtype. Similar to functor map, but for
-newtypes.
-
-**Signature**
-
-```ts
-export declare const over: <A>(f: Endomorphism<A>) => <B extends Newtype<unknown, A>>(x: B) => B
-```
-
-```hs
-over :: b extends (Newtype unknown a) => Endomorphism a -> b -> b
-```
-
-**Example**
-
-```ts
-import { over } from 'fp-ts-std/Newtype'
-import { mkMilliseconds } from 'fp-ts-std/Date'
-import { multiply } from 'fp-ts-std/Number'
-
-assert.strictEqual(over(multiply(2))(mkMilliseconds(3)), mkMilliseconds(6))
-```
-
-Added in v0.15.0
+# 2 Typeclass Methods
 
 ## overF
 
@@ -97,6 +71,35 @@ const filterLongEnough = overF(O.Functor)<number>(O.fromPredicate((n) => n > 100
 
 assert.deepStrictEqual(filterLongEnough(mkMilliseconds(500)), O.none)
 assert.deepStrictEqual(filterLongEnough(mkMilliseconds(1500)), O.some(mkMilliseconds(1500)))
+```
+
+Added in v0.15.0
+
+# 3 Functions
+
+## over
+
+Apply an endomorphism over a newtype. Similar to functor map, but for
+newtypes.
+
+**Signature**
+
+```ts
+export declare const over: <A>(f: Endomorphism<A>) => <B extends Newtype<unknown, A>>(x: B) => B
+```
+
+```hs
+over :: b extends (Newtype unknown a) => Endomorphism a -> b -> b
+```
+
+**Example**
+
+```ts
+import { over } from 'fp-ts-std/Newtype'
+import { mkMilliseconds } from 'fp-ts-std/Date'
+import { multiply } from 'fp-ts-std/Number'
+
+assert.strictEqual(over(multiply(2))(mkMilliseconds(3)), mkMilliseconds(6))
 ```
 
 Added in v0.15.0

@@ -42,6 +42,7 @@ type NonEmptyStringSymbol = { readonly NonEmptyString: unique symbol }
  * long as interaction with the newtype is confined to exports from this module,
  * as unlike `NonEmptyArray` it's only protected by a smart constructor.
  *
+ * @category 0 Types
  * @since 0.15.0
  */
 export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
@@ -49,6 +50,7 @@ export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 /**
  * Smart constructor from strings.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const fromString: (x: string) => O.Option<NonEmptyString> = flow(
@@ -60,6 +62,7 @@ export const fromString: (x: string) => O.Option<NonEmptyString> = flow(
  * Unsafely lift a string to `NonEmptyString`, throwing upon failure. Can be
  * useful for static values. Try to use `fromString` instead.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unsafeFromString: (x: string) => NonEmptyString = flow(
@@ -70,6 +73,7 @@ export const unsafeFromString: (x: string) => NonEmptyString = flow(
 /**
  * Safely derive a `NonEmptyString` from any number.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const fromNumber: (x: number) => NonEmptyString = flow(
@@ -81,6 +85,7 @@ export const fromNumber: (x: number) => NonEmptyString = flow(
  * Unwrap a `NonEmptyString` newtype back to its underlying string
  * representation.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unNonEmptyString: (x: NonEmptyString) => string = unpack
@@ -88,6 +93,7 @@ export const unNonEmptyString: (x: NonEmptyString) => string = unpack
 /**
  * An alias of `unNonEmptyString`.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const toString: (x: NonEmptyString) => string = unNonEmptyString
@@ -95,6 +101,7 @@ export const toString: (x: NonEmptyString) => string = unNonEmptyString
 /**
  * `Eq` instance for `NonEmptyString` for testing equivalence.
  *
+ * @category 1 Typeclass Instances
  * @since 0.15.0
  */
 export const Eq = getEq<NonEmptyString>(_Eq)
@@ -102,6 +109,7 @@ export const Eq = getEq<NonEmptyString>(_Eq)
 /**
  * `Ord` instance for `NonEmptyString` for comparison.
  *
+ * @category 1 Typeclass Instances
  * @since 0.15.0
  */
 export const Ord = getOrd<NonEmptyString>(_Ord)
@@ -109,6 +117,7 @@ export const Ord = getOrd<NonEmptyString>(_Ord)
 /**
  * `Semigroup` instance for `NonEmptyString`, enabling concatenation.
  *
+ * @category 1 Typeclass Instances
  * @since 0.15.0
  */
 export const Semigroup = getSemigroup<NonEmptyString>(_Semigroup)
@@ -116,6 +125,7 @@ export const Semigroup = getSemigroup<NonEmptyString>(_Semigroup)
 /**
  * `Show` instance for `NonEmptyString`.
  *
+ * @category 1 Typeclass Instances
  * @since 0.15.0
  */
 export const Show: Show<NonEmptyString> = {
@@ -125,6 +135,7 @@ export const Show: Show<NonEmptyString> = {
 /**
  * Get the first character in a `NonEmptyString`.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const head: Endomorphism<NonEmptyString> = over(
@@ -134,6 +145,7 @@ export const head: Endomorphism<NonEmptyString> = over(
 /**
  * Get the last character in a `NonEmptyString`.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const last: Endomorphism<NonEmptyString> = over(
@@ -143,6 +155,7 @@ export const last: Endomorphism<NonEmptyString> = over(
 /**
  * Convert a `NonEmptyString` to uppercase.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const toUpperCase: Endomorphism<NonEmptyString> = over(_toUpperCase)
@@ -150,6 +163,7 @@ export const toUpperCase: Endomorphism<NonEmptyString> = over(_toUpperCase)
 /**
  * Convert a `NonEmptyString` to lowercase.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const toLowerCase: Endomorphism<NonEmptyString> = over(_toLowerCase)
@@ -157,6 +171,7 @@ export const toLowerCase: Endomorphism<NonEmptyString> = over(_toLowerCase)
 /**
  * Prepend a string to a `NonEmptyString`.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const prepend: (x: string) => Endomorphism<NonEmptyString> = flow(
@@ -167,6 +182,7 @@ export const prepend: (x: string) => Endomorphism<NonEmptyString> = flow(
 /**
  * Append a string to a `NonEmptyString`.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const append: (x: string) => Endomorphism<NonEmptyString> = flow(
@@ -178,6 +194,7 @@ export const append: (x: string) => Endomorphism<NonEmptyString> = flow(
  * Surround a `NonEmptyString`. Equivalent to calling `prepend` and `append`
  * with the same outer value.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const surround: (x: string) => Endomorphism<NonEmptyString> = flow(
@@ -188,6 +205,7 @@ export const surround: (x: string) => Endomorphism<NonEmptyString> = flow(
 /**
  * Reverse a `NonEmptyString`.
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const reverse: Endomorphism<NonEmptyString> = over(Str.reverse)

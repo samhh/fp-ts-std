@@ -42,6 +42,7 @@ import { invert } from "./Boolean"
  *
  * assert.strictEqual(execute(f), 'foo')
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function ifM<M extends URIS4>(
@@ -93,6 +94,7 @@ export function ifM<M>(
  * assert.strictEqual(execute(f(IO.of(true))), true)
  * assert.strictEqual(execute(f(IO.of(false))), false)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function andM<M extends URIS4>(
@@ -144,6 +146,7 @@ export function andM<M>(
  * assert.strictEqual(execute(f(IO.of(true))), true)
  * assert.strictEqual(execute(f(IO.of(false))), false)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function orM<M extends URIS4>(
@@ -196,6 +199,7 @@ export function orM<M>(
  * assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(true))])('foo')), true)
  * assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(false))])('foo')), false)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function allPassM<M extends URIS4>(
@@ -250,6 +254,7 @@ export function allPassM<M>(
  * assert.strictEqual(execute(f([constant(IO.of(true)), constant(IO.of(false))])('foo')), true)
  * assert.strictEqual(execute(f([constant(IO.of(false)), constant(IO.of(false))])('foo')), false)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function anyPassM<M extends URIS4>(
@@ -304,6 +309,7 @@ export function anyPassM<M>(
  * assert.strictEqual(execute(f([constant(IO.of(false)), constant(IO.of(false))])('foo')), true)
  * assert.strictEqual(execute(f([constant(IO.of(false)), constant(IO.of(true))])('foo')), false)
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function nonePassM<M extends URIS4>(
@@ -364,6 +370,7 @@ export function nonePassM<M>(
  *     whenM(IO.Monad)(isInvalid(n))(log(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.16.0
  */
 export function whenM<F extends URIS4>(
@@ -414,6 +421,7 @@ export function whenM<F>(
  *     unlessM(IO.Monad)(isValid(n))(log(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.16.0
  */
 export function unlessM<F extends URIS4>(

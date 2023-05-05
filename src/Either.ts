@@ -29,6 +29,7 @@ import { LT, GT } from "./Ordering"
  *
  * assert.deepStrictEqual(unsafeUnwrap(E.right(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
@@ -48,6 +49,7 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
  *
  * assert.deepStrictEqual(unsafeUnwrapLeft(E.left(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.5.0
  */
 export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
@@ -71,6 +73,7 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
  *   /^"foo"$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpect = <E>(S: Show<E>): (<A>(x: Either<E, A>) => A) =>
@@ -90,6 +93,7 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: Either<E, A>) => A) =>
  *   /^"foo"$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpectLeft = <A>(S: Show<A>): (<E>(x: Either<E, A>) => E) =>
@@ -108,6 +112,7 @@ export const unsafeExpectLeft = <A>(S: Show<A>): (<E>(x: Either<E, A>) => E) =>
  * assert.deepStrictEqual(f(E.left(3)), E.left(6))
  * assert.deepStrictEqual(f(E.right(3)), E.right(6))
  *
+ * @category 2 Typeclass Methods
  * @since 0.14.0
  */
 export const mapBoth: <A, B>(
@@ -133,6 +138,7 @@ export const mapBoth: <A, B>(
  * assert.deepStrictEqual(f(E.left('r'))(E.right('l')), ['r', 'l'])
  * assert.deepStrictEqual(f(E.left('r'))(E.right('r')), ['r', 'r'])
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 /* eslint-disable functional/prefer-tacit */
@@ -184,6 +190,7 @@ export const match2 =
  * assert.strictEqual(O.compare(E.left(1), E.left(2)), LT)
  * assert.strictEqual(O.compare(E.right(1), E.left(2)), GT)
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const getOrd =
@@ -203,6 +210,7 @@ export const getOrd =
  * Derive a `Bounded` instance for `Either<E, A>` in which the top and bottom
  * bounds are `Right(A.top)` and `Left(E.bottom)` respectively.
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const getBounded =
@@ -230,6 +238,7 @@ export const getBounded =
  *   [E.left(false), E.left(true), E.right(false), E.right(true)],
  * )
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const getEnum =

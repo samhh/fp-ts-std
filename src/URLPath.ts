@@ -24,6 +24,7 @@ type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
 /**
  * Newtype wrapper around `URL`.
  *
+ * @category 0 Types
  * @since 0.17.0
  */
 export type URLPath = Newtype<URLPathSymbol, URL>
@@ -39,6 +40,7 @@ const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
  * assert.strictEqual(isURLPath(new URL('https://samhh.com/foo')), false)
  * assert.strictEqual(isURLPath(fromPathname('/foo')), true)
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
@@ -60,6 +62,7 @@ export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
  *
  * assert.strictEqual(toString(x), '/foo?bar=baz')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const fromURL = (x: URL): URLPath =>
@@ -85,6 +88,7 @@ export const fromURL = (x: URL): URLPath =>
  *   E.left('oops'),
  * )
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const toURL =
@@ -117,6 +121,7 @@ export const toURL =
  *   O.none,
  * )
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
@@ -139,6 +144,7 @@ export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
  * assert.deepStrictEqual(f('/foo#bar'), E.right(expected))
  * assert.deepStrictEqual(f('//'), E.left('oops'))
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const fromString =
@@ -167,6 +173,7 @@ export const fromString =
  * assert.deepStrictEqual(fromStringO('/foo#bar'), O.some(expected))
  * assert.deepStrictEqual(fromStringO('//'), O.none)
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const fromStringO: (x: string) => Option<URLPath> = flow(
@@ -185,6 +192,7 @@ export const fromStringO: (x: string) => Option<URLPath> = flow(
  *
  * assert.strictEqual(f('/foo?bar=baz'), '/foo%3Fbar=baz')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const fromPathname = (x: string): URLPath => {
@@ -209,6 +217,7 @@ export const fromPathname = (x: string): URLPath => {
  *
  * assert.strictEqual(toString(x), '/foo?bar=2000#baz')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const toString: (x: URLPath) => string = flow(
@@ -227,6 +236,7 @@ export const toString: (x: URLPath) => string = flow(
  *
  * assert.strictEqual(f('/foo'), '/foo')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const getPathname: (x: URLPath) => string = flow(unpack, x => x.pathname)
@@ -242,6 +252,7 @@ export const getPathname: (x: URLPath) => string = flow(unpack, x => x.pathname)
  *
  * assert.strictEqual(f('/foo'), '/foobar')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const modifyPathname = (
@@ -266,6 +277,7 @@ export const modifyPathname = (
  *
  * assert.strictEqual(f('/foo'), '/bar')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const setPathname = (x: string): Endomorphism<URLPath> =>
@@ -282,6 +294,7 @@ export const setPathname = (x: string): Endomorphism<URLPath> =>
  *
  * assert.strictEqual(getParams(x).toString(), (new URLSearchParams('?a=b&c=d')).toString())
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const getParams: (x: URLPath) => URLSearchParams = flow(
@@ -305,6 +318,7 @@ export const getParams: (x: URLPath) => URLSearchParams = flow(
  *
  * assert.deepStrictEqual(getParams(x).toString(), (new URLSearchParams('?a=e&c=d')).toString())
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const modifyParams = (
@@ -335,6 +349,7 @@ export const modifyParams = (
  *
  * assert.deepStrictEqual(getParams(x).toString(), ps.toString())
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const setParams = (x: URLSearchParams): Endomorphism<URLPath> =>
@@ -351,6 +366,7 @@ export const setParams = (x: URLSearchParams): Endomorphism<URLPath> =>
  *
  * assert.strictEqual(getHash(x), '#anchor')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const getHash: (x: URLPath) => string = flow(unpack, x => x.hash)
@@ -370,6 +386,7 @@ export const getHash: (x: URLPath) => string = flow(unpack, x => x.hash)
  *
  * assert.strictEqual(getHash(x), '#anchor!')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
@@ -396,6 +413,7 @@ export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
  *
  * assert.strictEqual(getHash(x), '#ciao')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const setHash = (x: string): Endomorphism<URLPath> =>

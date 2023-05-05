@@ -24,6 +24,7 @@ import { flow } from "fp-ts/function"
  *   assert.strictEqual(x, 5)
  * })
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A> = flow(
@@ -44,6 +45,7 @@ export const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A> = flow(
  *   /^foo$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpect = (

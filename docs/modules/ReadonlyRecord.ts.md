@@ -15,7 +15,7 @@ Added in v0.10.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [invertAll](#invertall)
   - [invertLast](#invertlast)
   - [lookupV](#lookupv)
@@ -26,7 +26,7 @@ Added in v0.10.0
 
 ---
 
-# utils
+# 3 Functions
 
 ## invertAll
 

@@ -14,8 +14,9 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [0 Types](#0-types)
   - [JSONString (type alias)](#jsonstring-type-alias)
+- [3 Functions](#3-functions)
   - [parse](#parse)
   - [parseO](#parseo)
   - [stringify](#stringify)
@@ -26,7 +27,7 @@ Added in v0.1.0
 
 ---
 
-# utils
+# 0 Types
 
 ## JSONString (type alias)
 
@@ -43,6 +44,8 @@ type JSONString = Newtype JSONStringSymbol string
 ```
 
 Added in v0.5.0
+
+# 3 Functions
 
 ## parse
 

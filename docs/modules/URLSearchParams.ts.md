@@ -15,7 +15,7 @@ Added in v0.2.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [clone](#clone)
   - [empty](#empty)
   - [fromRecord](#fromrecord)
@@ -32,7 +32,7 @@ Added in v0.2.0
 
 ---
 
-# utils
+# 3 Functions
 
 ## clone
 

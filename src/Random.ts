@@ -23,6 +23,7 @@ import { unsafeUnwrap } from "./Option"
  *
  * assert.deepStrictEqual(randomExtract(['x'])(), ['x', []])
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const randomExtract = <A>(xs: NonEmptyArray<A>): IO<[A, Array<A>]> =>

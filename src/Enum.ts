@@ -42,6 +42,7 @@ import Lazy = L.Lazy
  * `fromEnum` should always return an integer. `toEnum` should not accept
  * non-integer inputs. They should both be zero-based.
  *
+ * @category 0 Types
  * @since 0.17.0
  */
 export type Enum<A> = Bounded<A> & {
@@ -74,6 +75,7 @@ const unfoldDup1 =
  *
  * assert.deepStrictEqual(range(0)(3), [0, 1, 2, 3])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const fromTo =
@@ -95,6 +97,7 @@ export const fromTo =
  * assert.deepStrictEqual(f(0)(2)(6), [0, 2, 4, 6])
  * assert.deepStrictEqual(f(0)(3)(5), [0, 3])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const fromThenTo =
@@ -133,6 +136,7 @@ export const fromThenTo =
  * assert.deepStrictEqual(f(false), [true])
  * assert.deepStrictEqual(f(true), [])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const upFromExcl = <A>(E: Enum<A>): ((start: A) => Array<A>) =>
@@ -150,6 +154,7 @@ export const upFromExcl = <A>(E: Enum<A>): ((start: A) => Array<A>) =>
  * assert.deepStrictEqual(f(false), [false, true])
  * assert.deepStrictEqual(f(true), [true])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const upFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
@@ -167,6 +172,7 @@ export const upFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
  * assert.deepStrictEqual(f(true), [false])
  * assert.deepStrictEqual(f(false), [])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const downFromExcl = <A>(E: Enum<A>): ((end: A) => Array<A>) =>
@@ -184,6 +190,7 @@ export const downFromExcl = <A>(E: Enum<A>): ((end: A) => Array<A>) =>
  * assert.deepStrictEqual(f(true), [true, false])
  * assert.deepStrictEqual(f(false), [false])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const downFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
@@ -198,6 +205,7 @@ export const downFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
  *
  * assert.strictEqual(defaultCardinality(EnumBool), 2)
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const defaultCardinality = <A>(
@@ -225,6 +233,7 @@ export const defaultCardinality = <A>(
  *
  * assert.deepStrictEqual(universe(EnumBool), [false, true])
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const universe = <A>(E: Enum<A>): NonEmptyArray<A> =>
@@ -252,6 +261,7 @@ export const universe = <A>(E: Enum<A>): NonEmptyArray<A> =>
  * assert.deepStrictEqual(parseBool("false"), O.some(false))
  * assert.deepStrictEqual(parseBool("foobar"), O.none)
  *
+ * @category 2 Typeclass Methods
  * @since 0.17.0
  */
 export const inverseMap =
@@ -291,6 +301,7 @@ export const inverseMap =
  * assert.strictEqual(EnumBool1.fromEnum(true), EnumBool2.fromEnum(true))
  * assert.strictEqual(EnumBool1.fromEnum(false), EnumBool2.fromEnum(false))
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const getUnsafeConstantEnum =

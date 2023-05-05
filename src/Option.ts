@@ -31,6 +31,7 @@ import { increment, decrement } from "./Number"
  *   /^foo$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpect =
@@ -51,6 +52,7 @@ export const unsafeExpect =
  *
  * assert.deepStrictEqual(unsafeUnwrap(O.some(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unsafeUnwrap: <A>(x: Option<A>) => A = unsafeExpect(
@@ -69,6 +71,7 @@ export const unsafeUnwrap: <A>(x: Option<A>) => A = unsafeExpect(
  *
  * assert.deepStrictEqual(noneAs<any>(), O.none)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const noneAs = <A>(): Option<A> => O.none
@@ -92,6 +95,7 @@ export const noneAs = <A>(): Option<A> => O.none
  * assert.deepStrictEqual(f(O.some('y')), O.some('x'))
  * assert.deepStrictEqual(f(O.some('x')), O.none)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const invert =
@@ -115,6 +119,7 @@ export const invert =
  * assert.deepStrictEqual(f(O.some('x')), 'x')
  * assert.deepStrictEqual(f(O.none), '')
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const toMonoid = _toMonoid(O.Foldable)
@@ -135,6 +140,7 @@ export const toMonoid = _toMonoid(O.Foldable)
  * assert.deepStrictEqual(memptyWhen(false)(constant(O.some('x'))), O.some('x'))
  * assert.deepStrictEqual(memptyWhen(false)(constant(O.none)), O.none)
  *
+ * @category 2 Typeclass Methods
  * @since 0.13.0
  */
 export const memptyWhen =
@@ -156,6 +162,7 @@ export const memptyWhen =
  * assert.deepStrictEqual(memptyUnless(false)(constant(O.some('x'))), O.none)
  * assert.deepStrictEqual(memptyUnless(false)(constant(O.none)), O.none)
  *
+ * @category 2 Typeclass Methods
  * @since 0.13.0
  */
 export const memptyUnless: (
@@ -176,6 +183,7 @@ export const memptyUnless: (
  *
  * const mname = pureIf(isMagicNumber(person.age))(constant(person.name))
  *
+ * @category 2 Typeclass Methods
  * @since 0.13.0
  */
 export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
@@ -197,6 +205,7 @@ export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
  *   O.some('foo'),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const altAllBy: <A, B>(
@@ -207,6 +216,7 @@ export const altAllBy: <A, B>(
  * Derive a `Bounded` instance for `Option<A>` in which the top and bottom
  * bounds are `Some(B.top)` and `None` respectively.
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const getBounded = <A>(B: Bounded<A>): Bounded<Option<A>> => ({
@@ -231,6 +241,7 @@ export const getBounded = <A>(B: Bounded<A>): Bounded<Option<A>> => ({
  *   [O.none, O.some(false), O.some(true)],
  * )
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const getEnum = <A>(E: Enum<A>): Enum<Option<A>> => ({
@@ -266,6 +277,7 @@ export const getEnum = <A>(E: Enum<A>): Enum<Option<A>> => ({
  * assert.strictEqual(f(O.none)(O.some(40)), 'Your age is 40')
  * assert.strictEqual(f(O.some("Hodor"))(O.some(40)), 'You are Hodor, 40')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const match2 =

@@ -15,14 +15,14 @@ Added in v0.2.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [trace](#trace)
   - [traceShowWithValue](#traceshowwithvalue)
   - [traceWithValue](#tracewithvalue)
 
 ---
 
-# utils
+# 3 Functions
 
 ## trace
 

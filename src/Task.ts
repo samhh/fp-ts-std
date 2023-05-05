@@ -40,6 +40,7 @@ import { constVoid, flow } from "fp-ts/function"
  *     assert.deepStrictEqual(xs, ['a', 'c', 'b'])
  * })
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const sleep =
@@ -67,6 +68,7 @@ export const sleep =
  *     assert.strictEqual(time !== undefined && gt(D.ordMilliseconds)(time, D.mkMilliseconds(0)), true)
  * })
  *
+ * @category 3 Functions
  * @since 0.5.0
  */
 export const elapsed =
@@ -94,6 +96,7 @@ export const elapsed =
  *   assert.strictEqual(x, 5)
  * })
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const execute = <A>(x: Task<A>): Promise<A> => x()
@@ -119,6 +122,7 @@ export const execute = <A>(x: Task<A>): Promise<A> => x()
  *     when(isInvalid(n))(logAsync(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const when: (x: boolean) => Endomorphism<Task<void>> = _when(
@@ -145,6 +149,7 @@ export const when: (x: boolean) => Endomorphism<Task<void>> = _when(
  *     unless(isValid(n))(logAsync(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const unless: (x: boolean) => Endomorphism<Task<void>> = _unless(
@@ -154,6 +159,7 @@ export const unless: (x: boolean) => Endomorphism<Task<void>> = _unless(
 /**
  * Sequence an array of tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const sequenceArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
@@ -162,6 +168,7 @@ export const sequenceArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
 /**
  * Sequentially sequence an array of tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const sequenceSeqArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
@@ -170,6 +177,7 @@ export const sequenceSeqArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
 /**
  * Map to and sequence an array of tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const traverseArray_: <A, B>(
@@ -180,6 +188,7 @@ export const traverseArray_: <A, B>(
 /**
  * Sequentially map to and sequence an array of tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const traverseSeqArray_: <A, B>(

@@ -28,6 +28,7 @@ import { Show } from "fp-ts/Show"
  *   assert.strictEqual(x, 5)
  * })
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
@@ -47,6 +48,7 @@ export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
  *   assert.strictEqual(x, 5)
  * })
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
@@ -66,6 +68,7 @@ export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
  *   /^"foo"$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpect = <E>(
@@ -87,6 +90,7 @@ export const unsafeExpect = <E>(
  *   /^"foo"$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpectLeft = <A>(
@@ -112,6 +116,7 @@ export const unsafeExpectLeft = <A>(
  *   assert.deepStrictEqual(x, E.right(6))
  * })
  *
+ * @category 2 Typeclass Methods
  * @since 0.14.0
  */
 export const mapBoth: <A, B>(
@@ -121,6 +126,7 @@ export const mapBoth: <A, B>(
 /**
  * Sequence an array of fallible tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const sequenceArray_: <E, A>(
@@ -130,6 +136,7 @@ export const sequenceArray_: <E, A>(
 /**
  * Sequentially sequence an array of fallible tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const sequenceSeqArray_: <E, A>(
@@ -139,6 +146,7 @@ export const sequenceSeqArray_: <E, A>(
 /**
  * Map to and sequence an array of fallible tasks, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const traverseArray_: <E, A, B>(
@@ -150,6 +158,7 @@ export const traverseArray_: <E, A, B>(
  * Sequentially map to and sequence an array of fallible tasks, ignoring the
  * results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const traverseSeqArray_: <E, A, B>(

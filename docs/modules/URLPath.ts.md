@@ -18,8 +18,9 @@ Added in v0.17.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [0 Types](#0-types)
   - [URLPath (type alias)](#urlpath-type-alias)
+- [3 Functions](#3-functions)
   - [fromPathname](#frompathname)
   - [fromString](#fromstring)
   - [fromStringO](#fromstringo)
@@ -40,7 +41,7 @@ Added in v0.17.0
 
 ---
 
-# utils
+# 0 Types
 
 ## URLPath (type alias)
 
@@ -57,6 +58,8 @@ type URLPath = Newtype URLPathSymbol URL
 ```
 
 Added in v0.17.0
+
+# 3 Functions
 
 ## fromPathname
 

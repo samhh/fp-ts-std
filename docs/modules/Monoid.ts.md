@@ -14,14 +14,14 @@ Added in v0.12.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [memptyUnless](#memptyunless)
   - [memptyWhen](#memptywhen)
   - [toMonoid](#tomonoid)
 
 ---
 
-# utils
+# 2 Typeclass Methods
 
 ## memptyUnless
 

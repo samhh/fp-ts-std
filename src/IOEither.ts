@@ -26,6 +26,7 @@ import { Show } from "fp-ts/Show"
  *
  * assert.strictEqual(unsafeUnwrap(IOE.right(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unsafeUnwrap: <A>(x: IOEither<unknown, A>) => A = flow(
@@ -43,6 +44,7 @@ export const unsafeUnwrap: <A>(x: IOEither<unknown, A>) => A = flow(
  *
  * assert.strictEqual(unsafeUnwrapLeft(IOE.left(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E = flow(
@@ -64,6 +66,7 @@ export const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E = flow(
  *   /^"foo"$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
@@ -83,6 +86,7 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
  *   /^"foo"$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpectLeft = <A>(
@@ -103,6 +107,7 @@ export const unsafeExpectLeft = <A>(
  * assert.deepStrictEqual(f(IOE.left(3))(), E.left(6))
  * assert.deepStrictEqual(f(IOE.right(3))(), E.right(6))
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const mapBoth: <A, B>(
@@ -112,6 +117,7 @@ export const mapBoth: <A, B>(
 /**
  * Sequence an array of fallible effects, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const sequenceArray_: <E, A>(
@@ -121,6 +127,7 @@ export const sequenceArray_: <E, A>(
 /**
  * Map to and sequence an array of fallible effects, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const traverseArray_: <E, A, B>(

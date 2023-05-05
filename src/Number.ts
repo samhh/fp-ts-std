@@ -29,6 +29,7 @@ import * as L from "./Lazy"
  * assert.strictEqual(isValid(valid), true)
  * assert.strictEqual(isValid(invalid), false)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const isValid: Predicate<number> = not(Number.isNaN)
@@ -43,6 +44,7 @@ export const isValid: Predicate<number> = not(Number.isNaN)
  * assert.deepStrictEqual(fromStringWithRadix(16)('0xF'), some(15))
  * assert.deepStrictEqual(fromStringWithRadix(16)('xyz'), none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const fromStringWithRadix =
@@ -60,6 +62,7 @@ export const fromStringWithRadix =
  * assert.deepStrictEqual(fromString('3'), some(3))
  * assert.deepStrictEqual(fromString('abc'), none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const fromString: (string: string) => Option<number> =
@@ -75,6 +78,7 @@ export const fromString: (string: string) => Option<number> =
  * assert.deepStrictEqual(floatFromString('3.3'), some(3.3))
  * assert.deepStrictEqual(floatFromString('abc'), none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const floatFromString: (x: string) => Option<number> = flow(
@@ -90,6 +94,7 @@ export const floatFromString: (x: string) => Option<number> = flow(
  *
  * assert.strictEqual(increment(3), 4)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const increment: Endomorphism<number> = x => x + 1
@@ -102,6 +107,7 @@ export const increment: Endomorphism<number> = x => x + 1
  *
  * assert.strictEqual(decrement(3), 2)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const decrement: Endomorphism<number> = x => x - 1
@@ -114,6 +120,7 @@ export const decrement: Endomorphism<number> = x => x - 1
  *
  * assert.strictEqual(add(2)(3), 5)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const add =
@@ -129,6 +136,7 @@ export const add =
  *
  * assert.strictEqual(multiply(2)(3), 6)
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const multiply =
@@ -146,6 +154,7 @@ export const multiply =
  * assert.strictEqual(subtract(2)(3), 1)
  * assert.strictEqual(subtract(3)(2), -1)
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const subtract =
@@ -163,6 +172,7 @@ export const subtract =
  * assert.strictEqual(divide(2)(4), 2)
  * assert.strictEqual(divide(4)(2), .5)
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const divide =
@@ -180,6 +190,7 @@ export const divide =
  * assert.strictEqual(rem(-4)(2), 2)
  * assert.strictEqual(rem(5)(-12), -2)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const rem =
@@ -197,6 +208,7 @@ export const rem =
  * assert.strictEqual(mod(-4)(2), -2)
  * assert.strictEqual(mod(5)(-12), 3)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const mod =
@@ -213,6 +225,7 @@ export const mod =
  * assert.strictEqual(negate(42), -42)
  * assert.strictEqual(negate(-42), 42)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const negate: Endomorphism<number> = n => -n
@@ -228,6 +241,7 @@ export const negate: Endomorphism<number> = n => -n
  * assert.strictEqual(isFinite(Infinity), false)
  * assert.strictEqual(isFinite(-Infinity), false)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity
@@ -244,6 +258,7 @@ export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity
  * assert.strictEqual(toFinite(Infinity), Number.MAX_SAFE_INTEGER)
  * assert.strictEqual(toFinite(-Infinity), Number.MIN_SAFE_INTEGER)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const toFinite: Endomorphism<number> = unless(isFinite)(
@@ -260,6 +275,7 @@ export const toFinite: Endomorphism<number> = unless(isFinite)(
  * assert.strictEqual(isPositive(0), false)
  * assert.strictEqual(isPositive(-42), false)
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const isPositive: Predicate<number> = n => Math.sign(n) === 1
@@ -274,6 +290,7 @@ export const isPositive: Predicate<number> = n => Math.sign(n) === 1
  * assert.strictEqual(isNegative(0), false)
  * assert.strictEqual(isNegative(-42), true)
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const isNegative: Predicate<number> = n => Math.sign(n) === -1
@@ -288,6 +305,7 @@ export const isNegative: Predicate<number> = n => Math.sign(n) === -1
  * assert.strictEqual(isNonNegative(0), true)
  * assert.strictEqual(isNonNegative(-42), false)
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const isNonNegative: Predicate<number> = n => Math.sign(n) !== -1
@@ -302,6 +320,7 @@ export const isNonNegative: Predicate<number> = n => Math.sign(n) !== -1
  * assert.strictEqual(isNonPositive(0), true)
  * assert.strictEqual(isNonPositive(-42), true)
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const isNonPositive: Predicate<number> = n => Math.sign(n) !== 1
@@ -310,6 +329,7 @@ export const isNonPositive: Predicate<number> = n => Math.sign(n) !== 1
  * An alternative `Bounded` instance for numbers which defines top and bottom
  * as `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER` respectively.
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const BoundedSafe: Bounded<number> = {
@@ -336,6 +356,7 @@ export const BoundedSafe: Bounded<number> = {
  * assert.deepStrictEqual(EnumInt.pred(123), O.some(122))
  * assert.deepStrictEqual(EnumInt.pred(123.5), O.none)
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const EnumInt: Enum<number> = {
@@ -373,6 +394,7 @@ export const EnumInt: Enum<number> = {
  *
  * assert.deepStrictEqual(digits(123), [1, 2, 3])
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const digits = (n: number): Array<number> =>

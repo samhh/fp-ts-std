@@ -14,7 +14,7 @@ Added in v0.15.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [asksEither](#askseither)
   - [asksTask](#askstask)
   - [asksTaskEither](#askstaskeither)
@@ -24,7 +24,7 @@ Added in v0.15.0
 
 ---
 
-# utils
+# 3 Functions
 
 ## asksEither
 

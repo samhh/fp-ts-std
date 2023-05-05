@@ -14,20 +14,121 @@ Added in v0.7.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
-  - [execute](#execute)
-  - [memoize](#memoize)
-  - [once](#once)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [sequenceArray\_](#sequencearray_)
-  - [tap](#tap)
   - [traverseArray\_](#traversearray_)
   - [unless](#unless)
   - [when](#when)
+- [3 Functions](#3-functions)
+  - [execute](#execute)
+  - [memoize](#memoize)
+  - [once](#once)
+  - [tap](#tap)
   - [whenInvocationCount](#wheninvocationcount)
 
 ---
 
-# utils
+# 2 Typeclass Methods
+
+## sequenceArray\_
+
+Sequence an array of effects, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const sequenceArray_: <A>(xs: readonly IO<A>[]) => IO<void>
+```
+
+```hs
+sequenceArray_ :: Array (IO a) -> IO void
+```
+
+Added in v0.15.0
+
+## traverseArray\_
+
+Map to and sequence an array of effects, ignoring the results.
+
+**Signature**
+
+```ts
+export declare const traverseArray_: <A, B>(f: (x: A) => IO<B>) => (xs: readonly A[]) => IO<void>
+```
+
+```hs
+traverseArray_ :: (a -> IO b) -> Array a -> IO void
+```
+
+Added in v0.15.0
+
+## unless
+
+The reverse of `when`.
+
+**Signature**
+
+```ts
+export declare const unless: (x: boolean) => Endomorphism<IO<void>>
+```
+
+```hs
+unless :: boolean -> Endomorphism (IO void)
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
+import { unless } from 'fp-ts-std/IO'
+import * as IOE from 'fp-ts/IOEither'
+import { log } from 'fp-ts/Console'
+
+const isValid: Predicate<number> = (n) => n === 42
+
+pipe(
+  IOE.of(123),
+  IOE.chainFirstIOK((n) => unless(isValid(n))(log(n)))
+)
+```
+
+Added in v0.12.0
+
+## when
+
+Conditional execution of an `IO`. Helpful for things like logging.
+
+**Signature**
+
+```ts
+export declare const when: (x: boolean) => Endomorphism<IO<void>>
+```
+
+```hs
+when :: boolean -> Endomorphism (IO void)
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { Predicate } from 'fp-ts/Predicate'
+import { when } from 'fp-ts-std/IO'
+import * as IOE from 'fp-ts/IOEither'
+import { log } from 'fp-ts/Console'
+
+const isInvalid: Predicate<number> = (n) => n !== 42
+
+pipe(
+  IOE.of(123),
+  IOE.chainFirstIOK((n) => when(isInvalid(n))(log(n)))
+)
+```
+
+Added in v0.12.0
+
+# 3 Functions
 
 ## execute
 
@@ -112,22 +213,6 @@ assert.strictEqual(f(3)(), 7)
 
 Added in v0.7.0
 
-## sequenceArray\_
-
-Sequence an array of effects, ignoring the results.
-
-**Signature**
-
-```ts
-export declare const sequenceArray_: <A>(xs: readonly IO<A>[]) => IO<void>
-```
-
-```hs
-sequenceArray_ :: Array (IO a) -> IO void
-```
-
-Added in v0.15.0
-
 ## tap
 
 Performs the side effect with the input value and then returns said input
@@ -168,88 +253,6 @@ assert.strictEqual(x, 4)
 ```
 
 Added in v0.7.0
-
-## traverseArray\_
-
-Map to and sequence an array of effects, ignoring the results.
-
-**Signature**
-
-```ts
-export declare const traverseArray_: <A, B>(f: (x: A) => IO<B>) => (xs: readonly A[]) => IO<void>
-```
-
-```hs
-traverseArray_ :: (a -> IO b) -> Array a -> IO void
-```
-
-Added in v0.15.0
-
-## unless
-
-The reverse of `when`.
-
-**Signature**
-
-```ts
-export declare const unless: (x: boolean) => Endomorphism<IO<void>>
-```
-
-```hs
-unless :: boolean -> Endomorphism (IO void)
-```
-
-**Example**
-
-```ts
-import { pipe } from 'fp-ts/function'
-import { Predicate } from 'fp-ts/Predicate'
-import { unless } from 'fp-ts-std/IO'
-import * as IOE from 'fp-ts/IOEither'
-import { log } from 'fp-ts/Console'
-
-const isValid: Predicate<number> = (n) => n === 42
-
-pipe(
-  IOE.of(123),
-  IOE.chainFirstIOK((n) => unless(isValid(n))(log(n)))
-)
-```
-
-Added in v0.12.0
-
-## when
-
-Conditional execution of an `IO`. Helpful for things like logging.
-
-**Signature**
-
-```ts
-export declare const when: (x: boolean) => Endomorphism<IO<void>>
-```
-
-```hs
-when :: boolean -> Endomorphism (IO void)
-```
-
-**Example**
-
-```ts
-import { pipe } from 'fp-ts/function'
-import { Predicate } from 'fp-ts/Predicate'
-import { when } from 'fp-ts-std/IO'
-import * as IOE from 'fp-ts/IOEither'
-import { log } from 'fp-ts/Console'
-
-const isInvalid: Predicate<number> = (n) => n !== 42
-
-pipe(
-  IOE.of(123),
-  IOE.chainFirstIOK((n) => when(isInvalid(n))(log(n)))
-)
-```
-
-Added in v0.12.0
 
 ## whenInvocationCount
 

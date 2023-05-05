@@ -24,6 +24,7 @@ import * as L from "./Lazy"
  * assert.strictEqual(invert(true), false)
  * assert.strictEqual(invert(false), true)
  *
+ * @category 3 Functions
  * @since 0.4.0
  */
 export const invert: Endomorphism<boolean> = x => !x
@@ -38,6 +39,7 @@ export const invert: Endomorphism<boolean> = x => !x
  * assert.strictEqual(and(true)(true), true)
  * assert.strictEqual(and(true)(false), false)
  *
+ * @category 3 Functions
  * @since 0.4.0
  */
 export const and: (x: boolean) => Endomorphism<boolean> = curry2(
@@ -54,6 +56,7 @@ export const and: (x: boolean) => Endomorphism<boolean> = curry2(
  * assert.strictEqual(or(true)(false), true)
  * assert.strictEqual(or(false)(false), false)
  *
+ * @category 3 Functions
  * @since 0.4.0
  */
 export const or: (x: boolean) => Endomorphism<boolean> = curry2(
@@ -70,6 +73,7 @@ export const or: (x: boolean) => Endomorphism<boolean> = curry2(
  * assert.strictEqual(xor(true)(false), true)
  * assert.strictEqual(xor(true)(true), false)
  *
+ * @category 3 Functions
  * @since 0.4.0
  */
 export const xor =
@@ -86,6 +90,7 @@ export const xor =
  * assert.strictEqual(Bounded.top, true)
  * assert.strictEqual(Bounded.bottom, false)
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const Bounded: Bounded<boolean> = {
@@ -107,6 +112,7 @@ export const Bounded: Bounded<boolean> = {
  * assert.deepStrictEqual(Enum.pred(true), O.some(false))
  * assert.deepStrictEqual(Enum.pred(false), O.none)
  *
+ * @category 1 Typeclass Instances
  * @since 0.17.0
  */
 export const Enum: Enum<boolean> = {

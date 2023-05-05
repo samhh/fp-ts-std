@@ -14,11 +14,13 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [1 Typeclass Instances](#1-typeclass-instances)
   - [getBounded](#getbounded)
   - [getEnum](#getenum)
   - [getOrd](#getord)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [mapBoth](#mapboth)
+- [3 Functions](#3-functions)
   - [match2](#match2)
   - [unsafeExpect](#unsafeexpect)
   - [unsafeExpectLeft](#unsafeexpectleft)
@@ -27,7 +29,7 @@ Added in v0.1.0
 
 ---
 
-# utils
+# 1 Typeclass Instances
 
 ## getBounded
 
@@ -108,6 +110,8 @@ assert.strictEqual(O.compare(E.right(1), E.left(2)), GT)
 
 Added in v0.17.0
 
+# 2 Typeclass Methods
+
 ## mapBoth
 
 Apply a function to both elements of an `Either`.
@@ -136,6 +140,8 @@ assert.deepStrictEqual(f(E.right(3)), E.right(6))
 ```
 
 Added in v0.14.0
+
+# 3 Functions
 
 ## match2
 

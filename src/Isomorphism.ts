@@ -18,6 +18,7 @@ import { flow } from "fp-ts/function"
  * An isomorphism is formed between two reversible, lossless functions. The
  * order of the types is irrelevant.
  *
+ * @category 0 Types
  * @since 0.13.0
  */
 export type Isomorphism<A, B> = {
@@ -36,6 +37,7 @@ const getIsoIso = <A, B>(): Isomorphism<Isomorphism<A, B>, Iso<A, B>> => ({
 /**
  * Convert an `Isomorphism` to a monocle-ts `Iso`.
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 // eslint-disable-next-line functional/prefer-tacit
@@ -45,6 +47,7 @@ export const toIso = <A, B>(I: Isomorphism<A, B>): Iso<A, B> =>
 /**
  * Convert a monocle-ts `Iso` to an `Isomorphism`.
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 // eslint-disable-next-line functional/prefer-tacit
@@ -54,6 +57,7 @@ export const fromIso = <A, B>(I: Iso<A, B>): Isomorphism<A, B> =>
 /**
  * Reverse the order of the types in an `Isomorphism`.
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const reverse = <A, B>(I: Isomorphism<A, B>): Isomorphism<B, A> => ({
@@ -82,6 +86,7 @@ export const reverse = <A, B>(I: Isomorphism<A, B>): Isomorphism<B, A> => ({
  * assert.strictEqual(semigroupBinaryAll.concat(0, 1), 0)
  * assert.strictEqual(semigroupBinaryAll.concat(1, 1), 1)
  *
+ * @category 1 Typeclass Instances
  * @since 0.13.0
  */
 export const deriveSemigroup =
@@ -112,6 +117,7 @@ export const deriveSemigroup =
  * assert.strictEqual(monoidBinaryAll.concat(0, 1), 0)
  * assert.strictEqual(monoidBinaryAll.concat(1, 1), 1)
  *
+ * @category 1 Typeclass Instances
  * @since 0.13.0
  */
 export const deriveMonoid =
@@ -154,6 +160,7 @@ export const deriveMonoid =
  * assert.deepStrictEqual(isoSideBinary.from(0), E.left(null))
  * assert.deepStrictEqual(isoSideBinary.from(1), E.right(null))
  *
+ * @category 3 Functions
  * @since 0.13.0
  */
 export const compose =

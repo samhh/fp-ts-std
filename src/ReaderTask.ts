@@ -23,7 +23,7 @@ import { runReader } from "./Reader"
  *  runReaderTask(env)
  * )().then(extractedValue => assert.strictEqual(extractedValue, 1))
  *
- *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const runReaderTask: <R, A>(
@@ -43,6 +43,7 @@ export const runReaderTask: <R, A>(
  *   Promise.resolve(false),
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const asksTask: <R, A>(f: (r: R) => Task<A>) => ReaderTask<R, A> =

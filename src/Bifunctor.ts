@@ -27,6 +27,7 @@ import {
  *
  * assert.deepStrictEqual(xs, [6, 10])
  *
+ * @category 2 Typeclass Methods
  * @since 0.14.0
  */
 export function mapBoth<F extends URIS4>(

@@ -22,6 +22,7 @@ import { flow } from "fp-ts/function"
  *
  * assert.strictEqual(unsafeUnwrap(IOO.some(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeUnwrap: <A>(x: IOOption<A>) => A = flow(
@@ -41,6 +42,7 @@ export const unsafeUnwrap: <A>(x: IOOption<A>) => A = flow(
  *   /^foo$/,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const unsafeExpect = (msg: string): (<A>(x: IOOption<A>) => A) =>

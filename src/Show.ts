@@ -11,6 +11,7 @@ import { Contravariant1 } from "fp-ts/Contravariant"
 /**
  * Typeclass machinery.
  *
+ * @category 4 Minutiae
  * @since 0.12.0
  */
 export const URI = "Show"
@@ -18,6 +19,7 @@ export const URI = "Show"
 /**
  * Typeclass machinery.
  *
+ * @category 4 Minutiae
  * @since 0.12.0
  */
 export type URI = typeof URI
@@ -32,6 +34,7 @@ declare module "fp-ts/HKT" {
  * Derive an instance for `Show<B>` by providing a function from `B` to `A` and
  * a `Show<A>` instance.
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const contramap =
@@ -42,6 +45,7 @@ export const contramap =
  * Formal `Contravariant` instance for `Show` to be provided to higher-kinded
  * functions that require it.
  *
+ * @category 1 Typeclass Instances
  * @since 0.12.0
  */
 export const Contravariant: Contravariant1<URI> = {

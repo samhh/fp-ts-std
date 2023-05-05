@@ -19,7 +19,7 @@ import { apply } from "fp-ts/function"
  * const extractedValue = pipe(R.of<Env, number>(1), runReader(env))
  * assert.strictEqual(extractedValue, 1)
  *
- *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const runReader: <R, A>(r: R) => (reader: Reader<R, A>) => A = apply

@@ -43,6 +43,7 @@ import { Lazy } from "./Lazy"
  * assert.deepStrictEqual(f(O.some('x')), 'x')
  * assert.deepStrictEqual(f(O.none), '')
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export function toMonoid<F extends URIS4>(
@@ -86,6 +87,7 @@ export function toMonoid<F>(
  * assert.deepStrictEqual(f(false)(constant(O.some('x'))), O.some('x'))
  * assert.deepStrictEqual(f(false)(constant(O.none)), O.none)
  *
+ * @category 2 Typeclass Methods
  * @since 0.13.0
  */
 export const memptyWhen =
@@ -111,6 +113,7 @@ export const memptyWhen =
  * assert.deepStrictEqual(f(false)(constant(O.some('x'))), O.none)
  * assert.deepStrictEqual(f(false)(constant(O.none)), O.none)
  *
+ * @category 2 Typeclass Methods
  * @since 0.13.0
  */
 export const memptyUnless = <A>(

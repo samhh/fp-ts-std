@@ -32,7 +32,7 @@ import {
  *  runReaderTaskEither(env)
  * )().then(extractedValue => assert.deepStrictEqual(extractedValue, E.right(1)))
  *
- *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const runReaderTaskEither: <R, E, A>(
@@ -51,6 +51,7 @@ export const runReaderTaskEither: <R, E, A>(
  *   assert.strictEqual(x, 5)
  * })
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unsafeUnwrap =
@@ -70,6 +71,7 @@ export const unsafeUnwrap =
  *   assert.strictEqual(x, 5)
  * })
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const unsafeUnwrapLeft =
@@ -92,6 +94,7 @@ export const unsafeUnwrapLeft =
  *   Promise.resolve(E.right(false)),
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const asksEither = <R, E, A>(
@@ -113,6 +116,7 @@ export const asksEither = <R, E, A>(
  *   Promise.resolve(E.right(false)),
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const asksTask = <R, E, A>(
@@ -133,6 +137,7 @@ export const asksTask = <R, E, A>(
  *   Promise.resolve(E.right(false)),
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const asksTaskEither: <R, E, A>(

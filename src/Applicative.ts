@@ -45,6 +45,7 @@ import {
  *     when(IO.Applicative)(isInvalid(n))(log(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export function when<F extends URIS4>(
@@ -92,6 +93,7 @@ export function when<F>(
  *     unless(IO.Applicative)(isValid(n))(log(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export function unless<F extends URIS4>(

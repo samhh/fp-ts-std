@@ -15,9 +15,10 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [1 Typeclass Instances](#1-typeclass-instances)
   - [Bounded](#bounded)
   - [Enum](#enum)
+- [3 Functions](#3-functions)
   - [and](#and)
   - [invert](#invert)
   - [or](#or)
@@ -25,7 +26,7 @@ Added in v0.1.0
 
 ---
 
-# utils
+# 1 Typeclass Instances
 
 ## Bounded
 
@@ -76,6 +77,8 @@ assert.deepStrictEqual(Enum.pred(false), O.none)
 ```
 
 Added in v0.17.0
+
+# 3 Functions
 
 ## and
 

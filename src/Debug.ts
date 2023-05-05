@@ -31,6 +31,7 @@ import { Show } from "fp-ts/Show"
  * // Actual function/pipeline behaviour is unaffected:
  * assert.strictEqual(doubledString(2), '4')
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const trace =
@@ -57,6 +58,7 @@ export const trace =
  * // Actual function/pipeline behaviour is unaffected:
  * assert.strictEqual(doubledString(2), '4')
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const traceWithValue =
@@ -84,6 +86,7 @@ export const traceWithValue =
  * // Actual function/pipeline behaviour is unaffected:
  * assert.strictEqual(doubledString(2), '4')
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const traceShowWithValue =

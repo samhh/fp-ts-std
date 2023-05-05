@@ -14,12 +14,13 @@ Added in v0.12.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [mapBoth](#mapboth)
   - [sequenceArray\_](#sequencearray_)
   - [sequenceSeqArray\_](#sequenceseqarray_)
   - [traverseArray\_](#traversearray_)
   - [traverseSeqArray\_](#traverseseqarray_)
+- [3 Functions](#3-functions)
   - [unsafeExpect](#unsafeexpect)
   - [unsafeExpectLeft](#unsafeexpectleft)
   - [unsafeUnwrap](#unsafeunwrap)
@@ -27,7 +28,7 @@ Added in v0.12.0
 
 ---
 
-# utils
+# 2 Typeclass Methods
 
 ## mapBoth
 
@@ -131,6 +132,8 @@ traverseSeqArray_ :: (a -> TaskEither e b) -> Array a -> TaskEither e void
 ```
 
 Added in v0.15.0
+
+# 3 Functions
 
 ## unsafeExpect
 

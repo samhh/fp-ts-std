@@ -14,13 +14,13 @@ Added in v0.13.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [altAllBy](#altallby)
   - [pureIf](#pureif)
 
 ---
 
-# utils
+# 2 Typeclass Methods
 
 ## altAllBy
 

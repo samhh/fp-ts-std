@@ -43,6 +43,7 @@ import * as A from "fp-ts/Array"
  *
  * const mname = pureIf(O.Alternative)(isMagicNumber(person.age))(constant(person.name))
  *
+ * @category 2 Typeclass Methods
  * @since 0.13.0
  */
 export function pureIf<F extends URIS4, S, R, E>(
@@ -86,6 +87,7 @@ export function pureIf<F>(
  *   O.some('foo'),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export function altAllBy<F extends URIS4>(

@@ -24,7 +24,7 @@ import { identity } from "fp-ts/function"
  *   123,
  * )
  *
- *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const runReaderIO: <R, A>(r: R) => (m: ReaderIO<R, A>) => IO<A> =
@@ -43,6 +43,7 @@ export const runReaderIO: <R, A>(r: R) => (m: ReaderIO<R, A>) => IO<A> =
  *   false,
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const asksIO: <R, A>(f: (r: R) => IO<A>) => ReaderIO<R, A> = identity

@@ -28,6 +28,7 @@ import { invoke } from "./Function"
  * assert.strictEqual(Array.isArray(xs), false)
  * assert.strictEqual(Array.isArray(fromNodeList(xs)), true)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
@@ -51,6 +52,8 @@ export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
  * assert.deepStrictEqual(f('li:nth-child(1)')(), O.some('x'))
  * assert.deepStrictEqual(f('li:nth-child(2)')(), O.some('y'))
  * assert.deepStrictEqual(f('li:nth-child(3)')(), O.none)
+ *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const querySelector =
@@ -76,6 +79,7 @@ export const querySelector =
  *
  * assert.deepStrictEqual(getNumListItems(), O.some(2))
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const querySelectorAll =
@@ -102,6 +106,7 @@ export const querySelectorAll =
  *
  * assert.deepStrictEqual(getNumChildren(), O.some(2))
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const childNodes =
@@ -129,6 +134,7 @@ export const childNodes =
  * removeFirstPara()
  * assert.strictEqual(check(), after)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const remove =
@@ -156,6 +162,7 @@ export const remove =
  * addDiv()
  * assert.strictEqual(check(), after)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const appendChild =
@@ -184,6 +191,7 @@ export const appendChild =
  * emptyFirstDiv()
  * assert.strictEqual(check(), after)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const emptyChildren: (x: Node) => IO<void> = flow(
@@ -207,6 +215,7 @@ export const emptyChildren: (x: Node) => IO<void> = flow(
  * setTextContent('x')(el)()
  * assert.deepStrictEqual(check(), O.some('x'))
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const getTextContent =
@@ -230,6 +239,7 @@ export const getTextContent =
  * setTextContent('x')(el)()
  * assert.deepStrictEqual(check(), O.some('x'))
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const setTextContent =
@@ -272,6 +282,7 @@ type EventListenerCleanup = IO<void>
  * el.click()
  * assert.strictEqual(clicks, 2)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const addEventListener =
@@ -306,6 +317,7 @@ export const addEventListener =
  * el.click()
  * assert.strictEqual(clicks, 1)
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const addEventListener_ =

@@ -27,6 +27,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
  * assert.strictEqual(x.pathname, '/bar')
  * assert.strictEqual(y.pathname, '/foo')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const clone: Endomorphism<URL> = u => unsafeParse(u.href)
@@ -39,6 +40,7 @@ export const clone: Endomorphism<URL> = u => unsafeParse(u.href)
  *
  * assert.deepStrictEqual(unsafeParse('https://samhh.com'), new URL('https://samhh.com'))
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const unsafeParse = (x: string): URL => pipe([x], construct(URL))
@@ -56,6 +58,7 @@ export const unsafeParse = (x: string): URL => pipe([x], construct(URL))
  * assert.deepStrictEqual(f('https://samhh.com'), E.right(new URL('https://samhh.com')))
  * assert.deepStrictEqual(f('invalid'), E.left('e'))
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const parse =
@@ -78,6 +81,7 @@ export const parse =
  * assert.deepStrictEqual(parseO('https://samhh.com'), O.some(new URL('https://samhh.com')))
  * assert.deepStrictEqual(parseO('invalid'), O.none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const parseO: (href: string) => Option<URL> = flow(
@@ -94,6 +98,7 @@ export const parseO: (href: string) => Option<URL> = flow(
  * assert.strictEqual(isURL(new URL('https://samhh.com')), true)
  * assert.strictEqual(isURL({ not: { a: 'url' } }), false)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const isURL: Refinement<unknown, URL> = isInstanceOf(URL)

@@ -18,22 +18,25 @@ Added in v0.17.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [0 Types](#0-types)
   - [Enum (type alias)](#enum-type-alias)
-  - [defaultCardinality](#defaultcardinality)
+- [1 Typeclass Instances](#1-typeclass-instances)
+  - [getUnsafeConstantEnum](#getunsafeconstantenum)
+- [2 Typeclass Methods](#2-typeclass-methods)
   - [downFromExcl](#downfromexcl)
   - [downFromIncl](#downfromincl)
   - [fromThenTo](#fromthento)
   - [fromTo](#fromto)
-  - [getUnsafeConstantEnum](#getunsafeconstantenum)
   - [inverseMap](#inversemap)
   - [universe](#universe)
   - [upFromExcl](#upfromexcl)
   - [upFromIncl](#upfromincl)
+- [3 Functions](#3-functions)
+  - [defaultCardinality](#defaultcardinality)
 
 ---
 
-# utils
+# 0 Types
 
 ## Enum (type alias)
 
@@ -71,32 +74,45 @@ type Enum a = Bounded a & { succ: a -> Option a, pred: a -> Option a, toEnum: nu
 
 Added in v0.17.0
 
-## defaultCardinality
+# 1 Typeclass Instances
 
-Provides a default, inefficient implementation of `cardinality`.
+## getUnsafeConstantEnum
+
+Produces an Enum instance that's potentially both unlawful and unsafe from a
+list of values. Convenient for partially enumerating wide or deep types that
+contain a few very large types such as strings.
+
+The instance will be unsafe if `xs` does not contain every member of `A`. If
+this is the case, the only function that can throw is `fromEnum`.
+
+Behaviour in case of duplicate values is unspecified.
 
 **Signature**
 
 ```ts
-export declare const defaultCardinality: <A>(
-  E: Pick<Enum<A>, 'top' | 'bottom' | 'compare' | 'equals' | 'succ' | 'pred' | 'toEnum' | 'fromEnum'>
-) => number
-```
-
-```hs
-defaultCardinality :: Pick (Enum a) ("top" | ("bottom" | ("compare" | ("equals" | ("succ" | ("pred" | ("toEnum" | "fromEnum"))))))) -> number
+export declare const getUnsafeConstantEnum: <A>(Ord: Ord<A>) => (xs: NEA.NonEmptyArray<A>) => Enum<A>
 ```
 
 **Example**
 
 ```ts
-import { defaultCardinality } from 'fp-ts-std/Enum'
-import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+import { Enum, getUnsafeConstantEnum } from 'fp-ts-std/Enum'
+import * as Bool from 'fp-ts/boolean'
+import { Enum as EnumBool1 } from 'fp-ts-std/Boolean'
 
-assert.strictEqual(defaultCardinality(EnumBool), 2)
+// A safe instance equivalent to the real instance albeit with worse
+// performance characteristics.
+const EnumBool2: Enum<boolean> = getUnsafeConstantEnum(Bool.Ord)([false, true])
+
+assert.strictEqual(EnumBool2.fromEnum(true), 1)
+
+assert.strictEqual(EnumBool1.fromEnum(true), EnumBool2.fromEnum(true))
+assert.strictEqual(EnumBool1.fromEnum(false), EnumBool2.fromEnum(false))
 ```
 
 Added in v0.17.0
+
+# 2 Typeclass Methods
 
 ## downFromExcl
 
@@ -196,42 +212,6 @@ import { EnumInt } from 'fp-ts-std/Number'
 const range = fromTo(EnumInt)
 
 assert.deepStrictEqual(range(0)(3), [0, 1, 2, 3])
-```
-
-Added in v0.17.0
-
-## getUnsafeConstantEnum
-
-Produces an Enum instance that's potentially both unlawful and unsafe from a
-list of values. Convenient for partially enumerating wide or deep types that
-contain a few very large types such as strings.
-
-The instance will be unsafe if `xs` does not contain every member of `A`. If
-this is the case, the only function that can throw is `fromEnum`.
-
-Behaviour in case of duplicate values is unspecified.
-
-**Signature**
-
-```ts
-export declare const getUnsafeConstantEnum: <A>(Ord: Ord<A>) => (xs: NEA.NonEmptyArray<A>) => Enum<A>
-```
-
-**Example**
-
-```ts
-import { Enum, getUnsafeConstantEnum } from 'fp-ts-std/Enum'
-import * as Bool from 'fp-ts/boolean'
-import { Enum as EnumBool1 } from 'fp-ts-std/Boolean'
-
-// A safe instance equivalent to the real instance albeit with worse
-// performance characteristics.
-const EnumBool2: Enum<boolean> = getUnsafeConstantEnum(Bool.Ord)([false, true])
-
-assert.strictEqual(EnumBool2.fromEnum(true), 1)
-
-assert.strictEqual(EnumBool1.fromEnum(true), EnumBool2.fromEnum(true))
-assert.strictEqual(EnumBool1.fromEnum(false), EnumBool2.fromEnum(false))
 ```
 
 Added in v0.17.0
@@ -339,6 +319,35 @@ const f = upFromIncl(EnumBool)
 
 assert.deepStrictEqual(f(false), [false, true])
 assert.deepStrictEqual(f(true), [true])
+```
+
+Added in v0.17.0
+
+# 3 Functions
+
+## defaultCardinality
+
+Provides a default, inefficient implementation of `cardinality`.
+
+**Signature**
+
+```ts
+export declare const defaultCardinality: <A>(
+  E: Pick<Enum<A>, 'top' | 'bottom' | 'compare' | 'equals' | 'succ' | 'pred' | 'toEnum' | 'fromEnum'>
+) => number
+```
+
+```hs
+defaultCardinality :: Pick (Enum a) ("top" | ("bottom" | ("compare" | ("equals" | ("succ" | ("pred" | ("toEnum" | "fromEnum"))))))) -> number
+```
+
+**Example**
+
+```ts
+import { defaultCardinality } from 'fp-ts-std/Enum'
+import { Enum as EnumBool } from 'fp-ts-std/Boolean'
+
+assert.strictEqual(defaultCardinality(EnumBool), 2)
 ```
 
 Added in v0.17.0

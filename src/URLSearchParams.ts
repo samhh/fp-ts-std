@@ -29,6 +29,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
  *
  * assert.deepStrictEqual(empty, new URLSearchParams())
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const empty: URLSearchParams = construct(URLSearchParams)([])
@@ -42,6 +43,7 @@ export const empty: URLSearchParams = construct(URLSearchParams)([])
  * assert.strictEqual(isEmpty(new URLSearchParams()), true)
  * assert.strictEqual(isEmpty(new URLSearchParams({ k: 'v' })), false)
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const isEmpty: Predicate<URLSearchParams> = u =>
@@ -57,6 +59,7 @@ export const isEmpty: Predicate<URLSearchParams> = u =>
  *
  * assert.deepStrictEqual(fromString(x), new URLSearchParams(x))
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const fromString = (x: string): URLSearchParams =>
@@ -72,6 +75,7 @@ export const fromString = (x: string): URLSearchParams =>
  *
  * assert.strictEqual(toString(x), 'a=b&c=d')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const toString = (x: URLSearchParams): string => x.toString()
@@ -86,6 +90,7 @@ export const toString = (x: URLSearchParams): string => x.toString()
  *
  * assert.deepStrictEqual(fromTuples(x), new URLSearchParams(x))
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
@@ -101,6 +106,7 @@ export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
  *
  * assert.deepStrictEqual(toTuples(x), [['a', 'b'], ['c', 'd'], ['a', 'e']])
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const toTuples = (x: URLSearchParams): Array<[string, string]> =>
@@ -117,6 +123,7 @@ export const toTuples = (x: URLSearchParams): Array<[string, string]> =>
  *
  * assert.deepStrictEqual(fromRecord(r), new URLSearchParams(s))
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const fromRecord: (x: Record<string, Array<string>>) => URLSearchParams =
@@ -137,6 +144,7 @@ export const fromRecord: (x: Record<string, Array<string>>) => URLSearchParams =
  *
  * assert.deepStrictEqual(toRecord(x), { a: ['b', 'e'], c: ['d'] })
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const toRecord = (
@@ -158,6 +166,7 @@ export const toRecord = (
  * assert.strictEqual(x === clone(x), false)
  * assert.deepStrictEqual(x, clone(x))
  *
+ * @category 3 Functions
  * @since 0.2.0
  */
 export const clone = (x: URLSearchParams): URLSearchParams =>
@@ -174,6 +183,7 @@ export const clone = (x: URLSearchParams): URLSearchParams =>
  * assert.deepStrictEqual(isURLSearchParams(x), true)
  * assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), false)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
@@ -191,6 +201,7 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
  * assert.deepStrictEqual(getParam('c')(x), O.some('d1'))
  * assert.deepStrictEqual(getParam('e')(x), O.none)
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const getParam = (
@@ -211,6 +222,7 @@ export const getParam = (
  * assert.deepStrictEqual(getAllForParam('c')(x), O.some(['d1', 'd2']))
  * assert.deepStrictEqual(getAllForParam('e')(x), O.none)
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const getAllForParam = (
@@ -233,6 +245,7 @@ export const getAllForParam = (
  * assert.deepStrictEqual(f(x), O.some('d'))
  * assert.deepStrictEqual(f(y), O.some('e'))
  *
+ * @category 3 Functions
  * @since 0.1.0
  */
 export const setParam =

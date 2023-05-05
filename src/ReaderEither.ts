@@ -28,7 +28,7 @@ import { identity } from "fp-ts/function"
  *
  * assert.deepStrictEqual(extractedEither, E.right(1))
  *
- *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const runReaderEither: <R, E, A>(
@@ -49,6 +49,7 @@ export const runReaderEither: <R, E, A>(
  *   E.right(false),
  * )
  *
+ * @category 3 Functions
  * @since 0.16.0
  */
 export const asksEither: <R, E, A>(

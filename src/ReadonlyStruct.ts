@@ -20,6 +20,7 @@ import { uncurry2 } from "./Function"
  *
  * assert.deepStrictEqual(merge({ a: 1, b: 2 })({ b: 'two', c: true }), { a: 1, b: 'two', c: true })
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 // This combination of type arguments works with both partial application and
@@ -43,6 +44,7 @@ export const merge =
  *
  * assert.deepStrictEqual(picked, { a: 1, c: [true] })
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const pick =
@@ -81,6 +83,7 @@ export const pick =
  *
  * assert.deepStrictEqual(picked({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const pickFrom = <A extends Readonly<object>>(): (<K extends keyof A>(
@@ -98,6 +101,7 @@ export const pickFrom = <A extends Readonly<object>>(): (<K extends keyof A>(
  *
  * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const omit =
@@ -125,6 +129,7 @@ export const omit =
  *
  * assert.deepStrictEqual(sansB({ a: 1, b: 'two', c: [true] }), { a: 1, c: [true] })
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const omitFrom = <A>(): (<K extends keyof A & string>(
@@ -151,6 +156,7 @@ type Exact<A extends Readonly<object>, B extends A> = A &
  *
  * assert.deepStrictEqual(pipe(aOptB, withDefaults({ b: 'foo' })), { a: 1, b: 'foo' })
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const withDefaults: <
@@ -182,6 +188,7 @@ type RenameKey<
  *
  * const fooBar: (x: Foo) => Bar = renameKey('b')('c')
  *
+ * @category 3 Functions
  * @since 0.15.0
  */
 export const renameKey =

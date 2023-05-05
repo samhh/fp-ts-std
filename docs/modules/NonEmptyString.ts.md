@@ -17,12 +17,14 @@ Added in v0.15.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
-  - [Eq](#eq)
+- [0 Types](#0-types)
   - [NonEmptyString (type alias)](#nonemptystring-type-alias)
+- [1 Typeclass Instances](#1-typeclass-instances)
+  - [Eq](#eq)
   - [Ord](#ord)
   - [Semigroup](#semigroup)
   - [Show](#show)
+- [3 Functions](#3-functions)
   - [append](#append)
   - [fromNumber](#fromnumber)
   - [fromString](#fromstring)
@@ -39,23 +41,7 @@ Added in v0.15.0
 
 ---
 
-# utils
-
-## Eq
-
-`Eq` instance for `NonEmptyString` for testing equivalence.
-
-**Signature**
-
-```ts
-export declare const Eq: Eq<NonEmptyString>
-```
-
-```hs
-Eq :: Eq NonEmptyString
-```
-
-Added in v0.15.0
+# 0 Types
 
 ## NonEmptyString (type alias)
 
@@ -71,6 +57,24 @@ export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 
 ```hs
 type NonEmptyString = Newtype NonEmptyStringSymbol string
+```
+
+Added in v0.15.0
+
+# 1 Typeclass Instances
+
+## Eq
+
+`Eq` instance for `NonEmptyString` for testing equivalence.
+
+**Signature**
+
+```ts
+export declare const Eq: Eq<NonEmptyString>
+```
+
+```hs
+Eq :: Eq NonEmptyString
 ```
 
 Added in v0.15.0
@@ -122,6 +126,8 @@ Show :: Show NonEmptyString
 ```
 
 Added in v0.15.0
+
+# 3 Functions
 
 ## append
 

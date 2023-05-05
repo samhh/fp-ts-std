@@ -14,7 +14,7 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [3 Functions](#3-functions)
   - [clone](#clone)
   - [isURL](#isurl)
   - [parse](#parse)
@@ -23,7 +23,7 @@ Added in v0.1.0
 
 ---
 
-# utils
+# 3 Functions
 
 ## clone
 

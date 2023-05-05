@@ -19,19 +19,19 @@ Added in v0.12.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
-  - [ApT](#apt)
+- [0 Types](#0-types)
+  - [Lazy (type alias)](#lazy-type-alias)
+- [1 Typeclass Instances](#1-typeclass-instances)
   - [Applicative](#applicative)
   - [Apply](#apply)
   - [Chain](#chain)
   - [ChainRec](#chainrec)
-  - [Do](#do)
   - [Functor](#functor)
-  - [Lazy (type alias)](#lazy-type-alias)
   - [Monad](#monad)
   - [Pointed](#pointed)
-  - [URI](#uri)
-  - [URI (type alias)](#uri-type-alias)
+- [2 Typeclass Methods](#2-typeclass-methods)
+  - [ApT](#apt)
+  - [Do](#do)
   - [ap](#ap)
   - [apFirst](#apfirst)
   - [apS](#aps)
@@ -40,39 +40,45 @@ Added in v0.12.0
   - [bindTo](#bindto)
   - [chain](#chain)
   - [chainFirst](#chainfirst)
-  - [execute](#execute)
   - [flap](#flap)
   - [flatMap](#flatmap)
   - [flatten](#flatten)
-  - [lazy](#lazy)
   - [map](#map)
-  - [memoize](#memoize)
   - [of](#of)
   - [sequenceArray](#sequencearray)
   - [traverseArray](#traversearray)
   - [traverseArrayWithIndex](#traversearraywithindex)
   - [traverseReadonlyArrayWithIndex](#traversereadonlyarraywithindex)
   - [traverseReadonlyNonEmptyArrayWithIndex](#traversereadonlynonemptyarraywithindex)
+- [3 Functions](#3-functions)
+  - [execute](#execute)
+  - [lazy](#lazy)
+  - [memoize](#memoize)
+- [4 Minutiae](#4-minutiae)
+  - [URI](#uri)
+  - [URI (type alias)](#uri-type-alias)
 
 ---
 
-# utils
+# 0 Types
 
-## ApT
+## Lazy (type alias)
 
-Identity for `Lazy` as applied to `sequenceT`.
+Re-exported from fp-ts for convenience.
 
 **Signature**
 
 ```ts
-export declare const ApT: Lazy<readonly []>
+export type Lazy<A> = () => A
 ```
 
 ```hs
-ApT :: Lazy ([])
+type Lazy a = () -> a
 ```
 
 Added in v0.12.0
+
+# 1 Typeclass Instances
 
 ## Applicative
 
@@ -142,22 +148,6 @@ ChainRec :: ChainRec1 "Lazy"
 
 Added in v0.12.0
 
-## Do
-
-Initiate do notation in the context of `Lazy`.
-
-**Signature**
-
-```ts
-export declare const Do: Lazy<{}>
-```
-
-```hs
-Do :: Lazy {}
-```
-
-Added in v0.12.0
-
 ## Functor
 
 Formal `Functor` instance for `Lazy` to be provided to higher-kinded
@@ -171,22 +161,6 @@ export declare const Functor: Functor1<'Lazy'>
 
 ```hs
 Functor :: Functor1 "Lazy"
-```
-
-Added in v0.12.0
-
-## Lazy (type alias)
-
-Re-exported from fp-ts for convenience.
-
-**Signature**
-
-```ts
-export type Lazy<A> = () => A
-```
-
-```hs
-type Lazy a = () -> a
 ```
 
 Added in v0.12.0
@@ -225,34 +199,36 @@ Pointed :: Pointed1 "Lazy"
 
 Added in v0.12.0
 
-## URI
+# 2 Typeclass Methods
 
-Typeclass machinery.
+## ApT
+
+Identity for `Lazy` as applied to `sequenceT`.
 
 **Signature**
 
 ```ts
-export declare const URI: 'Lazy'
+export declare const ApT: Lazy<readonly []>
 ```
 
 ```hs
-URI :: "Lazy"
+ApT :: Lazy ([])
 ```
 
 Added in v0.12.0
 
-## URI (type alias)
+## Do
 
-Typeclass machinery.
+Initiate do notation in the context of `Lazy`.
 
 **Signature**
 
 ```ts
-export type URI = typeof URI
+export declare const Do: Lazy<{}>
 ```
 
 ```hs
-type URI = typeof URI
+Do :: Lazy {}
 ```
 
 Added in v0.12.0
@@ -392,31 +368,6 @@ chainFirst :: (a -> Lazy b) -> Lazy a -> Lazy a
 
 Added in v0.12.0
 
-## execute
-
-Execute a `Lazy`, returning the value within. Helpful for staying within
-function application and composition pipelines.
-
-**Signature**
-
-```ts
-export declare const execute: <A>(x: Lazy<A>) => A
-```
-
-```hs
-execute :: Lazy a -> a
-```
-
-**Example**
-
-```ts
-import * as Lazy from 'fp-ts-std/Lazy'
-
-assert.strictEqual(Lazy.execute(Lazy.of(5)), 5)
-```
-
-Added in v0.12.0
-
 ## flap
 
 Takes a function in a functorial `Lazy` context and applies it to an
@@ -466,33 +417,6 @@ flatten :: Lazy (Lazy a) -> Lazy a
 
 Added in v0.12.0
 
-## lazy
-
-A constructor for `Lazy` values. Given `Lazy` is a type alias around
-`() => A`, this function's only purpose is to aid in readability and express
-intentional laziness, as opposed to for example forgetting or opting not to
-use `constant`.
-
-**Signature**
-
-```ts
-export declare const lazy: <A>(f: () => A) => Lazy<A>
-```
-
-```hs
-lazy :: (() -> a) -> Lazy a
-```
-
-**Example**
-
-```ts
-import { lazy } from 'fp-ts-std/Lazy'
-
-const calc = lazy(() => 'do something expensive here')
-```
-
-Added in v0.13.0
-
 ## map
 
 Map the output of a `Lazy`.
@@ -508,33 +432,6 @@ map :: (a -> b) -> Lazy a -> Lazy b
 ```
 
 Added in v0.12.0
-
-## memoize
-
-Memoize a `Lazy`. Provided the input function is pure, this function is too.
-
-**Signature**
-
-```ts
-export declare const memoize: <A>(f: Lazy<A>) => Lazy<A>
-```
-
-```hs
-memoize :: Lazy a -> Lazy a
-```
-
-**Example**
-
-```ts
-import { lazy, memoize } from 'fp-ts-std/Lazy'
-
-const expensive = lazy(() => 42)
-const payOnce = memoize(expensive)
-
-assert.strictEqual(payOnce(), payOnce())
-```
-
-Added in v0.14.0
 
 ## of
 
@@ -634,6 +531,121 @@ export declare const traverseReadonlyNonEmptyArrayWithIndex: <A, B>(
 
 ```hs
 traverseReadonlyNonEmptyArrayWithIndex :: ((number, a) -> Lazy b) -> ReadonlyNonEmptyArray a -> Lazy (ReadonlyNonEmptyArray b)
+```
+
+Added in v0.12.0
+
+# 3 Functions
+
+## execute
+
+Execute a `Lazy`, returning the value within. Helpful for staying within
+function application and composition pipelines.
+
+**Signature**
+
+```ts
+export declare const execute: <A>(x: Lazy<A>) => A
+```
+
+```hs
+execute :: Lazy a -> a
+```
+
+**Example**
+
+```ts
+import * as Lazy from 'fp-ts-std/Lazy'
+
+assert.strictEqual(Lazy.execute(Lazy.of(5)), 5)
+```
+
+Added in v0.12.0
+
+## lazy
+
+A constructor for `Lazy` values. Given `Lazy` is a type alias around
+`() => A`, this function's only purpose is to aid in readability and express
+intentional laziness, as opposed to for example forgetting or opting not to
+use `constant`.
+
+**Signature**
+
+```ts
+export declare const lazy: <A>(f: () => A) => Lazy<A>
+```
+
+```hs
+lazy :: (() -> a) -> Lazy a
+```
+
+**Example**
+
+```ts
+import { lazy } from 'fp-ts-std/Lazy'
+
+const calc = lazy(() => 'do something expensive here')
+```
+
+Added in v0.13.0
+
+## memoize
+
+Memoize a `Lazy`. Provided the input function is pure, this function is too.
+
+**Signature**
+
+```ts
+export declare const memoize: <A>(f: Lazy<A>) => Lazy<A>
+```
+
+```hs
+memoize :: Lazy a -> Lazy a
+```
+
+**Example**
+
+```ts
+import { lazy, memoize } from 'fp-ts-std/Lazy'
+
+const expensive = lazy(() => 42)
+const payOnce = memoize(expensive)
+
+assert.strictEqual(payOnce(), payOnce())
+```
+
+Added in v0.14.0
+
+# 4 Minutiae
+
+## URI
+
+Typeclass machinery.
+
+**Signature**
+
+```ts
+export declare const URI: 'Lazy'
+```
+
+```hs
+URI :: "Lazy"
+```
+
+Added in v0.12.0
+
+## URI (type alias)
+
+Typeclass machinery.
+
+**Signature**
+
+```ts
+export type URI = typeof URI
+```
+
+```hs
+type URI = typeof URI
 ```
 
 Added in v0.12.0

@@ -34,6 +34,7 @@ type IO<A> = IO.IO<A>
  * assert.strictEqual(doubledString(2)(), '4')
  * assert.strictEqual(x, 4)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const tap =
@@ -59,6 +60,7 @@ export const tap =
  * assert.strictEqual(f(2)(), 7)
  * assert.strictEqual(f(3)(), 7)
  *
+ * @category 3 Functions
  * @since 0.7.0
  */
 export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
@@ -102,6 +104,7 @@ export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
  * f()
  * assert.strictEqual(n, 2)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const whenInvocationCount =
@@ -127,6 +130,7 @@ export const whenInvocationCount =
  *
  * assert.strictEqual(execute(IO.of(5)), 5)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const execute = <A>(x: IO<A>): A => x()
@@ -149,6 +153,7 @@ export const execute = <A>(x: IO<A>): A => x()
  *     when(isInvalid(n))(log(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
@@ -173,6 +178,7 @@ export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
  *     unless(isValid(n))(log(n))),
  * )
  *
+ * @category 2 Typeclass Methods
  * @since 0.12.0
  */
 export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
@@ -190,6 +196,7 @@ export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
  *
  * assert.strictEqual(then(), then())
  *
+ * @category 3 Functions
  * @since 0.14.0
  */
 export const memoize = <A>(f: IO<A>): IO<A> => {
@@ -203,6 +210,7 @@ export const memoize = <A>(f: IO<A>): IO<A> => {
 /**
  * Sequence an array of effects, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const sequenceArray_: <A>(xs: ReadonlyArray<IO<A>>) => IO<void> = flow(
@@ -213,6 +221,7 @@ export const sequenceArray_: <A>(xs: ReadonlyArray<IO<A>>) => IO<void> = flow(
 /**
  * Map to and sequence an array of effects, ignoring the results.
  *
+ * @category 2 Typeclass Methods
  * @since 0.15.0
  */
 export const traverseArray_: <A, B>(

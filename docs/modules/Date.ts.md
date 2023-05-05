@@ -14,17 +14,19 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [0 Types](#0-types)
   - [Milliseconds (type alias)](#milliseconds-type-alias)
+- [1 Typeclass Instances](#1-typeclass-instances)
   - [fieldMilliseconds](#fieldmilliseconds)
+  - [isoMilliseconds](#isomilliseconds)
+  - [ordMilliseconds](#ordmilliseconds)
+- [3 Functions](#3-functions)
   - [fromMilliseconds](#frommilliseconds)
   - [getTime](#gettime)
   - [isDate](#isdate)
   - [isValid](#isvalid)
-  - [isoMilliseconds](#isomilliseconds)
   - [mkMilliseconds](#mkmilliseconds)
   - [now](#now)
-  - [ordMilliseconds](#ordmilliseconds)
   - [parseDate](#parsedate)
   - [toISOString](#toisostring)
   - [toUTCString](#toutcstring)
@@ -33,7 +35,7 @@ Added in v0.1.0
 
 ---
 
-# utils
+# 0 Types
 
 ## Milliseconds (type alias)
 
@@ -51,6 +53,8 @@ type Milliseconds = Newtype MillisecondsSymbol number
 
 Added in v0.7.0
 
+# 1 Typeclass Instances
+
 ## fieldMilliseconds
 
 `Field` instance for `Milliseconds`, enabling arithmetic over the type.
@@ -66,6 +70,42 @@ fieldMilliseconds :: Field Milliseconds
 ```
 
 Added in v0.7.0
+
+## isoMilliseconds
+
+`Iso` instance for `Milliseconds`, enabling the use of lenses over the
+newtype pertaining to its isomorphic nature.
+
+**Signature**
+
+```ts
+export declare const isoMilliseconds: Iso<Milliseconds, number>
+```
+
+```hs
+isoMilliseconds :: Iso Milliseconds number
+```
+
+Added in v0.7.0
+
+## ordMilliseconds
+
+`Ord` instance for `Milliseconds`, enabling comparison between different
+instances of the type.
+
+**Signature**
+
+```ts
+export declare const ordMilliseconds: Ord<Milliseconds>
+```
+
+```hs
+ordMilliseconds :: Ord Milliseconds
+```
+
+Added in v0.7.0
+
+# 3 Functions
 
 ## fromMilliseconds
 
@@ -162,23 +202,6 @@ assert.strictEqual(isValid(invalid), false)
 
 Added in v0.1.0
 
-## isoMilliseconds
-
-`Iso` instance for `Milliseconds`, enabling the use of lenses over the
-newtype pertaining to its isomorphic nature.
-
-**Signature**
-
-```ts
-export declare const isoMilliseconds: Iso<Milliseconds, number>
-```
-
-```hs
-isoMilliseconds :: Iso Milliseconds number
-```
-
-Added in v0.7.0
-
 ## mkMilliseconds
 
 Lift a number to the `Milliseconds` newtype.
@@ -207,23 +230,6 @@ export declare const now: IO<Milliseconds>
 
 ```hs
 now :: IO Milliseconds
-```
-
-Added in v0.7.0
-
-## ordMilliseconds
-
-`Ord` instance for `Milliseconds`, enabling comparison between different
-instances of the type.
-
-**Signature**
-
-```ts
-export declare const ordMilliseconds: Ord<Milliseconds>
-```
-
-```hs
-ordMilliseconds :: Ord Milliseconds
 ```
 
 Added in v0.7.0

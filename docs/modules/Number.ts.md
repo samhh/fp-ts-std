@@ -14,9 +14,10 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
-- [utils](#utils)
+- [1 Typeclass Instances](#1-typeclass-instances)
   - [BoundedSafe](#boundedsafe)
   - [EnumInt](#enumint)
+- [3 Functions](#3-functions)
   - [add](#add)
   - [decrement](#decrement)
   - [digits](#digits)
@@ -40,7 +41,7 @@ Added in v0.1.0
 
 ---
 
-# utils
+# 1 Typeclass Instances
 
 ## BoundedSafe
 
@@ -92,6 +93,8 @@ assert.deepStrictEqual(EnumInt.pred(123.5), O.none)
 ```
 
 Added in v0.17.0
+
+# 3 Functions
 
 ## add
 

@@ -26,6 +26,7 @@ import { concatAll } from "fp-ts/Monoid"
  * assert.strictEqual(allPass([gt3, lt7, even])(4), true)
  * assert.strictEqual(allPass([gt3, lt7, even])(5), false)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
@@ -46,6 +47,7 @@ export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
  * assert.strictEqual(anyPass([lt3, gt7, even])(4), true)
  * assert.strictEqual(anyPass([lt3, gt7, even])(5), false)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
@@ -66,6 +68,7 @@ export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
  * assert.strictEqual(nonePass([lt3, gt7, even])(4), false)
  * assert.strictEqual(nonePass([lt3, gt7, even])(5), true)
  *
+ * @category 3 Functions
  * @since 0.12.0
  */
 
