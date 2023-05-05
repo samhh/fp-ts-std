@@ -15,7 +15,6 @@ import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative"
 import { toMonoid as _toMonoid } from "./Monoid"
 import * as L from "./Lazy"
 import Lazy = L.Lazy
-import { Ord } from "fp-ts/Ord"
 import { Bounded } from "fp-ts/Bounded"
 import { Enum } from "./Enum"
 import { increment, decrement } from "./Number"
