@@ -24,7 +24,7 @@ import {
   Functor2C,
 } from "fp-ts/Functor"
 import * as Tuple from "fp-ts/Tuple"
-import { applyN, fork } from "./Function"
+import { fork } from "./Function"
 import { flow, identity, pipe } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Eq, fromEquals } from "fp-ts/Eq"
@@ -355,14 +355,8 @@ export const getEnum =
         type AB = (x: A) => (y: B) => [A, B]
         return pipe(
           O.of<AB>(withFst),
-          O.ap(pipe(EA.bottom, O.some, applyN(n % ac)(O.chain(EA.succ)))),
-          O.ap(
-            pipe(
-              EB.bottom,
-              O.some,
-              applyN(Math.floor(n / ac))(O.chain(EB.succ)),
-            ),
-          ),
+          O.ap(EA.toEnum(n % ac)),
+          O.ap(EB.toEnum(Math.floor(n / ac))),
         )
       }),
     ),
