@@ -60,6 +60,18 @@ export declare const contramap: <B, A>(f: (b: B) => A) => (m: Show<A>) => Show<B
 contramap :: (b -> a) -> Show a -> Show b
 ```
 
+**Example**
+
+```ts
+import { Show } from 'fp-ts/Show'
+import * as Str from 'fp-ts/string'
+import { contramap } from 'fp-ts-std/Show'
+
+const showNum: Show<number> = contramap(String)(Str.Show)
+
+assert.strictEqual(showNum.show(123), '"123"')
+```
+
 Added in v0.12.0
 
 # 4 Minutiae

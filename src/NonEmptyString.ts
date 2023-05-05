@@ -42,6 +42,12 @@ type NonEmptyStringSymbol = { readonly NonEmptyString: unique symbol }
  * long as interaction with the newtype is confined to exports from this module,
  * as unlike `NonEmptyArray` it's only protected by a smart constructor.
  *
+ * @example
+ * import { NonEmptyString, unsafeFromString } from 'fp-ts-std/NonEmptyString'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const signature: NonEmptyString = unsafeFromString('- @samhh.com')
+ *
  * @category 0 Types
  * @since 0.15.0
  */

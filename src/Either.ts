@@ -210,6 +210,16 @@ export const getOrd =
  * Derive a `Bounded` instance for `Either<E, A>` in which the top and bottom
  * bounds are `Right(A.top)` and `Left(E.bottom)` respectively.
  *
+ * @example
+ * import { getBounded } from 'fp-ts-std/Either'
+ * import * as E from 'fp-ts/Either'
+ * import * as Bool from 'fp-ts-std/Boolean'
+ *
+ * assert.deepStrictEqual(
+ *   getBounded(Bool.Bounded)(Bool.Bounded).top,
+ *   E.right(true),
+ * )
+ *
  * @category 1 Typeclass Instances
  * @since 0.17.0
  */

@@ -57,6 +57,14 @@ export type URLPath = Newtype<URLPathSymbol, URL>
 type URLPath = Newtype URLPathSymbol URL
 ```
 
+**Example**
+
+```ts
+import { URLPath, fromPathname } from 'fp-ts-std/URLPath'
+
+const path: URLPath = fromPathname('/foo/bar')
+```
+
 Added in v0.17.0
 
 # 3 Functions

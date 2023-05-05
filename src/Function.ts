@@ -54,6 +54,15 @@ declare module "fp-ts/HKT" {
 /**
  * Map a unary function's output. Equivalent to function composition.
  *
+ * @example
+ * import * as Fn from 'fp-ts-std/Function'
+ * import * as Str from 'fp-ts-std/String'
+ *
+ * const exclaimF = Fn.map(Str.append('!'))
+ * const toStrExclaim = exclaimF(Str.fromNumber)
+ *
+ * assert.strictEqual(toStrExclaim(123), '123!')
+ *
  * @category 2 Typeclass Methods
  * @since 0.15.0
  */
@@ -76,6 +85,14 @@ export const Functor: Functor2<URI> = {
 /**
  * Lift a value to a function from any other value. Equivalent to `constant`.
  *
+ * @example
+ * import * as Fn from 'fp-ts-std/Function'
+ *
+ * const constant = Fn.of
+ * const foo = constant('foo')
+ *
+ * assert.strictEqual(foo('bar'), 'foo')
+ *
  * @category 2 Typeclass Methods
  * @since 0.15.0
  */
@@ -84,6 +101,14 @@ export const of: <A>(x: A) => <B>(y: B) => A = constant
 /**
  * Fork an input across a binary and a tertiary function, applying the output
  * of the former to the latter.
+ *
+ * @example
+ * import * as Fn from 'fp-ts-std/Function'
+ * import * as Str from 'fp-ts-std/String'
+ *
+ * const rev = Fn.ap(Str.reverse)(x => y => `${x} -> ${y}`)
+ *
+ * assert.strictEqual(rev('foo'), 'foo -> oof')
  *
  * @category 2 Typeclass Methods
  * @since 0.15.0
@@ -109,6 +134,14 @@ export const Applicative: Applicative2<URI> = {
  * Fork an input across a binary and a tertiary function, applying the output of
  * the former to the latter. As it applies to functions this is essentially
  * `ap` with some flips thrown in.
+ *
+ * @example
+ * import * as Fn from 'fp-ts-std/Function'
+ * import * as Str from 'fp-ts-std/String'
+ *
+ * const rev = Fn.chain((x: string) => (y: string) => `${y} -> ${x}`)(Str.reverse)
+ *
+ * assert.strictEqual(rev('foo'), 'foo -> oof')
  *
  * @category 2 Typeclass Methods
  * @since 0.15.0

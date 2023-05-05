@@ -329,6 +329,11 @@ export const isNonPositive: Predicate<number> = n => Math.sign(n) !== 1
  * An alternative `Bounded` instance for numbers which defines top and bottom
  * as `Number.MAX_SAFE_INTEGER` and `Number.MIN_SAFE_INTEGER` respectively.
  *
+ * @example
+ * import { BoundedSafe } from 'fp-ts-std/Number'
+ *
+ * assert.strictEqual(BoundedSafe.top, Number.MAX_SAFE_INTEGER)
+ *
  * @category 1 Typeclass Instances
  * @since 0.17.0
  */

@@ -42,6 +42,11 @@ type MillisecondsSymbol = { readonly Milliseconds: unique symbol }
 /**
  * Newtype representing milliseconds.
  *
+ * @example
+ * import { Milliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+ *
+ * const second: Milliseconds = mkMilliseconds(1000)
+ *
  * @category 0 Types
  * @since 0.7.0
  */
@@ -51,6 +56,12 @@ export type Milliseconds = Newtype<MillisecondsSymbol, number>
  * `Ord` instance for `Milliseconds`, enabling comparison between different
  * instances of the type.
  *
+ * @example
+ * import { ordMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+ * import { LT } from 'fp-ts-std/Ordering'
+ *
+ * assert.strictEqual(ordMilliseconds.compare(mkMilliseconds(0), mkMilliseconds(1)), LT)
+ *
  * @category 1 Typeclass Instances
  * @since 0.7.0
  */
@@ -58,6 +69,14 @@ export const ordMilliseconds = getOrd<Milliseconds>(ordNumber)
 
 /**
  * `Field` instance for `Milliseconds`, enabling arithmetic over the type.
+ *
+ * @example
+ * import { fieldMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+ *
+ * assert.strictEqual(
+ *   fieldMilliseconds.add(mkMilliseconds(2), mkMilliseconds(3)),
+ *   mkMilliseconds(5),
+ * )
  *
  * @category 1 Typeclass Instances
  * @since 0.7.0
@@ -68,6 +87,15 @@ export const fieldMilliseconds = getField<Milliseconds>(fieldNumber)
  * `Iso` instance for `Milliseconds`, enabling the use of lenses over the
  * newtype pertaining to its isomorphic nature.
  *
+ * @example
+ * import { isoMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+ * import { add } from 'fp-ts-std/Number'
+ *
+ * assert.strictEqual(
+ *   isoMilliseconds.modify(add(3))(mkMilliseconds(2)),
+ *   mkMilliseconds(5),
+ * )
+ *
  * @category 1 Typeclass Instances
  * @since 0.7.0
  */
@@ -75,6 +103,11 @@ export const isoMilliseconds = iso<Milliseconds>()
 
 /**
  * Lift a number to the `Milliseconds` newtype.
+ *
+ * @example
+ * import { mkMilliseconds } from 'fp-ts-std/Date'
+ *
+ * const second = mkMilliseconds(1000)
  *
  * @category 3 Functions
  * @since 0.7.0
@@ -84,6 +117,13 @@ export const mkMilliseconds: (n: number) => Milliseconds = pack
 /**
  * Unwrap a `Milliseconds` newtype back to its underlying number representation.
  *
+ * @example
+ * import { flow } from 'fp-ts/function'
+ * import { Endomorphism } from 'fp-ts/Endomorphism'
+ * import { mkMilliseconds, unMilliseconds } from 'fp-ts-std/Date'
+ *
+ * const redundant: Endomorphism<number> = flow(mkMilliseconds, unMilliseconds)
+ *
  * @category 3 Functions
  * @since 0.7.0
  */
@@ -91,6 +131,14 @@ export const unMilliseconds: (ms: Milliseconds) => number = unpack
 
 /**
  * Get a `Date` from `Milliseconds`.
+ *
+ * @example
+ * import { fromMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+ *
+ * assert.deepStrictEqual(
+ *   fromMilliseconds(mkMilliseconds(123)),
+ *   new Date(123),
+ * )
  *
  * @category 3 Functions
  * @since 0.7.0
@@ -210,6 +258,15 @@ export const parseDate: (ts: string | number) => Option<Date> = flow(
 
 /**
  * Get the time since the Unix Epoch in `Milliseconds` from a `Date`.
+ *
+ * @example
+ * import { now, mkMilliseconds } from 'fp-ts-std/Date'
+ *
+ * const x1970 = mkMilliseconds(0)
+ * const x2065 = mkMilliseconds(3000000000000)
+ *
+ * assert.strictEqual(now() > x1970, true)
+ * assert.strictEqual(now() < x2065, true)
  *
  * @category 3 Functions
  * @since 0.7.0

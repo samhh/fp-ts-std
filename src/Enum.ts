@@ -42,6 +42,12 @@ import Lazy = L.Lazy
  * `fromEnum` should always return an integer. `toEnum` should not accept
  * non-integer inputs. They should both be zero-based.
  *
+ * @example
+ * import * as Bool from 'fp-ts-std/Boolean'
+ * import { universe } from 'fp-ts-std/Enum'
+ *
+ * assert.deepStrictEqual(universe(Bool.Enum), [false, true])
+ *
  * @category 0 Types
  * @since 0.17.0
  */

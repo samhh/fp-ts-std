@@ -134,6 +134,17 @@ export declare const ap: <A, B>(f: (x: A) => B) => <C>(g: (x: A) => (y: B) => C)
 ap :: (a -> b) -> (a -> b -> c) -> a -> c
 ```
 
+**Example**
+
+```ts
+import * as Fn from 'fp-ts-std/Function'
+import * as Str from 'fp-ts-std/String'
+
+const rev = Fn.ap(Str.reverse)((x) => (y) => `${x} -> ${y}`)
+
+assert.strictEqual(rev('foo'), 'foo -> oof')
+```
+
 Added in v0.15.0
 
 ## chain
@@ -150,6 +161,17 @@ export declare const chain: <A, B, C>(f: (x: B) => (y: A) => C) => (g: (x: A) =>
 
 ```hs
 chain :: (b -> a -> c) -> (a -> b) -> a -> c
+```
+
+**Example**
+
+```ts
+import * as Fn from 'fp-ts-std/Function'
+import * as Str from 'fp-ts-std/String'
+
+const rev = Fn.chain((x: string) => (y: string) => `${y} -> ${x}`)(Str.reverse)
+
+assert.strictEqual(rev('foo'), 'foo -> oof')
 ```
 
 Added in v0.15.0
@@ -184,6 +206,18 @@ export declare const map: <B, C>(f: (x: B) => C) => <A>(g: (x: A) => B) => (x: A
 map :: (b -> c) -> (a -> b) -> a -> c
 ```
 
+**Example**
+
+```ts
+import * as Fn from 'fp-ts-std/Function'
+import * as Str from 'fp-ts-std/String'
+
+const exclaimF = Fn.map(Str.append('!'))
+const toStrExclaim = exclaimF(Str.fromNumber)
+
+assert.strictEqual(toStrExclaim(123), '123!')
+```
+
 Added in v0.15.0
 
 ## of
@@ -198,6 +232,17 @@ export declare const of: <A>(x: A) => <B>(y: B) => A
 
 ```hs
 of :: a -> b -> a
+```
+
+**Example**
+
+```ts
+import * as Fn from 'fp-ts-std/Function'
+
+const constant = Fn.of
+const foo = constant('foo')
+
+assert.strictEqual(foo('bar'), 'foo')
 ```
 
 Added in v0.15.0

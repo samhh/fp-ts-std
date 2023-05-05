@@ -43,6 +43,14 @@ export type JSONString = Newtype<JSONStringSymbol, string>
 type JSONString = Newtype JSONStringSymbol string
 ```
 
+**Example**
+
+```ts
+import { JSONString, stringifyPrimitive } from 'fp-ts-std/JSON'
+
+const safeToParse: JSONString = stringifyPrimitive('foo')
+```
+
 Added in v0.5.0
 
 # 3 Functions

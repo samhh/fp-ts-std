@@ -34,6 +34,15 @@ declare module "fp-ts/HKT" {
  * Derive an instance for `Show<B>` by providing a function from `B` to `A` and
  * a `Show<A>` instance.
  *
+ * @example
+ * import { Show } from 'fp-ts/Show'
+ * import * as Str from 'fp-ts/string'
+ * import { contramap } from 'fp-ts-std/Show'
+ *
+ * const showNum: Show<number> = contramap(String)(Str.Show)
+ *
+ * assert.strictEqual(showNum.show(123), '"123"')
+ *
  * @category 2 Typeclass Methods
  * @since 0.12.0
  */

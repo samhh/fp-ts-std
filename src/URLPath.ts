@@ -24,6 +24,11 @@ type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
 /**
  * Newtype wrapper around `URL`.
  *
+ * @example
+ * import { URLPath, fromPathname } from 'fp-ts-std/URLPath'
+ *
+ * const path: URLPath = fromPathname('/foo/bar')
+ *
  * @category 0 Types
  * @since 0.17.0
  */

@@ -37,6 +37,15 @@ export declare const EQ: Ordering
 EQ :: Ordering
 ```
 
+**Example**
+
+```ts
+import { Ord } from 'fp-ts/number'
+import { EQ } from 'fp-ts-std/Ordering'
+
+assert.strictEqual(Ord.compare(0, 0), EQ)
+```
+
 Added in v0.12.0
 
 ## GT
@@ -53,6 +62,15 @@ export declare const GT: Ordering
 GT :: Ordering
 ```
 
+**Example**
+
+```ts
+import { Ord } from 'fp-ts/number'
+import { GT } from 'fp-ts-std/Ordering'
+
+assert.strictEqual(Ord.compare(1, 0), GT)
+```
+
 Added in v0.12.0
 
 ## LT
@@ -67,6 +85,15 @@ export declare const LT: Ordering
 
 ```hs
 LT :: Ordering
+```
+
+**Example**
+
+```ts
+import { Ord } from 'fp-ts/number'
+import { LT } from 'fp-ts-std/Ordering'
+
+assert.strictEqual(Ord.compare(0, 1), LT)
 ```
 
 Added in v0.12.0

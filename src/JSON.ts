@@ -18,6 +18,11 @@ type JSONStringSymbol = { readonly Milliseconds: unique symbol }
 /**
  * Newtype representing stringified JSON.
  *
+ * @example
+ * import { JSONString, stringifyPrimitive } from 'fp-ts-std/JSON'
+ *
+ * const safeToParse: JSONString = stringifyPrimitive('foo')
+ *
  * @category 0 Types
  * @since 0.5.0
  */

@@ -46,6 +46,16 @@ export declare const getBounded: <E>(BE: Bounded<E>) => <A>(BA: Bounded<A>) => B
 getBounded :: Bounded e -> Bounded a -> Bounded (Either e a)
 ```
 
+**Example**
+
+```ts
+import { getBounded } from 'fp-ts-std/Either'
+import * as E from 'fp-ts/Either'
+import * as Bool from 'fp-ts-std/Boolean'
+
+assert.deepStrictEqual(getBounded(Bool.Bounded)(Bool.Bounded).top, E.right(true))
+```
+
 Added in v0.17.0
 
 ## getEnum

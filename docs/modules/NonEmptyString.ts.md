@@ -59,6 +59,15 @@ export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
 type NonEmptyString = Newtype NonEmptyStringSymbol string
 ```
 
+**Example**
+
+```ts
+import { NonEmptyString, unsafeFromString } from 'fp-ts-std/NonEmptyString'
+import * as O from 'fp-ts/Option'
+
+const signature: NonEmptyString = unsafeFromString('- @samhh.com')
+```
+
 Added in v0.15.0
 
 # 1 Typeclass Instances

@@ -216,6 +216,16 @@ export const altAllBy: <A, B>(
  * Derive a `Bounded` instance for `Option<A>` in which the top and bottom
  * bounds are `Some(B.top)` and `None` respectively.
  *
+ * @example
+ * import { getBounded } from 'fp-ts-std/Option'
+ * import * as O from 'fp-ts/Option'
+ * import * as Bool from 'fp-ts-std/Boolean'
+ *
+ * assert.deepStrictEqual(
+ *   getBounded(Bool.Bounded).top,
+ *   O.some(true),
+ * )
+ *
  * @category 1 Typeclass Instances
  * @since 0.17.0
  */

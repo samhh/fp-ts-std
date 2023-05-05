@@ -72,6 +72,15 @@ export type Enum<A> = Bounded<A> & {
 type Enum a = Bounded a & { succ: a -> Option a, pred: a -> Option a, toEnum: number -> Option a, fromEnum: a -> number, cardinality: Lazy number }
 ```
 
+**Example**
+
+```ts
+import * as Bool from 'fp-ts-std/Boolean'
+import { universe } from 'fp-ts-std/Enum'
+
+assert.deepStrictEqual(universe(Bool.Enum), [false, true])
+```
+
 Added in v0.17.0
 
 # 1 Typeclass Instances

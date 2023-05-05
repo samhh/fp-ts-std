@@ -49,6 +49,16 @@ export declare const getBounded: <A>(B: Bounded<A>) => Bounded<Option<A>>
 getBounded :: Bounded a -> Bounded (Option a)
 ```
 
+**Example**
+
+```ts
+import { getBounded } from 'fp-ts-std/Option'
+import * as O from 'fp-ts/Option'
+import * as Bool from 'fp-ts-std/Boolean'
+
+assert.deepStrictEqual(getBounded(Bool.Bounded).top, O.some(true))
+```
+
 Added in v0.17.0
 
 ## getEnum

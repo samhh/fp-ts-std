@@ -58,6 +58,14 @@ export declare const BoundedSafe: Bounded<number>
 BoundedSafe :: Bounded number
 ```
 
+**Example**
+
+```ts
+import { BoundedSafe } from 'fp-ts-std/Number'
+
+assert.strictEqual(BoundedSafe.top, Number.MAX_SAFE_INTEGER)
+```
+
 Added in v0.17.0
 
 ## EnumInt

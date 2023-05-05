@@ -317,6 +317,15 @@ export const getOrd =
  * Derive a `Bounded` instance for a tuple in which the top and bottom
  * bounds are `[A.top, B.top]` and `[A.bottom, B.bottom]` respectively.
  *
+ * @example
+ * import { getBounded } from 'fp-ts-std/Tuple'
+ * import * as Bool from 'fp-ts-std/Boolean'
+ *
+ * assert.deepStrictEqual(
+ *   getBounded(Bool.Bounded)(Bool.Bounded).top,
+ *   [true, true],
+ * )
+ *
  * @category 1 Typeclass Instances
  * @since 0.17.0
  */

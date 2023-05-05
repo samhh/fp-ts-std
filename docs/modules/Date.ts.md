@@ -51,6 +51,14 @@ export type Milliseconds = Newtype<MillisecondsSymbol, number>
 type Milliseconds = Newtype MillisecondsSymbol number
 ```
 
+**Example**
+
+```ts
+import { Milliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+
+const second: Milliseconds = mkMilliseconds(1000)
+```
+
 Added in v0.7.0
 
 # 1 Typeclass Instances
@@ -67,6 +75,14 @@ export declare const fieldMilliseconds: Field<Milliseconds>
 
 ```hs
 fieldMilliseconds :: Field Milliseconds
+```
+
+**Example**
+
+```ts
+import { fieldMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+
+assert.strictEqual(fieldMilliseconds.add(mkMilliseconds(2), mkMilliseconds(3)), mkMilliseconds(5))
 ```
 
 Added in v0.7.0
@@ -86,6 +102,15 @@ export declare const isoMilliseconds: Iso<Milliseconds, number>
 isoMilliseconds :: Iso Milliseconds number
 ```
 
+**Example**
+
+```ts
+import { isoMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+import { add } from 'fp-ts-std/Number'
+
+assert.strictEqual(isoMilliseconds.modify(add(3))(mkMilliseconds(2)), mkMilliseconds(5))
+```
+
 Added in v0.7.0
 
 ## ordMilliseconds
@@ -101,6 +126,15 @@ export declare const ordMilliseconds: Ord<Milliseconds>
 
 ```hs
 ordMilliseconds :: Ord Milliseconds
+```
+
+**Example**
+
+```ts
+import { ordMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+import { LT } from 'fp-ts-std/Ordering'
+
+assert.strictEqual(ordMilliseconds.compare(mkMilliseconds(0), mkMilliseconds(1)), LT)
 ```
 
 Added in v0.7.0
@@ -119,6 +153,14 @@ export declare const fromMilliseconds: (x: Milliseconds) => Date
 
 ```hs
 fromMilliseconds :: Milliseconds -> Date
+```
+
+**Example**
+
+```ts
+import { fromMilliseconds, mkMilliseconds } from 'fp-ts-std/Date'
+
+assert.deepStrictEqual(fromMilliseconds(mkMilliseconds(123)), new Date(123))
 ```
 
 Added in v0.7.0
@@ -216,6 +258,14 @@ export declare const mkMilliseconds: (n: number) => Milliseconds
 mkMilliseconds :: number -> Milliseconds
 ```
 
+**Example**
+
+```ts
+import { mkMilliseconds } from 'fp-ts-std/Date'
+
+const second = mkMilliseconds(1000)
+```
+
 Added in v0.7.0
 
 ## now
@@ -230,6 +280,18 @@ export declare const now: IO<Milliseconds>
 
 ```hs
 now :: IO Milliseconds
+```
+
+**Example**
+
+```ts
+import { now, mkMilliseconds } from 'fp-ts-std/Date'
+
+const x1970 = mkMilliseconds(0)
+const x2065 = mkMilliseconds(3000000000000)
+
+assert.strictEqual(now() > x1970, true)
+assert.strictEqual(now() < x2065, true)
 ```
 
 Added in v0.7.0
@@ -327,6 +389,16 @@ export declare const unMilliseconds: (ms: Milliseconds) => number
 
 ```hs
 unMilliseconds :: Milliseconds -> number
+```
+
+**Example**
+
+```ts
+import { flow } from 'fp-ts/function'
+import { Endomorphism } from 'fp-ts/Endomorphism'
+import { mkMilliseconds, unMilliseconds } from 'fp-ts-std/Date'
+
+const redundant: Endomorphism<number> = flow(mkMilliseconds, unMilliseconds)
 ```
 
 Added in v0.7.0
