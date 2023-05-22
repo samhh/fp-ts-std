@@ -13,34 +13,6 @@ import { constVoid, flow } from "fp-ts/function"
 type IO<A> = IO.IO<A>
 
 /**
- * Performs the side effect with the input value and then returns said input
- * value.
- *
- * @example
- * import { tap } from 'fp-ts-std/IO'
- * import * as IO from 'fp-ts/IO'
- * import { flow } from 'fp-ts/function'
- *
- * let x = 0
- * const mutate = (y: number): IO.IO<void> => () => { x = y }
- *
- * const double = (n: number): number => n * 2
- * const toString = (n: number): string => String(n)
- *
- * const doubledString: (n: number) => IO.IO<string> =
- *     flow(double, tap(mutate), IO.map(toString))
- *
- * assert.strictEqual(x, 0)
- * assert.strictEqual(doubledString(2)(), '4')
- * assert.strictEqual(x, 4)
- *
- * @category 3 Functions
- * @since 0.7.0
- */
-export const tap = <A>(f: (x: A) => IO<void>): ((x: A) => IO<A>) =>
-  flow(IO.of, IO.chainFirst(f))
-
-/**
  * Given a function, returns a new function that always returns the output
  * value of its first invocation.
  *
