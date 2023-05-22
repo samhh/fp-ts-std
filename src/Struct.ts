@@ -78,6 +78,25 @@ export const pickFrom = <A extends object>(): (<K extends keyof A>(
 ) => (x: A) => Pick<A, K>) => pick
 
 /**
+ * Lookup the value for a key in a `Struct`.
+ *
+ * @example
+ * import { lookup } from 'fp-ts-std/Struct'
+ *
+ * const lookupA = lookup('a')
+ * const lookuped = lookupA({ a: 'hello' })
+ * // const errorLookuped = lookupA({ b: 'hello' }) // Type error
+ *
+ * assert.deepStrictEqual(lookuped, 'hello')
+ *
+ * @since 0.17.0
+ */
+export const lookup =
+  <K extends string | number | symbol>(k: K) =>
+  <A>(x: { [P in K]: A }): A =>
+    x[k]
+
+/**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
  * type.
  *

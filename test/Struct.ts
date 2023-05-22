@@ -1,4 +1,5 @@
 import {
+  lookup,
   pick,
   pickFrom,
   omit,
@@ -10,6 +11,14 @@ import {
 import { pipe } from "fp-ts/function"
 
 describe("Struct", () => {
+  describe("lookup", () => {
+    const f = lookup
+
+    expect(pipe({ a: 1 }, f('a'))).toStrictEqual(1)
+    // pipe({ a: 1 }, f('b'))) // type error
+    // pipe({}, f('a'))) // type error
+  })
+
   describe("pick", () => {
     const f = pick
 
