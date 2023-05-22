@@ -89,6 +89,7 @@ export const pickFrom = <A extends object>(): (<K extends keyof A>(
  *
  * assert.deepStrictEqual(lookuped, 'hello')
  *
+ * @category 3 Functions
  * @since 0.17.0
  */
 export const lookup =
