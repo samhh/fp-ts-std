@@ -13,7 +13,7 @@ import { Json } from "fp-ts/Json"
 import { flow, identity, pipe } from "fp-ts/function"
 import { isString } from "fp-ts/string"
 
-type JSONStringSymbol = { readonly JSON: unique symbol }
+type JSONStringSymbol = { readonly JSONString: unique symbol }
 
 /**
  * Newtype representing stringified JSON.
