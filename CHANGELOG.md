@@ -21,7 +21,7 @@ This project adheres to semantic versioning.
 - Narrow return type of `getParamNonEmpty` in `Env` to `NonEmptyString`.
 - Add `flatMap` aliases.
 - Support TypeScript's `node16`/`nodenext` module resolutions.
-- Bump minimum supported fp-ts version to 2.14.0.
+- Bump minimum supported fp-ts version to 2.15.0.
 
 ## 0.16.0 (2023-04-10)
 
