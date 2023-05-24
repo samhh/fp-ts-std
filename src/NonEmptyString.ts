@@ -197,11 +197,15 @@ export const reverse: Endomorphism<NonEmptyString> = over(Str.reverse)
 
 /**
  * Calculate the number of characters in a `NonEmptyString`.
+ * 
+ * @since 0.17.0
  */
 export const size: (x: NonEmptyString) => number = flow(toString, _size)
 
 /**
  * Split a `NonEmptyString` into an array of strings using `separator`.
+ * 
+ * @since 0.17.0
  */
 export const split: (
   separator: string | RegExp,
@@ -210,6 +214,8 @@ export const split: (
 
 /**
  * Returns a `boolean` if a `NonEmptyString` contains `needle`.
+ * 
+ * @since 0.17.0
  */
 export const includes: (
   needle: string,
