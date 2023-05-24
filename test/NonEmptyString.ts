@@ -14,11 +14,17 @@ import {
   reverse,
   head,
   last,
+  includes,
+  size,
+  split
 } from "../src/NonEmptyString"
 import {
   isEmpty as _isEmpty,
   toUpperCase as _toUpperCase,
   toLowerCase as _toLowerCase,
+  includes as _includes,
+  size as _size,
+  split as _split,
 } from "fp-ts/string"
 import * as laws from "fp-ts-laws"
 import fc from "fast-check"
@@ -213,6 +219,46 @@ describe("NonEmptyString", () => {
 
     it("maintains newtype contract", () => {
       fc.assert(fc.property(arb, flow(f, isValid)))
+    })
+  })
+
+  describe("size", () => {
+    const f = size
+
+    it("is equivalent to lifted infallible string.size", () => {
+      fc.assert(fc.property(arb, x => _size(unNonEmptyString(x)) === f(x)))
+    })
+  })
+
+  describe("includes", () => {
+    const f = includes
+
+    it("is equivalent to lifted infallible string.includes", () => {
+      fc.assert(
+        fc.property(
+          arb,
+          fc.string(),
+          fc.option(fc.integer(), {
+            nil: undefined,
+          }),
+          (haystack, needle, pos) =>
+            _includes(needle, pos)(unNonEmptyString(haystack)) ===
+            f(needle, pos)(haystack),
+        ),
+      )
+    })
+  })
+
+  describe("split", () => {
+    const f = split
+    const sep = " "
+
+    it("is equivalent to lifted infallible string.split", () => {
+      fc.assert(
+        fc.property(fc.lorem({ mode: "words" }).map(unsafeFromString), x =>
+          expect(f(sep)(x)).toEqual(_split(sep)(unNonEmptyString(x))),
+        ),
+      )
     })
   })
 })
