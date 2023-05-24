@@ -20,12 +20,15 @@ import {
   toLowerCase as _toLowerCase,
   isEmpty as _isEmpty,
   size as _size,
+  includes as _includes,
+  split as _split,
 } from "fp-ts/string"
 import * as Str from "./String"
 import { pack, unpack, over } from "./Newtype"
 import { not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import type { Show as TShow } from "fp-ts/Show"
+import { ReadonlyNonEmptyArray } from "fp-ts/lib/ReadonlyNonEmptyArray"
 
 type Show<A> = TShow<A>
 
@@ -209,3 +212,31 @@ export const surround: (x: string) => Endomorphism<NonEmptyString> = flow(
  * @since 0.15.0
  */
 export const reverse: Endomorphism<NonEmptyString> = over(Str.reverse)
+
+/**
+ * Calculate the number of characters in a `NonEmptyString`.
+ *
+ * @since 0.17.0
+ */
+export const size: (x: NonEmptyString) => number = flow(toString, _size)
+
+/**
+ * Split a `NonEmptyString` into an array of strings using `separator`.
+ *
+ * @since 0.17.0
+ */
+export const split: (
+  separator: string | RegExp,
+) => (s: NonEmptyString) => ReadonlyNonEmptyArray<string> = separator =>
+  flow(toString, _split(separator))
+
+/**
+ * Returns a `boolean` if a `NonEmptyString` contains `needle`.
+ *
+ * @since 0.17.0
+ */
+export const includes: (
+  needle: string,
+  pos?: number,
+) => (haystack: NonEmptyString) => boolean = (needle, pos) =>
+  flow(toString, _includes(needle, pos))
