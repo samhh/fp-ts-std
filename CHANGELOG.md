@@ -16,11 +16,13 @@ This project adheres to semantic versioning.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.
 - Remove index module. It's unfriendly to tree-shaking and less flexible than the [facades pattern](https://samhh.github.io/fp-ts-std/facades.html).
+- Remove `tap` from `IO` as it's superceded by [fp-ts/IO::tap](https://gcanti.github.io/fp-ts/modules/IO.ts.html#tap).
 - Improve safety and inference of `isInstanceOf`.
 - Adjust the input type of `fromRecord` in `URLSearchParams`.
 - Narrow return type of `getParamNonEmpty` in `Env` to `NonEmptyString`.
 - Add `flatMap` aliases.
 - Support TypeScript's `node16`/`nodenext` module resolutions.
+- Fix symbol property name of `JSONString` newtype.
 - Bump minimum supported fp-ts version to 2.15.0.
 
 ## 0.16.0 (2023-04-10)
