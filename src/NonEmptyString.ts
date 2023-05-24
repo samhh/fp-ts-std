@@ -7,12 +7,6 @@
  * @since 0.15.0
  */
 
-// To avoid this module becoming too much of a maintenance burden, aside from
-// the absolute fundamentals, generally only functions which involve some
-// unsafety should be defined here, for example anything involving `over` or
-// "unsafe" in its definition. Most other functions can be defined by the
-// consumer in terms of `flow(unNonEmptyString, f)` or `contramap`.
-
 import { flow } from "fp-ts/function"
 import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
 import * as O from "fp-ts/Option"
