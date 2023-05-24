@@ -9,6 +9,7 @@ This project adheres to semantic versioning.
 - Add `Bounded` instance to `Boolean`.
 - Add `match2`, `getBounded`, and `getOrd` to `Either`.
 - Add `applyN` to `Function`.
+- Add `includes`, `size`, and `split` to `NonEmptyString`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.
 - Add `getEq`, `getOrd`, and `getBounded` to `Tuple`.

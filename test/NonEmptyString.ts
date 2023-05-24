@@ -225,7 +225,7 @@ describe("NonEmptyString", () => {
   describe("size", () => {
     const f = size
 
-    it("is equivalent to lifted infallible string.size", () => {
+    it("is equivalent to lifted Str.size", () => {
       fc.assert(fc.property(arb, x => _size(unNonEmptyString(x)) === f(x)))
     })
   })
@@ -233,17 +233,14 @@ describe("NonEmptyString", () => {
   describe("includes", () => {
     const f = includes
 
-    it("is equivalent to lifted infallible string.includes", () => {
+    it("is equivalent to lifted Str.includes", () => {
       fc.assert(
         fc.property(
           arb,
           fc.string(),
-          fc.option(fc.integer(), {
-            nil: undefined,
-          }),
-          (haystack, needle, pos) =>
-            _includes(needle, pos)(unNonEmptyString(haystack)) ===
-            f(needle, pos)(haystack),
+          (haystack, needle) =>
+            _includes(needle)(unNonEmptyString(haystack)) ===
+            f(needle)(haystack),
         ),
       )
     })
@@ -253,7 +250,7 @@ describe("NonEmptyString", () => {
     const f = split
     const sep = " "
 
-    it("is equivalent to lifted infallible string.split", () => {
+    it("is equivalent to lifted Str.split", () => {
       fc.assert(
         fc.property(fc.lorem({ mode: "words" }).map(unsafeFromString), x =>
           expect(f(sep)(x)).toEqual(_split(sep)(unNonEmptyString(x))),

@@ -29,9 +29,12 @@ Added in v0.15.0
   - [fromNumber](#fromnumber)
   - [fromString](#fromstring)
   - [head](#head)
+  - [includes](#includes)
   - [last](#last)
   - [prepend](#prepend)
   - [reverse](#reverse)
+  - [size](#size)
+  - [split](#split)
   - [surround](#surround)
   - [toLowerCase](#tolowercase)
   - [toString](#tostring)
@@ -198,6 +201,23 @@ head :: Endomorphism NonEmptyString
 
 Added in v0.15.0
 
+## includes
+
+Predicate upon the presence of a `search` string anywhere in a
+`NonEmptyString`.
+
+**Signature**
+
+```ts
+export declare const includes: (search: string) => Predicate<NonEmptyString>
+```
+
+```hs
+includes :: string -> Predicate NonEmptyString
+```
+
+Added in v0.17.0
+
 ## last
 
 Get the last character in a `NonEmptyString`.
@@ -245,6 +265,38 @@ reverse :: Endomorphism NonEmptyString
 ```
 
 Added in v0.15.0
+
+## size
+
+Calculate the number of characters in a `NonEmptyString`.
+
+**Signature**
+
+```ts
+export declare const size: (x: NonEmptyString) => number
+```
+
+```hs
+size :: NonEmptyString -> number
+```
+
+Added in v0.17.0
+
+## split
+
+Split a `NonEmptyString` into an array of strings using `separator`.
+
+**Signature**
+
+```ts
+export declare const split: (separator: string | RegExp) => (x: NonEmptyString) => ReadonlyNonEmptyArray<string>
+```
+
+```hs
+split :: string | RegExp -> NonEmptyString -> ReadonlyNonEmptyArray string
+```
+
+Added in v0.17.0
 
 ## surround
 
