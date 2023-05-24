@@ -16,7 +16,7 @@ import {
   last,
   includes,
   size,
-  split
+  split,
 } from "../src/NonEmptyString"
 import {
   isEmpty as _isEmpty,
