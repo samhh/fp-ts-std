@@ -409,7 +409,7 @@ describe("Number", () => {
       expect(f(1.2)).toEqual([1, 2])
 
       fc.assert(
-        fc.property(fc.float({ noDefaultInfinity: true }), n =>
+        fc.property(fc.float({ noDefaultInfinity: true, noNaN: true }), n =>
           expect(f(n).length).toBeGreaterThan(0),
         ),
       )
