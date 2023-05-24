@@ -8,7 +8,6 @@ import {
   pipe,
 } from "fp-ts/function"
 import {
-  tap,
   once,
   whenInvocationCount,
   execute,
@@ -24,29 +23,6 @@ import fc from "fast-check"
 type IO<A> = IO.IO<A>
 
 describe("IO", () => {
-  describe("tap", () => {
-    const f = tap
-
-    it("performs the side effect", () => {
-      let x = false // eslint-disable-line functional/no-let
-      const g =
-        (y: boolean): IO<void> =>
-        () => {
-          x = y // eslint-disable-line functional/no-expression-statements
-        }
-
-      expect(x).toBe(false)
-      f(g)(true)() // eslint-disable-line functional/no-expression-statements
-      expect(x).toBe(true)
-    })
-
-    it("returns the value unmodified", () => {
-      fc.assert(
-        fc.property(fc.string(), x => f(constant(constVoid))(x)() === x),
-      )
-    })
-  })
-
   describe("once", () => {
     const f = once
 
