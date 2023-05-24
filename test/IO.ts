@@ -1,12 +1,5 @@
 import * as IO from "fp-ts/IO"
-import {
-  constant,
-  constFalse,
-  constTrue,
-  constVoid,
-  identity,
-  pipe,
-} from "fp-ts/function"
+import { constFalse, constTrue, identity, pipe } from "fp-ts/function"
 import {
   once,
   whenInvocationCount,
