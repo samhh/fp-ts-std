@@ -359,11 +359,11 @@ Like `chain`, but discards the new output.
 **Signature**
 
 ```ts
-export declare const chainFirst: <A, B>(f: (a: A) => Lazy<B>) => (first: Lazy<A>) => Lazy<A>
+export declare const chainFirst: <A, _>(f: (a: A) => Lazy<_>) => (first: Lazy<A>) => Lazy<A>
 ```
 
 ```hs
-chainFirst :: (a -> Lazy b) -> Lazy a -> Lazy a
+chainFirst :: (a -> Lazy _) -> Lazy a -> Lazy a
 ```
 
 Added in v0.12.0
