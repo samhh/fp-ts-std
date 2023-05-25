@@ -78,21 +78,21 @@ export const pickFrom = <A extends object>(): (<K extends keyof A>(
 ) => (x: A) => Pick<A, K>) => pick
 
 /**
- * Lookup the value for a key in a `Struct`.
+ * Get the value for a key in a `Struct`.
  *
  * @example
- * import { lookup } from 'fp-ts-std/Struct'
+ * import { get } from 'fp-ts-std/Struct'
  *
- * const lookupA = lookup('a')
- * const lookuped = lookupA({ a: 'hello' })
- * // const errorLookuped = lookupA({ b: 'hello' }) // Type error
+ * const getA = get('a')
+ * const geted = getA({ a: 'hello' })
+ * // const errorgeted = getA({ b: 'hello' }) // Type error
  *
- * assert.deepStrictEqual(lookuped, 'hello')
+ * assert.deepStrictEqual(geted, 'hello')
  *
  * @category 3 Functions
  * @since 0.17.0
  */
-export const lookup =
+export const get =
   <K extends string | number | symbol>(k: K) =>
   <A>(x: { [P in K]: A }): A =>
     x[k]

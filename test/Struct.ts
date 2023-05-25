@@ -1,5 +1,5 @@
 import {
-  lookup,
+  get,
   pick,
   pickFrom,
   omit,
@@ -11,8 +11,8 @@ import {
 import { pipe } from "fp-ts/function"
 
 describe("Struct", () => {
-  describe("lookup", () => {
-    const f = lookup
+  describe("get", () => {
+    const f = get
 
     expect(pipe({ a: 1 }, f("a"))).toStrictEqual(1)
     // pipe({ a: 1 }, f('b'))) // type error
