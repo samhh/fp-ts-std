@@ -15,8 +15,8 @@ describe("Struct", () => {
     const f = get
 
     expect(pipe({ a: 1 }, f("a"))).toStrictEqual(1)
-    // pipe({ a: 1 }, f('b'))) // type error
-    // pipe({}, f('a'))) // type error
+    // pipe({ a: 1 }, f("b"))) // type error
+    // pipe({}, f("a"))) // type error
   })
 
   describe("pick", () => {
