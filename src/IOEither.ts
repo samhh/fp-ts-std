@@ -13,7 +13,6 @@ import {
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
-import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Show } from "fp-ts/Show"
 
 /**
@@ -92,27 +91,6 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
 export const unsafeExpectLeft = <A>(
   S: Show<A>,
 ): (<E>(x: IOEither<E, A>) => E) => flow(IOE.map(S.show), unsafeUnwrapLeft)
-
-/**
- * Apply a function to both elements of an `IOEither`.
- *
- * @example
- * import * as IOE from 'fp-ts/IOEither'
- * import * as E from 'fp-ts/Either'
- * import { mapBoth } from 'fp-ts-std/IOEither'
- * import { multiply } from 'fp-ts-std/Number'
- *
- * const f = mapBoth(multiply(2))
- *
- * assert.deepStrictEqual(f(IOE.left(3))(), E.left(6))
- * assert.deepStrictEqual(f(IOE.right(3))(), E.right(6))
- *
- * @category 2 Typeclass Methods
- * @since 0.15.0
- */
-export const mapBoth: <A, B>(
-  f: (x: A) => B,
-) => (xs: IOEither<A, A>) => IOEither<B, B> = _mapBoth(IOE.Bifunctor)
 
 /**
  * Sequence an array of fallible effects, ignoring the results.

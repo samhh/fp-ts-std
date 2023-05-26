@@ -13,7 +13,6 @@ import {
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
-import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Show } from "fp-ts/Show"
 
 /**
@@ -97,31 +96,6 @@ export const unsafeExpectLeft = <A>(
   S: Show<A>,
 ): (<E>(x: TaskEither<E, A>) => Promise<E>) =>
   flow(TE.map(S.show), unsafeUnwrapLeft)
-
-/**
- * Apply a function to both elements of an `TaskEither`.
- *
- * @example
- * import * as TE from 'fp-ts/TaskEither'
- * import * as E from 'fp-ts/Either'
- * import { mapBoth } from 'fp-ts-std/TaskEither'
- * import { multiply } from 'fp-ts-std/Number'
- *
- * const f = mapBoth(multiply(2))
- *
- * f(TE.left(3))().then((x) => {
- *   assert.deepStrictEqual(x, E.left(6))
- * })
- * f(TE.right(3))().then((x) => {
- *   assert.deepStrictEqual(x, E.right(6))
- * })
- *
- * @category 2 Typeclass Methods
- * @since 0.14.0
- */
-export const mapBoth: <A, B>(
-  f: (x: A) => B,
-) => (xs: TaskEither<A, A>) => TaskEither<B, B> = _mapBoth(TE.Bifunctor)
 
 /**
  * Sequence an array of fallible tasks, ignoring the results.

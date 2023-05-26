@@ -18,6 +18,7 @@ This project adheres to semantic versioning.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.
 - Remove index module. It's unfriendly to tree-shaking and less flexible than the [facades pattern](https://samhh.github.io/fp-ts-std/facades.html).
+- Remove `mapBoth` from `IOEither` and `TaskEither` as they're superceded by [fp-ts/IOEither::mapBoth](https://gcanti.github.io/fp-ts/modules/IOEither.ts.html#mapboth) and [fp-ts/TaskEither::mapBoth](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html#mapboth) respectively.
 - Remove `tap` from `IO` as it's superceded by [fp-ts/IO::tap](https://gcanti.github.io/fp-ts/modules/IO.ts.html#tap).
 - Improve safety and inference of `isInstanceOf`.
 - Adjust the input type of `fromRecord` in `URLSearchParams`.

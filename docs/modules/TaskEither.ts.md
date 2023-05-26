@@ -15,7 +15,6 @@ Added in v0.12.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [2 Typeclass Methods](#2-typeclass-methods)
-  - [mapBoth](#mapboth)
   - [sequenceArray\_](#sequencearray_)
   - [sequenceSeqArray\_](#sequenceseqarray_)
   - [traverseArray\_](#traversearray_)
@@ -29,40 +28,6 @@ Added in v0.12.0
 ---
 
 # 2 Typeclass Methods
-
-## mapBoth
-
-Apply a function to both elements of an `TaskEither`.
-
-**Signature**
-
-```ts
-export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: TaskEither<A, A>) => TaskEither<B, B>
-```
-
-```hs
-mapBoth :: (a -> b) -> TaskEither a a -> TaskEither b b
-```
-
-**Example**
-
-```ts
-import * as TE from 'fp-ts/TaskEither'
-import * as E from 'fp-ts/Either'
-import { mapBoth } from 'fp-ts-std/TaskEither'
-import { multiply } from 'fp-ts-std/Number'
-
-const f = mapBoth(multiply(2))
-
-f(TE.left(3))().then((x) => {
-  assert.deepStrictEqual(x, E.left(6))
-})
-f(TE.right(3))().then((x) => {
-  assert.deepStrictEqual(x, E.right(6))
-})
-```
-
-Added in v0.14.0
 
 ## sequenceArray\_
 

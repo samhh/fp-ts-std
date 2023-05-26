@@ -15,7 +15,6 @@ Added in v0.15.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [2 Typeclass Methods](#2-typeclass-methods)
-  - [mapBoth](#mapboth)
   - [sequenceArray\_](#sequencearray_)
   - [traverseArray\_](#traversearray_)
 - [3 Functions](#3-functions)
@@ -27,36 +26,6 @@ Added in v0.15.0
 ---
 
 # 2 Typeclass Methods
-
-## mapBoth
-
-Apply a function to both elements of an `IOEither`.
-
-**Signature**
-
-```ts
-export declare const mapBoth: <A, B>(f: (x: A) => B) => (xs: IOEither<A, A>) => IOEither<B, B>
-```
-
-```hs
-mapBoth :: (a -> b) -> IOEither a a -> IOEither b b
-```
-
-**Example**
-
-```ts
-import * as IOE from 'fp-ts/IOEither'
-import * as E from 'fp-ts/Either'
-import { mapBoth } from 'fp-ts-std/IOEither'
-import { multiply } from 'fp-ts-std/Number'
-
-const f = mapBoth(multiply(2))
-
-assert.deepStrictEqual(f(IOE.left(3))(), E.left(6))
-assert.deepStrictEqual(f(IOE.right(3))(), E.right(6))
-```
-
-Added in v0.15.0
 
 ## sequenceArray\_
 

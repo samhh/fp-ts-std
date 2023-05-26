@@ -1,5 +1,4 @@
 import {
-  mapBoth,
   unsafeUnwrap,
   unsafeUnwrapLeft,
   unsafeExpect,
@@ -9,11 +8,8 @@ import {
 } from "../src/IOEither"
 import * as IOE from "fp-ts/IOEither"
 import * as IO from "../src/IO"
-import * as E from "fp-ts/Either"
 import { identity, pipe } from "fp-ts/function"
-import * as Str from "../src/String"
 import { Show as StrShow } from "fp-ts/string"
-import fc from "fast-check"
 
 describe("IOEither", () => {
   describe("unsafeUnwrap", () => {
@@ -61,41 +57,6 @@ describe("IOEither", () => {
 
     it("throws Right via Show", () => {
       expect(() => f(IOE.right("r"))).toThrow('"r"')
-    })
-  })
-
-  describe("mapBoth", () => {
-    const f = mapBoth
-
-    it("returns identity on identity input", () => {
-      fc.assert(
-        fc.property(fc.string(), x => {
-          expect(f(identity)(IOE.left(x))()).toEqual(E.left(x))
-          expect(f(identity)(IOE.right(x))()).toEqual(E.right(x))
-        }),
-      )
-    })
-
-    it("maps both sides", () => {
-      const g = Str.append("!")
-
-      fc.assert(
-        fc.property(fc.string(), x => {
-          expect(f(g)(IOE.left(x))()).toEqual(E.left(g(x)))
-          expect(f(g)(IOE.right(x))()).toEqual(E.right(g(x)))
-        }),
-      )
-    })
-
-    it("is equivalent to doubly applied bimap", () => {
-      const g = Str.append("!")
-
-      fc.assert(
-        fc.property(fc.string(), x => {
-          expect(f(g)(IOE.left(x))()).toEqual(E.bimap(g, g)(E.left(x)))
-          expect(f(g)(IOE.right(x))()).toEqual(E.bimap(g, g)(E.right(x)))
-        }),
-      )
     })
   })
 
