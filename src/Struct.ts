@@ -78,23 +78,24 @@ export const pickFrom = <A extends object>(): (<K extends keyof A>(
 ) => (x: A) => Pick<A, K>) => pick
 
 /**
- * Get the value for a key in a `Struct`.
+ * Get the value for a key in a struct.
  *
  * @example
  * import { get } from 'fp-ts-std/Struct'
  *
- * const getA = get('a')
- * const geted = getA({ a: 'hello' })
- * // const errorgeted = getA({ b: 'hello' }) // Type error
+ * type Person = { name: string; age: number }
+ * const person: Person = { name: 'Albert', age: 76 }
  *
- * assert.deepStrictEqual(geted, 'hello')
+ * const getName = get('name')
+ *
+ * assert.strictEqual(getName(person), 'Albert')
  *
  * @category 3 Functions
  * @since 0.17.0
  */
 export const get =
-  <K extends string | number | symbol>(k: K) =>
-  <A>(x: { [P in K]: A }): A =>
+  <K extends string>(k: K) =>
+  <A>(x: Record<K, A>): A =>
     x[k]
 
 /**

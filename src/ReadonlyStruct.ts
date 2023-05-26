@@ -91,6 +91,27 @@ export const pickFrom = <A extends Readonly<object>>(): (<K extends keyof A>(
 ) => (x: A) => Pick<A, K>) => pick
 
 /**
+ * Get the value for a key in a struct.
+ *
+ * @example
+ * import { get } from 'fp-ts-std/Struct'
+ *
+ * type Person = { name: string; age: number }
+ * const person: Person = { name: 'Albert', age: 76 }
+ *
+ * const getName = get('name')
+ *
+ * assert.strictEqual(getName(person), 'Albert')
+ *
+ * @category 3 Functions
+ * @since 0.17.0
+ */
+export const get =
+  <K extends string>(k: K) =>
+  <A>(x: RR.ReadonlyRecord<K, A>): A =>
+    x[k]
+
+/**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
  * type.
  *

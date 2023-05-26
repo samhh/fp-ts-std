@@ -16,6 +16,7 @@ Added in v0.14.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [3 Functions](#3-functions)
+  - [get](#get)
   - [merge](#merge)
   - [omit](#omit)
   - [omitFrom](#omitfrom)
@@ -27,6 +28,35 @@ Added in v0.14.0
 ---
 
 # 3 Functions
+
+## get
+
+Get the value for a key in a struct.
+
+**Signature**
+
+```ts
+export declare const get: <K extends string>(k: K) => <A>(x: Record<K, A>) => A
+```
+
+```hs
+get :: k extends string => k -> Record k a -> a
+```
+
+**Example**
+
+```ts
+import { get } from 'fp-ts-std/Struct'
+
+type Person = { name: string; age: number }
+const person: Person = { name: 'Albert', age: 76 }
+
+const getName = get('name')
+
+assert.strictEqual(getName(person), 'Albert')
+```
+
+Added in v0.17.0
 
 ## merge
 

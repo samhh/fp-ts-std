@@ -1,4 +1,5 @@
 import {
+  get,
   pick,
   pickFrom,
   omit,
@@ -10,6 +11,14 @@ import {
 import { pipe } from "fp-ts/function"
 
 describe("ReadonlyStruct", () => {
+  describe("get", () => {
+    const f = get
+
+    it("returns the associated value", () => {
+      expect(pipe({ a: 1, b: "foo" }, f("a"))).toBe(1)
+    })
+  })
+
   describe("pick", () => {
     const f = pick
 

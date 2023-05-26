@@ -14,9 +14,9 @@ describe("Struct", () => {
   describe("get", () => {
     const f = get
 
-    expect(pipe({ a: 1 }, f("a"))).toStrictEqual(1)
-    // pipe({ a: 1 }, f("b"))) // type error
-    // pipe({}, f("a"))) // type error
+    it("returns the associated value", () => {
+      expect(pipe({ a: 1, b: "foo" }, f("a"))).toBe(1)
+    })
   })
 
   describe("pick", () => {

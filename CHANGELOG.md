@@ -12,6 +12,7 @@ This project adheres to semantic versioning.
 - Add `includes`, `size`, and `split` to `NonEmptyString`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.
+- Add `get` to `Struct` and `ReadonlyStruct`.
 - Add `getEq`, `getOrd`, and `getBounded` to `Tuple`.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
