@@ -12,8 +12,8 @@ import { fanout } from "./Tuple"
 import { uncurry2 } from "./Function"
 
 /**
- * Merge two records together. For merging many identical records, instead
- * consider defining a semigroup.
+ * Merge two readonly structs together. For merging many identical structs,
+ * instead consider defining a semigroup.
  *
  * @example
  * import { merge } from 'fp-ts-std/ReadonlyStruct'
@@ -30,8 +30,8 @@ export const merge =
   <C extends B>(y: C): A & C => ({ ...x, ...y })
 
 /**
- * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
- * type.
+ * Pick a set of keys from a readonly struct. The value-level equivalent of the
+ * `Pick` type.
  *
  * @example
  * import { pick } from 'fp-ts-std/ReadonlyStruct'
@@ -73,7 +73,7 @@ export const pick =
 // }
 
 /**
- * Like `pick`, but allows you to specify the input record upfront.
+ * Like `pick`, but allows you to specify the input struct upfront.
  *
  * @example
  * import { pickFrom } from 'fp-ts-std/ReadonlyStruct'
@@ -112,8 +112,8 @@ export const get =
     x[k]
 
 /**
- * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
- * type.
+ * Omit a set of keys from a readonly struct. The value-level equivalent of the
+ * `Omit` type.
  *
  * @example
  * import { omit } from 'fp-ts-std/ReadonlyStruct'
@@ -140,7 +140,7 @@ export const omit =
   }
 
 /**
- * Like `omit`, but allows you to specify the input record upfront.
+ * Like `omit`, but allows you to specify the input struct upfront.
  *
  * @example
  * import { omitFrom } from 'fp-ts-std/ReadonlyStruct'

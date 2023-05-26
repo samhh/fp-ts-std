@@ -11,7 +11,7 @@ import { fanout } from "./Tuple"
 import { uncurry2 } from "./Function"
 
 /**
- * Merge two records together. For merging many identical records, instead
+ * Merge two structs together. For merging many identical structs, instead
  * consider defining a semigroup.
  *
  * @example
@@ -29,7 +29,7 @@ export const merge =
   <C extends B>(y: C): A & C => ({ ...x, ...y })
 
 /**
- * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
+ * Pick a set of keys from a struct. The value-level equivalent of the `Pick`
  * type.
  *
  * @example
@@ -60,7 +60,7 @@ export const pick =
     )
 
 /**
- * Like `pick`, but allows you to specify the input record upfront.
+ * Like `pick`, but allows you to specify the input struct upfront.
  *
  * @example
  * import { pickFrom } from 'fp-ts-std/Struct'
@@ -99,7 +99,7 @@ export const get =
     x[k]
 
 /**
- * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
+ * Omit a set of keys from a struct. The value-level equivalent of the `Omit`
  * type.
  *
  * @example
@@ -127,7 +127,7 @@ export const omit =
   }
 
 /**
- * Like `omit`, but allows you to specify the input record upfront.
+ * Like `omit`, but allows you to specify the input struct upfront.
  *
  * @example
  * import { omitFrom } from 'fp-ts-std/Struct'

@@ -60,7 +60,7 @@ Added in v0.17.0
 
 ## merge
 
-Merge two records together. For merging many identical records, instead
+Merge two structs together. For merging many identical structs, instead
 consider defining a semigroup.
 
 **Signature**
@@ -85,7 +85,7 @@ Added in v0.14.0
 
 ## omit
 
-Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
+Omit a set of keys from a struct. The value-level equivalent of the `Omit`
 type.
 
 **Signature**
@@ -114,7 +114,7 @@ Added in v0.14.0
 
 ## omitFrom
 
-Like `omit`, but allows you to specify the input record upfront.
+Like `omit`, but allows you to specify the input struct upfront.
 
 **Signature**
 
@@ -141,7 +141,7 @@ Added in v0.15.0
 
 ## pick
 
-Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
+Pick a set of keys from a struct. The value-level equivalent of the `Pick`
 type.
 
 **Signature**
@@ -169,7 +169,7 @@ Added in v0.14.0
 
 ## pickFrom
 
-Like `pick`, but allows you to specify the input record upfront.
+Like `pick`, but allows you to specify the input struct upfront.
 
 **Signature**
 
