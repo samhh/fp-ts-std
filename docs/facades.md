@@ -20,4 +20,10 @@ Now simply import from these modules instead! You may wish to set up an alias fo
 
 ## Conflicts
 
-fp-ts-std generally tries to avoid naming conflicts, however they do exist in rare cases. When this occurs you'll have to manually name the exports from the offending module.
+fp-ts-std generally tries to avoid naming conflicts, however they do exist in rare cases. When this occurs you'll have to specify which import you'd like to prioritise with a final named export:
+
+```ts
+export * from 'fp-ts/Array';
+export * from 'fp-ts-std/Array';
+export { thing } from 'fp-ts/Array';
+```
