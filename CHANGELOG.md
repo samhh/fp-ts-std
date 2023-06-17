@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.17.1 (*Unreleased*)
+## 0.17.1 (2023-06-17)
 
 - Fix widening of additional type arguments in `pass`.
 
