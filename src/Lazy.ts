@@ -12,7 +12,12 @@
 // All the typeclass stuff was copied from fp-ts/IO almost identically.
 
 import { constant, identity } from "fp-ts/function"
-import { Functor1, flap as flap_, bindTo as bindTo_ } from "fp-ts/Functor"
+import {
+  Functor1,
+  flap as flap_,
+  bindTo as bindTo_,
+  let as let__,
+} from "fp-ts/Functor"
 import { Applicative1 } from "fp-ts/Applicative"
 import { Monad1 } from "fp-ts/Monad"
 import { Pointed1 } from "fp-ts/Pointed"
@@ -289,6 +294,18 @@ export const bind = bind_(Chain)
  * @since 0.12.0
  */
 export const apS = apS_(Apply)
+
+const let_ = let__(Functor)
+
+export {
+  /**
+   * Assign a variable in do notation.
+   *
+   * @category 2 Typeclass Methods
+   * @since 0.17.0
+   */
+  let_ as let,
+}
 
 /**
  * Identity for `Lazy` as applied to `sequenceT`.

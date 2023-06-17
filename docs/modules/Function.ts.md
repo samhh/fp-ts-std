@@ -22,9 +22,16 @@ Added in v0.1.0
   - [Functor](#functor)
   - [Monad](#monad)
 - [2 Typeclass Methods](#2-typeclass-methods)
+  - [Do](#do)
   - [ap](#ap)
+  - [apFirst](#apfirst)
+  - [apS](#aps)
+  - [apSecond](#apsecond)
+  - [bind](#bind)
+  - [bindTo](#bindto)
   - [chain](#chain)
   - [flatMap](#flatmap)
+  - [let](#let)
   - [map](#map)
   - [of](#of)
 - [3 Functions](#3-functions)
@@ -119,6 +126,22 @@ Added in v0.15.0
 
 # 2 Typeclass Methods
 
+## Do
+
+Initiate do notation in the context of a unary function.
+
+**Signature**
+
+```ts
+export declare const Do: <A>(x: A) => {}
+```
+
+```hs
+Do :: a -> {}
+```
+
+Added in v0.17.0
+
 ## ap
 
 Fork an input across a binary and a tertiary function, applying the output
@@ -146,6 +169,93 @@ assert.strictEqual(rev('foo'), 'foo -> oof')
 ```
 
 Added in v0.15.0
+
+## apFirst
+
+Sequence actions, discarding the value of the first argument.
+
+**Signature**
+
+```ts
+export declare const apFirst: <E, B>(second: (x: E) => B) => <A>(first: (x: E) => A) => (x: E) => A
+```
+
+```hs
+apFirst :: (e -> b) -> (e -> a) -> e -> a
+```
+
+Added in v0.17.0
+
+## apS
+
+Bind the provided value to the specified key in do notation.
+
+**Signature**
+
+```ts
+export declare const apS: <N, A, E, B>(
+  name: Exclude<N, keyof A>,
+  fb: (x: E) => B
+) => (fa: (x: E) => A) => (x: E) => { readonly [K in N | keyof A]: K extends keyof A ? A[K] : B }
+```
+
+```hs
+apS :: (Exclude n (keyof a), (e -> b)) -> (e -> a) -> e -> { [k in n | keyof a]: k extends keyof a ? a[k] : b }
+```
+
+Added in v0.17.0
+
+## apSecond
+
+Sequence actions, discarding the value of the second argument.
+
+**Signature**
+
+```ts
+export declare const apSecond: <E, B>(second: (x: E) => B) => <A>(first: (x: E) => A) => (x: E) => B
+```
+
+```hs
+apSecond :: (e -> b) -> (e -> a) -> e -> b
+```
+
+Added in v0.17.0
+
+## bind
+
+Bind the output of the provided function to the specified key in do notation.
+
+**Signature**
+
+```ts
+export declare const bind: <N, A, E, B>(
+  name: Exclude<N, keyof A>,
+  f: (a: A) => (x: E) => B
+) => (ma: (x: E) => A) => (x: E) => { readonly [K in N | keyof A]: K extends keyof A ? A[K] : B }
+```
+
+```hs
+bind :: (Exclude n (keyof a), (a -> e -> b)) -> (e -> a) -> e -> { [k in n | keyof a]: k extends keyof a ? a[k] : b }
+```
+
+Added in v0.17.0
+
+## bindTo
+
+Bind the provided value, typically preceding it in a pipeline, to the
+specified key in do notation.
+
+**Signature**
+
+```ts
+export declare const bindTo: <N>(name: N) => <E, A>(fa: (x: E) => A) => (x: E) => { readonly [K in N]: A }
+```
+
+```hs
+bindTo :: n -> (e -> a) -> e -> { [k in n]: a }
+```
+
+Added in v0.17.0
 
 ## chain
 
@@ -188,6 +298,25 @@ export declare const flatMap: <A, B, C>(f: (x: B) => (y: A) => C) => (g: (x: A) 
 
 ```hs
 flatMap :: (b -> a -> c) -> (a -> b) -> a -> c
+```
+
+Added in v0.17.0
+
+## let
+
+Assign a variable in do notation.
+
+**Signature**
+
+```ts
+export declare const let: <N, A, B>(
+  name: Exclude<N, keyof A>,
+  f: (a: A) => B
+) => <E>(fa: (x: E) => A) => (x: E) => { readonly [K in N | keyof A]: K extends keyof A ? A[K] : B }
+```
+
+```hs
+let :: (Exclude n (keyof a), (a -> b)) -> (e -> a) -> e -> { [k in n | keyof a]: k extends keyof a ? a[k] : b }
 ```
 
 Added in v0.17.0

@@ -8,7 +8,8 @@ This project adheres to semantic versioning.
 - Add `pass` to `Applicative`, `IO`, `IOOption`, `IOEither`, `Task`, `TaskOption`, and `TaskEither`.
 - Add `Bounded` instance to `Boolean`.
 - Add `match2`, `getBounded`, and `getOrd` to `Either`.
-- Add `applyN` to `Function`.
+- Add `applyN` and some do notation helpers to `Function`.
+- Add the do notation helper `let` to `Lazy`.
 - Add `includes`, `size`, and `split` to `NonEmptyString`.
 - Add `digits` and alternative "Safe" `Bounded` instance to `Number`.
 - Add `match2` and `getBounded` to `Option`.

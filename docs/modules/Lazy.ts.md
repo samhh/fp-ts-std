@@ -43,6 +43,7 @@ Added in v0.12.0
   - [flap](#flap)
   - [flatMap](#flatmap)
   - [flatten](#flatten)
+  - [let](#let)
   - [map](#map)
   - [of](#of)
   - [sequenceArray](#sequencearray)
@@ -416,6 +417,25 @@ flatten :: Lazy (Lazy a) -> Lazy a
 ```
 
 Added in v0.12.0
+
+## let
+
+Assign a variable in do notation.
+
+**Signature**
+
+```ts
+export declare const let: <N, A, B>(
+  name: Exclude<N, keyof A>,
+  f: (a: A) => B
+) => (fa: Lazy<A>) => Lazy<{ readonly [K in N | keyof A]: K extends keyof A ? A[K] : B }>
+```
+
+```hs
+let :: (Exclude n (keyof a), (a -> b)) -> Lazy a -> Lazy { [k in (n | (keyof a))]: k extends (keyof a) ? a[k] : b }
+```
+
+Added in v0.17.0
 
 ## map
 

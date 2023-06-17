@@ -31,6 +31,7 @@ import {
   applySomes,
   applyN,
 } from "../src/Function"
+import * as Fn from "../src/Function"
 import { fromNumber } from "../src/String"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
@@ -253,6 +254,17 @@ describe("Function", () => {
           ),
         )
       })
+    })
+
+    it("supports do notation", () => {
+      const f = pipe(
+        Fn.Do,
+        Fn.apS("x", fromNumber),
+        Fn.apS("y", flow(add(2), fromNumber)),
+        Fn.map(({ x, y }) => x + y),
+      )
+
+      expect(f(123)).toBe("123125")
     })
   })
 

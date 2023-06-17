@@ -25,8 +25,14 @@ import { concatAll } from "fp-ts/Monoid"
 import { first } from "fp-ts/Semigroup"
 import { Eq } from "fp-ts/Eq"
 import { Refinement } from "fp-ts/Refinement"
-import { Functor2 } from "fp-ts/Functor"
+import { Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/Functor"
+import {
+  apFirst as apFirst_,
+  apSecond as apSecond_,
+  apS as apS_,
+} from "fp-ts/Apply"
 import { Applicative2 } from "fp-ts/Applicative"
+import { bind as bind_, chainFirst as chainFirst_ } from "fp-ts/Chain"
 import { Monad2 } from "fp-ts/Monad"
 
 /**
@@ -131,6 +137,22 @@ export const Applicative: Applicative2<URI> = {
 }
 
 /**
+ * Sequence actions, discarding the value of the first argument.
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const apFirst = apFirst_(Applicative)
+
+/**
+ * Sequence actions, discarding the value of the second argument.
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const apSecond = apSecond_(Applicative)
+
+/**
  * Fork an input across a binary and a tertiary function, applying the output of
  * the former to the latter. As it applies to functions this is essentially
  * `ap` with some flips thrown in.
@@ -169,6 +191,52 @@ export const flatMap = chain
 export const Monad: Monad2<URI> = {
   ...Applicative,
   chain: (f, g) => chain(g)(f),
+}
+
+/**
+ * Initiate do notation in the context of a unary function.
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const Do: <A>(x: A) => {} = of({})
+
+/**
+ * Bind the provided value, typically preceding it in a pipeline, to the
+ * specified key in do notation.
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const bindTo = bindTo_(Functor)
+
+/**
+ * Bind the output of the provided function to the specified key in do notation.
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const bind = bind_(Monad)
+
+/**
+ * Bind the provided value to the specified key in do notation.
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const apS = apS_(Applicative)
+
+const let_ = let__(Functor)
+
+export {
+  /**
+   * Assign a variable in do notation.
+   *
+   * @category 2 Typeclass Methods
+   * @since 0.17.0
+   */
+  let_ as let,
 }
 
 /**
