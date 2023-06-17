@@ -15,12 +15,50 @@ Added in v0.12.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [2 Typeclass Methods](#2-typeclass-methods)
+  - [pass](#pass)
   - [unless](#unless)
   - [when](#when)
 
 ---
 
 # 2 Typeclass Methods
+
+## pass
+
+Convenient alias for `F.of(undefined)`.
+
+**Signature**
+
+```ts
+export declare function pass<F extends URIS4, S, R, E>(F: Applicative4<F>): Kind4<F, S, R, E, void>
+export declare function pass<F extends URIS3, R, E>(F: Applicative3<F>): Kind3<F, R, E, void>
+export declare function pass<F extends URIS2, E>(F: Applicative2<F>): Kind2<F, E, void>
+export declare function pass<F extends URIS>(F: Applicative1<F>): Kind<F, void>
+```
+
+```hs
+pass :: f extends URIS4 => Applicative4 f -> Kind4 f s r e void
+pass :: f extends URIS3 => ((Applicative3 f) -> Kind3 f r e void)
+pass :: f extends URIS2 => ((Applicative2 f) -> Kind2 f e void)
+pass :: f extends URIS => ((Applicative1 f) -> Kind f void)
+```
+
+**Example**
+
+```ts
+import { pipe, constant } from 'fp-ts/function'
+import { pass } from 'fp-ts-std/Applicative'
+import * as O from 'fp-ts/Option'
+import Option = O.Option
+import { IO, Applicative } from 'fp-ts/IO'
+import { log } from 'fp-ts/Console'
+
+const mcount: Option<number> = O.some(123)
+
+const logCount: IO<void> = pipe(mcount, O.match(constant(pass(Applicative)), log))
+```
+
+Added in v0.17.0
 
 ## unless
 

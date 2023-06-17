@@ -121,3 +121,39 @@ export function unless<F>(
 ): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
   return b => x => b ? F.of(undefined) : x
 }
+
+/**
+ * Convenient alias for `F.of(undefined)`.
+ *
+ * @example
+ * import { pipe, constant } from 'fp-ts/function'
+ * import { pass } from 'fp-ts-std/Applicative'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import { IO, Applicative } from 'fp-ts/IO'
+ * import { log } from 'fp-ts/Console'
+ *
+ * const mcount: Option<number> = O.some(123)
+ *
+ * const logCount: IO<void> = pipe(
+ *   mcount,
+ *   O.match(
+ *     constant(pass(Applicative)),
+ *     log,
+ *   ),
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export function pass<F extends URIS4, S, R, E>(
+  F: Applicative4<F>,
+): Kind4<F, S, R, E, void>
+export function pass<F extends URIS3, R, E>(
+  F: Applicative3<F>,
+): Kind3<F, R, E, void>
+export function pass<F extends URIS2, E>(F: Applicative2<F>): Kind2<F, E, void>
+export function pass<F extends URIS>(F: Applicative1<F>): Kind<F, void>
+export function pass<F>(F: Applicative<F>): HKT<F, void> {
+  return F.of(undefined)
+}

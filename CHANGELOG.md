@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.17.0 (_Unreleased_)
 
 - Add `URLPath` module.
+- Add `pass` to `Applicative`.
 - Add `Bounded` instance to `Boolean`.
 - Add `match2`, `getBounded`, and `getOrd` to `Either`.
 - Add `applyN` to `Function`.
