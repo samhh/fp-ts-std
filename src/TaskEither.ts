@@ -155,9 +155,9 @@ export const traverseSeqArray_: <E, A, B>(
  * import { log } from 'fp-ts/Console'
  *
  * const mcount: Option<number> = O.some(123)
- * const tryAsyncLog: <A>(x: A) => TaskEither<unknown, void> = flow(log, TE.fromIO)
+ * const tryAsyncLog: <A>(x: A) => TaskEither<void, void> = flow(log, TE.fromIO)
  *
- * const logCount: TaskEither<unknown, void> = pipe(
+ * const logCount: TaskEither<void, void> = pipe(
  *   mcount,
  *   O.match(
  *     constant(pass),
@@ -168,4 +168,4 @@ export const traverseSeqArray_: <E, A, B>(
  * @category 2 Typeclass Methods
  * @since 0.17.0
  */
-export const pass: TaskEither<unknown, void> = _pass(TE.ApplicativePar)
+export const pass: TaskEither<never, void> = _pass(TE.ApplicativePar)

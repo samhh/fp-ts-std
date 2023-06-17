@@ -35,11 +35,11 @@ Convenient alias for `IOE.of(undefined)`.
 **Signature**
 
 ```ts
-export declare const pass: IOEither<unknown, void>
+export declare const pass: IOEither<never, void>
 ```
 
 ```hs
-pass :: IOEither unknown void
+pass :: IOEither never void
 ```
 
 **Example**
@@ -55,9 +55,9 @@ import { pass } from 'fp-ts-std/IOEither'
 import { log } from 'fp-ts/Console'
 
 const mcount: Option<number> = O.some(123)
-const tryLog: <A>(x: A) => IOEither<unknown, void> = flow(log, IOE.fromIO)
+const tryLog: <A>(x: A) => IOEither<void, void> = flow(log, IOE.fromIO)
 
-const logCount: IOEither<unknown, void> = pipe(mcount, O.match(constant(pass), tryLog))
+const logCount: IOEither<void, void> = pipe(mcount, O.match(constant(pass), tryLog))
 ```
 
 Added in v0.17.0

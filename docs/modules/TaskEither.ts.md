@@ -37,11 +37,11 @@ Convenient alias for `TE.of(undefined)`.
 **Signature**
 
 ```ts
-export declare const pass: TaskEither<unknown, void>
+export declare const pass: TaskEither<never, void>
 ```
 
 ```hs
-pass :: TaskEither unknown void
+pass :: TaskEither never void
 ```
 
 **Example**
@@ -57,9 +57,9 @@ import { pass } from 'fp-ts-std/TaskEither'
 import { log } from 'fp-ts/Console'
 
 const mcount: Option<number> = O.some(123)
-const tryAsyncLog: <A>(x: A) => TaskEither<unknown, void> = flow(log, TE.fromIO)
+const tryAsyncLog: <A>(x: A) => TaskEither<void, void> = flow(log, TE.fromIO)
 
-const logCount: TaskEither<unknown, void> = pipe(mcount, O.match(constant(pass), tryAsyncLog))
+const logCount: TaskEither<void, void> = pipe(mcount, O.match(constant(pass), tryAsyncLog))
 ```
 
 Added in v0.17.0

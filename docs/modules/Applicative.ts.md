@@ -30,9 +30,11 @@ Convenient alias for `F.of(undefined)`.
 **Signature**
 
 ```ts
-export declare function pass<F extends URIS4, S, R, E>(F: Applicative4<F>): Kind4<F, S, R, E, void>
-export declare function pass<F extends URIS3, R, E>(F: Applicative3<F>): Kind3<F, R, E, void>
-export declare function pass<F extends URIS2, E>(F: Applicative2<F>): Kind2<F, E, void>
+export declare function pass<F extends URIS4, S = never, R = never, E = never>(
+  F: Applicative4<F>
+): Kind4<F, S, R, E, void>
+export declare function pass<F extends URIS3, R = never, E = never>(F: Applicative3<F>): Kind3<F, R, E, void>
+export declare function pass<F extends URIS2, E = never>(F: Applicative2<F>): Kind2<F, E, void>
 export declare function pass<F extends URIS>(F: Applicative1<F>): Kind<F, void>
 ```
 

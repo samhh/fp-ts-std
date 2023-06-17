@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.17.1 (*Unreleased*)
+
+- Fix widening of additional type arguments in `pass`.
+
 ## 0.17.0 (2023-06-17)
 
 - Add `URLPath` module.

@@ -128,9 +128,9 @@ export const traverseArray_: <E, A, B>(
  * import { log } from 'fp-ts/Console'
  *
  * const mcount: Option<number> = O.some(123)
- * const tryLog: <A>(x: A) => IOEither<unknown, void> = flow(log, IOE.fromIO)
+ * const tryLog: <A>(x: A) => IOEither<void, void> = flow(log, IOE.fromIO)
  *
- * const logCount: IOEither<unknown, void> = pipe(
+ * const logCount: IOEither<void, void> = pipe(
  *   mcount,
  *   O.match(
  *     constant(pass),
@@ -141,4 +141,4 @@ export const traverseArray_: <E, A, B>(
  * @category 2 Typeclass Methods
  * @since 0.17.0
  */
-export const pass: IOEither<unknown, void> = _pass(IOE.ApplicativePar)
+export const pass: IOEither<never, void> = _pass(IOE.ApplicativePar)
