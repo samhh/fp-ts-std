@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.17.0 (_Unreleased_)
+## 0.17.0 (2023-06-17)
 
 - Add `URLPath` module.
 - Add `pass` to `Applicative`, `IO`, `IOOption`, `IOEither`, `Task`, `TaskOption`, and `TaskEither`.
