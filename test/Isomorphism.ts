@@ -108,7 +108,7 @@ describe("Isomorphism", () => {
     const g: (x: number) => string = String
     const absurd = (): never => {
       // eslint-disable-next-line functional/no-throw-statements
-      throw new Error("unreachable")
+      throw Error("unreachable")
     }
 
     it('"to" mirrors lifted function composition', () => {

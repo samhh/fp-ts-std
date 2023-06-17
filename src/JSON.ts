@@ -70,7 +70,7 @@ export const stringify =
         e => f(e as TypeError),
       ),
       E.filterOrElse(isString, () =>
-        f(new TypeError("Stringify output not a string")),
+        f(TypeError("Stringify output not a string")),
       ),
       E.map(mkJSONString),
     )

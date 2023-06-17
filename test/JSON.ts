@@ -42,7 +42,7 @@ describe("JSON", () => {
     })
 
     it("fails when stringification does not return a string", () => {
-      const e = new TypeError("Stringify output not a string")
+      const e = TypeError("Stringify output not a string")
       expect(f(identity)(undefined)).toEqual(E.left(e))
 
       fc.assert(
