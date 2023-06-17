@@ -11,6 +11,19 @@ import * as IOE from "fp-ts/IOEither"
 import * as IO from "../src/IO"
 import { identity, pipe } from "fp-ts/function"
 import { Show as StrShow } from "fp-ts/string"
+import { Lazy } from "../src/Lazy"
+
+const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
+  /* eslint-disable */
+  try {
+    f()
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
 
 describe("IOEither", () => {
   describe("unsafeUnwrap", () => {
@@ -21,7 +34,10 @@ describe("IOEither", () => {
     })
 
     it("throws Left", () => {
-      expect(() => f(IOE.left("l"))).toThrow("l")
+      const [m, c] = msgAndCause(() => f(IOE.left("l")))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe("l")
     })
   })
 
@@ -33,7 +49,10 @@ describe("IOEither", () => {
     })
 
     it("throws Right", () => {
-      expect(() => f(IOE.right("r"))).toThrow("r")
+      const [m, c] = msgAndCause(() => f(IOE.right("r")))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe("r")
     })
   })
 
@@ -45,7 +64,10 @@ describe("IOEither", () => {
     })
 
     it("throws Left via Show", () => {
-      expect(() => f(IOE.left("l"))).toThrow('"l"')
+      const [m, c] = msgAndCause(() => f(IOE.left("l")))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe('"l"')
     })
   })
 
@@ -57,7 +79,10 @@ describe("IOEither", () => {
     })
 
     it("throws Right via Show", () => {
-      expect(() => f(IOE.right("r"))).toThrow('"r"')
+      const [m, c] = msgAndCause(() => f(IOE.right("r")))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe('"r"')
     })
   })
 

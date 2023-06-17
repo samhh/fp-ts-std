@@ -1,7 +1,20 @@
 import { unsafeUnwrap, unsafeExpect, pass } from "../src/IOOption"
 import * as IOO from "fp-ts/IOOption"
+import { Lazy } from "../src/Lazy"
 
-describe("IOEither", () => {
+const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
+  /* eslint-disable */
+  try {
+    f()
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
+
+describe("IOOption", () => {
   describe("unsafeUnwrap", () => {
     const f = unsafeUnwrap
 
@@ -10,7 +23,10 @@ describe("IOEither", () => {
     })
 
     it("throws None", () => {
-      expect(() => f(IOO.none)).toThrow()
+      const [m, c] = msgAndCause(() => f(IOO.none))
+
+      expect(m).toBe("Unwrapped `None`")
+      expect(c).toBe(undefined)
     })
   })
 
@@ -22,7 +38,10 @@ describe("IOEither", () => {
     })
 
     it("throws None with provided message", () => {
-      expect(() => f(IOO.none)).toThrow("foo")
+      const [m, c] = msgAndCause(() => f(IOO.none))
+
+      expect(m).toBe("Unwrapped `None`")
+      expect(c).toBe("foo")
     })
   })
 

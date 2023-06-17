@@ -63,7 +63,7 @@ export const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E = flow(
  *
  * assert.throws(
  *   () => unsafeExpect(Str.Show)(IOE.left('foo')),
- *   /^"foo"$/,
+ *   Error('Unwrapped `Left`', { cause: '"foo"' }),
  * )
  *
  * @category 3 Functions
@@ -83,7 +83,7 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
  *
  * assert.throws(
  *   () => unsafeExpectLeft(Str.Show)(IOE.right('foo')),
- *   /^"foo"$/,
+ *   Error('Unwrapped `Right`', { cause: '"foo"' }),
  * )
  *
  * @category 3 Functions

@@ -14,6 +14,18 @@ import { constVoid, identity, pipe } from "fp-ts/function"
 import { Show as StrShow } from "fp-ts/string"
 import { mkMilliseconds } from "../src/Date"
 
+const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
+  /* eslint-disable */
+  try {
+    await f
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
+
 describe("TaskEither", () => {
   describe("unsafeUnwrap", () => {
     const f = unsafeUnwrap
@@ -22,8 +34,11 @@ describe("TaskEither", () => {
       return expect(f(TE.right(123))).resolves.toBe(123)
     })
 
-    it("rejects Left", () => {
-      return expect(f(TE.left("l"))).rejects.toBe("l")
+    it("rejects Left", async () => {
+      const [m, c] = await msgAndCause(f(TE.left("l")))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe("l")
     })
   })
 
@@ -34,8 +49,11 @@ describe("TaskEither", () => {
       return expect(f(TE.left(123))).resolves.toBe(123)
     })
 
-    it("rejects Right", () => {
-      return expect(f(TE.right("r"))).rejects.toBe("r")
+    it("rejects Right", async () => {
+      const [m, c] = await msgAndCause(f(TE.right("r")))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe("r")
     })
   })
 
@@ -46,8 +64,11 @@ describe("TaskEither", () => {
       return expect(f(TE.right(123))).resolves.toBe(123)
     })
 
-    it("rejects Left via Show", () => {
-      return expect(f(TE.left("l"))).rejects.toBe('"l"')
+    it("rejects Left via Show", async () => {
+      const [m, c] = await msgAndCause(f(TE.left("l")))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe('"l"')
     })
   })
 
@@ -58,8 +79,11 @@ describe("TaskEither", () => {
       return expect(f(TE.left(123))).resolves.toBe(123)
     })
 
-    it("rejects Right via Show", () => {
-      return expect(f(TE.right("r"))).rejects.toBe('"r"')
+    it("rejects Right via Show", async () => {
+      const [m, c] = await msgAndCause(f(TE.right("r")))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe('"r"')
     })
   })
 

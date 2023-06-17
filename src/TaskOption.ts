@@ -44,7 +44,7 @@ export const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A> = flow(
  *
  * assert.rejects(
  *   unsafeExpect('foo')(TO.none),
- *   /^foo$/,
+ *   Error('Unwrapped `None`'),
  * )
  *
  * @category 3 Functions

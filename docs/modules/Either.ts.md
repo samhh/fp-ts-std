@@ -214,7 +214,7 @@ import { unsafeExpect } from 'fp-ts-std/Either'
 import * as E from 'fp-ts/Either'
 import * as Str from 'fp-ts/string'
 
-assert.throws(() => unsafeExpect(Str.Show)(E.left('foo')), /^"foo"$/)
+assert.throws(() => unsafeExpect(Str.Show)(E.left('foo')), Error('Unwrapped `Left`', { cause: '"foo"' }))
 ```
 
 Added in v0.16.0
@@ -241,7 +241,7 @@ import { unsafeExpectLeft } from 'fp-ts-std/Either'
 import * as E from 'fp-ts/Either'
 import * as Str from 'fp-ts/string'
 
-assert.throws(() => unsafeExpectLeft(Str.Show)(E.right('foo')), /^"foo"$/)
+assert.throws(() => unsafeExpectLeft(Str.Show)(E.right('foo')), Error('Unwrapped `Right`', { cause: '"foo"' }))
 ```
 
 Added in v0.16.0

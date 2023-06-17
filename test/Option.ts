@@ -22,6 +22,18 @@ import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
 import { curry2 } from "../src/Function"
 
+const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
+  /* eslint-disable */
+  try {
+    f()
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
+
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
   fc.oneof(x.map(O.some), fc.constant(O.none))
 
@@ -34,7 +46,10 @@ describe("Option", () => {
     })
 
     it("throws None", () => {
-      expect(() => f(O.none)).toThrow()
+      const [m, c] = msgAndCause(() => f(O.none))
+
+      expect(m).toBe("Unwrapped `None`")
+      expect(c).toBe(undefined)
     })
   })
 
@@ -46,7 +61,10 @@ describe("Option", () => {
     })
 
     it("throws None with provided message", () => {
-      expect(() => f(O.none)).toThrow("foo")
+      const [m, c] = msgAndCause(() => f(O.none))
+
+      expect(m).toBe("Unwrapped `None`")
+      expect(c).toBe("foo")
     })
   })
 

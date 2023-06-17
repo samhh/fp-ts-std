@@ -72,7 +72,7 @@ export declare const unsafeExpect: (msg: string) => <A>(x: IOO.IOOption<A>) => A
 import { unsafeExpect } from 'fp-ts-std/IOOption'
 import * as IOO from 'fp-ts/IOOption'
 
-assert.throws(() => unsafeExpect('foo')(IOO.none), /^foo$/)
+assert.throws(() => unsafeExpect('foo')(IOO.none), Error('Unwrapped `None`', { cause: 'foo' }))
 ```
 
 Added in v0.16.0

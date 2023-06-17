@@ -19,6 +19,19 @@ import * as Num from "fp-ts/number"
 import { LT, EQ, GT } from "../src/Ordering"
 import { Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
+import { Lazy } from "../src/Lazy"
+
+const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
+  /* eslint-disable */
+  try {
+    f()
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
 
 describe("Either", () => {
   describe("unsafeUnwrap", () => {
@@ -29,7 +42,10 @@ describe("Either", () => {
     })
 
     it("throws Left", () => {
-      expect(() => f(E.left("l"))).toThrow("l")
+      const [m, c] = msgAndCause(() => f(E.left("l")))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe("l")
     })
   })
 
@@ -41,7 +57,10 @@ describe("Either", () => {
     })
 
     it("throws Right", () => {
-      expect(() => f(E.right("r"))).toThrow("r")
+      const [m, c] = msgAndCause(() => f(E.right("r")))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe("r")
     })
   })
 
@@ -53,7 +72,10 @@ describe("Either", () => {
     })
 
     it("throws Left via Show", () => {
-      expect(() => f(E.left("l"))).toThrow('"l"')
+      const [m, c] = msgAndCause(() => f(E.left("l")))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe('"l"')
     })
   })
 
@@ -64,8 +86,11 @@ describe("Either", () => {
       expect(f(E.left(123))).toBe(123)
     })
 
-    it("throws Right", () => {
-      expect(() => f(E.right("r"))).toThrow('"r"')
+    it("throws Right via Show", () => {
+      const [m, c] = msgAndCause(() => f(E.right("r")))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe('"r"')
     })
   })
 

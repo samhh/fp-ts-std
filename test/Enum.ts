@@ -26,6 +26,19 @@ import * as Ord from "fp-ts/Ord"
 import * as Num from "fp-ts/number"
 import * as Str from "fp-ts/string"
 import * as L from "../src/Lazy"
+import { Lazy } from "../src/Lazy"
+
+const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
+  /* eslint-disable */
+  try {
+    f()
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
 
 const BoundedNull: Bounded<null> = {
   equals: constant(true),
@@ -374,8 +387,10 @@ describe("Enum", () => {
 
     it("throws with expected message in fromEnum if member not present", () => {
       const E = f(Str.Ord)(["foo"])
+      const [m, c] = msgAndCause(() => E.fromEnum("bar"))
 
-      expect(() => E.fromEnum("bar")).toThrow(/getUnsafeConstantEnum/)
+      expect(m).toBe("Unwrapped `None`")
+      expect(c).toMatch(/getUnsafeConstantEnum/)
     })
   })
 })

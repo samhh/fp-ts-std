@@ -118,7 +118,7 @@ import { unsafeExpect } from 'fp-ts-std/IOEither'
 import * as IOE from 'fp-ts/IOEither'
 import * as Str from 'fp-ts/string'
 
-assert.throws(() => unsafeExpect(Str.Show)(IOE.left('foo')), /^"foo"$/)
+assert.throws(() => unsafeExpect(Str.Show)(IOE.left('foo')), Error('Unwrapped `Left`', { cause: '"foo"' }))
 ```
 
 Added in v0.16.0
@@ -145,7 +145,7 @@ import { unsafeExpectLeft } from 'fp-ts-std/IOEither'
 import * as IOE from 'fp-ts/IOEither'
 import * as Str from 'fp-ts/string'
 
-assert.throws(() => unsafeExpectLeft(Str.Show)(IOE.right('foo')), /^"foo"$/)
+assert.throws(() => unsafeExpectLeft(Str.Show)(IOE.right('foo')), Error('Unwrapped `Right`', { cause: '"foo"' }))
 ```
 
 Added in v0.16.0

@@ -65,7 +65,7 @@ export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
  *
  * assert.rejects(
  *   unsafeExpect(Str.Show)(TE.left('foo')),
- *   /^"foo"$/,
+ *   Error('Unwrapped `Left`', { cause: 'foo' }),
  * )
  *
  * @category 3 Functions
@@ -87,7 +87,7 @@ export const unsafeExpect = <E>(
  *
  * assert.rejects(
  *   unsafeExpectLeft(Str.Show)(TE.right('foo')),
- *   /^"foo"$/,
+ *   Error('Unwrapped `Right`', { cause: '"foo"' }),
  * )
  *
  * @category 3 Functions

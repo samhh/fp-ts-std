@@ -14,6 +14,18 @@ import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
 import * as Str from "../src/String"
 
+const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
+  /* eslint-disable */
+  try {
+    await f
+    throw "didn't throw"
+  } catch (e) {
+    if (!(e instanceof Error)) throw "threw unexpected type"
+    return [e.message, e.cause]
+  }
+  /* eslint-enable */
+}
+
 describe("ReaderTaskEither", () => {
   describe("unsafeUnwrap", () => {
     const f = unsafeUnwrap
@@ -22,8 +34,11 @@ describe("ReaderTaskEither", () => {
       return expect(f(RTE.right(123))({})).resolves.toBe(123)
     })
 
-    it("rejects Left", () => {
-      return expect(f(RTE.left("l"))({})).rejects.toBe("l")
+    it("rejects Left", async () => {
+      const [m, c] = await msgAndCause(f(RTE.left("l"))({}))
+
+      expect(m).toBe("Unwrapped `Left`")
+      expect(c).toBe("l")
     })
   })
 
@@ -34,8 +49,11 @@ describe("ReaderTaskEither", () => {
       return expect(f(RTE.left(123))({})).resolves.toBe(123)
     })
 
-    it("rejects Right", () => {
-      return expect(f(RTE.right("r"))({})).rejects.toBe("r")
+    it("rejects Right", async () => {
+      const [m, c] = await msgAndCause(f(RTE.right("r"))({}))
+
+      expect(m).toBe("Unwrapped `Right`")
+      expect(c).toBe("r")
     })
   })
 

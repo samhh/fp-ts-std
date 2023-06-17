@@ -41,7 +41,7 @@ export const unsafeUnwrap: <A>(x: IOOption<A>) => A = flow(
  *
  * assert.throws(
  *   () => unsafeExpect('foo')(IOO.none),
- *   /^foo$/,
+ *   Error('Unwrapped `None`', { cause: 'foo' }),
  * )
  *
  * @category 3 Functions

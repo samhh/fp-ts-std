@@ -16,6 +16,7 @@ This project adheres to semantic versioning.
 - Add `getEq`, `getOrd`, and `getBounded` to `Tuple`.
 - Add `clone` to `URL`.
 - Add `toRecord`, `toString`, and `toTuples` to `URLSearchParams`.
+- Unsafe unwrapping and expectation functions now wrap all thrown values in an `Error` object, providing a stack trace.
 - Return a cleanup function in `addEventListener`, and add `addEventListener_`. Narrow the event type/target of each.
 - Remove index module. It's unfriendly to tree-shaking and less flexible than the [facades pattern](https://samhh.github.io/fp-ts-std/facades.html).
 - Remove `mapBoth` from `IOEither` and `TaskEither` as they're superceded by [fp-ts/IOEither::mapBoth](https://gcanti.github.io/fp-ts/modules/IOEither.ts.html#mapboth) and [fp-ts/TaskEither::mapBoth](https://gcanti.github.io/fp-ts/modules/TaskEither.ts.html#mapboth) respectively.

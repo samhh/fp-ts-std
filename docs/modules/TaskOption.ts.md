@@ -73,7 +73,7 @@ export declare const unsafeExpect: (msg: string) => <A>(x: TO.TaskOption<A>) => 
 import { unsafeExpect } from 'fp-ts-std/TaskOption'
 import * as TO from 'fp-ts/TaskOption'
 
-assert.rejects(unsafeExpect('foo')(TO.none), /^foo$/)
+assert.rejects(unsafeExpect('foo')(TO.none), Error('Unwrapped `None`'))
 ```
 
 Added in v0.16.0

@@ -34,7 +34,7 @@ import { LT, GT } from "./Ordering"
  */
 export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
   // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-  if (E.isLeft(x)) throw x.left
+  if (E.isLeft(x)) throw Error("Unwrapped `Left`", { cause: x.left })
 
   return x.right
 }
@@ -54,7 +54,7 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
  */
 export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
   // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-  if (E.isRight(x)) throw x.right
+  if (E.isRight(x)) throw Error("Unwrapped `Right`", { cause: x.right })
 
   return x.left
 }
@@ -70,7 +70,7 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
  *
  * assert.throws(
  *   () => unsafeExpect(Str.Show)(E.left('foo')),
- *   /^"foo"$/,
+ *   Error('Unwrapped `Left`', { cause: '"foo"' }),
  * )
  *
  * @category 3 Functions
@@ -90,7 +90,7 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: Either<E, A>) => A) =>
  *
  * assert.throws(
  *   () => unsafeExpectLeft(Str.Show)(E.right('foo')),
- *   /^"foo"$/,
+ *   Error('Unwrapped `Right`', { cause: '"foo"' }),
  * )
  *
  * @category 3 Functions

@@ -28,7 +28,7 @@ import { increment, decrement } from "./Number"
  *
  * assert.throws(
  *   () => unsafeExpect('foo')(O.none),
- *   /^foo$/,
+ *   Error('Unwrapped `None`', { cause: 'foo' }),
  * )
  *
  * @category 3 Functions
@@ -38,7 +38,7 @@ export const unsafeExpect =
   (msg: string) =>
   <A>(x: Option<A>): A => {
     // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-    if (O.isNone(x)) throw msg
+    if (O.isNone(x)) throw Error("Unwrapped `None`", { cause: msg })
 
     return x.value
   }
@@ -55,9 +55,12 @@ export const unsafeExpect =
  * @category 3 Functions
  * @since 0.1.0
  */
-export const unsafeUnwrap: <A>(x: Option<A>) => A = unsafeExpect(
-  "Unsafe attempt to unwrap Option failed",
-)
+export const unsafeUnwrap = <A>(x: Option<A>): A => {
+  // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
+  if (O.isNone(x)) throw Error("Unwrapped `None`")
+
+  return x.value
+}
 
 /**
  * A thunked `None` constructor. Enables specifying the type of the `Option`
