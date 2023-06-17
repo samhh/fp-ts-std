@@ -5,7 +5,6 @@ This project adheres to semantic versioning.
 ## 0.17.0 (_Unreleased_)
 
 - Add `URLPath` module.
-- Add `Enum` module.
 - Add `Bounded` instance to `Boolean`.
 - Add `match2`, `getBounded`, and `getOrd` to `Either`.
 - Add `applyN` to `Function`.
@@ -27,6 +26,7 @@ This project adheres to semantic versioning.
 - Support TypeScript's `node16`/`nodenext` module resolutions.
 - Fix symbol property name of `JSONString` newtype.
 - Bump minimum supported fp-ts version to 2.16.0.
+- Add experimental `Enum` module.
 
 ## 0.16.0 (2023-04-10)
 

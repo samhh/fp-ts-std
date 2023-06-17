@@ -6,6 +6,8 @@ parent: Modules
 
 ## Enum overview
 
+**This module is experimental.**
+
 Not to be confused with TypeScript's enums, this module refers to
 enumeration, modelled similarly to PureScript's `BoundedEnum`.
 
