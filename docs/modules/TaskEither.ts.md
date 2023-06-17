@@ -15,6 +15,7 @@ Added in v0.12.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [2 Typeclass Methods](#2-typeclass-methods)
+  - [pass](#pass)
   - [sequenceArray\_](#sequencearray_)
   - [sequenceSeqArray\_](#sequenceseqarray_)
   - [traverseArray\_](#traversearray_)
@@ -28,6 +29,40 @@ Added in v0.12.0
 ---
 
 # 2 Typeclass Methods
+
+## pass
+
+Convenient alias for `TE.of(undefined)`.
+
+**Signature**
+
+```ts
+export declare const pass: TaskEither<unknown, void>
+```
+
+```hs
+pass :: TaskEither unknown void
+```
+
+**Example**
+
+```ts
+import { flow, pipe, constant } from 'fp-ts/function'
+import * as Fn from 'fp-ts-std/Function'
+import * as O from 'fp-ts/Option'
+import Option = O.Option
+import * as TE from 'fp-ts/TaskEither'
+import TaskEither = TE.TaskEither
+import { pass } from 'fp-ts-std/TaskEither'
+import { log } from 'fp-ts/Console'
+
+const mcount: Option<number> = O.some(123)
+const tryAsyncLog: <A>(x: A) => TaskEither<unknown, void> = flow(log, TE.fromIO)
+
+const logCount: TaskEither<unknown, void> = pipe(mcount, O.match(constant(pass), tryAsyncLog))
+```
+
+Added in v0.17.0
 
 ## sequenceArray\_
 

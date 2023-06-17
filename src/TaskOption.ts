@@ -4,7 +4,8 @@
  * @since 0.15.0
  */
 
-import { TaskOption } from "fp-ts/TaskOption"
+import * as TO from "fp-ts/TaskOption"
+import TaskOption = TO.TaskOption
 import * as T from "fp-ts/Task"
 import { execute as executeT } from "./Task"
 import {
@@ -12,6 +13,7 @@ import {
   unsafeExpect as unsafeExpectO,
 } from "./Option"
 import { flow } from "fp-ts/function"
+import { pass as _pass } from "./Applicative"
 
 /**
  * Unwrap the promise from within a `TaskOption`, rejecting if `None`.
@@ -52,3 +54,32 @@ export const unsafeExpect = (
   msg: string,
 ): (<A>(x: TaskOption<A>) => Promise<A>) =>
   flow(T.map(unsafeExpectO(msg)), executeT)
+
+/**
+ * Convenient alias for `TO.of(undefined)`.
+ *
+ * @example
+ * import { flow, pipe, constant } from 'fp-ts/function'
+ * import * as Fn from 'fp-ts-std/Function'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import * as TO from 'fp-ts/TaskOption'
+ * import TaskOption = TO.TaskOption
+ * import { pass } from 'fp-ts-std/TaskOption'
+ * import { log } from 'fp-ts/Console'
+ *
+ * const mcount: Option<number> = O.some(123)
+ * const tryAsyncLog: <A>(x: A) => TaskOption<void> = flow(log, TO.fromIO)
+ *
+ * const logCount: TaskOption<void> = pipe(
+ *   mcount,
+ *   O.match(
+ *     constant(pass),
+ *     tryAsyncLog,
+ *   ),
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const pass: TaskOption<void> = _pass(TO.ApplicativePar)

@@ -9,6 +9,7 @@ import {
   memoize,
   sequenceArray_,
   traverseArray_,
+  pass,
 } from "../src/IO"
 import { add } from "../src/Number"
 import fc from "fast-check"
@@ -242,5 +243,13 @@ describe("IO", () => {
       expect(n).toBe(10)
     })
     /* eslint-enable */
+  })
+
+  describe("pass", () => {
+    const f = pass
+
+    it("is equivalent to of(undefined)", () => {
+      expect(execute(f)).toBe(execute(IO.of(undefined)))
+    })
   })
 })

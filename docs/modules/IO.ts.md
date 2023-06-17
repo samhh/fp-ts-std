@@ -15,6 +15,7 @@ Added in v0.7.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [2 Typeclass Methods](#2-typeclass-methods)
+  - [pass](#pass)
   - [sequenceArray\_](#sequencearray_)
   - [traverseArray\_](#traversearray_)
   - [unless](#unless)
@@ -28,6 +29,37 @@ Added in v0.7.0
 ---
 
 # 2 Typeclass Methods
+
+## pass
+
+Convenient alias for `IO.of(undefined)`.
+
+**Signature**
+
+```ts
+export declare const pass: IO<void>
+```
+
+```hs
+pass :: IO void
+```
+
+**Example**
+
+```ts
+import { pipe, constant } from 'fp-ts/function'
+import * as O from 'fp-ts/Option'
+import Option = O.Option
+import { IO } from 'fp-ts/IO'
+import { pass } from 'fp-ts-std/IO'
+import { log } from 'fp-ts/Console'
+
+const mcount: Option<number> = O.some(123)
+
+const logCount: IO<void> = pipe(mcount, O.match(constant(pass), log))
+```
+
+Added in v0.17.0
 
 ## sequenceArray\_
 

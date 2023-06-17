@@ -15,6 +15,7 @@ Added in v0.15.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [2 Typeclass Methods](#2-typeclass-methods)
+  - [pass](#pass)
   - [sequenceArray\_](#sequencearray_)
   - [traverseArray\_](#traversearray_)
 - [3 Functions](#3-functions)
@@ -26,6 +27,40 @@ Added in v0.15.0
 ---
 
 # 2 Typeclass Methods
+
+## pass
+
+Convenient alias for `IOE.of(undefined)`.
+
+**Signature**
+
+```ts
+export declare const pass: IOEither<unknown, void>
+```
+
+```hs
+pass :: IOEither unknown void
+```
+
+**Example**
+
+```ts
+import { flow, pipe, constant } from 'fp-ts/function'
+import * as Fn from 'fp-ts-std/Function'
+import * as O from 'fp-ts/Option'
+import Option = O.Option
+import * as IOE from 'fp-ts/IOEither'
+import IOEither = IOE.IOEither
+import { pass } from 'fp-ts-std/IOEither'
+import { log } from 'fp-ts/Console'
+
+const mcount: Option<number> = O.some(123)
+const tryLog: <A>(x: A) => IOEither<unknown, void> = flow(log, IOE.fromIO)
+
+const logCount: IOEither<unknown, void> = pipe(mcount, O.match(constant(pass), tryLog))
+```
+
+Added in v0.17.0
 
 ## sequenceArray\_
 

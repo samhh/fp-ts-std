@@ -5,6 +5,7 @@ import {
   unsafeExpectLeft,
   sequenceArray_,
   traverseArray_,
+  pass,
 } from "../src/IOEither"
 import * as IOE from "fp-ts/IOEither"
 import * as IO from "../src/IO"
@@ -92,5 +93,13 @@ describe("IOEither", () => {
       expect(n).toBe(10)
     })
     /* eslint-enable */
+  })
+
+  describe("pass", () => {
+    const f = pass
+
+    it("is equivalent to of(undefined)", () => {
+      expect(unsafeUnwrap(f)).toBe(unsafeUnwrap(IOE.of(undefined)))
+    })
   })
 })

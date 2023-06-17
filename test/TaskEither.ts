@@ -6,6 +6,7 @@ import {
   sequenceSeqArray_,
   traverseArray_,
   traverseSeqArray_,
+  pass,
 } from "../src/TaskEither"
 import * as TE from "fp-ts/TaskEither"
 import * as T from "../src/Task"
@@ -126,5 +127,13 @@ describe("TaskEither", () => {
       expect(n).toBe(5)
     })
     /* eslint-enable */
+  })
+
+  describe("pass", () => {
+    const f = pass
+
+    it("is equivalent to of(undefined)", async () => {
+      expect(await unsafeUnwrap(f)).toBe(await unsafeUnwrap(TE.of(undefined)))
+    })
   })
 })

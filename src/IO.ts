@@ -7,7 +7,7 @@
 import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
-import { when as _when, unless as _unless } from "./Applicative"
+import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
 import { constVoid, flow } from "fp-ts/function"
 
 type IO<A> = IO.IO<A>
@@ -194,3 +194,29 @@ export const traverseArray_: <A, B>(
   f: (x: A) => IO<B>,
 ) => (xs: ReadonlyArray<A>) => IO<void> = f =>
   flow(IO.traverseArray(f), IO.map(constVoid))
+
+/**
+ * Convenient alias for `IO.of(undefined)`.
+ *
+ * @example
+ * import { pipe, constant } from 'fp-ts/function'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import { IO } from 'fp-ts/IO'
+ * import { pass } from 'fp-ts-std/IO'
+ * import { log } from 'fp-ts/Console'
+ *
+ * const mcount: Option<number> = O.some(123)
+ *
+ * const logCount: IO<void> = pipe(
+ *   mcount,
+ *   O.match(
+ *     constant(pass),
+ *     log,
+ *   ),
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const pass: IO<void> = _pass(IO.Applicative)

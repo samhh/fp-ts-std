@@ -9,7 +9,7 @@ type Task<A> = T.Task<A>
 import { IO } from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
-import { when as _when, unless as _unless } from "./Applicative"
+import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
 import { constVoid, flow } from "fp-ts/function"
 
 /**
@@ -195,3 +195,31 @@ export const traverseSeqArray_: <A, B>(
   f: (x: A) => Task<B>,
 ) => (xs: ReadonlyArray<A>) => Task<void> = f =>
   flow(T.traverseSeqArray(f), T.map(constVoid))
+
+/**
+ * Convenient alias for `T.of(undefined)`.
+ *
+ * @example
+ * import { flow, pipe, constant } from 'fp-ts/function'
+ * import * as T from 'fp-ts/Task'
+ * import Task = T.Task
+ * import { pass } from 'fp-ts-std/Task'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import { log } from 'fp-ts/Console'
+ *
+ * const mcount: Option<number> = O.some(123)
+ * const asyncLog: <A>(x: A) => Task<void> = flow(log, T.fromIO)
+ *
+ * const logCount: Task<void> = pipe(
+ *   mcount,
+ *   O.match(
+ *     constant(pass),
+ *     asyncLog,
+ *   ),
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const pass: Task<void> = _pass(T.ApplicativePar)

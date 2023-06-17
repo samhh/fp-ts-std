@@ -1,4 +1,4 @@
-import { unsafeUnwrap, unsafeExpect } from "../src/TaskOption"
+import { unsafeUnwrap, unsafeExpect, pass } from "../src/TaskOption"
 import * as TO from "fp-ts/TaskOption"
 
 describe("TaskOption", () => {
@@ -23,6 +23,14 @@ describe("TaskOption", () => {
 
     it("throws None with provided message", () => {
       return expect(() => f(TO.none)).rejects.toBe("foo")
+    })
+  })
+
+  describe("pass", () => {
+    const f = pass
+
+    it("is equivalent to of(undefined)", async () => {
+      expect(await unsafeUnwrap(f)).toBe(await unsafeUnwrap(TO.of(undefined)))
     })
   })
 })

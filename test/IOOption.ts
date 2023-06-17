@@ -1,4 +1,4 @@
-import { unsafeUnwrap, unsafeExpect } from "../src/IOOption"
+import { unsafeUnwrap, unsafeExpect, pass } from "../src/IOOption"
 import * as IOO from "fp-ts/IOOption"
 
 describe("IOEither", () => {
@@ -23,6 +23,14 @@ describe("IOEither", () => {
 
     it("throws None with provided message", () => {
       expect(() => f(IOO.none)).toThrow("foo")
+    })
+  })
+
+  describe("pass", () => {
+    const f = pass
+
+    it("is equivalent to of(undefined)", () => {
+      expect(unsafeUnwrap(f)).toBe(unsafeUnwrap(IOO.of(undefined)))
     })
   })
 })

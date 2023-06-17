@@ -14,6 +14,7 @@ import {
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
 import { Show } from "fp-ts/Show"
+import { pass as _pass } from "./Applicative"
 
 /**
  * Unwrap the value from within an `IOEither`, throwing with the inner value of
@@ -112,3 +113,32 @@ export const traverseArray_: <E, A, B>(
   f: (x: A) => IOEither<E, B>,
 ) => (xs: ReadonlyArray<A>) => IOEither<E, void> = f =>
   flow(IOE.traverseArray(f), IOE.map(constVoid))
+
+/**
+ * Convenient alias for `IOE.of(undefined)`.
+ *
+ * @example
+ * import { flow, pipe, constant } from 'fp-ts/function'
+ * import * as Fn from 'fp-ts-std/Function'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import * as IOE from 'fp-ts/IOEither'
+ * import IOEither = IOE.IOEither
+ * import { pass } from 'fp-ts-std/IOEither'
+ * import { log } from 'fp-ts/Console'
+ *
+ * const mcount: Option<number> = O.some(123)
+ * const tryLog: <A>(x: A) => IOEither<unknown, void> = flow(log, IOE.fromIO)
+ *
+ * const logCount: IOEither<unknown, void> = pipe(
+ *   mcount,
+ *   O.match(
+ *     constant(pass),
+ *     tryLog,
+ *   ),
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const pass: IOEither<unknown, void> = _pass(IOE.ApplicativePar)

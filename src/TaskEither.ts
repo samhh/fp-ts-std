@@ -14,6 +14,7 @@ import {
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
 import { Show } from "fp-ts/Show"
+import { pass as _pass } from "./Applicative"
 
 /**
  * Unwrap the promise from within a `TaskEither`, rejecting with the inner
@@ -139,3 +140,32 @@ export const traverseSeqArray_: <E, A, B>(
   f: (x: A) => TaskEither<E, B>,
 ) => (xs: ReadonlyArray<A>) => TaskEither<E, void> = f =>
   flow(TE.traverseSeqArray(f), TE.map(constVoid))
+
+/**
+ * Convenient alias for `TE.of(undefined)`.
+ *
+ * @example
+ * import { flow, pipe, constant } from 'fp-ts/function'
+ * import * as Fn from 'fp-ts-std/Function'
+ * import * as O from 'fp-ts/Option'
+ * import Option = O.Option
+ * import * as TE from 'fp-ts/TaskEither'
+ * import TaskEither = TE.TaskEither
+ * import { pass } from 'fp-ts-std/TaskEither'
+ * import { log } from 'fp-ts/Console'
+ *
+ * const mcount: Option<number> = O.some(123)
+ * const tryAsyncLog: <A>(x: A) => TaskEither<unknown, void> = flow(log, TE.fromIO)
+ *
+ * const logCount: TaskEither<unknown, void> = pipe(
+ *   mcount,
+ *   O.match(
+ *     constant(pass),
+ *     tryAsyncLog,
+ *   ),
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.17.0
+ */
+export const pass: TaskEither<unknown, void> = _pass(TE.ApplicativePar)

@@ -11,6 +11,7 @@ import {
   sequenceSeqArray_,
   traverseArray_,
   traverseSeqArray_,
+  pass,
 } from "../src/Task"
 import { constant, constVoid, identity, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
@@ -242,5 +243,13 @@ describe("Task", () => {
       expect(n).toBe(5)
     })
     /* eslint-enable */
+  })
+
+  describe("pass", () => {
+    const f = pass
+
+    it("is equivalent to of(undefined)", async () => {
+      expect(await execute(f)).toBe(await execute(T.of(undefined)))
+    })
   })
 })
