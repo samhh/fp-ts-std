@@ -32,7 +32,7 @@ import {
   apS as apS_,
 } from "fp-ts/Apply"
 import { Applicative2 } from "fp-ts/Applicative"
-import { bind as bind_, chainFirst as chainFirst_ } from "fp-ts/Chain"
+import { bind as bind_ } from "fp-ts/Chain"
 import { Monad2 } from "fp-ts/Monad"
 
 /**
