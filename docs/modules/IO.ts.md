@@ -19,6 +19,7 @@ Added in v0.7.0
   - [sequenceArray\_](#sequencearray_)
   - [traverseArray\_](#traversearray_)
   - [unless](#unless)
+  - [until](#until)
   - [when](#when)
 - [3 Functions](#3-functions)
   - [execute](#execute)
@@ -125,6 +126,37 @@ pipe(
 ```
 
 Added in v0.12.0
+
+## until
+
+Repeatedly execute a synchronous effect until the result satisfies the predicate.
+
+**Signature**
+
+```ts
+export declare const until: <A>(p: Predicate<A>) => Endomorphism<IO<A>>
+```
+
+```hs
+until :: Predicate a -> Endomorphism (IO a)
+```
+
+**Example**
+
+```ts
+import { until, execute } from 'fp-ts-std/IO'
+import { IO } from 'fp-ts/IO'
+import { Predicate } from 'fp-ts/Predicate'
+import * as Rand from 'fp-ts/Random'
+
+const isValid: Predicate<number> = (n) => n > 0.5
+
+const genValid: IO<number> = until(isValid)(Rand.random)
+
+assert.strictEqual(isValid(execute(genValid)), true)
+```
+
+Added in v0.18.0
 
 ## when
 

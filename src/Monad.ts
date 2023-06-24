@@ -27,6 +27,7 @@ import {
 import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 import { invert } from "./Boolean"
+import { Predicate } from "fp-ts/Predicate"
 
 /**
  * Monadic if/then/else. Only executes the relevant action.
@@ -452,4 +453,55 @@ export function unlessM<F>(
   M: Monad<F>,
 ): (b: HKT<F, boolean>) => (x: HKT<F, void>) => HKT<F, void> {
   return b => x => M.chain(b, bb => (bb ? M.of(undefined) : x))
+}
+
+/**
+ * Repeatedly execute an action until the result satisfies the predicate.
+ *
+ * @example
+ * import { until } from 'fp-ts-std/Monad'
+ * import * as IO from 'fp-ts/IO'
+ * import { execute } from 'fp-ts-std/IO'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import * as Rand from 'fp-ts/Random'
+ *
+ * const isValid: Predicate<number> = n => n > 0.5
+ *
+ * const genValid: IO.IO<number> = until(IO.Monad)(isValid)(Rand.random)
+ *
+ * assert.strictEqual(
+ *   isValid(execute(genValid)),
+ *   true,
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.18.0
+ */
+export function until<F extends URIS4>(
+  M: Monad4<F>,
+): <S, R, E, A>(
+  p: Predicate<A>,
+) => (x: Kind4<F, S, R, E, A>) => Kind4<F, S, R, E, A>
+export function until<F extends URIS3>(
+  M: Monad3<F>,
+): <R, E, A>(p: Predicate<A>) => (x: Kind3<F, R, E, A>) => Kind3<F, R, E, A>
+export function until<F extends URIS3, E>(
+  M: Monad3C<F, E>,
+): <R, A>(p: Predicate<A>) => (x: Kind3<F, R, E, A>) => Kind3<F, R, E, A>
+export function until<F extends URIS2>(
+  M: Monad2<F>,
+): <E, A>(p: Predicate<A>) => (x: Kind2<F, E, A>) => Kind2<F, E, A>
+export function until<F extends URIS2, E>(
+  M: Monad2C<F, E>,
+): <A>(p: Predicate<A>) => (x: Kind2<F, E, A>) => Kind2<F, E, A>
+export function until<F extends URIS>(
+  M: Monad1<F>,
+): <A>(p: Predicate<A>) => (x: Kind<F, A>) => Kind<F, A>
+export function until<F>(M: Monad<F>) {
+  return <A>(p: Predicate<A>) =>
+    (x: HKT<F, A>): HKT<F, A> => {
+      const go: HKT<F, A> = M.chain(x, y => (p(y) ? M.of<A>(y) : go))
+
+      return go
+    }
 }

@@ -10,6 +10,7 @@ import {
   sequenceArray_,
   traverseArray_,
   pass,
+  until,
 } from "../src/IO"
 import { add } from "../src/Number"
 import fc from "fast-check"
@@ -250,6 +251,23 @@ describe("IO", () => {
 
     it("is equivalent to of(undefined)", () => {
       expect(execute(f)).toBe(execute(IO.of(undefined)))
+    })
+  })
+
+  describe("until", () => {
+    const f = until<number>
+
+    it("executes until predicate passes", () => {
+      // eslint-disable-next-line functional/no-let
+      let n = 0
+
+      const g: IO<number> = () => ++n
+
+      expect(execute(f(n => n === 2)(g))).toBe(2)
+      expect(n).toBe(2)
+
+      expect(execute(f(n => n === 6)(pipe(g, IO.map(add(2)))))).toBe(6)
+      expect(n).toBe(4)
     })
   })
 })

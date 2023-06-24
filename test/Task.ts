@@ -12,10 +12,13 @@ import {
   traverseArray_,
   traverseSeqArray_,
   pass,
+  until,
 } from "../src/Task"
 import { constant, constVoid, identity, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
+import Task = T.Task
 import { mkMilliseconds, unMilliseconds } from "../src/Date"
+import { add } from "../src/Number"
 
 const flushPromises = (): Promise<void> =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
@@ -250,6 +253,23 @@ describe("Task", () => {
 
     it("is equivalent to of(undefined)", async () => {
       expect(await execute(f)).toBe(await execute(T.of(undefined)))
+    })
+  })
+
+  describe("until", () => {
+    const f = until<number>
+
+    it("executes until predicate passes", async () => {
+      // eslint-disable-next-line functional/no-let
+      let n = 0
+
+      const g: Task<number> = () => Promise.resolve(++n)
+
+      expect(await execute(f(n => n === 2)(g))).toBe(2)
+      expect(n).toBe(2)
+
+      expect(await execute(f(n => n === 6)(pipe(g, T.map(add(2)))))).toBe(6)
+      expect(n).toBe(4)
     })
   })
 })

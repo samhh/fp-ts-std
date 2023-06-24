@@ -21,6 +21,7 @@ Added in v0.1.0
   - [traverseArray\_](#traversearray_)
   - [traverseSeqArray\_](#traverseseqarray_)
   - [unless](#unless)
+  - [until](#until)
   - [when](#when)
 - [3 Functions](#3-functions)
   - [elapsed](#elapsed)
@@ -162,6 +163,42 @@ pipe(
 ```
 
 Added in v0.12.0
+
+## until
+
+Repeatedly execute an asynchronous effect until the result satisfies the predicate.
+
+**Signature**
+
+```ts
+export declare const until: <A>(p: Predicate<A>) => Endomorphism<Task<A>>
+```
+
+```hs
+until :: Predicate a -> Endomorphism (Task a)
+```
+
+**Example**
+
+```ts
+import { until, execute } from 'fp-ts-std/Task'
+import * as T from 'fp-ts/Task'
+import Task = T.Task
+import { Predicate } from 'fp-ts/Predicate'
+import * as Rand from 'fp-ts/Random'
+
+const isValid: Predicate<number> = (n) => n > 0.5
+
+const genValidAsync: Task<number> = until(isValid)(T.fromIO(Rand.random))
+
+async function test() {
+  assert.strictEqual(isValid(await execute(genValidAsync)), true)
+}
+
+test()
+```
+
+Added in v0.18.0
 
 ## when
 

@@ -22,6 +22,7 @@ Added in v0.15.0
   - [nonePassM](#nonepassm)
   - [orM](#orm)
   - [unlessM](#unlessm)
+  - [until](#until)
   - [whenM](#whenm)
 
 ---
@@ -395,6 +396,58 @@ pipe(
 ```
 
 Added in v0.16.0
+
+## until
+
+Repeatedly execute an action until the result satisfies the predicate.
+
+**Signature**
+
+```ts
+export declare function until<F extends URIS4>(
+  M: Monad4<F>
+): <S, R, E, A>(p: Predicate<A>) => (x: Kind4<F, S, R, E, A>) => Kind4<F, S, R, E, A>
+export declare function until<F extends URIS3>(
+  M: Monad3<F>
+): <R, E, A>(p: Predicate<A>) => (x: Kind3<F, R, E, A>) => Kind3<F, R, E, A>
+export declare function until<F extends URIS3, E>(
+  M: Monad3C<F, E>
+): <R, A>(p: Predicate<A>) => (x: Kind3<F, R, E, A>) => Kind3<F, R, E, A>
+export declare function until<F extends URIS2>(
+  M: Monad2<F>
+): <E, A>(p: Predicate<A>) => (x: Kind2<F, E, A>) => Kind2<F, E, A>
+export declare function until<F extends URIS2, E>(
+  M: Monad2C<F, E>
+): <A>(p: Predicate<A>) => (x: Kind2<F, E, A>) => Kind2<F, E, A>
+export declare function until<F extends URIS>(M: Monad1<F>): <A>(p: Predicate<A>) => (x: Kind<F, A>) => Kind<F, A>
+```
+
+```hs
+until :: f extends URIS4 => Monad4 f -> Predicate a -> Kind4 f s r e a -> Kind4 f s r e a
+until :: f extends URIS3 => ((Monad3 f) -> Predicate a -> Kind3 f r e a -> Kind3 f r e a)
+until :: f extends URIS3 => ((Monad3C f e) -> Predicate a -> Kind3 f r e a -> Kind3 f r e a)
+until :: f extends URIS2 => ((Monad2 f) -> Predicate a -> Kind2 f e a -> Kind2 f e a)
+until :: f extends URIS2 => ((Monad2C f e) -> Predicate a -> Kind2 f e a -> Kind2 f e a)
+until :: f extends URIS => ((Monad1 f) -> Predicate a -> Kind f a -> Kind f a)
+```
+
+**Example**
+
+```ts
+import { until } from 'fp-ts-std/Monad'
+import * as IO from 'fp-ts/IO'
+import { execute } from 'fp-ts-std/IO'
+import { Predicate } from 'fp-ts/Predicate'
+import * as Rand from 'fp-ts/Random'
+
+const isValid: Predicate<number> = (n) => n > 0.5
+
+const genValid: IO.IO<number> = until(IO.Monad)(isValid)(Rand.random)
+
+assert.strictEqual(isValid(execute(genValid)), true)
+```
+
+Added in v0.18.0
 
 ## whenM
 

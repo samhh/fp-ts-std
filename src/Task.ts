@@ -10,7 +10,9 @@ import { IO } from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
 import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
+import { until as _until } from "./Monad"
 import { constVoid, flow } from "fp-ts/function"
+import { Predicate } from "fp-ts/Predicate"
 
 /**
  * Wait for the specified number of milliseconds before resolving.
@@ -223,3 +225,33 @@ export const traverseSeqArray_: <A, B>(
  * @since 0.17.0
  */
 export const pass: Task<void> = _pass(T.ApplicativePar)
+
+/**
+ * Repeatedly execute an asynchronous effect until the result satisfies the predicate.
+ *
+ * @example
+ * import { until, execute } from 'fp-ts-std/Task'
+ * import * as T from 'fp-ts/Task'
+ * import Task = T.Task
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import * as Rand from 'fp-ts/Random'
+ *
+ * const isValid: Predicate<number> = n => n > 0.5
+ *
+ * const genValidAsync: Task<number> = until(isValid)(T.fromIO(Rand.random))
+ *
+ * async function test() {
+ *   assert.strictEqual(
+ *     isValid(await execute(genValidAsync)),
+ *     true,
+ *   )
+ * }
+ *
+ * test()
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.18.0
+ */
+export const until: <A>(p: Predicate<A>) => Endomorphism<Task<A>> = _until(
+  T.Monad,
+)

@@ -8,6 +8,7 @@ import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
 import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
+import { until as _until } from "./Monad"
 import { constVoid, flow } from "fp-ts/function"
 
 type IO<A> = IO.IO<A>
@@ -220,3 +221,28 @@ export const traverseArray_: <A, B>(
  * @since 0.17.0
  */
 export const pass: IO<void> = _pass(IO.Applicative)
+
+/**
+ * Repeatedly execute a synchronous effect until the result satisfies the predicate.
+ *
+ * @example
+ * import { until, execute } from 'fp-ts-std/IO'
+ * import { IO } from 'fp-ts/IO'
+ * import { Predicate } from 'fp-ts/Predicate'
+ * import * as Rand from 'fp-ts/Random'
+ *
+ * const isValid: Predicate<number> = n => n > 0.5
+ *
+ * const genValid: IO<number> = until(isValid)(Rand.random)
+ *
+ * assert.strictEqual(
+ *   isValid(execute(genValid)),
+ *   true,
+ * )
+ *
+ * @category 2 Typeclass Methods
+ * @since 0.18.0
+ */
+export const until: <A>(p: Predicate<A>) => Endomorphism<IO<A>> = _until(
+  IO.Monad,
+)

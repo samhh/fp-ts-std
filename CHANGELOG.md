@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.18.0 (_Unreleased_)
+
+- Add `until` to `Monad`, `IO`, and `Task`.
+
 ## 0.17.1 (2023-06-17)
 
 - Fix widening of additional type arguments in `pass`.
