@@ -26,13 +26,6 @@
       "import": "./dist/esm/*.js"
     }
   },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/types/*"
-      ]
-    }
-  },
   "files": [
     "dist/"
   ],

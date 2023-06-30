@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.18.0 (_Unreleased_)
 
 - Add `until` to `Monad`, `IO`, and `Task`.
+- Improve ESM support.
 
 ## 0.17.1 (2023-06-17)
 
