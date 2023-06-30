@@ -18,6 +18,7 @@
   "engines": {
     "node": ">=18"
   },
+  "type": "module",
   "exports": {
     "./*": {
       "types": "./dist/types/*.d.ts",

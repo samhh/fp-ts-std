@@ -1,4 +1,4 @@
-module.exports = {
+const cfg = {
   testRegex: "/test/",
   collectCoverage: true,
   collectCoverageFrom: ["./src/**/*"],
@@ -16,3 +16,5 @@ module.exports = {
     "\\.ts$": ["@swc/jest"],
   },
 }
+
+export default cfg
