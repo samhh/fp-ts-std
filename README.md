@@ -10,7 +10,7 @@ The library is available on the npm registry under the same package name: [fp-ts
 
 fp-ts, [newtype-ts](https://gcanti.github.io/newtype-ts/), and [monocle-ts](https://gcanti.github.io/monocle-ts/) are listed as peer dependencies.
 
-fp-ts-std is published with both ESM and CJS modules. The import paths in either case needn't change and the appropriate module resolution should be picked up by Node and your bundler, however if your environment doesn't support [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) you'll need to import directly from a `dist/(cjs|esm)/` subdirectory. Given ESM modules the library should tree shake well.
+fp-ts-std is published with both ESM and CJS modules. The import paths in either case needn't change and the appropriate module resolution should be picked up by Node and your bundler, however if your environment doesn't support [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) you'll need to import directly from a `dist/(cjs|esm)/` subdirectory. Given ESM the library should tree shake well.
 
 Node LTS - at time of writing v18 - and the latest evergreen browsers are supported.
 
