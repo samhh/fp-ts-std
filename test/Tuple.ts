@@ -12,16 +12,16 @@ import {
   getEq,
   getOrd,
   getEnum,
-} from "../src/Tuple"
-import { increment } from "../src/Number"
+} from "../src/Tuple.js"
+import { increment } from "../src/Number.js"
 import { constant, flow, identity, pipe } from "fp-ts/function"
 import { bimap, swap } from "fp-ts/Tuple"
 import * as O from "fp-ts/Option"
 import fc from "fast-check"
 import * as Str from "fp-ts/string"
-import { LT, EQ, GT } from "../src/Ordering"
-import { Enum as EnumBool } from "../src/Boolean"
-import { universe } from "../src/Enum"
+import { LT, EQ, GT } from "../src/Ordering.js"
+import { Enum as EnumBool } from "../src/Boolean.js"
+import { universe } from "../src/Enum.js"
 
 const nonMaxNumber = fc.integer({ max: Number.MAX_SAFE_INTEGER - 1 })
 

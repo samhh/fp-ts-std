@@ -9,11 +9,11 @@ import * as TE from "fp-ts/TaskEither"
 import { TaskEither } from "fp-ts/TaskEither"
 import { Task } from "fp-ts/Task"
 import { Either } from "fp-ts/Either"
-import { runReader } from "./Reader"
+import { runReader } from "./Reader.js"
 import {
   unsafeUnwrap as unsafeUnwrapTE,
   unsafeUnwrapLeft as unsafeUnwrapLeftTE,
-} from "./TaskEither"
+} from "./TaskEither.js"
 
 /**
  * Runs a ReaderTaskEither and extracts the final TaskEither from it.

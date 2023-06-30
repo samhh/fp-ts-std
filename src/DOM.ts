@@ -14,7 +14,7 @@ import { IOOption } from "fp-ts/IOOption"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import { constVoid, flow, pipe } from "fp-ts/function"
-import { invoke } from "./Function"
+import { invoke } from "./Function.js"
 /**
  * Convert a `NodeList` into an `Array`.
  *

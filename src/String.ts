@@ -17,10 +17,10 @@ import {
   join,
   dropRightWhile as dropRightWhileRA,
   takeRightWhile as takeRightWhileRA,
-} from "./ReadonlyArray"
+} from "./ReadonlyArray.js"
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
-import { invoke, when } from "./Function"
+import { invoke, when } from "./Function.js"
 
 /**
  * Convert a number to a string.

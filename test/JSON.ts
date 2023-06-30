@@ -6,7 +6,7 @@ import {
   parse,
   parseO,
   JSONString,
-} from "../src/JSON"
+} from "../src/JSON.js"
 import fc from "fast-check"
 import { constant, constTrue, flow, identity } from "fp-ts/function"
 import * as E from "fp-ts/Either"

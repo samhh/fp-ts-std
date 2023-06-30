@@ -10,15 +10,15 @@ import {
   addEventListener_,
   getTextContent,
   setTextContent,
-} from "../src/DOM"
+} from "../src/DOM.js"
 import * as IO from "fp-ts/IO"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as A from "fp-ts/Array"
 import { JSDOM } from "jsdom"
 import { constVoid, constant, pipe } from "fp-ts/function"
-import { unsafeUnwrap } from "../src/Option"
-import { execute as IOexecute } from "../src/IO"
+import { unsafeUnwrap } from "../src/Option.js"
+import { execute as IOexecute } from "../src/IO.js"
 
 describe("DOM", () => {
   describe("fromNodeList", () => {

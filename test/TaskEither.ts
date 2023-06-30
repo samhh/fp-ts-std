@@ -7,12 +7,12 @@ import {
   traverseArray_,
   traverseSeqArray_,
   pass,
-} from "../src/TaskEither"
+} from "../src/TaskEither.js"
 import * as TE from "fp-ts/TaskEither"
-import * as T from "../src/Task"
+import * as T from "../src/Task.js"
 import { constVoid, identity, pipe } from "fp-ts/function"
 import { Show as StrShow } from "fp-ts/string"
-import { mkMilliseconds } from "../src/Date"
+import { mkMilliseconds } from "../src/Date.js"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
   /* eslint-disable */

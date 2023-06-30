@@ -8,8 +8,8 @@
 import { pipe } from "fp-ts/function"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
-import { fanout } from "./Tuple"
-import { uncurry2 } from "./Function"
+import { fanout } from "./Tuple.js"
+import { uncurry2 } from "./Function.js"
 
 /**
  * Merge two readonly structs together. For merging many identical structs,

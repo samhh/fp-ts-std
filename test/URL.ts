@@ -1,4 +1,4 @@
-import { clone, unsafeParse, parse, parseO, isURL } from "../src/URL"
+import { clone, unsafeParse, parse, parseO, isURL } from "../src/URL.js"
 import fc from "fast-check"
 import { constant } from "fp-ts/function"
 import * as E from "fp-ts/Either"

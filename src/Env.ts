@@ -9,7 +9,7 @@ import { pipe, flow } from "fp-ts/function"
 import * as O from "fp-ts/Option"
 import * as IOO from "fp-ts/IOOption"
 import IOOption = IOO.IOOption
-import * as NES from "./NonEmptyString"
+import * as NES from "./NonEmptyString.js"
 import NonEmptyString = NES.NonEmptyString
 
 /**

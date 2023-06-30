@@ -10,14 +10,14 @@ import { Eq } from "fp-ts/Eq"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { constant, flow, pipe } from "fp-ts/function"
 import * as B from "fp-ts/boolean"
-import { invert as invertBool } from "./Boolean"
-import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative"
-import { toMonoid as _toMonoid } from "./Monoid"
-import * as L from "./Lazy"
+import { invert as invertBool } from "./Boolean.js"
+import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative.js"
+import { toMonoid as _toMonoid } from "./Monoid.js"
+import * as L from "./Lazy.js"
 import Lazy = L.Lazy
 import { Bounded } from "fp-ts/Bounded"
-import { Enum } from "./Enum"
-import { increment, decrement } from "./Number"
+import { Enum } from "./Enum.js"
+import { increment, decrement } from "./Number.js"
 
 /**
  * Unwrap the value from within an `Option`, throwing `msg` if `None`.

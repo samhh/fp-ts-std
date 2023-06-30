@@ -1,6 +1,6 @@
-import { unsafeUnwrap, unsafeExpect, pass } from "../src/IOOption"
+import { unsafeUnwrap, unsafeExpect, pass } from "../src/IOOption.js"
 import * as IOO from "fp-ts/IOOption"
-import { Lazy } from "../src/Lazy"
+import { Lazy } from "../src/Lazy.js"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
   /* eslint-disable */

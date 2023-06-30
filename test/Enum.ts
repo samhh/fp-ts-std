@@ -10,23 +10,23 @@ import {
   universe,
   inverseMap,
   getUnsafeConstantEnum,
-} from "../src/Enum"
+} from "../src/Enum.js"
 import fc from "fast-check"
 import { constant } from "fp-ts/function"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
-import { EnumInt } from "../src/Number"
+import { EnumInt } from "../src/Number.js"
 import { Show as ShowBool, Ord as OrdBool } from "fp-ts/boolean"
-import { Enum as EnumBool } from "../src/Boolean"
-import { curry2 } from "../src/Function"
+import { Enum as EnumBool } from "../src/Boolean.js"
+import { curry2 } from "../src/Function.js"
 import { Bounded } from "fp-ts/Bounded"
-import { EQ } from "../src/Ordering"
+import { EQ } from "../src/Ordering.js"
 import * as Ord from "fp-ts/Ord"
 import * as Num from "fp-ts/number"
 import * as Str from "fp-ts/string"
-import * as L from "../src/Lazy"
-import { Lazy } from "../src/Lazy"
+import * as L from "../src/Lazy.js"
+import { Lazy } from "../src/Lazy.js"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
   /* eslint-disable */

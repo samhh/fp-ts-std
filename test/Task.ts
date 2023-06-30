@@ -13,12 +13,12 @@ import {
   traverseSeqArray_,
   pass,
   until,
-} from "../src/Task"
+} from "../src/Task.js"
 import { constant, constVoid, identity, pipe } from "fp-ts/function"
 import * as T from "fp-ts/Task"
 import Task = T.Task
-import { mkMilliseconds, unMilliseconds } from "../src/Date"
-import { add } from "../src/Number"
+import { mkMilliseconds, unMilliseconds } from "../src/Date.js"
+import { add } from "../src/Number.js"
 
 const flushPromises = (): Promise<void> =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access

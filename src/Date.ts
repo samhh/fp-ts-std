@@ -8,15 +8,15 @@ import { Newtype, iso, getField, getOrd } from "newtype-ts"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { Predicate } from "fp-ts/Predicate"
-import { isValid as isValidNum } from "./Number"
+import { isValid as isValidNum } from "./Number.js"
 import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/number"
 import { now as nownum } from "fp-ts/Date"
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { construct, invokeOn, isInstanceOf } from "./Function"
-import { pack, unpack } from "./Newtype"
+import { construct, invokeOn, isInstanceOf } from "./Function.js"
+import { pack, unpack } from "./Newtype.js"
 
 /**
  * Parse a date, leaving open the risk of a failure to parse resulting in an

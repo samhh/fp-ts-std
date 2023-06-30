@@ -1,9 +1,9 @@
-import { runReaderIO, asksIO } from "../src/ReaderIO"
+import { runReaderIO, asksIO } from "../src/ReaderIO.js"
 import * as RIO from "fp-ts/ReaderIO"
 import * as IO from "fp-ts/IO"
 import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 
 describe("ReaderIO", () => {
   describe("runReaderIO", () => {

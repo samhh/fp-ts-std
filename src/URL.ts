@@ -10,7 +10,7 @@ import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { flow, identity, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { construct, isInstanceOf } from "./Function"
+import { construct, isInstanceOf } from "./Function.js"
 import { Endomorphism } from "fp-ts/Endomorphism"
 
 /**

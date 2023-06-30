@@ -22,7 +22,7 @@ import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
 import { concatAll } from "fp-ts/Monoid"
 import { max, min } from "fp-ts/Semigroup"
-import { invoke } from "./Function"
+import { invoke } from "./Function.js"
 import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 import {

@@ -7,7 +7,7 @@ import {
   merge,
   withDefaults,
   renameKey,
-} from "../src/ReadonlyStruct"
+} from "../src/ReadonlyStruct.js"
 import { pipe } from "fp-ts/function"
 
 describe("ReadonlyStruct", () => {

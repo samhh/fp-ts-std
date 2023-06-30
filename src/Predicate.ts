@@ -8,7 +8,7 @@
 import { Predicate } from "fp-ts/Predicate"
 import * as Pred from "fp-ts/Predicate"
 import { flow } from "fp-ts/function"
-import { invert } from "./Boolean"
+import { invert } from "./Boolean.js"
 import { concatAll } from "fp-ts/Monoid"
 
 /**

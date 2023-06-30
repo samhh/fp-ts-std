@@ -5,14 +5,14 @@ import {
   asksEither,
   asksTask,
   asksTaskEither,
-} from "../src/ReaderTaskEither"
+} from "../src/ReaderTaskEither.js"
 import * as RTE from "fp-ts/ReaderTaskEither"
 import * as T from "fp-ts/Task"
 import * as TE from "fp-ts/TaskEither"
 import * as E from "fp-ts/Either"
 import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
   /* eslint-disable */

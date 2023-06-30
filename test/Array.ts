@@ -39,7 +39,7 @@ import {
   allM,
   anyM,
   separateNE,
-} from "../src/Array"
+} from "../src/Array.js"
 import * as O from "fp-ts/Option"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as A from "fp-ts/Array"
@@ -60,9 +60,9 @@ import { concatAll } from "fp-ts/Monoid"
 import { split } from "fp-ts/string"
 import * as NEA from "fp-ts/NonEmptyArray"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import { values } from "../src/Record"
+import { values } from "../src/Record.js"
 import * as R from "fp-ts/Record"
-import { add, decrement } from "../src/Number"
+import { add, decrement } from "../src/Number.js"
 import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"
 import { fst, snd } from "fp-ts/Tuple"

@@ -24,7 +24,7 @@ import {
   Alternative3C,
   Alternative4,
 } from "fp-ts/Alternative"
-import { Lazy } from "./Lazy"
+import { Lazy } from "./Lazy.js"
 import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 

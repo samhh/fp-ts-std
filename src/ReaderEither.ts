@@ -5,7 +5,7 @@
  */
 import { ReaderEither } from "fp-ts/ReaderEither"
 import { Either } from "fp-ts/Either"
-import { runReader } from "./Reader"
+import { runReader } from "./Reader.js"
 import { identity } from "fp-ts/function"
 
 /**

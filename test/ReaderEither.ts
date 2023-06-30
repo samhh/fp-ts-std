@@ -1,9 +1,9 @@
-import { runReaderEither, asksEither } from "../src/ReaderEither"
+import { runReaderEither, asksEither } from "../src/ReaderEither.js"
 import * as RE from "fp-ts/ReaderEither"
 import * as E from "fp-ts/Either"
 import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 
 describe("ReaderEither", () => {
   describe("runReaderEither", () => {

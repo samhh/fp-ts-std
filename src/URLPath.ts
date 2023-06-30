@@ -14,9 +14,9 @@ import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import { constant, flow, identity, pipe } from "fp-ts/function"
-import { over, pack, unpack } from "./Newtype"
+import { over, pack, unpack } from "./Newtype.js"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { clone as cloneURL, isURL } from "./URL"
+import { clone as cloneURL, isURL } from "./URL.js"
 import { Refinement } from "fp-ts/Refinement"
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }

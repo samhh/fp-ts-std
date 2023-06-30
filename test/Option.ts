@@ -11,16 +11,16 @@ import {
   getBounded,
   getEnum,
   match2,
-} from "../src/Option"
+} from "../src/Option.js"
 import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
 import { constant, flow, identity, pipe } from "fp-ts/function"
-import { Lazy } from "../src/Lazy"
-import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
-import { universe } from "../src/Enum"
-import { curry2 } from "../src/Function"
+import { Lazy } from "../src/Lazy.js"
+import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean.js"
+import { universe } from "../src/Enum.js"
+import { curry2 } from "../src/Function.js"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
   /* eslint-disable */

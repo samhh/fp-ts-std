@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statements */
 
-import { trace, traceWithValue, traceShowWithValue } from "../src/Debug"
+import { trace, traceWithValue, traceShowWithValue } from "../src/Debug.js"
 import fc from "fast-check"
 import { constVoid } from "fp-ts/function"
 import * as Str from "fp-ts/string"

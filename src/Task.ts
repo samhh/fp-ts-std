@@ -8,9 +8,13 @@ import * as T from "fp-ts/Task"
 type Task<A> = T.Task<A>
 import { IO } from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
-import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
-import { until as _until } from "./Monad"
+import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date.js"
+import {
+  when as _when,
+  unless as _unless,
+  pass as _pass,
+} from "./Applicative.js"
+import { until as _until } from "./Monad.js"
 import { constVoid, flow } from "fp-ts/function"
 import { Predicate } from "fp-ts/Predicate"
 

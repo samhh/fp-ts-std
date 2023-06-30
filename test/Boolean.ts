@@ -1,4 +1,4 @@
-import { invert, and, or, xor, Bounded, Enum } from "../src/Boolean"
+import { invert, and, or, xor, Bounded, Enum } from "../src/Boolean.js"
 import { flow } from "fp-ts/function"
 import * as O from "fp-ts/Option"
 

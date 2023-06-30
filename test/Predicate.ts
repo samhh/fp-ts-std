@@ -1,5 +1,5 @@
 import { constFalse, constTrue } from "fp-ts/function"
-import { allPass, anyPass, nonePass } from "../src/Predicate"
+import { allPass, anyPass, nonePass } from "../src/Predicate.js"
 
 describe("Predicate", () => {
   describe("allPass", () => {

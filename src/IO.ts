@@ -7,8 +7,12 @@
 import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
-import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
-import { until as _until } from "./Monad"
+import {
+  when as _when,
+  unless as _unless,
+  pass as _pass,
+} from "./Applicative.js"
+import { until as _until } from "./Monad.js"
 import { constVoid, flow } from "fp-ts/function"
 
 type IO<A> = IO.IO<A>

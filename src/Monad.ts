@@ -26,7 +26,7 @@ import {
 } from "fp-ts/Monad"
 import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
-import { invert } from "./Boolean"
+import { invert } from "./Boolean.js"
 import { Predicate } from "fp-ts/Predicate"
 
 /**

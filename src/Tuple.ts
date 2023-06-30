@@ -24,18 +24,18 @@ import {
   Functor2C,
 } from "fp-ts/Functor"
 import * as Tuple from "fp-ts/Tuple"
-import { fork } from "./Function"
+import { fork } from "./Function.js"
 import { flow, identity, pipe } from "fp-ts/function"
-import { mapBoth as _mapBoth } from "./Bifunctor"
+import { mapBoth as _mapBoth } from "./Bifunctor.js"
 import { Eq, fromEquals } from "fp-ts/Eq"
 import { Ord, fromCompare } from "fp-ts/Ord"
-import { EQ } from "./Ordering"
+import { EQ } from "./Ordering.js"
 import { Bounded } from "fp-ts/Bounded"
-import { Enum } from "./Enum"
-import * as L from "./Lazy"
-import { isNonNegative, isValid, multiply } from "./Number"
+import { Enum } from "./Enum.js"
+import * as L from "./Lazy.js"
+import { isNonNegative, isValid, multiply } from "./Number.js"
 import * as O from "fp-ts/Option"
-import { allPass } from "./Predicate"
+import { allPass } from "./Predicate.js"
 
 /**
  * Duplicate a value into a tuple.

@@ -11,8 +11,8 @@ import {
   traverseArray_,
   pass,
   until,
-} from "../src/IO"
-import { add } from "../src/Number"
+} from "../src/IO.js"
+import { add } from "../src/Number.js"
 import fc from "fast-check"
 
 type IO<A> = IO.IO<A>

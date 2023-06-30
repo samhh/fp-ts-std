@@ -10,7 +10,7 @@
 import { flow } from "fp-ts/function"
 import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
 import * as O from "fp-ts/Option"
-import { unsafeExpect, unsafeUnwrap } from "./Option"
+import { unsafeExpect, unsafeUnwrap } from "./Option.js"
 import {
   Show as _Show,
   Eq as _Eq,
@@ -23,8 +23,8 @@ import {
   includes as _includes,
   split as _split,
 } from "fp-ts/string"
-import * as Str from "./String"
-import { pack, unpack, over } from "./Newtype"
+import * as Str from "./String.js"
+import { pack, unpack, over } from "./Newtype.js"
 import { Predicate, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import type { Show as TShow } from "fp-ts/Show"

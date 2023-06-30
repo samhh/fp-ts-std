@@ -1,6 +1,6 @@
-import { contramap, Contravariant } from "../src/Show"
+import { contramap, Contravariant } from "../src/Show.js"
 import { Show } from "fp-ts/Show"
-import { fromNumber } from "../src/String"
+import { fromNumber } from "../src/String.js"
 
 describe("Show", () => {
   describe("Contravariant", () => {

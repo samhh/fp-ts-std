@@ -1,4 +1,4 @@
-import * as F from "../src/Function"
+import * as F from "../src/Function.js"
 import {
   withIndex,
   unary,
@@ -30,13 +30,13 @@ import {
   applyEvery,
   applySomes,
   applyN,
-} from "../src/Function"
-import * as Fn from "../src/Function"
-import { fromNumber } from "../src/String"
+} from "../src/Function.js"
+import * as Fn from "../src/Function.js"
+import { fromNumber } from "../src/String.js"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
-import { add, multiply } from "../src/Number"
+import { add, multiply } from "../src/Number.js"
 import {
   apply,
   constant,
@@ -51,8 +51,8 @@ import {
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as N from "fp-ts/number"
 import fc from "fast-check"
-import * as S from "../src/String"
-import { join } from "../src/Array"
+import * as S from "../src/String.js"
+import { join } from "../src/Array.js"
 import * as laws from "fp-ts-laws"
 import * as Eq from "fp-ts/Eq"
 type Eq<A> = Eq.Eq<A>

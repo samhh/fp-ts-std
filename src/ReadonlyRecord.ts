@@ -12,7 +12,7 @@ import * as RR from "fp-ts/ReadonlyRecord"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as RT from "fp-ts/ReadonlyTuple"
 import { last } from "fp-ts/Semigroup"
-import { elemV } from "./ReadonlyArray"
+import { elemV } from "./ReadonlyArray.js"
 import * as Str from "fp-ts/string"
 
 /**

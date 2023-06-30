@@ -26,8 +26,8 @@ import {
 } from "fp-ts/HKT"
 import { Monoid } from "fp-ts/Monoid"
 import { flow, identity } from "fp-ts/function"
-import { invert } from "./Boolean"
-import { Lazy } from "./Lazy"
+import { invert } from "./Boolean.js"
+import { Lazy } from "./Lazy.js"
 
 /**
  * Extracts the value from within a foldable, falling back to the monoidal

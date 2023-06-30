@@ -9,10 +9,10 @@ type IO<A> = IO.IO<A>
 import { flow, pipe } from "fp-ts/function"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as RA from "fp-ts/ReadonlyArray"
-import { extractAt } from "./Array"
+import { extractAt } from "./Array.js"
 import * as Rand from "fp-ts/Random"
-import { decrement } from "./Number"
-import { unsafeUnwrap } from "./Option"
+import { decrement } from "./Number.js"
+import { unsafeUnwrap } from "./Option.js"
 
 /**
  * Like `fp-ts/Array::randomElem`, but returns the remainder of the array as

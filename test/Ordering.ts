@@ -1,4 +1,4 @@
-import { LT, EQ, GT } from "../src/Ordering"
+import { LT, EQ, GT } from "../src/Ordering.js"
 import * as Num from "fp-ts/number"
 
 describe("Ordering", () => {

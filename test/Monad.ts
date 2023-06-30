@@ -11,9 +11,9 @@ import {
   nonePassM,
   whenM,
   unlessM,
-} from "../src/Monad"
-import { when, unless } from "../src/Applicative"
-import { allPass, anyPass, nonePass } from "../src/Predicate"
+} from "../src/Monad.js"
+import { when, unless } from "../src/Applicative.js"
+import { allPass, anyPass, nonePass } from "../src/Predicate.js"
 
 type IO<A> = IO.IO<A>
 

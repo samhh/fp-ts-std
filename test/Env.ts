@@ -1,4 +1,4 @@
-import { getParam, getParamNonEmpty } from "../src/Env"
+import { getParam, getParamNonEmpty } from "../src/Env.js"
 import * as O from "fp-ts/Option"
 
 describe("Env", () => {

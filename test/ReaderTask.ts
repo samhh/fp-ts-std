@@ -1,9 +1,9 @@
-import { runReaderTask, asksTask } from "../src/ReaderTask"
+import { runReaderTask, asksTask } from "../src/ReaderTask.js"
 import * as RT from "fp-ts/ReaderTask"
 import * as T from "fp-ts/Task"
 import { flow, pipe } from "fp-ts/function"
 import fc from "fast-check"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 
 describe("ReaderTask", () => {
   describe("runReaderTask", () => {

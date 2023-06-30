@@ -1,7 +1,7 @@
-import { mapBoth } from "../src/Bifunctor"
+import { mapBoth } from "../src/Bifunctor.js"
 import * as Tuple from "fp-ts/Tuple"
 import * as E from "fp-ts/Either"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 import fc from "fast-check"
 import { identity } from "fp-ts/function"
 

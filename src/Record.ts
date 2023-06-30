@@ -12,7 +12,7 @@ import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
 import * as T from "fp-ts/Tuple"
 import { last } from "fp-ts/Semigroup"
-import { elemV } from "./Array"
+import { elemV } from "./Array.js"
 import * as Str from "fp-ts/string"
 
 /**

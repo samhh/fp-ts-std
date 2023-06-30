@@ -35,7 +35,7 @@ import {
   isSpace,
   words,
   unwords,
-} from "../src/String"
+} from "../src/String.js"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as RA from "fp-ts/ReadonlyArray"

@@ -7,13 +7,13 @@
 
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { SemigroupAll, SemigroupAny, Ord } from "fp-ts/boolean"
-import { curry2 } from "./Function"
+import { curry2 } from "./Function.js"
 import * as O from "fp-ts/Option"
 import * as Bounded_ from "fp-ts/Bounded"
 type Bounded<A> = Bounded_.Bounded<A>
-import * as Enum_ from "./Enum"
+import * as Enum_ from "./Enum.js"
 import Enum = Enum_.Enum
-import * as L from "./Lazy"
+import * as L from "./Lazy.js"
 
 /**
  * Invert a boolean.

@@ -1,4 +1,4 @@
-import { unsafeUnwrap, unsafeExpect, pass } from "../src/TaskOption"
+import { unsafeUnwrap, unsafeExpect, pass } from "../src/TaskOption.js"
 import * as TO from "fp-ts/TaskOption"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {

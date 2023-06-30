@@ -5,7 +5,7 @@
  */
 import { ReaderIO } from "fp-ts/ReaderIO"
 import { IO } from "fp-ts/IO"
-import { runReader } from "./Reader"
+import { runReader } from "./Reader.js"
 import { identity } from "fp-ts/function"
 
 /**

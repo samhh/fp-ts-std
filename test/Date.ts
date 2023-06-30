@@ -10,7 +10,7 @@ import {
   now,
   mkMilliseconds,
   unMilliseconds,
-} from "../src/Date"
+} from "../src/Date.js"
 import fc from "fast-check"
 import { not } from "fp-ts/Predicate"
 import * as O from "fp-ts/Option"

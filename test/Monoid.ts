@@ -1,10 +1,10 @@
-import { toMonoid, memptyWhen, memptyUnless } from "../src/Monoid"
+import { toMonoid, memptyWhen, memptyUnless } from "../src/Monoid.js"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 import * as S from "fp-ts/string"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
-import { Lazy } from "../src/Lazy"
+import { Lazy } from "../src/Lazy.js"
 
 describe("Monoid", () => {
   describe("toMonoid", () => {

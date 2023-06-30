@@ -1,4 +1,4 @@
-import { runReader } from "../src/Reader"
+import { runReader } from "../src/Reader.js"
 import * as R from "fp-ts/Reader"
 import { pipe } from "fp-ts/function"
 

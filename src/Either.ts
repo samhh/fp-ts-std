@@ -7,17 +7,17 @@
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { mapBoth as _mapBoth } from "./Bifunctor"
+import { mapBoth as _mapBoth } from "./Bifunctor.js"
 import { Show } from "fp-ts/Show"
 import { constant, flow, pipe } from "fp-ts/function"
-import * as L from "./Lazy"
+import * as L from "./Lazy.js"
 import { Ord } from "fp-ts/Ord"
 import { Bounded } from "fp-ts/Bounded"
-import { Enum } from "./Enum"
-import { add } from "./Number"
-import { curry2 } from "./Function"
+import { Enum } from "./Enum.js"
+import { add } from "./Number.js"
+import { curry2 } from "./Function.js"
 import { Ordering } from "fp-ts/Ordering"
-import { LT, GT } from "./Ordering"
+import { LT, GT } from "./Ordering.js"
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Left`

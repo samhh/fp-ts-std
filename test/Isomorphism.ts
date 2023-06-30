@@ -8,7 +8,7 @@ import {
   deriveSemigroup,
   deriveMonoid,
   compose,
-} from "../src/Isomorphism"
+} from "../src/Isomorphism.js"
 import { Iso } from "monocle-ts/Iso"
 import * as Eq from "fp-ts/Eq"
 import * as Bool from "fp-ts/boolean"

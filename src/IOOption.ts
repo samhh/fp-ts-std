@@ -7,13 +7,13 @@
 import * as IOO from "fp-ts/IOOption"
 import IOOption = IOO.IOOption
 import * as IO from "fp-ts/IO"
-import { execute as executeIO } from "./IO"
+import { execute as executeIO } from "./IO.js"
 import {
   unsafeUnwrap as unsafeUnwrapO,
   unsafeExpect as unsafeExpectO,
-} from "./Option"
+} from "./Option.js"
 import { flow } from "fp-ts/function"
-import { pass as _pass } from "./Applicative"
+import { pass as _pass } from "./Applicative.js"
 
 /**
  * Unwrap the value from within an `IOOption`, throwing if `None`.

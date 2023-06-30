@@ -17,18 +17,18 @@ import {
   getHash,
   modifyHash,
   setHash,
-} from "../src/URLPath"
+} from "../src/URLPath.js"
 import fc from "fast-check"
 import { constant, flow, identity, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { unpack } from "../src/Newtype"
+import { unpack } from "../src/Newtype.js"
 import {
   unsafeUnwrap as unsafeUnwrapRight,
   unsafeUnwrapLeft,
-} from "../src/Either"
-import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
-import { setParam } from "../src/URLSearchParams"
+} from "../src/Either.js"
+import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option.js"
+import { setParam } from "../src/URLSearchParams.js"
 
 // Prefer not to export this.
 const phonyBase = "https://urlpath.fp-ts-std.samhh.com"

@@ -37,7 +37,7 @@ import {
   allM,
   anyM,
   separateNE,
-} from "../src/ReadonlyArray"
+} from "../src/ReadonlyArray.js"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/ReadonlyArray"
 import * as N from "fp-ts/number"
@@ -57,9 +57,9 @@ import { concatAll } from "fp-ts/Monoid"
 import { split } from "fp-ts/string"
 import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
 import ReadonlyNonEmptyArray = RNEA.ReadonlyNonEmptyArray
-import { values } from "../src/Record"
+import { values } from "../src/Record.js"
 import * as R from "fp-ts/Record"
-import { add, decrement } from "../src/Number"
+import { add, decrement } from "../src/Number.js"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as T from "fp-ts/These"
 import * as IO from "fp-ts/IO"

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2020",
     "lib": ["esnext", "dom"],
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "strict": true,
     "declaration": false,
     "removeComments": true

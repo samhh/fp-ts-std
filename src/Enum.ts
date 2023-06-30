@@ -15,16 +15,16 @@ import { Ord } from "fp-ts/Ord"
 import { Bounded } from "fp-ts/Bounded"
 import * as O from "fp-ts/Option"
 import Option = O.Option
-import { unsafeExpect as unsafeExpectO } from "./Option"
+import { unsafeExpect as unsafeExpectO } from "./Option.js"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
 import * as A from "fp-ts/Array"
-import { dup, toFst, toSnd } from "./Tuple"
+import { dup, toFst, toSnd } from "./Tuple.js"
 import * as Map from "fp-ts/Map"
 import { Eq } from "fp-ts/Eq"
 import * as Semigroup from "fp-ts/Semigroup"
-import { increment, decrement, add } from "./Number"
-import * as L from "./Lazy"
+import { increment, decrement, add } from "./Number.js"
+import * as L from "./Lazy.js"
 import Lazy = L.Lazy
 
 /**

@@ -15,6 +15,10 @@ const cfg = {
   transform: {
     "\\.ts$": ["@swc/jest"],
   },
+  moduleNameMapper: {
+    // https://github.com/swc-project/jest/issues/64#issuecomment-1029753225
+    "^(\\.{1,2}/.*)\\.js$": "$1",
+  },
 }
 
 export default cfg

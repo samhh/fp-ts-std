@@ -10,15 +10,15 @@ import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { construct, invoke, isInstanceOf } from "./Function"
+import { construct, invoke, isInstanceOf } from "./Function.js"
 import { Predicate } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
 import * as A from "fp-ts/Array"
-import { fromIterable } from "./Array"
+import { fromIterable } from "./Array.js"
 import { mapSnd } from "fp-ts/Tuple"
 import * as Str from "fp-ts/string"
-import { withFst } from "./Tuple"
+import { withFst } from "./Tuple.js"
 import { Endomorphism } from "fp-ts/Endomorphism"
 
 /**

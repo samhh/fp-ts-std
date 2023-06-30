@@ -1,6 +1,6 @@
-import { pack, unpack, over } from "../src/Newtype"
+import { pack, unpack, over } from "../src/Newtype.js"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { multiply } from "../src/Number"
+import { multiply } from "../src/Number.js"
 import { Newtype, iso } from "newtype-ts"
 import fc from "fast-check"
 

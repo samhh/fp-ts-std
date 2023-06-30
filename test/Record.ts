@@ -6,14 +6,14 @@ import {
   invertAll,
   pick,
   omit,
-} from "../src/Record"
+} from "../src/Record.js"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
 import fc from "fast-check"
 import { constTrue, flow, pipe } from "fp-ts/function"
 import { Predicate } from "fp-ts/Predicate"
-import { fromNumber } from "../src/String"
+import { fromNumber } from "../src/String.js"
 import * as N from "fp-ts/number"
 import * as S from "fp-ts/string"
 

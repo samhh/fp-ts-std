@@ -7,7 +7,7 @@ import {
   merge,
   withDefaults,
   renameKey,
-} from "../src/Struct"
+} from "../src/Struct.js"
 import { pipe } from "fp-ts/function"
 
 describe("Struct", () => {

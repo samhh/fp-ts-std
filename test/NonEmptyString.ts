@@ -17,7 +17,7 @@ import {
   includes,
   size,
   split,
-} from "../src/NonEmptyString"
+} from "../src/NonEmptyString.js"
 import {
   isEmpty as _isEmpty,
   toUpperCase as _toUpperCase,
@@ -28,11 +28,11 @@ import {
 } from "fp-ts/string"
 import * as laws from "fp-ts-laws"
 import fc from "fast-check"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 import { flow, pipe } from "fp-ts/function"
 import { not, Predicate } from "fp-ts/Predicate"
 import * as Pred from "fp-ts/Predicate"
-import { unsafeUnwrap } from "../src/Option"
+import { unsafeUnwrap } from "../src/Option.js"
 
 const arb = fc.string({ minLength: 1 }).map(unsafeFromString)
 

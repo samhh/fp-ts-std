@@ -20,8 +20,8 @@ import {
   isNonPositive,
   EnumInt,
   digits,
-} from "../src/Number"
-import { fromNumber } from "../src/String"
+} from "../src/Number.js"
+import { fromNumber } from "../src/String.js"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import * as Pred from "fp-ts/Predicate"

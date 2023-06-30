@@ -12,7 +12,7 @@ import {
   getParam,
   getAllForParam,
   setParam,
-} from "../src/URLSearchParams"
+} from "../src/URLSearchParams.js"
 import fc from "fast-check"
 import { keys } from "fp-ts/Record"
 import * as O from "fp-ts/Option"

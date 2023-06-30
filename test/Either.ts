@@ -7,19 +7,19 @@ import {
   match2,
   getOrd,
   getEnum,
-} from "../src/Either"
+} from "../src/Either.js"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 import { flow, identity } from "fp-ts/function"
-import * as Str from "../src/String"
+import * as Str from "../src/String.js"
 import { Show as StrShow, Semigroup as StrSemigroup } from "fp-ts/string"
 import fc from "fast-check"
-import { curry2 } from "../src/Function"
+import { curry2 } from "../src/Function.js"
 import * as Num from "fp-ts/number"
-import { LT, EQ, GT } from "../src/Ordering"
-import { Enum as EnumBool } from "../src/Boolean"
-import { universe } from "../src/Enum"
-import { Lazy } from "../src/Lazy"
+import { LT, EQ, GT } from "../src/Ordering.js"
+import { Enum as EnumBool } from "../src/Boolean.js"
+import { universe } from "../src/Enum.js"
+import { Lazy } from "../src/Lazy.js"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
   /* eslint-disable */

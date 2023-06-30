@@ -7,14 +7,14 @@
 import { TaskEither } from "fp-ts/TaskEither"
 import * as TE from "fp-ts/TaskEither"
 import * as T from "fp-ts/Task"
-import { execute as executeT } from "./Task"
+import { execute as executeT } from "./Task.js"
 import {
   unsafeUnwrap as unsafeUnwrapE,
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
-} from "./Either"
+} from "./Either.js"
 import { constVoid, flow } from "fp-ts/function"
 import { Show } from "fp-ts/Show"
-import { pass as _pass } from "./Applicative"
+import { pass as _pass } from "./Applicative.js"
 
 /**
  * Unwrap the promise from within a `TaskEither`, rejecting with the inner

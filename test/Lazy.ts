@@ -1,12 +1,12 @@
 import * as laws from "fp-ts-laws"
 import fc from "fast-check"
-import * as Lazy from "../src/Lazy"
+import * as Lazy from "../src/Lazy.js"
 import { flow, pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 import * as E from "fp-ts/Either"
 import * as Eq from "fp-ts/Eq"
-import { increment } from "../src/Number"
-import { fromNumber } from "../src/String"
+import { increment } from "../src/Number.js"
+import { fromNumber } from "../src/String.js"
 
 const apply = <A>(f: Lazy.Lazy<A>): A => f()
 const getEq = Eq.contramap(apply)

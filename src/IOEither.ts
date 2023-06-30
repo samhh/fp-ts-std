@@ -7,14 +7,14 @@
 import { IOEither } from "fp-ts/IOEither"
 import * as IOE from "fp-ts/IOEither"
 import * as IO from "fp-ts/IO"
-import { execute as executeIO } from "./IO"
+import { execute as executeIO } from "./IO.js"
 import {
   unsafeUnwrap as unsafeUnwrapE,
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
-} from "./Either"
+} from "./Either.js"
 import { constVoid, flow } from "fp-ts/function"
 import { Show } from "fp-ts/Show"
-import { pass as _pass } from "./Applicative"
+import { pass as _pass } from "./Applicative.js"
 
 /**
  * Unwrap the value from within an `IOEither`, throwing with the inner value of

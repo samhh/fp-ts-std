@@ -6,7 +6,7 @@
 import { identity } from "fp-ts/function"
 import { ReaderTask } from "fp-ts/ReaderTask"
 import { Task } from "fp-ts/Task"
-import { runReader } from "./Reader"
+import { runReader } from "./Reader.js"
 
 /**
  * Runs a ReaderTask and extracts the final Task from it.

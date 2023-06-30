@@ -9,12 +9,12 @@ import { Predicate, not, and } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
 import Option = O.Option
-import { unless } from "./Function"
+import { unless } from "./Function.js"
 import { Bounded as BoundedInfinity } from "fp-ts/number"
-import { Enum } from "./Enum"
+import { Enum } from "./Enum.js"
 import { Bounded } from "fp-ts/Bounded"
 import * as A from "fp-ts/Array"
-import * as L from "./Lazy"
+import * as L from "./Lazy.js"
 
 /**
  * Check if a number is actually valid. Specifically, all this function is

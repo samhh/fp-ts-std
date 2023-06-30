@@ -1,8 +1,8 @@
 import fc from "fast-check"
-import { pureIf, altAllBy } from "../src/Alternative"
+import { pureIf, altAllBy } from "../src/Alternative.js"
 import * as O from "fp-ts/Option"
 import { constant } from "fp-ts/function"
-import { Lazy } from "../src/Lazy"
+import { Lazy } from "../src/Lazy.js"
 
 describe("Alternative", () => {
   describe("pureIf", () => {

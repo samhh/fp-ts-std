@@ -6,12 +6,12 @@ import {
   sequenceArray_,
   traverseArray_,
   pass,
-} from "../src/IOEither"
+} from "../src/IOEither.js"
 import * as IOE from "fp-ts/IOEither"
-import * as IO from "../src/IO"
+import * as IO from "../src/IO.js"
 import { identity, pipe } from "fp-ts/function"
 import { Show as StrShow } from "fp-ts/string"
-import { Lazy } from "../src/Lazy"
+import { Lazy } from "../src/Lazy.js"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
   /* eslint-disable */
