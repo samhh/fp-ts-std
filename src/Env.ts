@@ -5,9 +5,9 @@
  * @since 0.9.0
  */
 
-import { pipe, flow } from "fp-ts/function"
-import * as O from "fp-ts/Option"
-import * as IOO from "fp-ts/IOOption"
+import { pipe, flow } from "fp-ts/lib/function.js"
+import * as O from "fp-ts/lib/Option.js"
+import * as IOO from "fp-ts/lib/IOOption.js"
 import IOOption = IOO.IOOption
 import * as NES from "./NonEmptyString.js"
 import NonEmptyString = NES.NonEmptyString

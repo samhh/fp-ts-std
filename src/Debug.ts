@@ -5,7 +5,7 @@
  * @since 0.2.0
  */
 
-import { Show } from "fp-ts/Show"
+import { Show } from "fp-ts/lib/Show.js"
 
 /* eslint-disable functional/no-expression-statements */
 

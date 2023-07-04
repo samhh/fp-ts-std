@@ -23,10 +23,10 @@ import {
   Alternative3,
   Alternative3C,
   Alternative4,
-} from "fp-ts/Alternative"
+} from "fp-ts/lib/Alternative.js"
 import { Lazy } from "./Lazy.js"
-import { pipe } from "fp-ts/function"
-import * as A from "fp-ts/Array"
+import { pipe } from "fp-ts/lib/function.js"
+import * as A from "fp-ts/lib/Array.js"
 
 /**
  * Conditionally lifts a value to an `Alternative` context or returns

@@ -3,18 +3,18 @@
  *
  * @since 0.16.0
  */
-import { ReaderIO } from "fp-ts/ReaderIO"
-import { IO } from "fp-ts/IO"
+import { ReaderIO } from "fp-ts/lib/ReaderIO.js"
+import { IO } from "fp-ts/lib/IO.js"
 import { runReader } from "./Reader.js"
-import { identity } from "fp-ts/function"
+import { identity } from "fp-ts/lib/function.js"
 
 /**
  * Runs a `ReaderIO` and extracts the final `IO` from it.
  *
  * @example
  * import { runReaderIO } from 'fp-ts-std/ReaderIO'
- * import { pipe } from "fp-ts/function"
- * import * as RIO from "fp-ts/ReaderIO"
+ * import { pipe } from "fp-ts/lib/function.js"
+ * import * as RIO from "fp-ts/lib/ReaderIO.js"
  *
  * assert.strictEqual(
  *   pipe(

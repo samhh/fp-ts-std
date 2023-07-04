@@ -5,21 +5,21 @@
  * @since 0.2.0
  */
 
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import * as R from "fp-ts/Record"
-import { flow, pipe } from "fp-ts/function"
-import { Refinement } from "fp-ts/Refinement"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
+import * as R from "fp-ts/lib/Record.js"
+import { flow, pipe } from "fp-ts/lib/function.js"
+import { Refinement } from "fp-ts/lib/Refinement.js"
 import { construct, invoke, isInstanceOf } from "./Function.js"
-import { Predicate } from "fp-ts/Predicate"
-import * as NEA from "fp-ts/NonEmptyArray"
+import { Predicate } from "fp-ts/lib/Predicate.js"
+import * as NEA from "fp-ts/lib/NonEmptyArray.js"
 import NonEmptyArray = NEA.NonEmptyArray
-import * as A from "fp-ts/Array"
+import * as A from "fp-ts/lib/Array.js"
 import { fromIterable } from "./Array.js"
-import { mapSnd } from "fp-ts/Tuple"
-import * as Str from "fp-ts/string"
+import { mapSnd } from "fp-ts/lib/Tuple.js"
+import * as Str from "fp-ts/lib/string.js"
 import { withFst } from "./Tuple.js"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
 
 /**
  * An empty `URLSearchParams`.

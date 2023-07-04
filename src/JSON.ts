@@ -4,14 +4,14 @@
  * @since 0.1.0
  */
 
-import { Newtype, iso } from "newtype-ts"
-import { Either } from "fp-ts/Either"
-import * as E from "fp-ts/Either"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import { Json } from "fp-ts/Json"
-import { flow, identity, pipe } from "fp-ts/function"
-import { isString } from "fp-ts/string"
+import { Newtype, iso } from "newtype-ts/lib/index.js"
+import { Either } from "fp-ts/lib/Either.js"
+import * as E from "fp-ts/lib/Either.js"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
+import { Json } from "fp-ts/lib/Json.js"
+import { flow, identity, pipe } from "fp-ts/lib/function.js"
+import { isString } from "fp-ts/lib/string.js"
 
 type JSONStringSymbol = { readonly JSONString: unique symbol }
 

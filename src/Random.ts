@@ -4,13 +4,13 @@
  * @since 0.12.0
  */
 
-import * as IO from "fp-ts/IO"
+import * as IO from "fp-ts/lib/IO.js"
 type IO<A> = IO.IO<A>
-import { flow, pipe } from "fp-ts/function"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as RA from "fp-ts/ReadonlyArray"
+import { flow, pipe } from "fp-ts/lib/function.js"
+import { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js"
+import * as RA from "fp-ts/lib/ReadonlyArray.js"
 import { extractAt } from "./Array.js"
-import * as Rand from "fp-ts/Random"
+import * as Rand from "fp-ts/lib/Random.js"
 import { decrement } from "./Number.js"
 import { unsafeUnwrap } from "./Option.js"
 

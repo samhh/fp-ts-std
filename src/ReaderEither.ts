@@ -3,19 +3,19 @@
  *
  * @since 0.15.0
  */
-import { ReaderEither } from "fp-ts/ReaderEither"
-import { Either } from "fp-ts/Either"
+import { ReaderEither } from "fp-ts/lib/ReaderEither.js"
+import { Either } from "fp-ts/lib/Either.js"
 import { runReader } from "./Reader.js"
-import { identity } from "fp-ts/function"
+import { identity } from "fp-ts/lib/function.js"
 
 /**
  * Runs a ReaderEither and extracts the final Either from it.
  *
  * @example
  * import { runReaderEither } from 'fp-ts-std/ReaderEither'
- * import { pipe } from "fp-ts/function"
- * import * as RE from "fp-ts/ReaderEither"
- * import * as E from "fp-ts/Either"
+ * import { pipe } from "fp-ts/lib/function.js"
+ * import * as RE from "fp-ts/lib/ReaderEither.js"
+ * import * as E from "fp-ts/lib/Either.js"
  *
  * type Env = { dependency: string }
  * const env: Env = { dependency: "dependency" }

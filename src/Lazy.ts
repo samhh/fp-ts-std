@@ -11,28 +11,32 @@
 
 // All the typeclass stuff was copied from fp-ts/IO almost identically.
 
-import { constant, identity } from "fp-ts/function"
+import { constant, identity } from "fp-ts/lib/function.js"
 import {
   Functor1,
   flap as flap_,
   bindTo as bindTo_,
   let as let__,
-} from "fp-ts/Functor"
-import { Applicative1 } from "fp-ts/Applicative"
-import { Monad1 } from "fp-ts/Monad"
-import { Pointed1 } from "fp-ts/Pointed"
+} from "fp-ts/lib/Functor.js"
+import { Applicative1 } from "fp-ts/lib/Applicative.js"
+import { Monad1 } from "fp-ts/lib/Monad.js"
+import { Pointed1 } from "fp-ts/lib/Pointed.js"
 import {
   Apply1,
   apFirst as apFirst_,
   apS as apS_,
   apSecond as apSecond_,
-} from "fp-ts/Apply"
-import { Chain1, bind as bind_, chainFirst as chainFirst_ } from "fp-ts/Chain"
-import { ChainRec1 } from "fp-ts/ChainRec"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
-import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as RA from "fp-ts/ReadonlyArray"
+} from "fp-ts/lib/Apply.js"
+import {
+  Chain1,
+  bind as bind_,
+  chainFirst as chainFirst_,
+} from "fp-ts/lib/Chain.js"
+import { ChainRec1 } from "fp-ts/lib/ChainRec.js"
+import { ReadonlyNonEmptyArray } from "fp-ts/lib/ReadonlyNonEmptyArray.js"
+import * as RNEA from "fp-ts/lib/ReadonlyNonEmptyArray.js"
+import { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js"
+import * as RA from "fp-ts/lib/ReadonlyArray.js"
 
 /**
  * Re-exported from fp-ts for convenience.

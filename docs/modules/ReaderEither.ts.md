@@ -67,9 +67,9 @@ runReaderEither :: r -> ReaderEither r e a -> Either e a
 
 ```ts
 import { runReaderEither } from 'fp-ts-std/ReaderEither'
-import { pipe } from 'fp-ts/function'
-import * as RE from 'fp-ts/ReaderEither'
-import * as E from 'fp-ts/Either'
+import { pipe } from 'fp-ts/lib/function'
+import * as RE from 'fp-ts/lib/ReaderEither'
+import * as E from 'fp-ts/lib/Either'
 
 type Env = { dependency: string }
 const env: Env = { dependency: 'dependency' }

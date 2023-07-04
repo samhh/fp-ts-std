@@ -4,16 +4,16 @@
  * @since 0.1.0
  */
 
-import { flow, identity, pipe } from "fp-ts/function"
-import { Predicate, not, and } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import * as O from "fp-ts/Option"
+import { flow, identity, pipe } from "fp-ts/lib/function.js"
+import { Predicate, not, and } from "fp-ts/lib/Predicate.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import * as O from "fp-ts/lib/Option.js"
 import Option = O.Option
 import { unless } from "./Function.js"
-import { Bounded as BoundedInfinity } from "fp-ts/number"
+import { Bounded as BoundedInfinity } from "fp-ts/lib/number.js"
 import { Enum } from "./Enum.js"
-import { Bounded } from "fp-ts/Bounded"
-import * as A from "fp-ts/Array"
+import { Bounded } from "fp-ts/lib/Bounded.js"
+import * as A from "fp-ts/lib/Array.js"
 import * as L from "./Lazy.js"
 
 /**

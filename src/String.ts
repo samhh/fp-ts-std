@@ -4,22 +4,22 @@
  * @since 0.1.0
  */
 
-import { pipe, flow, flip } from "fp-ts/function"
-import { Predicate, and, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as NEA from "fp-ts/NonEmptyArray"
-import * as RA from "fp-ts/ReadonlyArray"
-import * as S from "fp-ts/string"
+import { pipe, flow, flip } from "fp-ts/lib/function.js"
+import { Predicate, and, not } from "fp-ts/lib/Predicate.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
+import { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js"
+import * as NEA from "fp-ts/lib/NonEmptyArray.js"
+import * as RA from "fp-ts/lib/ReadonlyArray.js"
+import * as S from "fp-ts/lib/string.js"
 import {
   join,
   dropRightWhile as dropRightWhileRA,
   takeRightWhile as takeRightWhileRA,
 } from "./ReadonlyArray.js"
-import { max } from "fp-ts/Ord"
-import { Ord as ordNumber } from "fp-ts/number"
+import { max } from "fp-ts/lib/Ord.js"
+import { Ord as ordNumber } from "fp-ts/lib/number.js"
 import { invoke, when } from "./Function.js"
 
 /**

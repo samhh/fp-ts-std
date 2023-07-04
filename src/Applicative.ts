@@ -23,7 +23,7 @@ import {
   Applicative3,
   Applicative3C,
   Applicative4,
-} from "fp-ts/Applicative"
+} from "fp-ts/lib/Applicative.js"
 
 /**
  * Conditional execution of an applicative. Helpful for conditional side effects

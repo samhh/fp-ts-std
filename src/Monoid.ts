@@ -12,7 +12,7 @@ import {
   Foldable3,
   Foldable3C,
   Foldable4,
-} from "fp-ts/Foldable"
+} from "fp-ts/lib/Foldable.js"
 import {
   HKT,
   Kind,
@@ -24,8 +24,8 @@ import {
   URIS3,
   URIS4,
 } from "fp-ts/HKT"
-import { Monoid } from "fp-ts/Monoid"
-import { flow, identity } from "fp-ts/function"
+import { Monoid } from "fp-ts/lib/Monoid.js"
+import { flow, identity } from "fp-ts/lib/function.js"
 import { invert } from "./Boolean.js"
 import { Lazy } from "./Lazy.js"
 

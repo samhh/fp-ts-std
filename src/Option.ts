@@ -4,18 +4,18 @@
  * @since 0.1.0
  */
 
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import { Eq } from "fp-ts/Eq"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { constant, flow, pipe } from "fp-ts/function"
-import * as B from "fp-ts/boolean"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
+import { Eq } from "fp-ts/lib/Eq.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import { constant, flow, pipe } from "fp-ts/lib/function.js"
+import * as B from "fp-ts/lib/boolean.js"
 import { invert as invertBool } from "./Boolean.js"
 import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative.js"
 import { toMonoid as _toMonoid } from "./Monoid.js"
 import * as L from "./Lazy.js"
 import Lazy = L.Lazy
-import { Bounded } from "fp-ts/Bounded"
+import { Bounded } from "fp-ts/lib/Bounded.js"
 import { Enum } from "./Enum.js"
 import { increment, decrement } from "./Number.js"
 

@@ -5,15 +5,15 @@
  * @since 0.1.0
  */
 
-import { flow } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Option } from "fp-ts/Option"
-import * as R from "fp-ts/Record"
-import * as A from "fp-ts/Array"
-import * as T from "fp-ts/Tuple"
-import { last } from "fp-ts/Semigroup"
+import { flow } from "fp-ts/lib/function.js"
+import { Predicate, not } from "fp-ts/lib/Predicate.js"
+import { Option } from "fp-ts/lib/Option.js"
+import * as R from "fp-ts/lib/Record.js"
+import * as A from "fp-ts/lib/Array.js"
+import * as T from "fp-ts/lib/Tuple.js"
+import { last } from "fp-ts/lib/Semigroup.js"
 import { elemV } from "./Array.js"
-import * as Str from "fp-ts/string"
+import * as Str from "fp-ts/lib/string.js"
 
 /**
  * Get the values from a `Record`.

@@ -3,15 +3,15 @@
  *
  * @since 0.15.0
  */
-import { Reader } from "fp-ts/Reader"
-import { apply } from "fp-ts/function"
+import { Reader } from "fp-ts/lib/Reader.js"
+import { apply } from "fp-ts/lib/function.js"
 
 /**
  * Runs a Reader and extracts the final value from it.
  *
  * @example
  * import { runReader } from 'fp-ts-std/Reader'
- * import { pipe } from "fp-ts/function"
+ * import { pipe } from "fp-ts/lib/function.js"
  * import * as R from 'fp-ts/Reader'
  *
  * type Env = { dependency: string }

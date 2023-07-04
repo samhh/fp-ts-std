@@ -4,19 +4,19 @@
  * @since 0.1.0
  */
 
-import { Either } from "fp-ts/Either"
-import * as E from "fp-ts/Either"
-import * as O from "fp-ts/Option"
+import { Either } from "fp-ts/lib/Either.js"
+import * as E from "fp-ts/lib/Either.js"
+import * as O from "fp-ts/lib/Option.js"
 import { mapBoth as _mapBoth } from "./Bifunctor.js"
-import { Show } from "fp-ts/Show"
-import { constant, flow, pipe } from "fp-ts/function"
+import { Show } from "fp-ts/lib/Show.js"
+import { constant, flow, pipe } from "fp-ts/lib/function.js"
 import * as L from "./Lazy.js"
-import { Ord } from "fp-ts/Ord"
-import { Bounded } from "fp-ts/Bounded"
+import { Ord } from "fp-ts/lib/Ord.js"
+import { Bounded } from "fp-ts/lib/Bounded.js"
 import { Enum } from "./Enum.js"
 import { add } from "./Number.js"
 import { curry2 } from "./Function.js"
-import { Ordering } from "fp-ts/Ordering"
+import { Ordering } from "fp-ts/lib/Ordering.js"
 import { LT, GT } from "./Ordering.js"
 
 /**

@@ -5,11 +5,11 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { SemigroupAll, SemigroupAny, Ord } from "fp-ts/boolean"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import { SemigroupAll, SemigroupAny, Ord } from "fp-ts/lib/boolean.js"
 import { curry2 } from "./Function.js"
-import * as O from "fp-ts/Option"
-import * as Bounded_ from "fp-ts/Bounded"
+import * as O from "fp-ts/lib/Option.js"
+import * as Bounded_ from "fp-ts/lib/Bounded.js"
 type Bounded<A> = Bounded_.Bounded<A>
 import * as Enum_ from "./Enum.js"
 import Enum = Enum_.Enum

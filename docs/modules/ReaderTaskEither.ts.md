@@ -113,9 +113,9 @@ export declare const runReaderTaskEither: <R, E, A>(
 
 ```ts
 import { runReaderTaskEither } from 'fp-ts-std/ReaderTaskEither'
-import { pipe } from 'fp-ts/function'
-import * as RTE from 'fp-ts/ReaderTaskEither'
-import * as E from 'fp-ts/Either'
+import { pipe } from 'fp-ts/lib/function'
+import * as RTE from 'fp-ts/lib/ReaderTaskEither'
+import * as E from 'fp-ts/lib/Either'
 
 type Env = { dependency: string }
 const env: Env = { dependency: 'dependency' }

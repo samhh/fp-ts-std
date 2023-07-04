@@ -10,19 +10,19 @@
  * @since 0.17.0
  */
 
-import { constant, flow, pipe } from "fp-ts/function"
-import { Ord } from "fp-ts/Ord"
-import { Bounded } from "fp-ts/Bounded"
-import * as O from "fp-ts/Option"
+import { constant, flow, pipe } from "fp-ts/lib/function.js"
+import { Ord } from "fp-ts/lib/Ord.js"
+import { Bounded } from "fp-ts/lib/Bounded.js"
+import * as O from "fp-ts/lib/Option.js"
 import Option = O.Option
 import { unsafeExpect as unsafeExpectO } from "./Option.js"
-import * as NEA from "fp-ts/NonEmptyArray"
+import * as NEA from "fp-ts/lib/NonEmptyArray.js"
 import NonEmptyArray = NEA.NonEmptyArray
-import * as A from "fp-ts/Array"
+import * as A from "fp-ts/lib/Array.js"
 import { dup, toFst, toSnd } from "./Tuple.js"
-import * as Map from "fp-ts/Map"
-import { Eq } from "fp-ts/Eq"
-import * as Semigroup from "fp-ts/Semigroup"
+import * as Map from "fp-ts/lib/Map.js"
+import { Eq } from "fp-ts/lib/Eq.js"
+import * as Semigroup from "fp-ts/lib/Semigroup.js"
 import { increment, decrement, add } from "./Number.js"
 import * as L from "./Lazy.js"
 import Lazy = L.Lazy

@@ -3,12 +3,12 @@
  *
  * @since 0.15.0
  */
-import { flow, identity } from "fp-ts/function"
-import * as RTE from "fp-ts/ReaderTaskEither"
-import * as TE from "fp-ts/TaskEither"
-import { TaskEither } from "fp-ts/TaskEither"
-import { Task } from "fp-ts/Task"
-import { Either } from "fp-ts/Either"
+import { flow, identity } from "fp-ts/lib/function.js"
+import * as RTE from "fp-ts/lib/ReaderTaskEither.js"
+import * as TE from "fp-ts/lib/TaskEither.js"
+import { TaskEither } from "fp-ts/lib/TaskEither.js"
+import { Task } from "fp-ts/lib/Task.js"
+import { Either } from "fp-ts/lib/Either.js"
 import { runReader } from "./Reader.js"
 import {
   unsafeUnwrap as unsafeUnwrapTE,
@@ -20,9 +20,9 @@ import {
  *
  * @example
  * import { runReaderTaskEither } from 'fp-ts-std/ReaderTaskEither'
- * import { pipe } from "fp-ts/function"
- * import * as RTE from "fp-ts/ReaderTaskEither"
- * import * as E from "fp-ts/Either"
+ * import { pipe } from "fp-ts/lib/function.js"
+ * import * as RTE from "fp-ts/lib/ReaderTaskEither.js"
+ * import * as E from "fp-ts/lib/Either.js"
  *
  * type Env = { dependency: string }
  * const env: Env = { dependency: "dependency" }

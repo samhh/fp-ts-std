@@ -22,19 +22,19 @@ import {
   Functor3,
   Functor4,
   Functor2C,
-} from "fp-ts/Functor"
-import * as Tuple from "fp-ts/Tuple"
+} from "fp-ts/lib/Functor.js"
+import * as Tuple from "fp-ts/lib/Tuple.js"
 import { fork } from "./Function.js"
-import { flow, identity, pipe } from "fp-ts/function"
+import { flow, identity, pipe } from "fp-ts/lib/function.js"
 import { mapBoth as _mapBoth } from "./Bifunctor.js"
-import { Eq, fromEquals } from "fp-ts/Eq"
-import { Ord, fromCompare } from "fp-ts/Ord"
+import { Eq, fromEquals } from "fp-ts/lib/Eq.js"
+import { Ord, fromCompare } from "fp-ts/lib/Ord.js"
 import { EQ } from "./Ordering.js"
-import { Bounded } from "fp-ts/Bounded"
+import { Bounded } from "fp-ts/lib/Bounded.js"
 import { Enum } from "./Enum.js"
 import * as L from "./Lazy.js"
 import { isNonNegative, isValid, multiply } from "./Number.js"
-import * as O from "fp-ts/Option"
+import * as O from "fp-ts/lib/Option.js"
 import { allPass } from "./Predicate.js"
 
 /**

@@ -5,15 +5,15 @@
  * @since 0.10.0
  */
 
-import { flow } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Option } from "fp-ts/Option"
-import * as RR from "fp-ts/ReadonlyRecord"
-import * as RA from "fp-ts/ReadonlyArray"
-import * as RT from "fp-ts/ReadonlyTuple"
-import { last } from "fp-ts/Semigroup"
+import { flow } from "fp-ts/lib/function.js"
+import { Predicate, not } from "fp-ts/lib/Predicate.js"
+import { Option } from "fp-ts/lib/Option.js"
+import * as RR from "fp-ts/lib/ReadonlyRecord.js"
+import * as RA from "fp-ts/lib/ReadonlyArray.js"
+import * as RT from "fp-ts/lib/ReadonlyTuple.js"
+import { last } from "fp-ts/lib/Semigroup.js"
 import { elemV } from "./ReadonlyArray.js"
-import * as Str from "fp-ts/string"
+import * as Str from "fp-ts/lib/string.js"
 
 /**
  * Get the values from a `Record`.

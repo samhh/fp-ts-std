@@ -7,9 +7,9 @@
  * @since 0.15.0
  */
 
-import { flow } from "fp-ts/function"
-import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
-import * as O from "fp-ts/Option"
+import { flow } from "fp-ts/lib/function.js"
+import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts/lib/index.js"
+import * as O from "fp-ts/lib/Option.js"
 import { unsafeExpect, unsafeUnwrap } from "./Option.js"
 import {
   Show as _Show,
@@ -22,13 +22,13 @@ import {
   size as _size,
   includes as _includes,
   split as _split,
-} from "fp-ts/string"
+} from "fp-ts/lib/string.js"
 import * as Str from "./String.js"
 import { pack, unpack, over } from "./Newtype.js"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import type { Show as TShow } from "fp-ts/Show"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
+import { Predicate, not } from "fp-ts/lib/Predicate.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import type { Show as TShow } from "fp-ts/lib/Show.js"
+import { ReadonlyNonEmptyArray } from "fp-ts/lib/ReadonlyNonEmptyArray.js"
 
 type Show<A> = TShow<A>
 

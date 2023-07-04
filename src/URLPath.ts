@@ -8,16 +8,16 @@
  * @since 0.17.0
  */
 
-import { Newtype } from "newtype-ts"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import { Either } from "fp-ts/Either"
-import * as E from "fp-ts/Either"
-import { constant, flow, identity, pipe } from "fp-ts/function"
+import { Newtype } from "newtype-ts/lib/index.js"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
+import { Either } from "fp-ts/lib/Either.js"
+import * as E from "fp-ts/lib/Either.js"
+import { constant, flow, identity, pipe } from "fp-ts/lib/function.js"
 import { over, pack, unpack } from "./Newtype.js"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
 import { clone as cloneURL, isURL } from "./URL.js"
-import { Refinement } from "fp-ts/Refinement"
+import { Refinement } from "fp-ts/lib/Refinement.js"
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
 

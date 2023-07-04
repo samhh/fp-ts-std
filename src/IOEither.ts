@@ -4,16 +4,16 @@
  * @since 0.15.0
  */
 
-import { IOEither } from "fp-ts/IOEither"
-import * as IOE from "fp-ts/IOEither"
-import * as IO from "fp-ts/IO"
+import { IOEither } from "fp-ts/lib/IOEither.js"
+import * as IOE from "fp-ts/lib/IOEither.js"
+import * as IO from "fp-ts/lib/IO.js"
 import { execute as executeIO } from "./IO.js"
 import {
   unsafeUnwrap as unsafeUnwrapE,
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either.js"
-import { constVoid, flow } from "fp-ts/function"
-import { Show } from "fp-ts/Show"
+import { constVoid, flow } from "fp-ts/lib/function.js"
+import { Show } from "fp-ts/lib/Show.js"
 import { pass as _pass } from "./Applicative.js"
 
 /**

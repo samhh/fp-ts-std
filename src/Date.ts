@@ -4,17 +4,17 @@
  * @since 0.1.0
  */
 
-import { Newtype, iso, getField, getOrd } from "newtype-ts"
-import { flow, pipe } from "fp-ts/function"
-import { Refinement } from "fp-ts/Refinement"
-import { Predicate } from "fp-ts/Predicate"
+import { Newtype, iso, getField, getOrd } from "newtype-ts/lib/index.js"
+import { flow, pipe } from "fp-ts/lib/function.js"
+import { Refinement } from "fp-ts/lib/Refinement.js"
+import { Predicate } from "fp-ts/lib/Predicate.js"
 import { isValid as isValidNum } from "./Number.js"
-import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/number"
-import { now as nownum } from "fp-ts/Date"
-import * as IO from "fp-ts/IO"
+import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/lib/number.js"
+import { now as nownum } from "fp-ts/lib/Date.js"
+import * as IO from "fp-ts/lib/IO.js"
 type IO<A> = IO.IO<A>
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
 import { construct, invokeOn, isInstanceOf } from "./Function.js"
 import { pack, unpack } from "./Newtype.js"
 

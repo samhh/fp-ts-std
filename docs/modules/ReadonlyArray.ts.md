@@ -237,8 +237,8 @@ filterA :: ((Applicative f) -> (a -> HKT f boolean) -> ReadonlyArray a -> HKT f 
 **Example**
 
 ```ts
-import * as T from 'fp-ts/Task'
-import { Task } from 'fp-ts/Task'
+import * as T from 'fp-ts/lib/Task'
+import { Task } from 'fp-ts/lib/Task'
 import { filterA } from 'fp-ts-std/ReadonlyArray'
 
 const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0)

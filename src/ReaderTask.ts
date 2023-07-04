@@ -3,9 +3,9 @@
  *
  * @since 0.15.0
  */
-import { identity } from "fp-ts/function"
-import { ReaderTask } from "fp-ts/ReaderTask"
-import { Task } from "fp-ts/Task"
+import { identity } from "fp-ts/lib/function.js"
+import { ReaderTask } from "fp-ts/lib/ReaderTask.js"
+import { Task } from "fp-ts/lib/Task.js"
 import { runReader } from "./Reader.js"
 
 /**
@@ -13,8 +13,8 @@ import { runReader } from "./Reader.js"
  *
  * @example
  * import { runReaderTask } from 'fp-ts-std/ReaderTask'
- * import { pipe } from "fp-ts/function"
- * import * as RT from "fp-ts/ReaderTask"
+ * import { pipe } from "fp-ts/lib/function.js"
+ * import * as RT from "fp-ts/lib/ReaderTask.js"
  *
  * type Env = { dependency: string }
  * const env: Env = { dependency: "dependency " }

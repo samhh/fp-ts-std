@@ -5,11 +5,11 @@
  * @since 0.12.0
  */
 
-import { Predicate } from "fp-ts/Predicate"
-import * as Pred from "fp-ts/Predicate"
-import { flow } from "fp-ts/function"
+import { Predicate } from "fp-ts/lib/Predicate.js"
+import * as Pred from "fp-ts/lib/Predicate.js"
+import { flow } from "fp-ts/lib/function.js"
 import { invert } from "./Boolean.js"
-import { concatAll } from "fp-ts/Monoid"
+import { concatAll } from "fp-ts/lib/Monoid.js"
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the

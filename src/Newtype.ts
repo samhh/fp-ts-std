@@ -18,11 +18,17 @@ import {
   URIS3,
   URIS4,
 } from "fp-ts/HKT"
-import { Functor, Functor1, Functor2, Functor3, Functor4 } from "fp-ts/Functor"
-import { Newtype, iso } from "newtype-ts"
-import { pipe } from "fp-ts/function"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import * as Id from "fp-ts/Identity"
+import {
+  Functor,
+  Functor1,
+  Functor2,
+  Functor3,
+  Functor4,
+} from "fp-ts/lib/Functor.js"
+import { Newtype, iso } from "newtype-ts/lib/index.js"
+import { pipe } from "fp-ts/lib/function.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import * as Id from "fp-ts/lib/Identity.js"
 
 /**
  * Pack a value into a newtype.

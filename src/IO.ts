@@ -4,16 +4,16 @@
  * @since 0.7.0
  */
 
-import * as IO from "fp-ts/IO"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { Predicate } from "fp-ts/Predicate"
+import * as IO from "fp-ts/lib/IO.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import { Predicate } from "fp-ts/lib/Predicate.js"
 import {
   when as _when,
   unless as _unless,
   pass as _pass,
 } from "./Applicative.js"
 import { until as _until } from "./Monad.js"
-import { constVoid, flow } from "fp-ts/function"
+import { constVoid, flow } from "fp-ts/lib/function.js"
 
 type IO<A> = IO.IO<A>
 

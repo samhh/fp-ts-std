@@ -7,13 +7,13 @@
  * @since 0.12.0
  */
 
-import * as IO from "fp-ts/IO"
+import * as IO from "fp-ts/lib/IO.js"
 type IO<A> = IO.IO<A>
-import * as O from "fp-ts/Option"
-import { IOOption } from "fp-ts/IOOption"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as NEA from "fp-ts/NonEmptyArray"
-import { constVoid, flow, pipe } from "fp-ts/function"
+import * as O from "fp-ts/lib/Option.js"
+import { IOOption } from "fp-ts/lib/IOOption.js"
+import { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js"
+import * as NEA from "fp-ts/lib/NonEmptyArray.js"
+import { constVoid, flow, pipe } from "fp-ts/lib/function.js"
 import { invoke } from "./Function.js"
 /**
  * Convert a `NodeList` into an `Array`.

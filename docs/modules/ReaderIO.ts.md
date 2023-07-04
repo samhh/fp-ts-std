@@ -66,8 +66,8 @@ runReaderIO :: r -> ReaderIO r a -> IO a
 
 ```ts
 import { runReaderIO } from 'fp-ts-std/ReaderIO'
-import { pipe } from 'fp-ts/function'
-import * as RIO from 'fp-ts/ReaderIO'
+import { pipe } from 'fp-ts/lib/function'
+import * as RIO from 'fp-ts/lib/ReaderIO'
 
 assert.strictEqual(pipe(RIO.of<string, number>(123), runReaderIO('env'))(), 123)
 ```

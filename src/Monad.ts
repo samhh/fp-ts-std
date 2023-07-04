@@ -23,11 +23,11 @@ import {
   Monad3,
   Monad3C,
   Monad4,
-} from "fp-ts/Monad"
-import { pipe } from "fp-ts/function"
-import * as A from "fp-ts/Array"
+} from "fp-ts/lib/Monad.js"
+import { pipe } from "fp-ts/lib/function.js"
+import * as A from "fp-ts/lib/Array.js"
 import { invert } from "./Boolean.js"
-import { Predicate } from "fp-ts/Predicate"
+import { Predicate } from "fp-ts/lib/Predicate.js"
 
 /**
  * Monadic if/then/else. Only executes the relevant action.

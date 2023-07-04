@@ -4,27 +4,27 @@
  * @since 0.10.0
  */
 
-import { constant, pipe, flow, flip } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { Eq } from "fp-ts/Eq"
-import { Ord } from "fp-ts/Ord"
-import { match as orderingMatch } from "fp-ts/Ordering"
-import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/number"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
-import * as NEA from "fp-ts/ReadonlyNonEmptyArray"
-import { copy } from "fp-ts/Array"
-import * as RA from "fp-ts/ReadonlyArray"
-import * as R from "fp-ts/ReadonlyRecord"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import * as B from "fp-ts/boolean"
-import { reduceM } from "fp-ts/Foldable"
-import { concatAll } from "fp-ts/Monoid"
-import { max, min } from "fp-ts/Semigroup"
+import { constant, pipe, flow, flip } from "fp-ts/lib/function.js"
+import { Predicate, not } from "fp-ts/lib/Predicate.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
+import { Eq } from "fp-ts/lib/Eq.js"
+import { Ord } from "fp-ts/lib/Ord.js"
+import { match as orderingMatch } from "fp-ts/lib/Ordering.js"
+import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/lib/number.js"
+import { ReadonlyNonEmptyArray } from "fp-ts/lib/ReadonlyNonEmptyArray.js"
+import * as NEA from "fp-ts/lib/ReadonlyNonEmptyArray.js"
+import { copy } from "fp-ts/lib/Array.js"
+import * as RA from "fp-ts/lib/ReadonlyArray.js"
+import * as R from "fp-ts/lib/ReadonlyRecord.js"
+import { Option } from "fp-ts/lib/Option.js"
+import * as O from "fp-ts/lib/Option.js"
+import * as B from "fp-ts/lib/boolean.js"
+import { reduceM } from "fp-ts/lib/Foldable.js"
+import { concatAll } from "fp-ts/lib/Monoid.js"
+import { max, min } from "fp-ts/lib/Semigroup.js"
 import { invoke } from "./Function.js"
-import { These } from "fp-ts/These"
-import * as T from "fp-ts/These"
+import { These } from "fp-ts/lib/These.js"
+import * as T from "fp-ts/lib/These.js"
 import {
   HKT,
   Kind,
@@ -43,7 +43,7 @@ import {
   Applicative3,
   Applicative4,
   Applicative2C,
-} from "fp-ts/Applicative"
+} from "fp-ts/lib/Applicative.js"
 import {
   Monad,
   Monad1,
@@ -52,9 +52,9 @@ import {
   Monad3,
   Monad3C,
   Monad4,
-} from "fp-ts/Monad"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import { Either } from "fp-ts/Either"
+} from "fp-ts/lib/Monad.js"
+import { NonEmptyArray } from "fp-ts/lib/NonEmptyArray.js"
+import { Either } from "fp-ts/lib/Either.js"
 
 /**
  * Like `fp-ts/ReadonlyArray::elem` but flipped, which the "V" suffix denotes.
@@ -861,8 +861,8 @@ export const zipAll =
  * and therefore `Task`-based, for example.
  *
  * @example
- * import * as T from "fp-ts/Task"
- * import { Task } from "fp-ts/Task"
+ * import * as T from "fp-ts/lib/Task.js"
+ * import { Task } from "fp-ts/lib/Task.js"
  * import { filterA } from "fp-ts-std/ReadonlyArray"
  *
  * const asyncIsEven = (n: number): Task<boolean> => T.of(n % 2 === 0)

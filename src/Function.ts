@@ -7,9 +7,9 @@
  * @since 0.1.0
  */
 
-import * as O from "fp-ts/Option"
-import * as M from "fp-ts/Map"
-import * as A from "fp-ts/Array"
+import * as O from "fp-ts/lib/Option.js"
+import * as M from "fp-ts/lib/Map.js"
+import * as A from "fp-ts/lib/Array.js"
 import {
   flow,
   pipe,
@@ -18,22 +18,25 @@ import {
   constant,
   flip,
   tupled,
-} from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
-import { concatAll } from "fp-ts/Monoid"
-import { first } from "fp-ts/Semigroup"
-import { Eq } from "fp-ts/Eq"
-import { Refinement } from "fp-ts/Refinement"
-import { Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/Functor"
+} from "fp-ts/lib/function.js"
+import { Predicate, not } from "fp-ts/lib/Predicate.js"
+import {
+  Endomorphism,
+  getMonoid as getEndoMonoid,
+} from "fp-ts/lib/Endomorphism.js"
+import { concatAll } from "fp-ts/lib/Monoid.js"
+import { first } from "fp-ts/lib/Semigroup.js"
+import { Eq } from "fp-ts/lib/Eq.js"
+import { Refinement } from "fp-ts/lib/Refinement.js"
+import { Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/lib/Functor.js"
 import {
   apFirst as apFirst_,
   apSecond as apSecond_,
   apS as apS_,
-} from "fp-ts/Apply"
-import { Applicative2 } from "fp-ts/Applicative"
-import { bind as bind_ } from "fp-ts/Chain"
-import { Monad2 } from "fp-ts/Monad"
+} from "fp-ts/lib/Apply.js"
+import { Applicative2 } from "fp-ts/lib/Applicative.js"
+import { bind as bind_ } from "fp-ts/lib/Chain.js"
+import { Monad2 } from "fp-ts/lib/Monad.js"
 
 /**
  * Typeclass machinery.

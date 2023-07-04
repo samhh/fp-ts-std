@@ -4,10 +4,10 @@
  * @since 0.1.0
  */
 
-import * as T from "fp-ts/Task"
+import * as T from "fp-ts/lib/Task.js"
 type Task<A> = T.Task<A>
-import { IO } from "fp-ts/IO"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import { IO } from "fp-ts/lib/IO.js"
+import { Endomorphism } from "fp-ts/lib/Endomorphism.js"
 import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date.js"
 import {
   when as _when,
@@ -15,8 +15,8 @@ import {
   pass as _pass,
 } from "./Applicative.js"
 import { until as _until } from "./Monad.js"
-import { constVoid, flow } from "fp-ts/function"
-import { Predicate } from "fp-ts/Predicate"
+import { constVoid, flow } from "fp-ts/lib/function.js"
+import { Predicate } from "fp-ts/lib/Predicate.js"
 
 /**
  * Wait for the specified number of milliseconds before resolving.

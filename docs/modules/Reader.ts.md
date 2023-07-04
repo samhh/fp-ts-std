@@ -39,7 +39,7 @@ runReader :: r -> Reader r a -> a
 
 ```ts
 import { runReader } from 'fp-ts-std/Reader'
-import { pipe } from 'fp-ts/function'
+import { pipe } from 'fp-ts/lib/function'
 import * as R from 'fp-ts/Reader'
 
 type Env = { dependency: string }

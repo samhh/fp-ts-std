@@ -66,8 +66,8 @@ runReaderTask :: r -> ReaderTask r a -> Task a
 
 ```ts
 import { runReaderTask } from 'fp-ts-std/ReaderTask'
-import { pipe } from 'fp-ts/function'
-import * as RT from 'fp-ts/ReaderTask'
+import { pipe } from 'fp-ts/lib/function'
+import * as RT from 'fp-ts/lib/ReaderTask'
 
 type Env = { dependency: string }
 const env: Env = { dependency: 'dependency ' }

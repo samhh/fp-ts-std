@@ -12,7 +12,7 @@ import {
   Bifunctor3,
   Bifunctor3C,
   Bifunctor4,
-} from "fp-ts/Bifunctor"
+} from "fp-ts/lib/Bifunctor.js"
 
 /**
  * Apply a function to both elements of a bifunctor.

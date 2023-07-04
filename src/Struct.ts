@@ -5,8 +5,8 @@
  * @since 0.14.0
  */
 
-import { pipe } from "fp-ts/function"
-import * as A from "fp-ts/Array"
+import { pipe } from "fp-ts/lib/function.js"
+import * as A from "fp-ts/lib/Array.js"
 import { fanout } from "./Tuple.js"
 import { uncurry2 } from "./Function.js"
 

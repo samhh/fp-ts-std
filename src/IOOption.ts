@@ -4,15 +4,15 @@
  * @since 0.16.0
  */
 
-import * as IOO from "fp-ts/IOOption"
+import * as IOO from "fp-ts/lib/IOOption.js"
 import IOOption = IOO.IOOption
-import * as IO from "fp-ts/IO"
+import * as IO from "fp-ts/lib/IO.js"
 import { execute as executeIO } from "./IO.js"
 import {
   unsafeUnwrap as unsafeUnwrapO,
   unsafeExpect as unsafeExpectO,
 } from "./Option.js"
-import { flow } from "fp-ts/function"
+import { flow } from "fp-ts/lib/function.js"
 import { pass as _pass } from "./Applicative.js"
 
 /**

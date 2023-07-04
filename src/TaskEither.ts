@@ -4,16 +4,16 @@
  * @since 0.12.0
  */
 
-import { TaskEither } from "fp-ts/TaskEither"
-import * as TE from "fp-ts/TaskEither"
-import * as T from "fp-ts/Task"
+import { TaskEither } from "fp-ts/lib/TaskEither.js"
+import * as TE from "fp-ts/lib/TaskEither.js"
+import * as T from "fp-ts/lib/Task.js"
 import { execute as executeT } from "./Task.js"
 import {
   unsafeUnwrap as unsafeUnwrapE,
   unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either.js"
-import { constVoid, flow } from "fp-ts/function"
-import { Show } from "fp-ts/Show"
+import { constVoid, flow } from "fp-ts/lib/function.js"
+import { Show } from "fp-ts/lib/Show.js"
 import { pass as _pass } from "./Applicative.js"
 
 /**

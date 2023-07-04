@@ -4,15 +4,15 @@
  * @since 0.15.0
  */
 
-import * as TO from "fp-ts/TaskOption"
+import * as TO from "fp-ts/lib/TaskOption.js"
 import TaskOption = TO.TaskOption
-import * as T from "fp-ts/Task"
+import * as T from "fp-ts/lib/Task.js"
 import { execute as executeT } from "./Task.js"
 import {
   unsafeUnwrap as unsafeUnwrapO,
   unsafeExpect as unsafeExpectO,
 } from "./Option.js"
-import { flow } from "fp-ts/function"
+import { flow } from "fp-ts/lib/function.js"
 import { pass as _pass } from "./Applicative.js"
 
 /**

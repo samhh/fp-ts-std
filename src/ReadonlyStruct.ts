@@ -5,9 +5,9 @@
  * @since 0.14.0
  */
 
-import { pipe } from "fp-ts/function"
-import * as RR from "fp-ts/ReadonlyRecord"
-import * as RA from "fp-ts/ReadonlyArray"
+import { pipe } from "fp-ts/lib/function.js"
+import * as RR from "fp-ts/lib/ReadonlyRecord.js"
+import * as RA from "fp-ts/lib/ReadonlyArray.js"
 import { fanout } from "./Tuple.js"
 import { uncurry2 } from "./Function.js"
 
