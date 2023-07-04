@@ -16,3 +16,4 @@ sd 'from "(.+).js"$' 'from "$1"' ./docs-workdir/src/*.ts
 
 rm -rf ./docs/
 mv ./docs-workdir/docs/ ./docs
+rm -r ./docs-workdir/
