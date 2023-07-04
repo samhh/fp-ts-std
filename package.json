@@ -36,7 +36,6 @@
     "lint": "eslint ./src/ ./test/ --ext ts",
     "fmt": "prettier .",
     "test": "jest",
-    "docs-ci": "docs-ts",
     "docs": "docs-ts && tshm-docs-ts ./docs/modules/*",
     "prepublish": "yarn run build"
   },
