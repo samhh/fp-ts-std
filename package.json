@@ -47,7 +47,7 @@
     "@types/jsdom": "^21.1.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "docs-ts": "^0.7.2",
+    "docs-ts": "^0.8.0",
     "eslint": "^8.0.1",
     "eslint-plugin-functional": "^5.0.8",
     "fast-check": "^3.1.2",

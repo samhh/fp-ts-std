@@ -1446,14 +1446,14 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-docs-ts@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/docs-ts/-/docs-ts-0.7.2.tgz#ee4f34a1f9d11a91bd37d2cae7a0952b8e6efdfd"
-  integrity sha512-9zydJV84gi0imZWdVPHHqar7yIx6wRpwRHc4aJ3pw9vov/4pAmjfEPPE5gXRtiPFf+3WqOrE4qC6ih1kBJGl9w==
+docs-ts@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/docs-ts/-/docs-ts-0.8.0.tgz#48e43a9d38ac5ee1c6354e5fb80706175c9db411"
+  integrity sha512-Z++SYRAoJJnWrLZNHKkalIyroJQAppqnfrjoc8pmAr/k3wxZvl7YFd9mocVEAhIZwUEkzUl6luBaAlsJip3sdw==
   dependencies:
     chalk "^2.4.2"
     doctrine "^3.0.0"
-    fp-ts "^2.13.2"
+    fp-ts "^2.15.0"
     fs-extra "^7.0.1"
     glob "^7.1.6"
     io-ts "^2.2.20"
@@ -1715,7 +1715,18 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
-fast-glob@^3.2.5, fast-glob@^3.2.9:
+fast-glob@^3.2.5:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.0.tgz#7c40cb491e1e2ed5664749e87bfb516dbe8727c0"
+  integrity sha512-ChDuvbOypPuNjO8yIDf36x7BlZX1smcUMTTcyoIjycexOxd6DFsKsg21qVBzEmr3G7fUKIRy2/psii+CIUt7FA==
+  dependencies:
+    "@nodelib/fs.stat" "^2.0.2"
+    "@nodelib/fs.walk" "^1.2.3"
+    glob-parent "^5.1.2"
+    merge2 "^1.3.0"
+    micromatch "^4.0.4"
+
+fast-glob@^3.2.9:
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.12.tgz#7f39ec99c2e6ab030337142da9e0c18f37afae80"
   integrity sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==
@@ -1823,12 +1834,7 @@ fp-ts-laws@^0.3.0:
   resolved "https://registry.yarnpkg.com/fp-ts-laws/-/fp-ts-laws-0.3.0.tgz#428639e087081317cdbf96fc7958449fb8c42602"
   integrity sha512-uCLBnZq429UDYIx7TDsKmIOXQvgVfEFJMDBbJ2OljpW19cCEF+UgwoGnTfq6AYkHofFlkd6t0p3a9HB1OXTiaA==
 
-fp-ts@^2.13.2:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.15.0.tgz#ed1ff6fc9a072176ec2310e20e814077bb391545"
-  integrity sha512-3o6EllAvGuCsDgjM+frscLKDRPR9pqbrg13tJ13z86F4eni913kBV8h85rM6zpu2fEvJ8RWA0ouYlUWwHEmxTg==
-
-fp-ts@^2.16.0:
+fp-ts@^2.15.0, fp-ts@^2.16.0:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.16.0.tgz#64e03314dfc1c7ce5e975d3496ac14bc3eb7f92e"
   integrity sha512-bLq+KgbiXdTEoT1zcARrWEpa5z6A/8b7PcDW7Gef3NSisQ+VS7ll2Xbf1E+xsgik0rWub/8u0qP/iTTjj+PhxQ==
