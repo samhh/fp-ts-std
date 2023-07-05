@@ -99,7 +99,7 @@ Added in v0.17.0
 ## fromString
 
 Build a `URLPath` from a string containing any parts. For an infallible
-alternative taking only a pathname, consider `fromPathnamename`.
+alternative taking only a pathname, consider `fromPathname`.
 
 **Signature**
 

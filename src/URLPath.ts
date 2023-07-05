@@ -135,7 +135,7 @@ export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
 // fallible: example "//"
 /**
  * Build a `URLPath` from a string containing any parts. For an infallible
- * alternative taking only a pathname, consider `fromPathnamename`.
+ * alternative taking only a pathname, consider `fromPathname`.
  *
  * @example
  * import { pipe, constant } from 'fp-ts/function';
