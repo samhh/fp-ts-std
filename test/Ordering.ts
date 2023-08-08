@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { LT, EQ, GT } from "../src/Ordering"
 import * as Num from "fp-ts/number"
 

@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { toMonoid, memptyWhen, memptyUnless } from "../src/Monoid"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"

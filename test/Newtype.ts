@@ -1,3 +1,4 @@
+import { describe, it } from "@jest/globals"
 import { pack, unpack, over } from "../src/Newtype"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { multiply } from "../src/Number"

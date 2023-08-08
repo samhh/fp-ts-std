@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { mapBoth } from "../src/Bifunctor"
 import * as Tuple from "fp-ts/Tuple"
 import * as E from "fp-ts/Either"

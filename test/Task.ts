@@ -1,5 +1,6 @@
 /* eslint-disable functional/no-expression-statements */
 
+import { describe, it, expect, jest } from "@jest/globals"
 import fc from "fast-check"
 import {
   sleep,
@@ -22,7 +23,9 @@ import { add } from "../src/Number"
 
 const flushPromises = (): Promise<void> =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-  new Promise(jest.requireActual("timers").setImmediate)
+  new Promise(
+    jest.requireActual<typeof import("timers")>("timers").setImmediate,
+  )
 
 describe("Task", () => {
   describe("sleep", () => {

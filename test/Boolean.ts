@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { invert, and, or, xor, Bounded, Enum } from "../src/Boolean"
 import { flow } from "fp-ts/function"
 import * as O from "fp-ts/Option"

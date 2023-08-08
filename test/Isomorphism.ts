@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import fc from "fast-check"
 import * as laws from "fp-ts-laws"
 import {

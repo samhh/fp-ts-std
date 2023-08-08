@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { contramap, Contravariant } from "../src/Show"
 import { Show } from "fp-ts/Show"
 import { fromNumber } from "../src/String"

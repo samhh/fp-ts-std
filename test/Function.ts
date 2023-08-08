@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import * as F from "../src/Function"
 import {
   withIndex,

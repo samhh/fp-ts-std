@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { clone, unsafeParse, parse, parseO, isURL } from "../src/URL"
 import fc from "fast-check"
 import { constant } from "fp-ts/function"

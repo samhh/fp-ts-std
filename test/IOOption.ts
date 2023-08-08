@@ -1,3 +1,4 @@
+import { describe, it, expect } from "@jest/globals"
 import { unsafeUnwrap, unsafeExpect, pass } from "../src/IOOption"
 import * as IOO from "fp-ts/IOOption"
 import { Lazy } from "../src/Lazy"

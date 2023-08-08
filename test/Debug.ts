@@ -1,5 +1,6 @@
 /* eslint-disable functional/no-expression-statements */
 
+import { describe, it, expect, jest } from "@jest/globals"
 import { trace, traceWithValue, traceShowWithValue } from "../src/Debug"
 import fc from "fast-check"
 import { constVoid } from "fp-ts/function"
