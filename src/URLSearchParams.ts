@@ -10,7 +10,7 @@ import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { construct, invoke, isInstanceOf } from "./Function"
+import { invoke, isInstanceOf } from "./Function"
 import { Predicate } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
@@ -23,6 +23,10 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
 import Eq = Eq_.Eq
 
+const constructor = (
+  x: ConstructorParameters<typeof URLSearchParams>[0],
+): URLSearchParams => new URLSearchParams(x)
+
 /**
  * An empty `URLSearchParams`.
  *
@@ -34,7 +38,7 @@ import Eq = Eq_.Eq
  * @category 3 Functions
  * @since 0.2.0
  */
-export const empty: URLSearchParams = construct(URLSearchParams)([])
+export const empty: URLSearchParams = constructor(undefined)
 
 /**
  * Test if there are any search params.
@@ -64,8 +68,7 @@ export const isEmpty: Predicate<URLSearchParams> = u =>
  * @category 3 Functions
  * @since 0.2.0
  */
-export const fromString = (x: string): URLSearchParams =>
-  pipe([x], construct(URLSearchParams))
+export const fromString: (x: string) => URLSearchParams = constructor
 
 /**
  * Returns a query string suitable for use in a URL, absent a question mark.
@@ -95,8 +98,8 @@ export const toString = (x: URLSearchParams): string => x.toString()
  * @category 3 Functions
  * @since 0.2.0
  */
-export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
-  pipe([x], construct(URLSearchParams))
+export const fromTuples: (x: Array<[string, string]>) => URLSearchParams =
+  constructor
 
 /**
  * Construct a `URLSearchParams` from a single key/value pair.
@@ -204,8 +207,7 @@ export const Eq: Eq<URLSearchParams> = Eq_.contramap(toRecord)(
  * @category 3 Functions
  * @since 0.2.0
  */
-export const clone = (x: URLSearchParams): URLSearchParams =>
-  pipe([x], construct(URLSearchParams))
+export const clone: (x: URLSearchParams) => URLSearchParams = constructor
 
 /**
  * Refine a foreign value to `URLSearchParams`.
