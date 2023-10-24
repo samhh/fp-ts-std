@@ -18,6 +18,7 @@ Added in v0.2.0
 - [1 Typeclass Instances](#1-typeclass-instances)
   - [Eq](#eq)
 - [3 Functions](#3-functions)
+  - [appendAt](#appendat)
   - [clone](#clone)
   - [empty](#empty)
   - [fromRecord](#fromrecord)
@@ -64,6 +65,37 @@ assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('a=1&b=2')), false)
 Added in v0.18.0
 
 # 3 Functions
+
+## appendAt
+
+Append a URL parameter in a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const appendAt: (k: string) => (v: string) => Endomorphism<URLSearchParams>
+```
+
+```hs
+appendAt :: string -> string -> Endomorphism URLSearchParams
+```
+
+**Example**
+
+```ts
+import { appendAt, lookup, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d')
+const y = appendAt('c')('e')(x)
+
+const f = lookup('c')
+
+assert.deepStrictEqual(f(x), O.some(['d']))
+assert.deepStrictEqual(f(y), O.some(['d', 'e']))
+```
+
+Added in v0.18.0
 
 ## clone
 

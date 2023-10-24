@@ -359,3 +359,30 @@ export const setParam =
     y.set(k, v) // eslint-disable-line functional/no-expression-statements
     return y
   }
+
+/**
+ * Append a URL parameter in a `URLSearchParams`.
+ *
+ * @example
+ * import { appendAt, lookup, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const x = fromString('a=b&c=d')
+ * const y = appendAt('c')('e')(x)
+ *
+ * const f = lookup('c')
+ *
+ * assert.deepStrictEqual(f(x), O.some(['d']))
+ * assert.deepStrictEqual(f(y), O.some(['d', 'e']))
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const appendAt =
+  (k: string) =>
+  (v: string): Endomorphism<URLSearchParams> =>
+  (x): URLSearchParams => {
+    const y = clone(x)
+    y.append(k, v) // eslint-disable-line functional/no-expression-statements
+    return y
+  }

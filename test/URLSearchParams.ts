@@ -15,6 +15,7 @@ import {
   upsertAt,
   singleton,
   Eq,
+  appendAt,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import { keys } from "fp-ts/Record"
@@ -274,6 +275,27 @@ describe("URLSearchParams", () => {
 
     it("is lawful", () => {
       laws.eq(Eq, arb)
+    })
+  })
+
+  describe("appendAt", () => {
+    const f = appendAt
+
+    it("does not overwrite preexisting keys", () => {
+      const xs = fromString("a=1&b=2")
+      const ys = f("a")("3")(xs)
+
+      expect(lookup("a")(ys)).toEqual(O.some(["1", "3"]))
+    })
+
+    it("always increases the size of the dataset", () => {
+      fc.assert(
+        fc.property(arb, fc.string(), fc.string(), (xs, k, v) =>
+          expect(toString(f(k)(v)(xs)).length).toBeGreaterThan(
+            toString(xs).length,
+          ),
+        ),
+      )
     })
   })
 })
