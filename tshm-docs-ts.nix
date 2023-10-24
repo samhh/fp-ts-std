@@ -26,6 +26,7 @@ stdenv.mkDerivation rec {
   meta = {
     homepage = "https://github.com/samhh/tshm";
     license = lib.licenses.mit;
-    platforms = [ "x86_64-linux" "x86_64-darwin" ];
+    # Assuming Rosetta for aarch64-darwin.
+    platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
   };
 }
