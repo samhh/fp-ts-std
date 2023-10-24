@@ -20,6 +20,7 @@ Added in v0.2.0
 - [3 Functions](#3-functions)
   - [appendAt](#appendat)
   - [clone](#clone)
+  - [deleteAt](#deleteat)
   - [empty](#empty)
   - [fromRecord](#fromrecord)
   - [fromString](#fromstring)
@@ -123,6 +124,37 @@ assert.deepStrictEqual(x, clone(x))
 ```
 
 Added in v0.2.0
+
+## deleteAt
+
+Delete all URL parameters with the specified key.
+
+**Signature**
+
+```ts
+export declare const deleteAt: (k: string) => Endomorphism<URLSearchParams>
+```
+
+```hs
+deleteAt :: string -> Endomorphism URLSearchParams
+```
+
+**Example**
+
+```ts
+import { deleteAt, lookup, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d&a=e')
+const y = deleteAt('a')(x)
+
+const f = lookup('a')
+
+assert.deepStrictEqual(f(x), O.some(['b', 'e']))
+assert.deepStrictEqual(f(y), O.none)
+```
+
+Added in v0.18.0
 
 ## empty
 

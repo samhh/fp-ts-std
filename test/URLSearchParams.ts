@@ -16,6 +16,7 @@ import {
   singleton,
   Eq,
   appendAt,
+  deleteAt,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import { keys } from "fp-ts/Record"
@@ -292,6 +293,28 @@ describe("URLSearchParams", () => {
       fc.assert(
         fc.property(arb, fc.string(), fc.string(), (xs, k, v) =>
           expect(toString(f(k)(v)(xs)).length).toBeGreaterThan(
+            toString(xs).length,
+          ),
+        ),
+      )
+    })
+  })
+
+  describe("deleteAt", () => {
+    const f = deleteAt
+
+    it("deletes all values with the associated key", () => {
+      const xs = fromString("a=1&b=2&a=3")
+      const ys = f("a")(xs)
+
+      expect(lookup("a")(xs)).toEqual(O.some(["1", "3"]))
+      expect(lookup("a")(ys)).toEqual(O.none)
+    })
+
+    it("never increases the size of the dataset", () => {
+      fc.assert(
+        fc.property(arb, fc.string(), (xs, k) =>
+          expect(toString(f(k)(xs)).length).toBeLessThanOrEqual(
             toString(xs).length,
           ),
         ),

@@ -386,3 +386,29 @@ export const appendAt =
     y.append(k, v) // eslint-disable-line functional/no-expression-statements
     return y
   }
+
+/**
+ * Delete all URL parameters with the specified key.
+ *
+ * @example
+ * import { deleteAt, lookup, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const x = fromString('a=b&c=d&a=e')
+ * const y = deleteAt('a')(x)
+ *
+ * const f = lookup('a')
+ *
+ * assert.deepStrictEqual(f(x), O.some(['b', 'e']))
+ * assert.deepStrictEqual(f(y), O.none)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const deleteAt =
+  (k: string): Endomorphism<URLSearchParams> =>
+  x => {
+    const y = clone(x)
+    y.delete(k) // eslint-disable-line functional/no-expression-statements
+    return y
+  }
