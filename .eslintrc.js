@@ -15,7 +15,7 @@ module.exports = {
     "functional/prefer-tacit": 2,
     "functional/no-expression-statements": [
       2,
-      { ignorePattern: "(describe)|(it)|(expect)|(fc.)|(laws.)" },
+      { ignoreCodePattern: "(describe)|(it)|(expect)|(fc.)|(laws.)" },
     ],
     // Tripped in Jest suites
     "functional/no-return-void": [2, { ignoreInferredTypes: true }],
