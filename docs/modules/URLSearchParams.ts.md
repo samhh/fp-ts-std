@@ -15,6 +15,8 @@ Added in v0.2.0
 
 <h2 class="text-delta">Table of contents</h2>
 
+- [1 Typeclass Instances](#1-typeclass-instances)
+  - [Eq](#eq)
 - [3 Functions](#3-functions)
   - [clone](#clone)
   - [empty](#empty)
@@ -32,6 +34,30 @@ Added in v0.2.0
   - [toTuples](#totuples)
 
 ---
+
+# 1 Typeclass Instances
+
+## Eq
+
+An `Eq` instance for `URLSearchParams` in which equivalence is determined
+without respect to order.
+
+**Signature**
+
+```ts
+export declare const Eq: Eq_.Eq<URLSearchParams>
+```
+
+**Example**
+
+```ts
+import { Eq, fromString as f } from 'fp-ts-std/URLSearchParams'
+
+assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('b=2&a=3&a=1')), true)
+assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('a=1&b=2')), false)
+```
+
+Added in v0.18.0
 
 # 3 Functions
 

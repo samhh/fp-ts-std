@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## 0.18.0 (_Unreleased_)
 
 - Add `until` to `Monad`, `IO`, and `Task`.
-- Add `singleton` to `URLSearchParams`.
+- Add `singleton` and an `Eq` instance to `URLSearchParams`.
 
 ## 0.17.1 (2023-06-17)
 

@@ -15,11 +15,13 @@ import { Predicate } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
 import * as A from "fp-ts/Array"
-import { fromIterable } from "./Array"
+import { fromIterable, getDisorderedEq } from "./Array"
 import { mapSnd } from "fp-ts/Tuple"
 import * as Str from "fp-ts/string"
 import { withFst } from "./Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
+import * as Eq_ from "fp-ts/Eq"
+import Eq = Eq_.Eq
 
 /**
  * An empty `URLSearchParams`.
@@ -170,6 +172,23 @@ export const toRecord = (
     toTuples(x),
     mapSnd(NEA.of),
   )
+
+/**
+ * An `Eq` instance for `URLSearchParams` in which equivalence is determined
+ * without respect to order.
+ *
+ * @example
+ * import { Eq, fromString as f } from 'fp-ts-std/URLSearchParams'
+ *
+ * assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('b=2&a=3&a=1')), true)
+ * assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('a=1&b=2')), false)
+ *
+ * @category 1 Typeclass Instances
+ * @since 0.18.0
+ */
+export const Eq: Eq<URLSearchParams> = Eq_.contramap(toRecord)(
+  R.getEq(getDisorderedEq(Str.Ord)),
+)
 
 /**
  * Clone a `URLSearchParams`.

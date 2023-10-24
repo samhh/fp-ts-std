@@ -14,12 +14,18 @@ import {
   getAllForParam,
   setParam,
   singleton,
+  Eq,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import { keys } from "fp-ts/Record"
 import * as O from "fp-ts/Option"
 import * as T from "fp-ts/Tuple"
 import { flip, pipe } from "fp-ts/function"
+import * as laws from "fp-ts-laws"
+
+const arb: fc.Arbitrary<URLSearchParams> = fc
+  .webQueryParameters()
+  .map(fromString)
 
 describe("URLSearchParams", () => {
   describe("empty", () => {
@@ -248,6 +254,26 @@ describe("URLSearchParams", () => {
           f(k)(v)
         }),
       )
+    })
+  })
+
+  describe("Eq", () => {
+    const f = Eq.equals
+    const g = fromString
+
+    it("considers all key values", () => {
+      const x = "a=1&b=2&a=3"
+
+      expect(f(g(x), g(x))).toBe(true)
+      expect(f(g(x), g(x + "&b=4"))).toBe(false)
+    })
+
+    it("disregards order", () => {
+      expect(f(g("a=1&b=2"), g("b=2&a=1"))).toBe(true)
+    })
+
+    it("is lawful", () => {
+      laws.eq(Eq, arb)
     })
   })
 })
