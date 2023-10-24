@@ -1,6 +1,6 @@
 /**
  * Various functions to aid in working with JavaScript's `URLSearchParams`
- * interface.
+ * interface. It can be thought of similarly to `Map<string, Array<string>>`.
  *
  * @since 0.2.0
  */

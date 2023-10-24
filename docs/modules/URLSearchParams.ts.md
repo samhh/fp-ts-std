@@ -7,7 +7,7 @@ parent: Modules
 ## URLSearchParams overview
 
 Various functions to aid in working with JavaScript's `URLSearchParams`
-interface.
+interface. It can be thought of similarly to `Map<string, Array<string>>`.
 
 Added in v0.2.0
 
