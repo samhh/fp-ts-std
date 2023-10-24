@@ -11,8 +11,8 @@ import { curry2 } from "./Function"
 import * as O from "fp-ts/Option"
 import * as Bounded_ from "fp-ts/Bounded"
 type Bounded<A> = Bounded_.Bounded<A>
-import * as Enum_ from "./Enum"
-import Enum = Enum_.Enum
+import type { Enum as _Enum } from "./Enum"
+type Enum<A> = _Enum<A>
 import * as L from "./Lazy"
 
 /**

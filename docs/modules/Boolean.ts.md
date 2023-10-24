@@ -60,7 +60,11 @@ An `Enum` instance for booleans.
 **Signature**
 
 ```ts
-export declare const Enum: Enum_.Enum<boolean>
+export declare const Enum: _Enum<boolean>
+```
+
+```hs
+Enum :: _Enum boolean
 ```
 
 **Example**
