@@ -13,12 +13,13 @@ import {
   getParam,
   getAllForParam,
   setParam,
+  singleton,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import { keys } from "fp-ts/Record"
 import * as O from "fp-ts/Option"
 import * as T from "fp-ts/Tuple"
-import { flip } from "fp-ts/function"
+import { flip, pipe } from "fp-ts/function"
 
 describe("URLSearchParams", () => {
   describe("empty", () => {
@@ -226,6 +227,27 @@ describe("URLSearchParams", () => {
 
       expect(x.get("x")).toBe("z")
       expect(y.get("x")).toBe("y")
+    })
+  })
+
+  describe("singleton", () => {
+    const f = singleton
+
+    it("is always retrievable", () => {
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (k, v) =>
+          expect(pipe(f(k)(v), getParam(k))).toEqual(O.some(v)),
+        ),
+      )
+    })
+
+    it("never throws", () => {
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (k, v) => {
+          // eslint-disable-next-line functional/no-expression-statements
+          f(k)(v)
+        }),
+      )
     })
   })
 })

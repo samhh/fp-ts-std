@@ -26,6 +26,7 @@ Added in v0.2.0
   - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
   - [setParam](#setparam)
+  - [singleton](#singleton)
   - [toRecord](#torecord)
   - [toString](#tostring)
   - [toTuples](#totuples)
@@ -306,6 +307,30 @@ assert.deepStrictEqual(f(y), O.some('e'))
 ```
 
 Added in v0.1.0
+
+## singleton
+
+Construct a `URLSearchParams` from a single key/value pair.
+
+**Signature**
+
+```ts
+export declare const singleton: (k: string) => (v: string) => URLSearchParams
+```
+
+```hs
+singleton :: string -> string -> URLSearchParams
+```
+
+**Example**
+
+```ts
+import { singleton } from 'fp-ts-std/URLSearchParams'
+
+assert.deepStrictEqual(singleton('k')('v'), new URLSearchParams({ k: 'v' }))
+```
+
+Added in v0.18.0
 
 ## toRecord
 

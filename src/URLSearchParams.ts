@@ -97,6 +97,22 @@ export const fromTuples = (x: Array<[string, string]>): URLSearchParams =>
   pipe([x], construct(URLSearchParams))
 
 /**
+ * Construct a `URLSearchParams` from a single key/value pair.
+ *
+ * @example
+ * import { singleton } from 'fp-ts-std/URLSearchParams'
+ *
+ * assert.deepStrictEqual(singleton('k')('v'), new URLSearchParams({ k: 'v' }))
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const singleton =
+  (k: string) =>
+  (v: string): URLSearchParams =>
+    fromTuples([[k, v]])
+
+/**
  * Losslessly convert a `URLSearchParams` to an array of tuples.
  *
  * @example
