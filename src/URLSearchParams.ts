@@ -267,6 +267,27 @@ export const getParam: (k: string) => (ps: URLSearchParams) => Option<string> =
  * Attempt to get all matches for a URL parameter from a `URLSearchParams`.
  *
  * @example
+ * import { lookup, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const x = fromString('a=b&c=d1&c=d2')
+ *
+ * assert.deepStrictEqual(lookup('a')(x), O.some(['b']))
+ * assert.deepStrictEqual(lookup('c')(x), O.some(['d1', 'd2']))
+ * assert.deepStrictEqual(lookup('e')(x), O.none)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const lookup = (
+  k: string,
+): ((ps: URLSearchParams) => Option<NonEmptyArray<string>>) =>
+  flow(invoke("getAll")([k]), NEA.fromArray)
+
+/**
+ * Attempt to get all matches for a URL parameter from a `URLSearchParams`.
+ *
+ * @example
  * import { getAllForParam, fromString } from 'fp-ts-std/URLSearchParams'
  * import * as O from 'fp-ts/Option'
  *
@@ -276,13 +297,13 @@ export const getParam: (k: string) => (ps: URLSearchParams) => Option<string> =
  * assert.deepStrictEqual(getAllForParam('c')(x), O.some(['d1', 'd2']))
  * assert.deepStrictEqual(getAllForParam('e')(x), O.none)
  *
- * @category 3 Functions
+ * @deprecated Prefer `lookup`.
+ * @category 5 Zone of Death
  * @since 0.16.0
  */
-export const getAllForParam = (
+export const getAllForParam: (
   k: string,
-): ((ps: URLSearchParams) => Option<NonEmptyArray<string>>) =>
-  flow(invoke("getAll")([k]), NEA.fromArray)
+) => (ps: URLSearchParams) => Option<NonEmptyArray<string>> = lookup
 
 /**
  * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.

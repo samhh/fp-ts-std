@@ -11,7 +11,7 @@ import {
   isURLSearchParams,
   isEmpty,
   lookupFirst,
-  getAllForParam,
+  lookup,
   setParam,
   singleton,
   Eq,
@@ -201,8 +201,8 @@ describe("URLSearchParams", () => {
     })
   })
 
-  describe("getAllForParam", () => {
-    const f = flip(getAllForParam)(fromString("a=b1&a=b2"))
+  describe("lookup", () => {
+    const f = flip(lookup)(fromString("a=b1&a=b2"))
 
     it("works", () => {
       expect(f("a")).toEqual(O.some(["b1", "b2"]))

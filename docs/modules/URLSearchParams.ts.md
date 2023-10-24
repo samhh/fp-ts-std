@@ -23,9 +23,9 @@ Added in v0.2.0
   - [fromRecord](#fromrecord)
   - [fromString](#fromstring)
   - [fromTuples](#fromtuples)
-  - [getAllForParam](#getallforparam)
   - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
+  - [lookup](#lookup)
   - [lookupFirst](#lookupfirst)
   - [setParam](#setparam)
   - [singleton](#singleton)
@@ -33,6 +33,7 @@ Added in v0.2.0
   - [toString](#tostring)
   - [toTuples](#totuples)
 - [5 Zone of Death](#5-zone-of-death)
+  - [~~getAllForParam~~](#getallforparam)
   - [~~getParam~~](#getparam)
 
 ---
@@ -196,35 +197,6 @@ assert.deepStrictEqual(fromTuples(x), new URLSearchParams(x))
 
 Added in v0.2.0
 
-## getAllForParam
-
-Attempt to get all matches for a URL parameter from a `URLSearchParams`.
-
-**Signature**
-
-```ts
-export declare const getAllForParam: (k: string) => (ps: URLSearchParams) => Option<NonEmptyArray<string>>
-```
-
-```hs
-getAllForParam :: string -> URLSearchParams -> Option (NonEmptyArray string)
-```
-
-**Example**
-
-```ts
-import { getAllForParam, fromString } from 'fp-ts-std/URLSearchParams'
-import * as O from 'fp-ts/Option'
-
-const x = fromString('a=b&c=d1&c=d2')
-
-assert.deepStrictEqual(getAllForParam('a')(x), O.some(['b']))
-assert.deepStrictEqual(getAllForParam('c')(x), O.some(['d1', 'd2']))
-assert.deepStrictEqual(getAllForParam('e')(x), O.none)
-```
-
-Added in v0.16.0
-
 ## isEmpty
 
 Test if there are any search params.
@@ -276,6 +248,35 @@ assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), fal
 ```
 
 Added in v0.1.0
+
+## lookup
+
+Attempt to get all matches for a URL parameter from a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const lookup: (k: string) => (ps: URLSearchParams) => Option<NonEmptyArray<string>>
+```
+
+```hs
+lookup :: string -> URLSearchParams -> Option (NonEmptyArray string)
+```
+
+**Example**
+
+```ts
+import { lookup, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d1&c=d2')
+
+assert.deepStrictEqual(lookup('a')(x), O.some(['b']))
+assert.deepStrictEqual(lookup('c')(x), O.some(['d1', 'd2']))
+assert.deepStrictEqual(lookup('e')(x), O.none)
+```
+
+Added in v0.18.0
 
 ## lookupFirst
 
@@ -443,6 +444,35 @@ assert.deepStrictEqual(toTuples(x), [
 Added in v0.17.0
 
 # 5 Zone of Death
+
+## ~~getAllForParam~~
+
+Attempt to get all matches for a URL parameter from a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const getAllForParam: (k: string) => (ps: URLSearchParams) => Option<NonEmptyArray<string>>
+```
+
+```hs
+getAllForParam :: string -> URLSearchParams -> Option (NonEmptyArray string)
+```
+
+**Example**
+
+```ts
+import { getAllForParam, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d1&c=d2')
+
+assert.deepStrictEqual(getAllForParam('a')(x), O.some(['b']))
+assert.deepStrictEqual(getAllForParam('c')(x), O.some(['d1', 'd2']))
+assert.deepStrictEqual(getAllForParam('e')(x), O.none)
+```
+
+Added in v0.16.0
 
 ## ~~getParam~~
 
