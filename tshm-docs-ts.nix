@@ -1,7 +1,6 @@
-# This is a bit lazy at the moment, supporting only Linux x86_64 and assuming
-# the need to patch dynamic links for NixOS.
+# This is a bit lazy at the moment, supporting only Linux x86_64.
 
-{ fetchurl, lib, pkgs, stdenv }:
+{ fetchurl, lib, stdenv }:
 
 stdenv.mkDerivation rec {
   pname = "tshm-docs-ts";
@@ -20,16 +19,6 @@ stdenv.mkDerivation rec {
     cp $src $out/bin/tshm-docs-ts
     chmod +x $out/bin/tshm-docs-ts
   '';
-
-  preFixup =
-    let
-      patchelf = "${pkgs.patchelf}/bin/patchelf";
-      linker = stdenv.cc.bintools.dynamicLinker;
-      libPath = with pkgs; lib.makeLibraryPath [ gmp ];
-    in
-    ''
-      ${patchelf} --set-interpreter ${linker} --set-rpath ${libPath} $out/bin/tshm-docs-ts
-    '';
 
   meta = {
     homepage = "https://github.com/samhh/tshm";
