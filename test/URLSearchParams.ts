@@ -12,7 +12,7 @@ import {
   isEmpty,
   lookupFirst,
   lookup,
-  setParam,
+  upsertAt,
   singleton,
   Eq,
 } from "../src/URLSearchParams"
@@ -210,8 +210,8 @@ describe("URLSearchParams", () => {
     })
   })
 
-  describe("setParam", () => {
-    const f = setParam("x")("y")
+  describe("upsertAt", () => {
+    const f = upsertAt("x")("y")
 
     describe("returns updated data", () => {
       it("creates new property", () => {

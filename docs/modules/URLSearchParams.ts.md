@@ -27,14 +27,15 @@ Added in v0.2.0
   - [isURLSearchParams](#isurlsearchparams)
   - [lookup](#lookup)
   - [lookupFirst](#lookupfirst)
-  - [setParam](#setparam)
   - [singleton](#singleton)
   - [toRecord](#torecord)
   - [toString](#tostring)
   - [toTuples](#totuples)
+  - [upsertAt](#upsertat)
 - [5 Zone of Death](#5-zone-of-death)
   - [~~getAllForParam~~](#getallforparam)
   - [~~getParam~~](#getparam)
+  - [~~setParam~~](#setparam)
 
 ---
 
@@ -306,37 +307,6 @@ assert.deepStrictEqual(lookupFirst('e')(x), O.none)
 
 Added in v0.18.0
 
-## setParam
-
-Set a URL parameter in a `URLSearchParams`.
-
-**Signature**
-
-```ts
-export declare const setParam: (k: string) => (v: string) => Endomorphism<URLSearchParams>
-```
-
-```hs
-setParam :: string -> string -> Endomorphism URLSearchParams
-```
-
-**Example**
-
-```ts
-import { setParam, getParam, fromString } from 'fp-ts-std/URLSearchParams'
-import * as O from 'fp-ts/Option'
-
-const x = fromString('a=b&c=d')
-const y = setParam('c')('e')(x)
-
-const f = getParam('c')
-
-assert.deepStrictEqual(f(x), O.some('d'))
-assert.deepStrictEqual(f(y), O.some('e'))
-```
-
-Added in v0.1.0
-
 ## singleton
 
 Construct a `URLSearchParams` from a single key/value pair.
@@ -443,6 +413,37 @@ assert.deepStrictEqual(toTuples(x), [
 
 Added in v0.17.0
 
+## upsertAt
+
+Insert or replace a URL parameter in a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const upsertAt: (k: string) => (v: string) => Endomorphism<URLSearchParams>
+```
+
+```hs
+upsertAt :: string -> string -> Endomorphism URLSearchParams
+```
+
+**Example**
+
+```ts
+import { upsertAt, lookupFirst, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d')
+const y = upsertAt('c')('e')(x)
+
+const f = lookupFirst('c')
+
+assert.deepStrictEqual(f(x), O.some('d'))
+assert.deepStrictEqual(f(y), O.some('e'))
+```
+
+Added in v0.18.0
+
 # 5 Zone of Death
 
 ## ~~getAllForParam~~
@@ -498,6 +499,37 @@ const x = fromString('a=b&c=d1&c=d2')
 
 assert.deepStrictEqual(getParam('c')(x), O.some('d1'))
 assert.deepStrictEqual(getParam('e')(x), O.none)
+```
+
+Added in v0.1.0
+
+## ~~setParam~~
+
+Set a URL parameter in a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const setParam: (k: string) => (v: string) => Endomorphism<URLSearchParams>
+```
+
+```hs
+setParam :: string -> string -> Endomorphism URLSearchParams
+```
+
+**Example**
+
+```ts
+import { setParam, lookupFirst, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d')
+const y = setParam('c')('e')(x)
+
+const f = lookupFirst('c')
+
+assert.deepStrictEqual(f(x), O.some('d'))
+assert.deepStrictEqual(f(y), O.some('e'))
 ```
 
 Added in v0.1.0

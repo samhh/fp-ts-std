@@ -306,21 +306,49 @@ export const getAllForParam: (
 ) => (ps: URLSearchParams) => Option<NonEmptyArray<string>> = lookup
 
 /**
- * Set a URL parameter in a `URLSearchParams`.
+ * Insert or replace a URL parameter in a `URLSearchParams`.
  *
  * @example
- * import { setParam, getParam, fromString } from 'fp-ts-std/URLSearchParams'
+ * import { upsertAt, lookupFirst, fromString } from 'fp-ts-std/URLSearchParams'
  * import * as O from 'fp-ts/Option'
  *
  * const x = fromString('a=b&c=d')
- * const y = setParam('c')('e')(x)
+ * const y = upsertAt('c')('e')(x)
  *
- * const f = getParam('c')
+ * const f = lookupFirst('c')
  *
  * assert.deepStrictEqual(f(x), O.some('d'))
  * assert.deepStrictEqual(f(y), O.some('e'))
  *
  * @category 3 Functions
+ * @since 0.18.0
+ */
+export const upsertAt =
+  (k: string) =>
+  (v: string): Endomorphism<URLSearchParams> =>
+  (x): URLSearchParams => {
+    const y = clone(x)
+    y.set(k, v) // eslint-disable-line functional/no-expression-statements
+    return y
+  }
+
+/**
+ * Set a URL parameter in a `URLSearchParams`.
+ *
+ * @example
+ * import { setParam, lookupFirst, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const x = fromString('a=b&c=d')
+ * const y = setParam('c')('e')(x)
+ *
+ * const f = lookupFirst('c')
+ *
+ * assert.deepStrictEqual(f(x), O.some('d'))
+ * assert.deepStrictEqual(f(y), O.some('e'))
+ *
+ * @deprecated Prefer `upsertAt`.
+ * @category 5 Zone of Death
  * @since 0.1.0
  */
 export const setParam =
