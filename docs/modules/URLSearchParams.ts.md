@@ -24,14 +24,16 @@ Added in v0.2.0
   - [fromString](#fromstring)
   - [fromTuples](#fromtuples)
   - [getAllForParam](#getallforparam)
-  - [getParam](#getparam)
   - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
+  - [lookupFirst](#lookupfirst)
   - [setParam](#setparam)
   - [singleton](#singleton)
   - [toRecord](#torecord)
   - [toString](#tostring)
   - [toTuples](#totuples)
+- [5 Zone of Death](#5-zone-of-death)
+  - [~~getParam~~](#getparam)
 
 ---
 
@@ -223,34 +225,6 @@ assert.deepStrictEqual(getAllForParam('e')(x), O.none)
 
 Added in v0.16.0
 
-## getParam
-
-Attempt to get the first match for a URL parameter from a `URLSearchParams`.
-
-**Signature**
-
-```ts
-export declare const getParam: (k: string) => (ps: URLSearchParams) => Option<string>
-```
-
-```hs
-getParam :: string -> URLSearchParams -> Option string
-```
-
-**Example**
-
-```ts
-import { getParam, fromString } from 'fp-ts-std/URLSearchParams'
-import * as O from 'fp-ts/Option'
-
-const x = fromString('a=b&c=d1&c=d2')
-
-assert.deepStrictEqual(getParam('c')(x), O.some('d1'))
-assert.deepStrictEqual(getParam('e')(x), O.none)
-```
-
-Added in v0.1.0
-
 ## isEmpty
 
 Test if there are any search params.
@@ -302,6 +276,34 @@ assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), fal
 ```
 
 Added in v0.1.0
+
+## lookupFirst
+
+Attempt to get the first match for a URL parameter from a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const lookupFirst: (k: string) => (ps: URLSearchParams) => Option<string>
+```
+
+```hs
+lookupFirst :: string -> URLSearchParams -> Option string
+```
+
+**Example**
+
+```ts
+import { lookupFirst, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d1&c=d2')
+
+assert.deepStrictEqual(lookupFirst('c')(x), O.some('d1'))
+assert.deepStrictEqual(lookupFirst('e')(x), O.none)
+```
+
+Added in v0.18.0
 
 ## setParam
 
@@ -439,3 +441,33 @@ assert.deepStrictEqual(toTuples(x), [
 ```
 
 Added in v0.17.0
+
+# 5 Zone of Death
+
+## ~~getParam~~
+
+Attempt to get the first match for a URL parameter from a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const getParam: (k: string) => (ps: URLSearchParams) => Option<string>
+```
+
+```hs
+getParam :: string -> URLSearchParams -> Option string
+```
+
+**Example**
+
+```ts
+import { getParam, fromString } from 'fp-ts-std/URLSearchParams'
+import * as O from 'fp-ts/Option'
+
+const x = fromString('a=b&c=d1&c=d2')
+
+assert.deepStrictEqual(getParam('c')(x), O.some('d1'))
+assert.deepStrictEqual(getParam('e')(x), O.none)
+```
+
+Added in v0.1.0

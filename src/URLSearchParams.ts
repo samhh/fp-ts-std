@@ -228,6 +228,26 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
  * Attempt to get the first match for a URL parameter from a `URLSearchParams`.
  *
  * @example
+ * import { lookupFirst, fromString } from 'fp-ts-std/URLSearchParams'
+ * import * as O from 'fp-ts/Option'
+ *
+ * const x = fromString('a=b&c=d1&c=d2')
+ *
+ * assert.deepStrictEqual(lookupFirst('c')(x), O.some('d1'))
+ * assert.deepStrictEqual(lookupFirst('e')(x), O.none)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const lookupFirst = (
+  k: string,
+): ((ps: URLSearchParams) => Option<string>) =>
+  flow(invoke("get")([k]), O.fromNullable)
+
+/**
+ * Attempt to get the first match for a URL parameter from a `URLSearchParams`.
+ *
+ * @example
  * import { getParam, fromString } from 'fp-ts-std/URLSearchParams'
  * import * as O from 'fp-ts/Option'
  *
@@ -236,13 +256,12 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
  * assert.deepStrictEqual(getParam('c')(x), O.some('d1'))
  * assert.deepStrictEqual(getParam('e')(x), O.none)
  *
- * @category 3 Functions
+ * @deprecated Prefer `lookupFirst`.
+ * @category 5 Zone of Death
  * @since 0.1.0
  */
-export const getParam = (
-  k: string,
-): ((ps: URLSearchParams) => Option<string>) =>
-  flow(invoke("get")([k]), O.fromNullable)
+export const getParam: (k: string) => (ps: URLSearchParams) => Option<string> =
+  lookupFirst
 
 /**
  * Attempt to get all matches for a URL parameter from a `URLSearchParams`.

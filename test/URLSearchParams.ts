@@ -10,7 +10,7 @@ import {
   clone,
   isURLSearchParams,
   isEmpty,
-  getParam,
+  lookupFirst,
   getAllForParam,
   setParam,
   singleton,
@@ -192,8 +192,8 @@ describe("URLSearchParams", () => {
     })
   })
 
-  describe("getParam", () => {
-    const f = flip(getParam)(fromString("a=b1&a=b2"))
+  describe("lookupFirst", () => {
+    const f = flip(lookupFirst)(fromString("a=b1&a=b2"))
 
     it("works", () => {
       expect(f("a")).toEqual(O.some("b1"))
@@ -242,7 +242,7 @@ describe("URLSearchParams", () => {
     it("is always retrievable", () => {
       fc.assert(
         fc.property(fc.string(), fc.string(), (k, v) =>
-          expect(pipe(f(k)(v), getParam(k))).toEqual(O.some(v)),
+          expect(pipe(f(k)(v), lookupFirst(k))).toEqual(O.some(v)),
         ),
       )
     })
