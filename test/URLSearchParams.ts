@@ -3,6 +3,7 @@ import {
   empty,
   fromString,
   toString,
+  toLeadingString,
   fromRecord,
   toRecord,
   fromTuples,
@@ -24,6 +25,7 @@ import * as O from "fp-ts/Option"
 import * as T from "fp-ts/Tuple"
 import { flip, pipe } from "fp-ts/function"
 import * as laws from "fp-ts-laws"
+import { not } from "fp-ts/Predicate"
 
 const arb: fc.Arbitrary<URLSearchParams> = fc
   .webQueryParameters()
@@ -65,6 +67,22 @@ describe("URLSearchParams", () => {
       const u = new URLSearchParams(s)
 
       expect(f(u)).toBe(s)
+    })
+  })
+
+  describe("toLeadingString", () => {
+    const f = toLeadingString
+
+    it("returns an empty string for empty params", () => {
+      expect(f(new URLSearchParams())).toBe("")
+    })
+
+    it("returns a prefixed string for non-empty params", () => {
+      expect(f(new URLSearchParams("a=b"))).toBe("?a=b")
+
+      fc.assert(
+        fc.property(arb.filter(not(isEmpty)), xs => expect(f(xs)[0]).toBe("?")),
+      )
     })
   })
 

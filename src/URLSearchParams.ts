@@ -10,14 +10,15 @@ import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
 import { flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { invoke, isInstanceOf } from "./Function"
-import { Predicate } from "fp-ts/Predicate"
+import { invoke, isInstanceOf, when } from "./Function"
+import { Predicate, not } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
 import * as A from "fp-ts/Array"
 import { fromIterable, getDisorderedEq } from "./Array"
 import { mapSnd } from "fp-ts/Tuple"
 import * as Str from "fp-ts/string"
+import { prepend } from "./String"
 import { withFst } from "./Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
@@ -84,6 +85,27 @@ export const fromString: (x: string) => URLSearchParams = constructor
  * @since 0.17.0
  */
 export const toString = (x: URLSearchParams): string => x.toString()
+
+/**
+ * Like `toString`, but includes a leading question mark if the params are
+ * non-empty.
+ *
+ * @example
+ * import { toString, toLeadingString } from 'fp-ts-std/URLSearchParams'
+ *
+ * assert.strictEqual(toString(new URLSearchParams('')), '')
+ * assert.strictEqual(toString(new URLSearchParams('a=b')), 'a=b')
+ *
+ * assert.strictEqual(toLeadingString(new URLSearchParams('')), '')
+ * assert.strictEqual(toLeadingString(new URLSearchParams('a=b')), '?a=b')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const toLeadingString: (xs: URLSearchParams) => string = flow(
+  toString,
+  when(not(Str.isEmpty))(prepend("?")),
+)
 
 /**
  * Parse a `URLSearchParams` from an array of tuples.

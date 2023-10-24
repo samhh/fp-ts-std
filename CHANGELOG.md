@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## 0.18.0 (_Unreleased_)
 
 - Add `until` to `Monad`, `IO`, and `Task`.
-- Add `singleton`, `appendAt`, `upsertAt`, `deleteAt`, `lookup`, `lookupFirst`, and an `Eq` instance to `URLSearchParams`.
+- Add `singleton`, `appendAt`, `upsertAt`, `deleteAt`, `lookup`, `lookupFirst`, `toLeadingString`, and an `Eq` instance to `URLSearchParams`.
 - Deprecate `getParam`, `getAllForParam`, and `setParam` in `URLSearchParams`.
 
 ## 0.17.1 (2023-06-17)

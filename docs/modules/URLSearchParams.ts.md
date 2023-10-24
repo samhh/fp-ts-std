@@ -30,6 +30,7 @@ Added in v0.2.0
   - [lookup](#lookup)
   - [lookupFirst](#lookupfirst)
   - [singleton](#singleton)
+  - [toLeadingString](#toleadingstring)
   - [toRecord](#torecord)
   - [toString](#tostring)
   - [toTuples](#totuples)
@@ -391,6 +392,35 @@ singleton :: string -> string -> URLSearchParams
 import { singleton } from 'fp-ts-std/URLSearchParams'
 
 assert.deepStrictEqual(singleton('k')('v'), new URLSearchParams({ k: 'v' }))
+```
+
+Added in v0.18.0
+
+## toLeadingString
+
+Like `toString`, but includes a leading question mark if the params are
+non-empty.
+
+**Signature**
+
+```ts
+export declare const toLeadingString: (xs: URLSearchParams) => string
+```
+
+```hs
+toLeadingString :: URLSearchParams -> string
+```
+
+**Example**
+
+```ts
+import { toString, toLeadingString } from 'fp-ts-std/URLSearchParams'
+
+assert.strictEqual(toString(new URLSearchParams('')), '')
+assert.strictEqual(toString(new URLSearchParams('a=b')), 'a=b')
+
+assert.strictEqual(toLeadingString(new URLSearchParams('')), '')
+assert.strictEqual(toLeadingString(new URLSearchParams('a=b')), '?a=b')
 ```
 
 Added in v0.18.0
