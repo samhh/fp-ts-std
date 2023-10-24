@@ -308,7 +308,7 @@ Added in v0.18.0
 
 ## setParam
 
-Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
+Set a URL parameter in a `URLSearchParams`.
 
 **Signature**
 

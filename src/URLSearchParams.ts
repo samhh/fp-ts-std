@@ -306,7 +306,7 @@ export const getAllForParam: (
 ) => (ps: URLSearchParams) => Option<NonEmptyArray<string>> = lookup
 
 /**
- * Set a URL parameter in a `URLSearchParams`. This does not mutate the input.
+ * Set a URL parameter in a `URLSearchParams`.
  *
  * @example
  * import { setParam, getParam, fromString } from 'fp-ts-std/URLSearchParams'
