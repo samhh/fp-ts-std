@@ -453,3 +453,19 @@ export const deleteAt =
  */
 export const keys = (x: URLSearchParams): Array<string> =>
   fromIterable(x.keys())
+
+/**
+ * Get a flattened array of all the values in a `URLSearchParams`.
+ *
+ * @example
+ * import { values, fromString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = fromString('a=b&c=d&a=e')
+ *
+ * assert.deepStrictEqual(values(x), ['b', 'd', 'e'])
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const values = (x: URLSearchParams): Array<string> =>
+  fromIterable(x.values())

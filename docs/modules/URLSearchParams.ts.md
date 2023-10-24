@@ -36,6 +36,7 @@ Added in v0.2.0
   - [toString](#tostring)
   - [toTuples](#totuples)
   - [upsertAt](#upsertat)
+  - [values](#values)
 - [5 Zone of Death](#5-zone-of-death)
   - [~~getAllForParam~~](#getallforparam)
   - [~~getParam~~](#getparam)
@@ -562,6 +563,32 @@ const f = lookupFirst('c')
 
 assert.deepStrictEqual(f(x), O.some('d'))
 assert.deepStrictEqual(f(y), O.some('e'))
+```
+
+Added in v0.18.0
+
+## values
+
+Get a flattened array of all the values in a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const values: (x: URLSearchParams) => Array<string>
+```
+
+```hs
+values :: URLSearchParams -> Array string
+```
+
+**Example**
+
+```ts
+import { values, fromString } from 'fp-ts-std/URLSearchParams'
+
+const x = fromString('a=b&c=d&a=e')
+
+assert.deepStrictEqual(values(x), ['b', 'd', 'e'])
 ```
 
 Added in v0.18.0

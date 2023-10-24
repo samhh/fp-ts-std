@@ -19,6 +19,7 @@ import {
   appendAt,
   deleteAt,
   keys,
+  values,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import * as R from "fp-ts/Record"
@@ -28,7 +29,7 @@ import * as T from "fp-ts/Tuple"
 import { flip, pipe } from "fp-ts/function"
 import * as laws from "fp-ts-laws"
 import { not } from "fp-ts/Predicate"
-import { withSnd } from "../src/Tuple"
+import { withFst, withSnd } from "../src/Tuple"
 
 const arb: fc.Arbitrary<URLSearchParams> = fc
   .webQueryParameters()
@@ -355,6 +356,23 @@ describe("URLSearchParams", () => {
           const xs = pipe(ks, A.map(withSnd("foo")))
 
           expect(f(new URLSearchParams(xs))).toEqual(ks)
+        }),
+      )
+    })
+  })
+
+  describe("values", () => {
+    const f = values
+
+    it("returns all values", () => {
+      expect(f(new URLSearchParams())).toEqual([])
+      expect(f(new URLSearchParams("a=1&b=2&a=3"))).toEqual(["1", "2", "3"])
+
+      fc.assert(
+        fc.property(fc.array(fc.string()), vs => {
+          const xs = pipe(vs, A.map(withFst("foo")))
+
+          expect(f(new URLSearchParams(xs))).toEqual(vs)
         }),
       )
     })
