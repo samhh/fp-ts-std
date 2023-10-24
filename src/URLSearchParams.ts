@@ -436,3 +436,20 @@ export const deleteAt =
     y.delete(k) // eslint-disable-line functional/no-expression-statements
     return y
   }
+
+/**
+ * Get an unsorted, potentially duplicative array of the keys in a
+ * `URLSearchParams`.
+ *
+ * @example
+ * import { keys, fromString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = fromString('a=b&c=d&a=e')
+ *
+ * assert.deepStrictEqual(keys(x), ['a', 'c', 'a'])
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const keys = (x: URLSearchParams): Array<string> =>
+  fromIterable(x.keys())

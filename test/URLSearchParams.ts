@@ -18,14 +18,17 @@ import {
   Eq,
   appendAt,
   deleteAt,
+  keys,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
-import { keys } from "fp-ts/Record"
+import * as R from "fp-ts/Record"
 import * as O from "fp-ts/Option"
+import * as A from "fp-ts/Array"
 import * as T from "fp-ts/Tuple"
 import { flip, pipe } from "fp-ts/function"
 import * as laws from "fp-ts-laws"
 import { not } from "fp-ts/Predicate"
+import { withSnd } from "../src/Tuple"
 
 const arb: fc.Arbitrary<URLSearchParams> = fc
   .webQueryParameters()
@@ -106,7 +109,7 @@ describe("URLSearchParams", () => {
           fc.dictionary(fc.string(), fc.array(fc.string(), { minLength: 1 })),
           x => {
             const y = f(x)
-            return keys(x).every(z => y.has(z))
+            return R.keys(x).every(z => y.has(z))
           },
         ),
       )
@@ -336,6 +339,23 @@ describe("URLSearchParams", () => {
             toString(xs).length,
           ),
         ),
+      )
+    })
+  })
+
+  describe("keys", () => {
+    const f = keys
+
+    it("returns all keys", () => {
+      expect(f(new URLSearchParams())).toEqual([])
+      expect(f(new URLSearchParams("a=1&b=2&a=3"))).toEqual(["a", "b", "a"])
+
+      fc.assert(
+        fc.property(fc.array(fc.string()), ks => {
+          const xs = pipe(ks, A.map(withSnd("foo")))
+
+          expect(f(new URLSearchParams(xs))).toEqual(ks)
+        }),
       )
     })
   })

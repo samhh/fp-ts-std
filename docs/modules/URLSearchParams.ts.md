@@ -27,6 +27,7 @@ Added in v0.2.0
   - [fromTuples](#fromtuples)
   - [isEmpty](#isempty)
   - [isURLSearchParams](#isurlsearchparams)
+  - [keys](#keys)
   - [lookup](#lookup)
   - [lookupFirst](#lookupfirst)
   - [singleton](#singleton)
@@ -314,6 +315,33 @@ assert.deepStrictEqual(isURLSearchParams({ not: { a: 'urlsearchparams' } }), fal
 ```
 
 Added in v0.1.0
+
+## keys
+
+Get an unsorted, potentially duplicative array of the keys in a
+`URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const keys: (x: URLSearchParams) => Array<string>
+```
+
+```hs
+keys :: URLSearchParams -> Array string
+```
+
+**Example**
+
+```ts
+import { keys, fromString } from 'fp-ts-std/URLSearchParams'
+
+const x = fromString('a=b&c=d&a=e')
+
+assert.deepStrictEqual(keys(x), ['a', 'c', 'a'])
+```
+
+Added in v0.18.0
 
 ## lookup
 
