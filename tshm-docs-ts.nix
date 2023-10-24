@@ -23,5 +23,6 @@ stdenv.mkDerivation rec {
   meta = {
     homepage = "https://github.com/samhh/tshm";
     license = lib.licenses.mit;
+    platforms = [ "x86_64-linux" ];
   };
 }
