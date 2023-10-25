@@ -12,6 +12,7 @@ import {
   negate,
   fromString,
   floatFromString,
+  integerFromString,
   fromStringWithRadix,
   isFinite,
   toFinite,
@@ -105,8 +106,17 @@ describe("Number", () => {
       expect(f("abc")).toBe(O.none)
     })
 
-    it("returns some for integer", () => {
+    it("returns some(3) for '3'", () => {
       expect(f("3")).toStrictEqual(O.some(3))
+      fc.assert(
+        fc.property(fc.integer(), x =>
+          expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
+        ),
+      )
+    })
+
+    it("returns some(3.3) for '3.3'", () => {
+      expect(f("3.3")).toStrictEqual(O.some(3.3))
       fc.assert(
         fc.property(fc.integer(), x =>
           expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
@@ -134,6 +144,32 @@ describe("Number", () => {
         fc.property(
           fc.float({ noNaN: true }).filter(Pred.not(isNegativeZero)),
           x => expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
+        ),
+      )
+    })
+  })
+
+  describe("integerFromString", () => {
+    const f = integerFromString
+
+    it("returns none for non-number", () => {
+      expect(f("abc")).toBe(O.none)
+    })
+
+    it("returns some(3) for '3'", () => {
+      expect(f("3")).toStrictEqual(O.some(3))
+      fc.assert(
+        fc.property(fc.integer(), x =>
+          expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
+        ),
+      )
+    })
+
+    it("returns some(3) for '3.3'", () => {
+      expect(f("3.3")).toStrictEqual(O.some(3))
+      fc.assert(
+        fc.property(fc.integer(), x =>
+          expect(f(fromNumber(x))).toStrictEqual(O.some(x)),
         ),
       )
     })

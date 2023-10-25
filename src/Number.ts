@@ -60,13 +60,17 @@ export const fromStringWithRadix =
  * import { some, none } from 'fp-ts/Option'
  *
  * assert.deepStrictEqual(fromString('3'), some(3))
- * assert.deepStrictEqual(fromString('abc'), none)
+ * assert.deepStrictEqual(fromString('3.3'), some(3.3))
+ * assert.deepStrictEqual(fromString('0xF'), some(15))
+ * assert.deepStrictEqual(fromString('xyz'), none)
  *
  * @category 3 Functions
  * @since 0.1.0
  */
-export const fromString: (string: string) => Option<number> =
-  fromStringWithRadix(10)
+export const fromString: (string: string) => Option<number> = flow(
+  Number,
+  O.fromPredicate(isValid),
+)
 
 /**
  * Convert a string to a floating point number.
@@ -85,6 +89,23 @@ export const floatFromString: (x: string) => Option<number> = flow(
   Number.parseFloat,
   O.fromPredicate(isValid),
 )
+
+/**
+ * Convert a string to an integer.
+ *
+ * @example
+ * import { integerFromString } from 'fp-ts-std/Number'
+ * import { some, none } from 'fp-ts/Option'
+ *
+ * assert.deepStrictEqual(integerFromString('3'), some(3))
+ * assert.deepStrictEqual(integerFromString('3.3'), some(3))
+ * assert.deepStrictEqual(integerFromString('abc'), none)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const integerFromString: (string: string) => Option<number> =
+  fromStringWithRadix(10)
 
 /**
  * Increment a number.
