@@ -19,6 +19,7 @@ Added in v0.1.0
   - [isURL](#isurl)
   - [parse](#parse)
   - [parseO](#parseo)
+  - [toString](#tostring)
   - [unsafeParse](#unsafeparse)
 
 ---
@@ -134,6 +135,33 @@ assert.deepStrictEqual(parseO('invalid'), O.none)
 ```
 
 Added in v0.1.0
+
+## toString
+
+Build a string from every piece of a `URL`. Includes a trailing `/` when the
+pathname is empty.
+
+**Signature**
+
+```ts
+export declare const toString: (x: URL) => string
+```
+
+```hs
+toString :: URL -> string
+```
+
+**Example**
+
+```ts
+import { toString } from 'fp-ts-std/URL'
+
+const u = 'https://samhh.com/foo.bar'
+
+assert.strictEqual(toString(new URL(u)), u)
+```
+
+Added in v0.18.0
 
 ## unsafeParse
 

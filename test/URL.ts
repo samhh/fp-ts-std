@@ -1,9 +1,10 @@
 import { describe, it, expect } from "@jest/globals"
-import { clone, unsafeParse, parse, parseO, isURL } from "../src/URL"
+import { clone, unsafeParse, parse, parseO, isURL, toString } from "../src/URL"
 import fc from "fast-check"
-import { constant } from "fp-ts/function"
+import { constant, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
+import { Endomorphism } from "fp-ts/lib/Endomorphism"
 
 const validUrl = "https://a:b@c.d.e:1/f/g.h?i=j&k=l&i=m#n"
 
@@ -98,6 +99,28 @@ describe("URL", () => {
     it("works", () => {
       expect(f({})).toBe(false)
       expect(f(unsafeParse("https://samhh.com"))).toBe(true)
+    })
+  })
+
+  describe("toString", () => {
+    const f = toString
+
+    it("is the same as prototypal toString and href", () => {
+      const u = new URL(validUrl)
+      const x = f(u)
+
+      expect(x).toBe(u.toString())
+      expect(x).toBe(u.href)
+    })
+
+    it("is lossless (excluding formatting)", () => {
+      fc.assert(
+        fc.property(
+          fc.webUrl({ withFragments: true, withQueryParameters: true }),
+          x =>
+            pipe(x, unsafeParse, f, unsafeParse, f) === pipe(x, unsafeParse, f),
+        ),
+      )
     })
   })
 })

@@ -104,3 +104,19 @@ export const parseO: (href: string) => Option<URL> = flow(
  * @since 0.1.0
  */
 export const isURL: Refinement<unknown, URL> = isInstanceOf(URL)
+
+/**
+ * Build a string from every piece of a `URL`. Includes a trailing `/` when the
+ * pathname is empty.
+ *
+ * @example
+ * import { toString } from 'fp-ts-std/URL'
+ *
+ * const u = 'https://samhh.com/foo.bar'
+ *
+ * assert.strictEqual(toString(new URL(u)), u)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const toString = (x: URL): string => x.toString()
