@@ -16,6 +16,7 @@ import {
   upsertAt,
   singleton,
   Eq,
+  Semigroup,
   appendAt,
   deleteAt,
   keys,
@@ -453,6 +454,22 @@ describe("URLSearchParams", () => {
 
       expect(xa).toBe(xb)
       expect(ya).toBe(yb)
+    })
+  })
+
+  describe("Semigroup", () => {
+    const f = Semigroup.concat
+
+    it("keeps all key/value pairs", () => {
+      const xs = fromString("a=1&b=2&a=3")
+      const ys = fromString("b=4&c=5")
+
+      expect(f(xs, ys)).toEqual(fromString("a=1&a=3&b=4&b=2&c=5"))
+      expect(f(ys, xs)).toEqual(fromString("b=2&b=4&c=5&a=1&a=3"))
+    })
+
+    it("is lawful", () => {
+      laws.semigroup(Semigroup, Eq, arb)
     })
   })
 })

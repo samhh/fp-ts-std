@@ -8,9 +8,9 @@
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
-import { flow, pipe } from "fp-ts/function"
+import { constant, flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { invoke, isInstanceOf, when } from "./Function"
+import { invoke, isInstanceOf, uncurry2, when } from "./Function"
 import { Predicate, not } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
@@ -23,6 +23,8 @@ import { withFst } from "./Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
 import Eq = Eq_.Eq
+import * as Semigroup_ from "fp-ts/Semigroup"
+import Semigroup = Semigroup_.Semigroup
 
 const constructor = (
   x: ConstructorParameters<typeof URLSearchParams>[0],
@@ -547,3 +549,25 @@ export const concatBy =
 
     return zs
   }
+
+/**
+ * A `Semigroup` instance for `URLSearchParams` in which all key/value pairs
+ * are preserved.
+ *
+ * @example
+ * import { Semigroup, fromString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const xs = fromString("a=1&b=2&a=3")
+ * const ys = fromString("b=4&c=5")
+ *
+ * const f = Semigroup.concat
+ *
+ * assert.deepStrictEqual(f(xs, ys), fromString("a=1&a=3&b=4&b=2&c=5"))
+ * assert.deepStrictEqual(f(ys, xs), fromString("b=2&b=4&c=5&a=1&a=3"))
+ *
+ * @category 1 Typeclass Instances
+ * @since 0.18.0
+ */
+export const Semigroup: Semigroup<URLSearchParams> = {
+  concat: (x, y) => concatBy(constant(uncurry2(A.concat)))(x)(y),
+}

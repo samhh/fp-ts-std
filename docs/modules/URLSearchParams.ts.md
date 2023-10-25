@@ -17,6 +17,7 @@ Added in v0.2.0
 
 - [1 Typeclass Instances](#1-typeclass-instances)
   - [Eq](#eq)
+  - [Semigroup](#semigroup)
 - [3 Functions](#3-functions)
   - [appendAt](#appendat)
   - [clone](#clone)
@@ -66,6 +67,33 @@ import { Eq, fromString as f } from 'fp-ts-std/URLSearchParams'
 
 assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('b=2&a=3&a=1')), true)
 assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('a=1&b=2')), false)
+```
+
+Added in v0.18.0
+
+## Semigroup
+
+A `Semigroup` instance for `URLSearchParams` in which all key/value pairs
+are preserved.
+
+**Signature**
+
+```ts
+export declare const Semigroup: Semigroup_.Semigroup<URLSearchParams>
+```
+
+**Example**
+
+```ts
+import { Semigroup, fromString } from 'fp-ts-std/URLSearchParams'
+
+const xs = fromString('a=1&b=2&a=3')
+const ys = fromString('b=4&c=5')
+
+const f = Semigroup.concat
+
+assert.deepStrictEqual(f(xs, ys), fromString('a=1&a=3&b=4&b=2&c=5'))
+assert.deepStrictEqual(f(ys, xs), fromString('b=2&b=4&c=5&a=1&a=3'))
 ```
 
 Added in v0.18.0
