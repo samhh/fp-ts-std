@@ -1,10 +1,17 @@
 import { describe, it, expect } from "@jest/globals"
-import { clone, unsafeParse, parse, parseO, isURL, toString } from "../src/URL"
+import {
+  clone,
+  unsafeParse,
+  parse,
+  parseO,
+  isURL,
+  isStringlyURL,
+  toString,
+} from "../src/URL"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { Endomorphism } from "fp-ts/lib/Endomorphism"
 
 const validUrl = "https://a:b@c.d.e:1/f/g.h?i=j&k=l&i=m#n"
 
@@ -99,6 +106,17 @@ describe("URL", () => {
     it("works", () => {
       expect(f({})).toBe(false)
       expect(f(unsafeParse("https://samhh.com"))).toBe(true)
+    })
+  })
+
+  describe("isStringlyURL", () => {
+    const f = isStringlyURL
+
+    it("works", () => {
+      expect(f("invalid")).toBe(false)
+      expect(f(validUrl)).toBe(true)
+
+      fc.assert(fc.property(fc.webUrl(), f))
     })
   })
 

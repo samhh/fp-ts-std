@@ -8,10 +8,11 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { flow, identity } from "fp-ts/function"
+import { flow, identity, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { isInstanceOf } from "./Function"
 import { Endomorphism } from "fp-ts/Endomorphism"
+import { Predicate } from "fp-ts/Predicate"
 
 const constructor = (x: ConstructorParameters<typeof URL>[0]): URL => new URL(x)
 
@@ -104,6 +105,20 @@ export const parseO: (href: string) => Option<URL> = flow(
  * @since 0.1.0
  */
 export const isURL: Refinement<unknown, URL> = isInstanceOf(URL)
+
+/**
+ * Test if a string is a valid stringly representation of an absolute URL.
+ *
+ * @example
+ * import { isStringlyURL } from 'fp-ts-std/URL'
+ *
+ * assert.strictEqual(isStringlyURL('https://samhh.com'), true)
+ * assert.strictEqual(isStringlyURL('invalid'), false)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const isStringlyURL: Predicate<string> = URL.canParse
 
 /**
  * Build a string from every piece of a `URL`. Includes a trailing `/` when the

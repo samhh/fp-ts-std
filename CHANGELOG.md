@@ -5,7 +5,7 @@ This project adheres to semantic versioning.
 ## 0.18.0 (_Unreleased_)
 
 - Add `until` to `Monad`, `IO`, and `Task`.
-- Add `toString` to `URL`.
+- Add `toString` and `isStringlyURL` to `URL`.
 - Add `singleton`, `appendAt`, `upsertAt`, `deleteAt`, `lookup`, `lookupFirst`, `toLeadingString`, `keys`, `values`, `size`, `concatBy`, `fromMap` and `toMap`, and `Eq`, `Semigroup` and `Monoid` instances to `URLSearchParams`.
 - Add `integerFromString` to `Number`.
 - Fix `fromString` in `Number` not parsing floats.

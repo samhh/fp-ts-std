@@ -16,6 +16,7 @@ Added in v0.1.0
 
 - [3 Functions](#3-functions)
   - [clone](#clone)
+  - [isStringlyURL](#isstringlyurl)
   - [isURL](#isurl)
   - [parse](#parse)
   - [parseO](#parseo)
@@ -55,6 +56,31 @@ assert.strictEqual(y.pathname, '/foo')
 ```
 
 Added in v0.17.0
+
+## isStringlyURL
+
+Test if a string is a valid stringly representation of an absolute URL.
+
+**Signature**
+
+```ts
+export declare const isStringlyURL: Predicate<string>
+```
+
+```hs
+isStringlyURL :: Predicate string
+```
+
+**Example**
+
+```ts
+import { isStringlyURL } from 'fp-ts-std/URL'
+
+assert.strictEqual(isStringlyURL('https://samhh.com'), true)
+assert.strictEqual(isStringlyURL('invalid'), false)
+```
+
+Added in v0.18.0
 
 ## isURL
 
