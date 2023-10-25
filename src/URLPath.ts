@@ -243,7 +243,7 @@ export const toString: (x: URLPath) => string = flow(
  * @category 3 Functions
  * @since 0.17.0
  */
-export const getPathname: (x: URLPath) => string = flow(unpack, x => x.pathname)
+export const getPathname: (x: URLPath) => string = flow(unpack, URL.getPathname)
 
 /**
  * Modify the pathname component of a `URLPath`.
@@ -261,14 +261,7 @@ export const getPathname: (x: URLPath) => string = flow(unpack, x => x.pathname)
  */
 export const modifyPathname = (
   f: Endomorphism<string>,
-): Endomorphism<URLPath> =>
-  over(
-    flow(URL.clone, x => {
-      // eslint-disable-next-line
-      x.pathname = f(x.pathname)
-      return x
-    }),
-  )
+): Endomorphism<URLPath> => over(URL.modifyPathname(f))
 
 /**
  * Set the pathname component of a `URLPath`.
@@ -285,7 +278,7 @@ export const modifyPathname = (
  * @since 0.17.0
  */
 export const setPathname = (x: string): Endomorphism<URLPath> =>
-  modifyPathname(constant(x))
+  over(URL.setPathname(x))
 
 /**
  * Get the search params component of a `URLPath`.
@@ -303,7 +296,7 @@ export const setPathname = (x: string): Endomorphism<URLPath> =>
  */
 export const getParams: (x: URLPath) => URLSearchParams = flow(
   unpack,
-  x => x.searchParams,
+  URL.getParams,
 )
 
 /**
@@ -327,14 +320,7 @@ export const getParams: (x: URLPath) => URLSearchParams = flow(
  */
 export const modifyParams = (
   f: Endomorphism<URLSearchParams>,
-): Endomorphism<URLPath> =>
-  over(
-    flow(URL.clone, x => {
-      // eslint-disable-next-line
-      x.search = f(x.searchParams).toString()
-      return x
-    }),
-  )
+): Endomorphism<URLPath> => over(URL.modifyParams(f))
 
 /**
  * Set the search params component of a `URLPath`.
@@ -357,7 +343,7 @@ export const modifyParams = (
  * @since 0.17.0
  */
 export const setParams = (x: URLSearchParams): Endomorphism<URLPath> =>
-  modifyParams(constant(x))
+  over(URL.setParams(x))
 
 /**
  * Get the hash component of a `URLPath`.
@@ -373,7 +359,7 @@ export const setParams = (x: URLSearchParams): Endomorphism<URLPath> =>
  * @category 3 Functions
  * @since 0.17.0
  */
-export const getHash: (x: URLPath) => string = flow(unpack, x => x.hash)
+export const getHash: (x: URLPath) => string = flow(unpack, URL.getHash)
 
 /**
  * Modify the hash component of a `URLPath`.
@@ -394,13 +380,7 @@ export const getHash: (x: URLPath) => string = flow(unpack, x => x.hash)
  * @since 0.17.0
  */
 export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
-  over(
-    flow(URL.clone, x => {
-      // eslint-disable-next-line
-      x.hash = f(x.hash)
-      return x
-    }),
-  )
+  over(URL.modifyHash(f))
 
 /**
  * Set the hash component of a `URLPath`.
@@ -421,4 +401,4 @@ export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
  * @since 0.17.0
  */
 export const setHash = (x: string): Endomorphism<URLPath> =>
-  modifyHash(constant(x))
+  over(URL.setHash(x))
