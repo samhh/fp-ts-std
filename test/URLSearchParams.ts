@@ -17,6 +17,7 @@ import {
   singleton,
   Eq,
   Semigroup,
+  Monoid,
   appendAt,
   deleteAt,
   keys,
@@ -470,6 +471,12 @@ describe("URLSearchParams", () => {
 
     it("is lawful", () => {
       laws.semigroup(Semigroup, Eq, arb)
+    })
+  })
+
+  describe("Monoid", () => {
+    it("it lawful", () => {
+      laws.monoid(Monoid, Eq, arb)
     })
   })
 })

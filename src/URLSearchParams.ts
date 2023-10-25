@@ -23,8 +23,9 @@ import { withFst } from "./Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
 import Eq = Eq_.Eq
-import * as Semigroup_ from "fp-ts/Semigroup"
-import Semigroup = Semigroup_.Semigroup
+import type { Semigroup as SemigroupT } from "fp-ts/Semigroup"
+import * as Monoid_ from "fp-ts/Monoid"
+import Monoid = Monoid_.Monoid
 
 const constructor = (
   x: ConstructorParameters<typeof URLSearchParams>[0],
@@ -568,6 +569,23 @@ export const concatBy =
  * @category 1 Typeclass Instances
  * @since 0.18.0
  */
-export const Semigroup: Semigroup<URLSearchParams> = {
+export const Semigroup: SemigroupT<URLSearchParams> = {
   concat: (x, y) => concatBy(constant(uncurry2(A.concat)))(x)(y),
+}
+
+/**
+ * A `Monoid` instance for `URLSearchParams` in which all key/value pairs are
+ * preserved.
+ *
+ * @example
+ * import { Monoid, empty } from 'fp-ts-std/URLSearchParams'
+ *
+ * assert.deepStrictEqual(Monoid.empty, empty)
+ *
+ * @category 1 Typeclass Instances
+ * @since 0.18.0
+ */
+export const Monoid: Monoid<URLSearchParams> = {
+  ...Semigroup,
+  empty,
 }

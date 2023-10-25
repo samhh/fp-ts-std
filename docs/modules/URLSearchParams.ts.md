@@ -17,6 +17,7 @@ Added in v0.2.0
 
 - [1 Typeclass Instances](#1-typeclass-instances)
   - [Eq](#eq)
+  - [Monoid](#monoid)
   - [Semigroup](#semigroup)
 - [3 Functions](#3-functions)
   - [appendAt](#appendat)
@@ -71,6 +72,27 @@ assert.strictEqual(Eq.equals(f('a=1&b=2&a=3'), f('a=1&b=2')), false)
 
 Added in v0.18.0
 
+## Monoid
+
+A `Monoid` instance for `URLSearchParams` in which all key/value pairs are
+preserved.
+
+**Signature**
+
+```ts
+export declare const Monoid: Monoid_.Monoid<URLSearchParams>
+```
+
+**Example**
+
+```ts
+import { Monoid, empty } from 'fp-ts-std/URLSearchParams'
+
+assert.deepStrictEqual(Monoid.empty, empty)
+```
+
+Added in v0.18.0
+
 ## Semigroup
 
 A `Semigroup` instance for `URLSearchParams` in which all key/value pairs
@@ -79,7 +101,11 @@ are preserved.
 **Signature**
 
 ```ts
-export declare const Semigroup: Semigroup_.Semigroup<URLSearchParams>
+export declare const Semigroup: SemigroupT<URLSearchParams>
+```
+
+```hs
+Semigroup :: SemigroupT URLSearchParams
 ```
 
 **Example**
