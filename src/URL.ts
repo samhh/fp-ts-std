@@ -328,4 +328,17 @@ export const setHash: (x: string) => Endomorphism<URL> = flow(
  * @category 3 Functions
  * @since 0.18.0
  */
-export const getOrigin = (x: URL): string => x.origin;
+export const getOrigin = (x: URL): string => x.origin
+
+/**
+ * Get the hostname component of a `URL`.
+ *
+ * @example
+ * import { getHostname } from 'fp-ts-std/URL'
+ *
+ * assert.strictEqual(getHostname(new URL('https://foo.samhh.com/bar')), 'foo.samhh.com')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const getHostname = (x: URL): string => x.hostname

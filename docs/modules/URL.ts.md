@@ -17,6 +17,7 @@ Added in v0.1.0
 - [3 Functions](#3-functions)
   - [clone](#clone)
   - [getHash](#gethash)
+  - [getHostname](#gethostname)
   - [getOrigin](#getorigin)
   - [getParams](#getparams)
   - [getPathname](#getpathname)
@@ -89,6 +90,30 @@ import { getHash } from 'fp-ts-std/URL'
 const x = new URL('https://samhh.com#anchor')
 
 assert.strictEqual(getHash(x), '#anchor')
+```
+
+Added in v0.18.0
+
+## getHostname
+
+Get the hostname component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const getHostname: (x: URL) => string
+```
+
+```hs
+getHostname :: URL -> string
+```
+
+**Example**
+
+```ts
+import { getHostname } from 'fp-ts-std/URL'
+
+assert.strictEqual(getHostname(new URL('https://foo.samhh.com/bar')), 'foo.samhh.com')
 ```
 
 Added in v0.18.0
