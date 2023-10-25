@@ -198,6 +198,8 @@ export const toRecord = (
     mapSnd(NEA.of),
   )
 
+const EqValues = getDisorderedEq(Str.Ord)
+
 /**
  * An `Eq` instance for `URLSearchParams` in which equivalence is determined
  * without respect to order.
@@ -211,9 +213,22 @@ export const toRecord = (
  * @category 1 Typeclass Instances
  * @since 0.18.0
  */
-export const Eq: Eq<URLSearchParams> = Eq_.contramap(toRecord)(
-  R.getEq(getDisorderedEq(Str.Ord)),
-)
+export const Eq: Eq<URLSearchParams> = {
+  equals: (xs, ys) => {
+    if (size(xs) !== size(ys)) return false
+
+    const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
+    for (const k of ks) {
+      const mxvs = lookup(k)(xs)
+      const myvs = lookup(k)(ys)
+
+      if (O.isNone(mxvs) || O.isNone(myvs)) return false
+      if (!EqValues.equals(mxvs.value, myvs.value)) return false
+    }
+
+    return true
+  },
+}
 
 /**
  * Clone a `URLSearchParams`.

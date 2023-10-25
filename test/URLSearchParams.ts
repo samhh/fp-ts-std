@@ -288,6 +288,12 @@ describe("URLSearchParams", () => {
     const f = Eq.equals
     const g = fromString
 
+    it("compares", () => {
+      expect(f(g("a=1"), g("b=1"))).toBe(false)
+      expect(f(g("a=1"), g("a=2"))).toBe(false)
+      expect(f(g("a=1"), g("a=1"))).toBe(true)
+    })
+
     it("considers all key values", () => {
       const x = "a=1&b=2&a=3"
 
