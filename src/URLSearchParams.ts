@@ -469,3 +469,19 @@ export const keys = (x: URLSearchParams): Array<string> =>
  */
 export const values = (x: URLSearchParams): Array<string> =>
   fromIterable(x.values())
+
+/**
+ * Get the number of potentially duplicative key/value pairs in a
+ * `URLSearchParams`.
+ *
+ * @example
+ * import { size, fromString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = fromString('a=b&c=d&a=e')
+ *
+ * assert.strictEqual(size(x), 3)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const size = (x: URLSearchParams): number => x.size

@@ -31,6 +31,7 @@ Added in v0.2.0
   - [lookup](#lookup)
   - [lookupFirst](#lookupfirst)
   - [singleton](#singleton)
+  - [size](#size)
   - [toLeadingString](#toleadingstring)
   - [toRecord](#torecord)
   - [toString](#tostring)
@@ -421,6 +422,33 @@ singleton :: string -> string -> URLSearchParams
 import { singleton } from 'fp-ts-std/URLSearchParams'
 
 assert.deepStrictEqual(singleton('k')('v'), new URLSearchParams({ k: 'v' }))
+```
+
+Added in v0.18.0
+
+## size
+
+Get the number of potentially duplicative key/value pairs in a
+`URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const size: (x: URLSearchParams) => number
+```
+
+```hs
+size :: URLSearchParams -> number
+```
+
+**Example**
+
+```ts
+import { size, fromString } from 'fp-ts-std/URLSearchParams'
+
+const x = fromString('a=b&c=d&a=e')
+
+assert.strictEqual(size(x), 3)
 ```
 
 Added in v0.18.0

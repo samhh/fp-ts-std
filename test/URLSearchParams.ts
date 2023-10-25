@@ -20,6 +20,7 @@ import {
   deleteAt,
   keys,
   values,
+  size,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import * as R from "fp-ts/Record"
@@ -373,6 +374,25 @@ describe("URLSearchParams", () => {
           const xs = pipe(vs, A.map(withFst("foo")))
 
           expect(f(new URLSearchParams(xs))).toEqual(vs)
+        }),
+      )
+    })
+  })
+
+  describe("size", () => {
+    const f = size
+
+    it("is equivalent to the size of the total number of potentially duplicative keys", () => {
+      expect(f(new URLSearchParams())).toBe(0)
+      expect(f(new URLSearchParams("a=1&b=2&a=3"))).toBe(3)
+
+      fc.assert(
+        fc.property(fc.array(fc.string()), ks => {
+          const xs = pipe(ks, A.map(withSnd("foo")))
+          const ys = new URLSearchParams(xs)
+
+          expect(f(ys)).toEqual(A.size(ks))
+          expect(f(ys)).toEqual(A.size(keys(ys)))
         }),
       )
     })
