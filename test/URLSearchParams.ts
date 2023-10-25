@@ -448,6 +448,7 @@ describe("URLSearchParams", () => {
       const xa = x.toString()
       const ya = y.toString()
 
+      // eslint-disable-next-line functional/no-expression-statements
       concatBy(constant(uncurry2(A.concat)))(x)(y)
 
       const xb = x.toString()

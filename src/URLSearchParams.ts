@@ -217,6 +217,7 @@ const EqValues = getDisorderedEq(Str.Ord)
  * @since 0.18.0
  */
 export const Eq: Eq<URLSearchParams> = {
+  /* eslint-disable */
   equals: (xs, ys) => {
     if (size(xs) !== size(ys)) return false
 
@@ -231,6 +232,7 @@ export const Eq: Eq<URLSearchParams> = {
 
     return true
   },
+  /* eslint-enable */
 }
 
 /**
@@ -532,6 +534,7 @@ export const concatBy =
     ) => (vs: [NonEmptyArray<string>, NonEmptyArray<string>]) => Array<string>,
   ) =>
   (xs: URLSearchParams): Endomorphism<URLSearchParams> =>
+  /* eslint-disable */
   ys => {
     const zs = clone(empty)
     const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
@@ -550,6 +553,7 @@ export const concatBy =
 
     return zs
   }
+/* eslint-enable */
 
 /**
  * A `Semigroup` instance for `URLSearchParams` in which all key/value pairs
