@@ -8,7 +8,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { flow, identity, pipe } from "fp-ts/function"
+import { flow, identity } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { isInstanceOf } from "./Function"
 import { Endomorphism } from "fp-ts/Endomorphism"
@@ -118,6 +118,7 @@ export const isURL: Refinement<unknown, URL> = isInstanceOf(URL)
  * @category 3 Functions
  * @since 0.18.0
  */
+// eslint-disable-next-line @typescript-eslint/unbound-method
 export const isStringlyURL: Predicate<string> = URL.canParse
 
 /**
