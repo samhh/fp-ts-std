@@ -118,8 +118,8 @@ export const isURL: Refinement<unknown, URL> = isInstanceOf(URL)
  * @category 3 Functions
  * @since 0.18.0
  */
-// eslint-disable-next-line @typescript-eslint/unbound-method
-export const isStringlyURL: Predicate<string> = URL.canParse
+// Once browser support improves, use `URL.canParse`.
+export const isStringlyURL: Predicate<string> = flow(parseO, O.isSome)
 
 /**
  * Build a string from every piece of a `URL`. Includes a trailing `/` when the
