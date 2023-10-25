@@ -132,7 +132,6 @@ export const toURL =
 export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
   flow(toURL(identity)(baseUrl), O.fromEither)
 
-// fallible: example "//"
 /**
  * Build a `URLPath` from a string containing any parts. For an infallible
  * alternative taking only a pathname, consider `fromPathname`.
