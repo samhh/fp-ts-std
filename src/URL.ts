@@ -8,7 +8,7 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { flow, identity } from "fp-ts/function"
+import { constant, flow, identity } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { isInstanceOf } from "./Function"
 import { Endomorphism } from "fp-ts/Endomorphism"
@@ -136,3 +136,183 @@ export const isStringlyURL: Predicate<string> = URL.canParse
  * @since 0.18.0
  */
 export const toString = (x: URL): string => x.toString()
+
+/**
+ * Get the pathname component of a `URL`.
+ *
+ * @example
+ * import { getPathname } from 'fp-ts-std/URL'
+ *
+ * assert.strictEqual(getPathname(new URL('https://samhh.com/foo?bar=baz')), '/foo')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const getPathname = (x: URL): string => x.pathname
+
+/**
+ * Modify the pathname component of a `URL`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { modifyPathname, getPathname } from 'fp-ts-std/URL'
+ *
+ * const x = pipe(new URL('https://samhh.com/foo'), modifyPathname(s => s + 'bar'), getPathname)
+ *
+ * assert.strictEqual(x, '/foobar')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const modifyPathname = (f: Endomorphism<string>): Endomorphism<URL> =>
+  flow(clone, x => {
+    // eslint-disable-next-line
+    x.pathname = f(x.pathname)
+    return x
+  })
+
+/**
+ * Set the pathname component of a `URL`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { setPathname, getPathname } from 'fp-ts-std/URL'
+ *
+ * const x = pipe(new URL('https://samhh.com/foo'), setPathname('/bar'), getPathname)
+ *
+ * assert.strictEqual(x, '/bar')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const setPathname: (x: string) => Endomorphism<URL> = flow(
+  constant,
+  modifyPathname,
+)
+
+/**
+ * Get the search params component of a `URL`.
+ *
+ * @example
+ * import { getParams } from 'fp-ts-std/URL'
+ *
+ * const x = new URL('https://samhh.com/foo?a=b&c=d')
+ *
+ * assert.strictEqual(getParams(x).toString(), (new URLSearchParams('?a=b&c=d')).toString())
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const getParams = (x: URL): URLSearchParams => x.searchParams
+
+/**
+ * Modify the search params component of a `URL`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { modifyParams, getParams } from 'fp-ts-std/URL'
+ * import { upsertAt } from 'fp-ts-std/URLSearchParams'
+ *
+ * const x = pipe(
+ *   new URL('https://samhh.com/foo?a=b&c=d'),
+ *   modifyParams(upsertAt('a')('e')),
+ * )
+ *
+ * assert.deepStrictEqual(getParams(x).toString(), (new URLSearchParams('?a=e&c=d')).toString())
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const modifyParams = (
+  f: Endomorphism<URLSearchParams>,
+): Endomorphism<URL> =>
+  flow(clone, x => {
+    // eslint-disable-next-line
+    x.search = f(x.searchParams).toString()
+    return x
+  })
+
+/**
+ * Set the search params component of a `URL`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { setParams, getParams } from 'fp-ts-std/URL'
+ *
+ * const ps = new URLSearchParams('?c=d')
+ *
+ * const x = pipe(
+ *   new URL('https://samhh.com/foo?a=b'),
+ *   setParams(ps),
+ * )
+ *
+ * assert.deepStrictEqual(getParams(x).toString(), ps.toString())
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const setParams: (x: URLSearchParams) => Endomorphism<URL> = flow(
+  constant,
+  modifyParams,
+)
+
+/**
+ * Get the hash component of a `URL`.
+ *
+ * @example
+ * import { getHash } from 'fp-ts-std/URL'
+ *
+ * const x = new URL('https://samhh.com#anchor')
+ *
+ * assert.strictEqual(getHash(x), '#anchor')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const getHash = (x: URL): string => x.hash
+
+/**
+ * Modify the hash component of a `URL`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { modifyHash, getHash } from 'fp-ts-std/URL'
+ *
+ * const x = pipe(
+ *   new URL('https://samhh.com#anchor'),
+ *   modifyHash(s => s + '!'),
+ * )
+ *
+ * assert.strictEqual(getHash(x), '#anchor!')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const modifyHash = (f: Endomorphism<string>): Endomorphism<URL> =>
+  flow(clone, x => {
+    // eslint-disable-next-line
+    x.hash = f(x.hash)
+    return x
+  })
+
+/**
+ * Set the hash component of a `URL`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { setHash, getHash } from 'fp-ts-std/URL'
+ *
+ * const x = pipe(
+ *   new URL('https://samhh.com#anchor'),
+ *   setHash('ciao'),
+ * )
+ *
+ * assert.strictEqual(getHash(x), '#ciao')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const setHash: (x: string) => Endomorphism<URL> = flow(
+  constant,
+  modifyHash,
+)

@@ -7,13 +7,30 @@ import {
   isURL,
   isStringlyURL,
   toString,
+  getPathname,
+  modifyPathname,
+  setPathname,
+  getParams,
+  modifyParams,
+  setParams,
+  getHash,
+  modifyHash,
+  setHash,
 } from "../src/URL"
+import * as Params from "../src/URLSearchParams"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 
-const validUrl = "https://a:b@c.d.e:1/f/g.h?i=j&k=l&i=m#n"
+const validBase = "https://a:b@c.d.e:1"
+const validUrl = validBase + "/f/g.h?i=j&k=l&i=m#n"
+
+const fromPathname = (x: string): URL => {
+  const y = new URL(validBase)
+  y.pathname = x // eslint-disable-line
+  return y
+}
 
 describe("URL", () => {
   describe("clone", () => {
@@ -139,6 +156,121 @@ describe("URL", () => {
             pipe(x, unsafeParse, f, unsafeParse, f) === pipe(x, unsafeParse, f),
         ),
       )
+    })
+  })
+
+  describe("getPathname", () => {
+    const f = getPathname
+
+    it("returns the path", () => {
+      const x = "/foo/bar.baz"
+      expect(pipe(x, fromPathname, f)).toBe(x)
+    })
+  })
+
+  describe("setPathname", () => {
+    const f = setPathname
+
+    it("sets the path without mutating input", () => {
+      const x = fromPathname("foo")
+      const y = f("bar")(x)
+
+      expect(getPathname(x)).toBe("/foo")
+      expect(getPathname(y)).toBe("/bar")
+    })
+  })
+
+  describe("modifyPathname", () => {
+    const f = modifyPathname
+
+    it("modifies the path with the provided function without mutating input", () => {
+      const x = fromPathname("foo")
+      const y = f(s => s + "bar")(x)
+
+      expect(getPathname(x)).toBe("/foo")
+      expect(getPathname(y)).toBe("/foobar")
+    })
+  })
+
+  describe("getParams", () => {
+    const f = getParams
+
+    it("returns the search params", () => {
+      const s = "?a=b&c=d&a=e"
+      const r = new URL(validBase + s)
+      const p = new URLSearchParams(s)
+
+      expect(f(r)).toEqual(p)
+    })
+  })
+
+  describe("setParams", () => {
+    const f = setParams
+
+    it("sets the search params without mutating input", () => {
+      const s = "?a=b"
+      const p = new URLSearchParams(s)
+      const u = new URL(validBase + s)
+
+      const ss = "?c=d"
+      const pp = new URLSearchParams(ss)
+      const r = f(pp)(u)
+
+      expect(u.searchParams).toEqual(p)
+      expect(getParams(r)).toEqual(pp)
+    })
+  })
+
+  describe("modifyParams", () => {
+    const f = modifyParams
+
+    it("modifies the search params without mutating input", () => {
+      const s = "?a=b&c=d"
+      const p = new URLSearchParams(s)
+      const u = new URL(validBase + s)
+
+      const pp = new URLSearchParams("?a=e&c=d")
+      const r = pipe(u, f(Params.upsertAt("a")("e")))
+
+      expect(u.searchParams).toEqual(p)
+      expect(getParams(r)).toEqual(pp)
+    })
+  })
+
+  describe("getHash", () => {
+    const f = getHash
+
+    it("returns the hash", () => {
+      const h = "#foo"
+      const r = new URL(validBase + h)
+
+      expect(f(r)).toBe(h)
+    })
+  })
+
+  describe("setHash", () => {
+    const f = setHash
+
+    it("sets the hash without mutating input", () => {
+      const h = "#foo"
+      const x = new URL(validBase + h)
+      const y = f("bar")(x)
+
+      expect(getHash(x)).toBe("#foo")
+      expect(getHash(y)).toBe("#bar")
+    })
+  })
+
+  describe("modifyHash", () => {
+    const f = modifyHash
+
+    it("modifies the hash with the provided function without mutating input", () => {
+      const h = "#foo"
+      const x = new URL(validBase + h)
+      const y = f(s => s + "bar")(x)
+
+      expect(getHash(x)).toBe("#foo")
+      expect(getHash(y)).toBe("#foobar")
     })
   })
 })

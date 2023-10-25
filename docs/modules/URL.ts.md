@@ -16,10 +16,19 @@ Added in v0.1.0
 
 - [3 Functions](#3-functions)
   - [clone](#clone)
+  - [getHash](#gethash)
+  - [getParams](#getparams)
+  - [getPathname](#getpathname)
   - [isStringlyURL](#isstringlyurl)
   - [isURL](#isurl)
+  - [modifyHash](#modifyhash)
+  - [modifyParams](#modifyparams)
+  - [modifyPathname](#modifypathname)
   - [parse](#parse)
   - [parseO](#parseo)
+  - [setHash](#sethash)
+  - [setParams](#setparams)
+  - [setPathname](#setpathname)
   - [toString](#tostring)
   - [unsafeParse](#unsafeparse)
 
@@ -56,6 +65,82 @@ assert.strictEqual(y.pathname, '/foo')
 ```
 
 Added in v0.17.0
+
+## getHash
+
+Get the hash component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const getHash: (x: URL) => string
+```
+
+```hs
+getHash :: URL -> string
+```
+
+**Example**
+
+```ts
+import { getHash } from 'fp-ts-std/URL'
+
+const x = new URL('https://samhh.com#anchor')
+
+assert.strictEqual(getHash(x), '#anchor')
+```
+
+Added in v0.18.0
+
+## getParams
+
+Get the search params component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const getParams: (x: URL) => URLSearchParams
+```
+
+```hs
+getParams :: URL -> URLSearchParams
+```
+
+**Example**
+
+```ts
+import { getParams } from 'fp-ts-std/URL'
+
+const x = new URL('https://samhh.com/foo?a=b&c=d')
+
+assert.strictEqual(getParams(x).toString(), new URLSearchParams('?a=b&c=d').toString())
+```
+
+Added in v0.18.0
+
+## getPathname
+
+Get the pathname component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const getPathname: (x: URL) => string
+```
+
+```hs
+getPathname :: URL -> string
+```
+
+**Example**
+
+```ts
+import { getPathname } from 'fp-ts-std/URL'
+
+assert.strictEqual(getPathname(new URL('https://samhh.com/foo?bar=baz')), '/foo')
+```
+
+Added in v0.18.0
 
 ## isStringlyURL
 
@@ -106,6 +191,95 @@ assert.strictEqual(isURL({ not: { a: 'url' } }), false)
 ```
 
 Added in v0.1.0
+
+## modifyHash
+
+Modify the hash component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const modifyHash: (f: Endomorphism<string>) => Endomorphism<URL>
+```
+
+```hs
+modifyHash :: Endomorphism string -> Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { modifyHash, getHash } from 'fp-ts-std/URL'
+
+const x = pipe(
+  new URL('https://samhh.com#anchor'),
+  modifyHash((s) => s + '!')
+)
+
+assert.strictEqual(getHash(x), '#anchor!')
+```
+
+Added in v0.18.0
+
+## modifyParams
+
+Modify the search params component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const modifyParams: (f: Endomorphism<URLSearchParams>) => Endomorphism<URL>
+```
+
+```hs
+modifyParams :: Endomorphism URLSearchParams -> Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { modifyParams, getParams } from 'fp-ts-std/URL'
+import { upsertAt } from 'fp-ts-std/URLSearchParams'
+
+const x = pipe(new URL('https://samhh.com/foo?a=b&c=d'), modifyParams(upsertAt('a')('e')))
+
+assert.deepStrictEqual(getParams(x).toString(), new URLSearchParams('?a=e&c=d').toString())
+```
+
+Added in v0.18.0
+
+## modifyPathname
+
+Modify the pathname component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const modifyPathname: (f: Endomorphism<string>) => Endomorphism<URL>
+```
+
+```hs
+modifyPathname :: Endomorphism string -> Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { modifyPathname, getPathname } from 'fp-ts-std/URL'
+
+const x = pipe(
+  new URL('https://samhh.com/foo'),
+  modifyPathname((s) => s + 'bar'),
+  getPathname
+)
+
+assert.strictEqual(x, '/foobar')
+```
+
+Added in v0.18.0
 
 ## parse
 
@@ -161,6 +335,89 @@ assert.deepStrictEqual(parseO('invalid'), O.none)
 ```
 
 Added in v0.1.0
+
+## setHash
+
+Set the hash component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const setHash: (x: string) => Endomorphism<URL>
+```
+
+```hs
+setHash :: string -> Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { setHash, getHash } from 'fp-ts-std/URL'
+
+const x = pipe(new URL('https://samhh.com#anchor'), setHash('ciao'))
+
+assert.strictEqual(getHash(x), '#ciao')
+```
+
+Added in v0.18.0
+
+## setParams
+
+Set the search params component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const setParams: (x: URLSearchParams) => Endomorphism<URL>
+```
+
+```hs
+setParams :: URLSearchParams -> Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { setParams, getParams } from 'fp-ts-std/URL'
+
+const ps = new URLSearchParams('?c=d')
+
+const x = pipe(new URL('https://samhh.com/foo?a=b'), setParams(ps))
+
+assert.deepStrictEqual(getParams(x).toString(), ps.toString())
+```
+
+Added in v0.18.0
+
+## setPathname
+
+Set the pathname component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const setPathname: (x: string) => Endomorphism<URL>
+```
+
+```hs
+setPathname :: string -> Endomorphism URL
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { setPathname, getPathname } from 'fp-ts-std/URL'
+
+const x = pipe(new URL('https://samhh.com/foo'), setPathname('/bar'), getPathname)
+
+assert.strictEqual(x, '/bar')
+```
+
+Added in v0.18.0
 
 ## toString
 
