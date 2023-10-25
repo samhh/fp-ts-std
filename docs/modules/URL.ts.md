@@ -17,6 +17,7 @@ Added in v0.1.0
 - [3 Functions](#3-functions)
   - [clone](#clone)
   - [getHash](#gethash)
+  - [getOrigin](#getorigin)
   - [getParams](#getparams)
   - [getPathname](#getpathname)
   - [isStringlyURL](#isstringlyurl)
@@ -88,6 +89,30 @@ import { getHash } from 'fp-ts-std/URL'
 const x = new URL('https://samhh.com#anchor')
 
 assert.strictEqual(getHash(x), '#anchor')
+```
+
+Added in v0.18.0
+
+## getOrigin
+
+Get the origin component of a `URL`.
+
+**Signature**
+
+```ts
+export declare const getOrigin: (x: URL) => string
+```
+
+```hs
+getOrigin :: URL -> string
+```
+
+**Example**
+
+```ts
+import { getOrigin } from 'fp-ts-std/URL'
+
+assert.strictEqual(getOrigin(new URL('https://samhh.com/foo.bar')), 'https://samhh.com')
 ```
 
 Added in v0.18.0

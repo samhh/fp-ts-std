@@ -16,6 +16,7 @@ import {
   getHash,
   modifyHash,
   setHash,
+  getOrigin,
 } from "../src/URL"
 import * as Params from "../src/URLSearchParams"
 import fc from "fast-check"
@@ -271,6 +272,14 @@ describe("URL", () => {
 
       expect(getHash(x)).toBe("#foo")
       expect(getHash(y)).toBe("#foobar")
+    })
+  })
+
+  describe("getOrigin", () => {
+    const f = getOrigin
+
+    it("works", () => {
+      expect(f(new URL("https://u:p@a.b.e:123/foo"))).toBe("https://a.b.e:123")
     })
   })
 })

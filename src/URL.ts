@@ -316,3 +316,16 @@ export const setHash: (x: string) => Endomorphism<URL> = flow(
   constant,
   modifyHash,
 )
+
+/**
+ * Get the origin component of a `URL`.
+ *
+ * @example
+ * import { getOrigin } from 'fp-ts-std/URL'
+ *
+ * assert.strictEqual(getOrigin(new URL('https://samhh.com/foo.bar')), 'https://samhh.com')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const getOrigin = (x: URL): string => x.origin;
