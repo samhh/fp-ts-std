@@ -16,7 +16,7 @@ import * as E from "fp-ts/Either"
 import { constant, flow, identity, pipe } from "fp-ts/function"
 import { over, pack, unpack } from "./Newtype"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { clone as cloneURL, isURL } from "./URL"
+import * as URL from "./URL"
 import { Refinement } from "fp-ts/Refinement"
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
@@ -53,7 +53,7 @@ export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
   // then, well, firstly I'm flattered. But secondly that's on them.
   //
   // Also nota bene that the origin check will only work with some protocols.
-  isURL(u) && u.origin === phonyBase
+  URL.isURL(u) && u.origin === phonyBase
 
 /**
  * Convert a `URL` to a `URLPath`. Anything prior to the path such as the origin
@@ -71,7 +71,7 @@ export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
  * @since 0.17.0
  */
 export const fromURL = (x: URL): URLPath =>
-  pipe(new URL(x.href, phonyBase), pack<URLPath>)
+  pipe(new globalThis.URL(x.href, phonyBase), pack<URLPath>)
 
 /**
  * Convert a `URLPath` to a `URL` with the provided `baseUrl`.
@@ -103,7 +103,7 @@ export const toURL =
     // It should only throw some sort of `TypeError`:
     // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
     E.tryCatch(
-      () => new URL(toString(x), baseUrl),
+      () => new globalThis.URL(toString(x), baseUrl),
       e => f(e as TypeError),
     )
 
@@ -158,7 +158,7 @@ export const fromString =
       // It should only throw some sort of `TypeError`:
       // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
       E.tryCatch(
-        () => new URL(x, phonyBase),
+        () => new globalThis.URL(x, phonyBase),
         e => f(e as TypeError),
       ),
       E.map(pack<URLPath>),
@@ -200,7 +200,7 @@ export const fromStringO: (x: string) => Option<URLPath> = flow(
  * @since 0.17.0
  */
 export const fromPathname = (x: string): URLPath => {
-  const y = new URL("", phonyBase)
+  const y = new globalThis.URL("", phonyBase)
   // eslint-disable-next-line
   y.pathname = x
   return pack(y)
@@ -263,7 +263,7 @@ export const modifyPathname = (
   f: Endomorphism<string>,
 ): Endomorphism<URLPath> =>
   over(
-    flow(cloneURL, x => {
+    flow(URL.clone, x => {
       // eslint-disable-next-line
       x.pathname = f(x.pathname)
       return x
@@ -329,7 +329,7 @@ export const modifyParams = (
   f: Endomorphism<URLSearchParams>,
 ): Endomorphism<URLPath> =>
   over(
-    flow(cloneURL, x => {
+    flow(URL.clone, x => {
       // eslint-disable-next-line
       x.search = f(x.searchParams).toString()
       return x
@@ -395,7 +395,7 @@ export const getHash: (x: URLPath) => string = flow(unpack, x => x.hash)
  */
 export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
   over(
-    flow(cloneURL, x => {
+    flow(URL.clone, x => {
       // eslint-disable-next-line
       x.hash = f(x.hash)
       return x
