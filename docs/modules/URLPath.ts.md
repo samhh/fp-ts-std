@@ -20,6 +20,8 @@ Added in v0.17.0
 
 - [0 Types](#0-types)
   - [URLPath (type alias)](#urlpath-type-alias)
+- [1 Typeclass Instances](#1-typeclass-instances)
+  - [Eq](#eq)
 - [3 Functions](#3-functions)
   - [fromPathname](#frompathname)
   - [fromString](#fromstring)
@@ -66,6 +68,29 @@ const path: URLPath = fromPathname('/foo/bar')
 ```
 
 Added in v0.17.0
+
+# 1 Typeclass Instances
+
+## Eq
+
+A holistic `Eq` instance for `URLPath`.
+
+**Signature**
+
+```ts
+export declare const Eq: Eq_.Eq<URLPath>
+```
+
+**Example**
+
+```ts
+import { Eq, fromPathname } from 'fp-ts-std/URLPath'
+
+assert.strictEqual(Eq.equals(fromPathname('/foo'), fromPathname('/foo')), true)
+assert.strictEqual(Eq.equals(fromPathname('/foo'), fromPathname('/bar')), false)
+```
+
+Added in v0.18.0
 
 # 3 Functions
 

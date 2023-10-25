@@ -18,6 +18,7 @@ import {
   getHash,
   modifyHash,
   setHash,
+  Eq,
 } from "../src/URLPath"
 import fc from "fast-check"
 import { constant, flow, identity, pipe } from "fp-ts/function"
@@ -30,6 +31,12 @@ import {
 } from "../src/Either"
 import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
 import { setParam } from "../src/URLSearchParams"
+import * as laws from "fp-ts-laws"
+import { unsafeParse as unsafeParseURL } from "../src/URL"
+
+const arb: fc.Arbitrary<URLPath> = fc
+  .webUrl({ withFragments: true, withQueryParameters: true })
+  .map(flow(unsafeParseURL, fromURL))
 
 // Prefer not to export this.
 const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
@@ -300,6 +307,22 @@ describe("URLPath", () => {
 
       expect(getHash(x)).toBe("#foo")
       expect(getHash(y)).toBe("#foobar")
+    })
+  })
+
+  describe("Eq", () => {
+    const f = Eq.equals
+    const g = flow(fromStringO, unsafeUnwrapO)
+
+    it("works", () => {
+      const x = "/foo.bar#baz"
+
+      expect(f(g(x), g(x))).toBe(true)
+      expect(f(g(x), g(x + "!"))).toBe(false)
+    })
+
+    it("is lawful", () => {
+      laws.eq(Eq, arb)
     })
   })
 })

@@ -6,6 +6,7 @@ This project adheres to semantic versioning.
 
 - Add `until` to `Monad`, `IO`, and `Task`.
 - Add `toString`, `isStringlyURL`, `getHash`, `getParams`, `getPathname`, `modifyHash`, `modifyParams`, `modifyPathname`, `setHash`, `setParams`, `setPathname`, `getOrigin` and `getHostname`, and an `Eq` instance to `URL`.
+- Add an `Eq` instance to `URLPath`.
 - Add `singleton`, `appendAt`, `upsertAt`, `deleteAt`, `lookup`, `lookupFirst`, `toLeadingString`, `keys`, `values`, `size`, `concatBy`, `fromMap` and `toMap`, and `Eq`, `Semigroup` and `Monoid` instances to `URLSearchParams`.
 - Add `integerFromString` to `Number`.
 - Fix `fromString` in `Number` not parsing floats.

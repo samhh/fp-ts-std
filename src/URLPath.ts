@@ -13,11 +13,13 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { constant, flow, identity, pipe } from "fp-ts/function"
+import { flow, identity, pipe } from "fp-ts/function"
 import { over, pack, unpack } from "./Newtype"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as URL from "./URL"
 import { Refinement } from "fp-ts/Refinement"
+import * as Eq_ from "fp-ts/Eq"
+import Eq = Eq_.Eq
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
 
@@ -402,3 +404,17 @@ export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
  */
 export const setHash = (x: string): Endomorphism<URLPath> =>
   over(URL.setHash(x))
+
+/**
+ * A holistic `Eq` instance for `URLPath`.
+ *
+ * @example
+ * import { Eq, fromPathname } from 'fp-ts-std/URLPath'
+ *
+ * assert.strictEqual(Eq.equals(fromPathname("/foo"), fromPathname("/foo")), true)
+ * assert.strictEqual(Eq.equals(fromPathname("/foo"), fromPathname("/bar")), false)
+ *
+ * @category 1 Typeclass Instances
+ * @since 0.18.0
+ */
+export const Eq: Eq<URLPath> = Eq_.contramap(unpack)(URL.Eq)
