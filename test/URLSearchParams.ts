@@ -24,12 +24,16 @@ import {
   values,
   size,
   concatBy,
+  fromMap,
+  toMap,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import * as R from "fp-ts/Record"
+import * as M from "fp-ts/Map"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import * as T from "fp-ts/Tuple"
+import * as Str from "fp-ts/string"
 import { constant, flip, pipe } from "fp-ts/function"
 import * as laws from "fp-ts-laws"
 import { not } from "fp-ts/Predicate"
@@ -478,6 +482,44 @@ describe("URLSearchParams", () => {
   describe("Monoid", () => {
     it("it lawful", () => {
       laws.monoid(Monoid, Eq, arb)
+    })
+  })
+
+  describe("fromMap", () => {
+    const f = fromMap
+
+    const mapArb: fc.Arbitrary<Map<string, Array<string>>> = fc
+      .array(fc.tuple(fc.string(), fc.array(fc.string())))
+      .map(M.fromFoldable(Str.Eq, A.getSemigroup<string>(), A.Foldable))
+
+    it("is infallible", () => {
+      fc.assert(fc.property(mapArb, xs => isURLSearchParams(f(xs))))
+    })
+
+    it("takes all key/value pairs", () => {
+      const xs: Array<[string, Array<string>]> = [
+        ["a", ["1", "2"]],
+        ["b", ["3"]],
+      ]
+
+      expect(f(new Map(xs))).toEqual(fromString("a=1&a=2&b=3"))
+    })
+  })
+
+  describe("toMap", () => {
+    const f = toMap
+
+    it("is infallible", () => {
+      fc.assert(fc.property(arb, xs => f(xs) instanceof Map))
+    })
+
+    it("takes all key/value pairs", () => {
+      const xs: Array<[string, Array<string>]> = [
+        ["a", ["1", "3"]],
+        ["b", ["2"]],
+      ]
+
+      expect(f(fromString("a=1&b=2&a=3"))).toEqual(new Map(xs))
     })
   })
 })

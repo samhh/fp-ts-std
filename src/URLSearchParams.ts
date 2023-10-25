@@ -8,6 +8,7 @@
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as R from "fp-ts/Record"
+import * as M from "fp-ts/Map"
 import { constant, flow, pipe } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
 import { invoke, isInstanceOf, uncurry2, when } from "./Function"
@@ -593,3 +594,56 @@ export const Monoid: Monoid<URLSearchParams> = {
   ...Semigroup,
   empty,
 }
+
+/**
+ * Convert a `Map` to a `URLSearchParams`.
+ *
+ * @example
+ * import { fromMap, fromString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const m: Map<string, Array<string>> = new Map([ ['a', ['b', 'c']], ['d', ['e', 'f']] ])
+ * const s = 'a=b&a=c&d=e&d=f'
+ *
+ * assert.deepStrictEqual(fromMap(m), fromString(s))
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const fromMap: (x: Map<string, Array<string>>) => URLSearchParams = flow(
+  M.foldMapWithIndex(Str.Ord)(A.getMonoid<[string, string]>())((k, vs) =>
+    pipe(vs, A.map(withFst(k))),
+  ),
+  fromTuples,
+)
+
+/**
+ * Convert a `URLSearchParams` to a `Map`, grouping values by keys.
+ *
+ * @example
+ * import { toMap, fromString } from 'fp-ts-std/URLSearchParams'
+ *
+ * const u = fromString("a=1&b=3&a=2&b=4")
+ * const m = new Map([ ['a', ['1', '2']], ['b', ['3', '4']] ])
+ *
+ * assert.deepStrictEqual(toMap(u), m)
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+// Defined like this as there's currently no `M.fromFoldableMap`.
+export const toMap = (
+  x: URLSearchParams,
+  /* eslint-disable */
+): Map<string, NonEmptyArray<string>> => {
+  const m = new Map<string, NonEmptyArray<string>>()
+
+  for (const [k, v] of x.entries()) {
+    const prev = M.lookup(Str.Eq)(k)(m)
+
+    if (O.isSome(prev)) m.set(k, A.append(v)(prev.value))
+    else m.set(k, NEA.of(v))
+  }
+
+  return m
+}
+/* eslint-enable */

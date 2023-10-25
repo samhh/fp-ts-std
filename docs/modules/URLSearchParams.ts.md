@@ -25,6 +25,7 @@ Added in v0.2.0
   - [concatBy](#concatby)
   - [deleteAt](#deleteat)
   - [empty](#empty)
+  - [fromMap](#frommap)
   - [fromRecord](#fromrecord)
   - [fromString](#fromstring)
   - [fromTuples](#fromtuples)
@@ -36,6 +37,7 @@ Added in v0.2.0
   - [singleton](#singleton)
   - [size](#size)
   - [toLeadingString](#toleadingstring)
+  - [toMap](#tomap)
   - [toRecord](#torecord)
   - [toString](#tostring)
   - [toTuples](#totuples)
@@ -274,6 +276,36 @@ assert.deepStrictEqual(empty, new URLSearchParams())
 ```
 
 Added in v0.2.0
+
+## fromMap
+
+Convert a `Map` to a `URLSearchParams`.
+
+**Signature**
+
+```ts
+export declare const fromMap: (x: Map<string, Array<string>>) => URLSearchParams
+```
+
+```hs
+fromMap :: Map string (Array string) -> URLSearchParams
+```
+
+**Example**
+
+```ts
+import { fromMap, fromString } from 'fp-ts-std/URLSearchParams'
+
+const m: Map<string, Array<string>> = new Map([
+  ['a', ['b', 'c']],
+  ['d', ['e', 'f']],
+])
+const s = 'a=b&a=c&d=e&d=f'
+
+assert.deepStrictEqual(fromMap(m), fromString(s))
+```
+
+Added in v0.18.0
 
 ## fromRecord
 
@@ -569,6 +601,36 @@ assert.strictEqual(toString(new URLSearchParams('a=b')), 'a=b')
 
 assert.strictEqual(toLeadingString(new URLSearchParams('')), '')
 assert.strictEqual(toLeadingString(new URLSearchParams('a=b')), '?a=b')
+```
+
+Added in v0.18.0
+
+## toMap
+
+Convert a `URLSearchParams` to a `Map`, grouping values by keys.
+
+**Signature**
+
+```ts
+export declare const toMap: (x: URLSearchParams) => Map<string, NonEmptyArray<string>>
+```
+
+```hs
+toMap :: URLSearchParams -> Map string (NonEmptyArray string)
+```
+
+**Example**
+
+```ts
+import { toMap, fromString } from 'fp-ts-std/URLSearchParams'
+
+const u = fromString('a=1&b=3&a=2&b=4')
+const m = new Map([
+  ['a', ['1', '2']],
+  ['b', ['3', '4']],
+])
+
+assert.deepStrictEqual(toMap(u), m)
 ```
 
 Added in v0.18.0
