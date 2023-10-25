@@ -14,6 +14,8 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
+- [1 Typeclass Instances](#1-typeclass-instances)
+  - [Eq](#eq)
 - [3 Functions](#3-functions)
   - [clone](#clone)
   - [getHash](#gethash)
@@ -35,6 +37,29 @@ Added in v0.1.0
   - [unsafeParse](#unsafeparse)
 
 ---
+
+# 1 Typeclass Instances
+
+## Eq
+
+A holistic `Eq` instance for `URL`.
+
+**Signature**
+
+```ts
+export declare const Eq: Eq_.Eq<URL>
+```
+
+**Example**
+
+```ts
+import { Eq } from 'fp-ts-std/URL'
+
+assert.strictEqual(Eq.equals(new URL('https://samhh.com/foo'), new URL('https://samhh.com/foo')), true)
+assert.strictEqual(Eq.equals(new URL('https://samhh.com/foo'), new URL('http://samhh.com/foo')), false)
+```
+
+Added in v0.18.0
 
 # 3 Functions
 

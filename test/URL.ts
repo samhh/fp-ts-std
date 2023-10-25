@@ -18,12 +18,18 @@ import {
   setHash,
   getOrigin,
   getHostname,
+  Eq,
 } from "../src/URL"
 import * as Params from "../src/URLSearchParams"
 import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
+import * as laws from "fp-ts-laws"
+
+const arb: fc.Arbitrary<URL> = fc
+  .webUrl({ withFragments: true, withQueryParameters: true })
+  .map(unsafeParse)
 
 const validBase = "https://a:b@c.d.e:1"
 const validUrl = validBase + "/f/g.h?i=j&k=l&i=m#n"
@@ -289,6 +295,22 @@ describe("URL", () => {
 
     it("works", () => {
       expect(f(new URL("https://u:p@a.b.e:123/foo"))).toBe("a.b.e")
+    })
+  })
+
+  describe("Eq", () => {
+    const f = Eq.equals
+    const g = unsafeParse
+
+    it("works", () => {
+      const x = "https://samhh.com/foo.bar#baz"
+
+      expect(f(g(x), g(x))).toBe(true)
+      expect(f(g(x), g(x + "!"))).toBe(false)
+    })
+
+    it("is lawful", () => {
+      laws.eq(Eq, arb)
     })
   })
 })

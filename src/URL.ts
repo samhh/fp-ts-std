@@ -13,6 +13,9 @@ import { Refinement } from "fp-ts/Refinement"
 import { isInstanceOf } from "./Function"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
+import * as Str from "fp-ts/string"
+import * as Eq_ from "fp-ts/Eq"
+import Eq = Eq_.Eq
 
 const constructor = (x: ConstructorParameters<typeof URL>[0]): URL => new URL(x)
 
@@ -342,3 +345,17 @@ export const getOrigin = (x: URL): string => x.origin
  * @since 0.18.0
  */
 export const getHostname = (x: URL): string => x.hostname
+
+/**
+ * A holistic `Eq` instance for `URL`.
+ *
+ * @example
+ * import { Eq } from 'fp-ts-std/URL'
+ *
+ * assert.strictEqual(Eq.equals(new URL("https://samhh.com/foo"), new URL("https://samhh.com/foo")), true)
+ * assert.strictEqual(Eq.equals(new URL("https://samhh.com/foo"), new URL("http://samhh.com/foo")), false)
+ *
+ * @category 1 Typeclass Instances
+ * @since 0.18.0
+ */
+export const Eq: Eq<URL> = Eq_.contramap(toString)(Str.Eq)
