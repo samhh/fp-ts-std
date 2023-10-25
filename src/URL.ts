@@ -8,10 +8,12 @@ import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { flow, identity, pipe } from "fp-ts/function"
+import { flow, identity } from "fp-ts/function"
 import { Refinement } from "fp-ts/Refinement"
-import { construct, isInstanceOf } from "./Function"
+import { isInstanceOf } from "./Function"
 import { Endomorphism } from "fp-ts/Endomorphism"
+
+const constructor = (x: ConstructorParameters<typeof URL>[0]): URL => new URL(x)
 
 /**
  * Clone a `URL` object.
@@ -30,7 +32,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
  * @category 3 Functions
  * @since 0.17.0
  */
-export const clone: Endomorphism<URL> = u => unsafeParse(u.href)
+export const clone: Endomorphism<URL> = constructor
 
 /**
  * Unsafely parse a `URL`, throwing on failure.
@@ -43,7 +45,7 @@ export const clone: Endomorphism<URL> = u => unsafeParse(u.href)
  * @category 3 Functions
  * @since 0.1.0
  */
-export const unsafeParse = (x: string): URL => pipe([x], construct(URL))
+export const unsafeParse: (x: string) => URL = constructor
 
 /**
  * Safely parse a `URL`.
