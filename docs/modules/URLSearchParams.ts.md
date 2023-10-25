@@ -20,6 +20,7 @@ Added in v0.2.0
 - [3 Functions](#3-functions)
   - [appendAt](#appendat)
   - [clone](#clone)
+  - [concatBy](#concatby)
   - [deleteAt](#deleteat)
   - [empty](#empty)
   - [fromRecord](#fromrecord)
@@ -128,6 +129,42 @@ assert.deepStrictEqual(x, clone(x))
 ```
 
 Added in v0.2.0
+
+## concatBy
+
+Concat two `URLSearchParams` according to `f` in case of conflicts. The
+`Array` in the return type of `f` encodes the possibility to set the key
+once, multiple times, or not at all. Output order is unspecified.
+
+**Signature**
+
+```ts
+export declare const concatBy: (
+  f: (k: string) => (vs: [NonEmptyArray<string>, NonEmptyArray<string>]) => Array<string>
+) => (xs: URLSearchParams) => Endomorphism<URLSearchParams>
+```
+
+```hs
+concatBy :: (string -> [NonEmptyArray string, NonEmptyArray string] -> Array string) -> URLSearchParams -> Endomorphism URLSearchParams
+```
+
+**Example**
+
+```ts
+import { concatBy, fromString, toString } from 'fp-ts-std/URLSearchParams'
+import { fst } from 'fp-ts/Tuple'
+import { constant } from 'fp-ts/function'
+
+const concatFirst = concatBy(constant(fst))
+
+const xs = fromString('a=1&b=2&a=3')
+const ys = fromString('b=1&c=2')
+
+assert.deepStrictEqual(concatFirst(xs)(ys), fromString('a=1&a=3&b=2&c=2'))
+assert.deepStrictEqual(concatFirst(ys)(xs), fromString('b=1&c=2&a=1&a=3'))
+```
+
+Added in v0.18.0
 
 ## deleteAt
 

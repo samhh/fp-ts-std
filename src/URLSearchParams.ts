@@ -485,3 +485,50 @@ export const values = (x: URLSearchParams): Array<string> =>
  * @since 0.18.0
  */
 export const size = (x: URLSearchParams): number => x.size
+
+/**
+ * Concat two `URLSearchParams` according to `f` in case of conflicts. The
+ * `Array` in the return type of `f` encodes the possibility to set the key
+ * once, multiple times, or not at all. Output order is unspecified.
+ *
+ * @example
+ * import { concatBy, fromString, toString } from 'fp-ts-std/URLSearchParams'
+ * import { fst } from 'fp-ts/Tuple'
+ * import { constant } from 'fp-ts/function'
+ *
+ * const concatFirst = concatBy(constant(fst))
+ *
+ * const xs = fromString('a=1&b=2&a=3')
+ * const ys = fromString('b=1&c=2')
+ *
+ * assert.deepStrictEqual(concatFirst(xs)(ys), fromString('a=1&a=3&b=2&c=2'))
+ * assert.deepStrictEqual(concatFirst(ys)(xs), fromString('b=1&c=2&a=1&a=3'))
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const concatBy =
+  (
+    f: (
+      k: string,
+    ) => (vs: [NonEmptyArray<string>, NonEmptyArray<string>]) => Array<string>,
+  ) =>
+  (xs: URLSearchParams): Endomorphism<URLSearchParams> =>
+  ys => {
+    const zs = clone(empty)
+    const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
+
+    for (const k of ks) {
+      const xvs = xs.getAll(k)
+      const yvs = ys.getAll(k)
+
+      const zvs =
+        A.isNonEmpty(xvs) && A.isNonEmpty(yvs)
+          ? f(k)([xvs, yvs])
+          : A.concat(yvs)(xvs)
+
+      for (const zv of zvs) zs.append(k, zv)
+    }
+
+    return zs
+  }

@@ -21,16 +21,18 @@ import {
   keys,
   values,
   size,
+  concatBy,
 } from "../src/URLSearchParams"
 import fc from "fast-check"
 import * as R from "fp-ts/Record"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import * as T from "fp-ts/Tuple"
-import { flip, pipe } from "fp-ts/function"
+import { constant, flip, pipe } from "fp-ts/function"
 import * as laws from "fp-ts-laws"
 import { not } from "fp-ts/Predicate"
 import { withFst, withSnd } from "../src/Tuple"
+import { uncurry2 } from "../src/Function"
 
 const arb: fc.Arbitrary<URLSearchParams> = fc
   .webQueryParameters()
@@ -395,6 +397,56 @@ describe("URLSearchParams", () => {
           expect(f(ys)).toEqual(A.size(keys(ys)))
         }),
       )
+    })
+  })
+
+  describe("concatBy", () => {
+    const f = concatBy
+
+    it("concats as per the provided function", () => {
+      const x = fromTuples([
+        ["foo", "a"],
+        ["bar", "b"],
+      ])
+
+      const y = fromTuples([
+        ["baz", "c"],
+        ["foo", "d"],
+        ["foo", "e"],
+      ])
+
+      const first = constant(T.fst)
+      const last = constant(T.snd)
+      const both = constant(uncurry2(A.concat))
+      const neither = constant(constant([]))
+
+      expect(f(first)(x)(y).toString()).toBe("foo=a&bar=b&baz=c")
+      expect(f(last)(x)(y).toString()).toBe("foo=d&foo=e&bar=b&baz=c")
+      expect(f(both)(x)(y).toString()).toBe("foo=d&foo=e&foo=a&bar=b&baz=c")
+      expect(f(neither)(x)(y).toString()).toBe("bar=b&baz=c")
+    })
+
+    it("does not mutate input", () => {
+      const x = fromTuples([
+        ["foo", "a"],
+        ["bar", "b"],
+      ])
+
+      const y = fromTuples([
+        ["baz", "c"],
+        ["foo", "d"],
+      ])
+
+      const xa = x.toString()
+      const ya = y.toString()
+
+      concatBy(constant(uncurry2(A.concat)))(x)(y)
+
+      const xb = x.toString()
+      const yb = y.toString()
+
+      expect(xa).toBe(xb)
+      expect(ya).toBe(yb)
     })
   })
 })
