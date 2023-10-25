@@ -26,6 +26,7 @@ Added in v0.1.0
   - [fromString](#fromstring)
   - [fromStringWithRadix](#fromstringwithradix)
   - [increment](#increment)
+  - [integerFromString](#integerfromstring)
   - [isFinite](#isfinite)
   - [isNegative](#isnegative)
   - [isNonNegative](#isnonnegative)
@@ -257,7 +258,9 @@ import { fromString } from 'fp-ts-std/Number'
 import { some, none } from 'fp-ts/Option'
 
 assert.deepStrictEqual(fromString('3'), some(3))
-assert.deepStrictEqual(fromString('abc'), none)
+assert.deepStrictEqual(fromString('3.3'), some(3.3))
+assert.deepStrictEqual(fromString('0xF'), some(15))
+assert.deepStrictEqual(fromString('xyz'), none)
 ```
 
 Added in v0.1.0
@@ -311,6 +314,33 @@ assert.strictEqual(increment(3), 4)
 ```
 
 Added in v0.1.0
+
+## integerFromString
+
+Convert a string to an integer.
+
+**Signature**
+
+```ts
+export declare const integerFromString: (string: string) => Option<number>
+```
+
+```hs
+integerFromString :: string -> Option number
+```
+
+**Example**
+
+```ts
+import { integerFromString } from 'fp-ts-std/Number'
+import { some, none } from 'fp-ts/Option'
+
+assert.deepStrictEqual(integerFromString('3'), some(3))
+assert.deepStrictEqual(integerFromString('3.3'), some(3))
+assert.deepStrictEqual(integerFromString('abc'), none)
+```
+
+Added in v0.18.0
 
 ## isFinite
 

@@ -6,6 +6,8 @@ This project adheres to semantic versioning.
 
 - Add `until` to `Monad`, `IO`, and `Task`.
 - Add `singleton`, `appendAt`, `upsertAt`, `deleteAt`, `lookup`, `lookupFirst`, `toLeadingString`, `keys`, `values`, `size`, and an `Eq` instance to `URLSearchParams`.
+- Add `integerFromString` to `Number`.
+- Fix `fromString` in `Number` not parsing floats.
 - Deprecate `getParam`, `getAllForParam`, and `setParam` in `URLSearchParams`.
 
 ## 0.17.1 (2023-06-17)
