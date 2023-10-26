@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.18.0 (_Unreleased_)
+## 0.18.0 (2023-10-26)
 
 - Add `until` to `Monad`, `IO`, and `Task`.
 - Add `toString`, `isStringlyURL`, `getHash`, `getParams`, `getPathname`, `modifyHash`, `modifyParams`, `modifyPathname`, `setHash`, `setParams`, `setPathname`, `getOrigin` and `getHostname`, and an `Eq` instance to `URL`.
