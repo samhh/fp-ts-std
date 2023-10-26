@@ -22,7 +22,7 @@
         {
           devShells = {
             default = pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [ nodejs_21 ] ++ common;
+              nativeBuildInputs = with pkgs; [ nodejs_20 ] ++ common;
             };
 
             lts = pkgs.mkShell {
