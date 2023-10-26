@@ -14,6 +14,7 @@ import {
   append,
   unappend,
   fromNumber,
+  fromBool,
   test,
   dropLeftWhile,
   dropLeft,
@@ -355,6 +356,15 @@ describe("String", () => {
       fc.assert(
         fc.property(fc.oneof(fc.integer(), fc.float()), flow(f, S.isString)),
       )
+    })
+  })
+
+  describe("fromBool", () => {
+    const f = fromBool
+
+    it("works", () => {
+      expect(f(true)).toBe("true")
+      expect(f(false)).toBe("false")
     })
   })
 

@@ -36,6 +36,20 @@ import { invoke, when } from "./Function"
 export const fromNumber: (x: number) => string = String
 
 /**
+ * Convert a boolean to a string.
+ *
+ * @example
+ * import { fromBool } from 'fp-ts-std/String'
+ *
+ * assert.strictEqual(fromBool(true), 'true')
+ * assert.strictEqual(fromBool(false), 'false')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const fromBool: (x: boolean) => string = String
+
+/**
  * Prepend one string to another.
  *
  * @example

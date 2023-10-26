@@ -20,6 +20,7 @@ Added in v0.1.0
   - [dropLeftWhile](#dropleftwhile)
   - [dropRight](#dropright)
   - [dropRightWhile](#droprightwhile)
+  - [fromBool](#frombool)
   - [fromNumber](#fromnumber)
   - [head](#head)
   - [init](#init)
@@ -202,6 +203,31 @@ assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
 ```
 
 Added in v0.7.0
+
+## fromBool
+
+Convert a boolean to a string.
+
+**Signature**
+
+```ts
+export declare const fromBool: (x: boolean) => string
+```
+
+```hs
+fromBool :: boolean -> string
+```
+
+**Example**
+
+```ts
+import { fromBool } from 'fp-ts-std/String'
+
+assert.strictEqual(fromBool(true), 'true')
+assert.strictEqual(fromBool(false), 'false')
+```
+
+Added in v0.18.0
 
 ## fromNumber
 
