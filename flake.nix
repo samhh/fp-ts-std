@@ -17,7 +17,7 @@
             overlays = [ overlay ];
           };
 
-          common = with pkgs; [ git yarn tshm-docs-ts ];
+          common = with pkgs; [ yarn tshm-docs-ts ];
         in
         {
           devShells = {
