@@ -683,3 +683,39 @@ export const words = S.split(/\s/)
  * @since 0.14.0
  */
 export const unwords = join(" ")
+
+/**
+ * Drop a prefix if present, else return the input string unmodified.
+ *
+ * @example
+ * import { dropPrefix } from 'fp-ts-std/String'
+ *
+ * const f = dropPrefix('foo')
+ *
+ * assert.strictEqual(f('foobar'), 'bar')
+ * assert.strictEqual(f('barfoo'), 'barfoo')
+ * assert.strictEqual(f('foofoo'), 'foo')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const dropPrefix = (prefix: string): Endomorphism<string> =>
+  when(S.startsWith(prefix))(dropLeft(S.size(prefix)))
+
+/**
+ * Drop a suffix if present, else return the input string unmodified.
+ *
+ * @example
+ * import { dropSuffix } from 'fp-ts-std/String'
+ *
+ * const f = dropSuffix('bar')
+ *
+ * assert.strictEqual(f('foobar'), 'foo')
+ * assert.strictEqual(f('barfoo'), 'barfoo')
+ * assert.strictEqual(f('barbar'), 'bar')
+ *
+ * @category 3 Functions
+ * @since 0.18.0
+ */
+export const dropSuffix = (suffix: string): Endomorphism<string> =>
+  when(S.endsWith(suffix))(dropRight(S.size(suffix)))

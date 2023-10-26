@@ -9,7 +9,7 @@ This project adheres to semantic versioning.
 - Add an `Eq` instance to `URLPath`.
 - Add `singleton`, `appendAt`, `upsertAt`, `deleteAt`, `lookup`, `lookupFirst`, `toLeadingString`, `keys`, `values`, `size`, `concatBy`, `fromMap` and `toMap`, and `Eq`, `Semigroup` and `Monoid` instances to `URLSearchParams`.
 - Add `integerFromString` to `Number`.
-- Add `fromBool` to `String`.
+- Add `dropPrefix`, `dropSuffix`, and `fromBool` to `String`.
 - Fix `fromString` in `Number` not parsing floats.
 - Deprecate `getParam`, `getAllForParam`, and `setParam` in `URLSearchParams`.
 

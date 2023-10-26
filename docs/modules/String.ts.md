@@ -18,8 +18,10 @@ Added in v0.1.0
   - [append](#append)
   - [dropLeft](#dropleft)
   - [dropLeftWhile](#dropleftwhile)
+  - [dropPrefix](#dropprefix)
   - [dropRight](#dropright)
   - [dropRightWhile](#droprightwhile)
+  - [dropSuffix](#dropsuffix)
   - [fromBool](#frombool)
   - [fromNumber](#fromnumber)
   - [head](#head)
@@ -142,6 +144,34 @@ assert.strictEqual(dropFilename('File.hs'), '.hs')
 
 Added in v0.6.0
 
+## dropPrefix
+
+Drop a prefix if present, else return the input string unmodified.
+
+**Signature**
+
+```ts
+export declare const dropPrefix: (prefix: string) => Endomorphism<string>
+```
+
+```hs
+dropPrefix :: string -> Endomorphism string
+```
+
+**Example**
+
+```ts
+import { dropPrefix } from 'fp-ts-std/String'
+
+const f = dropPrefix('foo')
+
+assert.strictEqual(f('foobar'), 'bar')
+assert.strictEqual(f('barfoo'), 'barfoo')
+assert.strictEqual(f('foofoo'), 'foo')
+```
+
+Added in v0.18.0
+
 ## dropRight
 
 Drop a number of characters from the end of a string, returning a new
@@ -203,6 +233,34 @@ assert.deepStrictEqual(dropRightVowels('hellooo'), 'hell')
 ```
 
 Added in v0.7.0
+
+## dropSuffix
+
+Drop a suffix if present, else return the input string unmodified.
+
+**Signature**
+
+```ts
+export declare const dropSuffix: (suffix: string) => Endomorphism<string>
+```
+
+```hs
+dropSuffix :: string -> Endomorphism string
+```
+
+**Example**
+
+```ts
+import { dropSuffix } from 'fp-ts-std/String'
+
+const f = dropSuffix('bar')
+
+assert.strictEqual(f('foobar'), 'foo')
+assert.strictEqual(f('barfoo'), 'barfoo')
+assert.strictEqual(f('barbar'), 'bar')
+```
+
+Added in v0.18.0
 
 ## fromBool
 

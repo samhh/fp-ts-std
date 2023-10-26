@@ -37,6 +37,8 @@ import {
   isSpace,
   words,
   unwords,
+  dropPrefix,
+  dropSuffix,
 } from "../src/String"
 import * as O from "fp-ts/Option"
 import * as NEA from "fp-ts/NonEmptyArray"
@@ -794,6 +796,46 @@ describe("String", () => {
 
     it("joins array of strings with whitespace", () => {
       expect(f(["a", "b", "c"])).toBe("a b c")
+    })
+  })
+
+  describe("dropPrefix", () => {
+    const f = dropPrefix
+
+    it("removes prefix if present", () => {
+      expect(f("foo")("foobar")).toBe("bar")
+
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (x, y) => f(y)(y + x) === x),
+      )
+    })
+
+    it("does not modify string without prefix", () => {
+      expect(f("bar")("foobar")).toBe("foobar")
+    })
+
+    it("does not modify string given empty prefix", () => {
+      fc.assert(fc.property(fc.string(), x => f("")(x) === x))
+    })
+  })
+
+  describe("dropSuffix", () => {
+    const f = dropSuffix
+
+    it("removes suffix if present", () => {
+      expect(f("bar")("foobar")).toBe("foo")
+
+      fc.assert(
+        fc.property(fc.string(), fc.string(), (x, y) => f(y)(x + y) === x),
+      )
+    })
+
+    it("does not modify string without suffix", () => {
+      expect(f("foo")("foobar")).toBe("foobar")
+    })
+
+    it("does not modify string given empty suffix", () => {
+      fc.assert(fc.property(fc.string(), x => f("")(x) === x))
     })
   })
 })
