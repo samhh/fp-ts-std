@@ -2,6 +2,7 @@ import { describe, it, expect } from "@jest/globals"
 import {
   URLPath,
   isURLPath,
+  clone,
   fromURL,
   fromString,
   fromStringO,
@@ -56,6 +57,36 @@ describe("URLPath", () => {
       expect(f(new URL(validBase))).toBe(false)
       expect(f(new URL(phonyBase))).toBe(true)
       expect(f(new URL(phonyBase + validPath))).toBe(true)
+    })
+  })
+
+  describe("clone", () => {
+    const f = clone
+
+    it("clones to an identical URLPath", () => {
+      const x = fromPathname(validPath)
+
+      expect(f(x)).toEqual(x)
+      expect(toString(f(x))).toBe(toString(x))
+    })
+
+    it("clones without references", () => {
+      const x = fromPathname(validPath)
+      ;(x as unknown as URL).pathname = "/foo" // eslint-disable-line
+      ;(x as unknown as URL).search = "?foo=food&bar=bard&foo=fool" // eslint-disable-line
+      const y = f(x)
+
+      expect(getPathname(x)).toBe("/foo")
+      expect(getPathname(y)).toBe("/foo")
+      expect(getParams(x).getAll("foo")).toEqual(["food", "fool"])
+      expect(getParams(y).getAll("foo")).toEqual(["food", "fool"])
+      ;(x as unknown as URL).pathname = "/bar" // eslint-disable-line
+      ;(x as unknown as URL).searchParams.set("foo", "bar2000") // eslint-disable-line
+
+      expect(getPathname(x)).toBe("/bar")
+      expect(getPathname(y)).toBe("/foo")
+      expect(getParams(x).getAll("foo")).toEqual(["bar2000"])
+      expect(getParams(y).getAll("foo")).toEqual(["food", "fool"])
     })
   })
 

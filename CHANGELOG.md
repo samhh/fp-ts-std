@@ -4,6 +4,7 @@ This project adheres to semantic versioning.
 
 ## 0.19.0 (_Unreleased_)
 
+- Add `clone` to `URLPath`.
 - Fix typings in presence of `isolatedModules`.
 - Bump minimum supported Node LTS to v20.
 

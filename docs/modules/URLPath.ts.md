@@ -23,6 +23,7 @@ Added in v0.17.0
 - [1 Typeclass Instances](#1-typeclass-instances)
   - [Eq](#eq)
 - [3 Functions](#3-functions)
+  - [clone](#clone)
   - [fromPathname](#frompathname)
   - [fromString](#fromstring)
   - [fromStringO](#fromstringo)
@@ -97,6 +98,36 @@ assert.strictEqual(Eq.equals(fromPathname('/foo'), fromPathname('/bar')), false)
 Added in v0.18.0
 
 # 3 Functions
+
+## clone
+
+Clone a `URLPath`.
+
+**Signature**
+
+```ts
+export declare const clone: Endomorphism<URLPath>
+```
+
+```hs
+clone :: Endomorphism URLPath
+```
+
+**Example**
+
+```ts
+import { pipe } from 'fp-ts/function'
+import { clone, fromPathname, getPathname } from 'fp-ts-std/URLPath'
+
+const x = fromPathname('/foo')
+const y = clone(x)
+;(x as unknown as URL).pathname = '/bar'
+
+assert.strictEqual(getPathname(x), '/bar')
+assert.strictEqual(getPathname(y), '/foo')
+```
+
+Added in v0.19.0
 
 ## fromPathname
 

@@ -58,6 +58,25 @@ export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
   URL.isURL(u) && u.origin === phonyBase
 
 /**
+ * Clone a `URLPath`.
+ *
+ * @example
+ * import { pipe } from 'fp-ts/function'
+ * import { clone, fromPathname, getPathname } from 'fp-ts-std/URLPath'
+ *
+ * const x = fromPathname('/foo')
+ * const y = clone(x)
+ * ;(x as unknown as URL).pathname = '/bar'
+ *
+ * assert.strictEqual(getPathname(x), '/bar')
+ * assert.strictEqual(getPathname(y), '/foo')
+ *
+ * @category 3 Functions
+ * @since 0.19.0
+ */
+export const clone: Endomorphism<URLPath> = over(URL.clone)
+
+/**
  * Convert a `URL` to a `URLPath`. Anything prior to the path such as the origin
  * will be lost.
  *
