@@ -10,11 +10,7 @@
   },
   "homepage": "https://github.com/samhh/fp-ts-std",
   "bugs": "https://github.com/samhh/fp-ts-std/issues",
-  "keywords": [
-    "functional-programming",
-    "typescript",
-    "fp-ts"
-  ],
+  "keywords": ["functional-programming", "typescript", "fp-ts"],
   "engines": {
     "node": ">=20"
   },
@@ -27,14 +23,10 @@
   },
   "typesVersions": {
     "*": {
-      "*": [
-        "./dist/types/*"
-      ]
+      "*": ["./dist/types/*"]
     }
   },
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "sideEffects": false,
   "scripts": {
     "build": "rm -rf ./dist/ && mkdir -p ./dist/esm/ ./dist/cjs/ && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",

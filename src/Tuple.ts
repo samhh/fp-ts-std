@@ -191,8 +191,7 @@ export function traverseToSnd<F>(
  */
 export const withFst =
   <A>(x: A) =>
-  <B>(y: B): [A, B] =>
-    [x, y]
+  <B>(y: B): [A, B] => [x, y]
 
 /**
  * Curried tuple construction. A dual to `withFst`. Equivalent to Haskell's
@@ -209,8 +208,7 @@ export const withFst =
  */
 export const withSnd =
   <A>(x: A) =>
-  <B>(y: B): [B, A] =>
-    [y, x]
+  <B>(y: B): [B, A] => [y, x]
 
 /**
  * Create a tuple. Helps with fighting TypeScript's type inferrence without

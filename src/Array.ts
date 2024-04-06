@@ -531,12 +531,14 @@ export const moveFrom =
     from >= xs.length || to >= xs.length
       ? O.none
       : from === to
-      ? O.some(xs)
-      : pipe(
-          xs,
-          A.lookup(from),
-          O.chain(x => pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x)))),
-        )
+        ? O.some(xs)
+        : pipe(
+            xs,
+            A.lookup(from),
+            O.chain(x =>
+              pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x))),
+            ),
+          )
 
 /**
  * Move an item at index `from` to index `to`. See also `moveFrom`.

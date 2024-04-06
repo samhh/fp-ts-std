@@ -570,8 +570,10 @@ export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  */
 export const splitAt =
   (index: number) =>
-  (str: string): [string, string] =>
-    [S.slice(0, index)(str), S.slice(index, Infinity)(str)]
+  (str: string): [string, string] => [
+    S.slice(0, index)(str),
+    S.slice(index, Infinity)(str),
+  ]
 
 /**
  * Tests if a string exclusively consists of alphabetic characters. Behaviour

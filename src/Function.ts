@@ -72,9 +72,9 @@ declare module "fp-ts/HKT" {
  * @category 2 Typeclass Methods
  * @since 0.15.0
  */
-export const map: <B, C>(
-  f: (x: B) => C,
-) => <A>(g: (x: A) => B) => (x: A) => C = f => g => flow(g, f)
+export const map: <B, C>(f: (x: B) => C) => <A>(g: (x: A) => B) => (x: A) => C =
+  f => g =>
+    flow(g, f)
 
 /**
  * Formal `Functor` instance for unary functions to be provided to

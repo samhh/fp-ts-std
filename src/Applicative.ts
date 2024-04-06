@@ -71,7 +71,7 @@ export function when<F extends URIS>(
 export function when<F>(
   F: Applicative<F>,
 ): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
-  return b => x => b ? x : F.of(undefined)
+  return b => x => (b ? x : F.of(undefined))
 }
 
 /**
@@ -119,7 +119,7 @@ export function unless<F extends URIS>(
 export function unless<F>(
   F: Applicative<F>,
 ): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
-  return b => x => b ? F.of(undefined) : x
+  return b => x => (b ? F.of(undefined) : x)
 }
 
 /**

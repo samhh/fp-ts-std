@@ -278,9 +278,9 @@ describe("Function", () => {
       expect(f(i => () => i)([1, 2, 3])).toEqual([0, 1, 2])
       expect(f(add)([1, 2, 3])).toEqual([1, 3, 5])
       expect(g(i => () => i % 2 === 0)([1, 2, 3])).toEqual([1, 3])
-      expect(h(i => x => i % 2 === 0 ? O.some(x) : O.none)([1, 2, 3])).toEqual([
-        1, 3,
-      ])
+      expect(
+        h(i => x => (i % 2 === 0 ? O.some(x) : O.none))([1, 2, 3]),
+      ).toEqual([1, 3])
     })
   })
 
@@ -377,7 +377,10 @@ describe("Function", () => {
     // eslint-disable-next-line functional/no-classes
     class X {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      constructor(public x: number, public y: string) {}
+      constructor(
+        public x: number,
+        public y: string,
+      ) {}
     }
 
     it("instantiates and passes on constructor arguments", () => {

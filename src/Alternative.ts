@@ -67,7 +67,7 @@ export function pureIf<F extends URIS>(
 export function pureIf<F>(
   F: Alternative<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => HKT<F, A> {
-  return x => y => x ? F.of(y()) : F.zero()
+  return x => y => (x ? F.of(y()) : F.zero())
 }
 
 /**
