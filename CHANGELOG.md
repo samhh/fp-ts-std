@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## 0.19.0 (_Unreleased_)
+## 0.19.0 (2024-04-06)
 
 - Add `clone` to `URLPath`.
 - Wrap the provided error cause in `unsafeExpect` in `Option` in an `Error` object.
