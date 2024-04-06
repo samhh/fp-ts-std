@@ -20,7 +20,7 @@
         {
           devShells = rec {
             default = pkgs.mkShell {
-              inputsFrom = [ nodejs-latest lint ];
+              inputsFrom = [ nodejs-latest ];
 
               nativeBuildInputs = with pkgs; [
                 tshm-docs-ts
@@ -29,6 +29,7 @@
 
             nodejs-latest = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
+                biome
                 nodejs_21
                 nodePackages.pnpm
               ];
@@ -45,12 +46,6 @@
               nativeBuildInputs = with pkgs; [
                 bun
                 nodePackages.pnpm
-              ];
-            };
-
-            lint = pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [
-                biome
               ];
             };
           };

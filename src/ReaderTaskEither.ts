@@ -1,13 +1,13 @@
-import type { Either } from "fp-ts/Either"
-import type * as RTE from "fp-ts/ReaderTaskEither"
-import type { Task } from "fp-ts/Task"
-import * as TE from "fp-ts/TaskEither"
-import type { TaskEither } from "fp-ts/TaskEither"
 /**
  * Utility functions to accommodate `fp-ts/ReaderTaskEither`.
  *
  * @since 0.15.0
  */
+import type { Either } from "fp-ts/Either"
+import type * as RTE from "fp-ts/ReaderTaskEither"
+import type { Task } from "fp-ts/Task"
+import * as TE from "fp-ts/TaskEither"
+import type { TaskEither } from "fp-ts/TaskEither"
 import { flow, identity } from "fp-ts/function"
 import { runReader } from "./Reader"
 import {

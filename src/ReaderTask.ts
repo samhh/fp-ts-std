@@ -1,10 +1,10 @@
-import type { ReaderTask } from "fp-ts/ReaderTask"
-import type { Task } from "fp-ts/Task"
 /**
  * Utility functions to accommodate `fp-ts/ReaderTask`.
  *
  * @since 0.15.0
  */
+import type { ReaderTask } from "fp-ts/ReaderTask"
+import type { Task } from "fp-ts/Task"
 import { identity } from "fp-ts/function"
 import { runReader } from "./Reader"
 

@@ -26,7 +26,7 @@ const flushPromises = (): Promise<void> =>
 
 describe("Task", () => {
 	// Bun doesn't support fake timers yet.
-	const desc = 'advanceTimersByTime' in jest ? describe : describe.skip;
+	const desc = "advanceTimersByTime" in jest ? describe : describe.skip
 	desc("sleep", () => {
 		it("waits the specified period of time", async () => {
 			jest.useFakeTimers()
