@@ -47,7 +47,11 @@ A holistic `Eq` instance for `URL`.
 **Signature**
 
 ```ts
-export declare const Eq: Eq_.Eq<URL>
+export declare const Eq: Eq<URL>
+```
+
+```hs
+Eq :: Eq URL
 ```
 
 **Example**

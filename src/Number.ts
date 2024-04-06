@@ -8,7 +8,7 @@ import { flow, identity, pipe } from "fp-ts/function"
 import { Predicate, not, and } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
-import Option = O.Option
+type Option<A> = O.Option<A>
 import { unless } from "./Function"
 import { Bounded as BoundedInfinity } from "fp-ts/number"
 import { Enum } from "./Enum"

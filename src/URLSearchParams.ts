@@ -14,7 +14,7 @@ import { Refinement } from "fp-ts/Refinement"
 import { invoke, isInstanceOf, uncurry2, when } from "./Function"
 import { Predicate, not } from "fp-ts/Predicate"
 import * as NEA from "fp-ts/NonEmptyArray"
-import NonEmptyArray = NEA.NonEmptyArray
+type NonEmptyArray<A> = NEA.NonEmptyArray<A>
 import * as A from "fp-ts/Array"
 import { fromIterable, getDisorderedEq } from "./Array"
 import { mapSnd } from "fp-ts/Tuple"
@@ -23,10 +23,10 @@ import { prepend } from "./String"
 import { withFst } from "./Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
-import Eq = Eq_.Eq
+type Eq<A> = Eq_.Eq<A>
 import type { Semigroup as SemigroupT } from "fp-ts/Semigroup"
 import * as Monoid_ from "fp-ts/Monoid"
-import Monoid = Monoid_.Monoid
+type Monoid<A> = Monoid_.Monoid<A>
 
 const constructor = (
   x: ConstructorParameters<typeof URLSearchParams>[0],

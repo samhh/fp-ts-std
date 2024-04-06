@@ -5,7 +5,7 @@
  */
 
 import * as IOO from "fp-ts/IOOption"
-import IOOption = IOO.IOOption
+type IOOption<A> = IOO.IOOption<A>
 import * as IO from "fp-ts/IO"
 import { execute as executeIO } from "./IO"
 import {

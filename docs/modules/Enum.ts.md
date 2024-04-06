@@ -101,7 +101,11 @@ Behaviour in case of duplicate values is unspecified.
 **Signature**
 
 ```ts
-export declare const getUnsafeConstantEnum: <A>(Ord: Ord<A>) => (xs: NEA.NonEmptyArray<A>) => Enum<A>
+export declare const getUnsafeConstantEnum: <A>(Ord: Ord<A>) => (xs: NonEmptyArray<A>) => Enum<A>
+```
+
+```hs
+getUnsafeConstantEnum :: Ord a -> NonEmptyArray a -> Enum a
 ```
 
 **Example**
@@ -160,7 +164,11 @@ Produces all predecessors of `start` inclusive.
 **Signature**
 
 ```ts
-export declare const downFromIncl: <A>(E: Enum<A>) => (start: A) => NEA.NonEmptyArray<A>
+export declare const downFromIncl: <A>(E: Enum<A>) => (start: A) => NonEmptyArray<A>
+```
+
+```hs
+downFromIncl :: Enum a -> a -> NonEmptyArray a
 ```
 
 **Example**
@@ -186,7 +194,11 @@ unspecified if `end` is not greater than `start` or `step` is non-positive.
 **Signature**
 
 ```ts
-export declare const fromThenTo: <A>(E: Enum<A>) => (first: A) => (second: A) => (limit: A) => NEA.NonEmptyArray<A>
+export declare const fromThenTo: <A>(E: Enum<A>) => (first: A) => (second: A) => (limit: A) => NonEmptyArray<A>
+```
+
+```hs
+fromThenTo :: Enum a -> a -> a -> a -> NonEmptyArray a
 ```
 
 **Example**
@@ -211,7 +223,11 @@ inclusive. Behaviour is unspecified if `end` is not greater than `start`.
 **Signature**
 
 ```ts
-export declare const fromTo: <A>(E: Enum<A>) => (start: A) => (limit: A) => NEA.NonEmptyArray<A>
+export declare const fromTo: <A>(E: Enum<A>) => (start: A) => (limit: A) => NonEmptyArray<A>
+```
+
+```hs
+fromTo :: Enum a -> a -> a -> NonEmptyArray a
 ```
 
 **Example**
@@ -268,7 +284,11 @@ Enumerates every value of an `Enum` in ascending order.
 **Signature**
 
 ```ts
-export declare const universe: <A>(E: Enum<A>) => NEA.NonEmptyArray<A>
+export declare const universe: <A>(E: Enum<A>) => NonEmptyArray<A>
+```
+
+```hs
+universe :: Enum a -> NonEmptyArray a
 ```
 
 **Example**
@@ -317,7 +337,11 @@ Produces all successors of `start` inclusive.
 **Signature**
 
 ```ts
-export declare const upFromIncl: <A>(E: Enum<A>) => (start: A) => NEA.NonEmptyArray<A>
+export declare const upFromIncl: <A>(E: Enum<A>) => (start: A) => NonEmptyArray<A>
+```
+
+```hs
+upFromIncl :: Enum a -> a -> NonEmptyArray a
 ```
 
 **Example**

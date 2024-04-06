@@ -19,7 +19,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import * as URL from "./URL"
 import { Refinement } from "fp-ts/Refinement"
 import * as Eq_ from "fp-ts/Eq"
-import Eq = Eq_.Eq
+type Eq<A> = Eq_.Eq<A>
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
 

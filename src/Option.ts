@@ -14,7 +14,7 @@ import { invert as invertBool } from "./Boolean"
 import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative"
 import { toMonoid as _toMonoid } from "./Monoid"
 import * as L from "./Lazy"
-import Lazy = L.Lazy
+type Lazy<A> = L.Lazy<A>
 import { Bounded } from "fp-ts/Bounded"
 import { Enum } from "./Enum"
 import { increment, decrement } from "./Number"

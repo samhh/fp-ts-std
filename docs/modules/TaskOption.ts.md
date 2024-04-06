@@ -31,7 +31,11 @@ Convenient alias for `TO.of(undefined)`.
 **Signature**
 
 ```ts
-export declare const pass: TO.TaskOption<void>
+export declare const pass: TaskOption<void>
+```
+
+```hs
+pass :: TaskOption void
 ```
 
 **Example**
@@ -64,7 +68,11 @@ Unwrap the promise from within a `TaskOption`, rejecting with `msg` if
 **Signature**
 
 ```ts
-export declare const unsafeExpect: (msg: string) => <A>(x: TO.TaskOption<A>) => Promise<A>
+export declare const unsafeExpect: (msg: string) => <A>(x: TaskOption<A>) => Promise<A>
+```
+
+```hs
+unsafeExpect :: string -> TaskOption a -> Promise a
 ```
 
 **Example**
@@ -85,7 +93,11 @@ Unwrap the promise from within a `TaskOption`, rejecting if `None`.
 **Signature**
 
 ```ts
-export declare const unsafeUnwrap: <A>(x: TO.TaskOption<A>) => Promise<A>
+export declare const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A>
+```
+
+```hs
+unsafeUnwrap :: TaskOption a -> Promise a
 ```
 
 **Example**

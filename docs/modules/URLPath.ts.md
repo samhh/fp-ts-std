@@ -78,7 +78,11 @@ A holistic `Eq` instance for `URLPath`.
 **Signature**
 
 ```ts
-export declare const Eq: Eq_.Eq<URLPath>
+export declare const Eq: Eq<URLPath>
+```
+
+```hs
+Eq :: Eq URLPath
 ```
 
 **Example**

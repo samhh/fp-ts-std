@@ -15,7 +15,7 @@ import { Endomorphism } from "fp-ts/Endomorphism"
 import { Predicate } from "fp-ts/Predicate"
 import * as Str from "fp-ts/string"
 import * as Eq_ from "fp-ts/Eq"
-import Eq = Eq_.Eq
+type Eq<A> = Eq_.Eq<A>
 
 const constructor = (x: ConstructorParameters<typeof URL>[0]): URL => new URL(x)
 

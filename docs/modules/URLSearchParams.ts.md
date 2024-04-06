@@ -60,7 +60,11 @@ without respect to order.
 **Signature**
 
 ```ts
-export declare const Eq: Eq_.Eq<URLSearchParams>
+export declare const Eq: Eq<URLSearchParams>
+```
+
+```hs
+Eq :: Eq URLSearchParams
 ```
 
 **Example**
@@ -82,7 +86,11 @@ preserved.
 **Signature**
 
 ```ts
-export declare const Monoid: Monoid_.Monoid<URLSearchParams>
+export declare const Monoid: Monoid<URLSearchParams>
+```
+
+```hs
+Monoid :: Monoid URLSearchParams
 ```
 
 **Example**

@@ -31,7 +31,11 @@ Convenient alias for `IOO.of(undefined)`.
 **Signature**
 
 ```ts
-export declare const pass: IOO.IOOption<void>
+export declare const pass: IOOption<void>
+```
+
+```hs
+pass :: IOOption void
 ```
 
 **Example**
@@ -63,7 +67,11 @@ Unwrap the value from within an `IOOption`, throwing `msg` if `None`.
 **Signature**
 
 ```ts
-export declare const unsafeExpect: (msg: string) => <A>(x: IOO.IOOption<A>) => A
+export declare const unsafeExpect: (msg: string) => <A>(x: IOOption<A>) => A
+```
+
+```hs
+unsafeExpect :: string -> IOOption a -> a
 ```
 
 **Example**
@@ -84,7 +92,11 @@ Unwrap the value from within an `IOOption`, throwing if `None`.
 **Signature**
 
 ```ts
-export declare const unsafeUnwrap: <A>(x: IOO.IOOption<A>) => A
+export declare const unsafeUnwrap: <A>(x: IOOption<A>) => A
+```
+
+```hs
+unsafeUnwrap :: IOOption a -> a
 ```
 
 **Example**

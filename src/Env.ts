@@ -8,9 +8,9 @@
 import { pipe, flow } from "fp-ts/function"
 import * as O from "fp-ts/Option"
 import * as IOO from "fp-ts/IOOption"
-import IOOption = IOO.IOOption
+type IOOption<A> = IOO.IOOption<A>
 import * as NES from "./NonEmptyString"
-import NonEmptyString = NES.NonEmptyString
+type NonEmptyString = NES.NonEmptyString
 
 /**
  * Attempt to get an environment parameter.

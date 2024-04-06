@@ -5,7 +5,7 @@
  */
 
 import * as TO from "fp-ts/TaskOption"
-import TaskOption = TO.TaskOption
+type TaskOption<A> = TO.TaskOption<A>
 import * as T from "fp-ts/Task"
 import { execute as executeT } from "./Task"
 import {
