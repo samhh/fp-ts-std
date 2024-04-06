@@ -33,13 +33,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Latest released and oldest supported.
-        node: [21, 20]
+        shell: [ci, ci-lts]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
-          node-version: ${{ matrix.node }}
+          shell: ${{ matrix.shell }}
       - run: yarn test
 
   docs:

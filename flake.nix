@@ -16,17 +16,29 @@
             inherit system;
             overlays = [ overlay ];
           };
-
-          common = with pkgs; [ yarn tshm-docs-ts ];
         in
         {
           devShells = {
             default = pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [ nodejs_21 ] ++ common;
+              nativeBuildInputs = with pkgs; [
+                nodejs_21
+                tshm-docs-ts
+                yarn
+              ];
             };
 
-            lts = pkgs.mkShell {
-              nativeBuildInputs = with pkgs; [ nodejs ] ++ common;
+            ci = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [
+                nodejs_21
+                yarn
+              ];
+            };
+
+            ci-lts = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [
+                nodejs
+                yarn
+              ];
             };
           };
         }

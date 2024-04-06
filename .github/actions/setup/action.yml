@@ -1,20 +1,26 @@
-name: Setup - matrix
+name: Setup
 
 inputs:
-  node-version:
-    type: string
+  shell:
     required: false
-    default: 21
+    default: ci
 
 runs:
   using: composite
   steps:
-    - name: Setup Node.js & Yarn
+    - name: Install Nix
+      uses: cachix/install-nix-action@v26
+
+    - name: Embed Nix shell
+      uses: nicknovitski/nix-develop@v1
+      with:
+        arguments: .#${{ inputs.shell }}
+
+    - name: Cache Yarn
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ inputs.node-version }}
         cache: yarn
 
-    - name: Install dependencies
+    - name: Install Yarn dependencies
       shell: bash
       run: yarn install --frozen-lockfile
