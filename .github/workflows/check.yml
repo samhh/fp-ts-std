@@ -39,7 +39,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           shell: nodejs-${{ matrix.shell }}
-      - run: pnpm test
+      - run: pnpm run test --coverage
 
   test:
     name: Test (Bun)
