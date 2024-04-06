@@ -20,7 +20,7 @@ jobs:
       - run: pnpm run lint
 
   fmt:
-    name: Check formatting
+    name: Formatting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
