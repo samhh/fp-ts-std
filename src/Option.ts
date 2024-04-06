@@ -28,7 +28,7 @@ import { decrement, increment } from "./Number"
  *
  * assert.throws(
  *   () => unsafeExpect('foo')(O.none),
- *   Error('Unwrapped `None`', { cause: 'foo' }),
+ *   Error('Unwrapped `None`', { cause: Error('foo') }),
  * )
  *
  * @category 3 Functions
@@ -37,7 +37,7 @@ import { decrement, increment } from "./Number"
 export const unsafeExpect =
 	(msg: string) =>
 	<A>(x: Option<A>): A => {
-		if (O.isNone(x)) throw Error("Unwrapped `None`", { cause: msg })
+		if (O.isNone(x)) throw Error("Unwrapped `None`", { cause: new Error(msg) })
 
 		return x.value
 	}

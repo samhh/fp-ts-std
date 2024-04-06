@@ -23,16 +23,6 @@ import {
 	unsafeUnwrap,
 } from "../src/Option"
 
-const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	try {
-		f()
-		throw "didn't throw"
-	} catch (e) {
-		if (!(e instanceof Error)) throw "threw unexpected type"
-		return [e.message, e.cause]
-	}
-}
-
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
 	fc.oneof(x.map(O.some), fc.constant(O.none))
 
@@ -45,10 +35,7 @@ describe("Option", () => {
 		})
 
 		it("throws None", () => {
-			const [m, c] = msgAndCause(() => f(O.none))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toBe(undefined)
+			expect(() => f(O.none)).toThrow(new Error("Unwrapped `None`"))
 		})
 	})
 
@@ -60,10 +47,9 @@ describe("Option", () => {
 		})
 
 		it("throws None with provided message", () => {
-			const [m, c] = msgAndCause(() => f(O.none))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toBe("foo")
+			expect(() => f(O.none)).toThrow(
+				new Error("Unwrapped `None`", { cause: new Error("foo") }),
+			)
 		})
 	})
 

@@ -5,6 +5,7 @@ This project adheres to semantic versioning.
 ## 0.19.0 (_Unreleased_)
 
 - Add `clone` to `URLPath`.
+- Wrap the provided error cause in `unsafeExpect` in `Option` in an `Error` object.
 - Fix `URLPath` incorrectly parsing alternative origins.
 - Fix typings in presence of `isolatedModules`.
 - Bump minimum supported Node LTS to v20.

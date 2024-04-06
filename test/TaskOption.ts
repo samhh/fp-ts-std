@@ -2,16 +2,6 @@ import { describe, expect, it } from "@jest/globals"
 import * as TO from "fp-ts/TaskOption"
 import { pass, unsafeExpect, unsafeUnwrap } from "../src/TaskOption"
 
-const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
-	try {
-		await f
-		throw "didn't throw"
-	} catch (e) {
-		if (!(e instanceof Error)) throw "threw unexpected type"
-		return [e.message, e.cause]
-	}
-}
-
 describe("TaskOption", () => {
 	describe("unsafeUnwrap", () => {
 		const f = unsafeUnwrap
@@ -21,10 +11,7 @@ describe("TaskOption", () => {
 		})
 
 		it("throws None", async () => {
-			const [m, c] = await msgAndCause(f(TO.none))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toBe(undefined)
+			expect(f(TO.none)).rejects.toThrow(new Error("Unwrapped `None`"))
 		})
 	})
 
@@ -36,10 +23,9 @@ describe("TaskOption", () => {
 		})
 
 		it("throws None with provided message", async () => {
-			const [m, c] = await msgAndCause(f(TO.none))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toBe("foo")
+			expect(f(TO.none)).rejects.toThrow(
+				new Error("Unwrapped `None`", { cause: new Error("foo") }),
+			)
 		})
 	})
 

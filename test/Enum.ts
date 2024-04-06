@@ -25,19 +25,8 @@ import * as Str from "fp-ts/string"
 import { Enum as EnumBool } from "../src/Boolean"
 import { curry2 } from "../src/Function"
 import * as L from "../src/Lazy"
-import type { Lazy } from "../src/Lazy"
 import { EnumInt } from "../src/Number"
 import { EQ } from "../src/Ordering"
-
-const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	try {
-		f()
-		throw "didn't throw"
-	} catch (e) {
-		if (!(e instanceof Error)) throw "threw unexpected type"
-		return [e.message, e.cause]
-	}
-}
 
 const BoundedNull: Bounded<null> = {
 	equals: constant(true),
@@ -375,10 +364,13 @@ describe("Enum", () => {
 
 		it("throws with expected message in fromEnum if member not present", () => {
 			const E = f(Str.Ord)(["foo"])
-			const [m, c] = msgAndCause(() => E.fromEnum("bar"))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toMatch(/getUnsafeConstantEnum/)
+			expect(() => E.fromEnum("bar")).toThrow(
+				new Error("Unwrapped `None`", {
+					cause: new Error(
+						"Failed to lookup fromEnum input via getUnsafeConstantEnum",
+					),
+				}),
+			)
 		})
 	})
 })

@@ -349,7 +349,7 @@ unsafeExpect :: string -> Option a -> a
 import { unsafeExpect } from 'fp-ts-std/Option'
 import * as O from 'fp-ts/Option'
 
-assert.throws(() => unsafeExpect('foo')(O.none), Error('Unwrapped `None`', { cause: 'foo' }))
+assert.throws(() => unsafeExpect('foo')(O.none), Error('Unwrapped `None`', { cause: Error('foo') }))
 ```
 
 Added in v0.16.0

@@ -1,17 +1,6 @@
 import { describe, expect, it } from "@jest/globals"
 import * as IOO from "fp-ts/IOOption"
 import { pass, unsafeExpect, unsafeUnwrap } from "../src/IOOption"
-import type { Lazy } from "../src/Lazy"
-
-const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	try {
-		f()
-		throw "didn't throw"
-	} catch (e) {
-		if (!(e instanceof Error)) throw "threw unexpected type"
-		return [e.message, e.cause]
-	}
-}
 
 describe("IOOption", () => {
 	describe("unsafeUnwrap", () => {
@@ -22,10 +11,7 @@ describe("IOOption", () => {
 		})
 
 		it("throws None", () => {
-			const [m, c] = msgAndCause(() => f(IOO.none))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toBe(undefined)
+			expect(() => f(IOO.none)).toThrow(new Error("Unwrapped `None`"))
 		})
 	})
 
@@ -37,10 +23,9 @@ describe("IOOption", () => {
 		})
 
 		it("throws None with provided message", () => {
-			const [m, c] = msgAndCause(() => f(IOO.none))
-
-			expect(m).toBe("Unwrapped `None`")
-			expect(c).toBe("foo")
+			expect(() => f(IOO.none)).toThrow(
+				new Error("Unwrapped `None`", { cause: new Error("foo") }),
+			)
 		})
 	})
 
