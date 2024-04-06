@@ -4,7 +4,7 @@
  * @since 0.12.0
  */
 
-import { Ordering } from "fp-ts/Ordering"
+import type { Ordering } from "fp-ts/Ordering"
 
 /**
  * Alias for the notion of "less than" in `Ordering`.

@@ -58,7 +58,7 @@ describe("Lazy", () => {
 			const f = (n: number) =>
 				n < 15000
 					? Lazy.of(E.left(n + 1))
-					: Lazy.of(E.right("ok " + fromNumber(n)))
+					: Lazy.of(E.right(`ok ${fromNumber(n)}`))
 			expect(Lazy.ChainRec.chainRec(0, f)()).toBe("ok 15000")
 		})
 	})

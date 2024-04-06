@@ -1,7 +1,7 @@
 import { describe, it } from "@jest/globals"
 import fc from "fast-check"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { Newtype, iso } from "newtype-ts"
+import type { Endomorphism } from "fp-ts/Endomorphism"
+import { type Newtype, iso } from "newtype-ts"
 import { over, pack, unpack } from "../src/Newtype"
 import { multiply } from "../src/Number"
 

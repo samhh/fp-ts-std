@@ -3,7 +3,7 @@
  *
  * @since 0.15.0
  */
-import { Reader } from "fp-ts/Reader"
+import type { Reader } from "fp-ts/Reader"
 import { apply } from "fp-ts/function"
 
 /**

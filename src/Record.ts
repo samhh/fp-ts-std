@@ -6,8 +6,8 @@
  */
 
 import * as A from "fp-ts/Array"
-import { Option } from "fp-ts/Option"
-import { Predicate, not } from "fp-ts/Predicate"
+import type { Option } from "fp-ts/Option"
+import { type Predicate, not } from "fp-ts/Predicate"
 import * as R from "fp-ts/Record"
 import { last } from "fp-ts/Semigroup"
 import * as T from "fp-ts/Tuple"

@@ -32,7 +32,7 @@ const arb: fc.Arbitrary<URL> = fc
 	.map(unsafeParse)
 
 const validBase = "https://a:b@c.d.e:1"
-const validUrl = validBase + "/f/g.h?i=j&k=l&i=m#n"
+const validUrl = `${validBase}/f/g.h?i=j&k=l&i=m#n`
 
 const fromPathname = (x: string): URL => {
 	const y = new URL(validBase)
@@ -159,6 +159,7 @@ describe("URL", () => {
 				fc.property(
 					fc.webUrl({ withFragments: true, withQueryParameters: true }),
 					x =>
+						// biome-ignore lint/suspicious/noSelfCompare: Incorrect lint.
 						pipe(x, unsafeParse, f, unsafeParse, f) === pipe(x, unsafeParse, f),
 				),
 			)
@@ -191,7 +192,7 @@ describe("URL", () => {
 
 		it("modifies the path with the provided function without mutating input", () => {
 			const x = fromPathname("foo")
-			const y = f(s => s + "bar")(x)
+			const y = f(s => `${s}bar`)(x)
 
 			expect(getPathname(x)).toBe("/foo")
 			expect(getPathname(y)).toBe("/foobar")
@@ -273,7 +274,7 @@ describe("URL", () => {
 		it("modifies the hash with the provided function without mutating input", () => {
 			const h = "#foo"
 			const x = new URL(validBase + h)
-			const y = f(s => s + "bar")(x)
+			const y = f(s => `${s}bar`)(x)
 
 			expect(getHash(x)).toBe("#foo")
 			expect(getHash(y)).toBe("#foobar")
@@ -304,7 +305,7 @@ describe("URL", () => {
 			const x = "https://samhh.com/foo.bar#baz"
 
 			expect(f(g(x), g(x))).toBe(true)
-			expect(f(g(x), g(x + "!"))).toBe(false)
+			expect(f(g(x), g(`${x}!`))).toBe(false)
 		})
 
 		it("is lawful", () => {

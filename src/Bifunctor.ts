@@ -4,7 +4,7 @@
  * @since 0.14.0
  */
 
-import {
+import type {
 	Bifunctor,
 	Bifunctor2,
 	Bifunctor2C,
@@ -12,7 +12,7 @@ import {
 	Bifunctor3C,
 	Bifunctor4,
 } from "fp-ts/Bifunctor"
-import { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from "fp-ts/HKT"
+import type { HKT2, Kind2, Kind3, Kind4, URIS2, URIS3, URIS4 } from "fp-ts/HKT"
 
 /**
  * Apply a function to both elements of a bifunctor.

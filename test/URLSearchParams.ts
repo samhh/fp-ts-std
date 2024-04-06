@@ -300,7 +300,7 @@ describe("URLSearchParams", () => {
 			const x = "a=1&b=2&a=3"
 
 			expect(f(g(x), g(x))).toBe(true)
-			expect(f(g(x), g(x + "&b=4"))).toBe(false)
+			expect(f(g(x), g(`${x}&b=4`))).toBe(false)
 		})
 
 		it("disregards order", () => {

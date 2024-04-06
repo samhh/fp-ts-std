@@ -6,12 +6,17 @@
 
 import * as T from "fp-ts/Task"
 type Task<A> = T.Task<A>
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { IO } from "fp-ts/IO"
-import { Predicate } from "fp-ts/Predicate"
+import type { Endomorphism } from "fp-ts/Endomorphism"
+import type { IO } from "fp-ts/IO"
+import type { Predicate } from "fp-ts/Predicate"
 import { constVoid, flow } from "fp-ts/function"
 import { pass as _pass, unless as _unless, when as _when } from "./Applicative"
-import { Milliseconds, fieldMilliseconds, now, unMilliseconds } from "./Date"
+import {
+	type Milliseconds,
+	fieldMilliseconds,
+	now,
+	unMilliseconds,
+} from "./Date"
 import { until as _until } from "./Monad"
 
 /**

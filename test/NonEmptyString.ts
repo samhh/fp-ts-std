@@ -1,7 +1,7 @@
 import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as laws from "fp-ts-laws"
-import { Predicate, not } from "fp-ts/Predicate"
+import { type Predicate, not } from "fp-ts/Predicate"
 import * as Pred from "fp-ts/Predicate"
 import { flow, pipe } from "fp-ts/function"
 import {
@@ -14,7 +14,7 @@ import {
 } from "fp-ts/string"
 import {
 	Eq,
-	NonEmptyString,
+	type NonEmptyString,
 	Ord,
 	Semigroup,
 	append,

@@ -2,15 +2,15 @@ import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as A from "fp-ts/Array"
 import * as E from "fp-ts/Either"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import { contramap as eqContramap } from "fp-ts/Eq"
 import * as IO from "fp-ts/IO"
 import { concatAll } from "fp-ts/Monoid"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import type { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as O from "fp-ts/Option"
 import { max, contramap as ordContramap } from "fp-ts/Ord"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as R from "fp-ts/Record"
 import * as T from "fp-ts/These"
@@ -775,7 +775,7 @@ describe("Array", () => {
 		})
 
 		it("removes everything from the index if count is too large", () => {
-			expect(f(2)(Infinity)(xs)).toEqual(O.some(["a", "b"]))
+			expect(f(2)(Number.POSITIVE_INFINITY)(xs)).toEqual(O.some(["a", "b"]))
 		})
 
 		it("rounds down both input numbers", () => {

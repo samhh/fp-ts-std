@@ -4,14 +4,14 @@
  * @since 0.1.0
  */
 
-import { Either } from "fp-ts/Either"
+import type { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { Predicate } from "fp-ts/Predicate"
-import { Refinement } from "fp-ts/Refinement"
+import type { Predicate } from "fp-ts/Predicate"
+import type { Refinement } from "fp-ts/Refinement"
 import { constant, flow, identity } from "fp-ts/function"
 import * as Str from "fp-ts/string"
 import { isInstanceOf } from "./Function"

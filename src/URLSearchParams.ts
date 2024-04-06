@@ -7,24 +7,24 @@
 
 import * as M from "fp-ts/Map"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { Predicate, not } from "fp-ts/Predicate"
+import { type Predicate, not } from "fp-ts/Predicate"
 import * as R from "fp-ts/Record"
-import { Refinement } from "fp-ts/Refinement"
+import type { Refinement } from "fp-ts/Refinement"
 import { constant, flow, pipe } from "fp-ts/function"
 import { invoke, isInstanceOf, uncurry2, when } from "./Function"
 type NonEmptyArray<A> = NEA.NonEmptyArray<A>
 import * as A from "fp-ts/Array"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import * as Eq_ from "fp-ts/Eq"
+import type { Endomorphism } from "fp-ts/Endomorphism"
+import type * as Eq_ from "fp-ts/Eq"
 import { mapSnd } from "fp-ts/Tuple"
 import * as Str from "fp-ts/string"
 import { fromIterable, getDisorderedEq } from "./Array"
 import { prepend } from "./String"
 import { withFst } from "./Tuple"
 type Eq<A> = Eq_.Eq<A>
-import * as Monoid_ from "fp-ts/Monoid"
+import type * as Monoid_ from "fp-ts/Monoid"
 import type { Semigroup as SemigroupT } from "fp-ts/Semigroup"
 type Monoid<A> = Monoid_.Monoid<A>
 

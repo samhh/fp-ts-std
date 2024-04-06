@@ -2,7 +2,7 @@ import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import * as Pred from "fp-ts/Predicate"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import { flow } from "fp-ts/function"
 import {
 	EnumInt,
@@ -79,7 +79,7 @@ describe("Number", () => {
 		const f = isValid
 
 		it("returns false for NaN", () => {
-			expect(f(NaN)).toBe(false)
+			expect(f(Number.NaN)).toBe(false)
 		})
 
 		it("returns true for any other number", () => {
@@ -224,8 +224,8 @@ describe("Number", () => {
 		})
 
 		it("fails for Infinity (positive and negative)", () => {
-			expect(f(Infinity)).toBe(false)
-			expect(f(-Infinity)).toBe(false)
+			expect(f(Number.POSITIVE_INFINITY)).toBe(false)
+			expect(f(Number.NEGATIVE_INFINITY)).toBe(false)
 		})
 	})
 
@@ -245,8 +245,8 @@ describe("Number", () => {
 		})
 
 		it("converts Infinity to smallest/largest safe integer", () => {
-			expect(f(Infinity)).toBe(Number.MAX_SAFE_INTEGER)
-			expect(f(-Infinity)).toBe(Number.MIN_SAFE_INTEGER)
+			expect(f(Number.POSITIVE_INFINITY)).toBe(Number.MAX_SAFE_INTEGER)
+			expect(f(Number.NEGATIVE_INFINITY)).toBe(Number.MIN_SAFE_INTEGER)
 		})
 	})
 
@@ -256,7 +256,7 @@ describe("Number", () => {
 		it("returns true for any number above zero", () => {
 			expect(f(0.000001)).toBe(true)
 			expect(f(42)).toBe(true)
-			expect(f(Infinity)).toBe(true)
+			expect(f(Number.POSITIVE_INFINITY)).toBe(true)
 
 			fc.assert(fc.property(fc.integer({ min: 1 }), f))
 		})
@@ -268,7 +268,7 @@ describe("Number", () => {
 		it("returns false for any number below zero", () => {
 			expect(f(-0.000001)).toBe(false)
 			expect(f(-42)).toBe(false)
-			expect(f(-Infinity)).toBe(false)
+			expect(f(Number.NEGATIVE_INFINITY)).toBe(false)
 
 			fc.assert(fc.property(fc.integer({ max: -1 }), Pred.not(f)))
 		})
@@ -280,7 +280,7 @@ describe("Number", () => {
 		it("returns false for any number above zero", () => {
 			expect(f(0.000001)).toBe(false)
 			expect(f(42)).toBe(false)
-			expect(f(Infinity)).toBe(false)
+			expect(f(Number.POSITIVE_INFINITY)).toBe(false)
 
 			fc.assert(fc.property(fc.integer({ min: 1 }), Pred.not(f)))
 		})
@@ -292,7 +292,7 @@ describe("Number", () => {
 		it("returns true for any number below zero", () => {
 			expect(f(-0.000001)).toBe(true)
 			expect(f(-42)).toBe(true)
-			expect(f(-Infinity)).toBe(true)
+			expect(f(Number.NEGATIVE_INFINITY)).toBe(true)
 
 			fc.assert(fc.property(fc.integer({ max: -1 }), f))
 		})
@@ -304,7 +304,7 @@ describe("Number", () => {
 		it("returns true for any number above zero", () => {
 			expect(f(0.000001)).toBe(true)
 			expect(f(42)).toBe(true)
-			expect(f(Infinity)).toBe(true)
+			expect(f(Number.POSITIVE_INFINITY)).toBe(true)
 
 			fc.assert(fc.property(fc.integer({ min: 1 }), f))
 		})
@@ -316,7 +316,7 @@ describe("Number", () => {
 		it("returns false for any number below zero", () => {
 			expect(f(-0.000001)).toBe(false)
 			expect(f(-42)).toBe(false)
-			expect(f(-Infinity)).toBe(false)
+			expect(f(Number.NEGATIVE_INFINITY)).toBe(false)
 
 			fc.assert(fc.property(fc.integer({ max: -1 }), Pred.not(f)))
 		})
@@ -328,7 +328,7 @@ describe("Number", () => {
 		it("returns false for any number above zero", () => {
 			expect(f(0.000001)).toBe(false)
 			expect(f(42)).toBe(false)
-			expect(f(Infinity)).toBe(false)
+			expect(f(Number.POSITIVE_INFINITY)).toBe(false)
 
 			fc.assert(fc.property(fc.integer({ min: 1 }), Pred.not(f)))
 		})
@@ -340,7 +340,7 @@ describe("Number", () => {
 		it("returns true for any number below zero", () => {
 			expect(f(-0.000001)).toBe(true)
 			expect(f(-42)).toBe(true)
-			expect(f(-Infinity)).toBe(true)
+			expect(f(Number.NEGATIVE_INFINITY)).toBe(true)
 
 			fc.assert(fc.property(fc.integer({ max: -1 }), f))
 		})
@@ -370,7 +370,7 @@ describe("Number", () => {
 			it("rejects number more than or equal to max", () => {
 				expect(f(Number.MAX_SAFE_INTEGER)).toEqual(O.none)
 				expect(f(Number.MAX_SAFE_INTEGER + 1)).toEqual(O.none)
-				expect(f(Infinity)).toEqual(O.none)
+				expect(f(Number.POSITIVE_INFINITY)).toEqual(O.none)
 			})
 
 			it("rejects float", () => {
@@ -402,7 +402,7 @@ describe("Number", () => {
 			it("rejects number less than or equal to min", () => {
 				expect(f(Number.MIN_SAFE_INTEGER)).toEqual(O.none)
 				expect(f(Number.MIN_SAFE_INTEGER - 1)).toEqual(O.none)
-				expect(f(-Infinity)).toEqual(O.none)
+				expect(f(Number.NEGATIVE_INFINITY)).toEqual(O.none)
 			})
 
 			it("rejects float", () => {
@@ -453,13 +453,13 @@ describe("Number", () => {
 		})
 
 		it("returns empty output for NaN", () => {
-			expect(f(NaN)).toEqual([])
-			expect(f(-NaN)).toEqual([])
+			expect(f(Number.NaN)).toEqual([])
+			expect(f(-Number.NaN)).toEqual([])
 		})
 
 		it("returns empty output for infinities", () => {
-			expect(f(Infinity)).toEqual([])
-			expect(f(-Infinity)).toEqual([])
+			expect(f(Number.POSITIVE_INFINITY)).toEqual([])
+			expect(f(Number.NEGATIVE_INFINITY)).toEqual([])
 		})
 
 		it("alternative notations are implicitly converted to decimals", () => {

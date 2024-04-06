@@ -4,13 +4,13 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import type { Endomorphism } from "fp-ts/Endomorphism"
+import type { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { max } from "fp-ts/Ord"
-import { Predicate, and, not } from "fp-ts/Predicate"
+import { type Predicate, and, not } from "fp-ts/Predicate"
 import * as RA from "fp-ts/ReadonlyArray"
 import { flip, flow, pipe } from "fp-ts/function"
 import { Ord as ordNumber } from "fp-ts/number"
@@ -189,7 +189,10 @@ export const takeLeft = (n: number): Endomorphism<string> =>
 export const takeRight =
 	(n: number): Endomorphism<string> =>
 	x =>
-		S.slice(max(ordNumber)(0, x.length - Math.floor(n)), Infinity)(x)
+		S.slice(
+			max(ordNumber)(0, x.length - Math.floor(n)),
+			Number.POSITIVE_INFINITY,
+		)(x)
 
 /**
  * Functional wrapper around `String.prototype.match`.
@@ -571,7 +574,7 @@ export const splitAt =
 	(index: number) =>
 	(str: string): [string, string] => [
 		S.slice(0, index)(str),
-		S.slice(index, Infinity)(str),
+		S.slice(index, Number.POSITIVE_INFINITY)(str),
 	]
 
 /**

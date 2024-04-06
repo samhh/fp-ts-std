@@ -8,15 +8,15 @@
  * @since 0.17.0
  */
 
-import { Either } from "fp-ts/Either"
+import type { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { Refinement } from "fp-ts/Refinement"
+import type { Refinement } from "fp-ts/Refinement"
 import { flow, identity, pipe } from "fp-ts/function"
-import { Newtype } from "newtype-ts"
+import type { Newtype } from "newtype-ts"
 import { over, pack, unpack } from "./Newtype"
 import * as URL from "./URL"
 type Eq<A> = Eq_.Eq<A>

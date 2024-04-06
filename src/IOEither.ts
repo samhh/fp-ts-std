@@ -5,9 +5,9 @@
  */
 
 import * as IO from "fp-ts/IO"
-import { IOEither } from "fp-ts/IOEither"
+import type { IOEither } from "fp-ts/IOEither"
 import * as IOE from "fp-ts/IOEither"
-import { Show } from "fp-ts/Show"
+import type { Show } from "fp-ts/Show"
 import { constVoid, flow } from "fp-ts/function"
 import { pass as _pass } from "./Applicative"
 import {

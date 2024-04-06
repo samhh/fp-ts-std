@@ -9,8 +9,8 @@
 
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
-import { IOOption } from "fp-ts/IOOption"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import type { IOOption } from "fp-ts/IOOption"
+import type { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
 import * as O from "fp-ts/Option"
 import { constVoid, flow, pipe } from "fp-ts/function"

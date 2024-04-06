@@ -7,7 +7,7 @@
  * @since 0.1.0
  */
 
-import { Applicative2 } from "fp-ts/Applicative"
+import type { Applicative2 } from "fp-ts/Applicative"
 import {
 	apFirst as apFirst_,
 	apS as apS_,
@@ -15,15 +15,18 @@ import {
 } from "fp-ts/Apply"
 import * as A from "fp-ts/Array"
 import { bind as bind_ } from "fp-ts/Chain"
-import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
-import { Eq } from "fp-ts/Eq"
-import { Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/Functor"
+import {
+	type Endomorphism,
+	getMonoid as getEndoMonoid,
+} from "fp-ts/Endomorphism"
+import type { Eq } from "fp-ts/Eq"
+import { type Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/Functor"
 import * as M from "fp-ts/Map"
-import { Monad2 } from "fp-ts/Monad"
+import type { Monad2 } from "fp-ts/Monad"
 import { concatAll } from "fp-ts/Monoid"
 import * as O from "fp-ts/Option"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Refinement } from "fp-ts/Refinement"
+import { type Predicate, not } from "fp-ts/Predicate"
+import type { Refinement } from "fp-ts/Refinement"
 import { first } from "fp-ts/Semigroup"
 import {
 	apply,
@@ -429,9 +432,9 @@ export const until =
  */
 export const construct =
 	// biome-ignore lint/correctness/noUnusedVariables: Biome bug.
-	<A extends Array<unknown>, B>(x: new (...xs: A) => B) =>
-	(xs: A): B =>
-		new x(...xs)
+		<A extends Array<unknown>, B>(x: new (...xs: A) => B) =>
+		(xs: A): B =>
+			new x(...xs)
 
 /**
  * Invoke a method of the specified name with the provided arguments on an

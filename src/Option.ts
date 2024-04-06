@@ -4,9 +4,9 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { Eq } from "fp-ts/Eq"
-import { Option } from "fp-ts/Option"
+import type { Endomorphism } from "fp-ts/Endomorphism"
+import type { Eq } from "fp-ts/Eq"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import * as B from "fp-ts/boolean"
 import { constant, flow, pipe } from "fp-ts/function"
@@ -15,8 +15,8 @@ import { invert as invertBool } from "./Boolean"
 import * as L from "./Lazy"
 import { toMonoid as _toMonoid } from "./Monoid"
 type Lazy<A> = L.Lazy<A>
-import { Bounded } from "fp-ts/Bounded"
-import { Enum } from "./Enum"
+import type { Bounded } from "fp-ts/Bounded"
+import type { Enum } from "./Enum"
 import { decrement, increment } from "./Number"
 
 /**

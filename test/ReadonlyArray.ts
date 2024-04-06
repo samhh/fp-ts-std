@@ -4,7 +4,7 @@ import { contramap as eqContramap } from "fp-ts/Eq"
 import { concatAll } from "fp-ts/Monoid"
 import * as O from "fp-ts/Option"
 import { max, contramap as ordContramap } from "fp-ts/Ord"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import * as A from "fp-ts/ReadonlyArray"
 import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
 import {
@@ -59,9 +59,9 @@ import {
 } from "../src/ReadonlyArray"
 import ReadonlyNonEmptyArray = RNEA.ReadonlyNonEmptyArray
 import * as E from "fp-ts/Either"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as IO from "fp-ts/IO"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import type { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as R from "fp-ts/Record"
 import * as T from "fp-ts/These"
 import { fst, snd } from "fp-ts/Tuple"
@@ -773,7 +773,7 @@ describe("Array", () => {
 		})
 
 		it("removes everything from the index if count is too large", () => {
-			expect(f(2)(Infinity)(xs)).toEqual(O.some(["a", "b"]))
+			expect(f(2)(Number.POSITIVE_INFINITY)(xs)).toEqual(O.some(["a", "b"]))
 		})
 
 		it("rounds down both input numbers", () => {

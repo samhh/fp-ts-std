@@ -6,7 +6,7 @@
  */
 
 import { concatAll } from "fp-ts/Monoid"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import * as Pred from "fp-ts/Predicate"
 import { flow } from "fp-ts/function"
 import { invert } from "./Boolean"

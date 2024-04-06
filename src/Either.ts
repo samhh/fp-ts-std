@@ -4,16 +4,16 @@
  * @since 0.1.0
  */
 
-import { Bounded } from "fp-ts/Bounded"
-import { Either } from "fp-ts/Either"
+import type { Bounded } from "fp-ts/Bounded"
+import type { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { Ord } from "fp-ts/Ord"
-import { Ordering } from "fp-ts/Ordering"
-import { Show } from "fp-ts/Show"
+import type { Ord } from "fp-ts/Ord"
+import type { Ordering } from "fp-ts/Ordering"
+import type { Show } from "fp-ts/Show"
 import { constant, flow, pipe } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
-import { Enum } from "./Enum"
+import type { Enum } from "./Enum"
 import { curry2 } from "./Function"
 import * as L from "./Lazy"
 import { add } from "./Number"

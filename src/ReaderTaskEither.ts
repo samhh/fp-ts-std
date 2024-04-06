@@ -1,8 +1,8 @@
-import { Either } from "fp-ts/Either"
-import * as RTE from "fp-ts/ReaderTaskEither"
-import { Task } from "fp-ts/Task"
+import type { Either } from "fp-ts/Either"
+import type * as RTE from "fp-ts/ReaderTaskEither"
+import type { Task } from "fp-ts/Task"
 import * as TE from "fp-ts/TaskEither"
-import { TaskEither } from "fp-ts/TaskEither"
+import type { TaskEither } from "fp-ts/TaskEither"
 /**
  * Utility functions to accommodate `fp-ts/ReaderTaskEither`.
  *

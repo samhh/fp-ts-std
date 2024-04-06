@@ -7,10 +7,10 @@
  * @since 0.15.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
-import { Predicate, not } from "fp-ts/Predicate"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
+import { type Predicate, not } from "fp-ts/Predicate"
+import type { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import type { Show as TShow } from "fp-ts/Show"
 import { flow } from "fp-ts/function"
 import {
@@ -25,7 +25,7 @@ import {
 	toLowerCase as _toLowerCase,
 	toUpperCase as _toUpperCase,
 } from "fp-ts/string"
-import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
+import { type Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
 import { over, pack, unpack } from "./Newtype"
 import { unsafeExpect, unsafeUnwrap } from "./Option"
 import * as Str from "./String"

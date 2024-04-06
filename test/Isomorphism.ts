@@ -4,9 +4,9 @@ import * as laws from "fp-ts-laws"
 import * as Eq from "fp-ts/Eq"
 import * as Bool from "fp-ts/boolean"
 import { flow } from "fp-ts/function"
-import { Iso } from "monocle-ts/Iso"
+import type { Iso } from "monocle-ts/Iso"
 import {
-	Isomorphism,
+	type Isomorphism,
 	compose,
 	deriveMonoid,
 	deriveSemigroup,

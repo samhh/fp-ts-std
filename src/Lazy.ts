@@ -11,26 +11,30 @@
 
 // All the typeclass stuff was copied from fp-ts/IO almost identically.
 
-import { Applicative1 } from "fp-ts/Applicative"
+import type { Applicative1 } from "fp-ts/Applicative"
 import {
-	Apply1,
+	type Apply1,
 	apFirst as apFirst_,
 	apS as apS_,
 	apSecond as apSecond_,
 } from "fp-ts/Apply"
-import { Chain1, bind as bind_, chainFirst as chainFirst_ } from "fp-ts/Chain"
-import { ChainRec1 } from "fp-ts/ChainRec"
 import {
-	Functor1,
+	type Chain1,
+	bind as bind_,
+	chainFirst as chainFirst_,
+} from "fp-ts/Chain"
+import type { ChainRec1 } from "fp-ts/ChainRec"
+import {
+	type Functor1,
 	bindTo as bindTo_,
 	flap as flap_,
 	let as let__,
 } from "fp-ts/Functor"
-import { Monad1 } from "fp-ts/Monad"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import { Pointed1 } from "fp-ts/Pointed"
+import type { Monad1 } from "fp-ts/Monad"
+import type { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import type { Pointed1 } from "fp-ts/Pointed"
 import * as RA from "fp-ts/ReadonlyArray"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
+import type { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
 import { constant, identity } from "fp-ts/function"
 
@@ -423,5 +427,6 @@ export const memoize = <A>(f: Lazy<A>): Lazy<A> => {
 	const empty = Symbol()
 	let res: A | typeof empty = empty
 
+	// biome-ignore lint/suspicious/noAssignInExpressions: Intentional.
 	return () => (res === empty ? (res = f()) : res)
 }

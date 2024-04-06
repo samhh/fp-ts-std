@@ -90,7 +90,9 @@ describe("Task", () => {
 
 			it("runs the effect on true condition", async () => {
 				let ran = false
-				const g = f(true)(async () => void (ran = true))
+				const g = f(true)(async () => {
+					ran = true
+				})
 
 				await g()
 				return expect(ran).toBe(true)
@@ -98,7 +100,9 @@ describe("Task", () => {
 
 			it("does not run the effect on false condition", async () => {
 				let ran = false
-				const g = f(false)(async () => void (ran = true))
+				const g = f(false)(async () => {
+					ran = true
+				})
 
 				await g()
 				return expect(ran).toBe(false)
@@ -106,7 +110,9 @@ describe("Task", () => {
 
 			it("does not prematurely execute side effect", async () => {
 				let ran = false
-				const g = f(true)(async () => void (ran = true))
+				const g = f(true)(async () => {
+					ran = true
+				})
 
 				expect(ran).toBe(false)
 				const h = pipe(
@@ -124,7 +130,9 @@ describe("Task", () => {
 
 			it("runs the effect on false condition", async () => {
 				let ran = false
-				const g = f(false)(async () => void (ran = true))
+				const g = f(false)(async () => {
+					ran = true
+				})
 
 				await g()
 				return expect(ran).toBe(true)
@@ -132,7 +140,9 @@ describe("Task", () => {
 
 			it("does not run the effect on true condition", async () => {
 				let ran = false
-				const g = f(true)(async () => void (ran = true))
+				const g = f(true)(async () => {
+					ran = true
+				})
 
 				await g()
 				return expect(ran).toBe(false)
@@ -140,7 +150,9 @@ describe("Task", () => {
 
 			it("does not prematurely execute side effect", async () => {
 				let ran = false
-				const g = f(false)(async () => void (ran = true))
+				const g = f(false)(async () => {
+					ran = true
+				})
 
 				expect(ran).toBe(false)
 				const h = pipe(
@@ -161,10 +173,14 @@ describe("Task", () => {
 			let n = 0
 			const g = pipe(
 				sleep(mkMilliseconds(1)),
-				T.chainFirstIOK(() => () => (n = n * 2)),
+				T.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				T.fromIO(() => (n += 5)),
+				T.fromIO(() => {
+					n += 5
+				}),
 				T.map(constVoid),
 			)
 
@@ -181,10 +197,14 @@ describe("Task", () => {
 			let n = 0
 			const g = pipe(
 				sleep(mkMilliseconds(1)),
-				T.chainFirstIOK(() => () => (n = n * 2)),
+				T.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				T.fromIO(() => (n += 5)),
+				T.fromIO(() => {
+					n += 5
+				}),
 				T.map(constVoid),
 			)
 
@@ -201,10 +221,14 @@ describe("Task", () => {
 			let n = 0
 			const g = pipe(
 				sleep(mkMilliseconds(1)),
-				T.chainFirstIOK(() => () => (n = n * 2)),
+				T.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				T.fromIO(() => (n += 5)),
+				T.fromIO(() => {
+					n += 5
+				}),
 				T.map(constVoid),
 			)
 
@@ -221,10 +245,14 @@ describe("Task", () => {
 			let n = 0
 			const g = pipe(
 				sleep(mkMilliseconds(1)),
-				T.chainFirstIOK(() => () => (n = n * 2)),
+				T.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				T.fromIO(() => (n += 5)),
+				T.fromIO(() => {
+					n += 5
+				}),
 				T.map(constVoid),
 			)
 

@@ -222,7 +222,7 @@ describe("DOM", () => {
 
 			f(child)(parent())()
 
-			expect(parent().outerHTML).toBe(pre + "<li>3</li>" + post)
+			expect(parent().outerHTML).toBe(`${pre}<li>3</li>${post}`)
 		})
 	})
 
@@ -233,7 +233,7 @@ describe("DOM", () => {
 			const inner = "<li>1</li><li>2</li>"
 			const {
 				window: { document },
-			} = new JSDOM("<ul>" + inner + "</ul>")
+			} = new JSDOM(`<ul>${inner}</ul>`)
 
 			const parent = pipe(querySelector("ul")(document), IO.map(unsafeUnwrap))
 

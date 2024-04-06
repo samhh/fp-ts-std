@@ -1,11 +1,11 @@
 import { describe, expect, it } from "@jest/globals"
-import { Show } from "fp-ts/Show"
+import type { Show } from "fp-ts/Show"
 import { Contravariant, contramap } from "../src/Show"
 import { fromNumber } from "../src/String"
 
 describe("Show", () => {
 	describe("Contravariant", () => {
-		const showExcl: Show<string> = { show: x => x + "!" }
+		const showExcl: Show<string> = { show: x => `${x}!` }
 
 		describe("contramap (standalone)", () => {
 			it("maps to provided Show instance", () => {

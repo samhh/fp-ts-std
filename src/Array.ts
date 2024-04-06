@@ -4,7 +4,7 @@
  * @since 0.1.0
  */
 
-import {
+import type {
 	Applicative,
 	Applicative1,
 	Applicative2,
@@ -13,11 +13,11 @@ import {
 	Applicative4,
 } from "fp-ts/Applicative"
 import * as A from "fp-ts/Array"
-import { Either } from "fp-ts/Either"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { Eq } from "fp-ts/Eq"
+import type { Either } from "fp-ts/Either"
+import type { Endomorphism } from "fp-ts/Endomorphism"
+import type { Eq } from "fp-ts/Eq"
 import { reduceM } from "fp-ts/Foldable"
-import {
+import type {
 	HKT,
 	Kind,
 	Kind2,
@@ -28,7 +28,7 @@ import {
 	URIS3,
 	URIS4,
 } from "fp-ts/HKT"
-import {
+import type {
 	Monad,
 	Monad1,
 	Monad2,
@@ -38,17 +38,17 @@ import {
 	Monad4,
 } from "fp-ts/Monad"
 import { concatAll } from "fp-ts/Monoid"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import type { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { Ord } from "fp-ts/Ord"
+import type { Ord } from "fp-ts/Ord"
 import { match as orderingMatch } from "fp-ts/Ordering"
-import { Predicate, not } from "fp-ts/Predicate"
+import { type Predicate, not } from "fp-ts/Predicate"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as R from "fp-ts/Record"
 import { max, min } from "fp-ts/Semigroup"
-import { These } from "fp-ts/These"
+import type { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 import * as B from "fp-ts/boolean"
 import { constant, flip, flow, pipe } from "fp-ts/function"
@@ -827,7 +827,7 @@ export const zipAll =
 	<A>(xs: Array<A>) =>
 	<B>(ys: Array<B>): Array<These<B, A>> => {
 		const zs = A.zip(ys, xs)
-		const getRem = slice(A.size(zs))(Infinity)
+		const getRem = slice(A.size(zs))(Number.POSITIVE_INFINITY)
 
 		const rest = pipe(
 			ordNumber.compare(A.size(ys), A.size(xs)),
@@ -1080,7 +1080,7 @@ export const separateNE = <A, B>(
 ): These<NonEmptyArray<A>, NonEmptyArray<B>> =>
 	pipe(xs, A.separate, ({ left, right }) => {
 		if (A.isEmpty(left)) return T.right(right as NonEmptyArray<B>)
-		else if (A.isEmpty(right)) return T.left(left as NonEmptyArray<A>)
+		if (A.isEmpty(right)) return T.left(left as NonEmptyArray<A>)
 		// They can't both be empty as per the non-empty input.
-		else return T.both(left as NonEmptyArray<A>, right as NonEmptyArray<B>)
+		return T.both(left as NonEmptyArray<A>, right as NonEmptyArray<B>)
 	})

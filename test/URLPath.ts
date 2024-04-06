@@ -13,7 +13,7 @@ import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
 import { unsafeParse as unsafeParseURL } from "../src/URL"
 import {
 	Eq,
-	URLPath,
+	type URLPath,
 	clone,
 	fromPathname,
 	fromString,
@@ -109,7 +109,7 @@ describe("URLPath", () => {
 		it("succeeds for valid base URLs", () => {
 			const u = pipe("foo", fromPathname, f(validBase), unsafeUnwrapRight)
 
-			expect(u.href).toBe(validBase + "/foo")
+			expect(u.href).toBe(`${validBase}/foo`)
 		})
 
 		it("passes a TypeError to the callback on failure", () => {
@@ -133,7 +133,7 @@ describe("URLPath", () => {
 		it("succeeds for valid base URLs", () => {
 			const u = pipe("foo", fromPathname, f(validBase), unsafeUnwrapO)
 
-			expect(u.href).toBe(validBase + "/foo")
+			expect(u.href).toBe(`${validBase}/foo`)
 		})
 
 		it("fails for invalid base URLs", () => {
@@ -277,7 +277,7 @@ describe("URLPath", () => {
 
 		it("modifies the path with the provided function without mutating input", () => {
 			const x = fromPathname("foo")
-			const y = f(s => s + "bar")(x)
+			const y = f(s => `${s}bar`)(x)
 
 			expect(getPathname(x)).toBe("/foo")
 			expect(getPathname(y)).toBe("/foobar")
@@ -359,7 +359,7 @@ describe("URLPath", () => {
 		it("modifies the hash with the provided function without mutating input", () => {
 			const h = "#foo"
 			const x = fromURL(new URL(validBase + h))
-			const y = f(s => s + "bar")(x)
+			const y = f(s => `${s}bar`)(x)
 
 			expect(getHash(x)).toBe("#foo")
 			expect(getHash(y)).toBe("#foobar")
@@ -374,7 +374,7 @@ describe("URLPath", () => {
 			const x = "/foo.bar#baz"
 
 			expect(f(g(x), g(x))).toBe(true)
-			expect(f(g(x), g(x + "!"))).toBe(false)
+			expect(f(g(x), g(`${x}!`))).toBe(false)
 		})
 
 		it("is lawful", () => {

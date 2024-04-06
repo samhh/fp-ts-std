@@ -4,7 +4,7 @@
  * @since 0.13.0
  */
 
-import {
+import type {
 	Alternative,
 	Alternative1,
 	Alternative2,
@@ -14,7 +14,7 @@ import {
 	Alternative4,
 } from "fp-ts/Alternative"
 import * as A from "fp-ts/Array"
-import {
+import type {
 	HKT,
 	Kind,
 	Kind2,
@@ -26,7 +26,7 @@ import {
 	URIS4,
 } from "fp-ts/HKT"
 import { pipe } from "fp-ts/function"
-import { Lazy } from "./Lazy"
+import type { Lazy } from "./Lazy"
 
 /**
  * Conditionally lifts a value to an `Alternative` context or returns

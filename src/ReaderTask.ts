@@ -1,5 +1,5 @@
-import { ReaderTask } from "fp-ts/ReaderTask"
-import { Task } from "fp-ts/Task"
+import type { ReaderTask } from "fp-ts/ReaderTask"
+import type { Task } from "fp-ts/Task"
 /**
  * Utility functions to accommodate `fp-ts/ReaderTask`.
  *

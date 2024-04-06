@@ -1,13 +1,13 @@
 import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import { constant, flow, identity, pipe } from "fp-ts/function"
 import * as S from "fp-ts/string"
 import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
 import { curry2 } from "../src/Function"
-import { Lazy } from "../src/Lazy"
+import type { Lazy } from "../src/Lazy"
 import {
 	altAllBy,
 	getBounded,
@@ -87,7 +87,7 @@ describe("Option", () => {
 		it("wraps provied value in Some given a Some containing a different value", () => {
 			fc.assert(
 				fc.property(fc.string(), x =>
-					expect(f(x)(O.some(x + "!"))).toEqual(O.some(x)),
+					expect(f(x)(O.some(`${x}!`))).toEqual(O.some(x)),
 				),
 			)
 		})
@@ -278,13 +278,13 @@ describe("Option", () => {
 			})
 
 			it("fails gracefully for invalid input", () => {
-				expect(f(-Infinity)).toEqual(O.none)
+				expect(f(Number.NEGATIVE_INFINITY)).toEqual(O.none)
 				expect(f(-1)).toEqual(O.none)
 				expect(f(1.5)).toEqual(O.none)
 				expect(f(3)).toEqual(O.none)
 				expect(f(1e6)).toEqual(O.none)
-				expect(f(Infinity)).toEqual(O.none)
-				expect(f(NaN)).toEqual(O.none)
+				expect(f(Number.POSITIVE_INFINITY)).toEqual(O.none)
+				expect(f(Number.NaN)).toEqual(O.none)
 			})
 		})
 

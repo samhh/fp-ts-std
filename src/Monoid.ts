@@ -4,7 +4,7 @@
  * @since 0.12.0
  */
 
-import {
+import type {
 	Foldable,
 	Foldable1,
 	Foldable2,
@@ -13,7 +13,7 @@ import {
 	Foldable3C,
 	Foldable4,
 } from "fp-ts/Foldable"
-import {
+import type {
 	HKT,
 	Kind,
 	Kind2,
@@ -24,10 +24,10 @@ import {
 	URIS3,
 	URIS4,
 } from "fp-ts/HKT"
-import { Monoid } from "fp-ts/Monoid"
+import type { Monoid } from "fp-ts/Monoid"
 import { flow, identity } from "fp-ts/function"
 import { invert } from "./Boolean"
-import { Lazy } from "./Lazy"
+import type { Lazy } from "./Lazy"
 
 /**
  * Extracts the value from within a foldable, falling back to the monoidal

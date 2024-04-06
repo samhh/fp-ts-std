@@ -4,9 +4,9 @@
  * @since 0.12.0
  */
 
-import { Show } from "fp-ts/Show"
+import type { Show } from "fp-ts/Show"
 import * as T from "fp-ts/Task"
-import { TaskEither } from "fp-ts/TaskEither"
+import type { TaskEither } from "fp-ts/TaskEither"
 import * as TE from "fp-ts/TaskEither"
 import { constVoid, flow } from "fp-ts/function"
 import { pass as _pass } from "./Applicative"

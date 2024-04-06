@@ -12,7 +12,7 @@ import {
 	unsafeUnwrap,
 	unsafeUnwrapLeft,
 } from "../src/IOEither"
-import { Lazy } from "../src/Lazy"
+import type { Lazy } from "../src/Lazy"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 	try {
@@ -91,8 +91,12 @@ describe("IOEither", () => {
 		it("sequences from left to right", () => {
 			let n = 0
 
-			const g: IOE.IOEither<void, void> = IOE.fromIO(() => void (n += 5))
-			const h: IOE.IOEither<void, void> = IOE.fromIO(() => void (n *= 2))
+			const g: IOE.IOEither<void, void> = IOE.fromIO(() => {
+				n += 5
+			})
+			const h: IOE.IOEither<void, void> = IOE.fromIO(() => {
+				n *= 2
+			})
 
 			pipe(f([g, h]), IO.execute)
 
@@ -106,8 +110,12 @@ describe("IOEither", () => {
 		it("traverses from left to right", () => {
 			let n = 0
 
-			const g: IOE.IOEither<void, void> = IOE.fromIO(() => void (n += 5))
-			const h: IOE.IOEither<void, void> = IOE.fromIO(() => void (n *= 2))
+			const g: IOE.IOEither<void, void> = IOE.fromIO(() => {
+				n += 5
+			})
+			const h: IOE.IOEither<void, void> = IOE.fromIO(() => {
+				n *= 2
+			})
 
 			pipe(f(identity<IOE.IOEither<void, void>>)([g, h]), IO.execute)
 

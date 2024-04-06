@@ -1,7 +1,7 @@
 import { describe, expect, it } from "@jest/globals"
 import * as IOO from "fp-ts/IOOption"
 import { pass, unsafeExpect, unsafeUnwrap } from "../src/IOOption"
-import { Lazy } from "../src/Lazy"
+import type { Lazy } from "../src/Lazy"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 	try {

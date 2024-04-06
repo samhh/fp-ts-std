@@ -275,13 +275,13 @@ describe("Tuple", () => {
 			})
 
 			it("fails gracefully for invalid input", () => {
-				expect(f(-Infinity)).toEqual(O.none)
+				expect(f(Number.NEGATIVE_INFINITY)).toEqual(O.none)
 				expect(f(-1)).toEqual(O.none)
 				expect(f(2.5)).toEqual(O.none)
 				expect(f(4)).toEqual(O.none)
 				expect(f(1e6)).toEqual(O.none)
-				expect(f(Infinity)).toEqual(O.none)
-				expect(f(NaN)).toEqual(O.none)
+				expect(f(Number.POSITIVE_INFINITY)).toEqual(O.none)
+				expect(f(Number.NaN)).toEqual(O.none)
 			})
 		})
 

@@ -221,7 +221,9 @@ describe("Monad", () => {
 
 		it("doesn't execute action if condition fails", () => {
 			let exe = false
-			const set: IO<boolean> = () => (exe = true)
+			const set: IO<boolean> = () => {
+				exe = true
+			}
 
 			expect(exe).toBe(false)
 
@@ -260,7 +262,9 @@ describe("Monad", () => {
 
 		it("doesn't execute action if condition succeeds", () => {
 			let exe = false
-			const set: IO<boolean> = () => (exe = true)
+			const set: IO<boolean> = () => {
+				exe = true
+			}
 
 			expect(exe).toBe(false)
 

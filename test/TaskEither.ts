@@ -93,10 +93,14 @@ describe("TaskEither", () => {
 			let n = 0
 			const g = pipe(
 				TE.fromTask(T.sleep(mkMilliseconds(1))),
-				TE.chainFirstIOK(() => () => (n = n * 2)),
+				TE.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				TE.fromIO(() => (n += 5)),
+				TE.fromIO(() => {
+					n += 5
+				}),
 				TE.map(constVoid),
 			)
 
@@ -113,10 +117,14 @@ describe("TaskEither", () => {
 			let n = 0
 			const g = pipe(
 				TE.fromTask(T.sleep(mkMilliseconds(1))),
-				TE.chainFirstIOK(() => () => (n = n * 2)),
+				TE.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				TE.fromIO(() => (n += 5)),
+				TE.fromIO(() => {
+					n += 5
+				}),
 				TE.map(constVoid),
 			)
 
@@ -133,10 +141,14 @@ describe("TaskEither", () => {
 			let n = 0
 			const g = pipe(
 				TE.fromTask(T.sleep(mkMilliseconds(1))),
-				TE.chainFirstIOK(() => () => (n = n * 2)),
+				TE.chainFirstIOK(() => () => {
+					n = n * 2
+				}),
 			)
 			const h = pipe(
-				TE.fromIO(() => (n += 5)),
+				TE.fromIO(() => {
+					n += 5
+				}),
 				TE.map(constVoid),
 			)
 

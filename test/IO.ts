@@ -120,7 +120,9 @@ describe("IO", () => {
 
 		it("runs the effect on true condition", () => {
 			let ran = false
-			const g = f(true)(() => (ran = true))
+			const g = f(true)(() => {
+				ran = true
+			})
 
 			g()
 			expect(ran).toBe(true)
@@ -128,7 +130,9 @@ describe("IO", () => {
 
 		it("does not run the effect on false condition", () => {
 			let ran = false
-			const g = f(false)(() => (ran = true))
+			const g = f(false)(() => {
+				ran = true
+			})
 
 			g()
 			expect(ran).toBe(false)
@@ -136,7 +140,9 @@ describe("IO", () => {
 
 		it("does not prematurely execute side effect", () => {
 			let ran = false
-			const g = f(true)(() => (ran = true))
+			const g = f(true)(() => {
+				ran = true
+			})
 
 			expect(ran).toBe(false)
 			const h = pipe(
@@ -154,7 +160,9 @@ describe("IO", () => {
 
 		it("runs the effect on false condition", () => {
 			let ran = false
-			const g = f(false)(() => (ran = true))
+			const g = f(false)(() => {
+				ran = true
+			})
 
 			g()
 			expect(ran).toBe(true)
@@ -162,7 +170,9 @@ describe("IO", () => {
 
 		it("does not run the effect on true condition", () => {
 			let ran = false
-			const g = f(true)(() => (ran = true))
+			const g = f(true)(() => {
+				ran = true
+			})
 
 			g()
 			expect(ran).toBe(false)
@@ -170,7 +180,9 @@ describe("IO", () => {
 
 		it("does not prematurely execute side effect", () => {
 			let ran = false
-			const g = f(false)(() => (ran = true))
+			const g = f(false)(() => {
+				ran = true
+			})
 
 			expect(ran).toBe(false)
 			const h = pipe(
@@ -211,8 +223,12 @@ describe("IO", () => {
 		it("sequences from left to right", () => {
 			let n = 0
 
-			const g: IO<void> = () => (n += 5)
-			const h: IO<void> = () => (n *= 2)
+			const g: IO<void> = () => {
+				n += 5
+			}
+			const h: IO<void> = () => {
+				n *= 2
+			}
 
 			pipe(f([g, h]), execute)
 
@@ -226,8 +242,12 @@ describe("IO", () => {
 		it("traverses from left to right", () => {
 			let n = 0
 
-			const g: IO<void> = () => (n += 5)
-			const h: IO<void> = () => (n *= 2)
+			const g: IO<void> = () => {
+				n += 5
+			}
+			const h: IO<void> = () => {
+				n *= 2
+			}
 
 			pipe(f(identity<IO<void>>)([g, h]), execute)
 

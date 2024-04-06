@@ -5,8 +5,8 @@
  * @since 0.10.0
  */
 
-import { Option } from "fp-ts/Option"
-import { Predicate, not } from "fp-ts/Predicate"
+import type { Option } from "fp-ts/Option"
+import { type Predicate, not } from "fp-ts/Predicate"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as RT from "fp-ts/ReadonlyTuple"

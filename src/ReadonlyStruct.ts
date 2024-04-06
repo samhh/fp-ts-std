@@ -6,7 +6,7 @@
  */
 
 import * as RA from "fp-ts/ReadonlyArray"
-import * as RR from "fp-ts/ReadonlyRecord"
+import type * as RR from "fp-ts/ReadonlyRecord"
 import { pipe } from "fp-ts/function"
 import { uncurry2 } from "./Function"
 import { fanout } from "./Tuple"

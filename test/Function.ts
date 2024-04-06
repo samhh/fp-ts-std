@@ -2,9 +2,9 @@ import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as laws from "fp-ts-laws"
 import * as A from "fp-ts/Array"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq from "fp-ts/Eq"
-import { Option } from "fp-ts/Option"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import {
 	apply,
@@ -394,6 +394,7 @@ describe("Function", () => {
 		const f = invoke
 
 		it("calls the method with arguments on the object", () => {
+			// biome-ignore lint/complexity/noStaticOnlyClass: Testing.
 			class X {
 				static f(x: string) {
 					return x + x
@@ -409,6 +410,7 @@ describe("Function", () => {
 		const f = invokeNullary
 
 		it("calls the method", () => {
+			// biome-ignore lint/complexity/noStaticOnlyClass: Testing.
 			class X {
 				static f() {
 					return 42
@@ -427,7 +429,7 @@ describe("Function", () => {
 			fc.assert(
 				fc.property(
 					fc.string({ minLength: 5, maxLength: 5 }),
-					x => f<string>()("padStart")([8, "."])(x) === "..." + x,
+					x => f<string>()("padStart")([8, "."])(x) === `...${x}`,
 				),
 			)
 		})
@@ -624,7 +626,7 @@ describe("Function", () => {
 							A.of,
 							S.prepend("."),
 						])(x),
-					).toEqual([x + "!", x, x + "?", [x], "." + x]),
+					).toEqual([`${x}!`, x, `${x}?`, [x], `.${x}`]),
 				),
 			)
 			expect(f)

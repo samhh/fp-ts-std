@@ -4,15 +4,15 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
-import { Predicate, and, not } from "fp-ts/Predicate"
+import { type Predicate, and, not } from "fp-ts/Predicate"
 import { flow, identity, pipe } from "fp-ts/function"
 type Option<A> = O.Option<A>
 import * as A from "fp-ts/Array"
-import { Bounded } from "fp-ts/Bounded"
+import type { Bounded } from "fp-ts/Bounded"
 import { Bounded as BoundedInfinity } from "fp-ts/number"
-import { Enum } from "./Enum"
+import type { Enum } from "./Enum"
 import { unless } from "./Function"
 import * as L from "./Lazy"
 
@@ -265,7 +265,8 @@ export const negate: Endomorphism<number> = n => -n
  * @category 3 Functions
  * @since 0.12.0
  */
-export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity
+export const isFinite: Predicate<number> = n =>
+	Math.abs(n) !== Number.POSITIVE_INFINITY
 
 /**
  * If the provided number is `Infinity` or `-Infinity`, converts it to the
@@ -401,7 +402,7 @@ export const EnumInt: Enum<number> = {
 	),
 	toEnum: O.some,
 	fromEnum: identity,
-	cardinality: L.of(Infinity),
+	cardinality: L.of(Number.POSITIVE_INFINITY),
 }
 
 /**
@@ -424,4 +425,4 @@ export const EnumInt: Enum<number> = {
  * @since 0.17.0
  */
 export const digits = (n: number): Array<number> =>
-	pipe([...(n + "")], A.filterMap(fromString))
+	pipe([...`${n}`], A.filterMap(fromString))

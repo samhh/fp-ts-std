@@ -4,9 +4,9 @@
  * @since 0.12.0
  */
 
-import { Bounded } from "fp-ts/Bounded"
-import { Eq, fromEquals } from "fp-ts/Eq"
-import {
+import type { Bounded } from "fp-ts/Bounded"
+import { type Eq, fromEquals } from "fp-ts/Eq"
+import type {
 	Functor,
 	Functor1,
 	Functor2,
@@ -14,7 +14,7 @@ import {
 	Functor3,
 	Functor4,
 } from "fp-ts/Functor"
-import {
+import type {
 	HKT,
 	Kind,
 	Kind2,
@@ -26,11 +26,11 @@ import {
 	URIS4,
 } from "fp-ts/HKT"
 import * as O from "fp-ts/Option"
-import { Ord, fromCompare } from "fp-ts/Ord"
+import { type Ord, fromCompare } from "fp-ts/Ord"
 import * as Tuple from "fp-ts/Tuple"
 import { flow, identity, pipe } from "fp-ts/function"
 import { mapBoth as _mapBoth } from "./Bifunctor"
-import { Enum } from "./Enum"
+import type { Enum } from "./Enum"
 import { fork } from "./Function"
 import * as L from "./Lazy"
 import { isNonNegative, isValid, multiply } from "./Number"

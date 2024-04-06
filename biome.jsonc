@@ -25,19 +25,8 @@
 				"noUnusedImports": "warn",
 				"noUnusedVariables": "warn"
 			},
-			"complexity": {
-				"noStaticOnlyClass": "off"
-			},
-			"style": {
-				"noUselessElse": "off",
-				"useImportType": "off",
-				"useNumberNamespace": "off",
-				"useTemplate": "off"
-			},
 			"suspicious": {
-				"noAssignInExpressions": "off",
 				"noRedeclare": "off",
-				"noSelfCompare": "off",
 				"noShadowRestrictedNames": "off"
 			}
 		}

@@ -3,7 +3,7 @@ import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import { constant } from "fp-ts/function"
 import { altAllBy, pureIf } from "../src/Alternative"
-import { Lazy } from "../src/Lazy"
+import type { Lazy } from "../src/Lazy"
 
 describe("Alternative", () => {
 	describe("pureIf", () => {

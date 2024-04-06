@@ -1,7 +1,7 @@
 import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as RR from "fp-ts/ReadonlyRecord"
 import { constTrue, flow, pipe } from "fp-ts/function"

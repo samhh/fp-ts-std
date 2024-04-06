@@ -4,14 +4,14 @@
  * @since 0.1.0
  */
 
-import { Either } from "fp-ts/Either"
+import type { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { Json } from "fp-ts/Json"
-import { Option } from "fp-ts/Option"
+import type { Json } from "fp-ts/Json"
+import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { flow, identity, pipe } from "fp-ts/function"
 import { isString } from "fp-ts/string"
-import { Newtype, iso } from "newtype-ts"
+import { type Newtype, iso } from "newtype-ts"
 
 type JSONStringSymbol = { readonly JSONString: unique symbol }
 

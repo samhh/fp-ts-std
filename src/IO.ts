@@ -4,9 +4,9 @@
  * @since 0.7.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as IO from "fp-ts/IO"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import { constVoid, flow } from "fp-ts/function"
 import { pass as _pass, unless as _unless, when as _when } from "./Applicative"
 import { until as _until } from "./Monad"
@@ -167,6 +167,7 @@ export const memoize = <A>(f: IO<A>): IO<A> => {
 	const empty = Symbol()
 	let res: A | typeof empty = empty
 
+	// biome-ignore lint/suspicious/noAssignInExpressions: Intentional.
 	return () => (res === empty ? (res = f()) : res)
 }
 

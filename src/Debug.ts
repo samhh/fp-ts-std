@@ -5,7 +5,7 @@
  * @since 0.2.0
  */
 
-import { Show } from "fp-ts/Show"
+import type { Show } from "fp-ts/Show"
 
 /**
  * Log the provided string to the console and immediately return the generic

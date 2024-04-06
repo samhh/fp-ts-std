@@ -5,8 +5,8 @@
  * @since 0.1.0
  */
 
-import * as Bounded_ from "fp-ts/Bounded"
-import { Endomorphism } from "fp-ts/Endomorphism"
+import type * as Bounded_ from "fp-ts/Bounded"
+import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
 import { Ord, SemigroupAll, SemigroupAny } from "fp-ts/boolean"
 import { curry2 } from "./Function"

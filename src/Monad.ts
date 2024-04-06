@@ -5,7 +5,7 @@
  */
 
 import * as A from "fp-ts/Array"
-import {
+import type {
 	HKT,
 	Kind,
 	Kind2,
@@ -16,7 +16,7 @@ import {
 	URIS3,
 	URIS4,
 } from "fp-ts/HKT"
-import {
+import type {
 	Monad,
 	Monad1,
 	Monad2,
@@ -25,7 +25,7 @@ import {
 	Monad3C,
 	Monad4,
 } from "fp-ts/Monad"
-import { Predicate } from "fp-ts/Predicate"
+import type { Predicate } from "fp-ts/Predicate"
 import { pipe } from "fp-ts/function"
 import { invert } from "./Boolean"
 

@@ -101,8 +101,8 @@ describe("Date", () => {
 		const f = parseDate
 
 		it("wraps date constructor and validates", () => {
-			expect(f(-Infinity)).toEqual(O.none)
-			expect(f(Infinity)).toEqual(O.none)
+			expect(f(Number.NEGATIVE_INFINITY)).toEqual(O.none)
+			expect(f(Number.POSITIVE_INFINITY)).toEqual(O.none)
 			expect(f("invalid")).toEqual(O.none)
 
 			fc.assert(

@@ -684,7 +684,7 @@ describe("String", () => {
 					const tuple = splitAt(index)(str)
 					return (
 						tuple[0] === S.slice(0, index)(str) &&
-						tuple[1] === S.slice(index, Infinity)(str)
+						tuple[1] === S.slice(index, Number.POSITIVE_INFINITY)(str)
 					)
 				}),
 			)

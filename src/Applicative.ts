@@ -4,7 +4,7 @@
  * @since 0.12.0
  */
 
-import {
+import type {
 	Applicative,
 	Applicative1,
 	Applicative2,
@@ -13,7 +13,7 @@ import {
 	Applicative3C,
 	Applicative4,
 } from "fp-ts/Applicative"
-import {
+import type {
 	HKT,
 	Kind,
 	Kind2,

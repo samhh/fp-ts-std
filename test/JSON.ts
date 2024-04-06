@@ -5,7 +5,7 @@ import * as O from "fp-ts/Option"
 import { constTrue, constant, flow, identity } from "fp-ts/function"
 import { isString } from "fp-ts/string"
 import {
-	JSONString,
+	type JSONString,
 	parse,
 	parseO,
 	stringify,

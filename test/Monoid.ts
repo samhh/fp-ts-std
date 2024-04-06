@@ -4,7 +4,7 @@ import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 import { constant, pipe } from "fp-ts/function"
 import * as S from "fp-ts/string"
-import { Lazy } from "../src/Lazy"
+import type { Lazy } from "../src/Lazy"
 import { memptyUnless, memptyWhen, toMonoid } from "../src/Monoid"
 
 describe("Monoid", () => {

@@ -4,8 +4,8 @@
  * @since 0.12.0
  */
 
-import { Contravariant1 } from "fp-ts/Contravariant"
-import { Show } from "fp-ts/Show"
+import type { Contravariant1 } from "fp-ts/Contravariant"
+import type { Show } from "fp-ts/Show"
 import { flow, pipe } from "fp-ts/function"
 
 /**
