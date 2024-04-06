@@ -1,0 +1,4 @@
+[test]
+coverageSkipTestFiles = true
+# We don't meet 100% yet, but it doesn't tell us well enough where. /shrug
+coverageThreshold = 0.9
