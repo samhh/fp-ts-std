@@ -12,7 +12,7 @@ fp-ts, [newtype-ts](https://gcanti.github.io/newtype-ts/), and [monocle-ts](http
 
 fp-ts-std is published with both ES2015 and CJS modules, the former of which should tree shake well. Modern ES modules are not yet supported.
 
-Node LTS - at time of writing v18 - and the latest evergreen browsers are supported.
+Node LTS - at time of writing v20 - and the latest evergreen browsers are supported.
 
 ## Objectives
 

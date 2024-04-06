@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## 0.19.0 (_Unreleased_)
+
+- Bump minimum supported Node LTS to v20.
+
 ## 0.18.0 (2023-10-26)
 
 - Add `until` to `Monad`, `IO`, and `Task`.

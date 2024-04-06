@@ -34,7 +34,7 @@ jobs:
       fail-fast: false
       matrix:
         # Latest released and oldest supported.
-        node: [20, 18]
+        node: [21, 20]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup
