@@ -31,6 +31,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         # Latest released and oldest supported.
         node: [20, 18]
