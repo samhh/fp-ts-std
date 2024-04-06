@@ -36,7 +36,7 @@
 		"test": "jest",
 		"docs-ci": "docs-ts",
 		"docs": "docs-ts && tshm-docs-ts ./docs/modules/*",
-		"prepublish": "pnpm build"
+		"prepublish": "pnpm run build"
 	},
 	"devDependencies": {
 		"@jest/globals": "^29.7.0",
