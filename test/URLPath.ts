@@ -159,6 +159,32 @@ describe("URLPath", () => {
 
       expect(e.name).toBe("TypeError")
     })
+
+    it("accepts all valid paths", () => {
+      fc.assert(
+        fc.property(fc.webPath(), x =>
+          expect(f(x)).toEqual(E.right(new URL(x, phonyBase))),
+        ),
+      )
+    })
+
+    it("does not parse origins", () => {
+      const g = fromString(identity)
+
+      const e1 = unsafeUnwrapLeft(g("//x"))
+      expect(e1.name).toBe("TypeError")
+      expect(e1.message).toMatch(/phony/)
+
+      const e2 = unsafeUnwrapLeft(g("https://samhh.com/foo"))
+      expect(e2.name).toBe("TypeError")
+      expect(e2.message).toMatch(/phony/)
+
+      fc.assert(
+        fc.property(fc.string().map(f).filter(E.isRight), ({ right: x }) =>
+          expect((x as unknown as URL).origin).toBe(phonyBase),
+        ),
+      )
+    })
   })
 
   describe("fromStringO", () => {

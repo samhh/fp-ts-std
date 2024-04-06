@@ -179,7 +179,14 @@ export const fromString =
       // It should only throw some sort of `TypeError`:
       // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
       E.tryCatch(
-        () => new globalThis.URL(x, phonyBase),
+        () => {
+          const y = new globalThis.URL(x, phonyBase)
+          /* eslint-disable */
+          if (y.origin !== phonyBase)
+            throw new TypeError("Failed to retain phony base URL")
+          /* eslint-enable */
+          return y
+        },
         e => f(e as TypeError),
       ),
       E.map(pack<URLPath>),
