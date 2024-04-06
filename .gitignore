@@ -1,4 +1,6 @@
-node_modules/
-dist/
-coverage/
+/node_modules/
+/dist/
+/coverage/
 
+# Some tooling doesn't respect the user's global gitignore.
+/.direnv/

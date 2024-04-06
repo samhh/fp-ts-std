@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm fmt --check
+      - run: pnpm fmt
 
   test-nodejs:
     name: Test (Node.js)

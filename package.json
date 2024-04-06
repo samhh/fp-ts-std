@@ -40,7 +40,7 @@
     "build": "rm -rf ./dist/ && mkdir -p ./dist/esm/ ./dist/cjs/ && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src/ ./test/ --ext ts",
-    "fmt": "prettier .",
+    "fmt": "biome format .",
     "test": "jest",
     "docs-ci": "docs-ts",
     "docs": "docs-ts && tshm-docs-ts ./docs/modules/*",
@@ -66,7 +66,6 @@
     "jsdom": "^22.1.0",
     "monocle-ts": "^2.3.0",
     "newtype-ts": "^0.3.0",
-    "prettier": "^2.1.2",
     "ts-node": "^8.10.2",
     "typescript": "^5.0.4"
   },
