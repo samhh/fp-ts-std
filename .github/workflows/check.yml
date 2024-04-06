@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: yarn typecheck
+      - run: pnpm typecheck
 
   lint:
     name: Lint
@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: yarn lint
+      - run: pnpm lint
 
   fmt:
     name: Check formatting
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: yarn fmt --check
+      - run: pnpm fmt --check
 
   test:
     name: Test
@@ -39,7 +39,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           shell: ${{ matrix.shell }}
-      - run: yarn test
+      - run: pnpm test
 
   docs:
     name: Docs
@@ -47,4 +47,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: yarn docs-ci
+      - run: pnpm docs-ci

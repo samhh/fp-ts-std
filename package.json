@@ -44,9 +44,10 @@
     "test": "jest",
     "docs-ci": "docs-ts",
     "docs": "docs-ts && tshm-docs-ts ./docs/modules/*",
-    "prepublish": "yarn run build"
+    "prepublish": "pnpm build"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@swc/core": "^1.3.53",
     "@swc/jest": "^0.2.26",
     "@types/jsdom": "^21.1.1",

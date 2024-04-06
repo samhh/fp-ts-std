@@ -16,11 +16,11 @@ runs:
       with:
         arguments: .#${{ inputs.shell }}
 
-    - name: Cache Yarn
+    - name: Cache pnpm
       uses: actions/setup-node@v4
       with:
-        cache: yarn
+        cache: pnpm
 
-    - name: Install Yarn dependencies
+    - name: Install pnpm dependencies
       shell: bash
-      run: yarn install --frozen-lockfile
+      run: pnpm install

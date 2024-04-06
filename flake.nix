@@ -22,22 +22,22 @@
             default = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 nodejs_21
+                nodePackages.pnpm
                 tshm-docs-ts
-                yarn
               ];
             };
 
             ci = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 nodejs_21
-                yarn
+                nodePackages.pnpm
               ];
             };
 
             ci-lts = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 nodejs
-                yarn
+                nodePackages.pnpm
               ];
             };
           };
