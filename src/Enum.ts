@@ -10,21 +10,21 @@
  * @since 0.17.0
  */
 
-import { constant, flow, pipe } from "fp-ts/function"
-import { Ord } from "fp-ts/Ord"
 import { Bounded } from "fp-ts/Bounded"
 import * as O from "fp-ts/Option"
+import { Ord } from "fp-ts/Ord"
+import { constant, flow, pipe } from "fp-ts/function"
 type Option<A> = O.Option<A>
-import { unsafeExpect as unsafeExpectO } from "./Option"
 import * as NEA from "fp-ts/NonEmptyArray"
+import { unsafeExpect as unsafeExpectO } from "./Option"
 type NonEmptyArray<A> = NEA.NonEmptyArray<A>
 import * as A from "fp-ts/Array"
-import { dup, toFst, toSnd } from "./Tuple"
-import * as Map from "fp-ts/Map"
 import { Eq } from "fp-ts/Eq"
+import * as Map from "fp-ts/Map"
 import * as Semigroup from "fp-ts/Semigroup"
-import { increment, decrement, add } from "./Number"
 import * as L from "./Lazy"
+import { add, decrement, increment } from "./Number"
+import { dup, toFst, toSnd } from "./Tuple"
 type Lazy<A> = L.Lazy<A>
 
 /**

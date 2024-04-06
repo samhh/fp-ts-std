@@ -1,26 +1,26 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	unsafeUnwrap,
-	unsafeUnwrapLeft,
-	unsafeExpect,
-	unsafeExpectLeft,
-	mapBoth,
-	match2,
-	getOrd,
-	getEnum,
-} from "../src/Either"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
 import { flow, identity } from "fp-ts/function"
-import * as Str from "../src/String"
-import { Show as StrShow, Semigroup as StrSemigroup } from "fp-ts/string"
-import fc from "fast-check"
-import { curry2 } from "../src/Function"
 import * as Num from "fp-ts/number"
-import { LT, EQ, GT } from "../src/Ordering"
+import { Semigroup as StrSemigroup, Show as StrShow } from "fp-ts/string"
 import { Enum as EnumBool } from "../src/Boolean"
+import {
+	getEnum,
+	getOrd,
+	mapBoth,
+	match2,
+	unsafeExpect,
+	unsafeExpectLeft,
+	unsafeUnwrap,
+	unsafeUnwrapLeft,
+} from "../src/Either"
 import { universe } from "../src/Enum"
+import { curry2 } from "../src/Function"
 import { Lazy } from "../src/Lazy"
+import { EQ, GT, LT } from "../src/Ordering"
+import * as Str from "../src/String"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 	/* eslint-disable */

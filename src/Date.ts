@@ -4,14 +4,14 @@
  * @since 0.1.0
  */
 
-import { Newtype, iso, getField, getOrd } from "newtype-ts"
-import { flow, pipe } from "fp-ts/function"
-import { Refinement } from "fp-ts/Refinement"
-import { Predicate } from "fp-ts/Predicate"
-import { isValid as isValidNum } from "./Number"
-import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/number"
 import { now as nownum } from "fp-ts/Date"
 import * as IO from "fp-ts/IO"
+import { Predicate } from "fp-ts/Predicate"
+import { Refinement } from "fp-ts/Refinement"
+import { flow, pipe } from "fp-ts/function"
+import { Field as fieldNumber, Ord as ordNumber } from "fp-ts/number"
+import { Newtype, getField, getOrd, iso } from "newtype-ts"
+import { isValid as isValidNum } from "./Number"
 type IO<A> = IO.IO<A>
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"

@@ -1,18 +1,31 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as laws from "fp-ts-laws"
+import * as A from "fp-ts/Array"
+import { Endomorphism } from "fp-ts/Endomorphism"
+import * as Eq from "fp-ts/Eq"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import {
+	apply,
+	constFalse,
+	constTrue,
+	constant,
+	flip,
+	flow,
+	identity,
+	increment,
+	pipe,
+} from "fp-ts/function"
+import * as N from "fp-ts/number"
+import { join } from "../src/Array"
 import * as F from "../src/Function"
 import {
-	withIndex,
-	unary,
-	guard,
-	ifElse,
-	unless,
-	when,
-	until,
+	applyEvery,
+	applyN,
+	applySomes,
 	construct,
-	invoke,
-	invokeNullary,
-	invokeOn,
-	memoize,
+	converge,
 	curry2,
 	curry2T,
 	curry3,
@@ -21,41 +34,28 @@ import {
 	curry4T,
 	curry5,
 	curry5T,
+	fork,
+	guard,
+	ifElse,
+	invoke,
+	invokeNullary,
+	invokeOn,
+	isInstanceOf,
+	memoize,
+	unary,
 	uncurry2,
 	uncurry3,
 	uncurry4,
 	uncurry5,
-	fork,
-	converge,
-	isInstanceOf,
-	applyEvery,
-	applySomes,
-	applyN,
+	unless,
+	until,
+	when,
+	withIndex,
 } from "../src/Function"
 import * as Fn from "../src/Function"
-import { fromNumber } from "../src/String"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import * as A from "fp-ts/Array"
 import { add, multiply } from "../src/Number"
-import {
-	apply,
-	constant,
-	constFalse,
-	constTrue,
-	flip,
-	flow,
-	identity,
-	increment,
-	pipe,
-} from "fp-ts/function"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import * as N from "fp-ts/number"
-import fc from "fast-check"
+import { fromNumber } from "../src/String"
 import * as S from "../src/String"
-import { join } from "../src/Array"
-import * as laws from "fp-ts-laws"
-import * as Eq from "fp-ts/Eq"
 type Eq<A> = Eq.Eq<A>
 import { sequenceS } from "fp-ts/Apply"
 

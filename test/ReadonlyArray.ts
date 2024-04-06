@@ -1,72 +1,72 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	elemV,
-	none,
-	join,
-	pluckFirst,
-	upsert,
-	getDisorderedEq,
-	insertMany,
-	dropRepeats,
-	startsWith,
-	endsWith,
-	without,
-	cartesian,
-	sum,
-	product,
-	aperture,
-	slice,
-	reject,
-	moveFrom,
-	moveTo,
-	countBy,
-	dropRightWhile,
-	mean,
-	median,
-	dropAt,
-	transpose,
-	takeRightWhile,
-	symmetricDifference,
-	reduceWhile,
-	reduceRightWhile,
-	minimum,
-	maximum,
-	zipAll,
-	filterA,
-	extractAt,
-	fromIterable,
-	allM,
-	anyM,
-	separateNE,
-} from "../src/ReadonlyArray"
-import * as O from "fp-ts/Option"
-import * as A from "fp-ts/ReadonlyArray"
-import * as N from "fp-ts/number"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import { contramap as eqContramap } from "fp-ts/Eq"
-import { contramap as ordContramap, max } from "fp-ts/Ord"
+import { concatAll } from "fp-ts/Monoid"
+import * as O from "fp-ts/Option"
+import { max, contramap as ordContramap } from "fp-ts/Ord"
+import { Predicate } from "fp-ts/Predicate"
+import * as A from "fp-ts/ReadonlyArray"
+import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
 import {
-	constant,
 	constFalse,
 	constTrue,
+	constant,
 	flow,
 	identity,
 	pipe,
 } from "fp-ts/function"
-import { Predicate } from "fp-ts/Predicate"
-import fc from "fast-check"
-import { concatAll } from "fp-ts/Monoid"
+import * as N from "fp-ts/number"
 import { split } from "fp-ts/string"
-import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
+import {
+	allM,
+	anyM,
+	aperture,
+	cartesian,
+	countBy,
+	dropAt,
+	dropRepeats,
+	dropRightWhile,
+	elemV,
+	endsWith,
+	extractAt,
+	filterA,
+	fromIterable,
+	getDisorderedEq,
+	insertMany,
+	join,
+	maximum,
+	mean,
+	median,
+	minimum,
+	moveFrom,
+	moveTo,
+	none,
+	pluckFirst,
+	product,
+	reduceRightWhile,
+	reduceWhile,
+	reject,
+	separateNE,
+	slice,
+	startsWith,
+	sum,
+	symmetricDifference,
+	takeRightWhile,
+	transpose,
+	upsert,
+	without,
+	zipAll,
+} from "../src/ReadonlyArray"
 import ReadonlyNonEmptyArray = RNEA.ReadonlyNonEmptyArray
-import { values } from "../src/Record"
-import * as R from "fp-ts/Record"
-import { add, decrement } from "../src/Number"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as T from "fp-ts/These"
-import * as IO from "fp-ts/IO"
-import { fst, snd } from "fp-ts/Tuple"
-import { Endomorphism } from "fp-ts/Endomorphism"
 import * as E from "fp-ts/Either"
+import { Endomorphism } from "fp-ts/Endomorphism"
+import * as IO from "fp-ts/IO"
+import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import * as R from "fp-ts/Record"
+import * as T from "fp-ts/These"
+import { fst, snd } from "fp-ts/Tuple"
+import { add, decrement } from "../src/Number"
+import { values } from "../src/Record"
 
 type IO<A> = IO.IO<A>
 

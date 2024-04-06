@@ -1,22 +1,22 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	values,
-	lookupV,
-	reject,
-	invertLast,
-	invertAll,
-	pick,
-	omit,
-} from "../src/ReadonlyRecord"
-import * as O from "fp-ts/Option"
-import * as RR from "fp-ts/ReadonlyRecord"
-import * as RA from "fp-ts/ReadonlyArray"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import { constTrue, flow, pipe } from "fp-ts/function"
+import * as O from "fp-ts/Option"
 import { Predicate } from "fp-ts/Predicate"
-import { fromNumber } from "../src/String"
+import * as RA from "fp-ts/ReadonlyArray"
+import * as RR from "fp-ts/ReadonlyRecord"
+import { constTrue, flow, pipe } from "fp-ts/function"
 import * as N from "fp-ts/number"
 import * as S from "fp-ts/string"
+import {
+	invertAll,
+	invertLast,
+	lookupV,
+	omit,
+	pick,
+	reject,
+	values,
+} from "../src/ReadonlyRecord"
+import { fromNumber } from "../src/String"
 
 describe("Record", () => {
 	describe("values", () => {

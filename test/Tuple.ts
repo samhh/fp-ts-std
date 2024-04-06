@@ -1,28 +1,28 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as O from "fp-ts/Option"
+import { bimap, swap } from "fp-ts/Tuple"
+import { constant, flow, identity, pipe } from "fp-ts/function"
+import * as Str from "fp-ts/string"
+import { Enum as EnumBool } from "../src/Boolean"
+import { universe } from "../src/Enum"
+import { increment } from "../src/Number"
+import { EQ, GT, LT } from "../src/Ordering"
 import {
+	create,
 	dup,
+	fanout,
+	getEnum,
+	getEq,
+	getOrd,
+	mapBoth,
 	toFst,
 	toSnd,
 	traverseToFst,
 	traverseToSnd,
 	withFst,
 	withSnd,
-	create,
-	mapBoth,
-	fanout,
-	getEq,
-	getOrd,
-	getEnum,
 } from "../src/Tuple"
-import { increment } from "../src/Number"
-import { constant, flow, identity, pipe } from "fp-ts/function"
-import { bimap, swap } from "fp-ts/Tuple"
-import * as O from "fp-ts/Option"
-import fc from "fast-check"
-import * as Str from "fp-ts/string"
-import { LT, EQ, GT } from "../src/Ordering"
-import { Enum as EnumBool } from "../src/Boolean"
-import { universe } from "../src/Enum"
 
 const nonMaxNumber = fc.integer({ max: Number.MAX_SAFE_INTEGER - 1 })
 

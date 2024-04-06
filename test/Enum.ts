@@ -1,33 +1,33 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as NEA from "fp-ts/NonEmptyArray"
+import * as O from "fp-ts/Option"
+import { constant } from "fp-ts/function"
 import {
 	Enum,
-	fromTo,
-	fromThenTo,
-	upFromIncl,
-	upFromExcl,
-	downFromIncl,
-	downFromExcl,
 	defaultCardinality,
-	universe,
-	inverseMap,
+	downFromExcl,
+	downFromIncl,
+	fromThenTo,
+	fromTo,
 	getUnsafeConstantEnum,
+	inverseMap,
+	universe,
+	upFromExcl,
+	upFromIncl,
 } from "../src/Enum"
-import fc from "fast-check"
-import { constant } from "fp-ts/function"
-import * as O from "fp-ts/Option"
-import * as NEA from "fp-ts/NonEmptyArray"
 import NonEmptyArray = NEA.NonEmptyArray
-import { EnumInt } from "../src/Number"
-import { Show as ShowBool, Ord as OrdBool } from "fp-ts/boolean"
-import { Enum as EnumBool } from "../src/Boolean"
-import { curry2 } from "../src/Function"
 import { Bounded } from "fp-ts/Bounded"
-import { EQ } from "../src/Ordering"
 import * as Ord from "fp-ts/Ord"
+import { Ord as OrdBool, Show as ShowBool } from "fp-ts/boolean"
 import * as Num from "fp-ts/number"
 import * as Str from "fp-ts/string"
+import { Enum as EnumBool } from "../src/Boolean"
+import { curry2 } from "../src/Function"
 import * as L from "../src/Lazy"
 import { Lazy } from "../src/Lazy"
+import { EnumInt } from "../src/Number"
+import { EQ } from "../src/Ordering"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 	/* eslint-disable */

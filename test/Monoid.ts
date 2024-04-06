@@ -1,11 +1,11 @@
-import { describe, it, expect } from "@jest/globals"
-import { toMonoid, memptyWhen, memptyUnless } from "../src/Monoid"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import * as S from "fp-ts/string"
-import fc from "fast-check"
 import { constant, pipe } from "fp-ts/function"
+import * as S from "fp-ts/string"
 import { Lazy } from "../src/Lazy"
+import { memptyUnless, memptyWhen, toMonoid } from "../src/Monoid"
 
 describe("Monoid", () => {
 	describe("toMonoid", () => {

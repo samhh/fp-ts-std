@@ -1,6 +1,6 @@
-import { describe, it, expect, afterEach } from "@jest/globals"
-import { getParam, getParamNonEmpty } from "../src/Env"
+import { afterEach, describe, expect, it } from "@jest/globals"
 import * as O from "fp-ts/Option"
+import { getParam, getParamNonEmpty } from "../src/Env"
 
 describe("Env", () => {
 	const k = "example_key"

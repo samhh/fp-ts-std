@@ -5,9 +5,9 @@
  * @since 0.9.0
  */
 
-import { pipe, flow } from "fp-ts/function"
-import * as O from "fp-ts/Option"
 import * as IOO from "fp-ts/IOOption"
+import * as O from "fp-ts/Option"
+import { flow, pipe } from "fp-ts/function"
 type IOOption<A> = IOO.IOOption<A>
 import * as NES from "./NonEmptyString"
 type NonEmptyString = NES.NonEmptyString

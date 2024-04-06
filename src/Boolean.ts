@@ -5,11 +5,11 @@
  * @since 0.1.0
  */
 
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { SemigroupAll, SemigroupAny, Ord } from "fp-ts/boolean"
-import { curry2 } from "./Function"
-import * as O from "fp-ts/Option"
 import * as Bounded_ from "fp-ts/Bounded"
+import { Endomorphism } from "fp-ts/Endomorphism"
+import * as O from "fp-ts/Option"
+import { Ord, SemigroupAll, SemigroupAny } from "fp-ts/boolean"
+import { curry2 } from "./Function"
 type Bounded<A> = Bounded_.Bounded<A>
 import type { Enum as _Enum } from "./Enum"
 type Enum<A> = _Enum<A>

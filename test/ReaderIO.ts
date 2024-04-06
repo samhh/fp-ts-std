@@ -1,9 +1,9 @@
-import { describe, it, expect } from "@jest/globals"
-import { runReaderIO, asksIO } from "../src/ReaderIO"
-import * as RIO from "fp-ts/ReaderIO"
-import * as IO from "fp-ts/IO"
-import { flow, pipe } from "fp-ts/function"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
+import * as IO from "fp-ts/IO"
+import * as RIO from "fp-ts/ReaderIO"
+import { flow, pipe } from "fp-ts/function"
+import { asksIO, runReaderIO } from "../src/ReaderIO"
 import * as Str from "../src/String"
 
 describe("ReaderIO", () => {

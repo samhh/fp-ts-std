@@ -1,12 +1,12 @@
+import { IO } from "fp-ts/IO"
 /**
  * Utility functions to accommodate `fp-ts/ReaderIO`.
  *
  * @since 0.16.0
  */
 import { ReaderIO } from "fp-ts/ReaderIO"
-import { IO } from "fp-ts/IO"
-import { runReader } from "./Reader"
 import { identity } from "fp-ts/function"
+import { runReader } from "./Reader"
 
 /**
  * Runs a `ReaderIO` and extracts the final `IO` from it.

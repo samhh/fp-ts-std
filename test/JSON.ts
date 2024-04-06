@@ -1,18 +1,18 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	stringifyPrimitive,
-	stringify,
-	stringifyO,
-	unstringify,
-	parse,
-	parseO,
-	JSONString,
-} from "../src/JSON"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import { constant, constTrue, flow, identity } from "fp-ts/function"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
+import { constTrue, constant, flow, identity } from "fp-ts/function"
 import { isString } from "fp-ts/string"
+import {
+	JSONString,
+	parse,
+	parseO,
+	stringify,
+	stringifyO,
+	stringifyPrimitive,
+	unstringify,
+} from "../src/JSON"
 
 const stringifyPrimitiveUnwrapped = (
 	x: Parameters<typeof stringifyPrimitive>[0],

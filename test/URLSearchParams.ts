@@ -1,44 +1,44 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	empty,
-	fromString,
-	toString,
-	toLeadingString,
-	fromRecord,
-	toRecord,
-	fromTuples,
-	toTuples,
-	clone,
-	isURLSearchParams,
-	isEmpty,
-	lookupFirst,
-	lookup,
-	upsertAt,
-	singleton,
-	Eq,
-	Semigroup,
-	Monoid,
-	appendAt,
-	deleteAt,
-	keys,
-	values,
-	size,
-	concatBy,
-	fromMap,
-	toMap,
-} from "../src/URLSearchParams"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import * as R from "fp-ts/Record"
+import * as laws from "fp-ts-laws"
+import * as A from "fp-ts/Array"
 import * as M from "fp-ts/Map"
 import * as O from "fp-ts/Option"
-import * as A from "fp-ts/Array"
-import * as T from "fp-ts/Tuple"
-import * as Str from "fp-ts/string"
-import { constant, flip, pipe } from "fp-ts/function"
-import * as laws from "fp-ts-laws"
 import { not } from "fp-ts/Predicate"
-import { withFst, withSnd } from "../src/Tuple"
+import * as R from "fp-ts/Record"
+import * as T from "fp-ts/Tuple"
+import { constant, flip, pipe } from "fp-ts/function"
+import * as Str from "fp-ts/string"
 import { uncurry2 } from "../src/Function"
+import { withFst, withSnd } from "../src/Tuple"
+import {
+	Eq,
+	Monoid,
+	Semigroup,
+	appendAt,
+	clone,
+	concatBy,
+	deleteAt,
+	empty,
+	fromMap,
+	fromRecord,
+	fromString,
+	fromTuples,
+	isEmpty,
+	isURLSearchParams,
+	keys,
+	lookup,
+	lookupFirst,
+	singleton,
+	size,
+	toLeadingString,
+	toMap,
+	toRecord,
+	toString,
+	toTuples,
+	upsertAt,
+	values,
+} from "../src/URLSearchParams"
 
 const arb: fc.Arbitrary<URLSearchParams> = fc
 	.webQueryParameters()

@@ -1,19 +1,19 @@
 /* eslint-disable functional/no-expression-statements */
 
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import * as IO from "fp-ts/IO"
-import { constant, constVoid, flip } from "fp-ts/function"
+import { constVoid, constant, flip } from "fp-ts/function"
+import { unless, when } from "../src/Applicative"
 import {
-	ifM,
-	andM,
-	orM,
 	allPassM,
+	andM,
 	anyPassM,
+	ifM,
 	nonePassM,
-	whenM,
+	orM,
 	unlessM,
+	whenM,
 } from "../src/Monad"
-import { when, unless } from "../src/Applicative"
 import { allPass, anyPass, nonePass } from "../src/Predicate"
 
 type IO<A> = IO.IO<A>

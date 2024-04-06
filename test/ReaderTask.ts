@@ -1,9 +1,9 @@
-import { describe, it, expect } from "@jest/globals"
-import { runReaderTask, asksTask } from "../src/ReaderTask"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import * as RT from "fp-ts/ReaderTask"
 import * as T from "fp-ts/Task"
 import { flow, pipe } from "fp-ts/function"
-import fc from "fast-check"
+import { asksTask, runReaderTask } from "../src/ReaderTask"
 import * as Str from "../src/String"
 
 describe("ReaderTask", () => {

@@ -7,13 +7,13 @@
 import * as IOO from "fp-ts/IOOption"
 type IOOption<A> = IOO.IOOption<A>
 import * as IO from "fp-ts/IO"
-import { execute as executeIO } from "./IO"
-import {
-	unsafeUnwrap as unsafeUnwrapO,
-	unsafeExpect as unsafeExpectO,
-} from "./Option"
 import { flow } from "fp-ts/function"
 import { pass as _pass } from "./Applicative"
+import { execute as executeIO } from "./IO"
+import {
+	unsafeExpect as unsafeExpectO,
+	unsafeUnwrap as unsafeUnwrapO,
+} from "./Option"
 
 /**
  * Unwrap the value from within an `IOOption`, throwing if `None`.

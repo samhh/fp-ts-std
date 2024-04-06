@@ -8,17 +8,17 @@
  * @since 0.17.0
  */
 
-import { Newtype } from "newtype-ts"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { flow, identity, pipe } from "fp-ts/function"
-import { over, pack, unpack } from "./Newtype"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import * as URL from "./URL"
-import { Refinement } from "fp-ts/Refinement"
 import * as Eq_ from "fp-ts/Eq"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { Refinement } from "fp-ts/Refinement"
+import { flow, identity, pipe } from "fp-ts/function"
+import { Newtype } from "newtype-ts"
+import { over, pack, unpack } from "./Newtype"
+import * as URL from "./URL"
 type Eq<A> = Eq_.Eq<A>
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }

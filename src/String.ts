@@ -4,23 +4,23 @@
  * @since 0.1.0
  */
 
-import { pipe, flow, flip } from "fp-ts/function"
-import { Predicate, and, not } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import * as NEA from "fp-ts/NonEmptyArray"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { max } from "fp-ts/Ord"
+import { Predicate, and, not } from "fp-ts/Predicate"
 import * as RA from "fp-ts/ReadonlyArray"
+import { flip, flow, pipe } from "fp-ts/function"
+import { Ord as ordNumber } from "fp-ts/number"
 import * as S from "fp-ts/string"
+import { invoke, when } from "./Function"
 import {
-	join,
 	dropRightWhile as dropRightWhileRA,
+	join,
 	takeRightWhile as takeRightWhileRA,
 } from "./ReadonlyArray"
-import { max } from "fp-ts/Ord"
-import { Ord as ordNumber } from "fp-ts/number"
-import { invoke, when } from "./Function"
 
 /**
  * Convert a number to a string.

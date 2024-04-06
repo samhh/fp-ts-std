@@ -4,16 +4,16 @@
  * @since 0.1.0
  */
 
-import { flow, identity, pipe } from "fp-ts/function"
-import { Predicate, not, and } from "fp-ts/Predicate"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
+import { Predicate, and, not } from "fp-ts/Predicate"
+import { flow, identity, pipe } from "fp-ts/function"
 type Option<A> = O.Option<A>
-import { unless } from "./Function"
+import * as A from "fp-ts/Array"
+import { Bounded } from "fp-ts/Bounded"
 import { Bounded as BoundedInfinity } from "fp-ts/number"
 import { Enum } from "./Enum"
-import { Bounded } from "fp-ts/Bounded"
-import * as A from "fp-ts/Array"
+import { unless } from "./Function"
 import * as L from "./Lazy"
 
 /**

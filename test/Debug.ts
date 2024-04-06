@@ -1,10 +1,10 @@
 /* eslint-disable functional/no-expression-statements */
 
-import { describe, it, expect, jest } from "@jest/globals"
-import { trace, traceWithValue, traceShowWithValue } from "../src/Debug"
+import { describe, expect, it, jest } from "@jest/globals"
 import fc from "fast-check"
 import { constVoid } from "fp-ts/function"
 import * as Str from "fp-ts/string"
+import { trace, traceShowWithValue, traceWithValue } from "../src/Debug"
 
 describe("Debug", () => {
 	describe("trace", () => {

@@ -1,18 +1,18 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	unsafeUnwrap,
-	unsafeUnwrapLeft,
-	runReaderTaskEither,
-	asksEither,
-	asksTask,
-	asksTaskEither,
-} from "../src/ReaderTaskEither"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as E from "fp-ts/Either"
 import * as RTE from "fp-ts/ReaderTaskEither"
 import * as T from "fp-ts/Task"
 import * as TE from "fp-ts/TaskEither"
-import * as E from "fp-ts/Either"
 import { flow, pipe } from "fp-ts/function"
-import fc from "fast-check"
+import {
+	asksEither,
+	asksTask,
+	asksTaskEither,
+	runReaderTaskEither,
+	unsafeUnwrap,
+	unsafeUnwrapLeft,
+} from "../src/ReaderTaskEither"
 import * as Str from "../src/String"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {

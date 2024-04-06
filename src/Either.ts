@@ -4,20 +4,20 @@
  * @since 0.1.0
  */
 
+import { Bounded } from "fp-ts/Bounded"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { mapBoth as _mapBoth } from "./Bifunctor"
+import { Ord } from "fp-ts/Ord"
+import { Ordering } from "fp-ts/Ordering"
 import { Show } from "fp-ts/Show"
 import { constant, flow, pipe } from "fp-ts/function"
-import * as L from "./Lazy"
-import { Ord } from "fp-ts/Ord"
-import { Bounded } from "fp-ts/Bounded"
+import { mapBoth as _mapBoth } from "./Bifunctor"
 import { Enum } from "./Enum"
-import { add } from "./Number"
 import { curry2 } from "./Function"
-import { Ordering } from "fp-ts/Ordering"
-import { LT, GT } from "./Ordering"
+import * as L from "./Lazy"
+import { add } from "./Number"
+import { GT, LT } from "./Ordering"
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Left`

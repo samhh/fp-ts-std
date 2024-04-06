@@ -4,6 +4,7 @@
  * @since 0.15.0
  */
 
+import * as A from "fp-ts/Array"
 import {
 	HKT,
 	Kind,
@@ -24,10 +25,9 @@ import {
 	Monad3C,
 	Monad4,
 } from "fp-ts/Monad"
-import { pipe } from "fp-ts/function"
-import * as A from "fp-ts/Array"
-import { invert } from "./Boolean"
 import { Predicate } from "fp-ts/Predicate"
+import { pipe } from "fp-ts/function"
+import { invert } from "./Boolean"
 
 /**
  * Monadic if/then/else. Only executes the relevant action.

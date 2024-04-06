@@ -1,6 +1,6 @@
-import { describe, it, expect } from "@jest/globals"
-import { unsafeUnwrap, unsafeExpect, pass } from "../src/IOOption"
+import { describe, expect, it } from "@jest/globals"
 import * as IOO from "fp-ts/IOOption"
+import { pass, unsafeExpect, unsafeUnwrap } from "../src/IOOption"
 import { Lazy } from "../src/Lazy"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {

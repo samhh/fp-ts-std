@@ -7,33 +7,33 @@
  * @since 0.1.0
  */
 
-import * as O from "fp-ts/Option"
-import * as M from "fp-ts/Map"
-import * as A from "fp-ts/Array"
+import { Applicative2 } from "fp-ts/Applicative"
 import {
-	flow,
-	pipe,
-	getMonoid as getFunctionMonoid,
+	apFirst as apFirst_,
+	apS as apS_,
+	apSecond as apSecond_,
+} from "fp-ts/Apply"
+import * as A from "fp-ts/Array"
+import { bind as bind_ } from "fp-ts/Chain"
+import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
+import { Eq } from "fp-ts/Eq"
+import { Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/Functor"
+import * as M from "fp-ts/Map"
+import { Monad2 } from "fp-ts/Monad"
+import { concatAll } from "fp-ts/Monoid"
+import * as O from "fp-ts/Option"
+import { Predicate, not } from "fp-ts/Predicate"
+import { Refinement } from "fp-ts/Refinement"
+import { first } from "fp-ts/Semigroup"
+import {
 	apply,
 	constant,
 	flip,
+	flow,
+	getMonoid as getFunctionMonoid,
+	pipe,
 	tupled,
 } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism, getMonoid as getEndoMonoid } from "fp-ts/Endomorphism"
-import { concatAll } from "fp-ts/Monoid"
-import { first } from "fp-ts/Semigroup"
-import { Eq } from "fp-ts/Eq"
-import { Refinement } from "fp-ts/Refinement"
-import { Functor2, bindTo as bindTo_, let as let__ } from "fp-ts/Functor"
-import {
-	apFirst as apFirst_,
-	apSecond as apSecond_,
-	apS as apS_,
-} from "fp-ts/Apply"
-import { Applicative2 } from "fp-ts/Applicative"
-import { bind as bind_ } from "fp-ts/Chain"
-import { Monad2 } from "fp-ts/Monad"
 
 /**
  * Typeclass machinery.

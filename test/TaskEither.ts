@@ -1,19 +1,19 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	unsafeUnwrap,
-	unsafeUnwrapLeft,
-	unsafeExpect,
-	unsafeExpectLeft,
-	sequenceSeqArray_,
-	traverseArray_,
-	traverseSeqArray_,
-	pass,
-} from "../src/TaskEither"
+import { describe, expect, it } from "@jest/globals"
 import * as TE from "fp-ts/TaskEither"
-import * as T from "../src/Task"
 import { constVoid, identity, pipe } from "fp-ts/function"
 import { Show as StrShow } from "fp-ts/string"
 import { mkMilliseconds } from "../src/Date"
+import * as T from "../src/Task"
+import {
+	pass,
+	sequenceSeqArray_,
+	traverseArray_,
+	traverseSeqArray_,
+	unsafeExpect,
+	unsafeExpectLeft,
+	unsafeUnwrap,
+	unsafeUnwrapLeft,
+} from "../src/TaskEither"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
 	/* eslint-disable */

@@ -5,27 +5,27 @@
  * @since 0.2.0
  */
 
+import * as M from "fp-ts/Map"
+import * as NEA from "fp-ts/NonEmptyArray"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import * as R from "fp-ts/Record"
-import * as M from "fp-ts/Map"
-import { constant, flow, pipe } from "fp-ts/function"
-import { Refinement } from "fp-ts/Refinement"
-import { invoke, isInstanceOf, uncurry2, when } from "./Function"
 import { Predicate, not } from "fp-ts/Predicate"
-import * as NEA from "fp-ts/NonEmptyArray"
+import * as R from "fp-ts/Record"
+import { Refinement } from "fp-ts/Refinement"
+import { constant, flow, pipe } from "fp-ts/function"
+import { invoke, isInstanceOf, uncurry2, when } from "./Function"
 type NonEmptyArray<A> = NEA.NonEmptyArray<A>
 import * as A from "fp-ts/Array"
-import { fromIterable, getDisorderedEq } from "./Array"
-import { mapSnd } from "fp-ts/Tuple"
-import * as Str from "fp-ts/string"
-import { prepend } from "./String"
-import { withFst } from "./Tuple"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
+import { mapSnd } from "fp-ts/Tuple"
+import * as Str from "fp-ts/string"
+import { fromIterable, getDisorderedEq } from "./Array"
+import { prepend } from "./String"
+import { withFst } from "./Tuple"
 type Eq<A> = Eq_.Eq<A>
-import type { Semigroup as SemigroupT } from "fp-ts/Semigroup"
 import * as Monoid_ from "fp-ts/Monoid"
+import type { Semigroup as SemigroupT } from "fp-ts/Semigroup"
 type Monoid<A> = Monoid_.Monoid<A>
 
 const constructor = (

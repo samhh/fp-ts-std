@@ -1,53 +1,53 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as NEA from "fp-ts/NonEmptyArray"
+import * as O from "fp-ts/Option"
+import { max } from "fp-ts/Ord"
+import * as RA from "fp-ts/ReadonlyArray"
+import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
+import * as N from "fp-ts/number"
+import * as S from "fp-ts/string"
 import {
-	lines,
-	unlines,
-	surround,
-	unsurround,
-	takeLeft,
-	takeRight,
-	reverse,
-	match,
-	matchAll,
-	prepend,
-	unprepend,
 	append,
-	unappend,
-	fromNumber,
-	fromBool,
-	test,
-	dropLeftWhile,
 	dropLeft,
+	dropLeftWhile,
+	dropPrefix,
 	dropRight,
-	head,
-	tail,
-	last,
-	init,
-	lookup,
 	dropRightWhile,
-	under,
-	replaceAll,
-	takeLeftWhile,
-	takeRightWhile,
-	splitAt,
+	dropSuffix,
+	fromBool,
+	fromNumber,
+	head,
+	init,
 	isAlpha,
 	isAlphaNum,
 	isLower,
-	isUpper,
 	isSpace,
-	words,
+	isUpper,
+	last,
+	lines,
+	lookup,
+	match,
+	matchAll,
+	prepend,
+	replaceAll,
+	reverse,
+	splitAt,
+	surround,
+	tail,
+	takeLeft,
+	takeLeftWhile,
+	takeRight,
+	takeRightWhile,
+	test,
+	unappend,
+	under,
+	unlines,
+	unprepend,
+	unsurround,
 	unwords,
-	dropPrefix,
-	dropSuffix,
+	words,
 } from "../src/String"
-import * as O from "fp-ts/Option"
-import * as NEA from "fp-ts/NonEmptyArray"
-import * as RA from "fp-ts/ReadonlyArray"
-import { constFalse, constTrue, flow, pipe } from "fp-ts/function"
-import fc from "fast-check"
-import { max } from "fp-ts/Ord"
-import * as N from "fp-ts/number"
-import * as S from "fp-ts/string"
 
 describe("String", () => {
 	describe("lines", () => {

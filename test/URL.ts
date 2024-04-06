@@ -1,31 +1,31 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	clone,
-	unsafeParse,
-	parse,
-	parseO,
-	isURL,
-	isStringlyURL,
-	toString,
-	getPathname,
-	modifyPathname,
-	setPathname,
-	getParams,
-	modifyParams,
-	setParams,
-	getHash,
-	modifyHash,
-	setHash,
-	getOrigin,
-	getHostname,
-	Eq,
-} from "../src/URL"
-import * as Params from "../src/URLSearchParams"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import { constant, pipe } from "fp-ts/function"
+import * as laws from "fp-ts-laws"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import * as laws from "fp-ts-laws"
+import { constant, pipe } from "fp-ts/function"
+import {
+	Eq,
+	clone,
+	getHash,
+	getHostname,
+	getOrigin,
+	getParams,
+	getPathname,
+	isStringlyURL,
+	isURL,
+	modifyHash,
+	modifyParams,
+	modifyPathname,
+	parse,
+	parseO,
+	setHash,
+	setParams,
+	setPathname,
+	toString,
+	unsafeParse,
+} from "../src/URL"
+import * as Params from "../src/URLSearchParams"
 
 const arb: fc.Arbitrary<URL> = fc
 	.webUrl({ withFragments: true, withQueryParameters: true })

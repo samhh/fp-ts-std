@@ -1,20 +1,20 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as O from "fp-ts/Option"
+import { not } from "fp-ts/Predicate"
 import {
+	fromMilliseconds,
 	getTime,
-	toISOString,
-	toUTCString,
 	isDate,
 	isValid,
-	unsafeParseDate,
-	parseDate,
-	fromMilliseconds,
-	now,
 	mkMilliseconds,
+	now,
+	parseDate,
+	toISOString,
+	toUTCString,
 	unMilliseconds,
+	unsafeParseDate,
 } from "../src/Date"
-import fc from "fast-check"
-import { not } from "fp-ts/Predicate"
-import * as O from "fp-ts/Option"
 
 // Beware timezone differences on different machines - don't hardcode any
 // valid input/output pairs

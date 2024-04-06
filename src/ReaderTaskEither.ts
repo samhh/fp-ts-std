@@ -1,18 +1,18 @@
+import { Either } from "fp-ts/Either"
+import * as RTE from "fp-ts/ReaderTaskEither"
+import { Task } from "fp-ts/Task"
+import * as TE from "fp-ts/TaskEither"
+import { TaskEither } from "fp-ts/TaskEither"
 /**
  * Utility functions to accommodate `fp-ts/ReaderTaskEither`.
  *
  * @since 0.15.0
  */
 import { flow, identity } from "fp-ts/function"
-import * as RTE from "fp-ts/ReaderTaskEither"
-import * as TE from "fp-ts/TaskEither"
-import { TaskEither } from "fp-ts/TaskEither"
-import { Task } from "fp-ts/Task"
-import { Either } from "fp-ts/Either"
 import { runReader } from "./Reader"
 import {
-	unsafeUnwrap as unsafeUnwrapTE,
 	unsafeUnwrapLeft as unsafeUnwrapLeftTE,
+	unsafeUnwrap as unsafeUnwrapTE,
 } from "./TaskEither"
 
 /**

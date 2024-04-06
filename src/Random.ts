@@ -6,11 +6,11 @@
 
 import * as IO from "fp-ts/IO"
 type IO<A> = IO.IO<A>
-import { flow, pipe } from "fp-ts/function"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as RA from "fp-ts/ReadonlyArray"
-import { extractAt } from "./Array"
 import * as Rand from "fp-ts/Random"
+import * as RA from "fp-ts/ReadonlyArray"
+import { flow, pipe } from "fp-ts/function"
+import { extractAt } from "./Array"
 import { decrement } from "./Number"
 import { unsafeUnwrap } from "./Option"
 

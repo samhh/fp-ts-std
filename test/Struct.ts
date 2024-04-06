@@ -1,15 +1,15 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import { pipe } from "fp-ts/function"
 import {
 	get,
-	pick,
-	pickFrom,
+	merge,
 	omit,
 	omitFrom,
-	merge,
-	withDefaults,
+	pick,
+	pickFrom,
 	renameKey,
+	withDefaults,
 } from "../src/Struct"
-import { pipe } from "fp-ts/function"
 
 describe("Struct", () => {
 	describe("get", () => {

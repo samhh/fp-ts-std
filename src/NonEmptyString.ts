@@ -7,28 +7,28 @@
  * @since 0.15.0
  */
 
-import { flow } from "fp-ts/function"
-import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"
-import { unsafeExpect, unsafeUnwrap } from "./Option"
+import { Predicate, not } from "fp-ts/Predicate"
+import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
+import type { Show as TShow } from "fp-ts/Show"
+import { flow } from "fp-ts/function"
 import {
-	Show as _Show,
 	Eq as _Eq,
 	Ord as _Ord,
 	Semigroup as _Semigroup,
-	toUpperCase as _toUpperCase,
-	toLowerCase as _toLowerCase,
+	Show as _Show,
+	includes as _includes,
 	isEmpty as _isEmpty,
 	size as _size,
-	includes as _includes,
 	split as _split,
+	toLowerCase as _toLowerCase,
+	toUpperCase as _toUpperCase,
 } from "fp-ts/string"
+import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
+import { over, pack, unpack } from "./Newtype"
+import { unsafeExpect, unsafeUnwrap } from "./Option"
 import * as Str from "./String"
-import { pack, unpack, over } from "./Newtype"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import type { Show as TShow } from "fp-ts/Show"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 
 type Show<A> = TShow<A>
 

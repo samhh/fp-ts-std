@@ -1,9 +1,9 @@
 import { describe, it } from "@jest/globals"
-import { pack, unpack, over } from "../src/Newtype"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { multiply } from "../src/Number"
-import { Newtype, iso } from "newtype-ts"
 import fc from "fast-check"
+import { Endomorphism } from "fp-ts/Endomorphism"
+import { Newtype, iso } from "newtype-ts"
+import { over, pack, unpack } from "../src/Newtype"
+import { multiply } from "../src/Number"
 
 describe("Newtype", () => {
 	type Num = Newtype<{ readonly Num: unique symbol }, number>

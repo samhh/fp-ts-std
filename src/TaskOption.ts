@@ -7,13 +7,13 @@
 import * as TO from "fp-ts/TaskOption"
 type TaskOption<A> = TO.TaskOption<A>
 import * as T from "fp-ts/Task"
-import { execute as executeT } from "./Task"
-import {
-	unsafeUnwrap as unsafeUnwrapO,
-	unsafeExpect as unsafeExpectO,
-} from "./Option"
 import { flow } from "fp-ts/function"
 import { pass as _pass } from "./Applicative"
+import {
+	unsafeExpect as unsafeExpectO,
+	unsafeUnwrap as unsafeUnwrapO,
+} from "./Option"
+import { execute as executeT } from "./Task"
 
 /**
  * Unwrap the promise from within a `TaskOption`, rejecting if `None`.

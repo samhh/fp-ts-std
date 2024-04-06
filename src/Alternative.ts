@@ -5,6 +5,16 @@
  */
 
 import {
+	Alternative,
+	Alternative1,
+	Alternative2,
+	Alternative2C,
+	Alternative3,
+	Alternative3C,
+	Alternative4,
+} from "fp-ts/Alternative"
+import * as A from "fp-ts/Array"
+import {
 	HKT,
 	Kind,
 	Kind2,
@@ -15,18 +25,8 @@ import {
 	URIS3,
 	URIS4,
 } from "fp-ts/HKT"
-import {
-	Alternative,
-	Alternative1,
-	Alternative2,
-	Alternative2C,
-	Alternative3,
-	Alternative3C,
-	Alternative4,
-} from "fp-ts/Alternative"
-import { Lazy } from "./Lazy"
 import { pipe } from "fp-ts/function"
-import * as A from "fp-ts/Array"
+import { Lazy } from "./Lazy"
 
 /**
  * Conditionally lifts a value to an `Alternative` context or returns

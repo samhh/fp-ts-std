@@ -1,6 +1,6 @@
-import { describe, it, expect } from "@jest/globals"
-import { LT, EQ, GT } from "../src/Ordering"
+import { describe, expect, it } from "@jest/globals"
 import * as Num from "fp-ts/number"
+import { EQ, GT, LT } from "../src/Ordering"
 
 describe("Ordering", () => {
 	describe("LT", () => {

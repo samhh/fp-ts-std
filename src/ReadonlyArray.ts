@@ -4,27 +4,19 @@
  * @since 0.10.0
  */
 
-import { constant, pipe, flow, flip } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
+import {
+	Applicative,
+	Applicative1,
+	Applicative2,
+	Applicative2C,
+	Applicative3,
+	Applicative4,
+} from "fp-ts/Applicative"
+import { copy } from "fp-ts/Array"
+import { Either } from "fp-ts/Either"
 import { Endomorphism } from "fp-ts/Endomorphism"
 import { Eq } from "fp-ts/Eq"
-import { Ord } from "fp-ts/Ord"
-import { match as orderingMatch } from "fp-ts/Ordering"
-import { Ord as ordNumber, MonoidProduct, MonoidSum } from "fp-ts/number"
-import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
-import * as NEA from "fp-ts/ReadonlyNonEmptyArray"
-import { copy } from "fp-ts/Array"
-import * as RA from "fp-ts/ReadonlyArray"
-import * as R from "fp-ts/ReadonlyRecord"
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
-import * as B from "fp-ts/boolean"
 import { reduceM } from "fp-ts/Foldable"
-import { concatAll } from "fp-ts/Monoid"
-import { max, min } from "fp-ts/Semigroup"
-import { invoke } from "./Function"
-import { These } from "fp-ts/These"
-import * as T from "fp-ts/These"
 import {
 	HKT,
 	Kind,
@@ -37,14 +29,6 @@ import {
 	URIS4,
 } from "fp-ts/HKT"
 import {
-	Applicative,
-	Applicative1,
-	Applicative2,
-	Applicative3,
-	Applicative4,
-	Applicative2C,
-} from "fp-ts/Applicative"
-import {
 	Monad,
 	Monad1,
 	Monad2,
@@ -53,8 +37,24 @@ import {
 	Monad3C,
 	Monad4,
 } from "fp-ts/Monad"
+import { concatAll } from "fp-ts/Monoid"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import { Either } from "fp-ts/Either"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { Ord } from "fp-ts/Ord"
+import { match as orderingMatch } from "fp-ts/Ordering"
+import { Predicate, not } from "fp-ts/Predicate"
+import * as RA from "fp-ts/ReadonlyArray"
+import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
+import * as NEA from "fp-ts/ReadonlyNonEmptyArray"
+import * as R from "fp-ts/ReadonlyRecord"
+import { max, min } from "fp-ts/Semigroup"
+import { These } from "fp-ts/These"
+import * as T from "fp-ts/These"
+import * as B from "fp-ts/boolean"
+import { constant, flip, flow, pipe } from "fp-ts/function"
+import { MonoidProduct, MonoidSum, Ord as ordNumber } from "fp-ts/number"
+import { invoke } from "./Function"
 
 /**
  * Like `fp-ts/ReadonlyArray::elem` but flipped, which the "V" suffix denotes.

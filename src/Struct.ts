@@ -5,10 +5,10 @@
  * @since 0.14.0
  */
 
-import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
-import { fanout } from "./Tuple"
+import { pipe } from "fp-ts/function"
 import { uncurry2 } from "./Function"
+import { fanout } from "./Tuple"
 
 /**
  * Merge two structs together. For merging many identical structs, instead

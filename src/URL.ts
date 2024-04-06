@@ -4,17 +4,17 @@
  * @since 0.1.0
  */
 
-import { Option } from "fp-ts/Option"
-import * as O from "fp-ts/Option"
 import { Either } from "fp-ts/Either"
 import * as E from "fp-ts/Either"
-import { constant, flow, identity } from "fp-ts/function"
-import { Refinement } from "fp-ts/Refinement"
-import { isInstanceOf } from "./Function"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { Predicate } from "fp-ts/Predicate"
-import * as Str from "fp-ts/string"
 import * as Eq_ from "fp-ts/Eq"
+import { Option } from "fp-ts/Option"
+import * as O from "fp-ts/Option"
+import { Predicate } from "fp-ts/Predicate"
+import { Refinement } from "fp-ts/Refinement"
+import { constant, flow, identity } from "fp-ts/function"
+import * as Str from "fp-ts/string"
+import { isInstanceOf } from "./Function"
 type Eq<A> = Eq_.Eq<A>
 
 const constructor = (x: ConstructorParameters<typeof URL>[0]): URL => new URL(x)

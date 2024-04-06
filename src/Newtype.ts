@@ -7,6 +7,8 @@
  * @since 0.15.0
  */
 
+import { Endomorphism } from "fp-ts/Endomorphism"
+import { Functor, Functor1, Functor2, Functor3, Functor4 } from "fp-ts/Functor"
 import {
 	HKT,
 	Kind,
@@ -18,11 +20,9 @@ import {
 	URIS3,
 	URIS4,
 } from "fp-ts/HKT"
-import { Functor, Functor1, Functor2, Functor3, Functor4 } from "fp-ts/Functor"
-import { Newtype, iso } from "newtype-ts"
-import { pipe } from "fp-ts/function"
-import { Endomorphism } from "fp-ts/Endomorphism"
 import * as Id from "fp-ts/Identity"
+import { pipe } from "fp-ts/function"
+import { Newtype, iso } from "newtype-ts"
 
 /**
  * Pack a value into a newtype.

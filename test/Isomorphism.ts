@@ -1,19 +1,19 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as laws from "fp-ts-laws"
-import {
-	Isomorphism,
-	toIso,
-	fromIso,
-	reverse,
-	deriveSemigroup,
-	deriveMonoid,
-	compose,
-} from "../src/Isomorphism"
-import { Iso } from "monocle-ts/Iso"
 import * as Eq from "fp-ts/Eq"
 import * as Bool from "fp-ts/boolean"
 import { flow } from "fp-ts/function"
+import { Iso } from "monocle-ts/Iso"
+import {
+	Isomorphism,
+	compose,
+	deriveMonoid,
+	deriveSemigroup,
+	fromIso,
+	reverse,
+	toIso,
+} from "../src/Isomorphism"
 
 describe("Isomorphism", () => {
 	type Binary = 0 | 1

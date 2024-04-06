@@ -4,17 +4,17 @@
  * @since 0.15.0
  */
 
+import * as IO from "fp-ts/IO"
 import { IOEither } from "fp-ts/IOEither"
 import * as IOE from "fp-ts/IOEither"
-import * as IO from "fp-ts/IO"
-import { execute as executeIO } from "./IO"
+import { Show } from "fp-ts/Show"
+import { constVoid, flow } from "fp-ts/function"
+import { pass as _pass } from "./Applicative"
 import {
 	unsafeUnwrap as unsafeUnwrapE,
 	unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
-import { constVoid, flow } from "fp-ts/function"
-import { Show } from "fp-ts/Show"
-import { pass as _pass } from "./Applicative"
+import { execute as executeIO } from "./IO"
 
 /**
  * Unwrap the value from within an `IOEither`, throwing with the inner value of

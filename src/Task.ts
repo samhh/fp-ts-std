@@ -6,13 +6,13 @@
 
 import * as T from "fp-ts/Task"
 type Task<A> = T.Task<A>
-import { IO } from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
-import { fieldMilliseconds, Milliseconds, now, unMilliseconds } from "./Date"
-import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
-import { until as _until } from "./Monad"
-import { constVoid, flow } from "fp-ts/function"
+import { IO } from "fp-ts/IO"
 import { Predicate } from "fp-ts/Predicate"
+import { constVoid, flow } from "fp-ts/function"
+import { pass as _pass, unless as _unless, when as _when } from "./Applicative"
+import { Milliseconds, fieldMilliseconds, now, unMilliseconds } from "./Date"
+import { until as _until } from "./Monad"
 
 /**
  * Wait for the specified number of milliseconds before resolving.

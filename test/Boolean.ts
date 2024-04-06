@@ -1,7 +1,7 @@
-import { describe, it, expect } from "@jest/globals"
-import { invert, and, or, xor, Bounded, Enum } from "../src/Boolean"
-import { flow } from "fp-ts/function"
+import { describe, expect, it } from "@jest/globals"
 import * as O from "fp-ts/Option"
+import { flow } from "fp-ts/function"
+import { Bounded, Enum, and, invert, or, xor } from "../src/Boolean"
 
 describe("Boolean", () => {
 	describe("invert", () => {

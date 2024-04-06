@@ -1,74 +1,74 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	elemV,
-	none,
-	join,
-	pluckFirst,
-	upsert,
-	getDisorderedEq,
-	insertMany,
-	dropRepeats,
-	startsWith,
-	endsWith,
-	without,
-	cartesian,
-	sum,
-	product,
-	aperture,
-	slice,
-	reject,
-	moveFrom,
-	moveTo,
-	countBy,
-	dropRightWhile,
-	mean,
-	median,
-	dropAt,
-	transpose,
-	takeRightWhile,
-	symmetricDifference,
-	reduceWhile,
-	reduceRightWhile,
-	minimum,
-	maximum,
-	zipAll,
-	filterA,
-	extractAt,
-	fromIterable,
-	fromReadonly,
-	toReadonly,
-	allM,
-	anyM,
-	separateNE,
-} from "../src/Array"
-import * as O from "fp-ts/Option"
-import * as RA from "fp-ts/ReadonlyArray"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import * as A from "fp-ts/Array"
+import * as E from "fp-ts/Either"
+import { Endomorphism } from "fp-ts/Endomorphism"
 import { contramap as eqContramap } from "fp-ts/Eq"
-import * as N from "fp-ts/number"
-import { contramap as ordContramap, max } from "fp-ts/Ord"
+import * as IO from "fp-ts/IO"
+import { concatAll } from "fp-ts/Monoid"
+import * as NEA from "fp-ts/NonEmptyArray"
+import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import * as O from "fp-ts/Option"
+import { max, contramap as ordContramap } from "fp-ts/Ord"
+import { Predicate } from "fp-ts/Predicate"
+import * as RA from "fp-ts/ReadonlyArray"
+import * as R from "fp-ts/Record"
+import * as T from "fp-ts/These"
+import { fst, snd } from "fp-ts/Tuple"
 import {
-	constant,
 	constFalse,
 	constTrue,
+	constant,
 	flow,
 	identity,
 	pipe,
 } from "fp-ts/function"
-import { Predicate } from "fp-ts/Predicate"
-import fc from "fast-check"
-import { concatAll } from "fp-ts/Monoid"
+import * as N from "fp-ts/number"
 import { split } from "fp-ts/string"
-import * as NEA from "fp-ts/NonEmptyArray"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import { values } from "../src/Record"
-import * as R from "fp-ts/Record"
+import {
+	allM,
+	anyM,
+	aperture,
+	cartesian,
+	countBy,
+	dropAt,
+	dropRepeats,
+	dropRightWhile,
+	elemV,
+	endsWith,
+	extractAt,
+	filterA,
+	fromIterable,
+	fromReadonly,
+	getDisorderedEq,
+	insertMany,
+	join,
+	maximum,
+	mean,
+	median,
+	minimum,
+	moveFrom,
+	moveTo,
+	none,
+	pluckFirst,
+	product,
+	reduceRightWhile,
+	reduceWhile,
+	reject,
+	separateNE,
+	slice,
+	startsWith,
+	sum,
+	symmetricDifference,
+	takeRightWhile,
+	toReadonly,
+	transpose,
+	upsert,
+	without,
+	zipAll,
+} from "../src/Array"
 import { add, decrement } from "../src/Number"
-import * as T from "fp-ts/These"
-import * as IO from "fp-ts/IO"
-import { fst, snd } from "fp-ts/Tuple"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import * as E from "fp-ts/Either"
+import { values } from "../src/Record"
 
 type IO<A> = IO.IO<A>
 

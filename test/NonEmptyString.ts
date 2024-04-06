@@ -1,39 +1,39 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
+import * as laws from "fp-ts-laws"
+import { Predicate, not } from "fp-ts/Predicate"
+import * as Pred from "fp-ts/Predicate"
+import { flow, pipe } from "fp-ts/function"
 import {
-	NonEmptyString,
-	unNonEmptyString,
-	unsafeFromString,
-	Eq,
-	Ord,
-	Semigroup,
-	fromNumber,
-	append,
-	prepend,
-	surround,
-	toUpperCase,
-	toLowerCase,
-	reverse,
-	head,
-	last,
-	includes,
-	size,
-	split,
-} from "../src/NonEmptyString"
-import {
-	isEmpty as _isEmpty,
-	toUpperCase as _toUpperCase,
-	toLowerCase as _toLowerCase,
 	includes as _includes,
+	isEmpty as _isEmpty,
 	size as _size,
 	split as _split,
+	toLowerCase as _toLowerCase,
+	toUpperCase as _toUpperCase,
 } from "fp-ts/string"
-import * as laws from "fp-ts-laws"
-import fc from "fast-check"
-import * as Str from "../src/String"
-import { flow, pipe } from "fp-ts/function"
-import { not, Predicate } from "fp-ts/Predicate"
-import * as Pred from "fp-ts/Predicate"
+import {
+	Eq,
+	NonEmptyString,
+	Ord,
+	Semigroup,
+	append,
+	fromNumber,
+	head,
+	includes,
+	last,
+	prepend,
+	reverse,
+	size,
+	split,
+	surround,
+	toLowerCase,
+	toUpperCase,
+	unNonEmptyString,
+	unsafeFromString,
+} from "../src/NonEmptyString"
 import { unsafeUnwrap } from "../src/Option"
+import * as Str from "../src/String"
 
 const arb = fc.string({ minLength: 1 }).map(unsafeFromString)
 

@@ -4,20 +4,20 @@
  * @since 0.1.0
  */
 
+import { Endomorphism } from "fp-ts/Endomorphism"
+import { Eq } from "fp-ts/Eq"
 import { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
-import { Eq } from "fp-ts/Eq"
-import { Endomorphism } from "fp-ts/Endomorphism"
-import { constant, flow, pipe } from "fp-ts/function"
 import * as B from "fp-ts/boolean"
-import { invert as invertBool } from "./Boolean"
+import { constant, flow, pipe } from "fp-ts/function"
 import { altAllBy as _altAllBy, pureIf as _pureIf } from "./Alternative"
-import { toMonoid as _toMonoid } from "./Monoid"
+import { invert as invertBool } from "./Boolean"
 import * as L from "./Lazy"
+import { toMonoid as _toMonoid } from "./Monoid"
 type Lazy<A> = L.Lazy<A>
 import { Bounded } from "fp-ts/Bounded"
 import { Enum } from "./Enum"
-import { increment, decrement } from "./Number"
+import { decrement, increment } from "./Number"
 
 /**
  * Unwrap the value from within an `Option`, throwing `msg` if `None`.

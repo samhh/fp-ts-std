@@ -5,15 +5,15 @@
  * @since 0.1.0
  */
 
-import { flow } from "fp-ts/function"
-import { Predicate, not } from "fp-ts/Predicate"
-import { Option } from "fp-ts/Option"
-import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
-import * as T from "fp-ts/Tuple"
+import { Option } from "fp-ts/Option"
+import { Predicate, not } from "fp-ts/Predicate"
+import * as R from "fp-ts/Record"
 import { last } from "fp-ts/Semigroup"
-import { elemV } from "./Array"
+import * as T from "fp-ts/Tuple"
+import { flow } from "fp-ts/function"
 import * as Str from "fp-ts/string"
+import { elemV } from "./Array"
 
 /**
  * Get the values from a `Record`.

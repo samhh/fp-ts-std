@@ -1,20 +1,20 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import * as IO from "fp-ts/IO"
 import { constFalse, constTrue, identity, pipe } from "fp-ts/function"
 import {
-	once,
-	whenInvocationCount,
 	execute,
-	when,
-	unless,
 	memoize,
+	once,
+	pass,
 	sequenceArray_,
 	traverseArray_,
-	pass,
+	unless,
 	until,
+	when,
+	whenInvocationCount,
 } from "../src/IO"
 import { add } from "../src/Number"
-import fc from "fast-check"
 
 type IO<A> = IO.IO<A>
 

@@ -1,12 +1,12 @@
+import { Either } from "fp-ts/Either"
 /**
  * Utility functions to accommodate `fp-ts/ReaderEither`.
  *
  * @since 0.15.0
  */
 import { ReaderEither } from "fp-ts/ReaderEither"
-import { Either } from "fp-ts/Either"
-import { runReader } from "./Reader"
 import { identity } from "fp-ts/function"
+import { runReader } from "./Reader"
 
 /**
  * Runs a ReaderEither and extracts the final Either from it.

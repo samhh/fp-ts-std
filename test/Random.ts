@@ -1,14 +1,14 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import { randomExtract } from "../src/Random"
-import { pipe, flow } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 import * as IO from "fp-ts/IO"
-import { decrement } from "../src/Number"
-import { fst, snd } from "fp-ts/Tuple"
-import { execute } from "../src/IO"
 import * as NEA from "fp-ts/NonEmptyArray"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import { fst, snd } from "fp-ts/Tuple"
+import { flow, pipe } from "fp-ts/function"
+import { execute } from "../src/IO"
+import { decrement } from "../src/Number"
+import { randomExtract } from "../src/Random"
 
 describe("Random", () => {
 	describe("randomExtract", () => {

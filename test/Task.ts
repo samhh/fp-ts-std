@@ -1,22 +1,22 @@
 /* eslint-disable functional/no-expression-statements */
 
-import { describe, it, expect, jest } from "@jest/globals"
+import { describe, expect, it, jest } from "@jest/globals"
 import fc from "fast-check"
+import * as T from "fp-ts/Task"
+import { constVoid, constant, identity, pipe } from "fp-ts/function"
 import {
-	sleep,
 	elapsed,
 	execute,
-	when,
-	unless,
+	pass,
 	sequenceArray_,
 	sequenceSeqArray_,
+	sleep,
 	traverseArray_,
 	traverseSeqArray_,
-	pass,
+	unless,
 	until,
+	when,
 } from "../src/Task"
-import { constant, constVoid, identity, pipe } from "fp-ts/function"
-import * as T from "fp-ts/Task"
 import Task = T.Task
 import { mkMilliseconds, unMilliseconds } from "../src/Date"
 import { add } from "../src/Number"

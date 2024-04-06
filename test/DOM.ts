@@ -1,25 +1,25 @@
-import { describe, it, expect, jest } from "@jest/globals"
+import { describe, expect, it, jest } from "@jest/globals"
+import * as A from "fp-ts/Array"
+import * as IO from "fp-ts/IO"
+import * as NEA from "fp-ts/NonEmptyArray"
+import * as O from "fp-ts/Option"
+import { constVoid, constant, pipe } from "fp-ts/function"
+import { JSDOM } from "jsdom"
 import {
-	fromNodeList,
-	querySelector,
-	querySelectorAll,
-	childNodes,
-	remove,
-	appendChild,
-	emptyChildren,
 	addEventListener,
 	addEventListener_,
+	appendChild,
+	childNodes,
+	emptyChildren,
+	fromNodeList,
 	getTextContent,
+	querySelector,
+	querySelectorAll,
+	remove,
 	setTextContent,
 } from "../src/DOM"
-import * as IO from "fp-ts/IO"
-import * as O from "fp-ts/Option"
-import * as NEA from "fp-ts/NonEmptyArray"
-import * as A from "fp-ts/Array"
-import { JSDOM } from "jsdom"
-import { constVoid, constant, pipe } from "fp-ts/function"
-import { unsafeUnwrap } from "../src/Option"
 import { execute as IOexecute } from "../src/IO"
+import { unsafeUnwrap } from "../src/Option"
 
 describe("DOM", () => {
 	describe("fromNodeList", () => {

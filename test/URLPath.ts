@@ -1,39 +1,39 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	URLPath,
-	isURLPath,
-	clone,
-	fromURL,
-	fromString,
-	fromStringO,
-	fromPathname,
-	toURL,
-	toURLO,
-	toString,
-	getPathname,
-	modifyPathname,
-	setPathname,
-	getParams,
-	modifyParams,
-	setParams,
-	getHash,
-	modifyHash,
-	setHash,
-	Eq,
-} from "../src/URLPath"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import { constant, flow, identity, pipe } from "fp-ts/function"
+import * as laws from "fp-ts-laws"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { unpack } from "../src/Newtype"
+import { constant, flow, identity, pipe } from "fp-ts/function"
 import {
-	unsafeUnwrap as unsafeUnwrapRight,
 	unsafeUnwrapLeft,
+	unsafeUnwrap as unsafeUnwrapRight,
 } from "../src/Either"
+import { unpack } from "../src/Newtype"
 import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
-import { setParam } from "../src/URLSearchParams"
-import * as laws from "fp-ts-laws"
 import { unsafeParse as unsafeParseURL } from "../src/URL"
+import {
+	Eq,
+	URLPath,
+	clone,
+	fromPathname,
+	fromString,
+	fromStringO,
+	fromURL,
+	getHash,
+	getParams,
+	getPathname,
+	isURLPath,
+	modifyHash,
+	modifyParams,
+	modifyPathname,
+	setHash,
+	setParams,
+	setPathname,
+	toString,
+	toURL,
+	toURLO,
+} from "../src/URLPath"
+import { setParam } from "../src/URLSearchParams"
 
 const arb: fc.Arbitrary<URLPath> = fc
 	.webUrl({ withFragments: true, withQueryParameters: true })

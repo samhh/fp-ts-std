@@ -1,4 +1,4 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import { constFalse, constTrue } from "fp-ts/function"
 import { allPass, anyPass, nonePass } from "../src/Predicate"
 

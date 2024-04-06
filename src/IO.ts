@@ -4,12 +4,12 @@
  * @since 0.7.0
  */
 
-import * as IO from "fp-ts/IO"
 import { Endomorphism } from "fp-ts/Endomorphism"
+import * as IO from "fp-ts/IO"
 import { Predicate } from "fp-ts/Predicate"
-import { when as _when, unless as _unless, pass as _pass } from "./Applicative"
-import { until as _until } from "./Monad"
 import { constVoid, flow } from "fp-ts/function"
+import { pass as _pass, unless as _unless, when as _when } from "./Applicative"
+import { until as _until } from "./Monad"
 
 type IO<A> = IO.IO<A>
 

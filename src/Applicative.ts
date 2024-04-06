@@ -5,6 +5,15 @@
  */
 
 import {
+	Applicative,
+	Applicative1,
+	Applicative2,
+	Applicative2C,
+	Applicative3,
+	Applicative3C,
+	Applicative4,
+} from "fp-ts/Applicative"
+import {
 	HKT,
 	Kind,
 	Kind2,
@@ -15,15 +24,6 @@ import {
 	URIS3,
 	URIS4,
 } from "fp-ts/HKT"
-import {
-	Applicative,
-	Applicative1,
-	Applicative2,
-	Applicative2C,
-	Applicative3,
-	Applicative3C,
-	Applicative4,
-} from "fp-ts/Applicative"
 
 /**
  * Conditional execution of an applicative. Helpful for conditional side effects

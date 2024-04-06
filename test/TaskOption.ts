@@ -1,6 +1,6 @@
-import { describe, it, expect } from "@jest/globals"
-import { unsafeUnwrap, unsafeExpect, pass } from "../src/TaskOption"
+import { describe, expect, it } from "@jest/globals"
 import * as TO from "fp-ts/TaskOption"
+import { pass, unsafeExpect, unsafeUnwrap } from "../src/TaskOption"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
 	/* eslint-disable */

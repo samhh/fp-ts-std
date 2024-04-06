@@ -1,10 +1,10 @@
-import { describe, it, expect } from "@jest/globals"
-import { mapBoth } from "../src/Bifunctor"
-import * as Tuple from "fp-ts/Tuple"
-import * as E from "fp-ts/Either"
-import * as Str from "../src/String"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
+import * as E from "fp-ts/Either"
+import * as Tuple from "fp-ts/Tuple"
 import { identity } from "fp-ts/function"
+import { mapBoth } from "../src/Bifunctor"
+import * as Str from "../src/String"
 
 describe("Bifunctor", () => {
 	describe("mapBoth", () => {

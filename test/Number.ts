@@ -1,34 +1,34 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	add,
-	multiply,
-	subtract,
-	divide,
-	increment,
-	decrement,
-	isValid,
-	rem,
-	mod,
-	negate,
-	fromString,
-	floatFromString,
-	integerFromString,
-	fromStringWithRadix,
-	isFinite,
-	toFinite,
-	isPositive,
-	isNegative,
-	isNonNegative,
-	isNonPositive,
-	EnumInt,
-	digits,
-} from "../src/Number"
-import { fromNumber } from "../src/String"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import * as Pred from "fp-ts/Predicate"
 import { Predicate } from "fp-ts/Predicate"
 import { flow } from "fp-ts/function"
+import {
+	EnumInt,
+	add,
+	decrement,
+	digits,
+	divide,
+	floatFromString,
+	fromString,
+	fromStringWithRadix,
+	increment,
+	integerFromString,
+	isFinite,
+	isNegative,
+	isNonNegative,
+	isNonPositive,
+	isPositive,
+	isValid,
+	mod,
+	multiply,
+	negate,
+	rem,
+	subtract,
+	toFinite,
+} from "../src/Number"
+import { fromNumber } from "../src/String"
 
 describe("Number", () => {
 	describe("add", () => {

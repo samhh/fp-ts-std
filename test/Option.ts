@@ -1,27 +1,27 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	unsafeUnwrap,
-	unsafeExpect,
-	noneAs,
-	invert,
-	toMonoid,
-	memptyWhen,
-	memptyUnless,
-	pureIf,
-	altAllBy,
-	getBounded,
-	getEnum,
-	match2,
-} from "../src/Option"
+import { describe, expect, it } from "@jest/globals"
+import fc from "fast-check"
 import * as O from "fp-ts/Option"
 import { Option } from "fp-ts/Option"
-import * as S from "fp-ts/string"
-import fc from "fast-check"
 import { constant, flow, identity, pipe } from "fp-ts/function"
-import { Lazy } from "../src/Lazy"
+import * as S from "fp-ts/string"
 import { Bounded as BoundedBool, Enum as EnumBool } from "../src/Boolean"
 import { universe } from "../src/Enum"
 import { curry2 } from "../src/Function"
+import { Lazy } from "../src/Lazy"
+import {
+	altAllBy,
+	getBounded,
+	getEnum,
+	invert,
+	match2,
+	memptyUnless,
+	memptyWhen,
+	noneAs,
+	pureIf,
+	toMonoid,
+	unsafeExpect,
+	unsafeUnwrap,
+} from "../src/Option"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 	/* eslint-disable */

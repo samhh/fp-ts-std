@@ -4,9 +4,9 @@
  * @since 0.12.0
  */
 
+import { Contravariant1 } from "fp-ts/Contravariant"
 import { Show } from "fp-ts/Show"
 import { flow, pipe } from "fp-ts/function"
-import { Contravariant1 } from "fp-ts/Contravariant"
 
 /**
  * Typeclass machinery.

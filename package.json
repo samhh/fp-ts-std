@@ -32,7 +32,7 @@
 		"build": "rm -rf ./dist/ && mkdir -p ./dist/esm/ ./dist/cjs/ && tsc -p ./tsconfig.build-esm.json && tsc -p ./tsconfig.build-cjs.json && tsc -p ./tsconfig.build-types.json",
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint ./src/ ./test/ --ext ts",
-		"fmt": "biome format .",
+		"fmt": "biome check --linter-enabled=false .",
 		"test": "jest",
 		"docs-ci": "docs-ts",
 		"docs": "docs-ts && tshm-docs-ts ./docs/modules/*",

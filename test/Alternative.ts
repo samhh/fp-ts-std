@@ -1,8 +1,8 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
-import { pureIf, altAllBy } from "../src/Alternative"
 import * as O from "fp-ts/Option"
 import { constant } from "fp-ts/function"
+import { altAllBy, pureIf } from "../src/Alternative"
 import { Lazy } from "../src/Lazy"
 
 describe("Alternative", () => {

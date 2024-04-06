@@ -1,9 +1,9 @@
-import { describe, it, expect } from "@jest/globals"
-import { runReaderEither, asksEither } from "../src/ReaderEither"
-import * as RE from "fp-ts/ReaderEither"
-import * as E from "fp-ts/Either"
-import { flow, pipe } from "fp-ts/function"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
+import * as E from "fp-ts/Either"
+import * as RE from "fp-ts/ReaderEither"
+import { flow, pipe } from "fp-ts/function"
+import { asksEither, runReaderEither } from "../src/ReaderEither"
 import * as Str from "../src/String"
 
 describe("ReaderEither", () => {

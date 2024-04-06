@@ -4,17 +4,17 @@
  * @since 0.12.0
  */
 
+import { Show } from "fp-ts/Show"
+import * as T from "fp-ts/Task"
 import { TaskEither } from "fp-ts/TaskEither"
 import * as TE from "fp-ts/TaskEither"
-import * as T from "fp-ts/Task"
-import { execute as executeT } from "./Task"
+import { constVoid, flow } from "fp-ts/function"
+import { pass as _pass } from "./Applicative"
 import {
 	unsafeUnwrap as unsafeUnwrapE,
 	unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
-import { constVoid, flow } from "fp-ts/function"
-import { Show } from "fp-ts/Show"
-import { pass as _pass } from "./Applicative"
+import { execute as executeT } from "./Task"
 
 /**
  * Unwrap the promise from within a `TaskEither`, rejecting with the inner

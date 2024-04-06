@@ -1,17 +1,17 @@
-import { describe, it, expect } from "@jest/globals"
-import {
-	unsafeUnwrap,
-	unsafeUnwrapLeft,
-	unsafeExpect,
-	unsafeExpectLeft,
-	sequenceArray_,
-	traverseArray_,
-	pass,
-} from "../src/IOEither"
+import { describe, expect, it } from "@jest/globals"
 import * as IOE from "fp-ts/IOEither"
-import * as IO from "../src/IO"
 import { identity, pipe } from "fp-ts/function"
 import { Show as StrShow } from "fp-ts/string"
+import * as IO from "../src/IO"
+import {
+	pass,
+	sequenceArray_,
+	traverseArray_,
+	unsafeExpect,
+	unsafeExpectLeft,
+	unsafeUnwrap,
+	unsafeUnwrapLeft,
+} from "../src/IOEither"
 import { Lazy } from "../src/Lazy"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {

@@ -11,16 +11,7 @@
 
 // All the typeclass stuff was copied from fp-ts/IO almost identically.
 
-import { constant, identity } from "fp-ts/function"
-import {
-	Functor1,
-	flap as flap_,
-	bindTo as bindTo_,
-	let as let__,
-} from "fp-ts/Functor"
 import { Applicative1 } from "fp-ts/Applicative"
-import { Monad1 } from "fp-ts/Monad"
-import { Pointed1 } from "fp-ts/Pointed"
 import {
 	Apply1,
 	apFirst as apFirst_,
@@ -29,10 +20,19 @@ import {
 } from "fp-ts/Apply"
 import { Chain1, bind as bind_, chainFirst as chainFirst_ } from "fp-ts/Chain"
 import { ChainRec1 } from "fp-ts/ChainRec"
+import {
+	Functor1,
+	bindTo as bindTo_,
+	flap as flap_,
+	let as let__,
+} from "fp-ts/Functor"
+import { Monad1 } from "fp-ts/Monad"
+import { NonEmptyArray } from "fp-ts/NonEmptyArray"
+import { Pointed1 } from "fp-ts/Pointed"
+import * as RA from "fp-ts/ReadonlyArray"
 import { ReadonlyNonEmptyArray } from "fp-ts/ReadonlyNonEmptyArray"
 import * as RNEA from "fp-ts/ReadonlyNonEmptyArray"
-import { NonEmptyArray } from "fp-ts/NonEmptyArray"
-import * as RA from "fp-ts/ReadonlyArray"
+import { constant, identity } from "fp-ts/function"
 
 /**
  * Re-exported from fp-ts for convenience.
