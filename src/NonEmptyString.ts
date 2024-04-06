@@ -12,16 +12,16 @@ import { Newtype, getEq, getOrd, getSemigroup } from "newtype-ts"
 import * as O from "fp-ts/Option"
 import { unsafeExpect, unsafeUnwrap } from "./Option"
 import {
-  Show as _Show,
-  Eq as _Eq,
-  Ord as _Ord,
-  Semigroup as _Semigroup,
-  toUpperCase as _toUpperCase,
-  toLowerCase as _toLowerCase,
-  isEmpty as _isEmpty,
-  size as _size,
-  includes as _includes,
-  split as _split,
+	Show as _Show,
+	Eq as _Eq,
+	Ord as _Ord,
+	Semigroup as _Semigroup,
+	toUpperCase as _toUpperCase,
+	toLowerCase as _toLowerCase,
+	isEmpty as _isEmpty,
+	size as _size,
+	includes as _includes,
+	split as _split,
 } from "fp-ts/string"
 import * as Str from "./String"
 import { pack, unpack, over } from "./Newtype"
@@ -57,8 +57,8 @@ export type NonEmptyString = Newtype<NonEmptyStringSymbol, string>
  * @since 0.15.0
  */
 export const fromString: (x: string) => O.Option<NonEmptyString> = flow(
-  O.fromPredicate(not(_isEmpty)),
-  O.map(pack<NonEmptyString>),
+	O.fromPredicate(not(_isEmpty)),
+	O.map(pack<NonEmptyString>),
 )
 
 /**
@@ -69,8 +69,8 @@ export const fromString: (x: string) => O.Option<NonEmptyString> = flow(
  * @since 0.15.0
  */
 export const unsafeFromString: (x: string) => NonEmptyString = flow(
-  fromString,
-  unsafeExpect("Failed to lift an empty string to NonEmptyString"),
+	fromString,
+	unsafeExpect("Failed to lift an empty string to NonEmptyString"),
 )
 
 /**
@@ -80,8 +80,8 @@ export const unsafeFromString: (x: string) => NonEmptyString = flow(
  * @since 0.15.0
  */
 export const fromNumber: (x: number) => NonEmptyString = flow(
-  Str.fromNumber,
-  unsafeFromString,
+	Str.fromNumber,
+	unsafeFromString,
 )
 
 /**
@@ -132,7 +132,7 @@ export const Semigroup = getSemigroup<NonEmptyString>(_Semigroup)
  * @since 0.15.0
  */
 export const Show: Show<NonEmptyString> = {
-  show: flow(unNonEmptyString, _Show.show),
+	show: flow(unNonEmptyString, _Show.show),
 }
 
 /**
@@ -142,7 +142,7 @@ export const Show: Show<NonEmptyString> = {
  * @since 0.15.0
  */
 export const head: Endomorphism<NonEmptyString> = over(
-  flow(Str.head, unsafeUnwrap),
+	flow(Str.head, unsafeUnwrap),
 )
 
 /**
@@ -152,7 +152,7 @@ export const head: Endomorphism<NonEmptyString> = over(
  * @since 0.15.0
  */
 export const last: Endomorphism<NonEmptyString> = over(
-  flow(Str.last, unsafeUnwrap),
+	flow(Str.last, unsafeUnwrap),
 )
 
 /**
@@ -178,8 +178,8 @@ export const toLowerCase: Endomorphism<NonEmptyString> = over(_toLowerCase)
  * @since 0.15.0
  */
 export const prepend: (x: string) => Endomorphism<NonEmptyString> = flow(
-  Str.prepend,
-  over,
+	Str.prepend,
+	over,
 )
 
 /**
@@ -189,8 +189,8 @@ export const prepend: (x: string) => Endomorphism<NonEmptyString> = flow(
  * @since 0.15.0
  */
 export const append: (x: string) => Endomorphism<NonEmptyString> = flow(
-  Str.append,
-  over,
+	Str.append,
+	over,
 )
 
 /**
@@ -201,8 +201,8 @@ export const append: (x: string) => Endomorphism<NonEmptyString> = flow(
  * @since 0.15.0
  */
 export const surround: (x: string) => Endomorphism<NonEmptyString> = flow(
-  Str.surround,
-  over,
+	Str.surround,
+	over,
 )
 
 /**
@@ -228,9 +228,9 @@ export const size: (x: NonEmptyString) => number = flow(toString, _size)
  * @since 0.17.0
  */
 export const split = (
-  separator: string | RegExp,
+	separator: string | RegExp,
 ): ((x: NonEmptyString) => ReadonlyNonEmptyArray<string>) =>
-  flow(toString, _split(separator))
+	flow(toString, _split(separator))
 
 /**
  * Predicate upon the presence of a `search` string anywhere in a
@@ -240,4 +240,4 @@ export const split = (
  * @since 0.17.0
  */
 export const includes = (search: string): Predicate<NonEmptyString> =>
-  flow(toString, _includes(search))
+	flow(toString, _includes(search))

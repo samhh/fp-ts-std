@@ -35,13 +35,13 @@ import { increment, decrement } from "./Number"
  * @since 0.16.0
  */
 export const unsafeExpect =
-  (msg: string) =>
-  <A>(x: Option<A>): A => {
-    // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-    if (O.isNone(x)) throw Error("Unwrapped `None`", { cause: msg })
+	(msg: string) =>
+	<A>(x: Option<A>): A => {
+		// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
+		if (O.isNone(x)) throw Error("Unwrapped `None`", { cause: msg })
 
-    return x.value
-  }
+		return x.value
+	}
 
 /**
  * Unwrap the value from within an `Option`, throwing if `None`.
@@ -56,10 +56,10 @@ export const unsafeExpect =
  * @since 0.1.0
  */
 export const unsafeUnwrap = <A>(x: Option<A>): A => {
-  // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-  if (O.isNone(x)) throw Error("Unwrapped `None`")
+	// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
+	if (O.isNone(x)) throw Error("Unwrapped `None`")
 
-  return x.value
+	return x.value
 }
 
 /**
@@ -102,12 +102,12 @@ export const noneAs = <A>(): Option<A> => O.none
  * @since 0.12.0
  */
 export const invert =
-  <A>(eq: Eq<A>) =>
-  (val: A): Endomorphism<O.Option<A>> =>
-    flow(
-      O.exists(x => eq.equals(x, val)),
-      B.match(() => O.some(val), constant(O.none)),
-    )
+	<A>(eq: Eq<A>) =>
+	(val: A): Endomorphism<O.Option<A>> =>
+		flow(
+			O.exists(x => eq.equals(x, val)),
+			B.match(() => O.some(val), constant(O.none)),
+		)
 
 /**
  * Extracts monoidal identity if `None`.
@@ -147,9 +147,9 @@ export const toMonoid = _toMonoid(O.Foldable)
  * @since 0.13.0
  */
 export const memptyWhen =
-  (x: boolean) =>
-  <A>(m: Lazy<Option<A>>): Option<A> =>
-    x ? O.none : m()
+	(x: boolean) =>
+	<A>(m: Lazy<Option<A>>): Option<A> =>
+		x ? O.none : m()
 
 /**
  * Conditionally returns the provided `Option` or `None`. The dual to
@@ -169,7 +169,7 @@ export const memptyWhen =
  * @since 0.13.0
  */
 export const memptyUnless: (
-  x: boolean,
+	x: boolean,
 ) => <A>(m: Lazy<Option<A>>) => Option<A> = flow(invertBool, memptyWhen)
 
 /**
@@ -190,7 +190,7 @@ export const memptyUnless: (
  * @since 0.13.0
  */
 export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
-  O.Alternative,
+	O.Alternative,
 )
 
 /**
@@ -212,7 +212,7 @@ export const pureIf: (x: boolean) => <A>(y: Lazy<A>) => Option<A> = _pureIf(
  * @since 0.15.0
  */
 export const altAllBy: <A, B>(
-  fs: Array<(x: A) => Option<B>>,
+	fs: Array<(x: A) => Option<B>>,
 ) => (x: A) => Option<B> = _altAllBy(O.Alternative)
 
 /**
@@ -233,9 +233,9 @@ export const altAllBy: <A, B>(
  * @since 0.17.0
  */
 export const getBounded = <A>(B: Bounded<A>): Bounded<Option<A>> => ({
-  ...O.getOrd(B),
-  top: O.some(B.top),
-  bottom: O.none,
+	...O.getOrd(B),
+	top: O.some(B.top),
+	bottom: O.none,
 })
 
 /**
@@ -258,16 +258,16 @@ export const getBounded = <A>(B: Bounded<A>): Bounded<Option<A>> => ({
  * @since 0.17.0
  */
 export const getEnum = <A>(E: Enum<A>): Enum<Option<A>> => ({
-  ...getBounded(E),
-  succ: O.match(
-    L.lazy(() => O.some(O.some(E.bottom))),
-    flow(E.succ, O.map(O.some)),
-  ),
-  pred: O.map(E.pred),
-  toEnum: n =>
-    n === 0 ? O.some(O.none) : pipe(n, decrement, E.toEnum, O.map(O.some)),
-  fromEnum: O.match(constant(0), flow(E.fromEnum, increment)),
-  cardinality: pipe(E.cardinality, L.map(increment)),
+	...getBounded(E),
+	succ: O.match(
+		L.lazy(() => O.some(O.some(E.bottom))),
+		flow(E.succ, O.map(O.some)),
+	),
+	pred: O.map(E.pred),
+	toEnum: n =>
+		n === 0 ? O.some(O.none) : pipe(n, decrement, E.toEnum, O.map(O.some)),
+	fromEnum: O.match(constant(0), flow(E.fromEnum, increment)),
+	cardinality: pipe(E.cardinality, L.map(increment)),
 })
 
 /**
@@ -294,26 +294,26 @@ export const getEnum = <A>(E: Enum<A>): Enum<Option<A>> => ({
  * @since 0.17.0
  */
 export const match2 =
-  <A, B, C>(
-    onNone: Lazy<C>,
-    onSomeFst: (x: A) => C,
-    onSomeSnd: (x: B) => C,
-    onSomeBoth: (x: A) => (y: B) => C,
-  ) =>
-  (mx: Option<A>) =>
-  (my: Option<B>): C =>
-    pipe(
-      mx,
-      O.match(
-        L.lazy(() => pipe(my, O.match(onNone, onSomeSnd))),
-        x =>
-          pipe(
-            my,
-            O.match(
-              L.lazy(() => onSomeFst(x)),
-              // eslint-disable-next-line functional/prefer-tacit
-              y => onSomeBoth(x)(y),
-            ),
-          ),
-      ),
-    )
+	<A, B, C>(
+		onNone: Lazy<C>,
+		onSomeFst: (x: A) => C,
+		onSomeSnd: (x: B) => C,
+		onSomeBoth: (x: A) => (y: B) => C,
+	) =>
+	(mx: Option<A>) =>
+	(my: Option<B>): C =>
+		pipe(
+			mx,
+			O.match(
+				L.lazy(() => pipe(my, O.match(onNone, onSomeSnd))),
+				x =>
+					pipe(
+						my,
+						O.match(
+							L.lazy(() => onSomeFst(x)),
+							// eslint-disable-next-line functional/prefer-tacit
+							y => onSomeBoth(x)(y),
+						),
+					),
+			),
+		)

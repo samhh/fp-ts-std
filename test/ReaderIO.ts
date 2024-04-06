@@ -7,24 +7,24 @@ import fc from "fast-check"
 import * as Str from "../src/String"
 
 describe("ReaderIO", () => {
-  describe("runReaderIO", () => {
-    it("extracts expected IO from a ReaderIO", () => {
-      fc.assert(
-        fc.property(fc.integer(), n => {
-          const extractedIO = pipe(
-            RIO.of<string, number>(n),
-            runReaderIO("env"),
-          )()
+	describe("runReaderIO", () => {
+		it("extracts expected IO from a ReaderIO", () => {
+			fc.assert(
+				fc.property(fc.integer(), n => {
+					const extractedIO = pipe(
+						RIO.of<string, number>(n),
+						runReaderIO("env"),
+					)()
 
-          expect(extractedIO).toBe(n)
-        }),
-      )
-    })
-  })
+					expect(extractedIO).toBe(n)
+				}),
+			)
+		})
+	})
 
-  describe("asksIO", () => {
-    it("runs action and lifts to a Reader", () => {
-      expect(asksIO(flow(Str.prepend("foo"), IO.of))("bar")()).toBe("foobar")
-    })
-  })
+	describe("asksIO", () => {
+		it("runs action and lifts to a Reader", () => {
+			expect(asksIO(flow(Str.prepend("foo"), IO.of))("bar")()).toBe("foobar")
+		})
+	})
 })

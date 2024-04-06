@@ -5,24 +5,24 @@
  */
 
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import {
-  Alternative,
-  Alternative1,
-  Alternative2,
-  Alternative2C,
-  Alternative3,
-  Alternative3C,
-  Alternative4,
+	Alternative,
+	Alternative1,
+	Alternative2,
+	Alternative2C,
+	Alternative3,
+	Alternative3C,
+	Alternative4,
 } from "fp-ts/Alternative"
 import { Lazy } from "./Lazy"
 import { pipe } from "fp-ts/function"
@@ -47,27 +47,27 @@ import * as A from "fp-ts/Array"
  * @since 0.13.0
  */
 export function pureIf<F extends URIS4, S, R, E>(
-  F: Alternative4<F>,
+	F: Alternative4<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind4<F, S, R, E, A>
 export function pureIf<F extends URIS3, R, E>(
-  F: Alternative3<F>,
+	F: Alternative3<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind3<F, R, E, A>
 export function pureIf<F extends URIS3, R, E>(
-  F: Alternative3C<F, E>,
+	F: Alternative3C<F, E>,
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind3<F, R, E, A>
 export function pureIf<F extends URIS2, E>(
-  F: Alternative2<F>,
+	F: Alternative2<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind2<F, E, A>
 export function pureIf<F extends URIS2, E>(
-  F: Alternative2C<F, E>,
+	F: Alternative2C<F, E>,
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind2<F, E, A>
 export function pureIf<F extends URIS>(
-  F: Alternative1<F>,
+	F: Alternative1<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => Kind<F, A>
 export function pureIf<F>(
-  F: Alternative<F>,
+	F: Alternative<F>,
 ): (x: boolean) => <A>(y: Lazy<A>) => HKT<F, A> {
-  return x => y => (x ? F.of(y()) : F.zero())
+	return x => y => (x ? F.of(y()) : F.zero())
 }
 
 /**
@@ -91,38 +91,38 @@ export function pureIf<F>(
  * @since 0.15.0
  */
 export function altAllBy<F extends URIS4>(
-  F: Alternative4<F>,
+	F: Alternative4<F>,
 ): <S, R, E, B, A>(
-  fs: Array<(x: A) => Kind4<F, S, R, E, B>>,
+	fs: Array<(x: A) => Kind4<F, S, R, E, B>>,
 ) => (x: A) => Kind4<F, S, R, E, B>
 export function altAllBy<F extends URIS3>(
-  F: Alternative3<F>,
+	F: Alternative3<F>,
 ): <R, E, B, A>(
-  fs: Array<(x: A) => Kind3<F, R, E, B>>,
+	fs: Array<(x: A) => Kind3<F, R, E, B>>,
 ) => (x: A) => Kind3<F, R, E, B>
 export function altAllBy<F extends URIS3, E>(
-  F: Alternative3C<F, E>,
+	F: Alternative3C<F, E>,
 ): <R, B, A>(
-  fs: Array<(x: A) => Kind3<F, R, E, B>>,
+	fs: Array<(x: A) => Kind3<F, R, E, B>>,
 ) => (x: A) => Kind3<F, R, E, B>
 export function altAllBy<F extends URIS2>(
-  F: Alternative2<F>,
+	F: Alternative2<F>,
 ): <E, B, A>(fs: Array<(x: A) => Kind2<F, E, B>>) => (x: A) => Kind2<F, E, B>
 export function altAllBy<F extends URIS2, E>(
-  F: Alternative2C<F, E>,
+	F: Alternative2C<F, E>,
 ): <B, A>(fs: Array<(x: A) => Kind2<F, E, B>>) => (x: A) => Kind2<F, E, B>
 export function altAllBy<F extends URIS>(
-  F: Alternative1<F>,
+	F: Alternative1<F>,
 ): <B, A>(fs: Array<(x: A) => Kind<F, B>>) => (x: A) => Kind<F, B>
 export function altAllBy<F>(
-  F: Alternative<F>,
+	F: Alternative<F>,
 ): <B, A>(fs: Array<(x: A) => HKT<F, B>>) => (x: A) => HKT<F, B>
 export function altAllBy<F>(
-  F: Alternative<F>,
+	F: Alternative<F>,
 ): <B, A>(fs: Array<(x: A) => HKT<F, B>>) => (x: A) => HKT<F, B> {
-  return fs => x =>
-    pipe(
-      fs,
-      A.reduce(F.zero(), (m, f) => F.alt(m, () => f(x))),
-    )
+	return fs => x =>
+		pipe(
+			fs,
+			A.reduce(F.zero(), (m, f) => F.alt(m, () => f(x))),
+		)
 }

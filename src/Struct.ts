@@ -25,8 +25,8 @@ import { uncurry2 } from "./Function"
 // This combination of type arguments works with both partial application and
 // the likes of `uncurry2`.
 export const merge =
-  <A, B>(x: A) =>
-  <C extends B>(y: C): A & C => ({ ...x, ...y })
+	<A, B>(x: A) =>
+	<C extends B>(y: C): A & C => ({ ...x, ...y })
 
 /**
  * Pick a set of keys from a struct. The value-level equivalent of the `Pick`
@@ -47,17 +47,17 @@ export const merge =
  * @since 0.14.0
  */
 export const pick =
-  <A extends object, K extends keyof A>(ks: Array<K>) =>
-  (x: A): Pick<A, K> =>
-    // I don't believe there's any reasonable way to model this sort of
-    // transformation in the type system without an assertion - at least here
-    // it's in a single reused place.
-    pipe(
-      ks,
-      A.reduce({} as Pick<A, K>, (ys, k) =>
-        merge(ys)(k in x ? { [k]: x[k] } : {}),
-      ),
-    )
+	<A extends object, K extends keyof A>(ks: Array<K>) =>
+	(x: A): Pick<A, K> =>
+		// I don't believe there's any reasonable way to model this sort of
+		// transformation in the type system without an assertion - at least here
+		// it's in a single reused place.
+		pipe(
+			ks,
+			A.reduce({} as Pick<A, K>, (ys, k) =>
+				merge(ys)(k in x ? { [k]: x[k] } : {}),
+			),
+		)
 
 /**
  * Like `pick`, but allows you to specify the input struct upfront.
@@ -74,7 +74,7 @@ export const pick =
  * @since 0.14.0
  */
 export const pickFrom = <A extends object>(): (<K extends keyof A>(
-  ks: Array<K>,
+	ks: Array<K>,
 ) => (x: A) => Pick<A, K>) => pick
 
 /**
@@ -94,9 +94,9 @@ export const pickFrom = <A extends object>(): (<K extends keyof A>(
  * @since 0.17.0
  */
 export const get =
-  <K extends string>(k: K) =>
-  <A>(x: Record<K, A>): A =>
-    x[k]
+	<K extends string>(k: K) =>
+	<A>(x: Record<K, A>): A =>
+		x[k]
 
 /**
  * Omit a set of keys from a struct. The value-level equivalent of the `Omit`
@@ -113,18 +113,18 @@ export const get =
  * @since 0.14.0
  */
 export const omit =
-  <K extends string>(ks: Array<K>) =>
-  <V, A extends Record<K, V>>(x: A): Omit<A, K> => {
-    const y = { ...x }
+	<K extends string>(ks: Array<K>) =>
+	<V, A extends Record<K, V>>(x: A): Omit<A, K> => {
+		const y = { ...x }
 
-    /* eslint-disable */
-    for (const k of ks) {
-      delete y[k]
-    }
-    /* eslint-enable */
+		/* eslint-disable */
+		for (const k of ks) {
+			delete y[k]
+		}
+		/* eslint-enable */
 
-    return y as Omit<A, K>
-  }
+		return y as Omit<A, K>
+	}
 
 /**
  * Like `omit`, but allows you to specify the input struct upfront.
@@ -141,15 +141,15 @@ export const omit =
  * @since 0.15.0
  */
 export const omitFrom = <A>(): (<K extends keyof A & string>(
-  ks: Array<K>,
+	ks: Array<K>,
 ) => (x: A) => Omit<A, K>) => omit
 
 type OptionalKeys<O extends object> = {
-  [K in keyof O]-?: Record<string, unknown> extends Pick<O, K> ? K : never
+	[K in keyof O]-?: Record<string, unknown> extends Pick<O, K> ? K : never
 }[keyof O]
 
 type Exact<A extends object, B extends A> = A &
-  Record<Exclude<keyof B, keyof A>, never>
+	Record<Exclude<keyof B, keyof A>, never>
 
 /**
  * Provide default values for an object with optional properties.
@@ -166,20 +166,20 @@ type Exact<A extends object, B extends A> = A &
  * @since 0.15.0
  */
 export const withDefaults: <
-  T extends object,
-  PT extends Exact<{ [K in OptionalKeys<T>]-?: Exclude<T[K], undefined> }, PT>,
+	T extends object,
+	PT extends Exact<{ [K in OptionalKeys<T>]-?: Exclude<T[K], undefined> }, PT>,
 >(
-  defaults: PT,
+	defaults: PT,
 ) => (t: T) => PT & T = merge
 
 type MaybePartial<A> = A | Partial<A>
 
 type RenameKey<
-  A extends Record<string, unknown>,
-  I extends keyof A,
-  J extends string,
+	A extends Record<string, unknown>,
+	I extends keyof A,
+	J extends string,
 > = {
-  [K in keyof A as K extends I ? J : K]: A[K]
+	[K in keyof A as K extends I ? J : K]: A[K]
 }
 
 /**
@@ -198,15 +198,15 @@ type RenameKey<
  * @since 0.15.0
  */
 export const renameKey =
-  <I extends string>(oldK: I) =>
-  <J extends string>(newK: J) =>
-  // Can't be pointfree, need references to `A`.
-  <A extends MaybePartial<Record<I, unknown>>>(x: A): RenameKey<A, I, J> => {
-    const newO = (x: A) => (oldK in x ? { [newK]: x[oldK] } : {})
+	<I extends string>(oldK: I) =>
+	<J extends string>(newK: J) =>
+	// Can't be pointfree, need references to `A`.
+	<A extends MaybePartial<Record<I, unknown>>>(x: A): RenameKey<A, I, J> => {
+		const newO = (x: A) => (oldK in x ? { [newK]: x[oldK] } : {})
 
-    return pipe(
-      x,
-      fanout(omitFrom<A>()([oldK]))(newO),
-      uncurry2(merge),
-    ) as unknown as RenameKey<A, I, J>
-  }
+		return pipe(
+			x,
+			fanout(omitFrom<A>()([oldK]))(newO),
+			uncurry2(merge),
+		) as unknown as RenameKey<A, I, J>
+	}

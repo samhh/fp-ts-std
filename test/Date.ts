@@ -1,16 +1,16 @@
 import { describe, it, expect } from "@jest/globals"
 import {
-  getTime,
-  toISOString,
-  toUTCString,
-  isDate,
-  isValid,
-  unsafeParseDate,
-  parseDate,
-  fromMilliseconds,
-  now,
-  mkMilliseconds,
-  unMilliseconds,
+	getTime,
+	toISOString,
+	toUTCString,
+	isDate,
+	isValid,
+	unsafeParseDate,
+	parseDate,
+	fromMilliseconds,
+	now,
+	mkMilliseconds,
+	unMilliseconds,
 } from "../src/Date"
 import fc from "fast-check"
 import { not } from "fp-ts/Predicate"
@@ -21,122 +21,122 @@ import * as O from "fp-ts/Option"
 const dateMillisInt = fc.integer({ min: 0, max: new Date().getTime() })
 
 describe("Date", () => {
-  describe("getTime", () => {
-    const f = getTime
+	describe("getTime", () => {
+		const f = getTime
 
-    it("wraps prototype method", () => {
-      fc.assert(
-        fc.property(fc.date(), d => unMilliseconds(f(d)) === d.getTime()),
-      )
-    })
-  })
+		it("wraps prototype method", () => {
+			fc.assert(
+				fc.property(fc.date(), d => unMilliseconds(f(d)) === d.getTime()),
+			)
+		})
+	})
 
-  describe("toISOString", () => {
-    const f = toISOString
+	describe("toISOString", () => {
+		const f = toISOString
 
-    it("wraps prototype method", () => {
-      const d = new Date()
+		it("wraps prototype method", () => {
+			const d = new Date()
 
-      expect(f(d)).toBe(d.toISOString())
-    })
-  })
+			expect(f(d)).toBe(d.toISOString())
+		})
+	})
 
-  describe("toUTCString", () => {
-    const f = toUTCString
+	describe("toUTCString", () => {
+		const f = toUTCString
 
-    it("wraps prototype method", () => {
-      const d = new Date()
+		it("wraps prototype method", () => {
+			const d = new Date()
 
-      expect(f(d)).toBe(d.toUTCString())
-    })
-  })
+			expect(f(d)).toBe(d.toUTCString())
+		})
+	})
 
-  describe("isDate", () => {
-    const f = isDate
+	describe("isDate", () => {
+		const f = isDate
 
-    it("returns true for any date", () => {
-      expect(f(new Date())).toBe(true)
-      expect(f(new Date("invalid"))).toBe(true)
+		it("returns true for any date", () => {
+			expect(f(new Date())).toBe(true)
+			expect(f(new Date("invalid"))).toBe(true)
 
-      fc.assert(fc.property(fc.date(), isDate))
-    })
+			fc.assert(fc.property(fc.date(), isDate))
+		})
 
-    it("returns false for anything else", () => {
-      fc.assert(
-        fc.property(
-          fc.oneof(fc.integer(), fc.string(), fc.boolean(), fc.object()),
-          not(isDate),
-        ),
-      )
-    })
-  })
+		it("returns false for anything else", () => {
+			fc.assert(
+				fc.property(
+					fc.oneof(fc.integer(), fc.string(), fc.boolean(), fc.object()),
+					not(isDate),
+				),
+			)
+		})
+	})
 
-  describe("isValid", () => {
-    const f = isValid
+	describe("isValid", () => {
+		const f = isValid
 
-    it("works", () => {
-      expect(f(new Date())).toBe(true)
-      expect(f(new Date("invalid"))).toBe(false)
-    })
-  })
+		it("works", () => {
+			expect(f(new Date())).toBe(true)
+			expect(f(new Date("invalid"))).toBe(false)
+		})
+	})
 
-  describe("unsafeParseDate", () => {
-    const f = unsafeParseDate
+	describe("unsafeParseDate", () => {
+		const f = unsafeParseDate
 
-    it("wraps date constructor", () => {
-      fc.assert(
-        fc.property(
-          fc.oneof(fc.string(), fc.integer()),
-          // Invalid dates don't deep equality check in Jest
-          x =>
-            isValid(f(x))
-              ? expect(f(x)).toEqual(new Date(x))
-              : !isValid(f(x)) && !isValid(new Date(x)),
-        ),
-      )
-    })
-  })
+		it("wraps date constructor", () => {
+			fc.assert(
+				fc.property(
+					fc.oneof(fc.string(), fc.integer()),
+					// Invalid dates don't deep equality check in Jest
+					x =>
+						isValid(f(x))
+							? expect(f(x)).toEqual(new Date(x))
+							: !isValid(f(x)) && !isValid(new Date(x)),
+				),
+			)
+		})
+	})
 
-  describe("parseDate", () => {
-    const f = parseDate
+	describe("parseDate", () => {
+		const f = parseDate
 
-    it("wraps date constructor and validates", () => {
-      expect(f(-Infinity)).toEqual(O.none)
-      expect(f(Infinity)).toEqual(O.none)
-      expect(f("invalid")).toEqual(O.none)
+		it("wraps date constructor and validates", () => {
+			expect(f(-Infinity)).toEqual(O.none)
+			expect(f(Infinity)).toEqual(O.none)
+			expect(f("invalid")).toEqual(O.none)
 
-      fc.assert(
-        fc.property(dateMillisInt, x =>
-          expect(f(x)).toEqual(O.some(new Date(x))),
-        ),
-      )
-    })
-  })
+			fc.assert(
+				fc.property(dateMillisInt, x =>
+					expect(f(x)).toEqual(O.some(new Date(x))),
+				),
+			)
+		})
+	})
 
-  describe("fromMilliseconds", () => {
-    const f = fromMilliseconds
+	describe("fromMilliseconds", () => {
+		const f = fromMilliseconds
 
-    it("creates date using underlying number", () => {
-      fc.assert(
-        fc.property(dateMillisInt, n =>
-          expect(f(mkMilliseconds(n)).toISOString()).toBe(
-            new Date(n).toISOString(),
-          ),
-        ),
-      )
-    })
-  })
+		it("creates date using underlying number", () => {
+			fc.assert(
+				fc.property(dateMillisInt, n =>
+					expect(f(mkMilliseconds(n)).toISOString()).toBe(
+						new Date(n).toISOString(),
+					),
+				),
+			)
+		})
+	})
 
-  describe("now", () => {
-    const f = now
+	describe("now", () => {
+		const f = now
 
-    it("wraps prototype method", () => {
-      const a = Date.now()
-      const b = unMilliseconds(f())
-      const c = Date.now()
+		it("wraps prototype method", () => {
+			const a = Date.now()
+			const b = unMilliseconds(f())
+			const c = Date.now()
 
-      expect(b).toBeGreaterThanOrEqual(a)
-      expect(b).toBeLessThanOrEqual(c)
-    })
-  })
+			expect(b).toBeGreaterThanOrEqual(a)
+			expect(b).toBeLessThanOrEqual(c)
+		})
+	})
 })

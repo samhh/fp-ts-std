@@ -1,31 +1,31 @@
 import { describe, it, expect } from "@jest/globals"
 import {
-  NonEmptyString,
-  unNonEmptyString,
-  unsafeFromString,
-  Eq,
-  Ord,
-  Semigroup,
-  fromNumber,
-  append,
-  prepend,
-  surround,
-  toUpperCase,
-  toLowerCase,
-  reverse,
-  head,
-  last,
-  includes,
-  size,
-  split,
+	NonEmptyString,
+	unNonEmptyString,
+	unsafeFromString,
+	Eq,
+	Ord,
+	Semigroup,
+	fromNumber,
+	append,
+	prepend,
+	surround,
+	toUpperCase,
+	toLowerCase,
+	reverse,
+	head,
+	last,
+	includes,
+	size,
+	split,
 } from "../src/NonEmptyString"
 import {
-  isEmpty as _isEmpty,
-  toUpperCase as _toUpperCase,
-  toLowerCase as _toLowerCase,
-  includes as _includes,
-  size as _size,
-  split as _split,
+	isEmpty as _isEmpty,
+	toUpperCase as _toUpperCase,
+	toLowerCase as _toLowerCase,
+	includes as _includes,
+	size as _size,
+	split as _split,
 } from "fp-ts/string"
 import * as laws from "fp-ts-laws"
 import fc from "fast-check"
@@ -38,225 +38,225 @@ import { unsafeUnwrap } from "../src/Option"
 const arb = fc.string({ minLength: 1 }).map(unsafeFromString)
 
 const isValid: Predicate<NonEmptyString> = Pred.contramap(unNonEmptyString)(
-  not(_isEmpty),
+	not(_isEmpty),
 )
 
 describe("NonEmptyString", () => {
-  describe("Eq", () => {
-    it("is lawful", () => {
-      laws.eq(Eq, arb)
-    })
-  })
+	describe("Eq", () => {
+		it("is lawful", () => {
+			laws.eq(Eq, arb)
+		})
+	})
 
-  describe("Ord", () => {
-    it("is lawful", () => {
-      laws.ord(Ord, arb)
-    })
-  })
+	describe("Ord", () => {
+		it("is lawful", () => {
+			laws.ord(Ord, arb)
+		})
+	})
 
-  describe("Semigroup", () => {
-    it("is lawful", () => {
-      laws.semigroup(Semigroup, Eq, arb)
-    })
-  })
+	describe("Semigroup", () => {
+		it("is lawful", () => {
+			laws.semigroup(Semigroup, Eq, arb)
+		})
+	})
 
-  describe("fromNumber", () => {
-    const f = fromNumber
+	describe("fromNumber", () => {
+		const f = fromNumber
 
-    it("is equivalent to lifted Str.fromNumber", () => {
-      fc.assert(
-        fc.property(
-          fc.integer(),
-          n => Str.fromNumber(n) === unNonEmptyString(f(n)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.fromNumber", () => {
+			fc.assert(
+				fc.property(
+					fc.integer(),
+					n => Str.fromNumber(n) === unNonEmptyString(f(n)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(fc.integer(), flow(f, isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(fc.integer(), flow(f, isValid)))
+		})
+	})
 
-  describe("append", () => {
-    const f = append
+	describe("append", () => {
+		const f = append
 
-    it("is equivalent to lifted Str.append", () => {
-      fc.assert(
-        fc.property(
-          fc.string(),
-          arb,
-          (x, y) =>
-            Str.append(x)(unNonEmptyString(y)) === unNonEmptyString(f(x)(y)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.append", () => {
+			fc.assert(
+				fc.property(
+					fc.string(),
+					arb,
+					(x, y) =>
+						Str.append(x)(unNonEmptyString(y)) === unNonEmptyString(f(x)(y)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(fc.string(), arb, (x, y) => pipe(y, f(x), isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(fc.string(), arb, (x, y) => pipe(y, f(x), isValid)))
+		})
+	})
 
-  describe("prepend", () => {
-    const f = prepend
+	describe("prepend", () => {
+		const f = prepend
 
-    it("is equivalent to lifted Str.prepend", () => {
-      fc.assert(
-        fc.property(
-          fc.string(),
-          arb,
-          (x, y) =>
-            Str.prepend(x)(unNonEmptyString(y)) === unNonEmptyString(f(x)(y)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.prepend", () => {
+			fc.assert(
+				fc.property(
+					fc.string(),
+					arb,
+					(x, y) =>
+						Str.prepend(x)(unNonEmptyString(y)) === unNonEmptyString(f(x)(y)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(fc.string(), arb, (x, y) => pipe(y, f(x), isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(fc.string(), arb, (x, y) => pipe(y, f(x), isValid)))
+		})
+	})
 
-  describe("surround", () => {
-    const f = surround
+	describe("surround", () => {
+		const f = surround
 
-    it("is equivalent to lifted Str.surround", () => {
-      fc.assert(
-        fc.property(
-          fc.string(),
-          arb,
-          (x, y) =>
-            Str.surround(x)(unNonEmptyString(y)) === unNonEmptyString(f(x)(y)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.surround", () => {
+			fc.assert(
+				fc.property(
+					fc.string(),
+					arb,
+					(x, y) =>
+						Str.surround(x)(unNonEmptyString(y)) === unNonEmptyString(f(x)(y)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(fc.string(), arb, (x, y) => pipe(y, f(x), isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(fc.string(), arb, (x, y) => pipe(y, f(x), isValid)))
+		})
+	})
 
-  describe("toUpperCase", () => {
-    const f = toUpperCase
+	describe("toUpperCase", () => {
+		const f = toUpperCase
 
-    it("is equivalent to lifted Str.toUpperCase", () => {
-      fc.assert(
-        fc.property(
-          arb,
-          x => _toUpperCase(unNonEmptyString(x)) === unNonEmptyString(f(x)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.toUpperCase", () => {
+			fc.assert(
+				fc.property(
+					arb,
+					x => _toUpperCase(unNonEmptyString(x)) === unNonEmptyString(f(x)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(arb, flow(f, isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(arb, flow(f, isValid)))
+		})
+	})
 
-  describe("toLowerCase", () => {
-    const f = toLowerCase
+	describe("toLowerCase", () => {
+		const f = toLowerCase
 
-    it("is equivalent to lifted Str.toLowerCase", () => {
-      fc.assert(
-        fc.property(
-          arb,
-          x => _toLowerCase(unNonEmptyString(x)) === unNonEmptyString(f(x)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.toLowerCase", () => {
+			fc.assert(
+				fc.property(
+					arb,
+					x => _toLowerCase(unNonEmptyString(x)) === unNonEmptyString(f(x)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(arb, flow(f, isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(arb, flow(f, isValid)))
+		})
+	})
 
-  describe("reverse", () => {
-    const f = reverse
+	describe("reverse", () => {
+		const f = reverse
 
-    it("is equivalent to lifted Str.reverse", () => {
-      fc.assert(
-        fc.property(
-          arb,
-          x => Str.reverse(unNonEmptyString(x)) === unNonEmptyString(f(x)),
-        ),
-      )
-    })
+		it("is equivalent to lifted Str.reverse", () => {
+			fc.assert(
+				fc.property(
+					arb,
+					x => Str.reverse(unNonEmptyString(x)) === unNonEmptyString(f(x)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(arb, flow(f, isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(arb, flow(f, isValid)))
+		})
+	})
 
-  describe("head", () => {
-    const f = head
+	describe("head", () => {
+		const f = head
 
-    it("is equivalent to lifted infallible Str.head", () => {
-      fc.assert(
-        fc.property(
-          arb,
-          x =>
-            unsafeUnwrap(Str.head(unNonEmptyString(x))) ===
-            unNonEmptyString(f(x)),
-        ),
-      )
-    })
+		it("is equivalent to lifted infallible Str.head", () => {
+			fc.assert(
+				fc.property(
+					arb,
+					x =>
+						unsafeUnwrap(Str.head(unNonEmptyString(x))) ===
+						unNonEmptyString(f(x)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(arb, flow(f, isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(arb, flow(f, isValid)))
+		})
+	})
 
-  describe("last", () => {
-    const f = last
+	describe("last", () => {
+		const f = last
 
-    it("is equivalent to lifted infallible Str.last", () => {
-      fc.assert(
-        fc.property(
-          arb,
-          x =>
-            unsafeUnwrap(Str.last(unNonEmptyString(x))) ===
-            unNonEmptyString(f(x)),
-        ),
-      )
-    })
+		it("is equivalent to lifted infallible Str.last", () => {
+			fc.assert(
+				fc.property(
+					arb,
+					x =>
+						unsafeUnwrap(Str.last(unNonEmptyString(x))) ===
+						unNonEmptyString(f(x)),
+				),
+			)
+		})
 
-    it("maintains newtype contract", () => {
-      fc.assert(fc.property(arb, flow(f, isValid)))
-    })
-  })
+		it("maintains newtype contract", () => {
+			fc.assert(fc.property(arb, flow(f, isValid)))
+		})
+	})
 
-  describe("size", () => {
-    const f = size
+	describe("size", () => {
+		const f = size
 
-    it("is equivalent to lifted Str.size", () => {
-      fc.assert(fc.property(arb, x => _size(unNonEmptyString(x)) === f(x)))
-    })
-  })
+		it("is equivalent to lifted Str.size", () => {
+			fc.assert(fc.property(arb, x => _size(unNonEmptyString(x)) === f(x)))
+		})
+	})
 
-  describe("includes", () => {
-    const f = includes
+	describe("includes", () => {
+		const f = includes
 
-    it("is equivalent to lifted Str.includes", () => {
-      fc.assert(
-        fc.property(
-          arb,
-          fc.string(),
-          (haystack, needle) =>
-            _includes(needle)(unNonEmptyString(haystack)) ===
-            f(needle)(haystack),
-        ),
-      )
-    })
-  })
+		it("is equivalent to lifted Str.includes", () => {
+			fc.assert(
+				fc.property(
+					arb,
+					fc.string(),
+					(haystack, needle) =>
+						_includes(needle)(unNonEmptyString(haystack)) ===
+						f(needle)(haystack),
+				),
+			)
+		})
+	})
 
-  describe("split", () => {
-    const f = split
-    const sep = " "
+	describe("split", () => {
+		const f = split
+		const sep = " "
 
-    it("is equivalent to lifted Str.split", () => {
-      fc.assert(
-        fc.property(fc.lorem({ mode: "words" }).map(unsafeFromString), x =>
-          expect(f(sep)(x)).toEqual(_split(sep)(unNonEmptyString(x))),
-        ),
-      )
-    })
-  })
+		it("is equivalent to lifted Str.split", () => {
+			fc.assert(
+				fc.property(fc.lorem({ mode: "words" }).map(unsafeFromString), x =>
+					expect(f(sep)(x)).toEqual(_split(sep)(unNonEmptyString(x))),
+				),
+			)
+		})
+	})
 })

@@ -9,8 +9,8 @@ import * as TE from "fp-ts/TaskEither"
 import * as T from "fp-ts/Task"
 import { execute as executeT } from "./Task"
 import {
-  unsafeUnwrap as unsafeUnwrapE,
-  unsafeUnwrapLeft as unsafeUnwrapLeftE,
+	unsafeUnwrap as unsafeUnwrapE,
+	unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
 import { Show } from "fp-ts/Show"
@@ -32,8 +32,8 @@ import { pass as _pass } from "./Applicative"
  * @since 0.12.0
  */
 export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
-  T.map(unsafeUnwrapE),
-  executeT,
+	T.map(unsafeUnwrapE),
+	executeT,
 )
 
 /**
@@ -52,7 +52,7 @@ export const unsafeUnwrap: <A>(x: TaskEither<unknown, A>) => Promise<A> = flow(
  * @since 0.12.0
  */
 export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
-  flow(T.map(unsafeUnwrapLeftE), executeT)
+	flow(T.map(unsafeUnwrapLeftE), executeT)
 
 /**
  * Unwrap the promise from within a `TaskEither`, rejecting with the inner
@@ -72,9 +72,9 @@ export const unsafeUnwrapLeft: <E>(x: TaskEither<E, unknown>) => Promise<E> =
  * @since 0.16.0
  */
 export const unsafeExpect = <E>(
-  S: Show<E>,
+	S: Show<E>,
 ): (<A>(x: TaskEither<E, A>) => Promise<A>) =>
-  flow(TE.mapLeft(S.show), unsafeUnwrap)
+	flow(TE.mapLeft(S.show), unsafeUnwrap)
 
 /**
  * Unwrap the promise from within a `TaskEither`, rejecting with the inner
@@ -94,9 +94,9 @@ export const unsafeExpect = <E>(
  * @since 0.16.0
  */
 export const unsafeExpectLeft = <A>(
-  S: Show<A>,
+	S: Show<A>,
 ): (<E>(x: TaskEither<E, A>) => Promise<E>) =>
-  flow(TE.map(S.show), unsafeUnwrapLeft)
+	flow(TE.map(S.show), unsafeUnwrapLeft)
 
 /**
  * Sequence an array of fallible tasks, ignoring the results.
@@ -105,7 +105,7 @@ export const unsafeExpectLeft = <A>(
  * @since 0.15.0
  */
 export const sequenceArray_: <E, A>(
-  xs: ReadonlyArray<TaskEither<E, A>>,
+	xs: ReadonlyArray<TaskEither<E, A>>,
 ) => TaskEither<E, void> = flow(TE.sequenceArray, TE.map(constVoid))
 
 /**
@@ -115,7 +115,7 @@ export const sequenceArray_: <E, A>(
  * @since 0.15.0
  */
 export const sequenceSeqArray_: <E, A>(
-  xs: ReadonlyArray<TaskEither<E, A>>,
+	xs: ReadonlyArray<TaskEither<E, A>>,
 ) => TaskEither<E, void> = flow(TE.sequenceSeqArray, TE.map(constVoid))
 
 /**
@@ -125,9 +125,9 @@ export const sequenceSeqArray_: <E, A>(
  * @since 0.15.0
  */
 export const traverseArray_: <E, A, B>(
-  f: (x: A) => TaskEither<E, B>,
+	f: (x: A) => TaskEither<E, B>,
 ) => (xs: ReadonlyArray<A>) => TaskEither<E, void> = f =>
-  flow(TE.traverseArray(f), TE.map(constVoid))
+	flow(TE.traverseArray(f), TE.map(constVoid))
 
 /**
  * Sequentially map to and sequence an array of fallible tasks, ignoring the
@@ -137,9 +137,9 @@ export const traverseArray_: <E, A, B>(
  * @since 0.15.0
  */
 export const traverseSeqArray_: <E, A, B>(
-  f: (x: A) => TaskEither<E, B>,
+	f: (x: A) => TaskEither<E, B>,
 ) => (xs: ReadonlyArray<A>) => TaskEither<E, void> = f =>
-  flow(TE.traverseSeqArray(f), TE.map(constVoid))
+	flow(TE.traverseSeqArray(f), TE.map(constVoid))
 
 /**
  * Convenient alias for `TE.of(undefined)`.

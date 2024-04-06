@@ -9,8 +9,8 @@ import * as IOE from "fp-ts/IOEither"
 import * as IO from "fp-ts/IO"
 import { execute as executeIO } from "./IO"
 import {
-  unsafeUnwrap as unsafeUnwrapE,
-  unsafeUnwrapLeft as unsafeUnwrapLeftE,
+	unsafeUnwrap as unsafeUnwrapE,
+	unsafeUnwrapLeft as unsafeUnwrapLeftE,
 } from "./Either"
 import { constVoid, flow } from "fp-ts/function"
 import { Show } from "fp-ts/Show"
@@ -30,8 +30,8 @@ import { pass as _pass } from "./Applicative"
  * @since 0.15.0
  */
 export const unsafeUnwrap: <A>(x: IOEither<unknown, A>) => A = flow(
-  IO.map(unsafeUnwrapE),
-  executeIO,
+	IO.map(unsafeUnwrapE),
+	executeIO,
 )
 
 /**
@@ -48,8 +48,8 @@ export const unsafeUnwrap: <A>(x: IOEither<unknown, A>) => A = flow(
  * @since 0.15.0
  */
 export const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E = flow(
-  IO.map(unsafeUnwrapLeftE),
-  executeIO,
+	IO.map(unsafeUnwrapLeftE),
+	executeIO,
 )
 
 /**
@@ -70,7 +70,7 @@ export const unsafeUnwrapLeft: <E>(x: IOEither<E, unknown>) => E = flow(
  * @since 0.16.0
  */
 export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
-  flow(IOE.mapLeft(S.show), unsafeUnwrap)
+	flow(IOE.mapLeft(S.show), unsafeUnwrap)
 
 /**
  * Unwrap the value from within an `IOEither`, throwing the inner value of
@@ -90,7 +90,7 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: IOEither<E, A>) => A) =>
  * @since 0.16.0
  */
 export const unsafeExpectLeft = <A>(
-  S: Show<A>,
+	S: Show<A>,
 ): (<E>(x: IOEither<E, A>) => E) => flow(IOE.map(S.show), unsafeUnwrapLeft)
 
 /**
@@ -100,7 +100,7 @@ export const unsafeExpectLeft = <A>(
  * @since 0.15.0
  */
 export const sequenceArray_: <E, A>(
-  xs: ReadonlyArray<IOEither<E, A>>,
+	xs: ReadonlyArray<IOEither<E, A>>,
 ) => IOEither<E, void> = flow(IOE.sequenceArray, IOE.map(constVoid))
 
 /**
@@ -110,9 +110,9 @@ export const sequenceArray_: <E, A>(
  * @since 0.15.0
  */
 export const traverseArray_: <E, A, B>(
-  f: (x: A) => IOEither<E, B>,
+	f: (x: A) => IOEither<E, B>,
 ) => (xs: ReadonlyArray<A>) => IOEither<E, void> = f =>
-  flow(IOE.traverseArray(f), IOE.map(constVoid))
+	flow(IOE.traverseArray(f), IOE.map(constVoid))
 
 /**
  * Convenient alias for `IOE.of(undefined)`.

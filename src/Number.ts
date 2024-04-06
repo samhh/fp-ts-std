@@ -48,9 +48,9 @@ export const isValid: Predicate<number> = not(Number.isNaN)
  * @since 0.1.0
  */
 export const fromStringWithRadix =
-  (radix: number) =>
-  (string: string): Option<number> =>
-    pipe(Number.parseInt(string, radix), O.fromPredicate(isValid))
+	(radix: number) =>
+	(string: string): Option<number> =>
+		pipe(Number.parseInt(string, radix), O.fromPredicate(isValid))
 
 /**
  * Convert a string to a number.
@@ -68,8 +68,8 @@ export const fromStringWithRadix =
  * @since 0.1.0
  */
 export const fromString: (string: string) => Option<number> = flow(
-  Number,
-  O.fromPredicate(isValid),
+	Number,
+	O.fromPredicate(isValid),
 )
 
 /**
@@ -86,8 +86,8 @@ export const fromString: (string: string) => Option<number> = flow(
  * @since 0.1.0
  */
 export const floatFromString: (x: string) => Option<number> = flow(
-  Number.parseFloat,
-  O.fromPredicate(isValid),
+	Number.parseFloat,
+	O.fromPredicate(isValid),
 )
 
 /**
@@ -105,7 +105,7 @@ export const floatFromString: (x: string) => Option<number> = flow(
  * @since 0.18.0
  */
 export const integerFromString: (string: string) => Option<number> =
-  fromStringWithRadix(10)
+	fromStringWithRadix(10)
 
 /**
  * Increment a number.
@@ -145,9 +145,9 @@ export const decrement: Endomorphism<number> = x => x - 1
  * @since 0.1.0
  */
 export const add =
-  (x: number): Endomorphism<number> =>
-  y =>
-    x + y
+	(x: number): Endomorphism<number> =>
+	y =>
+		x + y
 
 /**
  * Multiply two numbers together.
@@ -161,9 +161,9 @@ export const add =
  * @since 0.2.0
  */
 export const multiply =
-  (x: number): Endomorphism<number> =>
-  y =>
-    x * y
+	(x: number): Endomorphism<number> =>
+	y =>
+		x * y
 
 /**
  * Subtract the first number (the _subtrahend_) from the second number (the
@@ -179,9 +179,9 @@ export const multiply =
  * @since 0.2.0
  */
 export const subtract =
-  (subtrahend: number): Endomorphism<number> =>
-  minuend =>
-    minuend - subtrahend
+	(subtrahend: number): Endomorphism<number> =>
+	minuend =>
+		minuend - subtrahend
 
 /**
  * Divide the second number (the _dividend_) by the first number (the
@@ -197,9 +197,9 @@ export const subtract =
  * @since 0.2.0
  */
 export const divide =
-  (divisor: number): Endomorphism<number> =>
-  dividend =>
-    dividend / divisor
+	(divisor: number): Endomorphism<number> =>
+	dividend =>
+		dividend / divisor
 
 /**
  * Calculates the remainder. See also `mod`.
@@ -215,9 +215,9 @@ export const divide =
  * @since 0.7.0
  */
 export const rem =
-  (divisor: number): Endomorphism<number> =>
-  dividend =>
-    dividend % divisor
+	(divisor: number): Endomorphism<number> =>
+	dividend =>
+		dividend % divisor
 
 /**
  * Calculate the modulus. See also `rem`.
@@ -233,9 +233,9 @@ export const rem =
  * @since 0.7.0
  */
 export const mod =
-  (divisor: number): Endomorphism<number> =>
-  dividend =>
-    ((dividend % divisor) + divisor) % divisor
+	(divisor: number): Endomorphism<number> =>
+	dividend =>
+		((dividend % divisor) + divisor) % divisor
 
 /**
  * Unary negation.
@@ -283,7 +283,7 @@ export const isFinite: Predicate<number> = n => Math.abs(n) !== Infinity
  * @since 0.12.0
  */
 export const toFinite: Endomorphism<number> = unless(isFinite)(
-  n => Math.sign(n) * Number.MAX_SAFE_INTEGER,
+	n => Math.sign(n) * Number.MAX_SAFE_INTEGER,
 )
 
 /**
@@ -359,9 +359,9 @@ export const isNonPositive: Predicate<number> = n => Math.sign(n) !== 1
  * @since 0.17.0
  */
 export const BoundedSafe: Bounded<number> = {
-  ...BoundedInfinity,
-  top: Number.MAX_SAFE_INTEGER,
-  bottom: Number.MIN_SAFE_INTEGER,
+	...BoundedInfinity,
+	top: Number.MAX_SAFE_INTEGER,
+	bottom: Number.MIN_SAFE_INTEGER,
 }
 
 /**
@@ -386,22 +386,22 @@ export const BoundedSafe: Bounded<number> = {
  * @since 0.17.0
  */
 export const EnumInt: Enum<number> = {
-  ...BoundedSafe,
-  succ: flow(
-    O.fromPredicate(
-      and((n: number) => n < Number.MAX_SAFE_INTEGER)(Number.isInteger),
-    ),
-    O.map(increment),
-  ),
-  pred: flow(
-    O.fromPredicate(
-      and((n: number) => n > Number.MIN_SAFE_INTEGER)(Number.isInteger),
-    ),
-    O.map(decrement),
-  ),
-  toEnum: O.some,
-  fromEnum: identity,
-  cardinality: L.of(Infinity),
+	...BoundedSafe,
+	succ: flow(
+		O.fromPredicate(
+			and((n: number) => n < Number.MAX_SAFE_INTEGER)(Number.isInteger),
+		),
+		O.map(increment),
+	),
+	pred: flow(
+		O.fromPredicate(
+			and((n: number) => n > Number.MIN_SAFE_INTEGER)(Number.isInteger),
+		),
+		O.map(decrement),
+	),
+	toEnum: O.some,
+	fromEnum: identity,
+	cardinality: L.of(Infinity),
 }
 
 /**
@@ -424,5 +424,5 @@ export const EnumInt: Enum<number> = {
  * @since 0.17.0
  */
 export const digits = (n: number): Array<number> =>
-  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  pipe([...(n + "")], A.filterMap(fromString))
+	// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+	pipe([...(n + "")], A.filterMap(fromString))

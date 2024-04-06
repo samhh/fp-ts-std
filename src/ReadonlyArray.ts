@@ -26,32 +26,32 @@ import { invoke } from "./Function"
 import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import {
-  Applicative,
-  Applicative1,
-  Applicative2,
-  Applicative3,
-  Applicative4,
-  Applicative2C,
+	Applicative,
+	Applicative1,
+	Applicative2,
+	Applicative3,
+	Applicative4,
+	Applicative2C,
 } from "fp-ts/Applicative"
 import {
-  Monad,
-  Monad1,
-  Monad2,
-  Monad2C,
-  Monad3,
-  Monad3C,
-  Monad4,
+	Monad,
+	Monad1,
+	Monad2,
+	Monad2C,
+	Monad3,
+	Monad3C,
+	Monad4,
 } from "fp-ts/Monad"
 import { NonEmptyArray } from "fp-ts/NonEmptyArray"
 import { Either } from "fp-ts/Either"
@@ -72,10 +72,10 @@ import { Either } from "fp-ts/Either"
  * @since 0.10.0
  */
 export const elemV =
-  <A>(eq: Eq<A>) =>
-  (xs: ReadonlyArray<A>): Predicate<A> =>
-  y =>
-    RA.elem(eq)(y)(xs)
+	<A>(eq: Eq<A>) =>
+	(xs: ReadonlyArray<A>): Predicate<A> =>
+	y =>
+		RA.elem(eq)(y)(xs)
 
 /**
  * Check if a predicate does not hold for any array member.
@@ -95,8 +95,8 @@ export const elemV =
  */
 // tsc doesn't like pointfree here. /shrug
 export const none: <A>(f: Predicate<A>) => Predicate<ReadonlyArray<A>> = flow(
-  not,
-  p => RA.every(p),
+	not,
+	p => RA.every(p),
 )
 
 /**
@@ -116,7 +116,7 @@ export const none: <A>(f: Predicate<A>) => Predicate<ReadonlyArray<A>> = flow(
  * @since 0.10.0
  */
 export const join = (x: string): ((ys: ReadonlyArray<string>) => string) =>
-  invoke("join")([x])
+	invoke("join")([x])
 
 /**
  * Like `fp-ts/Array::getEq`, but items are not required to be in the same
@@ -138,11 +138,11 @@ export const join = (x: string): ((ys: ReadonlyArray<string>) => string) =>
  * @since 0.10.0
  */
 export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<ReadonlyArray<A>> => ({
-  equals: (xs: ReadonlyArray<A>, ys: ReadonlyArray<A>) => {
-    const sort = RA.sort(ordA)
+	equals: (xs: ReadonlyArray<A>, ys: ReadonlyArray<A>) => {
+		const sort = RA.sort(ordA)
 
-    return RA.getEq(ordA).equals(sort(xs), sort(ys))
-  },
+		return RA.getEq(ordA).equals(sort(xs), sort(ys))
+	},
 })
 
 /**
@@ -167,15 +167,15 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<ReadonlyArray<A>> => ({
  * @since 0.10.0
  */
 export const pluckFirst =
-  <A>(p: Predicate<A>) =>
-  (xs: ReadonlyArray<A>): [Option<A>, ReadonlyArray<A>] =>
-    pipe(
-      RA.findIndex(p)(xs),
-      O.fold(constant([O.none, xs]), i => [
-        O.some(xs[i]),
-        RA.unsafeDeleteAt(i, xs),
-      ]),
-    )
+	<A>(p: Predicate<A>) =>
+	(xs: ReadonlyArray<A>): [Option<A>, ReadonlyArray<A>] =>
+		pipe(
+			RA.findIndex(p)(xs),
+			O.fold(constant([O.none, xs]), i => [
+				O.some(xs[i]),
+				RA.unsafeDeleteAt(i, xs),
+			]),
+		)
 
 /**
  * Update an item in an array or, if it's not present yet, insert it.
@@ -222,15 +222,15 @@ export const pluckFirst =
  * @since 0.10.0
  */
 export const upsert =
-  <A>(eqA: Eq<A>) =>
-  (x: A) =>
-  (ys: ReadonlyArray<A>): ReadonlyNonEmptyArray<A> =>
-    pipe(
-      RA.findIndex<A>(y => eqA.equals(x, y))(ys),
-      O.map(i => RA.unsafeUpdateAt(i, x, ys)),
-      O.chain(NEA.fromReadonlyArray),
-      O.getOrElse(() => RA.append(x)(ys)),
-    )
+	<A>(eqA: Eq<A>) =>
+	(x: A) =>
+	(ys: ReadonlyArray<A>): ReadonlyNonEmptyArray<A> =>
+		pipe(
+			RA.findIndex<A>(y => eqA.equals(x, y))(ys),
+			O.map(i => RA.unsafeUpdateAt(i, x, ys)),
+			O.chain(NEA.fromReadonlyArray),
+			O.getOrElse(() => RA.append(x)(ys)),
+		)
 
 /**
  * Insert all the elements of an array into another array at the specified
@@ -251,15 +251,15 @@ export const upsert =
  * @since 0.5.0
  */
 export const insertMany =
-  (i: number) =>
-  <A>(xs: ReadonlyNonEmptyArray<A>) =>
-  (ys: ReadonlyArray<A>): Option<ReadonlyNonEmptyArray<A>> =>
-    pipe(
-      xs,
-      RA.reverse,
-      reduceM(O.Monad, RA.Foldable)(ys, (zs, x) => pipe(zs, RA.insertAt(i, x))),
-      O.chain(NEA.fromReadonlyArray),
-    )
+	(i: number) =>
+	<A>(xs: ReadonlyNonEmptyArray<A>) =>
+	(ys: ReadonlyArray<A>): Option<ReadonlyNonEmptyArray<A>> =>
+		pipe(
+			xs,
+			RA.reverse,
+			reduceM(O.Monad, RA.Foldable)(ys, (zs, x) => pipe(zs, RA.insertAt(i, x))),
+			O.chain(NEA.fromReadonlyArray),
+		)
 
 /**
  * Filter a list, removing any elements that repeat that directly precede them.
@@ -274,11 +274,11 @@ export const insertMany =
  * @since 0.10.0
  */
 export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<ReadonlyArray<A>> =
-  eq => xs =>
-    pipe(
-      xs,
-      RA.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
-    )
+	eq => xs =>
+		pipe(
+			xs,
+			RA.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
+		)
 
 /**
  * Check if an array starts with the specified subarray.
@@ -296,9 +296,9 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<ReadonlyArray<A>> =
  * @since 0.10.0
  */
 export const startsWith =
-  <A>(eq: Eq<A>) =>
-  (start: ReadonlyArray<A>): Predicate<ReadonlyArray<A>> =>
-    flow(RA.takeLeft(start.length), xs => RA.getEq(eq).equals(xs, start))
+	<A>(eq: Eq<A>) =>
+	(start: ReadonlyArray<A>): Predicate<ReadonlyArray<A>> =>
+		flow(RA.takeLeft(start.length), xs => RA.getEq(eq).equals(xs, start))
 
 /**
  * Check if an array ends with the specified subarray.
@@ -316,9 +316,9 @@ export const startsWith =
  * @since 0.10.0
  */
 export const endsWith =
-  <A>(eq: Eq<A>) =>
-  (end: ReadonlyArray<A>): Predicate<ReadonlyArray<A>> =>
-    flow(RA.takeRight(end.length), xs => RA.getEq(eq).equals(xs, end))
+	<A>(eq: Eq<A>) =>
+	(end: ReadonlyArray<A>): Predicate<ReadonlyArray<A>> =>
+		flow(RA.takeRight(end.length), xs => RA.getEq(eq).equals(xs, end))
 
 /**
  * Returns a new array without the values present in the first input array.
@@ -339,9 +339,9 @@ export const endsWith =
  * @since 0.10.0
  */
 export const without =
-  <A>(eq: Eq<A>) =>
-  (xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
-    flow(RA.filter(y => !RA.elem(eq)(y)(xs)))
+	<A>(eq: Eq<A>) =>
+	(xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
+		flow(RA.filter(y => !RA.elem(eq)(y)(xs)))
 
 /**
  * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
@@ -360,17 +360,17 @@ export const without =
  * @since 0.10.0
  */
 export const cartesian =
-  <A>(xs: ReadonlyArray<A>) =>
-  <B>(ys: ReadonlyArray<B>): ReadonlyArray<[A, B]> =>
-    pipe(
-      xs,
-      RA.chain(x =>
-        pipe(
-          ys,
-          RA.map(y => [x, y]),
-        ),
-      ),
-    )
+	<A>(xs: ReadonlyArray<A>) =>
+	<B>(ys: ReadonlyArray<B>): ReadonlyArray<[A, B]> =>
+		pipe(
+			xs,
+			RA.chain(x =>
+				pipe(
+					ys,
+					RA.map(y => [x, y]),
+				),
+			),
+		)
 
 /**
  * Adds together all the numbers in the input array.
@@ -400,7 +400,7 @@ export const sum: (xs: ReadonlyArray<number>) => number = concatAll(MonoidSum)
  * @since 0.10.0
  */
 export const product: (xs: ReadonlyArray<number>) => number =
-  concatAll(MonoidProduct)
+	concatAll(MonoidProduct)
 
 /**
  * Calculate the mean of an array of numbers.
@@ -414,7 +414,7 @@ export const product: (xs: ReadonlyArray<number>) => number =
  * @since 0.10.0
  */
 export const mean = (xs: ReadonlyNonEmptyArray<number>): number =>
-  sum(xs) / xs.length
+	sum(xs) / xs.length
 
 /**
  * Calculate the median of an array of numbers.
@@ -429,11 +429,11 @@ export const mean = (xs: ReadonlyNonEmptyArray<number>): number =>
  * @since 0.10.0
  */
 export const median: (xs: ReadonlyNonEmptyArray<number>) => number = flow(
-  NEA.sort(ordNumber),
-  xs => {
-    const i = xs.length / 2
-    return i % 1 === 0 ? (xs[i - 1] + xs[i]) / 2 : xs[Math.floor(i)]
-  },
+	NEA.sort(ordNumber),
+	xs => {
+		const i = xs.length / 2
+		return i % 1 === 0 ? (xs[i - 1] + xs[i]) / 2 : xs[Math.floor(i)]
+	},
 )
 
 /**
@@ -456,15 +456,15 @@ export const median: (xs: ReadonlyNonEmptyArray<number>) => number = flow(
  * @since 0.10.0
  */
 export const aperture =
-  (n: number) =>
-  <A>(xs: ReadonlyArray<A>): ReadonlyArray<ReadonlyArray<A>> => {
-    const go =
-      (i: number) =>
-      (ys: ReadonlyArray<ReadonlyArray<A>>): ReadonlyArray<ReadonlyArray<A>> =>
-        i + n > xs.length ? ys : go(i + 1)(RA.append(slice(i)(n + i)(xs))(ys))
+	(n: number) =>
+	<A>(xs: ReadonlyArray<A>): ReadonlyArray<ReadonlyArray<A>> => {
+		const go =
+			(i: number) =>
+			(ys: ReadonlyArray<ReadonlyArray<A>>): ReadonlyArray<ReadonlyArray<A>> =>
+				i + n > xs.length ? ys : go(i + 1)(RA.append(slice(i)(n + i)(xs))(ys))
 
-    return n < 1 ? [] : go(0)([])
-  }
+		return n < 1 ? [] : go(0)([])
+	}
 
 /**
  * Returns the elements of the array between the start index (inclusive) and the
@@ -486,9 +486,9 @@ export const aperture =
  * @since 0.10.0
  */
 export const slice =
-  (start: number) =>
-  (end: number): (<A>(xs: ReadonlyArray<A>) => ReadonlyArray<A>) =>
-    invoke("slice")([start, end])
+	(start: number) =>
+	(end: number): (<A>(xs: ReadonlyArray<A>) => ReadonlyArray<A>) =>
+		invoke("slice")([start, end])
 
 /**
  * Filters out items in the array for which the predicate holds. This can be
@@ -506,9 +506,9 @@ export const slice =
  * @since 0.10.0
  */
 export const reject = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(xs: ReadonlyArray<B>) => ReadonlyArray<B>) =>
-  RA.filter(not(f))
+	RA.filter(not(f))
 
 /**
  * Move an item at index `from` to index `to`. See also `moveTo`.
@@ -531,20 +531,20 @@ export const reject = <A>(
  * @since 0.10.0
  */
 export const moveFrom =
-  (from: number) =>
-  (to: number) =>
-  <A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
-    from >= xs.length || to >= xs.length
-      ? O.none
-      : from === to
-        ? O.some(xs)
-        : pipe(
-            xs,
-            RA.lookup(from),
-            O.chain(x =>
-              pipe(RA.deleteAt(from)(xs), O.chain(RA.insertAt(to, x))),
-            ),
-          )
+	(from: number) =>
+	(to: number) =>
+	<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
+		from >= xs.length || to >= xs.length
+			? O.none
+			: from === to
+				? O.some(xs)
+				: pipe(
+						xs,
+						RA.lookup(from),
+						O.chain(x =>
+							pipe(RA.deleteAt(from)(xs), O.chain(RA.insertAt(to, x))),
+						),
+					)
 
 /**
  * Move an item at index `from` to index `to`. See also `moveFrom`.
@@ -584,9 +584,9 @@ export const moveTo = flip(moveFrom)
  * @since 0.10.0
  */
 export const countBy =
-  <A>(f: (x: A) => string) =>
-  (xs: ReadonlyArray<A>): Record<string, number> =>
-    R.fromFoldableMap(MonoidSum, RA.Foldable)(xs, x => [f(x), 1])
+	<A>(f: (x: A) => string) =>
+	(xs: ReadonlyArray<A>): Record<string, number> =>
+		R.fromFoldableMap(MonoidSum, RA.Foldable)(xs, x => [f(x), 1])
 
 /**
  * Remove the longest initial subarray from the end of the input array for
@@ -605,9 +605,9 @@ export const countBy =
  * @since 0.10.0
  */
 export const dropRightWhile = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(xs: ReadonlyArray<B>) => ReadonlyArray<B>) =>
-  flow(RA.reverse, RA.dropLeftWhile(f), RA.reverse)
+	flow(RA.reverse, RA.dropLeftWhile(f), RA.reverse)
 
 /**
  * Drop a number of elements from the specified index an array, returning a
@@ -637,25 +637,25 @@ export const dropRightWhile = <A>(
  */
 
 export const dropAt =
-  (i: number) =>
-  (n: number) =>
-  <A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
-    pipe(
-      RA.isOutOfBound(i, xs),
-      B.fold(
-        () =>
-          pipe(
-            copy(Array.from(xs)),
-            ys => {
-              // eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
-              ys.splice(i, n)
-              return ys
-            },
-            O.some,
-          ),
-        constant(O.none),
-      ),
-    )
+	(i: number) =>
+	(n: number) =>
+	<A>(xs: ReadonlyArray<A>): Option<ReadonlyArray<A>> =>
+		pipe(
+			RA.isOutOfBound(i, xs),
+			B.fold(
+				() =>
+					pipe(
+						copy(Array.from(xs)),
+						ys => {
+							// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
+							ys.splice(i, n)
+							return ys
+						},
+						O.some,
+					),
+				constant(O.none),
+			),
+		)
 
 /**
  * Tranposes the rows and columns of a 2D list. If some of the rows are shorter
@@ -672,17 +672,17 @@ export const dropAt =
  * @since 0.10.0
  */
 export const transpose = <A>(
-  xs: ReadonlyArray<ReadonlyArray<A>>,
+	xs: ReadonlyArray<ReadonlyArray<A>>,
 ): ReadonlyArray<ReadonlyArray<A>> => {
-  /* eslint-disable functional/no-conditional-statements */
-  if (RA.isEmpty(xs)) return []
-  if (RA.isEmpty(xs[0])) return transpose(RA.dropLeft(1)(xs))
-  /* eslint-enable functional/no-conditional-statements */
+	/* eslint-disable functional/no-conditional-statements */
+	if (RA.isEmpty(xs)) return []
+	if (RA.isEmpty(xs[0])) return transpose(RA.dropLeft(1)(xs))
+	/* eslint-enable functional/no-conditional-statements */
 
-  const [[y, ...ys], ...yss] = xs
-  const zs = [y, ...RA.filterMap(RA.head)(yss)]
-  const zss = [ys, ...RA.map(RA.dropLeft(1))(yss)]
-  return [zs, ...transpose(zss)]
+	const [[y, ...ys], ...yss] = xs
+	const zs = [y, ...RA.filterMap(RA.head)(yss)]
+	const zss = [ys, ...RA.map(RA.dropLeft(1))(yss)]
+	return [zs, ...transpose(zss)]
 }
 
 /**
@@ -702,9 +702,9 @@ export const transpose = <A>(
  * @since 0.10.0
  */
 export const takeRightWhile = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(xs: ReadonlyArray<B>) => ReadonlyArray<B>) =>
-  flow(RA.reverse, RA.takeLeftWhile(f), RA.reverse)
+	flow(RA.reverse, RA.takeLeftWhile(f), RA.reverse)
 
 /**
  * Creates an array of all values which are present in one of the two input
@@ -722,13 +722,13 @@ export const takeRightWhile = <A>(
  * @since 0.10.0
  */
 export const symmetricDifference =
-  <A>(eq: Eq<A>) =>
-  (xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
-  ys =>
-    RA.getMonoid<A>().concat(
-      RA.difference(eq)(ys)(xs),
-      RA.difference(eq)(xs)(ys),
-    )
+	<A>(eq: Eq<A>) =>
+	(xs: ReadonlyArray<A>): Endomorphism<ReadonlyArray<A>> =>
+	ys =>
+		RA.getMonoid<A>().concat(
+			RA.difference(eq)(ys)(xs),
+			RA.difference(eq)(xs)(ys),
+		)
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -749,22 +749,22 @@ export const symmetricDifference =
  * @since 0.10.0
  */
 export const reduceWhile =
-  <A>(p: Predicate<A>) =>
-  <B>(f: (x: A) => (y: B) => B): ((x: B) => (ys: ReadonlyArray<A>) => B) => {
-    const go =
-      (acc: B) =>
-      (ys: ReadonlyArray<A>): B =>
-        pipe(
-          NEA.fromReadonlyArray(ys),
-          O.filter(flow(NEA.head, p)),
-          O.fold(
-            constant(acc),
-            flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
-          ),
-        )
+	<A>(p: Predicate<A>) =>
+	<B>(f: (x: A) => (y: B) => B): ((x: B) => (ys: ReadonlyArray<A>) => B) => {
+		const go =
+			(acc: B) =>
+			(ys: ReadonlyArray<A>): B =>
+				pipe(
+					NEA.fromReadonlyArray(ys),
+					O.filter(flow(NEA.head, p)),
+					O.fold(
+						constant(acc),
+						flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
+					),
+				)
 
-    return go
-  }
+		return go
+	}
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -785,10 +785,10 @@ export const reduceWhile =
  * @since 0.10.0
  */
 export const reduceRightWhile =
-  <A>(p: Predicate<A>) =>
-  <B>(f: (x: A) => (y: B) => B) =>
-  (x: B): ((ys: ReadonlyArray<A>) => B) =>
-    flow(RA.reverse, reduceWhile(p)(f)(x))
+	<A>(p: Predicate<A>) =>
+	<B>(f: (x: A) => (y: B) => B) =>
+	(x: B): ((ys: ReadonlyArray<A>) => B) =>
+		flow(RA.reverse, reduceWhile(p)(f)(x))
 
 /**
  * Obtain the minimum value from a non-empty array.
@@ -803,7 +803,7 @@ export const reduceRightWhile =
  * @since 0.10.0
  */
 export const minimum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
-  flow(min, NEA.concatAll)
+	flow(min, NEA.concatAll)
 
 /**
  * Obtain the maximum value from a non-empty array.
@@ -818,7 +818,7 @@ export const minimum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
  * @since 0.10.0
  */
 export const maximum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
-  flow(max, NEA.concatAll)
+	flow(max, NEA.concatAll)
 
 /**
  * Greedy zip, preserving all items and expressing the possibility of unequal
@@ -834,26 +834,26 @@ export const maximum: <A>(ord: Ord<A>) => (xs: ReadonlyNonEmptyArray<A>) => A =
  * @since 0.11.0
  */
 export const zipAll =
-  <A>(xs: ReadonlyArray<A>) =>
-  <B>(ys: ReadonlyArray<B>): ReadonlyArray<These<B, A>> => {
-    const zs = RA.zip(ys, xs)
-    const getRem = slice(RA.size(zs))(Infinity)
+	<A>(xs: ReadonlyArray<A>) =>
+	<B>(ys: ReadonlyArray<B>): ReadonlyArray<These<B, A>> => {
+		const zs = RA.zip(ys, xs)
+		const getRem = slice(RA.size(zs))(Infinity)
 
-    const rest = pipe(
-      ordNumber.compare(RA.size(ys), RA.size(xs)),
-      orderingMatch<ReadonlyArray<These<B, A>>>(
-        () => pipe(xs, getRem, RA.map(T.right)),
-        constant(RA.empty),
-        () => pipe(ys, getRem, RA.map(T.left)),
-      ),
-    )
+		const rest = pipe(
+			ordNumber.compare(RA.size(ys), RA.size(xs)),
+			orderingMatch<ReadonlyArray<These<B, A>>>(
+				() => pipe(xs, getRem, RA.map(T.right)),
+				constant(RA.empty),
+				() => pipe(ys, getRem, RA.map(T.left)),
+			),
+		)
 
-    return pipe(
-      zs,
-      RA.map(([za, zb]) => T.both(za, zb)),
-      RA.concat(rest),
-    )
-  }
+		return pipe(
+			zs,
+			RA.map(([za, zb]) => T.both(za, zb)),
+			RA.concat(rest),
+		)
+	}
 
 /**
  * Filter an array based upon a predicate whose boolean is returned in an
@@ -875,42 +875,42 @@ export const zipAll =
  * @since 0.12.0
  */
 export function filterA<F extends URIS4>(
-  F: Applicative4<F>,
+	F: Applicative4<F>,
 ): <S, R, E, A>(
-  p: (x: A) => Kind4<F, S, R, E, boolean>,
+	p: (x: A) => Kind4<F, S, R, E, boolean>,
 ) => (xs: ReadonlyArray<A>) => Kind4<F, S, R, E, ReadonlyArray<A>>
 export function filterA<F extends URIS3>(
-  F: Applicative3<F>,
+	F: Applicative3<F>,
 ): <R, E, A>(
-  p: (x: A) => Kind3<F, R, E, boolean>,
+	p: (x: A) => Kind3<F, R, E, boolean>,
 ) => (xs: ReadonlyArray<A>) => Kind3<F, R, E, ReadonlyArray<A>>
 export function filterA<F extends URIS2>(
-  F: Applicative2<F>,
+	F: Applicative2<F>,
 ): <E, A>(
-  p: (x: A) => Kind2<F, E, boolean>,
+	p: (x: A) => Kind2<F, E, boolean>,
 ) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
 export function filterA<F extends URIS2, E>(
-  F: Applicative2C<F, E>,
+	F: Applicative2C<F, E>,
 ): <A>(
-  p: (x: A) => Kind2<F, E, boolean>,
+	p: (x: A) => Kind2<F, E, boolean>,
 ) => (xs: ReadonlyArray<A>) => Kind2<F, E, ReadonlyArray<A>>
 export function filterA<F extends URIS>(
-  F: Applicative1<F>,
+	F: Applicative1<F>,
 ): <A>(
-  p: (x: A) => Kind<F, boolean>,
+	p: (x: A) => Kind<F, boolean>,
 ) => (xs: ReadonlyArray<A>) => Kind<F, ReadonlyArray<A>>
 export function filterA<F>(
-  F: Applicative<F>,
+	F: Applicative<F>,
 ): <A>(
-  p: (x: A) => HKT<F, boolean>,
+	p: (x: A) => HKT<F, boolean>,
 ) => (xs: ReadonlyArray<A>) => HKT<F, ReadonlyArray<A>>
 export function filterA<F>(
-  F: Applicative<F>,
+	F: Applicative<F>,
 ): <A>(
-  p: (x: A) => HKT<F, boolean>,
+	p: (x: A) => HKT<F, boolean>,
 ) => (xs: ReadonlyArray<A>) => HKT<F, ReadonlyArray<A>> {
-  return p => xs =>
-    RA.Witherable.wither(F)(xs, x => F.map(p(x), y => (y ? O.some(x) : O.none)))
+	return p => xs =>
+		RA.Witherable.wither(F)(xs, x => F.map(p(x), y => (y ? O.some(x) : O.none)))
 }
 
 /**
@@ -930,13 +930,13 @@ export function filterA<F>(
  * @since 0.12.0
  */
 export const extractAt =
-  (i: number) =>
-  <A>(xs: ReadonlyArray<A>): Option<[A, ReadonlyArray<A>]> =>
-    pipe(
-      xs,
-      RA.lookup(i),
-      O.map(x => [x, RA.unsafeDeleteAt(i, xs)]),
-    )
+	(i: number) =>
+	<A>(xs: ReadonlyArray<A>): Option<[A, ReadonlyArray<A>]> =>
+		pipe(
+			xs,
+			RA.lookup(i),
+			O.map(x => [x, RA.unsafeDeleteAt(i, xs)]),
+		)
 
 /**
  * Convert an `Iterable` to a `ReadonlyArray`.
@@ -969,32 +969,32 @@ export const fromIterable: <A>(xs: Iterable<A>) => ReadonlyArray<A> = Array.from
  * @since 0.15.0
  */
 export function allM<M extends URIS4>(
-  M: Monad4<M>,
+	M: Monad4<M>,
 ): <S, R, E>(
-  xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>,
+	xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>,
 ) => Kind4<M, S, R, E, boolean>
 export function allM<M extends URIS3>(
-  M: Monad3<M>,
+	M: Monad3<M>,
 ): <R, E>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function allM<M extends URIS3, E>(
-  M: Monad3C<M, E>,
+	M: Monad3C<M, E>,
 ): <R>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function allM<M extends URIS2>(
-  M: Monad2<M>,
+	M: Monad2<M>,
 ): <E>(xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function allM<M extends URIS2, E>(
-  M: Monad2C<M, E>,
+	M: Monad2C<M, E>,
 ): (xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function allM<M extends URIS>(
-  M: Monad1<M>,
+	M: Monad1<M>,
 ): (xs: ReadonlyArray<Kind<M, boolean>>) => Kind<M, boolean>
 export function allM<M>(
-  M: Monad<M>,
+	M: Monad<M>,
 ): (xs: ReadonlyArray<HKT<M, boolean>>) => HKT<M, boolean> {
-  // Can't reuse `andM` here, unsure why.
-  return RA.reduce(M.of<boolean>(true), (x, y) =>
-    M.chain(x, b => (b ? y : M.of(false))),
-  )
+	// Can't reuse `andM` here, unsure why.
+	return RA.reduce(M.of<boolean>(true), (x, y) =>
+		M.chain(x, b => (b ? y : M.of(false))),
+	)
 }
 
 /**
@@ -1015,32 +1015,32 @@ export function allM<M>(
  * @since 0.15.0
  */
 export function anyM<M extends URIS4>(
-  M: Monad4<M>,
+	M: Monad4<M>,
 ): <S, R, E>(
-  xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>,
+	xs: ReadonlyArray<Kind4<M, S, R, E, boolean>>,
 ) => Kind4<M, S, R, E, boolean>
 export function anyM<M extends URIS3>(
-  M: Monad3<M>,
+	M: Monad3<M>,
 ): <R, E>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function anyM<M extends URIS3, E>(
-  M: Monad3C<M, E>,
+	M: Monad3C<M, E>,
 ): <R>(xs: ReadonlyArray<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function anyM<M extends URIS2>(
-  M: Monad2<M>,
+	M: Monad2<M>,
 ): <E>(xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function anyM<M extends URIS2, E>(
-  M: Monad2C<M, E>,
+	M: Monad2C<M, E>,
 ): (xs: ReadonlyArray<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function anyM<M extends URIS>(
-  M: Monad1<M>,
+	M: Monad1<M>,
 ): (xs: ReadonlyArray<Kind<M, boolean>>) => Kind<M, boolean>
 export function anyM<M>(
-  M: Monad<M>,
+	M: Monad<M>,
 ): (xs: ReadonlyArray<HKT<M, boolean>>) => HKT<M, boolean> {
-  // Can't reuse `orM` here, unsure why.
-  return RA.reduce(M.of<boolean>(false), (x, y) =>
-    M.chain(x, b => (b ? M.of(true) : y)),
-  )
+	// Can't reuse `orM` here, unsure why.
+	return RA.reduce(M.of<boolean>(false), (x, y) =>
+		M.chain(x, b => (b ? M.of(true) : y)),
+	)
 }
 
 /**
@@ -1066,14 +1066,14 @@ export function anyM<M>(
  * @since 0.16.0
  */
 export const separateNE = <A, B>(
-  xs: ReadonlyNonEmptyArray<Either<A, B>>,
+	xs: ReadonlyNonEmptyArray<Either<A, B>>,
 ): These<ReadonlyNonEmptyArray<A>, ReadonlyNonEmptyArray<B>> =>
-  pipe(xs, RA.separate, ({ left, right }) => {
-    /* eslint-disable functional/no-conditional-statements */
-    if (RA.isEmpty(left)) return T.right(right as ReadonlyNonEmptyArray<B>)
-    else if (RA.isEmpty(right)) return T.left(left as ReadonlyNonEmptyArray<A>)
-    /* eslint-enable functional/no-conditional-statements */
-    // They can't both be empty as per the non-empty input.
-    else
-      return T.both(left as NonEmptyArray<A>, right as ReadonlyNonEmptyArray<B>)
-  })
+	pipe(xs, RA.separate, ({ left, right }) => {
+		/* eslint-disable functional/no-conditional-statements */
+		if (RA.isEmpty(left)) return T.right(right as ReadonlyNonEmptyArray<B>)
+		else if (RA.isEmpty(right)) return T.left(left as ReadonlyNonEmptyArray<A>)
+		/* eslint-enable functional/no-conditional-statements */
+		// They can't both be empty as per the non-empty input.
+		else
+			return T.both(left as NonEmptyArray<A>, right as ReadonlyNonEmptyArray<B>)
+	})

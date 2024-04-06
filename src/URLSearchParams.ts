@@ -29,7 +29,7 @@ import * as Monoid_ from "fp-ts/Monoid"
 type Monoid<A> = Monoid_.Monoid<A>
 
 const constructor = (
-  x: ConstructorParameters<typeof URLSearchParams>[0],
+	x: ConstructorParameters<typeof URLSearchParams>[0],
 ): URLSearchParams => new URLSearchParams(x)
 
 /**
@@ -58,7 +58,7 @@ export const empty: URLSearchParams = constructor(undefined)
  * @since 0.16.0
  */
 export const isEmpty: Predicate<URLSearchParams> = u =>
-  Array.from(u.keys()).length === 0
+	Array.from(u.keys()).length === 0
 
 /**
  * Parse a `URLSearchParams` from a string.
@@ -107,8 +107,8 @@ export const toString = (x: URLSearchParams): string => x.toString()
  * @since 0.18.0
  */
 export const toLeadingString: (xs: URLSearchParams) => string = flow(
-  toString,
-  when(not(Str.isEmpty))(prepend("?")),
+	toString,
+	when(not(Str.isEmpty))(prepend("?")),
 )
 
 /**
@@ -125,7 +125,7 @@ export const toLeadingString: (xs: URLSearchParams) => string = flow(
  * @since 0.2.0
  */
 export const fromTuples: (x: Array<[string, string]>) => URLSearchParams =
-  constructor
+	constructor
 
 /**
  * Construct a `URLSearchParams` from a single key/value pair.
@@ -139,9 +139,9 @@ export const fromTuples: (x: Array<[string, string]>) => URLSearchParams =
  * @since 0.18.0
  */
 export const singleton =
-  (k: string) =>
-  (v: string): URLSearchParams =>
-    fromTuples([[k, v]])
+	(k: string) =>
+	(v: string): URLSearchParams =>
+		fromTuples([[k, v]])
 
 /**
  * Losslessly convert a `URLSearchParams` to an array of tuples.
@@ -157,7 +157,7 @@ export const singleton =
  * @since 0.17.0
  */
 export const toTuples = (x: URLSearchParams): Array<[string, string]> =>
-  pipe(x.entries(), fromIterable)
+	pipe(x.entries(), fromIterable)
 
 /**
  * Parse a `URLSearchParams` from a record.
@@ -174,12 +174,12 @@ export const toTuples = (x: URLSearchParams): Array<[string, string]> =>
  * @since 0.2.0
  */
 export const fromRecord: (x: Record<string, Array<string>>) => URLSearchParams =
-  flow(
-    R.foldMapWithIndex(Str.Ord)(A.getMonoid<[string, string]>())((k, vs) =>
-      pipe(vs, A.map(withFst(k))),
-    ),
-    fromTuples,
-  )
+	flow(
+		R.foldMapWithIndex(Str.Ord)(A.getMonoid<[string, string]>())((k, vs) =>
+			pipe(vs, A.map(withFst(k))),
+		),
+		fromTuples,
+	)
 
 /**
  * Convert a `URLSearchParams` to a record, grouping values by keys.
@@ -195,12 +195,12 @@ export const fromRecord: (x: Record<string, Array<string>>) => URLSearchParams =
  * @since 0.17.0
  */
 export const toRecord = (
-  x: URLSearchParams,
+	x: URLSearchParams,
 ): Record<string, NonEmptyArray<string>> =>
-  R.fromFoldableMap(NEA.getSemigroup<string>(), A.Foldable)(
-    toTuples(x),
-    mapSnd(NEA.of),
-  )
+	R.fromFoldableMap(NEA.getSemigroup<string>(), A.Foldable)(
+		toTuples(x),
+		mapSnd(NEA.of),
+	)
 
 const EqValues = getDisorderedEq(Str.Ord)
 
@@ -218,22 +218,22 @@ const EqValues = getDisorderedEq(Str.Ord)
  * @since 0.18.0
  */
 export const Eq: Eq<URLSearchParams> = {
-  /* eslint-disable */
-  equals: (xs, ys) => {
-    if (size(xs) !== size(ys)) return false
+	/* eslint-disable */
+	equals: (xs, ys) => {
+		if (size(xs) !== size(ys)) return false
 
-    const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
-    for (const k of ks) {
-      const mxvs = lookup(k)(xs)
-      const myvs = lookup(k)(ys)
+		const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
+		for (const k of ks) {
+			const mxvs = lookup(k)(xs)
+			const myvs = lookup(k)(ys)
 
-      if (O.isNone(mxvs) || O.isNone(myvs)) return false
-      if (!EqValues.equals(mxvs.value, myvs.value)) return false
-    }
+			if (O.isNone(mxvs) || O.isNone(myvs)) return false
+			if (!EqValues.equals(mxvs.value, myvs.value)) return false
+		}
 
-    return true
-  },
-  /* eslint-enable */
+		return true
+	},
+	/* eslint-enable */
 }
 
 /**
@@ -267,7 +267,7 @@ export const clone: (x: URLSearchParams) => URLSearchParams = constructor
  * @since 0.1.0
  */
 export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
-  isInstanceOf(URLSearchParams)
+	isInstanceOf(URLSearchParams)
 
 /**
  * Attempt to get the first match for a URL parameter from a `URLSearchParams`.
@@ -285,9 +285,9 @@ export const isURLSearchParams: Refinement<unknown, URLSearchParams> =
  * @since 0.18.0
  */
 export const lookupFirst = (
-  k: string,
+	k: string,
 ): ((ps: URLSearchParams) => Option<string>) =>
-  flow(invoke("get")([k]), O.fromNullable)
+	flow(invoke("get")([k]), O.fromNullable)
 
 /**
  * Attempt to get the first match for a URL parameter from a `URLSearchParams`.
@@ -306,7 +306,7 @@ export const lookupFirst = (
  * @since 0.1.0
  */
 export const getParam: (k: string) => (ps: URLSearchParams) => Option<string> =
-  lookupFirst
+	lookupFirst
 
 /**
  * Attempt to get all matches for a URL parameter from a `URLSearchParams`.
@@ -325,9 +325,9 @@ export const getParam: (k: string) => (ps: URLSearchParams) => Option<string> =
  * @since 0.18.0
  */
 export const lookup = (
-  k: string,
+	k: string,
 ): ((ps: URLSearchParams) => Option<NonEmptyArray<string>>) =>
-  flow(invoke("getAll")([k]), NEA.fromArray)
+	flow(invoke("getAll")([k]), NEA.fromArray)
 
 /**
  * Attempt to get all matches for a URL parameter from a `URLSearchParams`.
@@ -347,7 +347,7 @@ export const lookup = (
  * @since 0.16.0
  */
 export const getAllForParam: (
-  k: string,
+	k: string,
 ) => (ps: URLSearchParams) => Option<NonEmptyArray<string>> = lookup
 
 /**
@@ -369,13 +369,13 @@ export const getAllForParam: (
  * @since 0.18.0
  */
 export const upsertAt =
-  (k: string) =>
-  (v: string): Endomorphism<URLSearchParams> =>
-  (x): URLSearchParams => {
-    const y = clone(x)
-    y.set(k, v) // eslint-disable-line functional/no-expression-statements
-    return y
-  }
+	(k: string) =>
+	(v: string): Endomorphism<URLSearchParams> =>
+	(x): URLSearchParams => {
+		const y = clone(x)
+		y.set(k, v) // eslint-disable-line functional/no-expression-statements
+		return y
+	}
 
 /**
  * Set a URL parameter in a `URLSearchParams`.
@@ -397,13 +397,13 @@ export const upsertAt =
  * @since 0.1.0
  */
 export const setParam =
-  (k: string) =>
-  (v: string): Endomorphism<URLSearchParams> =>
-  (x): URLSearchParams => {
-    const y = clone(x)
-    y.set(k, v) // eslint-disable-line functional/no-expression-statements
-    return y
-  }
+	(k: string) =>
+	(v: string): Endomorphism<URLSearchParams> =>
+	(x): URLSearchParams => {
+		const y = clone(x)
+		y.set(k, v) // eslint-disable-line functional/no-expression-statements
+		return y
+	}
 
 /**
  * Append a URL parameter in a `URLSearchParams`.
@@ -424,13 +424,13 @@ export const setParam =
  * @since 0.18.0
  */
 export const appendAt =
-  (k: string) =>
-  (v: string): Endomorphism<URLSearchParams> =>
-  (x): URLSearchParams => {
-    const y = clone(x)
-    y.append(k, v) // eslint-disable-line functional/no-expression-statements
-    return y
-  }
+	(k: string) =>
+	(v: string): Endomorphism<URLSearchParams> =>
+	(x): URLSearchParams => {
+		const y = clone(x)
+		y.append(k, v) // eslint-disable-line functional/no-expression-statements
+		return y
+	}
 
 /**
  * Delete all URL parameters with the specified key.
@@ -451,12 +451,12 @@ export const appendAt =
  * @since 0.18.0
  */
 export const deleteAt =
-  (k: string): Endomorphism<URLSearchParams> =>
-  x => {
-    const y = clone(x)
-    y.delete(k) // eslint-disable-line functional/no-expression-statements
-    return y
-  }
+	(k: string): Endomorphism<URLSearchParams> =>
+	x => {
+		const y = clone(x)
+		y.delete(k) // eslint-disable-line functional/no-expression-statements
+		return y
+	}
 
 /**
  * Get an unsorted, potentially duplicative array of the keys in a
@@ -473,7 +473,7 @@ export const deleteAt =
  * @since 0.18.0
  */
 export const keys = (x: URLSearchParams): Array<string> =>
-  fromIterable(x.keys())
+	fromIterable(x.keys())
 
 /**
  * Get a flattened array of all the values in a `URLSearchParams`.
@@ -489,7 +489,7 @@ export const keys = (x: URLSearchParams): Array<string> =>
  * @since 0.18.0
  */
 export const values = (x: URLSearchParams): Array<string> =>
-  fromIterable(x.values())
+	fromIterable(x.values())
 
 /**
  * Get the number of potentially duplicative key/value pairs in a
@@ -529,31 +529,31 @@ export const size = (x: URLSearchParams): number => x.size
  * @since 0.18.0
  */
 export const concatBy =
-  (
-    f: (
-      k: string,
-    ) => (vs: [NonEmptyArray<string>, NonEmptyArray<string>]) => Array<string>,
-  ) =>
-  (xs: URLSearchParams): Endomorphism<URLSearchParams> =>
-  /* eslint-disable */
-  ys => {
-    const zs = clone(empty)
-    const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
+	(
+		f: (
+			k: string,
+		) => (vs: [NonEmptyArray<string>, NonEmptyArray<string>]) => Array<string>,
+	) =>
+	(xs: URLSearchParams): Endomorphism<URLSearchParams> =>
+	/* eslint-disable */
+	ys => {
+		const zs = clone(empty)
+		const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
 
-    for (const k of ks) {
-      const xvs = xs.getAll(k)
-      const yvs = ys.getAll(k)
+		for (const k of ks) {
+			const xvs = xs.getAll(k)
+			const yvs = ys.getAll(k)
 
-      const zvs =
-        A.isNonEmpty(xvs) && A.isNonEmpty(yvs)
-          ? f(k)([xvs, yvs])
-          : A.concat(yvs)(xvs)
+			const zvs =
+				A.isNonEmpty(xvs) && A.isNonEmpty(yvs)
+					? f(k)([xvs, yvs])
+					: A.concat(yvs)(xvs)
 
-      for (const zv of zvs) zs.append(k, zv)
-    }
+			for (const zv of zvs) zs.append(k, zv)
+		}
 
-    return zs
-  }
+		return zs
+	}
 /* eslint-enable */
 
 /**
@@ -575,7 +575,7 @@ export const concatBy =
  * @since 0.18.0
  */
 export const Semigroup: SemigroupT<URLSearchParams> = {
-  concat: (x, y) => concatBy(constant(uncurry2(A.concat)))(x)(y),
+	concat: (x, y) => concatBy(constant(uncurry2(A.concat)))(x)(y),
 }
 
 /**
@@ -591,8 +591,8 @@ export const Semigroup: SemigroupT<URLSearchParams> = {
  * @since 0.18.0
  */
 export const Monoid: Monoid<URLSearchParams> = {
-  ...Semigroup,
-  empty,
+	...Semigroup,
+	empty,
 }
 
 /**
@@ -610,10 +610,10 @@ export const Monoid: Monoid<URLSearchParams> = {
  * @since 0.18.0
  */
 export const fromMap: (x: Map<string, Array<string>>) => URLSearchParams = flow(
-  M.foldMapWithIndex(Str.Ord)(A.getMonoid<[string, string]>())((k, vs) =>
-    pipe(vs, A.map(withFst(k))),
-  ),
-  fromTuples,
+	M.foldMapWithIndex(Str.Ord)(A.getMonoid<[string, string]>())((k, vs) =>
+		pipe(vs, A.map(withFst(k))),
+	),
+	fromTuples,
 )
 
 /**
@@ -632,18 +632,18 @@ export const fromMap: (x: Map<string, Array<string>>) => URLSearchParams = flow(
  */
 // Defined like this as there's currently no `M.fromFoldableMap`.
 export const toMap = (
-  x: URLSearchParams,
-  /* eslint-disable */
+	x: URLSearchParams,
+	/* eslint-disable */
 ): Map<string, NonEmptyArray<string>> => {
-  const m = new Map<string, NonEmptyArray<string>>()
+	const m = new Map<string, NonEmptyArray<string>>()
 
-  for (const [k, v] of x.entries()) {
-    const prev = M.lookup(Str.Eq)(k)(m)
+	for (const [k, v] of x.entries()) {
+		const prev = M.lookup(Str.Eq)(k)(m)
 
-    if (O.isSome(prev)) m.set(k, A.append(v)(prev.value))
-    else m.set(k, NEA.of(v))
-  }
+		if (O.isSome(prev)) m.set(k, A.append(v)(prev.value))
+		else m.set(k, NEA.of(v))
+	}
 
-  return m
+	return m
 }
 /* eslint-enable */

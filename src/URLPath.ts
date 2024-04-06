@@ -51,11 +51,11 @@ const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
  * @since 0.17.0
  */
 export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
-  // If someone is really setting their base to the same as our phony base
-  // then, well, firstly I'm flattered. But secondly that's on them.
-  //
-  // Also nota bene that the origin check will only work with some protocols.
-  URL.isURL(u) && u.origin === phonyBase
+	// If someone is really setting their base to the same as our phony base
+	// then, well, firstly I'm flattered. But secondly that's on them.
+	//
+	// Also nota bene that the origin check will only work with some protocols.
+	URL.isURL(u) && u.origin === phonyBase
 
 /**
  * Clone a `URLPath`.
@@ -92,7 +92,7 @@ export const clone: Endomorphism<URLPath> = over(URL.clone)
  * @since 0.17.0
  */
 export const fromURL = (x: URL): URLPath =>
-  pipe(new globalThis.URL(x.href, phonyBase), pack<URLPath>)
+	pipe(new globalThis.URL(x.href, phonyBase), pack<URLPath>)
 
 /**
  * Convert a `URLPath` to a `URL` with the provided `baseUrl`.
@@ -118,15 +118,15 @@ export const fromURL = (x: URL): URLPath =>
  * @since 0.17.0
  */
 export const toURL =
-  <E>(f: (e: TypeError) => E) =>
-  (baseUrl: string) =>
-  (x: URLPath): Either<E, URL> =>
-    // It should only throw some sort of `TypeError`:
-    // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
-    E.tryCatch(
-      () => new globalThis.URL(toString(x), baseUrl),
-      e => f(e as TypeError),
-    )
+	<E>(f: (e: TypeError) => E) =>
+	(baseUrl: string) =>
+	(x: URLPath): Either<E, URL> =>
+		// It should only throw some sort of `TypeError`:
+		// https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
+		E.tryCatch(
+			() => new globalThis.URL(toString(x), baseUrl),
+			e => f(e as TypeError),
+		)
 
 /**
  * Convert a `URLPath` to a `URL` with the provided `baseUrl`, forgoing the
@@ -151,7 +151,7 @@ export const toURL =
  * @since 0.17.0
  */
 export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
-  flow(toURL(identity)(baseUrl), O.fromEither)
+	flow(toURL(identity)(baseUrl), O.fromEither)
 
 /**
  * Build a `URLPath` from a string containing any parts. For an infallible
@@ -173,24 +173,24 @@ export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
  * @since 0.17.0
  */
 export const fromString =
-  <E>(f: (e: TypeError) => E) =>
-  (x: string): Either<E, URLPath> =>
-    pipe(
-      // It should only throw some sort of `TypeError`:
-      // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
-      E.tryCatch(
-        () => {
-          const y = new globalThis.URL(x, phonyBase)
-          /* eslint-disable */
-          if (y.origin !== phonyBase)
-            throw new TypeError("Failed to retain phony base URL")
-          /* eslint-enable */
-          return y
-        },
-        e => f(e as TypeError),
-      ),
-      E.map(pack<URLPath>),
-    )
+	<E>(f: (e: TypeError) => E) =>
+	(x: string): Either<E, URLPath> =>
+		pipe(
+			// It should only throw some sort of `TypeError`:
+			// https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
+			E.tryCatch(
+				() => {
+					const y = new globalThis.URL(x, phonyBase)
+					/* eslint-disable */
+					if (y.origin !== phonyBase)
+						throw new TypeError("Failed to retain phony base URL")
+					/* eslint-enable */
+					return y
+				},
+				e => f(e as TypeError),
+			),
+			E.map(pack<URLPath>),
+		)
 
 /**
  * Build a `URLPath` from a string containing any parts, forgoing the error.
@@ -209,8 +209,8 @@ export const fromString =
  * @since 0.17.0
  */
 export const fromStringO: (x: string) => Option<URLPath> = flow(
-  fromString(identity),
-  O.fromEither,
+	fromString(identity),
+	O.fromEither,
 )
 
 /**
@@ -228,10 +228,10 @@ export const fromStringO: (x: string) => Option<URLPath> = flow(
  * @since 0.17.0
  */
 export const fromPathname = (x: string): URLPath => {
-  const y = new globalThis.URL("", phonyBase)
-  // eslint-disable-next-line
-  y.pathname = x
-  return pack(y)
+	const y = new globalThis.URL("", phonyBase)
+	// eslint-disable-next-line
+	y.pathname = x
+	return pack(y)
 }
 
 /**
@@ -253,8 +253,8 @@ export const fromPathname = (x: string): URLPath => {
  * @since 0.17.0
  */
 export const toString: (x: URLPath) => string = flow(
-  unpack,
-  x => x.pathname + x.search + x.hash,
+	unpack,
+	x => x.pathname + x.search + x.hash,
 )
 
 /**
@@ -288,7 +288,7 @@ export const getPathname: (x: URLPath) => string = flow(unpack, URL.getPathname)
  * @since 0.17.0
  */
 export const modifyPathname = (
-  f: Endomorphism<string>,
+	f: Endomorphism<string>,
 ): Endomorphism<URLPath> => over(URL.modifyPathname(f))
 
 /**
@@ -306,7 +306,7 @@ export const modifyPathname = (
  * @since 0.17.0
  */
 export const setPathname = (x: string): Endomorphism<URLPath> =>
-  over(URL.setPathname(x))
+	over(URL.setPathname(x))
 
 /**
  * Get the search params component of a `URLPath`.
@@ -323,8 +323,8 @@ export const setPathname = (x: string): Endomorphism<URLPath> =>
  * @since 0.17.0
  */
 export const getParams: (x: URLPath) => URLSearchParams = flow(
-  unpack,
-  URL.getParams,
+	unpack,
+	URL.getParams,
 )
 
 /**
@@ -347,7 +347,7 @@ export const getParams: (x: URLPath) => URLSearchParams = flow(
  * @since 0.17.0
  */
 export const modifyParams = (
-  f: Endomorphism<URLSearchParams>,
+	f: Endomorphism<URLSearchParams>,
 ): Endomorphism<URLPath> => over(URL.modifyParams(f))
 
 /**
@@ -371,7 +371,7 @@ export const modifyParams = (
  * @since 0.17.0
  */
 export const setParams = (x: URLSearchParams): Endomorphism<URLPath> =>
-  over(URL.setParams(x))
+	over(URL.setParams(x))
 
 /**
  * Get the hash component of a `URLPath`.
@@ -408,7 +408,7 @@ export const getHash: (x: URLPath) => string = flow(unpack, URL.getHash)
  * @since 0.17.0
  */
 export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
-  over(URL.modifyHash(f))
+	over(URL.modifyHash(f))
 
 /**
  * Set the hash component of a `URLPath`.
@@ -429,7 +429,7 @@ export const modifyHash = (f: Endomorphism<string>): Endomorphism<URLPath> =>
  * @since 0.17.0
  */
 export const setHash = (x: string): Endomorphism<URLPath> =>
-  over(URL.setHash(x))
+	over(URL.setHash(x))
 
 /**
  * A holistic `Eq` instance for `URLPath`.

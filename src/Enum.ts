@@ -54,22 +54,22 @@ type Lazy<A> = L.Lazy<A>
  * @since 0.17.0
  */
 export type Enum<A> = Bounded<A> & {
-  succ: (x: A) => Option<A>
-  pred: (x: A) => Option<A>
-  toEnum: (index: number) => Option<A>
-  fromEnum: (x: A) => number
-  cardinality: Lazy<number>
+	succ: (x: A) => Option<A>
+	pred: (x: A) => Option<A>
+	toEnum: (index: number) => Option<A>
+	fromEnum: (x: A) => number
+	cardinality: Lazy<number>
 }
 
 const unfoldDup =
-  <A>(f: (x: A) => Option<A>) =>
-  (x: A): Array<A> =>
-    A.unfold(x, flow(f, O.map(dup)))
+	<A>(f: (x: A) => Option<A>) =>
+	(x: A): Array<A> =>
+		A.unfold(x, flow(f, O.map(dup)))
 
 const unfoldDup1 =
-  <A>(f: (x: A) => Option<A>) =>
-  (x: A): NonEmptyArray<A> =>
-    pipe(unfoldDup(f)(x), A.prepend(x))
+	<A>(f: (x: A) => Option<A>) =>
+	(x: A): NonEmptyArray<A> =>
+		pipe(unfoldDup(f)(x), A.prepend(x))
 
 /**
  * Returns a contiguous sequence of elements between `start` and `end`
@@ -87,9 +87,9 @@ const unfoldDup1 =
  * @since 0.17.0
  */
 export const fromTo =
-  <A>(E: Enum<A>) =>
-  (start: A): ((limit: A) => NonEmptyArray<A>) =>
-    fromThenTo(E)(start)(pipe(E.succ(start), O.getOrElse(constant(start))))
+	<A>(E: Enum<A>) =>
+	(start: A): ((limit: A) => NonEmptyArray<A>) =>
+		fromThenTo(E)(start)(pipe(E.succ(start), O.getOrElse(constant(start))))
 
 /**
  * Returns a sequence of elements from `first` until `limit` with step size
@@ -109,28 +109,28 @@ export const fromTo =
  * @since 0.17.0
  */
 export const fromThenTo =
-  <A>(E: Enum<A>) =>
-  (first: A) =>
-  (second: A) =>
-  (limit: A): NonEmptyArray<A> => {
-    const start = E.fromEnum(first)
-    const step = E.fromEnum(second) - start
-    const end = E.fromEnum(limit)
+	<A>(E: Enum<A>) =>
+	(first: A) =>
+	(second: A) =>
+	(limit: A): NonEmptyArray<A> => {
+		const start = E.fromEnum(first)
+		const step = E.fromEnum(second) - start
+		const end = E.fromEnum(limit)
 
-    // eslint-disable-next-line functional/no-conditional-statements
-    if (step < 1 || end < start) return NEA.of(first)
+		// eslint-disable-next-line functional/no-conditional-statements
+		if (step < 1 || end < start) return NEA.of(first)
 
-    const f: (n: number) => Option<[number, number]> = flow(
-      O.fromPredicate(n => n <= end),
-      O.map(toSnd(add(step))),
-    )
+		const f: (n: number) => Option<[number, number]> = flow(
+			O.fromPredicate(n => n <= end),
+			O.map(toSnd(add(step))),
+		)
 
-    return pipe(
-      A.unfold(start, f),
-      A.filterMap(E.toEnum),
-      xs => xs as NonEmptyArray<A>,
-    )
-  }
+		return pipe(
+			A.unfold(start, f),
+			A.filterMap(E.toEnum),
+			xs => xs as NonEmptyArray<A>,
+		)
+	}
 
 /**
  * Produces all successors of `start` exclusive.
@@ -148,7 +148,7 @@ export const fromThenTo =
  * @since 0.17.0
  */
 export const upFromExcl = <A>(E: Enum<A>): ((start: A) => Array<A>) =>
-  unfoldDup(E.succ)
+	unfoldDup(E.succ)
 
 /**
  * Produces all successors of `start` inclusive.
@@ -166,7 +166,7 @@ export const upFromExcl = <A>(E: Enum<A>): ((start: A) => Array<A>) =>
  * @since 0.17.0
  */
 export const upFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
-  unfoldDup1(E.succ)
+	unfoldDup1(E.succ)
 
 /**
  * Produces all predecessors of `start` exclusive.
@@ -184,7 +184,7 @@ export const upFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
  * @since 0.17.0
  */
 export const downFromExcl = <A>(E: Enum<A>): ((end: A) => Array<A>) =>
-  unfoldDup(E.pred)
+	unfoldDup(E.pred)
 
 /**
  * Produces all predecessors of `start` inclusive.
@@ -202,7 +202,7 @@ export const downFromExcl = <A>(E: Enum<A>): ((end: A) => Array<A>) =>
  * @since 0.17.0
  */
 export const downFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
-  unfoldDup1(E.pred)
+	unfoldDup1(E.pred)
 
 /**
  * Provides a default, inefficient implementation of `cardinality`.
@@ -217,19 +217,19 @@ export const downFromIncl = <A>(E: Enum<A>): ((start: A) => NonEmptyArray<A>) =>
  * @since 0.17.0
  */
 export const defaultCardinality = <A>(
-  E: Omit<Enum<A>, "cardinality">,
+	E: Omit<Enum<A>, "cardinality">,
 ): number => {
-  const f = (n: number): ((x: A) => number) =>
-    flow(
-      E.succ,
-      O.match(
-        constant(n),
-        // eslint-disable-next-line functional/prefer-tacit
-        x => f(n + 1)(x),
-      ),
-    )
+	const f = (n: number): ((x: A) => number) =>
+		flow(
+			E.succ,
+			O.match(
+				constant(n),
+				// eslint-disable-next-line functional/prefer-tacit
+				x => f(n + 1)(x),
+			),
+		)
 
-  return f(1)(E.bottom)
+	return f(1)(E.bottom)
 }
 
 /**
@@ -245,7 +245,7 @@ export const defaultCardinality = <A>(
  * @since 0.17.0
  */
 export const universe = <A>(E: Enum<A>): NonEmptyArray<A> =>
-  fromTo(E)(E.bottom)(E.top)
+	fromTo(E)(E.bottom)(E.top)
 
 /**
  * Creates a fallible function that's the inverse of `f`. `f` is expected to
@@ -273,17 +273,17 @@ export const universe = <A>(E: Enum<A>): NonEmptyArray<A> =>
  * @since 0.17.0
  */
 export const inverseMap =
-  <A>(E: Enum<A>) =>
-  <B>(Eq: Eq<B>) =>
-  (f: (x: A) => B): ((x: B) => Option<A>) => {
-    const ys = pipe(
-      universe(E),
-      NEA.map(toFst(f)),
-      Map.fromFoldable(Eq, Semigroup.last<A>(), NEA.Foldable),
-    )
+	<A>(E: Enum<A>) =>
+	<B>(Eq: Eq<B>) =>
+	(f: (x: A) => B): ((x: B) => Option<A>) => {
+		const ys = pipe(
+			universe(E),
+			NEA.map(toFst(f)),
+			Map.fromFoldable(Eq, Semigroup.last<A>(), NEA.Foldable),
+		)
 
-    return x => Map.lookup(Eq)(x)(ys)
-  }
+		return x => Map.lookup(Eq)(x)(ys)
+	}
 
 /**
  * Produces an Enum instance that's potentially both unlawful and unsafe from a
@@ -313,34 +313,34 @@ export const inverseMap =
  * @since 0.17.0
  */
 export const getUnsafeConstantEnum =
-  <A>(Ord: Ord<A>) =>
-  (xs: NonEmptyArray<A>): Enum<A> => {
-    const f = (y: A): Option<number> =>
-      pipe(
-        xs,
-        A.findIndex(z => Ord.equals(y, z)),
-      )
+	<A>(Ord: Ord<A>) =>
+	(xs: NonEmptyArray<A>): Enum<A> => {
+		const f = (y: A): Option<number> =>
+			pipe(
+				xs,
+				A.findIndex(z => Ord.equals(y, z)),
+			)
 
-    const g = (n: number): Option<A> => A.lookup(n)(xs)
+		const g = (n: number): Option<A> => A.lookup(n)(xs)
 
-    const sorted = NEA.sort(Ord)(xs)
-    const Bounded: Bounded<A> = {
-      ...Ord,
-      top: NEA.last(sorted),
-      bottom: NEA.head(sorted),
-    }
+		const sorted = NEA.sort(Ord)(xs)
+		const Bounded: Bounded<A> = {
+			...Ord,
+			top: NEA.last(sorted),
+			bottom: NEA.head(sorted),
+		}
 
-    return {
-      ...Bounded,
-      succ: flow(f, O.chain(flow(increment, g))),
-      pred: flow(f, O.chain(flow(decrement, g))),
-      toEnum: g,
-      fromEnum: flow(
-        f,
-        unsafeExpectO(
-          "Failed to lookup fromEnum input via getUnsafeConstantEnum",
-        ),
-      ),
-      cardinality: L.of(xs.length),
-    }
-  }
+		return {
+			...Bounded,
+			succ: flow(f, O.chain(flow(increment, g))),
+			pred: flow(f, O.chain(flow(decrement, g))),
+			toEnum: g,
+			fromEnum: flow(
+				f,
+				unsafeExpectO(
+					"Failed to lookup fromEnum input via getUnsafeConstantEnum",
+				),
+			),
+			cardinality: L.of(xs.length),
+		}
+	}

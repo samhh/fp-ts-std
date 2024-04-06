@@ -32,7 +32,7 @@ import { identity } from "fp-ts/function"
  * @since 0.15.0
  */
 export const runReaderEither: <R, E, A>(
-  r: R,
+	r: R,
 ) => (reader: ReaderEither<R, E, A>) => Either<E, A> = runReader
 
 /**
@@ -53,5 +53,5 @@ export const runReaderEither: <R, E, A>(
  * @since 0.16.0
  */
 export const asksEither: <R, E, A>(
-  f: (r: R) => Either<E, A>,
+	f: (r: R) => Either<E, A>,
 ) => ReaderEither<R, E, A> = identity

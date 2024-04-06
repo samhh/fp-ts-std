@@ -9,8 +9,8 @@ type TaskOption<A> = TO.TaskOption<A>
 import * as T from "fp-ts/Task"
 import { execute as executeT } from "./Task"
 import {
-  unsafeUnwrap as unsafeUnwrapO,
-  unsafeExpect as unsafeExpectO,
+	unsafeUnwrap as unsafeUnwrapO,
+	unsafeExpect as unsafeExpectO,
 } from "./Option"
 import { flow } from "fp-ts/function"
 import { pass as _pass } from "./Applicative"
@@ -30,8 +30,8 @@ import { pass as _pass } from "./Applicative"
  * @since 0.15.0
  */
 export const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A> = flow(
-  T.map(unsafeUnwrapO),
-  executeT,
+	T.map(unsafeUnwrapO),
+	executeT,
 )
 
 /**
@@ -51,9 +51,9 @@ export const unsafeUnwrap: <A>(x: TaskOption<A>) => Promise<A> = flow(
  * @since 0.16.0
  */
 export const unsafeExpect = (
-  msg: string,
+	msg: string,
 ): (<A>(x: TaskOption<A>) => Promise<A>) =>
-  flow(T.map(unsafeExpectO(msg)), executeT)
+	flow(T.map(unsafeExpectO(msg)), executeT)
 
 /**
  * Convenient alias for `TO.of(undefined)`.

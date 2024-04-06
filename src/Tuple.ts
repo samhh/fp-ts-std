@@ -5,23 +5,23 @@
  */
 
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import {
-  Functor,
-  Functor1,
-  Functor2,
-  Functor3,
-  Functor4,
-  Functor2C,
+	Functor,
+	Functor1,
+	Functor2,
+	Functor3,
+	Functor4,
+	Functor2C,
 } from "fp-ts/Functor"
 import * as Tuple from "fp-ts/Tuple"
 import { fork } from "./Function"
@@ -64,7 +64,7 @@ export const dup: <A>(x: A) => [A, A] = fork([identity, identity])
  * @since 0.12.0
  */
 export const toFst = <A, B>(f: (x: A) => B): ((x: A) => [B, A]) =>
-  fork([f, identity])
+	fork([f, identity])
 
 /**
  * Apply a function, collecting the input alongside the output. A dual to
@@ -80,7 +80,7 @@ export const toFst = <A, B>(f: (x: A) => B): ((x: A) => [B, A]) =>
  * @since 0.12.0
  */
 export const toSnd = <A, B>(f: (x: A) => B): ((x: A) => [A, B]) =>
-  fork([identity, f])
+	fork([identity, f])
 
 /**
  * Apply a functorial function, collecting the output alongside the input. A
@@ -102,31 +102,31 @@ export const toSnd = <A, B>(f: (x: A) => B): ((x: A) => [A, B]) =>
  * @since 0.12.0
  */
 export function traverseToFst<F extends URIS4>(
-  F: Functor4<F>,
+	F: Functor4<F>,
 ): <S, R, E, A, B>(
-  g: (x: A) => Kind4<F, S, R, E, B>,
+	g: (x: A) => Kind4<F, S, R, E, B>,
 ) => (x: A) => Kind4<F, S, R, E, [B, A]>
 export function traverseToFst<F extends URIS3>(
-  F: Functor3<F>,
+	F: Functor3<F>,
 ): <R, E, A, B>(
-  g: (x: A) => Kind3<F, R, E, B>,
+	g: (x: A) => Kind3<F, R, E, B>,
 ) => (x: A) => Kind3<F, R, E, [B, A]>
 export function traverseToFst<F extends URIS2>(
-  F: Functor2<F>,
+	F: Functor2<F>,
 ): <E, A, B>(g: (x: A) => Kind2<F, E, B>) => (x: A) => Kind2<F, E, [B, A]>
 export function traverseToFst<F extends URIS2, E>(
-  F: Functor2C<F, E>,
+	F: Functor2C<F, E>,
 ): <A, B>(g: (x: A) => Kind2<F, E, B>) => (x: A) => Kind2<F, E, [B, A]>
 export function traverseToFst<F extends URIS>(
-  F: Functor1<F>,
+	F: Functor1<F>,
 ): <A, B>(g: (x: A) => Kind<F, B>) => (x: A) => Kind<F, [B, A]>
 export function traverseToFst<F>(
-  F: Functor<F>,
+	F: Functor<F>,
 ): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [B, A]>
 export function traverseToFst<F>(
-  F: Functor<F>,
+	F: Functor<F>,
 ): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [B, A]> {
-  return g => x => F.map(g(x), y => [y, x])
+	return g => x => F.map(g(x), y => [y, x])
 }
 
 /**
@@ -149,31 +149,31 @@ export function traverseToFst<F>(
  * @since 0.12.0
  */
 export function traverseToSnd<F extends URIS4>(
-  F: Functor4<F>,
+	F: Functor4<F>,
 ): <S, R, E, A, B>(
-  g: (x: A) => Kind4<F, S, R, E, B>,
+	g: (x: A) => Kind4<F, S, R, E, B>,
 ) => (x: A) => Kind4<F, S, R, E, [A, B]>
 export function traverseToSnd<F extends URIS3>(
-  F: Functor3<F>,
+	F: Functor3<F>,
 ): <R, E, A, B>(
-  g: (x: A) => Kind3<F, R, E, B>,
+	g: (x: A) => Kind3<F, R, E, B>,
 ) => (x: A) => Kind3<F, R, E, [A, B]>
 export function traverseToSnd<F extends URIS2>(
-  F: Functor2<F>,
+	F: Functor2<F>,
 ): <E, A, B>(g: (x: A) => Kind2<F, E, B>) => (x: A) => Kind2<F, E, [A, B]>
 export function traverseToSnd<F extends URIS2, E>(
-  F: Functor2C<F, E>,
+	F: Functor2C<F, E>,
 ): <A, B>(g: (x: A) => Kind2<F, E, B>) => (x: A) => Kind2<F, E, [A, B]>
 export function traverseToSnd<F extends URIS>(
-  F: Functor1<F>,
+	F: Functor1<F>,
 ): <A, B>(g: (x: A) => Kind<F, B>) => (x: A) => Kind<F, [A, B]>
 export function traverseToSnd<F>(
-  F: Functor<F>,
+	F: Functor<F>,
 ): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [A, B]>
 export function traverseToSnd<F>(
-  F: Functor<F>,
+	F: Functor<F>,
 ): <A, B>(g: (x: A) => HKT<F, B>) => (x: A) => HKT<F, [A, B]> {
-  return g => x => F.map(g(x), y => [x, y])
+	return g => x => F.map(g(x), y => [x, y])
 }
 
 /**
@@ -190,8 +190,8 @@ export function traverseToSnd<F>(
  * @since 0.12.0
  */
 export const withFst =
-  <A>(x: A) =>
-  <B>(y: B): [A, B] => [x, y]
+	<A>(x: A) =>
+	<B>(y: B): [A, B] => [x, y]
 
 /**
  * Curried tuple construction. A dual to `withFst`. Equivalent to Haskell's
@@ -207,8 +207,8 @@ export const withFst =
  * @since 0.12.0
  */
 export const withSnd =
-  <A>(x: A) =>
-  <B>(y: B): [B, A] => [y, x]
+	<A>(x: A) =>
+	<B>(y: B): [B, A] => [y, x]
 
 /**
  * Create a tuple. Helps with fighting TypeScript's type inferrence without
@@ -240,7 +240,7 @@ export const create: <A, B>(xs: [A, B]) => [A, B] = identity
  * @since 0.14.0
  */
 export const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B] =
-  _mapBoth(Tuple.Bifunctor)
+	_mapBoth(Tuple.Bifunctor)
 
 /**
  * Send an input to two functions and combine their outputs in a tuple. For a
@@ -261,7 +261,7 @@ export const mapBoth: <A, B>(f: (x: A) => B) => (xs: [A, A]) => [B, B] =
 // Not implemented in terms of `fp-ts/Strong` as there's no relevant typeclass
 // instances, and the implementation is very straightforward.
 export const fanout: <A, B>(
-  f: (x: A) => B,
+	f: (x: A) => B,
 ) => <C>(g: (x: A) => C) => (x: A) => [B, C] = f => g => fork([f, g])
 
 /**
@@ -281,9 +281,9 @@ export const fanout: <A, B>(
  * @since 0.17.0
  */
 export const getEq =
-  <A>(EA: Eq<A>) =>
-  <B>(EB: Eq<B>): Eq<[A, B]> =>
-    fromEquals(([xa, xb], [ya, yb]) => EA.equals(xa, ya) && EB.equals(xb, yb))
+	<A>(EA: Eq<A>) =>
+	<B>(EB: Eq<B>): Eq<[A, B]> =>
+		fromEquals(([xa, xb], [ya, yb]) => EA.equals(xa, ya) && EB.equals(xb, yb))
 
 /**
  * Derive `Ord` for a tuple given `Ord` instances for its members. The first
@@ -304,12 +304,12 @@ export const getEq =
  * @since 0.17.0
  */
 export const getOrd =
-  <A>(OA: Ord<A>) =>
-  <B>(OB: Ord<B>): Ord<[A, B]> =>
-    fromCompare(([xa, xb], [ya, yb]) => {
-      const a = OA.compare(xa, ya)
-      return a === EQ ? OB.compare(xb, yb) : a
-    })
+	<A>(OA: Ord<A>) =>
+	<B>(OB: Ord<B>): Ord<[A, B]> =>
+		fromCompare(([xa, xb], [ya, yb]) => {
+			const a = OA.compare(xa, ya)
+			return a === EQ ? OB.compare(xb, yb) : a
+		})
 
 /**
  * Derive a `Bounded` instance for a tuple in which the top and bottom
@@ -328,12 +328,12 @@ export const getOrd =
  * @since 0.17.0
  */
 export const getBounded =
-  <A>(BA: Bounded<A>) =>
-  <B>(BB: Bounded<B>): Bounded<[A, B]> => ({
-    ...getOrd(BA)(BB),
-    top: [BA.top, BB.top],
-    bottom: [BA.bottom, BB.bottom],
-  })
+	<A>(BA: Bounded<A>) =>
+	<B>(BB: Bounded<B>): Bounded<[A, B]> => ({
+		...getOrd(BA)(BB),
+		top: [BA.top, BB.top],
+		bottom: [BA.bottom, BB.bottom],
+	})
 
 /**
  * Derive an `Enum` instance for a tuple given an `Enum` instance for each
@@ -355,41 +355,41 @@ export const getBounded =
  * @since 0.17.0
  */
 export const getEnum =
-  <A>(EA: Enum<A>) =>
-  <B>(EB: Enum<B>): Enum<[A, B]> => ({
-    ...getBounded(EA)(EB),
-    succ: ([a, b]) =>
-      EA.equals(a, EA.top)
-        ? pipe(EB.succ(b), O.map(withFst(EA.bottom)))
-        : pipe(EA.succ(a), O.map(withSnd(b))),
-    pred: ([a, b]) =>
-      EA.equals(a, EA.bottom)
-        ? pipe(EB.pred(b), O.map(withFst(EA.top)))
-        : pipe(EA.pred(a), O.map(withSnd(b))),
-    toEnum: flow(
-      O.fromPredicate(allPass([isValid, isNonNegative, Number.isInteger])),
-      O.chain(n => {
-        const ac = L.execute(EA.cardinality)
-        const bc = L.execute(EB.cardinality)
-        if (n > ac + bc) return O.none // eslint-disable-line functional/no-conditional-statements
+	<A>(EA: Enum<A>) =>
+	<B>(EB: Enum<B>): Enum<[A, B]> => ({
+		...getBounded(EA)(EB),
+		succ: ([a, b]) =>
+			EA.equals(a, EA.top)
+				? pipe(EB.succ(b), O.map(withFst(EA.bottom)))
+				: pipe(EA.succ(a), O.map(withSnd(b))),
+		pred: ([a, b]) =>
+			EA.equals(a, EA.bottom)
+				? pipe(EB.pred(b), O.map(withFst(EA.top)))
+				: pipe(EA.pred(a), O.map(withSnd(b))),
+		toEnum: flow(
+			O.fromPredicate(allPass([isValid, isNonNegative, Number.isInteger])),
+			O.chain(n => {
+				const ac = L.execute(EA.cardinality)
+				const bc = L.execute(EB.cardinality)
+				if (n > ac + bc) return O.none // eslint-disable-line functional/no-conditional-statements
 
-        type AB = (x: A) => (y: B) => [A, B]
-        return pipe(
-          O.of<AB>(withFst),
-          O.ap(EA.toEnum(n % ac)),
-          O.ap(EB.toEnum(Math.floor(n / ac))),
-        )
-      }),
-    ),
-    fromEnum: ([a, b]) => {
-      const ai = EA.fromEnum(a)
-      const bi = EB.fromEnum(b)
-      const ac = L.execute(EA.cardinality)
-      return (ac - 1) * bi + ai + bi
-    },
-    cardinality: pipe(
-      L.of(multiply),
-      L.ap(EA.cardinality),
-      L.ap(EB.cardinality),
-    ),
-  })
+				type AB = (x: A) => (y: B) => [A, B]
+				return pipe(
+					O.of<AB>(withFst),
+					O.ap(EA.toEnum(n % ac)),
+					O.ap(EB.toEnum(Math.floor(n / ac))),
+				)
+			}),
+		),
+		fromEnum: ([a, b]) => {
+			const ai = EA.fromEnum(a)
+			const bi = EB.fromEnum(b)
+			const ac = L.execute(EA.cardinality)
+			return (ac - 1) * bi + ai + bi
+		},
+		cardinality: pipe(
+			L.of(multiply),
+			L.ap(EA.cardinality),
+			L.ap(EB.cardinality),
+		),
+	})

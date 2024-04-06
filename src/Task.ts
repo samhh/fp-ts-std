@@ -46,12 +46,12 @@ import { Predicate } from "fp-ts/Predicate"
  * @since 0.1.0
  */
 export const sleep =
-  (n: Milliseconds): Task<void> =>
-  () =>
-    new Promise<void>(resolve => {
-      // eslint-disable-next-line functional/no-expression-statements
-      setTimeout(resolve, Math.floor(unMilliseconds(n)))
-    })
+	(n: Milliseconds): Task<void> =>
+	() =>
+		new Promise<void>(resolve => {
+			// eslint-disable-next-line functional/no-expression-statements
+			setTimeout(resolve, Math.floor(unMilliseconds(n)))
+		})
 
 /**
  * Calls the callback upon task completion with the number of milliseconds it
@@ -74,17 +74,17 @@ export const sleep =
  * @since 0.5.0
  */
 export const elapsed =
-  (f: (n: Milliseconds) => IO<void>) =>
-  <A>(x: Task<A>): Task<A> =>
-  async () => {
-    const start = now()
-    const y = await x()
-    const duration = fieldMilliseconds.sub(now(), start)
-    // eslint-disable-next-line functional/no-expression-statements
-    f(duration)()
+	(f: (n: Milliseconds) => IO<void>) =>
+	<A>(x: Task<A>): Task<A> =>
+	async () => {
+		const start = now()
+		const y = await x()
+		const duration = fieldMilliseconds.sub(now(), start)
+		// eslint-disable-next-line functional/no-expression-statements
+		f(duration)()
 
-    return y
-  }
+		return y
+	}
 
 /**
  * Execute a `Task`, returning the `Promise` within. Helpful for staying within
@@ -128,7 +128,7 @@ export const execute = <A>(x: Task<A>): Promise<A> => x()
  * @since 0.12.0
  */
 export const when: (x: boolean) => Endomorphism<Task<void>> = _when(
-  T.ApplicativePar,
+	T.ApplicativePar,
 )
 
 /**
@@ -155,7 +155,7 @@ export const when: (x: boolean) => Endomorphism<Task<void>> = _when(
  * @since 0.12.0
  */
 export const unless: (x: boolean) => Endomorphism<Task<void>> = _unless(
-  T.ApplicativePar,
+	T.ApplicativePar,
 )
 
 /**
@@ -165,7 +165,7 @@ export const unless: (x: boolean) => Endomorphism<Task<void>> = _unless(
  * @since 0.15.0
  */
 export const sequenceArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
-  flow(T.sequenceArray, T.map(constVoid))
+	flow(T.sequenceArray, T.map(constVoid))
 
 /**
  * Sequentially sequence an array of tasks, ignoring the results.
@@ -174,7 +174,7 @@ export const sequenceArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
  * @since 0.15.0
  */
 export const sequenceSeqArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
-  flow(T.sequenceSeqArray, T.map(constVoid))
+	flow(T.sequenceSeqArray, T.map(constVoid))
 
 /**
  * Map to and sequence an array of tasks, ignoring the results.
@@ -183,9 +183,9 @@ export const sequenceSeqArray_: <A>(xs: ReadonlyArray<Task<A>>) => Task<void> =
  * @since 0.15.0
  */
 export const traverseArray_: <A, B>(
-  f: (x: A) => Task<B>,
+	f: (x: A) => Task<B>,
 ) => (xs: ReadonlyArray<A>) => Task<void> = f =>
-  flow(T.traverseArray(f), T.map(constVoid))
+	flow(T.traverseArray(f), T.map(constVoid))
 
 /**
  * Sequentially map to and sequence an array of tasks, ignoring the results.
@@ -194,9 +194,9 @@ export const traverseArray_: <A, B>(
  * @since 0.15.0
  */
 export const traverseSeqArray_: <A, B>(
-  f: (x: A) => Task<B>,
+	f: (x: A) => Task<B>,
 ) => (xs: ReadonlyArray<A>) => Task<void> = f =>
-  flow(T.traverseSeqArray(f), T.map(constVoid))
+	flow(T.traverseSeqArray(f), T.map(constVoid))
 
 /**
  * Convenient alias for `T.of(undefined)`.
@@ -253,5 +253,5 @@ export const pass: Task<void> = _pass(T.ApplicativePar)
  * @since 0.18.0
  */
 export const until: <A>(p: Predicate<A>) => Endomorphism<Task<A>> = _until(
-  T.Monad,
+	T.Monad,
 )

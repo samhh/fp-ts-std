@@ -29,7 +29,7 @@ import * as Str from "fp-ts/string"
  * @since 0.10.0
  */
 export const values: <A>(x: RR.ReadonlyRecord<string, A>) => ReadonlyArray<A> =
-  Object.values
+	Object.values
 
 /**
  * Like `fp-ts/ReadonlyRecord::lookup` but flipped, which the "V" suffix
@@ -48,9 +48,9 @@ export const values: <A>(x: RR.ReadonlyRecord<string, A>) => ReadonlyArray<A> =
  * @since 0.10.0
  */
 export const lookupV =
-  <A>(x: RR.ReadonlyRecord<string, A>) =>
-  (k: string): Option<A> =>
-    RR.lookup(k)(x)
+	<A>(x: RR.ReadonlyRecord<string, A>) =>
+	(k: string): Option<A> =>
+		RR.lookup(k)(x)
 
 /**
  * Filters out key/value pairs in the record for which the predicate upon the
@@ -69,9 +69,9 @@ export const lookupV =
  * @since 0.10.0
  */
 export const reject = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(
-  x: RR.ReadonlyRecord<string, B>,
+	x: RR.ReadonlyRecord<string, B>,
 ) => RR.ReadonlyRecord<string, B>) => RR.filter(not(f))
 
 /**
@@ -89,13 +89,13 @@ export const reject = <A>(
  * @since 0.10.0
  */
 export const invertLast = <A>(
-  f: (x: A) => string,
+	f: (x: A) => string,
 ): ((x: RR.ReadonlyRecord<string, A>) => RR.ReadonlyRecord<string, string>) =>
-  flow(
-    RR.toReadonlyArray,
-    RA.map(flow(RT.mapSnd(f), RT.swap)),
-    RR.fromFoldable(last<string>(), RA.Foldable),
-  )
+	flow(
+		RR.toReadonlyArray,
+		RA.map(flow(RT.mapSnd(f), RT.swap)),
+		RR.fromFoldable(last<string>(), RA.Foldable),
+	)
 
 /**
  * Invert a record, collecting values with duplicate keys in an array. Should
@@ -112,15 +112,15 @@ export const invertLast = <A>(
  * @since 0.10.0
  */
 export const invertAll = <A>(
-  f: (x: A) => string,
+	f: (x: A) => string,
 ): ((
-  x: RR.ReadonlyRecord<string, A>,
+	x: RR.ReadonlyRecord<string, A>,
 ) => RR.ReadonlyRecord<string, ReadonlyArray<string>>) =>
-  flow(
-    RR.toReadonlyArray,
-    RA.map(flow(RT.bimap(f, RA.of), RT.swap)),
-    RR.fromFoldable(RA.getMonoid<string>(), RA.Foldable),
-  )
+	flow(
+		RR.toReadonlyArray,
+		RA.map(flow(RT.bimap(f, RA.of), RT.swap)),
+		RR.fromFoldable(RA.getMonoid<string>(), RA.Foldable),
+	)
 
 /**
  * Pick a set of keys from a `ReadonlyRecord`. The value-level equivalent of
@@ -142,9 +142,9 @@ export const invertAll = <A>(
  * @since 0.16.0
  */
 export const pick = (
-  ks: ReadonlyArray<string>,
+	ks: ReadonlyArray<string>,
 ): (<A>(y: RR.ReadonlyRecord<string, A>) => RR.ReadonlyRecord<string, A>) =>
-  RR.filterWithIndex(elemV(Str.Eq)(ks))
+	RR.filterWithIndex(elemV(Str.Eq)(ks))
 
 /**
  * Omit a set of keys from a `ReadonlyRecord`. The value-level equivalent of
@@ -166,6 +166,6 @@ export const pick = (
  * @since 0.16.0
  */
 export const omit = (
-  ks: Array<string>,
+	ks: Array<string>,
 ): (<A>(y: Record<string, A>) => Record<string, A>) =>
-  RR.filterWithIndex(not(elemV(Str.Eq)(ks)))
+	RR.filterWithIndex(not(elemV(Str.Eq)(ks)))

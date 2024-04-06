@@ -35,7 +35,7 @@ import { pack, unpack } from "./Newtype"
  * @since 0.1.0
  */
 export const unsafeParseDate = (x: string | number): Date =>
-  construct(Date)([x])
+	construct(Date)([x])
 
 type MillisecondsSymbol = { readonly Milliseconds: unique symbol }
 
@@ -144,8 +144,8 @@ export const unMilliseconds: (ms: Milliseconds) => number = unpack
  * @since 0.7.0
  */
 export const fromMilliseconds: (x: Milliseconds) => Date = flow(
-  unMilliseconds,
-  unsafeParseDate,
+	unMilliseconds,
+	unsafeParseDate,
 )
 
 /**
@@ -162,8 +162,8 @@ export const fromMilliseconds: (x: Milliseconds) => Date = flow(
  * @since 0.1.0
  */
 export const getTime: (x: Date) => Milliseconds = flow(
-  invokeOn<Date>()("getTime")([]),
-  mkMilliseconds,
+	invokeOn<Date>()("getTime")([]),
+	mkMilliseconds,
 )
 
 /**
@@ -180,7 +180,7 @@ export const getTime: (x: Date) => Milliseconds = flow(
  * @since 0.1.0
  */
 export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
-  [],
+	[],
 )
 
 /**
@@ -197,7 +197,7 @@ export const toISOString: (x: Date) => string = invokeOn<Date>()("toISOString")(
  * @since 0.14.0
  */
 export const toUTCString: (x: Date) => string = invokeOn<Date>()("toUTCString")(
-  [],
+	[],
 )
 
 /**
@@ -230,9 +230,9 @@ export const isDate: Refinement<unknown, Date> = isInstanceOf(Date)
  * @since 0.1.0
  */
 export const isValid: Predicate<Date> = flow(
-  getTime,
-  unMilliseconds,
-  isValidNum,
+	getTime,
+	unMilliseconds,
+	isValidNum,
 )
 
 /**
@@ -252,8 +252,8 @@ export const isValid: Predicate<Date> = flow(
  * @since 0.1.0
  */
 export const parseDate: (ts: string | number) => Option<Date> = flow(
-  unsafeParseDate,
-  O.fromPredicate(isValid),
+	unsafeParseDate,
+	O.fromPredicate(isValid),
 )
 
 /**

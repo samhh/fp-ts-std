@@ -5,24 +5,24 @@
  */
 
 import {
-  Foldable,
-  Foldable1,
-  Foldable2,
-  Foldable2C,
-  Foldable3,
-  Foldable3C,
-  Foldable4,
+	Foldable,
+	Foldable1,
+	Foldable2,
+	Foldable2C,
+	Foldable3,
+	Foldable3C,
+	Foldable4,
 } from "fp-ts/Foldable"
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import { Monoid } from "fp-ts/Monoid"
 import { flow, identity } from "fp-ts/function"
@@ -47,27 +47,27 @@ import { Lazy } from "./Lazy"
  * @since 0.12.0
  */
 export function toMonoid<F extends URIS4>(
-  F: Foldable4<F>,
+	F: Foldable4<F>,
 ): <A, S, R, E>(G: Monoid<A>) => (x: Kind4<F, S, R, E, A>) => A
 export function toMonoid<F extends URIS3>(
-  F: Foldable3<F>,
+	F: Foldable3<F>,
 ): <A, R, E>(G: Monoid<A>) => (x: Kind3<F, R, E, A>) => A
 export function toMonoid<F extends URIS3, E>(
-  F: Foldable3C<F, E>,
+	F: Foldable3C<F, E>,
 ): <A, R>(G: Monoid<A>) => (x: Kind3<F, R, E, A>) => A
 export function toMonoid<F extends URIS2>(
-  F: Foldable2<F>,
+	F: Foldable2<F>,
 ): <A, E>(G: Monoid<A>) => (x: Kind2<F, E, A>) => A
 export function toMonoid<F extends URIS2, E>(
-  F: Foldable2C<F, E>,
+	F: Foldable2C<F, E>,
 ): <A>(G: Monoid<A>) => (x: Kind2<F, E, A>) => A
 export function toMonoid<F extends URIS>(
-  F: Foldable1<F>,
+	F: Foldable1<F>,
 ): <A>(G: Monoid<A>) => (x: Kind<F, A>) => A
 export function toMonoid<F>(
-  F: Foldable<F>,
+	F: Foldable<F>,
 ): <A>(G: Monoid<A>) => (x: HKT<F, A>) => A {
-  return G => x => F.foldMap(G)(x, identity)
+	return G => x => F.foldMap(G)(x, identity)
 }
 
 /**
@@ -91,10 +91,10 @@ export function toMonoid<F>(
  * @since 0.13.0
  */
 export const memptyWhen =
-  <A>(M: Monoid<A>) =>
-  (x: boolean) =>
-  (y: Lazy<A>): A =>
-    x ? M.empty : y()
+	<A>(M: Monoid<A>) =>
+	(x: boolean) =>
+	(y: Lazy<A>): A =>
+		x ? M.empty : y()
 
 /**
  * Conditionally returns the provided monoidal value or its identity. The dual
@@ -117,5 +117,5 @@ export const memptyWhen =
  * @since 0.13.0
  */
 export const memptyUnless = <A>(
-  M: Monoid<A>,
+	M: Monoid<A>,
 ): ((x: boolean) => (y: Lazy<A>) => A) => flow(invert, memptyWhen(M))

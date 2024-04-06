@@ -8,15 +8,15 @@
  */
 
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import { Functor, Functor1, Functor2, Functor3, Functor4 } from "fp-ts/Functor"
 import { Newtype, iso } from "newtype-ts"
@@ -40,7 +40,7 @@ import * as Id from "fp-ts/Identity"
  * @since 0.15.0
  */
 export const pack = <A extends Newtype<unknown, unknown> = never>(x: A["_A"]) =>
-  iso<A>().wrap(x)
+	iso<A>().wrap(x)
 
 /**
  * Unpack a value from a newtype.
@@ -58,7 +58,7 @@ export const pack = <A extends Newtype<unknown, unknown> = never>(x: A["_A"]) =>
  * @since 0.15.0
  */
 export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
-  iso<A>().unwrap(x)
+	iso<A>().unwrap(x)
 
 /**
  * Apply a effectful function over a newtype.
@@ -78,38 +78,38 @@ export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
  * @since 0.15.0
  */
 export function overF<F extends URIS4>(
-  F: Functor4<F>,
+	F: Functor4<F>,
 ): <S, R, E, A>(
-  f: (x: A) => Kind4<F, S, R, E, A>,
+	f: (x: A) => Kind4<F, S, R, E, A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => Kind4<F, S, R, E, B>
 export function overF<F extends URIS3>(
-  F: Functor3<F>,
+	F: Functor3<F>,
 ): <R, E, A>(
-  f: (x: A) => Kind3<F, R, E, A>,
+	f: (x: A) => Kind3<F, R, E, A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => Kind3<F, R, E, B>
 export function overF<F extends URIS2>(
-  F: Functor2<F>,
+	F: Functor2<F>,
 ): <E, A>(
-  f: (x: A) => Kind2<F, E, A>,
+	f: (x: A) => Kind2<F, E, A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => Kind2<F, E, B>
 export function overF<F extends URIS>(
-  F: Functor1<F>,
+	F: Functor1<F>,
 ): <A>(
-  f: (x: A) => Kind<F, A>,
+	f: (x: A) => Kind<F, A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => Kind<F, B>
 export function overF<F>(
-  F: Functor<F>,
+	F: Functor<F>,
 ): <A>(
-  f: (x: A) => HKT<F, A>,
+	f: (x: A) => HKT<F, A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => HKT<F, B>
 export function overF<F>(
-  F: Functor<F>,
+	F: Functor<F>,
 ): <A>(
-  f: (x: A) => HKT<F, A>,
+	f: (x: A) => HKT<F, A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => HKT<F, B> {
-  return <A>(f: (x: A) => HKT<F, A>) =>
-    <B extends Newtype<unknown, A>>(x: B) =>
-      pipe(x, unpack, f, y => F.map(y, pack<B>))
+	return <A>(f: (x: A) => HKT<F, A>) =>
+		<B extends Newtype<unknown, A>>(x: B) =>
+			pipe(x, unpack, f, y => F.map(y, pack<B>))
 }
 
 /**
@@ -130,5 +130,5 @@ export function overF<F>(
  * @since 0.15.0
  */
 export const over: <A>(
-  f: Endomorphism<A>,
+	f: Endomorphism<A>,
 ) => <B extends Newtype<unknown, A>>(x: B) => B = overF(Id.Functor)

@@ -27,7 +27,7 @@ import { runReader } from "./Reader"
  * @since 0.15.0
  */
 export const runReaderTask: <R, A>(
-  r: R,
+	r: R,
 ) => (reader: ReaderTask<R, A>) => Task<A> = runReader
 
 /**
@@ -47,4 +47,4 @@ export const runReaderTask: <R, A>(
  * @since 0.16.0
  */
 export const asksTask: <R, A>(f: (r: R) => Task<A>) => ReaderTask<R, A> =
-  identity
+	identity

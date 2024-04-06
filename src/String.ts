@@ -14,9 +14,9 @@ import * as NEA from "fp-ts/NonEmptyArray"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as S from "fp-ts/string"
 import {
-  join,
-  dropRightWhile as dropRightWhileRA,
-  takeRightWhile as takeRightWhileRA,
+	join,
+	dropRightWhile as dropRightWhileRA,
+	takeRightWhile as takeRightWhileRA,
 } from "./ReadonlyArray"
 import { max } from "fp-ts/Ord"
 import { Ord as ordNumber } from "fp-ts/number"
@@ -63,9 +63,9 @@ export const fromBool: (x: boolean) => string = String
  * @since 0.1.0
  */
 export const prepend =
-  (prepended: string): Endomorphism<string> =>
-  rest =>
-    prepended + rest
+	(prepended: string): Endomorphism<string> =>
+	rest =>
+		prepended + rest
 
 /**
  * Remove the beginning of a string, if it exists.
@@ -81,7 +81,7 @@ export const prepend =
  * @since 0.1.0
  */
 export const unprepend = (start: string): Endomorphism<string> =>
-  when(S.startsWith(start))(dropLeft(start.length))
+	when(S.startsWith(start))(dropLeft(start.length))
 
 /**
  * Append one string to another.
@@ -112,7 +112,7 @@ export const append: (appended: string) => Endomorphism<string> = flip(prepend)
  * @since 0.1.0
  */
 export const unappend = (end: string): Endomorphism<string> =>
-  when(S.endsWith(end))(dropRight(end.length))
+	when(S.endsWith(end))(dropRight(end.length))
 
 /**
  * Surround a string. Equivalent to calling `prepend` and `append` with the
@@ -129,7 +129,7 @@ export const unappend = (end: string): Endomorphism<string> =>
  * @since 0.1.0
  */
 export const surround = (x: string): Endomorphism<string> =>
-  flow(prepend(x), append(x))
+	flow(prepend(x), append(x))
 
 /**
  * Remove the start and end of a string, if they both exist.
@@ -145,7 +145,7 @@ export const surround = (x: string): Endomorphism<string> =>
  * @since 0.1.0
  */
 export const unsurround = (x: string): Endomorphism<string> =>
-  when(and(S.startsWith(x))(S.endsWith(x)))(flow(unprepend(x), unappend(x)))
+	when(and(S.startsWith(x))(S.endsWith(x)))(flow(unprepend(x), unappend(x)))
 
 /**
  * Keep the specified number of characters from the start of a string.
@@ -166,7 +166,7 @@ export const unsurround = (x: string): Endomorphism<string> =>
  * @since 0.3.0
  */
 export const takeLeft = (n: number): Endomorphism<string> =>
-  S.slice(0, max(ordNumber)(0, n))
+	S.slice(0, max(ordNumber)(0, n))
 
 /**
  * Keep the specified number of characters from the end of a string.
@@ -187,9 +187,9 @@ export const takeLeft = (n: number): Endomorphism<string> =>
  * @since 0.3.0
  */
 export const takeRight =
-  (n: number): Endomorphism<string> =>
-  x =>
-    S.slice(max(ordNumber)(0, x.length - Math.floor(n)), Infinity)(x)
+	(n: number): Endomorphism<string> =>
+	x =>
+		S.slice(max(ordNumber)(0, x.length - Math.floor(n)), Infinity)(x)
 
 /**
  * Functional wrapper around `String.prototype.match`.
@@ -208,7 +208,7 @@ export const takeRight =
  * @since 0.1.0
  */
 export const match = (r: RegExp): ((x: string) => Option<RegExpMatchArray>) =>
-  flow(invoke("match")([r]), O.fromNullable)
+	flow(invoke("match")([r]), O.fromNullable)
 
 /**
  * A functional wrapper around `String.prototype.matchAll`.
@@ -232,12 +232,12 @@ export const match = (r: RegExp): ((x: string) => Option<RegExpMatchArray>) =>
  * @since 0.5.0
  */
 export const matchAll =
-  (r: RegExp) =>
-  (x: string): Option<NonEmptyArray<RegExpMatchArray>> =>
-    pipe(
-      O.tryCatch(() => x.matchAll(r)),
-      O.chain(flow(xs => Array.from(xs), NEA.fromArray)),
-    )
+	(r: RegExp) =>
+	(x: string): Option<NonEmptyArray<RegExpMatchArray>> =>
+		pipe(
+			O.tryCatch(() => x.matchAll(r)),
+			O.chain(flow(xs => Array.from(xs), NEA.fromArray)),
+		)
 
 /**
  * Apply an endomorphism upon an array of strings (characters) against a string.
@@ -259,7 +259,7 @@ export const matchAll =
  * @since 0.7.0
  */
 export const under = (
-  f: Endomorphism<ReadonlyArray<string>>,
+	f: Endomorphism<ReadonlyArray<string>>,
 ): Endomorphism<string> => flow(S.split(""), f, join(""))
 
 /**
@@ -317,14 +317,14 @@ export const unlines = join("\n")
  * @since 0.1.0
  */
 export const test =
-  (r: RegExp): Predicate<string> =>
-  x => {
-    const lastIndex = r.lastIndex
-    const res = r.test(x)
-    // eslint-disable-next-line functional/no-expression-statements, functional/immutable-data
-    r.lastIndex = lastIndex
-    return res
-  }
+	(r: RegExp): Predicate<string> =>
+	x => {
+		const lastIndex = r.lastIndex
+		const res = r.test(x)
+		// eslint-disable-next-line functional/no-expression-statements, functional/immutable-data
+		r.lastIndex = lastIndex
+		return res
+	}
 
 /**
  * Replace every occurrence of a matched substring with a replacement.
@@ -341,10 +341,10 @@ export const test =
  * @since 0.7.0
  */
 export const replaceAll =
-  (r: string) =>
-  (s: string): Endomorphism<string> =>
-    // COMPAT: Use native `replaceAll` method once we drop support for Node <15.
-    invoke("replace")([new RegExp(r, "g"), s])
+	(r: string) =>
+	(s: string): Endomorphism<string> =>
+		// COMPAT: Use native `replaceAll` method once we drop support for Node <15.
+		invoke("replace")([new RegExp(r, "g"), s])
 
 /**
  * Drop a number of characters from the start of a string, returning a new
@@ -366,7 +366,7 @@ export const replaceAll =
  * @since 0.6.0
  */
 export const dropLeft = (n: number): Endomorphism<string> =>
-  invoke("substring")([n])
+	invoke("substring")([n])
 
 /**
  * Drop a number of characters from the end of a string, returning a new
@@ -388,9 +388,9 @@ export const dropLeft = (n: number): Endomorphism<string> =>
  * @since 0.3.0
  */
 export const dropRight =
-  (n: number): Endomorphism<string> =>
-  x =>
-    pipe(x, invoke("substring")([0, x.length - Math.floor(n)]))
+	(n: number): Endomorphism<string> =>
+	x =>
+		pipe(x, invoke("substring")([0, x.length - Math.floor(n)]))
 
 /**
  * Remove the longest initial substring for which all characters satisfy the
@@ -407,7 +407,7 @@ export const dropRight =
  * @since 0.6.0
  */
 export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
-  pipe(RA.dropLeftWhile(f), under)
+	pipe(RA.dropLeftWhile(f), under)
 
 /**
  * Remove the longest initial substring from the end of the input string for
@@ -427,7 +427,7 @@ export const dropLeftWhile = (f: Predicate<string>): Endomorphism<string> =>
  * @since 0.7.0
  */
 export const dropRightWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(dropRightWhileRA, under)
+	flow(dropRightWhileRA, under)
 
 /**
  * Get the first character in a string, or `None` if the string is empty.
@@ -443,8 +443,8 @@ export const dropRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  * @since 0.6.0
  */
 export const head: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(S.isEmpty)),
-  O.map(takeLeft(1)),
+	O.fromPredicate(not(S.isEmpty)),
+	O.map(takeLeft(1)),
 )
 
 /**
@@ -463,8 +463,8 @@ export const head: (x: string) => Option<string> = flow(
  * @since 0.6.0
  */
 export const tail: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(S.isEmpty)),
-  O.map(dropLeft(1)),
+	O.fromPredicate(not(S.isEmpty)),
+	O.map(dropLeft(1)),
 )
 
 /**
@@ -481,8 +481,8 @@ export const tail: (x: string) => Option<string> = flow(
  * @since 0.7.0
  */
 export const last: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(S.isEmpty)),
-  O.map(takeRight(1)),
+	O.fromPredicate(not(S.isEmpty)),
+	O.map(takeRight(1)),
 )
 
 /**
@@ -501,8 +501,8 @@ export const last: (x: string) => Option<string> = flow(
  * @since 0.7.0
  */
 export const init: (x: string) => Option<string> = flow(
-  O.fromPredicate(not(S.isEmpty)),
-  O.map(dropRight(1)),
+	O.fromPredicate(not(S.isEmpty)),
+	O.map(dropRight(1)),
 )
 
 /**
@@ -519,9 +519,9 @@ export const init: (x: string) => Option<string> = flow(
  * @since 0.7.0
  */
 export const lookup =
-  (i: number) =>
-  (x: string): Option<string> =>
-    pipe(x[i], O.fromNullable)
+	(i: number) =>
+	(x: string): Option<string> =>
+		pipe(x[i], O.fromNullable)
 
 /**
  * Calculate the longest initial substring for which all characters satisfy the
@@ -537,7 +537,7 @@ export const lookup =
  */
 // The pointful first function is needed to typecheck for some reason
 export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(f => RA.takeLeftWhile(f), under)
+	flow(f => RA.takeLeftWhile(f), under)
 
 /**
  * Calculate the longest initial substring from the end of the input string
@@ -553,7 +553,7 @@ export const takeLeftWhile: (f: Predicate<string>) => Endomorphism<string> =
  * @since 0.7.0
  */
 export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
-  flow(takeRightWhileRA, under)
+	flow(takeRightWhileRA, under)
 
 /**
  * Partition a string into parts at an index.
@@ -569,11 +569,11 @@ export const takeRightWhile: (f: Predicate<string>) => Endomorphism<string> =
  * @since 0.11.0
  */
 export const splitAt =
-  (index: number) =>
-  (str: string): [string, string] => [
-    S.slice(0, index)(str),
-    S.slice(index, Infinity)(str),
-  ]
+	(index: number) =>
+	(str: string): [string, string] => [
+		S.slice(0, index)(str),
+		S.slice(index, Infinity)(str),
+	]
 
 /**
  * Tests if a string exclusively consists of alphabetic characters. Behaviour
@@ -702,7 +702,7 @@ export const unwords = join(" ")
  * @since 0.18.0
  */
 export const dropPrefix = (prefix: string): Endomorphism<string> =>
-  when(S.startsWith(prefix))(dropLeft(S.size(prefix)))
+	when(S.startsWith(prefix))(dropLeft(S.size(prefix)))
 
 /**
  * Drop a suffix if present, else return the input string unmodified.
@@ -720,4 +720,4 @@ export const dropPrefix = (prefix: string): Endomorphism<string> =>
  * @since 0.18.0
  */
 export const dropSuffix = (suffix: string): Endomorphism<string> =>
-  when(S.endsWith(suffix))(dropRight(S.size(suffix)))
+	when(S.endsWith(suffix))(dropRight(S.size(suffix)))

@@ -46,9 +46,9 @@ export const values: <A>(x: Record<string, A>) => Array<A> = Object.values
  * @since 0.1.0
  */
 export const lookupV =
-  <A>(x: Record<string, A>) =>
-  (k: string): Option<A> =>
-    R.lookup(k)(x)
+	<A>(x: Record<string, A>) =>
+	(k: string): Option<A> =>
+		R.lookup(k)(x)
 
 /**
  * Filters out key/value pairs in the record for which the predicate upon the
@@ -67,9 +67,9 @@ export const lookupV =
  * @since 0.7.0
  */
 export const reject = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(x: Record<string, B>) => Record<string, B>) =>
-  R.filter(not(f))
+	R.filter(not(f))
 
 /**
  * Invert a record, keeping only the last value should the same key be
@@ -86,13 +86,13 @@ export const reject = <A>(
  * @since 0.7.0
  */
 export const invertLast = <A>(
-  f: (x: A) => string,
+	f: (x: A) => string,
 ): ((x: Record<string, A>) => Record<string, string>) =>
-  flow(
-    R.toArray,
-    A.map(flow(T.mapSnd(f), T.swap)),
-    R.fromFoldable(last<string>(), A.Foldable),
-  )
+	flow(
+		R.toArray,
+		A.map(flow(T.mapSnd(f), T.swap)),
+		R.fromFoldable(last<string>(), A.Foldable),
+	)
 
 /**
  * Invert a record, collecting values with duplicate keys in an array. Should
@@ -109,13 +109,13 @@ export const invertLast = <A>(
  * @since 0.7.0
  */
 export const invertAll = <A>(
-  f: (x: A) => string,
+	f: (x: A) => string,
 ): ((x: Record<string, A>) => Record<string, Array<string>>) =>
-  flow(
-    R.toArray,
-    A.map(flow(T.bimap(f, A.of), T.swap)),
-    R.fromFoldable(A.getMonoid<string>(), A.Foldable),
-  )
+	flow(
+		R.toArray,
+		A.map(flow(T.bimap(f, A.of), T.swap)),
+		R.fromFoldable(A.getMonoid<string>(), A.Foldable),
+	)
 
 /**
  * Pick a set of keys from a `Record`. The value-level equivalent of the `Pick`
@@ -137,9 +137,9 @@ export const invertAll = <A>(
  * @since 0.16.0
  */
 export const pick = (
-  ks: Array<string>,
+	ks: Array<string>,
 ): (<A>(y: Record<string, A>) => Record<string, A>) =>
-  R.filterWithIndex(elemV(Str.Eq)(ks))
+	R.filterWithIndex(elemV(Str.Eq)(ks))
 
 /**
  * Omit a set of keys from a `Record`. The value-level equivalent of the `Omit`
@@ -161,6 +161,6 @@ export const pick = (
  * @since 0.16.0
  */
 export const omit = (
-  ks: Array<string>,
+	ks: Array<string>,
 ): (<A>(y: Record<string, A>) => Record<string, A>) =>
-  R.filterWithIndex(not(elemV(Str.Eq)(ks)))
+	R.filterWithIndex(not(elemV(Str.Eq)(ks)))

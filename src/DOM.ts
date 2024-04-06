@@ -32,7 +32,7 @@ import { invoke } from "./Function"
  * @since 0.12.0
  */
 export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
-  Array.from
+	Array.from
 
 /**
  * Returns the first descendent element of the input node matching the provided
@@ -57,10 +57,10 @@ export const fromNodeList: <A extends Node>(xs: NodeListOf<A>) => Array<A> =
  * @since 0.12.0
  */
 export const querySelector =
-  (q: string) =>
-  (x: ParentNode): IOOption<Element> =>
-  () =>
-    pipe(x, invoke("querySelector")([q]), O.fromNullable)
+	(q: string) =>
+	(x: ParentNode): IOOption<Element> =>
+	() =>
+		pipe(x, invoke("querySelector")([q]), O.fromNullable)
 
 /**
  * Returns every descendent element of the input node matching the provided
@@ -83,10 +83,10 @@ export const querySelector =
  * @since 0.12.0
  */
 export const querySelectorAll =
-  (q: string) =>
-  (x: ParentNode): IOOption<NonEmptyArray<Element>> =>
-  () =>
-    pipe(x, invoke("querySelectorAll")([q]), fromNodeList, NEA.fromArray)
+	(q: string) =>
+	(x: ParentNode): IOOption<NonEmptyArray<Element>> =>
+	() =>
+		pipe(x, invoke("querySelectorAll")([q]), fromNodeList, NEA.fromArray)
 
 /**
  * Returns all child nodes, if any, of a node.
@@ -110,9 +110,9 @@ export const querySelectorAll =
  * @since 0.12.0
  */
 export const childNodes =
-  (x: Node): IOOption<NonEmptyArray<ChildNode>> =>
-  () =>
-    pipe(x.childNodes, fromNodeList, NEA.fromArray)
+	(x: Node): IOOption<NonEmptyArray<ChildNode>> =>
+	() =>
+		pipe(x.childNodes, fromNodeList, NEA.fromArray)
 
 /**
  * Removes a child node from the tree.
@@ -138,9 +138,9 @@ export const childNodes =
  * @since 0.12.0
  */
 export const remove =
-  (x: ChildNode): IO<void> =>
-  () =>
-    pipe(x, invoke("remove")([]))
+	(x: ChildNode): IO<void> =>
+	() =>
+		pipe(x, invoke("remove")([]))
 
 /**
  * Appends a node as a child of another.
@@ -166,10 +166,10 @@ export const remove =
  * @since 0.12.0
  */
 export const appendChild =
-  (child: Node) =>
-  (parent: Node): IO<void> =>
-  () =>
-    pipe(parent, invoke("appendChild")([child]))
+	(child: Node) =>
+	(parent: Node): IO<void> =>
+	() =>
+		pipe(parent, invoke("appendChild")([child]))
 
 /**
  * Removes all the child nodes, if any, of a given node.
@@ -195,8 +195,8 @@ export const appendChild =
  * @since 0.12.0
  */
 export const emptyChildren: (x: Node) => IO<void> = flow(
-  childNodes,
-  IO.chain(O.traverse(IO.Applicative)(IO.traverseArray(remove))),
+	childNodes,
+	IO.chain(O.traverse(IO.Applicative)(IO.traverseArray(remove))),
 )
 
 /**
@@ -219,9 +219,9 @@ export const emptyChildren: (x: Node) => IO<void> = flow(
  * @since 0.12.0
  */
 export const getTextContent =
-  (x: Node): IOOption<string> =>
-  () =>
-    pipe(x.textContent, O.fromNullable)
+	(x: Node): IOOption<string> =>
+	() =>
+		pipe(x.textContent, O.fromNullable)
 
 /**
  * Sets the text content of a node.
@@ -243,12 +243,12 @@ export const getTextContent =
  * @since 0.12.0
  */
 export const setTextContent =
-  (x: string) =>
-  (y: Node): IO<void> =>
-  () => {
-    // eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
-    y.textContent = x
-  }
+	(x: string) =>
+	(y: Node): IO<void> =>
+	() => {
+		// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
+		y.textContent = x
+	}
 
 type EventTarget = keyof WindowEventMap
 type EventListener = (e: Event) => IO<void>
@@ -286,15 +286,15 @@ type EventListenerCleanup = IO<void>
  * @since 0.12.0
  */
 export const addEventListener =
-  (type: EventTarget) =>
-  (listener: EventListener) =>
-  (el: Node | Window): IO<EventListenerCleanup> =>
-  () => {
-    const _listener = (e: Event) => listener(e)()
-    // eslint-disable-next-line functional/no-expression-statements
-    pipe(el, invoke("addEventListener")([type, _listener]))
-    return () => pipe(el, invoke("removeEventListener")([type, _listener]))
-  }
+	(type: EventTarget) =>
+	(listener: EventListener) =>
+	(el: Node | Window): IO<EventListenerCleanup> =>
+	() => {
+		const _listener = (e: Event) => listener(e)()
+		// eslint-disable-next-line functional/no-expression-statements
+		pipe(el, invoke("addEventListener")([type, _listener]))
+		return () => pipe(el, invoke("removeEventListener")([type, _listener]))
+	}
 
 /**
  * Adds an event listener to a node.
@@ -321,7 +321,7 @@ export const addEventListener =
  * @since 0.17.0
  */
 export const addEventListener_ =
-  (type: EventTarget) =>
-  (listener: EventListener) =>
-  (el: Node | Window): IO<void> =>
-    pipe(addEventListener(type)(listener)(el), IO.map(constVoid))
+	(type: EventTarget) =>
+	(listener: EventListener) =>
+	(el: Node | Window): IO<void> =>
+		pipe(addEventListener(type)(listener)(el), IO.map(constVoid))

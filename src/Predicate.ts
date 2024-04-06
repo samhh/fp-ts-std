@@ -30,7 +30,7 @@ import { concatAll } from "fp-ts/Monoid"
  * @since 0.12.0
  */
 export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
-  concatAll(Pred.getMonoidAll<A>())(fs)
+	concatAll(Pred.getMonoidAll<A>())(fs)
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
@@ -51,7 +51,7 @@ export const allPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
  * @since 0.12.0
  */
 export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
-  concatAll(Pred.getMonoidAny<A>())(fs)
+	concatAll(Pred.getMonoidAny<A>())(fs)
 
 /**
  * Given an array of predicates, returns a predicate that returns true if the
@@ -73,4 +73,4 @@ export const anyPass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
  */
 
 export const nonePass = <A>(fs: Array<Predicate<A>>): Predicate<A> =>
-  flow(anyPass(fs), invert)
+	flow(anyPass(fs), invert)

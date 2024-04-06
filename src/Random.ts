@@ -27,7 +27,7 @@ import { unsafeUnwrap } from "./Option"
  * @since 0.12.0
  */
 export const randomExtract = <A>(xs: NonEmptyArray<A>): IO<[A, Array<A>]> =>
-  pipe(
-    Rand.randomInt(0, pipe(xs, RA.size, decrement)),
-    IO.map(flow(i => extractAt(i)(xs), unsafeUnwrap)),
-  )
+	pipe(
+		Rand.randomInt(0, pipe(xs, RA.size, decrement)),
+		IO.map(flow(i => extractAt(i)(xs), unsafeUnwrap)),
+	)

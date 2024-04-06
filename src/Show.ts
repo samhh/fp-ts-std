@@ -25,9 +25,9 @@ export const URI = "Show"
 export type URI = typeof URI
 
 declare module "fp-ts/HKT" {
-  interface URItoKind<A> {
-    readonly [URI]: Show<A>
-  }
+	interface URItoKind<A> {
+		readonly [URI]: Show<A>
+	}
 }
 
 /**
@@ -47,8 +47,8 @@ declare module "fp-ts/HKT" {
  * @since 0.12.0
  */
 export const contramap =
-  <B, A>(f: (b: B) => A) =>
-  (m: Show<A>): Show<B> => ({ show: flow(f, m.show) })
+	<B, A>(f: (b: B) => A) =>
+	(m: Show<A>): Show<B> => ({ show: flow(f, m.show) })
 
 /**
  * Formal `Contravariant` instance for `Show` to be provided to higher-kinded
@@ -58,6 +58,6 @@ export const contramap =
  * @since 0.12.0
  */
 export const Contravariant: Contravariant1<URI> = {
-  URI,
-  contramap: (m, f) => pipe(m, contramap(f)),
+	URI,
+	contramap: (m, f) => pipe(m, contramap(f)),
 }

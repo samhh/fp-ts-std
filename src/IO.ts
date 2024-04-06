@@ -31,15 +31,15 @@ type IO<A> = IO.IO<A>
  * @since 0.7.0
  */
 export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
-  const uncalled = Symbol()
-  let val: typeof uncalled | B = uncalled // eslint-disable-line functional/no-let
+	const uncalled = Symbol()
+	let val: typeof uncalled | B = uncalled // eslint-disable-line functional/no-let
 
-  return x => {
-    // eslint-disable-next-line functional/no-conditional-statements
-    if (val === uncalled) val = f(x) // eslint-disable-line functional/no-expression-statements
+	return x => {
+		// eslint-disable-next-line functional/no-conditional-statements
+		if (val === uncalled) val = f(x) // eslint-disable-line functional/no-expression-statements
 
-    return IO.of(val)
-  }
+		return IO.of(val)
+	}
 }
 
 /**
@@ -75,17 +75,17 @@ export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
  * @since 0.12.0
  */
 export const whenInvocationCount =
-  (p: Predicate<number>): Endomorphism<IO<void>> =>
-  f => {
-    /* eslint-disable */
-    let n = 0
+	(p: Predicate<number>): Endomorphism<IO<void>> =>
+	f => {
+		/* eslint-disable */
+		let n = 0
 
-    return () => {
-      n++
-      if (p(n)) f()
-    }
-    /* eslint-enable */
-  }
+		return () => {
+			n++
+			if (p(n)) f()
+		}
+		/* eslint-enable */
+	}
 
 /**
  * Execute an `IO`, returning the value within. Helpful for staying within
@@ -124,7 +124,7 @@ export const execute = <A>(x: IO<A>): A => x()
  * @since 0.12.0
  */
 export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
-  IO.Applicative,
+	IO.Applicative,
 )
 
 /**
@@ -149,7 +149,7 @@ export const when: (x: boolean) => Endomorphism<IO<void>> = _when(
  * @since 0.12.0
  */
 export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
-  IO.Applicative,
+	IO.Applicative,
 )
 
 /**
@@ -167,11 +167,11 @@ export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
  * @since 0.14.0
  */
 export const memoize = <A>(f: IO<A>): IO<A> => {
-  const empty = Symbol()
-  // eslint-disable-next-line functional/no-let
-  let res: A | typeof empty = empty
+	const empty = Symbol()
+	// eslint-disable-next-line functional/no-let
+	let res: A | typeof empty = empty
 
-  return () => (res === empty ? (res = f()) : res)
+	return () => (res === empty ? (res = f()) : res)
 }
 
 /**
@@ -181,8 +181,8 @@ export const memoize = <A>(f: IO<A>): IO<A> => {
  * @since 0.15.0
  */
 export const sequenceArray_: <A>(xs: ReadonlyArray<IO<A>>) => IO<void> = flow(
-  IO.sequenceArray,
-  IO.map(constVoid),
+	IO.sequenceArray,
+	IO.map(constVoid),
 )
 
 /**
@@ -192,9 +192,9 @@ export const sequenceArray_: <A>(xs: ReadonlyArray<IO<A>>) => IO<void> = flow(
  * @since 0.15.0
  */
 export const traverseArray_: <A, B>(
-  f: (x: A) => IO<B>,
+	f: (x: A) => IO<B>,
 ) => (xs: ReadonlyArray<A>) => IO<void> = f =>
-  flow(IO.traverseArray(f), IO.map(constVoid))
+	flow(IO.traverseArray(f), IO.map(constVoid))
 
 /**
  * Convenient alias for `IO.of(undefined)`.
@@ -244,5 +244,5 @@ export const pass: IO<void> = _pass(IO.Applicative)
  * @since 0.18.0
  */
 export const until: <A>(p: Predicate<A>) => Endomorphism<IO<A>> = _until(
-  IO.Monad,
+	IO.Monad,
 )

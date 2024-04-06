@@ -28,7 +28,7 @@ import { identity } from "fp-ts/function"
  * @since 0.16.0
  */
 export const runReaderIO: <R, A>(r: R) => (m: ReaderIO<R, A>) => IO<A> =
-  runReader
+	runReader
 
 /**
  * Effectfully accesses the environment outside of the `Reader` layer.

@@ -68,14 +68,14 @@ export const unsafeParse: (x: string) => URL = constructor
  * @since 0.1.0
  */
 export const parse =
-  <E>(f: (e: TypeError) => E) =>
-  (x: string): Either<E, URL> =>
-    // It should only throw some sort of `TypeError`:
-    // https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
-    E.tryCatch(
-      () => unsafeParse(x),
-      e => f(e as TypeError),
-    )
+	<E>(f: (e: TypeError) => E) =>
+	(x: string): Either<E, URL> =>
+		// It should only throw some sort of `TypeError`:
+		// https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
+		E.tryCatch(
+			() => unsafeParse(x),
+			e => f(e as TypeError),
+		)
 
 /**
  * Safely parse a `URL`, returning an `Option`.
@@ -91,8 +91,8 @@ export const parse =
  * @since 0.1.0
  */
 export const parseO: (href: string) => Option<URL> = flow(
-  parse(identity),
-  O.fromEither,
+	parse(identity),
+	O.fromEither,
 )
 
 /**
@@ -168,11 +168,11 @@ export const getPathname = (x: URL): string => x.pathname
  * @since 0.18.0
  */
 export const modifyPathname = (f: Endomorphism<string>): Endomorphism<URL> =>
-  flow(clone, x => {
-    // eslint-disable-next-line
-    x.pathname = f(x.pathname)
-    return x
-  })
+	flow(clone, x => {
+		// eslint-disable-next-line
+		x.pathname = f(x.pathname)
+		return x
+	})
 
 /**
  * Set the pathname component of a `URL`.
@@ -189,8 +189,8 @@ export const modifyPathname = (f: Endomorphism<string>): Endomorphism<URL> =>
  * @since 0.18.0
  */
 export const setPathname: (x: string) => Endomorphism<URL> = flow(
-  constant,
-  modifyPathname,
+	constant,
+	modifyPathname,
 )
 
 /**
@@ -227,13 +227,13 @@ export const getParams = (x: URL): URLSearchParams => x.searchParams
  * @since 0.18.0
  */
 export const modifyParams = (
-  f: Endomorphism<URLSearchParams>,
+	f: Endomorphism<URLSearchParams>,
 ): Endomorphism<URL> =>
-  flow(clone, x => {
-    // eslint-disable-next-line
-    x.search = f(x.searchParams).toString()
-    return x
-  })
+	flow(clone, x => {
+		// eslint-disable-next-line
+		x.search = f(x.searchParams).toString()
+		return x
+	})
 
 /**
  * Set the search params component of a `URL`.
@@ -255,8 +255,8 @@ export const modifyParams = (
  * @since 0.18.0
  */
 export const setParams: (x: URLSearchParams) => Endomorphism<URL> = flow(
-  constant,
-  modifyParams,
+	constant,
+	modifyParams,
 )
 
 /**
@@ -292,11 +292,11 @@ export const getHash = (x: URL): string => x.hash
  * @since 0.18.0
  */
 export const modifyHash = (f: Endomorphism<string>): Endomorphism<URL> =>
-  flow(clone, x => {
-    // eslint-disable-next-line
-    x.hash = f(x.hash)
-    return x
-  })
+	flow(clone, x => {
+		// eslint-disable-next-line
+		x.hash = f(x.hash)
+		return x
+	})
 
 /**
  * Set the hash component of a `URL`.
@@ -316,8 +316,8 @@ export const modifyHash = (f: Endomorphism<string>): Endomorphism<URL> =>
  * @since 0.18.0
  */
 export const setHash: (x: string) => Endomorphism<URL> = flow(
-  constant,
-  modifyHash,
+	constant,
+	modifyHash,
 )
 
 /**

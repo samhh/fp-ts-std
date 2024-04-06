@@ -35,11 +35,11 @@ import { Show } from "fp-ts/Show"
  * @since 0.2.0
  */
 export const trace =
-  (msg: string) =>
-  <A>(x: A): A => {
-    console.log(msg)
-    return x
-  }
+	(msg: string) =>
+	<A>(x: A): A => {
+		console.log(msg)
+		return x
+	}
 
 /**
  * Like `trace`, but logs the generic value too.
@@ -62,11 +62,11 @@ export const trace =
  * @since 0.2.0
  */
 export const traceWithValue =
-  (msg: string) =>
-  <A>(x: A): A => {
-    console.log(msg, x)
-    return x
-  }
+	(msg: string) =>
+	<A>(x: A): A => {
+		console.log(msg, x)
+		return x
+	}
 
 /**
  * Like `traceWithValue`, but first processes the value via `Show`.
@@ -90,9 +90,9 @@ export const traceWithValue =
  * @since 0.16.0
  */
 export const traceShowWithValue =
-  <A>(S: Show<A>) =>
-  (msg: string) =>
-  (x: A): A => {
-    console.log(msg, S.show(x))
-    return x
-  }
+	<A>(S: Show<A>) =>
+	(msg: string) =>
+	(x: A): A => {
+		console.log(msg, S.show(x))
+		return x
+	}

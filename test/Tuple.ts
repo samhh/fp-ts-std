@@ -1,18 +1,18 @@
 import { describe, it, expect } from "@jest/globals"
 import {
-  dup,
-  toFst,
-  toSnd,
-  traverseToFst,
-  traverseToSnd,
-  withFst,
-  withSnd,
-  create,
-  mapBoth,
-  fanout,
-  getEq,
-  getOrd,
-  getEnum,
+	dup,
+	toFst,
+	toSnd,
+	traverseToFst,
+	traverseToSnd,
+	withFst,
+	withSnd,
+	create,
+	mapBoth,
+	fanout,
+	getEq,
+	getOrd,
+	getEnum,
 } from "../src/Tuple"
 import { increment } from "../src/Number"
 import { constant, flow, identity, pipe } from "fp-ts/function"
@@ -27,278 +27,278 @@ import { universe } from "../src/Enum"
 const nonMaxNumber = fc.integer({ max: Number.MAX_SAFE_INTEGER - 1 })
 
 describe("Tuple", () => {
-  describe("dup", () => {
-    const f = dup
+	describe("dup", () => {
+		const f = dup
 
-    it("duplicates the input", () => {
-      fc.assert(fc.property(fc.anything(), x => expect(f(x)).toEqual([x, x])))
-    })
-  })
+		it("duplicates the input", () => {
+			fc.assert(fc.property(fc.anything(), x => expect(f(x)).toEqual([x, x])))
+		})
+	})
 
-  describe("toFst", () => {
-    const f = toFst
-    const g = f(increment)
+	describe("toFst", () => {
+		const f = toFst
+		const g = f(increment)
 
-    it("applies the function and returns both input and output", () => {
-      fc.assert(
-        fc.property(nonMaxNumber, n => expect(g(n)).toEqual([increment(n), n])),
-      )
-    })
+		it("applies the function and returns both input and output", () => {
+			fc.assert(
+				fc.property(nonMaxNumber, n => expect(g(n)).toEqual([increment(n), n])),
+			)
+		})
 
-    it("is the dual of toSnd", () => {
-      fc.assert(
-        fc.property(nonMaxNumber, n =>
-          expect(g(n)).toEqual(pipe(n, toSnd(increment), swap)),
-        ),
-      )
-    })
-  })
+		it("is the dual of toSnd", () => {
+			fc.assert(
+				fc.property(nonMaxNumber, n =>
+					expect(g(n)).toEqual(pipe(n, toSnd(increment), swap)),
+				),
+			)
+		})
+	})
 
-  describe("toSnd", () => {
-    const f = toSnd
-    const g = f(increment)
+	describe("toSnd", () => {
+		const f = toSnd
+		const g = f(increment)
 
-    it("applies the function and returns both input and output", () => {
-      fc.assert(
-        fc.property(nonMaxNumber, n => expect(g(n)).toEqual([n, increment(n)])),
-      )
-    })
+		it("applies the function and returns both input and output", () => {
+			fc.assert(
+				fc.property(nonMaxNumber, n => expect(g(n)).toEqual([n, increment(n)])),
+			)
+		})
 
-    it("is the dual of toFst", () => {
-      fc.assert(
-        fc.property(nonMaxNumber, n =>
-          expect(g(n)).toEqual(pipe(n, toFst(increment), swap)),
-        ),
-      )
-    })
-  })
+		it("is the dual of toFst", () => {
+			fc.assert(
+				fc.property(nonMaxNumber, n =>
+					expect(g(n)).toEqual(pipe(n, toFst(increment), swap)),
+				),
+			)
+		})
+	})
 
-  describe("traverseToFst", () => {
-    const f = traverseToFst(O.Functor)
+	describe("traverseToFst", () => {
+		const f = traverseToFst(O.Functor)
 
-    it("preserves functor's sanctity", () => {
-      expect(f(constant(O.none))(123)).toEqual(O.none)
-    })
+		it("preserves functor's sanctity", () => {
+			expect(f(constant(O.none))(123)).toEqual(O.none)
+		})
 
-    it("is equivalent to a functorial toFst", () => {
-      fc.assert(
-        fc.property(nonMaxNumber, n =>
-          expect(pipe(n, f(flow(increment, O.some)))).toEqual(
-            pipe(n, toFst(increment), O.some),
-          ),
-        ),
-      )
-    })
-  })
+		it("is equivalent to a functorial toFst", () => {
+			fc.assert(
+				fc.property(nonMaxNumber, n =>
+					expect(pipe(n, f(flow(increment, O.some)))).toEqual(
+						pipe(n, toFst(increment), O.some),
+					),
+				),
+			)
+		})
+	})
 
-  describe("traverseToSnd", () => {
-    const f = traverseToSnd(O.Functor)
+	describe("traverseToSnd", () => {
+		const f = traverseToSnd(O.Functor)
 
-    it("preserves functor's sanctity", () => {
-      expect(f(constant(O.none))(123)).toEqual(O.none)
-    })
+		it("preserves functor's sanctity", () => {
+			expect(f(constant(O.none))(123)).toEqual(O.none)
+		})
 
-    it("is equivalent to a functorial toSnd", () => {
-      fc.assert(
-        fc.property(nonMaxNumber, n =>
-          expect(pipe(n, f(flow(increment, O.some)))).toEqual(
-            pipe(n, toSnd(increment), O.some),
-          ),
-        ),
-      )
-    })
-  })
+		it("is equivalent to a functorial toSnd", () => {
+			fc.assert(
+				fc.property(nonMaxNumber, n =>
+					expect(pipe(n, f(flow(increment, O.some)))).toEqual(
+						pipe(n, toSnd(increment), O.some),
+					),
+				),
+			)
+		})
+	})
 
-  describe("withFst", () => {
-    const f = withFst
+	describe("withFst", () => {
+		const f = withFst
 
-    it("constructs a tuple in order of arguments", () => {
-      expect(f(1)(2)).toEqual([1, 2])
-    })
-  })
+		it("constructs a tuple in order of arguments", () => {
+			expect(f(1)(2)).toEqual([1, 2])
+		})
+	})
 
-  describe("withSnd", () => {
-    const f = withSnd
+	describe("withSnd", () => {
+		const f = withSnd
 
-    it("constructs a tuple in reverse order of arguments", () => {
-      expect(f(1)(2)).toEqual([2, 1])
-    })
-  })
+		it("constructs a tuple in reverse order of arguments", () => {
+			expect(f(1)(2)).toEqual([2, 1])
+		})
+	})
 
-  describe("create", () => {
-    const f = create
+	describe("create", () => {
+		const f = create
 
-    it("is equivalent to identity at runtime", () => {
-      fc.assert(
-        fc.property(fc.anything(), fc.anything(), (x, y) =>
-          expect(f([x, y])).toEqual([x, y]),
-        ),
-      )
-    })
-  })
+		it("is equivalent to identity at runtime", () => {
+			fc.assert(
+				fc.property(fc.anything(), fc.anything(), (x, y) =>
+					expect(f([x, y])).toEqual([x, y]),
+				),
+			)
+		})
+	})
 
-  describe("mapBoth", () => {
-    const f = mapBoth
+	describe("mapBoth", () => {
+		const f = mapBoth
 
-    it("returns identity on identity input", () => {
-      fc.assert(
-        fc.property(fc.string(), fc.string(), (l, r) =>
-          expect(f(identity)([l, r])).toEqual([l, r]),
-        ),
-      )
-    })
+		it("returns identity on identity input", () => {
+			fc.assert(
+				fc.property(fc.string(), fc.string(), (l, r) =>
+					expect(f(identity)([l, r])).toEqual([l, r]),
+				),
+			)
+		})
 
-    it("maps both sides", () => {
-      const g = O.some
+		it("maps both sides", () => {
+			const g = O.some
 
-      fc.assert(
-        fc.property(fc.string(), fc.string(), (l, r) =>
-          expect(f(g)([l, r])).toEqual([g(l), g(r)]),
-        ),
-      )
-    })
+			fc.assert(
+				fc.property(fc.string(), fc.string(), (l, r) =>
+					expect(f(g)([l, r])).toEqual([g(l), g(r)]),
+				),
+			)
+		})
 
-    it("is equivalent to doubly applied bimap", () => {
-      const g = O.some
+		it("is equivalent to doubly applied bimap", () => {
+			const g = O.some
 
-      fc.assert(
-        fc.property(fc.string(), fc.string(), (l, r) =>
-          expect(f(g)([l, r])).toEqual(bimap(g, g)([l, r])),
-        ),
-      )
-    })
-  })
+			fc.assert(
+				fc.property(fc.string(), fc.string(), (l, r) =>
+					expect(f(g)([l, r])).toEqual(bimap(g, g)([l, r])),
+				),
+			)
+		})
+	})
 
-  describe("fanout", () => {
-    const f = fanout
+	describe("fanout", () => {
+		const f = fanout
 
-    it("calls both provided functions and returns their outputs in order", () => {
-      fc.assert(
-        fc.property(fc.string(), x =>
-          expect(fanout(O.of)(constant("foo"))(x)).toEqual([O.of(x), "foo"]),
-        ),
-      )
-      expect(f)
-    })
-  })
+		it("calls both provided functions and returns their outputs in order", () => {
+			fc.assert(
+				fc.property(fc.string(), x =>
+					expect(fanout(O.of)(constant("foo"))(x)).toEqual([O.of(x), "foo"]),
+				),
+			)
+			expect(f)
+		})
+	})
 
-  describe("getEq", () => {
-    it("checks both values in terms of AND", () => {
-      const { equals: f } = getEq(Str.Eq)(Str.Eq)
+	describe("getEq", () => {
+		it("checks both values in terms of AND", () => {
+			const { equals: f } = getEq(Str.Eq)(Str.Eq)
 
-      expect(f(["foo", "foo"], ["foo", "foo"])).toBe(true)
-      expect(f(["foo", "foo"], ["bar", "foo"])).toBe(false)
-      expect(f(["foo", "foo"], ["foo", "bar"])).toBe(false)
-      expect(f(["foo", "bar"], ["baz", "oof"])).toBe(false)
-    })
+			expect(f(["foo", "foo"], ["foo", "foo"])).toBe(true)
+			expect(f(["foo", "foo"], ["bar", "foo"])).toBe(false)
+			expect(f(["foo", "foo"], ["foo", "bar"])).toBe(false)
+			expect(f(["foo", "bar"], ["baz", "oof"])).toBe(false)
+		})
 
-    it("checks second component lazily", () => {
-      const { equals: f } = getEq(Str.Eq)({
-        equals: () => {
-          // eslint-disable-next-line functional/no-throw-statements
-          throw "evaluated second component"
-        },
-      })
+		it("checks second component lazily", () => {
+			const { equals: f } = getEq(Str.Eq)({
+				equals: () => {
+					// eslint-disable-next-line functional/no-throw-statements
+					throw "evaluated second component"
+				},
+			})
 
-      expect(f(["foo", "foo"], ["bar", "foo"])).toBe(false)
-    })
-  })
+			expect(f(["foo", "foo"], ["bar", "foo"])).toBe(false)
+		})
+	})
 
-  describe("getOrd", () => {
-    const { compare: f } = getOrd(Str.Ord)(Str.Ord)
+	describe("getOrd", () => {
+		const { compare: f } = getOrd(Str.Ord)(Str.Ord)
 
-    it("compares first component first", () => {
-      expect(f(["foo", "bar"], ["foo", "bar"])).toBe(EQ)
-      expect(f(["foo", "bar"], ["abc", "baz"])).toBe(GT)
-      expect(f(["foo", "bar"], ["foo", "baz"])).toBe(LT)
-    })
+		it("compares first component first", () => {
+			expect(f(["foo", "bar"], ["foo", "bar"])).toBe(EQ)
+			expect(f(["foo", "bar"], ["abc", "baz"])).toBe(GT)
+			expect(f(["foo", "bar"], ["foo", "baz"])).toBe(LT)
+		})
 
-    it("compares second component lazily", () => {
-      const { compare: f } = getOrd(Str.Ord)({
-        ...Str.Eq,
-        compare: () => {
-          // eslint-disable-next-line functional/no-throw-statements
-          throw "evaluated second component"
-        },
-      })
+		it("compares second component lazily", () => {
+			const { compare: f } = getOrd(Str.Ord)({
+				...Str.Eq,
+				compare: () => {
+					// eslint-disable-next-line functional/no-throw-statements
+					throw "evaluated second component"
+				},
+			})
 
-      expect(f(["foo", "foo"], ["bar", "foo"])).toBe(GT)
-    })
-  })
+			expect(f(["foo", "foo"], ["bar", "foo"])).toBe(GT)
+		})
+	})
 
-  describe("getEnum", () => {
-    const E = getEnum(EnumBool)(EnumBool)
+	describe("getEnum", () => {
+		const E = getEnum(EnumBool)(EnumBool)
 
-    describe("pred", () => {
-      it("retracts succ", () => {
-        const f = flow(E.pred, O.chain(E.succ), O.chain(E.pred))
-        const g = E.pred
+		describe("pred", () => {
+			it("retracts succ", () => {
+				const f = flow(E.pred, O.chain(E.succ), O.chain(E.pred))
+				const g = E.pred
 
-        fc.assert(
-          fc.property(fc.tuple(fc.boolean(), fc.boolean()), x =>
-            expect(f(x)).toEqual(g(x)),
-          ),
-        )
-      })
-    })
+				fc.assert(
+					fc.property(fc.tuple(fc.boolean(), fc.boolean()), x =>
+						expect(f(x)).toEqual(g(x)),
+					),
+				)
+			})
+		})
 
-    describe("succ", () => {
-      it("retracts pred", () => {
-        const f = flow(E.succ, O.chain(E.pred), O.chain(E.succ))
-        const g = E.succ
+		describe("succ", () => {
+			it("retracts pred", () => {
+				const f = flow(E.succ, O.chain(E.pred), O.chain(E.succ))
+				const g = E.succ
 
-        fc.assert(
-          fc.property(fc.tuple(fc.boolean(), fc.boolean()), x =>
-            expect(f(x)).toEqual(g(x)),
-          ),
-        )
-      })
-    })
+				fc.assert(
+					fc.property(fc.tuple(fc.boolean(), fc.boolean()), x =>
+						expect(f(x)).toEqual(g(x)),
+					),
+				)
+			})
+		})
 
-    describe("fromEnum", () => {
-      const f = E.fromEnum
+		describe("fromEnum", () => {
+			const f = E.fromEnum
 
-      it("works", () => {
-        expect(f([false, false])).toBe(0)
-        expect(f([true, false])).toBe(1)
-        expect(f([false, true])).toBe(2)
-        expect(f([true, true])).toBe(3)
-      })
-    })
+			it("works", () => {
+				expect(f([false, false])).toBe(0)
+				expect(f([true, false])).toBe(1)
+				expect(f([false, true])).toBe(2)
+				expect(f([true, true])).toBe(3)
+			})
+		})
 
-    describe("toEnum", () => {
-      const f = E.toEnum
+		describe("toEnum", () => {
+			const f = E.toEnum
 
-      it("succeeds for input in range", () => {
-        expect(f(0)).toEqual(O.some([false, false]))
-        expect(f(1)).toEqual(O.some([true, false]))
-        expect(f(2)).toEqual(O.some([false, true]))
-        expect(f(3)).toEqual(O.some([true, true]))
-      })
+			it("succeeds for input in range", () => {
+				expect(f(0)).toEqual(O.some([false, false]))
+				expect(f(1)).toEqual(O.some([true, false]))
+				expect(f(2)).toEqual(O.some([false, true]))
+				expect(f(3)).toEqual(O.some([true, true]))
+			})
 
-      it("fails gracefully for invalid input", () => {
-        expect(f(-Infinity)).toEqual(O.none)
-        expect(f(-1)).toEqual(O.none)
-        expect(f(2.5)).toEqual(O.none)
-        expect(f(4)).toEqual(O.none)
-        expect(f(1e6)).toEqual(O.none)
-        expect(f(Infinity)).toEqual(O.none)
-        expect(f(NaN)).toEqual(O.none)
-      })
-    })
+			it("fails gracefully for invalid input", () => {
+				expect(f(-Infinity)).toEqual(O.none)
+				expect(f(-1)).toEqual(O.none)
+				expect(f(2.5)).toEqual(O.none)
+				expect(f(4)).toEqual(O.none)
+				expect(f(1e6)).toEqual(O.none)
+				expect(f(Infinity)).toEqual(O.none)
+				expect(f(NaN)).toEqual(O.none)
+			})
+		})
 
-    it("can build all values bottom to top, left to right", () => {
-      expect(universe(E)).toEqual([
-        [false, false],
-        [true, false],
-        [false, true],
-        [true, true],
-      ])
-    })
+		it("can build all values bottom to top, left to right", () => {
+			expect(universe(E)).toEqual([
+				[false, false],
+				[true, false],
+				[false, true],
+				[true, true],
+			])
+		})
 
-    it("cardinality is a * b", () => {
-      expect(E.cardinality()).toBe(4)
-      expect(getEnum(E)(E).cardinality()).toBe(16)
-    })
-  })
+		it("cardinality is a * b", () => {
+			expect(E.cardinality()).toBe(4)
+			expect(getEnum(E)(E).cardinality()).toBe(16)
+		})
+	})
 })

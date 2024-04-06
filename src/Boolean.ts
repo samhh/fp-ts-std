@@ -43,7 +43,7 @@ export const invert: Endomorphism<boolean> = x => !x
  * @since 0.4.0
  */
 export const and: (x: boolean) => Endomorphism<boolean> = curry2(
-  SemigroupAll.concat,
+	SemigroupAll.concat,
 )
 
 /**
@@ -60,7 +60,7 @@ export const and: (x: boolean) => Endomorphism<boolean> = curry2(
  * @since 0.4.0
  */
 export const or: (x: boolean) => Endomorphism<boolean> = curry2(
-  SemigroupAny.concat,
+	SemigroupAny.concat,
 )
 
 /**
@@ -77,9 +77,9 @@ export const or: (x: boolean) => Endomorphism<boolean> = curry2(
  * @since 0.4.0
  */
 export const xor =
-  (x: boolean): Endomorphism<boolean> =>
-  y =>
-    (x && !y) || (!x && y)
+	(x: boolean): Endomorphism<boolean> =>
+	y =>
+		(x && !y) || (!x && y)
 
 /**
  * A `Bounded` instance for booleans.
@@ -94,9 +94,9 @@ export const xor =
  * @since 0.17.0
  */
 export const Bounded: Bounded<boolean> = {
-  ...Ord,
-  top: true,
-  bottom: false,
+	...Ord,
+	top: true,
+	bottom: false,
 }
 
 /**
@@ -116,10 +116,10 @@ export const Bounded: Bounded<boolean> = {
  * @since 0.17.0
  */
 export const Enum: Enum<boolean> = {
-  ...Bounded,
-  succ: x => (x ? O.none : O.some(true)),
-  pred: x => (x ? O.some(false) : O.none),
-  toEnum: n => (n === 1 ? O.some(true) : n === 0 ? O.some(false) : O.none),
-  fromEnum: Number,
-  cardinality: L.of(2),
+	...Bounded,
+	succ: x => (x ? O.none : O.some(true)),
+	pred: x => (x ? O.some(false) : O.none),
+	toEnum: n => (n === 1 ? O.some(true) : n === 0 ? O.some(false) : O.none),
+	fromEnum: Number,
+	cardinality: L.of(2),
 }

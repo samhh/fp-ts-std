@@ -1,5 +1,5 @@
 {
-  "enforceDescriptions": true,
-  "enforceExamples": false,
-  "enforceVersion": true
+	"enforceDescriptions": true,
+	"enforceExamples": false,
+	"enforceVersion": true
 }

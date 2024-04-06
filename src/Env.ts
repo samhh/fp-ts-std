@@ -27,9 +27,9 @@ type NonEmptyString = NES.NonEmptyString
  * @since 0.9.0
  */
 export const getParam =
-  (k: string): IOOption<string> =>
-  () =>
-    pipe(process.env[k], O.fromNullable)
+	(k: string): IOOption<string> =>
+	() =>
+		pipe(process.env[k], O.fromNullable)
 
 /**
  * Attempt to get an environment parameter, filtering out empty strings.
@@ -50,6 +50,6 @@ export const getParam =
  * @since 0.9.0
  */
 export const getParamNonEmpty: (k: string) => IOOption<NonEmptyString> = flow(
-  getParam,
-  IOO.chainOptionK(NES.fromString),
+	getParam,
+	IOO.chainOptionK(NES.fromString),
 )

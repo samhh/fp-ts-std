@@ -9,8 +9,8 @@ type IOOption<A> = IOO.IOOption<A>
 import * as IO from "fp-ts/IO"
 import { execute as executeIO } from "./IO"
 import {
-  unsafeUnwrap as unsafeUnwrapO,
-  unsafeExpect as unsafeExpectO,
+	unsafeUnwrap as unsafeUnwrapO,
+	unsafeExpect as unsafeExpectO,
 } from "./Option"
 import { flow } from "fp-ts/function"
 import { pass as _pass } from "./Applicative"
@@ -28,8 +28,8 @@ import { pass as _pass } from "./Applicative"
  * @since 0.16.0
  */
 export const unsafeUnwrap: <A>(x: IOOption<A>) => A = flow(
-  IO.map(unsafeUnwrapO),
-  executeIO,
+	IO.map(unsafeUnwrapO),
+	executeIO,
 )
 
 /**
@@ -48,7 +48,7 @@ export const unsafeUnwrap: <A>(x: IOOption<A>) => A = flow(
  * @since 0.16.0
  */
 export const unsafeExpect = (msg: string): (<A>(x: IOOption<A>) => A) =>
-  flow(IO.map(unsafeExpectO(msg)), executeIO)
+	flow(IO.map(unsafeExpectO(msg)), executeIO)
 
 /**
  * Convenient alias for `IOO.of(undefined)`.

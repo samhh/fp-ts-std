@@ -11,8 +11,8 @@ import { Task } from "fp-ts/Task"
 import { Either } from "fp-ts/Either"
 import { runReader } from "./Reader"
 import {
-  unsafeUnwrap as unsafeUnwrapTE,
-  unsafeUnwrapLeft as unsafeUnwrapLeftTE,
+	unsafeUnwrap as unsafeUnwrapTE,
+	unsafeUnwrapLeft as unsafeUnwrapLeftTE,
 } from "./TaskEither"
 
 /**
@@ -36,7 +36,7 @@ import {
  * @since 0.15.0
  */
 export const runReaderTaskEither: <R, E, A>(
-  r: R,
+	r: R,
 ) => (reader: RTE.ReaderTaskEither<R, E, A>) => TaskEither<E, A> = runReader
 
 /**
@@ -55,9 +55,9 @@ export const runReaderTaskEither: <R, E, A>(
  * @since 0.15.0
  */
 export const unsafeUnwrap =
-  <R, A>(rte: RTE.ReaderTaskEither<R, unknown, A>) =>
-  (r: R): Promise<A> =>
-    unsafeUnwrapTE(rte(r))
+	<R, A>(rte: RTE.ReaderTaskEither<R, unknown, A>) =>
+	(r: R): Promise<A> =>
+		unsafeUnwrapTE(rte(r))
 
 /**
  * Unwrap the promise from within a `ReaderTaskEither`, throwing the inner
@@ -75,9 +75,9 @@ export const unsafeUnwrap =
  * @since 0.15.0
  */
 export const unsafeUnwrapLeft =
-  <R, E>(rte: RTE.ReaderTaskEither<R, E, unknown>) =>
-  (r: R): Promise<E> =>
-    unsafeUnwrapLeftTE(rte(r))
+	<R, E>(rte: RTE.ReaderTaskEither<R, E, unknown>) =>
+	(r: R): Promise<E> =>
+		unsafeUnwrapLeftTE(rte(r))
 
 /**
  * Effectfully accesses the environment outside of the `Reader` and `Task`
@@ -98,7 +98,7 @@ export const unsafeUnwrapLeft =
  * @since 0.16.0
  */
 export const asksEither = <R, E, A>(
-  f: (r: R) => Either<E, A>,
+	f: (r: R) => Either<E, A>,
 ): RTE.ReaderTaskEither<R, E, A> => flow(f, TE.fromEither)
 
 /**
@@ -120,7 +120,7 @@ export const asksEither = <R, E, A>(
  * @since 0.16.0
  */
 export const asksTask = <R, E, A>(
-  f: (r: R) => Task<A>,
+	f: (r: R) => Task<A>,
 ): RTE.ReaderTaskEither<R, E, A> => flow(f, TE.fromTask)
 
 /**
@@ -141,5 +141,5 @@ export const asksTask = <R, E, A>(
  * @since 0.16.0
  */
 export const asksTaskEither: <R, E, A>(
-  f: (r: R) => TaskEither<E, A>,
+	f: (r: R) => TaskEither<E, A>,
 ) => RTE.ReaderTaskEither<R, E, A> = identity

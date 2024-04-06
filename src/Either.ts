@@ -33,10 +33,10 @@ import { LT, GT } from "./Ordering"
  * @since 0.1.0
  */
 export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
-  // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-  if (E.isLeft(x)) throw Error("Unwrapped `Left`", { cause: x.left })
+	// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
+	if (E.isLeft(x)) throw Error("Unwrapped `Left`", { cause: x.left })
 
-  return x.right
+	return x.right
 }
 
 /**
@@ -53,10 +53,10 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
  * @since 0.5.0
  */
 export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
-  // eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
-  if (E.isRight(x)) throw Error("Unwrapped `Right`", { cause: x.right })
+	// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
+	if (E.isRight(x)) throw Error("Unwrapped `Right`", { cause: x.right })
 
-  return x.left
+	return x.left
 }
 
 /**
@@ -77,7 +77,7 @@ export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
  * @since 0.16.0
  */
 export const unsafeExpect = <E>(S: Show<E>): (<A>(x: Either<E, A>) => A) =>
-  flow(E.mapLeft(S.show), unsafeUnwrap)
+	flow(E.mapLeft(S.show), unsafeUnwrap)
 
 /**
  * Unwrap the value from within an `Either`, throwing the inner value of `Right`
@@ -97,7 +97,7 @@ export const unsafeExpect = <E>(S: Show<E>): (<A>(x: Either<E, A>) => A) =>
  * @since 0.16.0
  */
 export const unsafeExpectLeft = <A>(S: Show<A>): (<E>(x: Either<E, A>) => E) =>
-  flow(E.map(S.show), unsafeUnwrapLeft)
+	flow(E.map(S.show), unsafeUnwrapLeft)
 
 /**
  * Apply a function to both elements of an `Either`.
@@ -116,7 +116,7 @@ export const unsafeExpectLeft = <A>(S: Show<A>): (<E>(x: Either<E, A>) => E) =>
  * @since 0.14.0
  */
 export const mapBoth: <A, B>(
-  f: (x: A) => B,
+	f: (x: A) => B,
 ) => (xs: Either<A, A>) => Either<B, B> = _mapBoth(E.Bifunctor)
 
 /**
@@ -143,35 +143,35 @@ export const mapBoth: <A, B>(
  */
 /* eslint-disable functional/prefer-tacit */
 export const match2 =
-  <A, B, C, D, E>(
-    onLeftLeft: (x: A) => (y: C) => E,
-    onLeftRight: (x: A) => (y: D) => E,
-    onRightLeft: (x: B) => (y: C) => E,
-    onRightRight: (x: B) => (y: D) => E,
-  ) =>
-  (mab: Either<A, B>) =>
-  (mcd: Either<C, D>): E =>
-    pipe(
-      mab,
-      E.match(
-        a =>
-          pipe(
-            mcd,
-            E.match(
-              c => onLeftLeft(a)(c),
-              d => onLeftRight(a)(d),
-            ),
-          ),
-        b =>
-          pipe(
-            mcd,
-            E.match(
-              c => onRightLeft(b)(c),
-              d => onRightRight(b)(d),
-            ),
-          ),
-      ),
-    )
+	<A, B, C, D, E>(
+		onLeftLeft: (x: A) => (y: C) => E,
+		onLeftRight: (x: A) => (y: D) => E,
+		onRightLeft: (x: B) => (y: C) => E,
+		onRightRight: (x: B) => (y: D) => E,
+	) =>
+	(mab: Either<A, B>) =>
+	(mcd: Either<C, D>): E =>
+		pipe(
+			mab,
+			E.match(
+				a =>
+					pipe(
+						mcd,
+						E.match(
+							c => onLeftLeft(a)(c),
+							d => onLeftRight(a)(d),
+						),
+					),
+				b =>
+					pipe(
+						mcd,
+						E.match(
+							c => onRightLeft(b)(c),
+							d => onRightRight(b)(d),
+						),
+					),
+			),
+		)
 /* eslint-enable functional/prefer-tacit */
 
 /**
@@ -194,17 +194,17 @@ export const match2 =
  * @since 0.17.0
  */
 export const getOrd =
-  <E>(EO: Ord<E>) =>
-  <A>(AO: Ord<A>): Ord<Either<E, A>> => ({
-    ...E.getEq(EO, AO),
-    compare: (x, y) =>
-      match2<E, A, E, A, Ordering>(
-        curry2(EO.compare),
-        constant(constant(LT)),
-        constant(constant(GT)),
-        curry2(AO.compare),
-      )(x)(y),
-  })
+	<E>(EO: Ord<E>) =>
+	<A>(AO: Ord<A>): Ord<Either<E, A>> => ({
+		...E.getEq(EO, AO),
+		compare: (x, y) =>
+			match2<E, A, E, A, Ordering>(
+				curry2(EO.compare),
+				constant(constant(LT)),
+				constant(constant(GT)),
+				curry2(AO.compare),
+			)(x)(y),
+	})
 
 /**
  * Derive a `Bounded` instance for `Either<E, A>` in which the top and bottom
@@ -224,12 +224,12 @@ export const getOrd =
  * @since 0.17.0
  */
 export const getBounded =
-  <E>(BE: Bounded<E>) =>
-  <A>(BA: Bounded<A>): Bounded<Either<E, A>> => ({
-    ...getOrd(BE)(BA),
-    top: E.right(BA.top),
-    bottom: E.left(BE.bottom),
-  })
+	<E>(BE: Bounded<E>) =>
+	<A>(BA: Bounded<A>): Bounded<Either<E, A>> => ({
+		...getOrd(BE)(BA),
+		top: E.right(BA.top),
+		bottom: E.left(BE.bottom),
+	})
 
 /**
  * Derive an `Enum` instance for `Either<E, A>` given an `Enum` instance for `E`
@@ -252,40 +252,40 @@ export const getBounded =
  * @since 0.17.0
  */
 export const getEnum =
-  <E>(EE: Enum<E>) =>
-  <A>(EA: Enum<A>): Enum<Either<E, A>> => ({
-    ...getBounded(EE)(EA),
-    succ: E.match(
-      flow(
-        EE.succ,
-        O.matchW(
-          L.lazy(() => E.right(EA.bottom)),
-          E.left,
-        ),
-        O.some,
-      ),
-      flow(EA.succ, O.map(E.right)),
-    ),
-    pred: E.match(
-      flow(EE.pred, O.map(E.left)),
-      flow(
-        EA.pred,
-        O.matchW(
-          L.lazy(() => E.left(EE.top)),
-          E.right,
-        ),
-        O.some,
-      ),
-    ),
-    toEnum: n => {
-      const ec = L.execute(EE.cardinality)
-      return n < ec
-        ? pipe(n, EE.toEnum, O.map(E.left))
-        : pipe(n - ec, EA.toEnum, O.map(E.right))
-    },
-    fromEnum: E.match(
-      EE.fromEnum,
-      flow(EA.fromEnum, n => n + L.execute(EE.cardinality)),
-    ),
-    cardinality: pipe(L.of(add), L.ap(EE.cardinality), L.ap(EA.cardinality)),
-  })
+	<E>(EE: Enum<E>) =>
+	<A>(EA: Enum<A>): Enum<Either<E, A>> => ({
+		...getBounded(EE)(EA),
+		succ: E.match(
+			flow(
+				EE.succ,
+				O.matchW(
+					L.lazy(() => E.right(EA.bottom)),
+					E.left,
+				),
+				O.some,
+			),
+			flow(EA.succ, O.map(E.right)),
+		),
+		pred: E.match(
+			flow(EE.pred, O.map(E.left)),
+			flow(
+				EA.pred,
+				O.matchW(
+					L.lazy(() => E.left(EE.top)),
+					E.right,
+				),
+				O.some,
+			),
+		),
+		toEnum: n => {
+			const ec = L.execute(EE.cardinality)
+			return n < ec
+				? pipe(n, EE.toEnum, O.map(E.left))
+				: pipe(n - ec, EA.toEnum, O.map(E.right))
+		},
+		fromEnum: E.match(
+			EE.fromEnum,
+			flow(EA.fromEnum, n => n + L.execute(EE.cardinality)),
+		),
+		cardinality: pipe(L.of(add), L.ap(EE.cardinality), L.ap(EA.cardinality)),
+	})

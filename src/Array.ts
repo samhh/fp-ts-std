@@ -26,32 +26,32 @@ import { invoke } from "./Function"
 import { These } from "fp-ts/These"
 import * as T from "fp-ts/These"
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import {
-  Applicative,
-  Applicative1,
-  Applicative2,
-  Applicative3,
-  Applicative4,
-  Applicative2C,
+	Applicative,
+	Applicative1,
+	Applicative2,
+	Applicative3,
+	Applicative4,
+	Applicative2C,
 } from "fp-ts/Applicative"
 import {
-  Monad,
-  Monad1,
-  Monad2,
-  Monad2C,
-  Monad3,
-  Monad3C,
-  Monad4,
+	Monad,
+	Monad1,
+	Monad2,
+	Monad2C,
+	Monad3,
+	Monad3C,
+	Monad4,
 } from "fp-ts/Monad"
 import { Either } from "fp-ts/Either"
 
@@ -71,10 +71,10 @@ import { Either } from "fp-ts/Either"
  * @since 0.1.0
  */
 export const elemV =
-  <A>(eq: Eq<A>) =>
-  (xs: Array<A>): Predicate<A> =>
-  y =>
-    A.elem(eq)(y)(xs)
+	<A>(eq: Eq<A>) =>
+	(xs: Array<A>): Predicate<A> =>
+	y =>
+		A.elem(eq)(y)(xs)
 
 /**
  * Check if a predicate does not hold for any array member.
@@ -94,7 +94,7 @@ export const elemV =
  */
 // tsc doesn't like pointfree here. /shrug
 export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(not, p =>
-  A.every(p),
+	A.every(p),
 )
 
 /**
@@ -114,7 +114,7 @@ export const none: <A>(f: Predicate<A>) => Predicate<Array<A>> = flow(not, p =>
  * @since 0.1.0
  */
 export const join = (x: string): ((ys: Array<string>) => string) =>
-  invoke("join")([x])
+	invoke("join")([x])
 
 /**
  * Like `fp-ts/Array::getEq`, but items are not required to be in the same
@@ -136,11 +136,11 @@ export const join = (x: string): ((ys: Array<string>) => string) =>
  * @since 0.1.0
  */
 export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
-  equals: (xs: Array<A>, ys: Array<A>) => {
-    const sort = A.sort(ordA)
+	equals: (xs: Array<A>, ys: Array<A>) => {
+		const sort = A.sort(ordA)
 
-    return A.getEq(ordA).equals(sort(xs), sort(ys))
-  },
+		return A.getEq(ordA).equals(sort(xs), sort(ys))
+	},
 })
 
 /**
@@ -165,15 +165,15 @@ export const getDisorderedEq = <A>(ordA: Ord<A>): Eq<Array<A>> => ({
  * @since 0.1.0
  */
 export const pluckFirst =
-  <A>(p: Predicate<A>) =>
-  (xs: Array<A>): [Option<A>, Array<A>] =>
-    pipe(
-      A.findIndex(p)(xs),
-      O.fold(constant([O.none, xs]), i => [
-        O.some(xs[i]),
-        A.unsafeDeleteAt(i, xs),
-      ]),
-    )
+	<A>(p: Predicate<A>) =>
+	(xs: Array<A>): [Option<A>, Array<A>] =>
+		pipe(
+			A.findIndex(p)(xs),
+			O.fold(constant([O.none, xs]), i => [
+				O.some(xs[i]),
+				A.unsafeDeleteAt(i, xs),
+			]),
+		)
 
 /**
  * Update an item in an array or, if it's not present yet, insert it.
@@ -220,15 +220,15 @@ export const pluckFirst =
  * @since 0.1.0
  */
 export const upsert =
-  <A>(eqA: Eq<A>) =>
-  (x: A) =>
-  (ys: Array<A>): NonEmptyArray<A> =>
-    pipe(
-      A.findIndex<A>(y => eqA.equals(x, y))(ys),
-      O.map(i => A.unsafeUpdateAt(i, x, ys)),
-      O.chain(NEA.fromArray),
-      O.getOrElse(() => A.append(x)(ys)),
-    )
+	<A>(eqA: Eq<A>) =>
+	(x: A) =>
+	(ys: Array<A>): NonEmptyArray<A> =>
+		pipe(
+			A.findIndex<A>(y => eqA.equals(x, y))(ys),
+			O.map(i => A.unsafeUpdateAt(i, x, ys)),
+			O.chain(NEA.fromArray),
+			O.getOrElse(() => A.append(x)(ys)),
+		)
 
 /**
  * Insert all the elements of an array into another array at the specified
@@ -249,15 +249,15 @@ export const upsert =
  * @since 0.5.0
  */
 export const insertMany =
-  (i: number) =>
-  <A>(xs: NonEmptyArray<A>) =>
-  (ys: Array<A>): Option<NonEmptyArray<A>> =>
-    pipe(
-      xs,
-      A.reverse,
-      reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
-      O.chain(NEA.fromArray),
-    )
+	(i: number) =>
+	<A>(xs: NonEmptyArray<A>) =>
+	(ys: Array<A>): Option<NonEmptyArray<A>> =>
+		pipe(
+			xs,
+			A.reverse,
+			reduceM(O.Monad, A.Foldable)(ys, (zs, x) => pipe(zs, A.insertAt(i, x))),
+			O.chain(NEA.fromArray),
+		)
 
 /**
  * Filter a list, removing any elements that repeat that directly precede them.
@@ -272,10 +272,10 @@ export const insertMany =
  * @since 0.6.0
  */
 export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
-  pipe(
-    xs,
-    A.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
-  )
+	pipe(
+		xs,
+		A.filterWithIndex((i, x) => i === 0 || !eq.equals(x, xs[i - 1])),
+	)
 
 /**
  * Check if an array starts with the specified subarray.
@@ -293,9 +293,9 @@ export const dropRepeats: <A>(eq: Eq<A>) => Endomorphism<Array<A>> = eq => xs =>
  * @since 0.7.0
  */
 export const startsWith =
-  <A>(eq: Eq<A>) =>
-  (start: Array<A>): Predicate<Array<A>> =>
-    flow(A.takeLeft(start.length), xs => A.getEq(eq).equals(xs, start))
+	<A>(eq: Eq<A>) =>
+	(start: Array<A>): Predicate<Array<A>> =>
+		flow(A.takeLeft(start.length), xs => A.getEq(eq).equals(xs, start))
 
 /**
  * Check if an array ends with the specified subarray.
@@ -313,9 +313,9 @@ export const startsWith =
  * @since 0.6.0
  */
 export const endsWith =
-  <A>(eq: Eq<A>) =>
-  (end: Array<A>): Predicate<Array<A>> =>
-    flow(A.takeRight(end.length), xs => A.getEq(eq).equals(xs, end))
+	<A>(eq: Eq<A>) =>
+	(end: Array<A>): Predicate<Array<A>> =>
+		flow(A.takeRight(end.length), xs => A.getEq(eq).equals(xs, end))
 
 /**
  * Returns a new array without the values present in the first input array.
@@ -336,9 +336,9 @@ export const endsWith =
  * @since 0.6.0
  */
 export const without =
-  <A>(eq: Eq<A>) =>
-  (xs: Array<A>): Endomorphism<Array<A>> =>
-    A.filter(y => !A.elem(eq)(y)(xs))
+	<A>(eq: Eq<A>) =>
+	(xs: Array<A>): Endomorphism<Array<A>> =>
+		A.filter(y => !A.elem(eq)(y)(xs))
 
 /**
  * Returns the {@link https://en.wikipedia.org/wiki/Cartesian_product Cartesian product}
@@ -357,17 +357,17 @@ export const without =
  * @since 0.6.0
  */
 export const cartesian =
-  <A>(xs: Array<A>) =>
-  <B>(ys: Array<B>): Array<[A, B]> =>
-    pipe(
-      xs,
-      A.chain(x =>
-        pipe(
-          ys,
-          A.map(y => [x, y]),
-        ),
-      ),
-    )
+	<A>(xs: Array<A>) =>
+	<B>(ys: Array<B>): Array<[A, B]> =>
+		pipe(
+			xs,
+			A.chain(x =>
+				pipe(
+					ys,
+					A.map(y => [x, y]),
+				),
+			),
+		)
 
 /**
  * Adds together all the numbers in the input array.
@@ -424,11 +424,11 @@ export const mean = (xs: NonEmptyArray<number>): number => sum(xs) / xs.length
  * @since 0.7.0
  */
 export const median: (xs: NonEmptyArray<number>) => number = flow(
-  NEA.sort(ordNumber),
-  xs => {
-    const i = xs.length / 2
-    return i % 1 === 0 ? (xs[i - 1] + xs[i]) / 2 : xs[Math.floor(i)]
-  },
+	NEA.sort(ordNumber),
+	xs => {
+		const i = xs.length / 2
+		return i % 1 === 0 ? (xs[i - 1] + xs[i]) / 2 : xs[Math.floor(i)]
+	},
 )
 
 /**
@@ -451,15 +451,15 @@ export const median: (xs: NonEmptyArray<number>) => number = flow(
  * @since 0.7.0
  */
 export const aperture =
-  (n: number) =>
-  <A>(xs: Array<A>): Array<Array<A>> => {
-    const go =
-      (i: number) =>
-      (ys: Array<Array<A>>): Array<Array<A>> =>
-        i + n > xs.length ? ys : go(i + 1)(A.append(slice(i)(n + i)(xs))(ys))
+	(n: number) =>
+	<A>(xs: Array<A>): Array<Array<A>> => {
+		const go =
+			(i: number) =>
+			(ys: Array<Array<A>>): Array<Array<A>> =>
+				i + n > xs.length ? ys : go(i + 1)(A.append(slice(i)(n + i)(xs))(ys))
 
-    return n < 1 ? [] : go(0)([])
-  }
+		return n < 1 ? [] : go(0)([])
+	}
 
 /**
  * Returns the elements of the array between the start index (inclusive) and the
@@ -481,9 +481,9 @@ export const aperture =
  * @since 0.7.0
  */
 export const slice =
-  (start: number) =>
-  (end: number): (<A>(xs: Array<A>) => Array<A>) =>
-    invoke("slice")([start, end])
+	(start: number) =>
+	(end: number): (<A>(xs: Array<A>) => Array<A>) =>
+		invoke("slice")([start, end])
 
 /**
  * Filters out items in the array for which the predicate holds. This can be
@@ -501,7 +501,7 @@ export const slice =
  * @since 0.7.0
  */
 export const reject = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(xs: Array<B>) => Array<B>) => A.filter(not(f))
 
 /**
@@ -525,20 +525,20 @@ export const reject = <A>(
  * @since 0.7.0
  */
 export const moveFrom =
-  (from: number) =>
-  (to: number) =>
-  <A>(xs: Array<A>): Option<Array<A>> =>
-    from >= xs.length || to >= xs.length
-      ? O.none
-      : from === to
-        ? O.some(xs)
-        : pipe(
-            xs,
-            A.lookup(from),
-            O.chain(x =>
-              pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x))),
-            ),
-          )
+	(from: number) =>
+	(to: number) =>
+	<A>(xs: Array<A>): Option<Array<A>> =>
+		from >= xs.length || to >= xs.length
+			? O.none
+			: from === to
+				? O.some(xs)
+				: pipe(
+						xs,
+						A.lookup(from),
+						O.chain(x =>
+							pipe(A.deleteAt(from)(xs), O.chain(A.insertAt(to, x))),
+						),
+					)
 
 /**
  * Move an item at index `from` to index `to`. See also `moveFrom`.
@@ -578,9 +578,9 @@ export const moveTo = flip(moveFrom)
  * @since 0.7.0
  */
 export const countBy =
-  <A>(f: (x: A) => string) =>
-  (xs: Array<A>): Record<string, number> =>
-    R.fromFoldableMap(MonoidSum, A.Foldable)(xs, x => [f(x), 1])
+	<A>(f: (x: A) => string) =>
+	(xs: Array<A>): Record<string, number> =>
+		R.fromFoldableMap(MonoidSum, A.Foldable)(xs, x => [f(x), 1])
 
 /**
  * Remove the longest initial subarray from the end of the input array for
@@ -599,9 +599,9 @@ export const countBy =
  * @since 0.7.0
  */
 export const dropRightWhile = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(xs: Array<B>) => Array<B>) =>
-  flow(A.reverse, A.dropLeftWhile(f), A.reverse)
+	flow(A.reverse, A.dropLeftWhile(f), A.reverse)
 
 /**
  * Drop a number of elements from the specified index an array, returning a
@@ -631,25 +631,25 @@ export const dropRightWhile = <A>(
  */
 
 export const dropAt =
-  (i: number) =>
-  (n: number) =>
-  <A>(xs: Array<A>): Option<Array<A>> =>
-    pipe(
-      A.isOutOfBound(i, xs),
-      B.fold(
-        () =>
-          pipe(
-            A.copy(xs),
-            ys => {
-              // eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
-              ys.splice(i, n)
-              return ys
-            },
-            O.some,
-          ),
-        constant(O.none),
-      ),
-    )
+	(i: number) =>
+	(n: number) =>
+	<A>(xs: Array<A>): Option<Array<A>> =>
+		pipe(
+			A.isOutOfBound(i, xs),
+			B.fold(
+				() =>
+					pipe(
+						A.copy(xs),
+						ys => {
+							// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
+							ys.splice(i, n)
+							return ys
+						},
+						O.some,
+					),
+				constant(O.none),
+			),
+		)
 
 /**
  * Tranposes the rows and columns of a 2D list. If some of the rows are shorter
@@ -666,15 +666,15 @@ export const dropAt =
  * @since 0.7.0
  */
 export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
-  /* eslint-disable functional/no-conditional-statements */
-  if (A.isEmpty(xs)) return []
-  if (A.isEmpty(xs[0])) return transpose(A.dropLeft(1)(xs))
-  /* eslint-enable functional/no-conditional-statements */
+	/* eslint-disable functional/no-conditional-statements */
+	if (A.isEmpty(xs)) return []
+	if (A.isEmpty(xs[0])) return transpose(A.dropLeft(1)(xs))
+	/* eslint-enable functional/no-conditional-statements */
 
-  const [[y, ...ys], ...yss] = xs
-  const zs = [y, ...A.filterMap(A.head)(yss)]
-  const zss = [ys, ...A.map(A.dropLeft(1))(yss)]
-  return [zs, ...transpose(zss)]
+	const [[y, ...ys], ...yss] = xs
+	const zs = [y, ...A.filterMap(A.head)(yss)]
+	const zss = [ys, ...A.map(A.dropLeft(1))(yss)]
+	return [zs, ...transpose(zss)]
 }
 
 /**
@@ -694,9 +694,9 @@ export const transpose = <A>(xs: Array<Array<A>>): Array<Array<A>> => {
  * @since 0.7.0
  */
 export const takeRightWhile = <A>(
-  f: Predicate<A>,
+	f: Predicate<A>,
 ): (<B extends A>(xs: Array<B>) => Array<B>) =>
-  flow(A.reverse, A.takeLeftWhile(f), A.reverse)
+	flow(A.reverse, A.takeLeftWhile(f), A.reverse)
 
 /**
  * Creates an array of all values which are present in one of the two input
@@ -714,10 +714,10 @@ export const takeRightWhile = <A>(
  * @since 0.7.0
  */
 export const symmetricDifference =
-  <A>(eq: Eq<A>) =>
-  (xs: Array<A>): Endomorphism<Array<A>> =>
-  ys =>
-    A.getMonoid<A>().concat(A.difference(eq)(ys)(xs), A.difference(eq)(xs)(ys))
+	<A>(eq: Eq<A>) =>
+	(xs: Array<A>): Endomorphism<Array<A>> =>
+	ys =>
+		A.getMonoid<A>().concat(A.difference(eq)(ys)(xs), A.difference(eq)(xs)(ys))
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -738,22 +738,22 @@ export const symmetricDifference =
  * @since 0.8.0
  */
 export const reduceWhile =
-  <A>(p: Predicate<A>) =>
-  <B>(f: (x: A) => (y: B) => B): ((x: B) => (ys: Array<A>) => B) => {
-    const go =
-      (acc: B) =>
-      (ys: Array<A>): B =>
-        pipe(
-          NEA.fromArray(ys),
-          O.filter(flow(NEA.head, p)),
-          O.fold(
-            constant(acc),
-            flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
-          ),
-        )
+	<A>(p: Predicate<A>) =>
+	<B>(f: (x: A) => (y: B) => B): ((x: B) => (ys: Array<A>) => B) => {
+		const go =
+			(acc: B) =>
+			(ys: Array<A>): B =>
+				pipe(
+					NEA.fromArray(ys),
+					O.filter(flow(NEA.head, p)),
+					O.fold(
+						constant(acc),
+						flow(NEA.unprepend, ([z, zs]) => go(f(z)(acc))(zs)),
+					),
+				)
 
-    return go
-  }
+		return go
+	}
 
 /**
  * Like ordinary array reduction, however this also takes a predicate that is
@@ -774,10 +774,10 @@ export const reduceWhile =
  * @since 0.8.0
  */
 export const reduceRightWhile =
-  <A>(p: Predicate<A>) =>
-  <B>(f: (x: A) => (y: B) => B) =>
-  (x: B): ((ys: Array<A>) => B) =>
-    flow(A.reverse, reduceWhile(p)(f)(x))
+	<A>(p: Predicate<A>) =>
+	<B>(f: (x: A) => (y: B) => B) =>
+	(x: B): ((ys: Array<A>) => B) =>
+		flow(A.reverse, reduceWhile(p)(f)(x))
 
 /**
  * Obtain the minimum value from a non-empty array.
@@ -792,8 +792,8 @@ export const reduceRightWhile =
  * @since 0.9.0
  */
 export const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
-  min,
-  NEA.concatAll,
+	min,
+	NEA.concatAll,
 )
 
 /**
@@ -809,8 +809,8 @@ export const minimum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
  * @since 0.9.0
  */
 export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
-  max,
-  NEA.concatAll,
+	max,
+	NEA.concatAll,
 )
 
 /**
@@ -827,26 +827,26 @@ export const maximum: <A>(ord: Ord<A>) => (xs: NonEmptyArray<A>) => A = flow(
  * @since 0.11.0
  */
 export const zipAll =
-  <A>(xs: Array<A>) =>
-  <B>(ys: Array<B>): Array<These<B, A>> => {
-    const zs = A.zip(ys, xs)
-    const getRem = slice(A.size(zs))(Infinity)
+	<A>(xs: Array<A>) =>
+	<B>(ys: Array<B>): Array<These<B, A>> => {
+		const zs = A.zip(ys, xs)
+		const getRem = slice(A.size(zs))(Infinity)
 
-    const rest = pipe(
-      ordNumber.compare(A.size(ys), A.size(xs)),
-      orderingMatch<Array<These<B, A>>>(
-        () => pipe(xs, getRem, A.map(T.right)),
-        constant(A.empty),
-        () => pipe(ys, getRem, A.map(T.left)),
-      ),
-    )
+		const rest = pipe(
+			ordNumber.compare(A.size(ys), A.size(xs)),
+			orderingMatch<Array<These<B, A>>>(
+				() => pipe(xs, getRem, A.map(T.right)),
+				constant(A.empty),
+				() => pipe(ys, getRem, A.map(T.left)),
+			),
+		)
 
-    return pipe(
-      zs,
-      A.map(([za, zb]) => T.both(za, zb)),
-      A.concat(rest),
-    )
-  }
+		return pipe(
+			zs,
+			A.map(([za, zb]) => T.both(za, zb)),
+			A.concat(rest),
+		)
+	}
 
 /**
  * Filter an array based upon a predicate whose boolean is returned in an
@@ -868,36 +868,36 @@ export const zipAll =
  * @since 0.12.0
  */
 export function filterA<F extends URIS4>(
-  F: Applicative4<F>,
+	F: Applicative4<F>,
 ): <S, R, E, A>(
-  p: (x: A) => Kind4<F, S, R, E, boolean>,
+	p: (x: A) => Kind4<F, S, R, E, boolean>,
 ) => (xs: Array<A>) => Kind4<F, S, R, E, Array<A>>
 export function filterA<F extends URIS3>(
-  F: Applicative3<F>,
+	F: Applicative3<F>,
 ): <R, E, A>(
-  p: (x: A) => Kind3<F, R, E, boolean>,
+	p: (x: A) => Kind3<F, R, E, boolean>,
 ) => (xs: Array<A>) => Kind3<F, R, E, Array<A>>
 export function filterA<F extends URIS2>(
-  F: Applicative2<F>,
+	F: Applicative2<F>,
 ): <E, A>(
-  p: (x: A) => Kind2<F, E, boolean>,
+	p: (x: A) => Kind2<F, E, boolean>,
 ) => (xs: Array<A>) => Kind2<F, E, Array<A>>
 export function filterA<F extends URIS2, E>(
-  F: Applicative2C<F, E>,
+	F: Applicative2C<F, E>,
 ): <A>(
-  p: (x: A) => Kind2<F, E, boolean>,
+	p: (x: A) => Kind2<F, E, boolean>,
 ) => (xs: Array<A>) => Kind2<F, E, Array<A>>
 export function filterA<F extends URIS>(
-  F: Applicative1<F>,
+	F: Applicative1<F>,
 ): <A>(p: (x: A) => Kind<F, boolean>) => (xs: Array<A>) => Kind<F, Array<A>>
 export function filterA<F>(
-  F: Applicative<F>,
+	F: Applicative<F>,
 ): <A>(p: (x: A) => HKT<F, boolean>) => (xs: Array<A>) => HKT<F, Array<A>>
 export function filterA<F>(
-  F: Applicative<F>,
+	F: Applicative<F>,
 ): <A>(p: (x: A) => HKT<F, boolean>) => (xs: Array<A>) => HKT<F, Array<A>> {
-  return p => xs =>
-    A.Witherable.wither(F)(xs, x => F.map(p(x), y => (y ? O.some(x) : O.none)))
+	return p => xs =>
+		A.Witherable.wither(F)(xs, x => F.map(p(x), y => (y ? O.some(x) : O.none)))
 }
 
 /**
@@ -917,13 +917,13 @@ export function filterA<F>(
  * @since 0.12.0
  */
 export const extractAt =
-  (i: number) =>
-  <A>(xs: Array<A>): Option<[A, Array<A>]> =>
-    pipe(
-      xs,
-      A.lookup(i),
-      O.map(x => [x, A.unsafeDeleteAt(i, xs)]),
-    )
+	(i: number) =>
+	<A>(xs: Array<A>): Option<[A, Array<A>]> =>
+		pipe(
+			xs,
+			A.lookup(i),
+			O.map(x => [x, A.unsafeDeleteAt(i, xs)]),
+		)
 
 /**
  * Convert an `Iterable` to an `Array`.
@@ -982,32 +982,32 @@ export const toReadonly: <A>(xs: Array<A>) => ReadonlyArray<A> = RA.fromArray
  * @since 0.15.0
  */
 export function allM<M extends URIS4>(
-  M: Monad4<M>,
+	M: Monad4<M>,
 ): <S, R, E>(
-  xs: Array<Kind4<M, S, R, E, boolean>>,
+	xs: Array<Kind4<M, S, R, E, boolean>>,
 ) => Kind4<M, S, R, E, boolean>
 export function allM<M extends URIS3>(
-  M: Monad3<M>,
+	M: Monad3<M>,
 ): <R, E>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function allM<M extends URIS3, E>(
-  M: Monad3C<M, E>,
+	M: Monad3C<M, E>,
 ): <R>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function allM<M extends URIS2>(
-  M: Monad2<M>,
+	M: Monad2<M>,
 ): <E>(xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function allM<M extends URIS2, E>(
-  M: Monad2C<M, E>,
+	M: Monad2C<M, E>,
 ): (xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function allM<M extends URIS>(
-  M: Monad1<M>,
+	M: Monad1<M>,
 ): (xs: Array<Kind<M, boolean>>) => Kind<M, boolean>
 export function allM<M>(
-  M: Monad<M>,
+	M: Monad<M>,
 ): (xs: Array<HKT<M, boolean>>) => HKT<M, boolean> {
-  // Can't reuse `andM` here, unsure why.
-  return A.reduce(M.of<boolean>(true), (x, y) =>
-    M.chain(x, b => (b ? y : M.of(false))),
-  )
+	// Can't reuse `andM` here, unsure why.
+	return A.reduce(M.of<boolean>(true), (x, y) =>
+		M.chain(x, b => (b ? y : M.of(false))),
+	)
 }
 
 /**
@@ -1028,32 +1028,32 @@ export function allM<M>(
  * @since 0.15.0
  */
 export function anyM<M extends URIS4>(
-  M: Monad4<M>,
+	M: Monad4<M>,
 ): <S, R, E>(
-  xs: Array<Kind4<M, S, R, E, boolean>>,
+	xs: Array<Kind4<M, S, R, E, boolean>>,
 ) => Kind4<M, S, R, E, boolean>
 export function anyM<M extends URIS3>(
-  M: Monad3<M>,
+	M: Monad3<M>,
 ): <R, E>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function anyM<M extends URIS3, E>(
-  M: Monad3C<M, E>,
+	M: Monad3C<M, E>,
 ): <R>(xs: Array<Kind3<M, R, E, boolean>>) => Kind3<M, R, E, boolean>
 export function anyM<M extends URIS2>(
-  M: Monad2<M>,
+	M: Monad2<M>,
 ): <E>(xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function anyM<M extends URIS2, E>(
-  M: Monad2C<M, E>,
+	M: Monad2C<M, E>,
 ): (xs: Array<Kind2<M, E, boolean>>) => Kind2<M, E, boolean>
 export function anyM<M extends URIS>(
-  M: Monad1<M>,
+	M: Monad1<M>,
 ): (xs: Array<Kind<M, boolean>>) => Kind<M, boolean>
 export function anyM<M>(
-  M: Monad<M>,
+	M: Monad<M>,
 ): (xs: Array<HKT<M, boolean>>) => HKT<M, boolean> {
-  // Can't reuse `orM` here, unsure why.
-  return A.reduce(M.of<boolean>(false), (x, y) =>
-    M.chain(x, b => (b ? M.of(true) : y)),
-  )
+	// Can't reuse `orM` here, unsure why.
+	return A.reduce(M.of<boolean>(false), (x, y) =>
+		M.chain(x, b => (b ? M.of(true) : y)),
+	)
 }
 
 /**
@@ -1079,13 +1079,13 @@ export function anyM<M>(
  * @since 0.16.0
  */
 export const separateNE = <A, B>(
-  xs: NonEmptyArray<Either<A, B>>,
+	xs: NonEmptyArray<Either<A, B>>,
 ): These<NonEmptyArray<A>, NonEmptyArray<B>> =>
-  pipe(xs, A.separate, ({ left, right }) => {
-    /* eslint-disable functional/no-conditional-statements */
-    if (A.isEmpty(left)) return T.right(right as NonEmptyArray<B>)
-    else if (A.isEmpty(right)) return T.left(left as NonEmptyArray<A>)
-    /* eslint-enable functional/no-conditional-statements */
-    // They can't both be empty as per the non-empty input.
-    else return T.both(left as NonEmptyArray<A>, right as NonEmptyArray<B>)
-  })
+	pipe(xs, A.separate, ({ left, right }) => {
+		/* eslint-disable functional/no-conditional-statements */
+		if (A.isEmpty(left)) return T.right(right as NonEmptyArray<B>)
+		else if (A.isEmpty(right)) return T.left(left as NonEmptyArray<A>)
+		/* eslint-enable functional/no-conditional-statements */
+		// They can't both be empty as per the non-empty input.
+		else return T.both(left as NonEmptyArray<A>, right as NonEmptyArray<B>)
+	})

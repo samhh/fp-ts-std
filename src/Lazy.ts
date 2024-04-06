@@ -13,19 +13,19 @@
 
 import { constant, identity } from "fp-ts/function"
 import {
-  Functor1,
-  flap as flap_,
-  bindTo as bindTo_,
-  let as let__,
+	Functor1,
+	flap as flap_,
+	bindTo as bindTo_,
+	let as let__,
 } from "fp-ts/Functor"
 import { Applicative1 } from "fp-ts/Applicative"
 import { Monad1 } from "fp-ts/Monad"
 import { Pointed1 } from "fp-ts/Pointed"
 import {
-  Apply1,
-  apFirst as apFirst_,
-  apS as apS_,
-  apSecond as apSecond_,
+	Apply1,
+	apFirst as apFirst_,
+	apS as apS_,
+	apSecond as apSecond_,
 } from "fp-ts/Apply"
 import { Chain1, bind as bind_, chainFirst as chainFirst_ } from "fp-ts/Chain"
 import { ChainRec1 } from "fp-ts/ChainRec"
@@ -60,22 +60,22 @@ export const URI = "Lazy"
 export type URI = typeof URI
 
 declare module "fp-ts/HKT" {
-  interface URItoKind<A> {
-    readonly [URI]: Lazy<A>
-  }
+	interface URItoKind<A> {
+		readonly [URI]: Lazy<A>
+	}
 }
 
 const _map: Functor1<URI>["map"] = (f, g) => () => g(f())
 const _ap: Applicative1<URI>["ap"] = (f, g) => () => f()(g())
 const _chain: Monad1<URI>["chain"] = (f, g) => g(f())
 const _chainRec: ChainRec1<URI>["chainRec"] = (a, f) => () => {
-  /* eslint-disable */
-  let e = f(a)()
-  while (e._tag === "Left") {
-    e = f(e.left)()
-  }
-  /* eslint-enable */
-  return e.right
+	/* eslint-disable */
+	let e = f(a)()
+	while (e._tag === "Left") {
+		e = f(e.left)()
+	}
+	/* eslint-enable */
+	return e.right
 }
 
 /**
@@ -85,9 +85,9 @@ const _chainRec: ChainRec1<URI>["chainRec"] = (a, f) => () => {
  * @since 0.12.0
  */
 export const map =
-  <A, B>(f: (x: A) => B) =>
-  (fa: Lazy<A>): Lazy<B> =>
-    _map(fa, f)
+	<A, B>(f: (x: A) => B) =>
+	(fa: Lazy<A>): Lazy<B> =>
+		_map(fa, f)
 
 /**
  * Apply a function within a `Lazy`.
@@ -96,8 +96,8 @@ export const map =
  * @since 0.12.0
  */
 export const ap: <A>(fa: Lazy<A>) => <B>(fab: Lazy<(a: A) => B>) => Lazy<B> =
-  fa => fab =>
-    _ap(fab, fa)
+	fa => fab =>
+		_ap(fab, fa)
 
 /**
  * Raise any value to a `Lazy`.
@@ -114,8 +114,8 @@ export const of: Pointed1<URI>["of"] = constant
  * @since 0.12.0
  */
 export const chain: <A, B>(f: (a: A) => Lazy<B>) => (ma: Lazy<A>) => Lazy<B> =
-  f => ma =>
-    _chain(ma, f)
+	f => ma =>
+		_chain(ma, f)
 
 /**
  * Alias of `chain`.
@@ -141,8 +141,8 @@ export const flatten: <A>(mma: Lazy<Lazy<A>>) => Lazy<A> = chain(identity)
  * @since 0.12.0
  */
 export const Functor: Functor1<URI> = {
-  URI,
-  map: _map,
+	URI,
+	map: _map,
 }
 
 /**
@@ -162,8 +162,8 @@ export const flap = flap_(Functor)
  * @since 0.12.0
  */
 export const Pointed: Pointed1<URI> = {
-  URI,
-  of,
+	URI,
+	of,
 }
 
 /**
@@ -174,9 +174,9 @@ export const Pointed: Pointed1<URI> = {
  * @since 0.12.0
  */
 export const Apply: Apply1<URI> = {
-  URI,
-  map: _map,
-  ap: _ap,
+	URI,
+	map: _map,
+	ap: _ap,
 }
 
 /**
@@ -203,10 +203,10 @@ export const apSecond = apSecond_(Apply)
  * @since 0.12.0
  */
 export const Applicative: Applicative1<URI> = {
-  URI,
-  map: _map,
-  ap: _ap,
-  of,
+	URI,
+	map: _map,
+	ap: _ap,
+	of,
 }
 
 /**
@@ -217,10 +217,10 @@ export const Applicative: Applicative1<URI> = {
  * @since 0.12.0
  */
 export const Chain: Chain1<URI> = {
-  URI,
-  map: _map,
-  ap: _ap,
-  chain: _chain,
+	URI,
+	map: _map,
+	ap: _ap,
+	chain: _chain,
 }
 
 /**
@@ -231,11 +231,11 @@ export const Chain: Chain1<URI> = {
  * @since 0.12.0
  */
 export const Monad: Monad1<URI> = {
-  URI,
-  map: _map,
-  ap: _ap,
-  of,
-  chain: _chain,
+	URI,
+	map: _map,
+	ap: _ap,
+	of,
+	chain: _chain,
 }
 
 /**
@@ -254,11 +254,11 @@ export const chainFirst = chainFirst_(Chain)
  * @since 0.12.0
  */
 export const ChainRec: ChainRec1<URI> = {
-  URI,
-  map: _map,
-  ap: _ap,
-  chain: _chain,
-  chainRec: _chainRec,
+	URI,
+	map: _map,
+	ap: _ap,
+	chain: _chain,
+	chainRec: _chainRec,
 }
 
 /**
@@ -298,13 +298,13 @@ export const apS = apS_(Apply)
 const let_ = let__(Functor)
 
 export {
-  /**
-   * Assign a variable in do notation.
-   *
-   * @category 2 Typeclass Methods
-   * @since 0.17.0
-   */
-  let_ as let,
+	/**
+	 * Assign a variable in do notation.
+	 *
+	 * @category 2 Typeclass Methods
+	 * @since 0.17.0
+	 */
+	let_ as let,
 }
 
 /**
@@ -322,17 +322,17 @@ export const ApT: Lazy<readonly []> = of([])
  * @since 0.12.0
  */
 export const traverseReadonlyNonEmptyArrayWithIndex =
-  <A, B>(f: (index: number, a: A) => Lazy<B>) =>
-  (as: ReadonlyNonEmptyArray<A>): Lazy<ReadonlyNonEmptyArray<B>> =>
-  () => {
-    const out: NonEmptyArray<B> = [f(0, RNEA.head(as))()]
-    /* eslint-disable */
-    for (let i = 1; i < as.length; i++) {
-      out.push(f(i, as[i])())
-    }
-    /* eslint-enable */
-    return out
-  }
+	<A, B>(f: (index: number, a: A) => Lazy<B>) =>
+	(as: ReadonlyNonEmptyArray<A>): Lazy<ReadonlyNonEmptyArray<B>> =>
+	() => {
+		const out: NonEmptyArray<B> = [f(0, RNEA.head(as))()]
+		/* eslint-disable */
+		for (let i = 1; i < as.length; i++) {
+			out.push(f(i, as[i])())
+		}
+		/* eslint-enable */
+		return out
+	}
 
 /**
  * Equivalent to `ReadonlyArray#traverseWithIndex(Applicative)`.
@@ -341,10 +341,10 @@ export const traverseReadonlyNonEmptyArrayWithIndex =
  * @since 0.12.0
  */
 export const traverseReadonlyArrayWithIndex = <A, B>(
-  f: (index: number, a: A) => Lazy<B>,
+	f: (index: number, a: A) => Lazy<B>,
 ): ((as: ReadonlyArray<A>) => Lazy<ReadonlyArray<B>>) => {
-  const g = traverseReadonlyNonEmptyArrayWithIndex(f)
-  return as => (RA.isNonEmpty(as) ? g(as) : ApT)
+	const g = traverseReadonlyNonEmptyArrayWithIndex(f)
+	return as => (RA.isNonEmpty(as) ? g(as) : ApT)
 }
 
 /**
@@ -354,9 +354,9 @@ export const traverseReadonlyArrayWithIndex = <A, B>(
  * @since 0.12.0
  */
 export const traverseArrayWithIndex: <A, B>(
-  f: (index: number, a: A) => Lazy<B>,
+	f: (index: number, a: A) => Lazy<B>,
 ) => (as: ReadonlyArray<A>) => Lazy<ReadonlyArray<B>> =
-  traverseReadonlyArrayWithIndex
+	traverseReadonlyArrayWithIndex
 
 /**
  * Equivalent to `Array#traverse(Applicative)`.
@@ -365,9 +365,9 @@ export const traverseArrayWithIndex: <A, B>(
  * @since 0.12.0
  */
 export const traverseArray = <A, B>(
-  f: (a: A) => Lazy<B>,
+	f: (a: A) => Lazy<B>,
 ): ((as: ReadonlyArray<A>) => Lazy<ReadonlyArray<B>>) =>
-  traverseReadonlyArrayWithIndex((_, a) => f(a))
+	traverseReadonlyArrayWithIndex((_, a) => f(a))
 
 /**
  * Equivalent to `Array#sequence(Applicative)`.
@@ -376,7 +376,7 @@ export const traverseArray = <A, B>(
  * @since 2.9.0
  */
 export const sequenceArray: <A>(
-  arr: ReadonlyArray<Lazy<A>>,
+	arr: ReadonlyArray<Lazy<A>>,
 ) => Lazy<ReadonlyArray<A>> = traverseArray(identity)
 
 /**
@@ -424,9 +424,9 @@ export const lazy: <A>(f: () => A) => Lazy<A> = identity
  * @since 0.14.0
  */
 export const memoize = <A>(f: Lazy<A>): Lazy<A> => {
-  const empty = Symbol()
-  // eslint-disable-next-line functional/no-let
-  let res: A | typeof empty = empty
+	const empty = Symbol()
+	// eslint-disable-next-line functional/no-let
+	let res: A | typeof empty = empty
 
-  return () => (res === empty ? (res = f()) : res)
+	return () => (res === empty ? (res = f()) : res)
 }

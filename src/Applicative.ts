@@ -5,24 +5,24 @@
  */
 
 import {
-  HKT,
-  Kind,
-  Kind2,
-  Kind3,
-  Kind4,
-  URIS,
-  URIS2,
-  URIS3,
-  URIS4,
+	HKT,
+	Kind,
+	Kind2,
+	Kind3,
+	Kind4,
+	URIS,
+	URIS2,
+	URIS3,
+	URIS4,
 } from "fp-ts/HKT"
 import {
-  Applicative,
-  Applicative1,
-  Applicative2,
-  Applicative2C,
-  Applicative3,
-  Applicative3C,
-  Applicative4,
+	Applicative,
+	Applicative1,
+	Applicative2,
+	Applicative2C,
+	Applicative3,
+	Applicative3C,
+	Applicative4,
 } from "fp-ts/Applicative"
 
 /**
@@ -49,29 +49,29 @@ import {
  * @since 0.12.0
  */
 export function when<F extends URIS4>(
-  F: Applicative4<F>,
+	F: Applicative4<F>,
 ): (
-  b: boolean,
+	b: boolean,
 ) => <S, R, E>(x: Kind4<F, S, R, E, void>) => Kind4<F, S, R, E, void>
 export function when<F extends URIS3>(
-  F: Applicative3<F>,
+	F: Applicative3<F>,
 ): (b: boolean) => <R, E>(x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
 export function when<F extends URIS3, E>(
-  F: Applicative3C<F, E>,
+	F: Applicative3C<F, E>,
 ): (b: boolean) => <R>(x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
 export function when<F extends URIS2>(
-  F: Applicative2<F>,
+	F: Applicative2<F>,
 ): (b: boolean) => <E>(x: Kind2<F, E, void>) => Kind2<F, E, void>
 export function when<F extends URIS2, E>(
-  F: Applicative2C<F, E>,
+	F: Applicative2C<F, E>,
 ): (b: boolean) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
 export function when<F extends URIS>(
-  F: Applicative1<F>,
+	F: Applicative1<F>,
 ): (b: boolean) => (x: Kind<F, void>) => Kind<F, void>
 export function when<F>(
-  F: Applicative<F>,
+	F: Applicative<F>,
 ): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
-  return b => x => (b ? x : F.of(undefined))
+	return b => x => (b ? x : F.of(undefined))
 }
 
 /**
@@ -97,29 +97,29 @@ export function when<F>(
  * @since 0.12.0
  */
 export function unless<F extends URIS4>(
-  F: Applicative4<F>,
+	F: Applicative4<F>,
 ): (
-  b: boolean,
+	b: boolean,
 ) => <S, R, E>(x: Kind4<F, S, R, E, void>) => Kind4<F, S, R, E, void>
 export function unless<F extends URIS3>(
-  F: Applicative3<F>,
+	F: Applicative3<F>,
 ): (b: boolean) => <R, E>(x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
 export function unless<F extends URIS3, E>(
-  F: Applicative3C<F, E>,
+	F: Applicative3C<F, E>,
 ): (b: boolean) => <R>(x: Kind3<F, R, E, void>) => Kind3<F, R, E, void>
 export function unless<F extends URIS2>(
-  F: Applicative2<F>,
+	F: Applicative2<F>,
 ): (b: boolean) => <E>(x: Kind2<F, E, void>) => Kind2<F, E, void>
 export function unless<F extends URIS2, E>(
-  F: Applicative2C<F, E>,
+	F: Applicative2C<F, E>,
 ): (b: boolean) => (x: Kind2<F, E, void>) => Kind2<F, E, void>
 export function unless<F extends URIS>(
-  F: Applicative1<F>,
+	F: Applicative1<F>,
 ): (b: boolean) => (x: Kind<F, void>) => Kind<F, void>
 export function unless<F>(
-  F: Applicative<F>,
+	F: Applicative<F>,
 ): (b: boolean) => (x: HKT<F, void>) => HKT<F, void> {
-  return b => x => (b ? F.of(undefined) : x)
+	return b => x => (b ? F.of(undefined) : x)
 }
 
 /**
@@ -147,15 +147,15 @@ export function unless<F>(
  * @since 0.17.0
  */
 export function pass<F extends URIS4, S = never, R = never, E = never>(
-  F: Applicative4<F>,
+	F: Applicative4<F>,
 ): Kind4<F, S, R, E, void>
 export function pass<F extends URIS3, R = never, E = never>(
-  F: Applicative3<F>,
+	F: Applicative3<F>,
 ): Kind3<F, R, E, void>
 export function pass<F extends URIS2, E = never>(
-  F: Applicative2<F>,
+	F: Applicative2<F>,
 ): Kind2<F, E, void>
 export function pass<F extends URIS>(F: Applicative1<F>): Kind<F, void>
 export function pass<F>(F: Applicative<F>): HKT<F, void> {
-  return F.of(undefined)
+	return F.of(undefined)
 }
