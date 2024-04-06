@@ -37,7 +37,6 @@ import { decrement, increment } from "./Number"
 export const unsafeExpect =
 	(msg: string) =>
 	<A>(x: Option<A>): A => {
-		// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
 		if (O.isNone(x)) throw Error("Unwrapped `None`", { cause: msg })
 
 		return x.value
@@ -56,7 +55,6 @@ export const unsafeExpect =
  * @since 0.1.0
  */
 export const unsafeUnwrap = <A>(x: Option<A>): A => {
-	// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
 	if (O.isNone(x)) throw Error("Unwrapped `None`")
 
 	return x.value
@@ -311,7 +309,6 @@ export const match2 =
 						my,
 						O.match(
 							L.lazy(() => onSomeFst(x)),
-							// eslint-disable-next-line functional/prefer-tacit
 							y => onSomeBoth(x)(y),
 						),
 					),

@@ -40,7 +40,6 @@ const getIsoIso = <A, B>(): Isomorphism<Isomorphism<A, B>, Iso<A, B>> => ({
  * @category 3 Functions
  * @since 0.13.0
  */
-// eslint-disable-next-line functional/prefer-tacit
 export const toIso = <A, B>(I: Isomorphism<A, B>): Iso<A, B> =>
 	getIsoIso<A, B>().to(I)
 
@@ -50,7 +49,6 @@ export const toIso = <A, B>(I: Isomorphism<A, B>): Iso<A, B> =>
  * @category 3 Functions
  * @since 0.13.0
  */
-// eslint-disable-next-line functional/prefer-tacit
 export const fromIso = <A, B>(I: Iso<A, B>): Isomorphism<A, B> =>
 	getIsoIso<A, B>().from(I)
 

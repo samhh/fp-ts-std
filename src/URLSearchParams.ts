@@ -218,7 +218,6 @@ const EqValues = getDisorderedEq(Str.Ord)
  * @since 0.18.0
  */
 export const Eq: Eq<URLSearchParams> = {
-	/* eslint-disable */
 	equals: (xs, ys) => {
 		if (size(xs) !== size(ys)) return false
 
@@ -233,7 +232,6 @@ export const Eq: Eq<URLSearchParams> = {
 
 		return true
 	},
-	/* eslint-enable */
 }
 
 /**
@@ -373,7 +371,7 @@ export const upsertAt =
 	(v: string): Endomorphism<URLSearchParams> =>
 	(x): URLSearchParams => {
 		const y = clone(x)
-		y.set(k, v) // eslint-disable-line functional/no-expression-statements
+		y.set(k, v)
 		return y
 	}
 
@@ -401,7 +399,7 @@ export const setParam =
 	(v: string): Endomorphism<URLSearchParams> =>
 	(x): URLSearchParams => {
 		const y = clone(x)
-		y.set(k, v) // eslint-disable-line functional/no-expression-statements
+		y.set(k, v)
 		return y
 	}
 
@@ -428,7 +426,7 @@ export const appendAt =
 	(v: string): Endomorphism<URLSearchParams> =>
 	(x): URLSearchParams => {
 		const y = clone(x)
-		y.append(k, v) // eslint-disable-line functional/no-expression-statements
+		y.append(k, v)
 		return y
 	}
 
@@ -454,7 +452,7 @@ export const deleteAt =
 	(k: string): Endomorphism<URLSearchParams> =>
 	x => {
 		const y = clone(x)
-		y.delete(k) // eslint-disable-line functional/no-expression-statements
+		y.delete(k)
 		return y
 	}
 
@@ -535,7 +533,6 @@ export const concatBy =
 		) => (vs: [NonEmptyArray<string>, NonEmptyArray<string>]) => Array<string>,
 	) =>
 	(xs: URLSearchParams): Endomorphism<URLSearchParams> =>
-	/* eslint-disable */
 	ys => {
 		const zs = clone(empty)
 		const ks = pipe(xs, keys, A.concat(keys(ys)), A.uniq(Str.Eq))
@@ -554,7 +551,6 @@ export const concatBy =
 
 		return zs
 	}
-/* eslint-enable */
 
 /**
  * A `Semigroup` instance for `URLSearchParams` in which all key/value pairs
@@ -633,7 +629,6 @@ export const fromMap: (x: Map<string, Array<string>>) => URLSearchParams = flow(
 // Defined like this as there's currently no `M.fromFoldableMap`.
 export const toMap = (
 	x: URLSearchParams,
-	/* eslint-disable */
 ): Map<string, NonEmptyArray<string>> => {
 	const m = new Map<string, NonEmptyArray<string>>()
 
@@ -646,4 +641,3 @@ export const toMap = (
 
 	return m
 }
-/* eslint-enable */

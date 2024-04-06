@@ -15,7 +15,6 @@ import {
 import { Lazy } from "../src/Lazy"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	/* eslint-disable */
 	try {
 		f()
 		throw "didn't throw"
@@ -23,7 +22,6 @@ const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 		if (!(e instanceof Error)) throw "threw unexpected type"
 		return [e.message, e.cause]
 	}
-	/* eslint-enable */
 }
 
 describe("IOEither", () => {
@@ -90,7 +88,6 @@ describe("IOEither", () => {
 	describe("sequenceArray_", () => {
 		const f = sequenceArray_
 
-		/* eslint-disable */
 		it("sequences from left to right", () => {
 			let n = 0
 
@@ -101,13 +98,11 @@ describe("IOEither", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("traverseArray_", () => {
 		const f = traverseArray_
 
-		/* eslint-disable */
 		it("traverses from left to right", () => {
 			let n = 0
 
@@ -118,7 +113,6 @@ describe("IOEither", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("pass", () => {

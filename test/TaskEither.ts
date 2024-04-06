@@ -16,7 +16,6 @@ import {
 } from "../src/TaskEither"
 
 const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
-	/* eslint-disable */
 	try {
 		await f
 		throw "didn't throw"
@@ -24,7 +23,6 @@ const msgAndCause = async (f: Promise<unknown>): Promise<[string, unknown]> => {
 		if (!(e instanceof Error)) throw "threw unexpected type"
 		return [e.message, e.cause]
 	}
-	/* eslint-enable */
 }
 
 describe("TaskEither", () => {
@@ -91,7 +89,6 @@ describe("TaskEither", () => {
 	describe("sequenceSeqArray_", () => {
 		const f = sequenceSeqArray_
 
-		/* eslint-disable */
 		it("sequences sequentially", async () => {
 			let n = 0
 			const g = pipe(
@@ -107,13 +104,11 @@ describe("TaskEither", () => {
 
 			expect(n).toBe(5)
 		})
-		/* eslint-enable */
 	})
 
 	describe("traverseArray_", () => {
 		const f = traverseArray_
 
-		/* eslint-disable */
 		it("sequences in parallel", async () => {
 			let n = 0
 			const g = pipe(
@@ -129,13 +124,11 @@ describe("TaskEither", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("traverseSeqArray_", () => {
 		const f = traverseSeqArray_
 
-		/* eslint-disable */
 		it("sequences in parallel", async () => {
 			let n = 0
 			const g = pipe(
@@ -151,7 +144,6 @@ describe("TaskEither", () => {
 
 			expect(n).toBe(5)
 		})
-		/* eslint-enable */
 	})
 
 	describe("pass", () => {

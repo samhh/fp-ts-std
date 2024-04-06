@@ -33,7 +33,6 @@ import { GT, LT } from "./Ordering"
  * @since 0.1.0
  */
 export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
-	// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
 	if (E.isLeft(x)) throw Error("Unwrapped `Left`", { cause: x.left })
 
 	return x.right
@@ -53,7 +52,6 @@ export const unsafeUnwrap = <A>(x: Either<unknown, A>): A => {
  * @since 0.5.0
  */
 export const unsafeUnwrapLeft = <E>(x: Either<E, unknown>): E => {
-	// eslint-disable-next-line functional/no-conditional-statements, functional/no-throw-statements
 	if (E.isRight(x)) throw Error("Unwrapped `Right`", { cause: x.right })
 
 	return x.left
@@ -141,7 +139,6 @@ export const mapBoth: <A, B>(
  * @category 3 Functions
  * @since 0.17.0
  */
-/* eslint-disable functional/prefer-tacit */
 export const match2 =
 	<A, B, C, D, E>(
 		onLeftLeft: (x: A) => (y: C) => E,
@@ -172,7 +169,6 @@ export const match2 =
 					),
 			),
 		)
-/* eslint-enable functional/prefer-tacit */
 
 /**
  * Derive an `Ord` instance for `Either<E, A>` in which `Left` values are

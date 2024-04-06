@@ -152,7 +152,6 @@ describe("Lazy", () => {
 		})
 	})
 
-	/* eslint-disable */
 	describe("memoize", () => {
 		const f = Lazy.memoize
 
@@ -167,5 +166,4 @@ describe("Lazy", () => {
 			expect(i).toBe(1)
 		})
 	})
-	/* eslint-enable */
 })

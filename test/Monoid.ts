@@ -36,9 +36,8 @@ describe("Monoid", () => {
 			fc.assert(fc.property(fc.string(), x => f(false)(constant(x)) === x))
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("lazily evaluates value", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const g: Lazy<string> = () => {
 				exe = true
 				return "foo"
@@ -50,7 +49,6 @@ describe("Monoid", () => {
 			f(false)(g)
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 
 	describe("memptyUnless", () => {
@@ -66,9 +64,8 @@ describe("Monoid", () => {
 			fc.assert(fc.property(fc.string(), x => f(true)(constant(x)) === x))
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("lazily evaluates value", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const g: Lazy<string> = () => {
 				exe = true
 				return "foo"
@@ -80,6 +77,5 @@ describe("Monoid", () => {
 			f(true)(g)
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 })

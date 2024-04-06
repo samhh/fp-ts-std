@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statements */
-
 import { describe, expect, it, jest } from "@jest/globals"
 import fc from "fast-check"
 import * as T from "fp-ts/Task"
@@ -22,7 +20,6 @@ import { mkMilliseconds, unMilliseconds } from "../src/Date"
 import { add } from "../src/Number"
 
 const flushPromises = (): Promise<void> =>
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 	new Promise(
 		jest.requireActual<typeof import("timers")>("timers").setImmediate,
 	)
@@ -33,7 +30,6 @@ describe("Task", () => {
 			jest.useFakeTimers()
 
 			const spy = jest.fn()
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			sleep(mkMilliseconds(1000))().then(spy)
 
 			expect(spy).not.toHaveBeenCalled()
@@ -66,7 +62,6 @@ describe("Task", () => {
 		it("tracks the elapsed time via the callback", async () => {
 			const x = "abc"
 
-			// eslint-disable-next-line functional/no-let
 			let time = 0
 
 			await pipe(
@@ -90,7 +85,6 @@ describe("Task", () => {
 			})
 		})
 
-		/* eslint-disable */
 		describe("when", () => {
 			const f = when
 
@@ -124,9 +118,7 @@ describe("Task", () => {
 				return expect(ran).toBe(true)
 			})
 		})
-		/* eslint-enable */
 
-		/* eslint-disable */
 		describe("unless", () => {
 			const f = unless
 
@@ -160,13 +152,11 @@ describe("Task", () => {
 				return expect(ran).toBe(true)
 			})
 		})
-		/* eslint-enable */
 	})
 
 	describe("sequenceArray_", () => {
 		const f = sequenceArray_
 
-		/* eslint-disable */
 		it("sequences in parallel", async () => {
 			let n = 0
 			const g = pipe(
@@ -182,13 +172,11 @@ describe("Task", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("sequenceSeqArray_", () => {
 		const f = sequenceSeqArray_
 
-		/* eslint-disable */
 		it("sequences sequentially", async () => {
 			let n = 0
 			const g = pipe(
@@ -204,13 +192,11 @@ describe("Task", () => {
 
 			expect(n).toBe(5)
 		})
-		/* eslint-enable */
 	})
 
 	describe("traverseArray_", () => {
 		const f = traverseArray_
 
-		/* eslint-disable */
 		it("traverses in parallel", async () => {
 			let n = 0
 			const g = pipe(
@@ -226,13 +212,11 @@ describe("Task", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("traverseSeqArray_", () => {
 		const f = traverseSeqArray_
 
-		/* eslint-disable */
 		it("traverses sequentially", async () => {
 			let n = 0
 			const g = pipe(
@@ -248,7 +232,6 @@ describe("Task", () => {
 
 			expect(n).toBe(5)
 		})
-		/* eslint-enable */
 	})
 
 	describe("pass", () => {
@@ -263,7 +246,6 @@ describe("Task", () => {
 		const f = until<number>
 
 		it("executes until predicate passes", async () => {
-			// eslint-disable-next-line functional/no-let
 			let n = 0
 
 			const g: Task<number> = () => Promise.resolve(++n)

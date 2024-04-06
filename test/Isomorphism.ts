@@ -108,7 +108,6 @@ describe("Isomorphism", () => {
 		const f: (x: boolean) => number = Number
 		const g: (x: number) => string = String
 		const absurd = (): never => {
-			// eslint-disable-next-line functional/no-throw-statements
 			throw Error("unreachable")
 		}
 

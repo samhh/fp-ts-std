@@ -30,7 +30,6 @@ import { EnumInt } from "../src/Number"
 import { EQ } from "../src/Ordering"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	/* eslint-disable */
 	try {
 		f()
 		throw "didn't throw"
@@ -38,7 +37,6 @@ const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 		if (!(e instanceof Error)) throw "threw unexpected type"
 		return [e.message, e.cause]
 	}
-	/* eslint-enable */
 }
 
 const BoundedNull: Bounded<null> = {
@@ -68,11 +66,9 @@ describe("Enum", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(pair, ([x, y]) => {
-					/* eslint-disable functional/no-expression-statements */
 					f(x)(x)
 					f(y)(y)
 					f(y)(x)
-					/* eslint-enable functional/no-expression-statements */
 				}),
 			)
 		})
@@ -118,7 +114,6 @@ describe("Enum", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(triple, ([x, y, z]) => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)(y)(z)
 				}),
 			)
@@ -218,7 +213,6 @@ describe("Enum", () => {
 			const BoundedBoolOrNull: Bounded<BoolOrNull> = {
 				equals: (x, y) => x === y,
 				compare: Ord.contramap<number, BoolOrNull>(x => {
-					// eslint-disable-next-line functional/no-conditional-statements
 					switch (x) {
 						case false:
 							return 0
@@ -235,7 +229,6 @@ describe("Enum", () => {
 			const EnumBoolOrNull: Enum<BoolOrNull> = {
 				...BoundedBoolOrNull,
 				succ: x => {
-					// eslint-disable-next-line functional/no-conditional-statements
 					switch (x) {
 						case false:
 							return O.some(true)
@@ -246,7 +239,6 @@ describe("Enum", () => {
 					}
 				},
 				pred: x => {
-					// eslint-disable-next-line functional/no-conditional-statements
 					switch (x) {
 						case false:
 							return O.none
@@ -257,7 +249,6 @@ describe("Enum", () => {
 					}
 				},
 				toEnum: n => {
-					// eslint-disable-next-line functional/no-conditional-statements
 					switch (n) {
 						case 0:
 							return O.some(false)
@@ -270,7 +261,6 @@ describe("Enum", () => {
 					}
 				},
 				fromEnum: x => {
-					// eslint-disable-next-line functional/no-conditional-statements
 					switch (x) {
 						case false:
 							return 0
@@ -344,10 +334,8 @@ describe("Enum", () => {
 					(xs, y) => {
 						const E = f(Str.Ord)(xs as NonEmptyArray<string>)
 
-						/* eslint-disable functional/no-expression-statements */
 						E.succ(y)
 						E.pred(y)
-						/* eslint-enable functional/no-expression-statements */
 					},
 				),
 			)
@@ -361,7 +349,6 @@ describe("Enum", () => {
 					(xs, y) => {
 						const E = f(Str.Ord)(xs as NonEmptyArray<string>)
 
-						// eslint-disable-next-line functional/no-expression-statements
 						E.toEnum(y)
 					},
 				),

@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statements */
-
 import { describe, expect, it } from "@jest/globals"
 import * as IO from "fp-ts/IO"
 import { constVoid, constant, flip } from "fp-ts/function"
@@ -23,7 +21,7 @@ describe("Monad", () => {
 		const f = ifM(IO.Monad)
 
 		it("returns action according to condition", () => {
-			let x = "baz" // eslint-disable-line functional/no-let
+			let x = "baz"
 			const g =
 				(y: string): IO<void> =>
 				() => {
@@ -38,7 +36,7 @@ describe("Monad", () => {
 		})
 
 		it("does not execute the non-returned condition", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const set: IO<void> = () => {
 				exe = true
 			}
@@ -62,7 +60,7 @@ describe("Monad", () => {
 		})
 
 		it("short-circuits", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const set: IO<boolean> = () => {
 				exe = true
 				return true
@@ -87,7 +85,7 @@ describe("Monad", () => {
 		})
 
 		it("short-circuits", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const set: IO<boolean> = () => {
 				exe = true
 				return true
@@ -123,8 +121,7 @@ describe("Monad", () => {
 		})
 
 		it("short-circuits, including the predicate", () => {
-			let exe = false // eslint-disable-line functional/no-let
-
+			let exe = false
 			const set = (): IO<boolean> => {
 				exe = true
 				return () => {
@@ -163,8 +160,7 @@ describe("Monad", () => {
 		})
 
 		it("short-circuits, including the predicate", () => {
-			let exe = false // eslint-disable-line functional/no-let
-
+			let exe = false
 			const set = (): IO<boolean> => {
 				exe = true
 				return () => {
@@ -203,8 +199,7 @@ describe("Monad", () => {
 		})
 
 		it("short-circuits, including the predicate", () => {
-			let exe = false // eslint-disable-line functional/no-let
-
+			let exe = false
 			const set = (): IO<boolean> => {
 				exe = true
 				return () => {
@@ -225,8 +220,7 @@ describe("Monad", () => {
 		const f = whenM(IO.Monad)
 
 		it("doesn't execute action if condition fails", () => {
-			let exe = false // eslint-disable-line functional/no-let
-
+			let exe = false
 			const set: IO<boolean> = () => (exe = true)
 
 			expect(exe).toBe(false)
@@ -239,7 +233,6 @@ describe("Monad", () => {
 		})
 
 		it("equivalent to lifted applicative when", () => {
-			// eslint-disable-next-line functional/no-let
 			let n = 0
 
 			const inc: IO<void> = () => n++
@@ -266,8 +259,7 @@ describe("Monad", () => {
 		const f = unlessM(IO.Monad)
 
 		it("doesn't execute action if condition succeeds", () => {
-			let exe = false // eslint-disable-line functional/no-let
-
+			let exe = false
 			const set: IO<boolean> = () => (exe = true)
 
 			expect(exe).toBe(false)
@@ -280,7 +272,6 @@ describe("Monad", () => {
 		})
 
 		it("equivalent to lifted applicative unless", () => {
-			// eslint-disable-next-line functional/no-let
 			let n = 0
 
 			const inc: IO<void> = () => n++

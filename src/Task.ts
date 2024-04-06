@@ -49,7 +49,6 @@ export const sleep =
 	(n: Milliseconds): Task<void> =>
 	() =>
 		new Promise<void>(resolve => {
-			// eslint-disable-next-line functional/no-expression-statements
 			setTimeout(resolve, Math.floor(unMilliseconds(n)))
 		})
 
@@ -80,7 +79,6 @@ export const elapsed =
 		const start = now()
 		const y = await x()
 		const duration = fieldMilliseconds.sub(now(), start)
-		// eslint-disable-next-line functional/no-expression-statements
 		f(duration)()
 
 		return y

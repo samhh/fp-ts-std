@@ -25,9 +25,8 @@ describe("Alternative", () => {
 			)
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("lazily evaluates value", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const g: Lazy<void> = () => {
 				exe = true
 			}
@@ -38,7 +37,6 @@ describe("Alternative", () => {
 			f(true)(g)
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 
 	describe("altAllBy", () => {
@@ -76,9 +74,8 @@ describe("Alternative", () => {
 			)
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("short-circuits", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const g: Lazy<O.Option<string>> = () => {
 				exe = true
 				return O.some("bar")
@@ -90,6 +87,5 @@ describe("Alternative", () => {
 			expect(f([g, constant(O.some("foo"))])("baz")).toEqual(O.some("bar"))
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 })

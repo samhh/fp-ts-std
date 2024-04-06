@@ -170,7 +170,6 @@ export const apSecond = apSecond_(Applicative)
  */
 export const chain: <A, B, C>(
 	f: (x: B) => (y: A) => C,
-	// eslint-disable-next-line functional/prefer-tacit
 ) => (g: (x: A) => B) => (x: A) => C = f => g => x => f(g(x))(x)
 
 /**
@@ -199,7 +198,7 @@ export const Monad: Monad2<URI> = {
  * @category 2 Typeclass Methods
  * @since 0.17.0
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// biome-ignore lint/complexity/noBannedTypes: Copying fp-ts.
 export const Do: <A>(x: A) => {} = of({})
 
 /**
@@ -258,9 +257,7 @@ export const withIndex: <A, B, C>(
 	f: (g: (x: A) => B) => (ys: Array<A>) => Array<C>,
 ) => (g: (i: number) => (x: A) => B) => (ys: Array<A>) => Array<C> =
 	f => g => xs => {
-		// eslint-disable-next-line functional/no-let
 		let i = 0
-		// eslint-disable-next-line functional/prefer-tacit
 		return f(y => g(i++)(y))(xs)
 	}
 
@@ -431,6 +428,7 @@ export const until =
  * @since 0.7.0
  */
 export const construct =
+	// biome-ignore lint/correctness/noUnusedVariables: Biome bug.
 	<A extends Array<unknown>, B>(x: new (...xs: A) => B) =>
 	(xs: A): B =>
 		new x(...xs)
@@ -500,7 +498,7 @@ export const invokeOn =
 	<A>() =>
 	<
 		B extends {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// biome-ignore lint/suspicious/noExplicitAny: Contravariant.
 			[K in keyof A]: A[K] extends (...xs: Array<any>) => unknown ? A[K] : never
 		},
 		C extends keyof B,
@@ -549,10 +547,10 @@ export const memoize =
 
 		return k => {
 			const cached = M.lookup(eq)(k)(cache)
-			if (O.isSome(cached)) return cached.value // eslint-disable-line functional/no-conditional-statements
+			if (O.isSome(cached)) return cached.value
 
 			const val = f(k)
-			cache.set(k, val) // eslint-disable-line functional/no-expression-statements
+			cache.set(k, val)
 			return val
 		}
 	}
@@ -878,7 +876,7 @@ export function fork<A, B, C, D, E, F, G, H, I, J>(
 		((x: A) => J)?,
 	],
 ): unknown {
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	// biome-ignore lint/style/noNonNullAssertion: Fun with overloads.
 	return (x: A): unknown => fs.map(f => f!(x))
 }
 
@@ -906,7 +904,7 @@ export const converge =
 	<A>(
 		gs: [(x: A) => B, ...{ [K in keyof C]: (x: A) => C[K] }],
 	): ((x: A) => D) =>
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
+		// biome-ignore lint/suspicious/noExplicitAny: Good luck typing this!
 		flow(x => fork(gs as any)(x) as unknown as [B, ...C], f)
 
 /**
@@ -926,7 +924,7 @@ export const converge =
  */
 export const isInstanceOf =
 	<A>(x: {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// biome-ignore lint/suspicious/noExplicitAny: Contravariant.
 		new (...args: Array<any>): A
 	}): Refinement<unknown, A> =>
 	(y: unknown): y is A =>

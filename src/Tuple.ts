@@ -371,7 +371,7 @@ export const getEnum =
 			O.chain(n => {
 				const ac = L.execute(EA.cardinality)
 				const bc = L.execute(EB.cardinality)
-				if (n > ac + bc) return O.none // eslint-disable-line functional/no-conditional-statements
+				if (n > ac + bc) return O.none
 
 				type AB = (x: A) => (y: B) => [A, B]
 				return pipe(

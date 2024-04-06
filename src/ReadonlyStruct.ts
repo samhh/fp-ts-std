@@ -63,11 +63,9 @@ export const pick =
 //   {
 //   const o = {} as Pick<A, K>
 //
-//   /* eslint-disable */
 //   for (const k of ks) {
 //     o[k] = x[k]
 //   }
-//   /* eslint-enable */
 //
 //   return o
 // }
@@ -130,11 +128,9 @@ export const omit =
 	<V, A extends RR.ReadonlyRecord<K, V>>(x: A): Omit<A, K> => {
 		const y = { ...x }
 
-		/* eslint-disable */
 		for (const k of ks) {
 			delete y[k]
 		}
-		/* eslint-enable */
 
 		return y as Omit<A, K>
 	}

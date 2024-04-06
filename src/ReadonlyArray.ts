@@ -647,7 +647,6 @@ export const dropAt =
 					pipe(
 						copy(Array.from(xs)),
 						ys => {
-							// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
 							ys.splice(i, n)
 							return ys
 						},
@@ -674,10 +673,8 @@ export const dropAt =
 export const transpose = <A>(
 	xs: ReadonlyArray<ReadonlyArray<A>>,
 ): ReadonlyArray<ReadonlyArray<A>> => {
-	/* eslint-disable functional/no-conditional-statements */
 	if (RA.isEmpty(xs)) return []
 	if (RA.isEmpty(xs[0])) return transpose(RA.dropLeft(1)(xs))
-	/* eslint-enable functional/no-conditional-statements */
 
 	const [[y, ...ys], ...yss] = xs
 	const zs = [y, ...RA.filterMap(RA.head)(yss)]
@@ -1069,10 +1066,8 @@ export const separateNE = <A, B>(
 	xs: ReadonlyNonEmptyArray<Either<A, B>>,
 ): These<ReadonlyNonEmptyArray<A>, ReadonlyNonEmptyArray<B>> =>
 	pipe(xs, RA.separate, ({ left, right }) => {
-		/* eslint-disable functional/no-conditional-statements */
 		if (RA.isEmpty(left)) return T.right(right as ReadonlyNonEmptyArray<B>)
 		else if (RA.isEmpty(right)) return T.left(left as ReadonlyNonEmptyArray<A>)
-		/* eslint-enable functional/no-conditional-statements */
 		// They can't both be empty as per the non-empty input.
 		else
 			return T.both(left as NonEmptyArray<A>, right as ReadonlyNonEmptyArray<B>)

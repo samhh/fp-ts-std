@@ -117,11 +117,9 @@ export const omit =
 	<V, A extends Record<K, V>>(x: A): Omit<A, K> => {
 		const y = { ...x }
 
-		/* eslint-disable */
 		for (const k of ks) {
 			delete y[k]
 		}
-		/* eslint-enable */
 
 		return y as Omit<A, K>
 	}

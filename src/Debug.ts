@@ -7,8 +7,6 @@
 
 import { Show } from "fp-ts/Show"
 
-/* eslint-disable functional/no-expression-statements */
-
 /**
  * Log the provided string to the console and immediately return the generic
  * argument. This is useful in the middle of `pipe`/`flow` chains.

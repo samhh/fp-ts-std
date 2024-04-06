@@ -424,5 +424,4 @@ export const EnumInt: Enum<number> = {
  * @since 0.17.0
  */
 export const digits = (n: number): Array<number> =>
-	// eslint-disable-next-line @typescript-eslint/restrict-plus-operands
 	pipe([...(n + "")], A.filterMap(fromString))

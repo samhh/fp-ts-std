@@ -24,7 +24,6 @@ import {
 } from "../src/Option"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	/* eslint-disable */
 	try {
 		f()
 		throw "didn't throw"
@@ -32,7 +31,6 @@ const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 		if (!(e instanceof Error)) throw "threw unexpected type"
 		return [e.message, e.cause]
 	}
-	/* eslint-enable */
 }
 
 const arbOption = <A>(x: fc.Arbitrary<A>): fc.Arbitrary<Option<A>> =>
@@ -208,9 +206,8 @@ describe("Option", () => {
 			)
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("short-circuits", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const g: Lazy<O.Option<string>> = () => {
 				exe = true
 				return O.some("bar")
@@ -222,7 +219,6 @@ describe("Option", () => {
 			expect(f([g, constant(O.some("foo"))])("baz")).toEqual(O.some("bar"))
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 
 	describe("getBounded", () => {
@@ -320,10 +316,8 @@ describe("Option", () => {
 		})
 
 		it("is as lazy as possible", () => {
-			// eslint-disable-next-line functional/no-let
 			let n = 0
 
-			/* eslint-disable functional/no-expression-statements */
 			const inc1 = () => {
 				n++
 			}
@@ -351,7 +345,6 @@ describe("Option", () => {
 			expect(n).toBe(3)
 			h(O.some(null))
 			expect(n).toBe(5)
-			/* eslint-enable functional/no-expression-statements */
 		})
 	})
 })

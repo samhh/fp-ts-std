@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-expression-statements */
-
 import { describe, expect, it, jest } from "@jest/globals"
 import fc from "fast-check"
 import { constVoid } from "fp-ts/function"

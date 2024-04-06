@@ -169,7 +169,6 @@ export const getPathname = (x: URL): string => x.pathname
  */
 export const modifyPathname = (f: Endomorphism<string>): Endomorphism<URL> =>
 	flow(clone, x => {
-		// eslint-disable-next-line
 		x.pathname = f(x.pathname)
 		return x
 	})
@@ -230,7 +229,6 @@ export const modifyParams = (
 	f: Endomorphism<URLSearchParams>,
 ): Endomorphism<URL> =>
 	flow(clone, x => {
-		// eslint-disable-next-line
 		x.search = f(x.searchParams).toString()
 		return x
 	})
@@ -293,7 +291,6 @@ export const getHash = (x: URL): string => x.hash
  */
 export const modifyHash = (f: Endomorphism<string>): Endomorphism<URL> =>
 	flow(clone, x => {
-		// eslint-disable-next-line
 		x.hash = f(x.hash)
 		return x
 	})

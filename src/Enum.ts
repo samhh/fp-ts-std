@@ -117,7 +117,6 @@ export const fromThenTo =
 		const step = E.fromEnum(second) - start
 		const end = E.fromEnum(limit)
 
-		// eslint-disable-next-line functional/no-conditional-statements
 		if (step < 1 || end < start) return NEA.of(first)
 
 		const f: (n: number) => Option<[number, number]> = flow(
@@ -222,11 +221,7 @@ export const defaultCardinality = <A>(
 	const f = (n: number): ((x: A) => number) =>
 		flow(
 			E.succ,
-			O.match(
-				constant(n),
-				// eslint-disable-next-line functional/prefer-tacit
-				x => f(n + 1)(x),
-			),
+			O.match(constant(n), x => f(n + 1)(x)),
 		)
 
 	return f(1)(E.bottom)

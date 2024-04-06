@@ -181,10 +181,8 @@ export const fromString =
 			E.tryCatch(
 				() => {
 					const y = new globalThis.URL(x, phonyBase)
-					/* eslint-disable */
 					if (y.origin !== phonyBase)
 						throw new TypeError("Failed to retain phony base URL")
-					/* eslint-enable */
 					return y
 				},
 				e => f(e as TypeError),
@@ -229,7 +227,6 @@ export const fromStringO: (x: string) => Option<URLPath> = flow(
  */
 export const fromPathname = (x: string): URLPath => {
 	const y = new globalThis.URL("", phonyBase)
-	// eslint-disable-next-line
 	y.pathname = x
 	return pack(y)
 }

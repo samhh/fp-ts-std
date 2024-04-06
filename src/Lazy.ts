@@ -69,12 +69,10 @@ const _map: Functor1<URI>["map"] = (f, g) => () => g(f())
 const _ap: Applicative1<URI>["ap"] = (f, g) => () => f()(g())
 const _chain: Monad1<URI>["chain"] = (f, g) => g(f())
 const _chainRec: ChainRec1<URI>["chainRec"] = (a, f) => () => {
-	/* eslint-disable */
 	let e = f(a)()
 	while (e._tag === "Left") {
 		e = f(e.left)()
 	}
-	/* eslint-enable */
 	return e.right
 }
 
@@ -267,7 +265,7 @@ export const ChainRec: ChainRec1<URI> = {
  * @category 2 Typeclass Methods
  * @since 0.12.0
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// biome-ignore lint/complexity/noBannedTypes: Copying fp-ts.
 export const Do: Lazy<{}> = of({})
 
 /**
@@ -326,11 +324,9 @@ export const traverseReadonlyNonEmptyArrayWithIndex =
 	(as: ReadonlyNonEmptyArray<A>): Lazy<ReadonlyNonEmptyArray<B>> =>
 	() => {
 		const out: NonEmptyArray<B> = [f(0, RNEA.head(as))()]
-		/* eslint-disable */
 		for (let i = 1; i < as.length; i++) {
 			out.push(f(i, as[i])())
 		}
-		/* eslint-enable */
 		return out
 	}
 
@@ -425,7 +421,6 @@ export const lazy: <A>(f: () => A) => Lazy<A> = identity
  */
 export const memoize = <A>(f: Lazy<A>): Lazy<A> => {
 	const empty = Symbol()
-	// eslint-disable-next-line functional/no-let
 	let res: A | typeof empty = empty
 
 	return () => (res === empty ? (res = f()) : res)

@@ -36,7 +36,7 @@ const validUrl = validBase + "/f/g.h?i=j&k=l&i=m#n"
 
 const fromPathname = (x: string): URL => {
 	const y = new URL(validBase)
-	y.pathname = x // eslint-disable-line
+	y.pathname = x
 	return y
 }
 
@@ -53,8 +53,8 @@ describe("URL", () => {
 
 		it("clones without references", () => {
 			const x = unsafeParse(validUrl)
-			x.pathname = "/foo" // eslint-disable-line
-			x.search = "?foo=food&bar=bard&foo=fool" // eslint-disable-line
+			x.pathname = "/foo"
+			x.search = "?foo=food&bar=bard&foo=fool"
 			const y = f(x)
 
 			expect(x.pathname).toBe("/foo")
@@ -62,8 +62,8 @@ describe("URL", () => {
 			expect(x.searchParams.getAll("foo")).toEqual(["food", "fool"])
 			expect(y.searchParams.getAll("foo")).toEqual(["food", "fool"])
 
-			x.pathname = "/bar" // eslint-disable-line
-			x.searchParams.set("foo", "bar2000") // eslint-disable-line
+			x.pathname = "/bar"
+			x.searchParams.set("foo", "bar2000")
 
 			expect(x.pathname).toBe("/bar")
 			expect(y.pathname).toBe("/foo")
@@ -97,7 +97,6 @@ describe("URL", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.string(), x => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)
 				}),
 			)
@@ -118,7 +117,6 @@ describe("URL", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.string(), x => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)
 				}),
 			)

@@ -23,7 +23,6 @@ import { EQ, GT, LT } from "../src/Ordering"
 import * as Str from "../src/String"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	/* eslint-disable */
 	try {
 		f()
 		throw "didn't throw"
@@ -31,7 +30,6 @@ const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 		if (!(e instanceof Error)) throw "threw unexpected type"
 		return [e.message, e.cause]
 	}
-	/* eslint-enable */
 }
 
 describe("Either", () => {
@@ -150,10 +148,8 @@ describe("Either", () => {
 		})
 
 		it("is as lazy as possible", () => {
-			// eslint-disable-next-line functional/no-let
 			let n = 0
 
-			/* eslint-disable functional/no-expression-statements */
 			const inc = () => {
 				n++
 				return () => {
@@ -185,7 +181,6 @@ describe("Either", () => {
 			expect(n).toBe(6)
 			rr(E.right(null))
 			expect(n).toBe(8)
-			/* eslint-enable functional/no-expression-statements */
 		})
 	})
 
@@ -198,10 +193,10 @@ describe("Either", () => {
 
 			fc.assert(
 				fc.property(fc.anything(), fc.anything(), (x, y) => {
-					/* eslint-disable @typescript-eslint/no-explicit-any */
+					// biome-ignore lint/suspicious/noExplicitAny: Testing.
 					expect(f(E.left<any, any>(x), E.right<any, any>(y))).toBe(LT)
+					// biome-ignore lint/suspicious/noExplicitAny: Testing.
 					expect(f(E.right<any, any>(x), E.left<any, any>(y))).toBe(GT)
-					/* eslint-enable @typescript-eslint/no-explicit-any */
 				}),
 			)
 		})

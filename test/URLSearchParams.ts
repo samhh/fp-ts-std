@@ -65,7 +65,6 @@ describe("URLSearchParams", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.string(), x => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)
 				}),
 			)
@@ -128,7 +127,6 @@ describe("URLSearchParams", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.dictionary(fc.string(), fc.array(fc.string())), x => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)
 				}),
 			)
@@ -171,7 +169,6 @@ describe("URLSearchParams", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.array(fc.tuple(fc.string(), fc.string())), x => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)
 				}),
 			)
@@ -199,7 +196,7 @@ describe("URLSearchParams", () => {
 		it("does not mutate input", () => {
 			const x = new URLSearchParams()
 			const y = f(x)
-			y.set("a", "b") // eslint-disable-line functional/no-expression-statements
+			y.set("a", "b")
 
 			expect(y.has("a")).toBe(true)
 			expect(x.has("a")).toBe(false)
@@ -283,7 +280,6 @@ describe("URLSearchParams", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.string(), fc.string(), (k, v) => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(k)(v)
 				}),
 			)
@@ -452,7 +448,6 @@ describe("URLSearchParams", () => {
 			const xa = x.toString()
 			const ya = y.toString()
 
-			// eslint-disable-next-line functional/no-expression-statements
 			concatBy(constant(uncurry2(A.concat)))(x)(y)
 
 			const xb = x.toString()

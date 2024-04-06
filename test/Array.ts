@@ -147,7 +147,6 @@ describe("Array", () => {
 
 		it("does not mutate input", () => {
 			const xs = [2, 3, 4]
-			// eslint-disable-next-line functional/no-expression-statements
 			f(xs)
 			expect(xs).toEqual([2, 3, 4])
 		})
@@ -177,7 +176,6 @@ describe("Array", () => {
 
 		it("does not mutate input", () => {
 			const xs = [{ ...x1 }]
-			// eslint-disable-next-line functional/no-expression-statements
 			g(xs)
 			expect(xs).toEqual([{ ...x1 }])
 		})
@@ -1095,7 +1093,6 @@ describe("Array", () => {
 
 		it("does not mutate input", () => {
 			const xs = [1, 2, 3]
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const _ = f(xs)
 			expect(xs).toEqual([1, 2, 3])
 		})
@@ -1173,9 +1170,8 @@ describe("Array", () => {
 			expect(f([IO.of(false), IO.of(false)])()).toBe(false && false)
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("runs from the left and short-circuits", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const set: IO<boolean> = () => {
 				exe = true
 				return true
@@ -1187,7 +1183,6 @@ describe("Array", () => {
 			f([IO.of(true), IO.of(true), set, IO.of(true)])()
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 
 	describe("anyM", () => {
@@ -1204,9 +1199,8 @@ describe("Array", () => {
 			expect(f([IO.of(false), IO.of(false)])()).toBe(false || false)
 		})
 
-		/* eslint-disable functional/no-expression-statements */
 		it("runs from the left and short-circuits", () => {
-			let exe = false // eslint-disable-line functional/no-let
+			let exe = false
 			const set: IO<boolean> = () => {
 				exe = true
 				return true
@@ -1218,7 +1212,6 @@ describe("Array", () => {
 			f([IO.of(false), IO.of(false), set, IO.of(false)])()
 			expect(exe).toBe(true)
 		})
-		/* eslint-enable functional/no-expression-statements */
 	})
 
 	describe("separateNE", () => {

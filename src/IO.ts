@@ -32,11 +32,10 @@ type IO<A> = IO.IO<A>
  */
 export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
 	const uncalled = Symbol()
-	let val: typeof uncalled | B = uncalled // eslint-disable-line functional/no-let
+	let val: typeof uncalled | B = uncalled
 
 	return x => {
-		// eslint-disable-next-line functional/no-conditional-statements
-		if (val === uncalled) val = f(x) // eslint-disable-line functional/no-expression-statements
+		if (val === uncalled) val = f(x)
 
 		return IO.of(val)
 	}
@@ -77,14 +76,12 @@ export const once = <A, B>(f: (x: A) => B): ((x: A) => IO<B>) => {
 export const whenInvocationCount =
 	(p: Predicate<number>): Endomorphism<IO<void>> =>
 	f => {
-		/* eslint-disable */
 		let n = 0
 
 		return () => {
 			n++
 			if (p(n)) f()
 		}
-		/* eslint-enable */
 	}
 
 /**
@@ -168,7 +165,6 @@ export const unless: (x: boolean) => Endomorphism<IO<void>> = _unless(
  */
 export const memoize = <A>(f: IO<A>): IO<A> => {
 	const empty = Symbol()
-	// eslint-disable-next-line functional/no-let
 	let res: A | typeof empty = empty
 
 	return () => (res === empty ? (res = f()) : res)

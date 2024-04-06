@@ -4,7 +4,6 @@ import { pass, unsafeExpect, unsafeUnwrap } from "../src/IOOption"
 import { Lazy } from "../src/Lazy"
 
 const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
-	/* eslint-disable */
 	try {
 		f()
 		throw "didn't throw"
@@ -12,7 +11,6 @@ const msgAndCause = (f: Lazy<unknown>): [string, unknown] => {
 		if (!(e instanceof Error)) throw "threw unexpected type"
 		return [e.message, e.cause]
 	}
-	/* eslint-enable */
 }
 
 describe("IOOption", () => {

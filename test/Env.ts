@@ -6,16 +6,13 @@ describe("Env", () => {
 	const k = "example_key"
 
 	const setEnvWith = (x: string | undefined) => {
-		// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
 		process.env[k] = x
 	}
 
 	const resetEnv = () => {
-		// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
 		delete process.env[k]
 	}
 
-	// eslint-disable-next-line functional/no-expression-statements
 	afterEach(resetEnv)
 
 	describe("getParam", () => {

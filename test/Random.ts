@@ -43,7 +43,6 @@ describe("Random", () => {
 
 		it("does not mutate input", () => {
 			const xs: NonEmptyArray<number> = [1, 2, 3]
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			const _ = f([1, 2, 3])()
 			expect(xs).toEqual([1, 2, 3])
 		})

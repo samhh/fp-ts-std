@@ -195,7 +195,6 @@ describe("Tuple", () => {
 		it("checks second component lazily", () => {
 			const { equals: f } = getEq(Str.Eq)({
 				equals: () => {
-					// eslint-disable-next-line functional/no-throw-statements
 					throw "evaluated second component"
 				},
 			})
@@ -217,7 +216,6 @@ describe("Tuple", () => {
 			const { compare: f } = getOrd(Str.Ord)({
 				...Str.Eq,
 				compare: () => {
-					// eslint-disable-next-line functional/no-throw-statements
 					throw "evaluated second component"
 				},
 			})

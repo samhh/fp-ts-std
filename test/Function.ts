@@ -374,9 +374,7 @@ describe("Function", () => {
 	describe("construct", () => {
 		const f = construct
 
-		// eslint-disable-next-line functional/no-classes
 		class X {
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			constructor(
 				public x: number,
 				public y: string,
@@ -396,7 +394,6 @@ describe("Function", () => {
 		const f = invoke
 
 		it("calls the method with arguments on the object", () => {
-			// eslint-disable-next-line functional/no-classes
 			class X {
 				static f(x: string) {
 					return x + x
@@ -412,7 +409,6 @@ describe("Function", () => {
 		const f = invokeNullary
 
 		it("calls the method", () => {
-			// eslint-disable-next-line functional/no-classes
 			class X {
 				static f() {
 					return 42
@@ -451,9 +447,9 @@ describe("Function", () => {
 		})
 
 		it("does not call function more than once per input", () => {
-			let runs = 0 // eslint-disable-line functional/no-let
+			let runs = 0
 			const g = f(N.Eq)<number>(n => {
-				runs++ // eslint-disable-line functional/no-expression-statements
+				runs++
 				return add(5)(n)
 			})
 
@@ -660,7 +656,6 @@ describe("Function", () => {
 
 	describe("isInstanceOf", () => {
 		it("is equivalent to instanceof operator", () => {
-			// eslint-disable-next-line functional/no-classes
 			class X {}
 			const x = new X()
 

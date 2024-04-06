@@ -72,16 +72,16 @@ describe("URLPath", () => {
 
 		it("clones without references", () => {
 			const x = fromPathname(validPath)
-			;(x as unknown as URL).pathname = "/foo" // eslint-disable-line
-			;(x as unknown as URL).search = "?foo=food&bar=bard&foo=fool" // eslint-disable-line
+			;(x as unknown as URL).pathname = "/foo"
+			;(x as unknown as URL).search = "?foo=food&bar=bard&foo=fool"
 			const y = f(x)
 
 			expect(getPathname(x)).toBe("/foo")
 			expect(getPathname(y)).toBe("/foo")
 			expect(getParams(x).getAll("foo")).toEqual(["food", "fool"])
 			expect(getParams(y).getAll("foo")).toEqual(["food", "fool"])
-			;(x as unknown as URL).pathname = "/bar" // eslint-disable-line
-			;(x as unknown as URL).searchParams.set("foo", "bar2000") // eslint-disable-line
+			;(x as unknown as URL).pathname = "/bar"
+			;(x as unknown as URL).searchParams.set("foo", "bar2000")
 
 			expect(getPathname(x)).toBe("/bar")
 			expect(getPathname(y)).toBe("/foo")
@@ -245,7 +245,6 @@ describe("URLPath", () => {
 		it("never throws", () => {
 			fc.assert(
 				fc.property(fc.string(), x => {
-					// eslint-disable-next-line functional/no-expression-statements
 					f(x)
 				}),
 			)

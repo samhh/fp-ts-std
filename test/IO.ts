@@ -30,9 +30,9 @@ describe("IO", () => {
 		})
 
 		it("only calls function once", () => {
-			let runs = 0 // eslint-disable-line functional/no-let
+			let runs = 0
 			const g = f<number, number>(n => {
-				runs++ // eslint-disable-line functional/no-expression-statements
+				runs++
 				return add(5)(n)
 			})
 
@@ -56,7 +56,6 @@ describe("IO", () => {
 		})
 	})
 
-	/* eslint-disable */
 	describe("whenInvocationCount", () => {
 		const f = whenInvocationCount
 
@@ -105,7 +104,6 @@ describe("IO", () => {
 			)
 		})
 	})
-	/* eslint-enable */
 
 	describe("execute", () => {
 		it("gets the value", () => {
@@ -117,7 +115,6 @@ describe("IO", () => {
 		})
 	})
 
-	/* eslint-disable */
 	describe("when", () => {
 		const f = when
 
@@ -151,9 +148,7 @@ describe("IO", () => {
 			expect(ran).toBe(true)
 		})
 	})
-	/* eslint-enable */
 
-	/* eslint-disable */
 	describe("unless", () => {
 		const f = unless
 
@@ -187,9 +182,7 @@ describe("IO", () => {
 			expect(ran).toBe(true)
 		})
 	})
-	/* eslint-enable */
 
-	/* eslint-disable */
 	describe("memoize", () => {
 		const f = memoize
 
@@ -211,12 +204,10 @@ describe("IO", () => {
 			expect(i).toBe(1)
 		})
 	})
-	/* eslint-enable */
 
 	describe("sequenceArray_", () => {
 		const f = sequenceArray_
 
-		/* eslint-disable */
 		it("sequences from left to right", () => {
 			let n = 0
 
@@ -227,13 +218,11 @@ describe("IO", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("traverseArray_", () => {
 		const f = traverseArray_
 
-		/* eslint-disable */
 		it("traverses from left to right", () => {
 			let n = 0
 
@@ -244,7 +233,6 @@ describe("IO", () => {
 
 			expect(n).toBe(10)
 		})
-		/* eslint-enable */
 	})
 
 	describe("pass", () => {
@@ -259,7 +247,6 @@ describe("IO", () => {
 		const f = until<number>
 
 		it("executes until predicate passes", () => {
-			// eslint-disable-next-line functional/no-let
 			let n = 0
 
 			const g: IO<number> = () => ++n

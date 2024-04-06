@@ -246,7 +246,6 @@ export const setTextContent =
 	(x: string) =>
 	(y: Node): IO<void> =>
 	() => {
-		// eslint-disable-next-line functional/immutable-data, functional/no-expression-statements
 		y.textContent = x
 	}
 
@@ -291,7 +290,6 @@ export const addEventListener =
 	(el: Node | Window): IO<EventListenerCleanup> =>
 	() => {
 		const _listener = (e: Event) => listener(e)()
-		// eslint-disable-next-line functional/no-expression-statements
 		pipe(el, invoke("addEventListener")([type, _listener]))
 		return () => pipe(el, invoke("removeEventListener")([type, _listener]))
 	}
