@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shell: [ci, ci-lts]
+        shell: [nodejs-latest, nodejs-lts]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup

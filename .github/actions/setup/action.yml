@@ -3,7 +3,7 @@ name: Setup
 inputs:
   shell:
     required: false
-    default: ci
+    default: nodejs-latest
 
 runs:
   using: composite

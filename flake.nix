@@ -18,23 +18,23 @@
           };
         in
         {
-          devShells = {
+          devShells = rec {
             default = pkgs.mkShell {
+              inputsFrom = [ nodejs-latest ];
+
               nativeBuildInputs = with pkgs; [
-                nodejs_21
-                nodePackages.pnpm
                 tshm-docs-ts
               ];
             };
 
-            ci = pkgs.mkShell {
+            nodejs-latest = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 nodejs_21
                 nodePackages.pnpm
               ];
             };
 
-            ci-lts = pkgs.mkShell {
+            nodejs-lts = pkgs.mkShell {
               nativeBuildInputs = with pkgs; [
                 nodejs
                 nodePackages.pnpm
