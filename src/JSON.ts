@@ -11,7 +11,8 @@ import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import { flow, identity, pipe } from "fp-ts/function"
 import { isString } from "fp-ts/string"
-import { type Newtype, iso } from "newtype-ts"
+import type { Newtype } from "newtype-ts"
+import { pack, unpack } from "./Newtype"
 
 type JSONStringSymbol = { readonly JSONString: unique symbol }
 
@@ -28,9 +29,7 @@ type JSONStringSymbol = { readonly JSONString: unique symbol }
  */
 export type JSONString = Newtype<JSONStringSymbol, string>
 
-const isoJSONString = iso<JSONString>()
-
-const mkJSONString = isoJSONString.wrap
+const mkJSONString: (x: string) => JSONString = pack
 
 /**
  * Unwrap a `JSONString` newtype back to its underlying string representation.
@@ -38,7 +37,7 @@ const mkJSONString = isoJSONString.wrap
  * @category 3 Functions
  * @since 0.6.0
  */
-export const unJSONString = isoJSONString.unwrap
+export const unJSONString: (x: JSONString) => string = unpack
 
 /**
  * Stringify some arbitrary data.
