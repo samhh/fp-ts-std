@@ -40,6 +40,13 @@
                 nodePackages.pnpm
               ];
             };
+
+            bun-latest = pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [
+                bun
+                nodePackages.pnpm
+              ];
+            };
           };
         }
       );

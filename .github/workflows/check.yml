@@ -27,19 +27,29 @@ jobs:
       - uses: ./.github/actions/setup
       - run: pnpm fmt --check
 
-  test:
-    name: Test
+  test-nodejs:
+    name: Test (Node.js)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        shell: [nodejs-latest, nodejs-lts]
+        shell: [latest, lts]
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
-          shell: ${{ matrix.shell }}
+          shell: nodejs-${{ matrix.shell }}
       - run: pnpm test
+
+  test:
+    name: Test (Bun)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          shell: bun-latest
+      - run: bun test --coverage ./test/*
 
   docs:
     name: Docs
