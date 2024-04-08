@@ -36,7 +36,15 @@ type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
  */
 export type URLPath = Newtype<URLPathSymbol, URL>
 
-const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
+const phonyBase = new globalThis.URL("https://urlpath.fp-ts-std.samhh.com")
+
+const ensureBase: Endomorphism<URL> = x =>
+	pipe(phonyBase, URL.clone, b => {
+		b.pathname = x.pathname
+		b.search = x.searchParams.toString()
+		b.hash = x.hash
+		return b
+	})
 
 /**
  * Check if a foreign value is a `URLPath`.
@@ -55,7 +63,7 @@ export const isURLPath: Refinement<unknown, URLPath> = (u): u is URLPath =>
 	// then, well, firstly I'm flattered. But secondly that's on them.
 	//
 	// Also nota bene that the origin check will only work with some protocols.
-	URL.isURL(u) && u.origin === phonyBase
+	URL.isURL(u) && u.origin === phonyBase.origin
 
 /**
  * Clone a `URLPath`.
@@ -92,7 +100,7 @@ export const clone: Endomorphism<URLPath> = over(URL.clone)
  * @since 0.17.0
  */
 export const fromURL = (x: URL): URLPath =>
-	pipe(new globalThis.URL(x.href, phonyBase), pack<URLPath>)
+	pipe(new globalThis.URL(x.href, phonyBase), ensureBase, pack<URLPath>)
 
 /**
  * Convert a `URLPath` to a `URL` with the provided `baseUrl`.
@@ -179,12 +187,7 @@ export const fromString =
 			// It should only throw some sort of `TypeError`:
 			// https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
 			E.tryCatch(
-				() => {
-					const y = new globalThis.URL(x, phonyBase)
-					if (y.origin !== phonyBase)
-						throw new TypeError("Failed to retain phony base URL")
-					return y
-				},
+				() => ensureBase(new globalThis.URL(x, phonyBase)),
 				e => f(e as TypeError),
 			),
 			E.map(pack<URLPath>),
@@ -226,7 +229,7 @@ export const fromStringO: (x: string) => Option<URLPath> = flow(
  * @since 0.17.0
  */
 export const fromPathname = (x: string): URLPath => {
-	const y = new globalThis.URL("", phonyBase)
+	const y = URL.clone(phonyBase)
 	y.pathname = x
 	return pack(y)
 }

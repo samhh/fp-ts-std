@@ -101,6 +101,11 @@ describe("URLPath", () => {
 			expect(y.search).toEqual(x.search)
 			expect(y.hash).toEqual(x.hash)
 		})
+
+		it("does not retain the origin", () => {
+			const x = f(new URL("https://samhh.com/foo")) as unknown as URL
+			expect(x.href).toBe(`${phonyBase}/foo`)
+		})
 	})
 
 	describe("toURL", () => {
@@ -168,16 +173,14 @@ describe("URLPath", () => {
 			)
 		})
 
-		it("does not parse origins", () => {
-			const g = fromString(identity)
+		it("parses but does not retain origins", () => {
+			const g = flow(
+				fromString(identity),
+				E.map(x => (x as unknown as URL).href),
+			)
 
-			const e1 = unsafeUnwrapLeft(g("//x"))
-			expect(e1.name).toBe("TypeError")
-			expect(e1.message).toMatch(/phony/)
-
-			const e2 = unsafeUnwrapLeft(g("https://samhh.com/foo"))
-			expect(e2.name).toBe("TypeError")
-			expect(e2.message).toMatch(/phony/)
+			expect(g("//x")).toEqual(E.right(`${phonyBase}/`))
+			expect(g("https://samhh.com/foo")).toEqual(E.right(`${phonyBase}/foo`))
 
 			fc.assert(
 				fc.property(fc.string().map(f).filter(E.isRight), ({ right: x }) =>
