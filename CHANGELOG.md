@@ -2,11 +2,16 @@
 
 This project adheres to semantic versioning.
 
+## 0.19.1 (2024-04-08)
+
+- Fix `fromString` in `URLPath` failing to parse absolute URLs.
+- Fix `fromURL` in `URLPath` incorrectly retaining alternative origins.
+
 ## 0.19.0 (2024-04-06)
 
 - Add `clone` to `URLPath`.
 - Wrap the provided error cause in `unsafeExpect` in `Option` in an `Error` object.
-- Fix `URLPath` incorrectly parsing alternative origins.
+- Fix `fromString` in `URLPath` incorrectly retaining alternative origins.
 - Fix typings in presence of `isolatedModules`.
 - Bump minimum supported Node LTS to v20.
 
