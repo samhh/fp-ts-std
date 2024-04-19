@@ -297,18 +297,18 @@ describe("DOM", () => {
 				IO.chain(addEventListener("click")(mockSomeEventFunction)),
 				IOexecute,
 			)
-			expect(mockSomeEventFunction).toBeCalledTimes(0)
+			expect(mockSomeEventFunction).toHaveBeenCalledTimes(0)
 
 			findElement().click()
-			expect(mockSomeEventFunction).toBeCalledTimes(1)
+			expect(mockSomeEventFunction).toHaveBeenCalledTimes(1)
 
 			findElement().click()
-			expect(mockSomeEventFunction).toBeCalledTimes(2)
+			expect(mockSomeEventFunction).toHaveBeenCalledTimes(2)
 
 			IOexecute(eventListenerCleanup)
 
 			findElement().click()
-			expect(mockSomeEventFunction).toBeCalledTimes(2)
+			expect(mockSomeEventFunction).toHaveBeenCalledTimes(2)
 		})
 	})
 
