@@ -30,7 +30,7 @@ Added in v0.15.0
 
 ## overF
 
-Apply a effectful function over a newtype.
+Apply an effectful function over a newtype.
 
 **Signature**
 

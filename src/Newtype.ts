@@ -67,7 +67,7 @@ export const unpack = <A extends Newtype<unknown, unknown>>(x: A): A["_A"] =>
 	iso<A>().unwrap(x)
 
 /**
- * Apply a effectful function over a newtype.
+ * Apply an effectful function over a newtype.
  *
  * @example
  * import { overF } from 'fp-ts-std/Newtype'
