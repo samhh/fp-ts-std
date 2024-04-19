@@ -12,6 +12,7 @@ import {
 	stringifyO,
 	stringifyPrimitive,
 	unstringify,
+	unJSONString,
 } from "../src/JSON"
 
 const stringifyPrimitiveUnwrapped = (
@@ -19,6 +20,14 @@ const stringifyPrimitiveUnwrapped = (
 ): string => stringifyPrimitive(x) as unknown as string
 
 describe("JSON", () => {
+	describe("unJSONString", () => {
+		const f = unJSONString
+
+		it("unwraps newtype unmodified", () => {
+			expect(f(stringifyPrimitive("foo"))).toBe('"foo"')
+		})
+	})
+
 	describe("stringifyPrimitive", () => {
 		it("never throws", () => {
 			fc.assert(
