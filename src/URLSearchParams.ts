@@ -394,14 +394,9 @@ export const upsertAt =
  * @category 5 Zone of Death
  * @since 0.1.0
  */
-export const setParam =
-	(k: string) =>
-	(v: string): Endomorphism<URLSearchParams> =>
-	(x): URLSearchParams => {
-		const y = clone(x)
-		y.set(k, v)
-		return y
-	}
+export const setParam: (
+	k: string,
+) => (v: string) => Endomorphism<URLSearchParams> = upsertAt
 
 /**
  * Append a URL parameter in a `URLSearchParams`.
