@@ -283,10 +283,10 @@ describe("URLPath", () => {
 			)
 		})
 
-		it("setPathname y . fromPathname x = fromPathname y", () => {
+		it("flip setPathname . fromPathname = setPathname y (fromPathname x) = fromPathname y", () => {
 			fc.assert(
 				fc.property(fc.string(), fc.string(), (x, y) => {
-					const a = pipe(fromPathname(x), setPathname(y))
+					const a = setPathname(y)(fromPathname(x))
 					const b = fromPathname(y)
 
 					expect(a).toEqual(b)
