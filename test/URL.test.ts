@@ -185,6 +185,11 @@ describe("URL", () => {
 			expect(getPathname(x)).toBe("/foo")
 			expect(getPathname(y)).toBe("/bar")
 		})
+
+		it("preserves the rest of the URL", () => {
+			const x = pipe(validUrl, unsafeParse, f("/foo"), toString)
+			expect(x).toBe("https://a:b@c.d.e:1/foo?i=j&k=l&i=m#n")
+		})
 	})
 
 	describe("modifyPathname", () => {
@@ -196,6 +201,11 @@ describe("URL", () => {
 
 			expect(getPathname(x)).toBe("/foo")
 			expect(getPathname(y)).toBe("/foobar")
+		})
+
+		it("preserves the rest of the URL", () => {
+			const x = pipe(validUrl, unsafeParse, f(constant("/foo")), toString)
+			expect(x).toBe("https://a:b@c.d.e:1/foo?i=j&k=l&i=m#n")
 		})
 	})
 
@@ -226,6 +236,16 @@ describe("URL", () => {
 			expect(u.searchParams).toEqual(p)
 			expect(getParams(r)).toEqual(pp)
 		})
+
+		it("preserves the rest of the URL", () => {
+			const x = pipe(
+				validUrl,
+				unsafeParse,
+				f(new URLSearchParams("?foo=bar")),
+				toString,
+			)
+			expect(x).toBe("https://a:b@c.d.e:1/f/g.h?foo=bar#n")
+		})
 	})
 
 	describe("modifyParams", () => {
@@ -241,6 +261,16 @@ describe("URL", () => {
 
 			expect(u.searchParams).toEqual(p)
 			expect(getParams(r)).toEqual(pp)
+		})
+
+		it("preserves the rest of the URL", () => {
+			const x = pipe(
+				validUrl,
+				unsafeParse,
+				f(constant(new URLSearchParams("?foo=bar"))),
+				toString,
+			)
+			expect(x).toBe("https://a:b@c.d.e:1/f/g.h?foo=bar#n")
 		})
 	})
 
@@ -266,6 +296,11 @@ describe("URL", () => {
 			expect(getHash(x)).toBe("#foo")
 			expect(getHash(y)).toBe("#bar")
 		})
+
+		it("preserves the rest of the URL", () => {
+			const x = pipe(validUrl, unsafeParse, f("foo"), toString)
+			expect(x).toBe("https://a:b@c.d.e:1/f/g.h?i=j&k=l&i=m#foo")
+		})
 	})
 
 	describe("modifyHash", () => {
@@ -278,6 +313,11 @@ describe("URL", () => {
 
 			expect(getHash(x)).toBe("#foo")
 			expect(getHash(y)).toBe("#foobar")
+		})
+
+		it("preserves the rest of the URL", () => {
+			const x = pipe(validUrl, unsafeParse, f(constant("foo")), toString)
+			expect(x).toBe("https://a:b@c.d.e:1/f/g.h?i=j&k=l&i=m#foo")
 		})
 	})
 
