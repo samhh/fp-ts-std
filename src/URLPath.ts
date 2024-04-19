@@ -19,6 +19,7 @@ import { flow, identity, pipe } from "fp-ts/function"
 import type { Newtype } from "newtype-ts"
 import { over, pack, unpack } from "./Newtype"
 import * as URL from "./URL"
+import * as Params from "./URLSearchParams"
 type Eq<A> = Eq_.Eq<A>
 
 type URLPathSymbol = { readonly URLPathSymbol: unique symbol }
@@ -41,7 +42,7 @@ const phonyBase = new globalThis.URL("https://urlpath.fp-ts-std.samhh.com")
 const ensureBase: Endomorphism<URL> = x =>
 	pipe(phonyBase, URL.clone, b => {
 		b.pathname = x.pathname
-		b.search = x.searchParams.toString()
+		b.search = Params.toString(x.searchParams)
 		b.hash = x.hash
 		return b
 	})

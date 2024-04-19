@@ -15,6 +15,7 @@ import type { Refinement } from "fp-ts/Refinement"
 import { constant, flow, identity } from "fp-ts/function"
 import * as Str from "fp-ts/string"
 import { isInstanceOf } from "./Function"
+import * as Params from "./URLSearchParams"
 type Eq<A> = Eq_.Eq<A>
 
 const constructor = (x: ConstructorParameters<typeof URL>[0]): URL => new URL(x)
@@ -229,7 +230,7 @@ export const modifyParams = (
 	f: Endomorphism<URLSearchParams>,
 ): Endomorphism<URL> =>
 	flow(clone, x => {
-		x.search = f(x.searchParams).toString()
+		x.search = Params.toString(f(x.searchParams))
 		return x
 	})
 
