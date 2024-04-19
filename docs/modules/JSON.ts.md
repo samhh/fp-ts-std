@@ -209,7 +209,7 @@ Unwrap a `JSONString` newtype back to its underlying string representation.
 **Signature**
 
 ```ts
-export declare const unJSONString: (s: JSONString) => string
+export declare const unJSONString: (x: JSONString) => string
 ```
 
 ```hs
