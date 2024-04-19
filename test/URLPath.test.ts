@@ -112,9 +112,13 @@ describe("URLPath", () => {
 		const f = toURL(identity)
 
 		it("succeeds for valid base URLs", () => {
-			const u = pipe("foo", fromPathname, f(validBase), unsafeUnwrapRight)
+			const g = flow(fromPathname, f(validBase), unsafeUnwrapRight)
 
-			expect(u.href).toBe(`${validBase}/foo`)
+			expect(g("/foo").href).toBe(`${validBase}/foo`)
+			expect(g("/foo/bar.baz").href).toBe(`${validBase}/foo/bar.baz`)
+
+			// This one can mess with naive `URL(path, base)` construction.
+			expect(g("//").href).toBe(`${validBase}//`)
 		})
 
 		it("passes a TypeError to the callback on failure", () => {
@@ -136,9 +140,13 @@ describe("URLPath", () => {
 		const f = toURLO
 
 		it("succeeds for valid base URLs", () => {
-			const u = pipe("foo", fromPathname, f(validBase), unsafeUnwrapO)
+			const g = flow(fromPathname, f(validBase), unsafeUnwrapO)
 
-			expect(u.href).toBe(`${validBase}/foo`)
+			expect(g("/foo").href).toBe(`${validBase}/foo`)
+			expect(g("/foo/bar.baz").href).toBe(`${validBase}/foo/bar.baz`)
+
+			// This one can mess with naive `URL(path, base)` construction.
+			expect(g("//").href).toBe(`${validBase}//`)
 		})
 
 		it("fails for invalid base URLs", () => {

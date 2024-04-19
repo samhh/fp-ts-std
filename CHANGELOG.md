@@ -2,6 +2,10 @@
 
 This project adheres to semantic versioning.
 
+## _Unreleased_
+
+- Fix `toURL`/`toURLO` in `URLPath` failing to prioritise the retention of the provided base URL.
+
 ## 0.19.1 (2024-04-08)
 
 - Fix `fromString` in `URLPath` failing to parse absolute URLs.

@@ -130,11 +130,16 @@ export const toURL =
 	<E>(f: (e: TypeError) => E) =>
 	(baseUrl: string) =>
 	(x: URLPath): Either<E, URL> =>
-		// It should only throw some sort of `TypeError`:
-		// https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
-		E.tryCatch(
-			() => new globalThis.URL(toString(x), baseUrl),
-			e => f(e as TypeError),
+		pipe(
+			baseUrl,
+			URL.parse(f),
+			E.map(
+				flow(
+					URL.setPathname(getPathname(x)),
+					URL.setParams(getParams(x)),
+					URL.setHash(getHash(x)),
+				),
+			),
 		)
 
 /**
