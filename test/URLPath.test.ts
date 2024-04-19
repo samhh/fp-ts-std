@@ -38,7 +38,7 @@ import {
 	toURL,
 	toURLO,
 } from "../src/URLPath"
-import { setParam } from "../src/URLSearchParams"
+import * as Params from "../src/URLSearchParams"
 
 const arb: fc.Arbitrary<URLPath> = fc
 	.webUrl({ withFragments: true, withQueryParameters: true })
@@ -374,7 +374,7 @@ describe("URLPath", () => {
 			const u = new URL(validBase + s)
 
 			const pp = new URLSearchParams("?a=e&c=d")
-			const r = pipe(u, fromURL, f(setParam("a")("e")))
+			const r = pipe(u, fromURL, f(Params.upsertAt("a")("e")))
 
 			expect(u.searchParams).toEqual(p)
 			expect(getParams(r)).toEqual(pp)
