@@ -1,4 +1,4 @@
-import { describe, it, expect } from "@jest/globals"
+import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as O from "fp-ts/Option"

@@ -11,8 +11,8 @@ import {
 	stringify,
 	stringifyO,
 	stringifyPrimitive,
-	unstringify,
 	unJSONString,
+	unstringify,
 } from "../src/JSON"
 
 const stringifyPrimitiveUnwrapped = (
