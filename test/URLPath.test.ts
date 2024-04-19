@@ -3,14 +3,19 @@ import fc from "fast-check"
 import * as laws from "fp-ts-laws"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { constant, flow, identity, pipe } from "fp-ts/function"
+import { apply, constant, flip, flow, identity, pipe } from "fp-ts/function"
 import {
 	unsafeUnwrapLeft,
 	unsafeUnwrap as unsafeUnwrapRight,
 } from "../src/Either"
+import * as Fn from "../src/Function"
 import { unpack } from "../src/Newtype"
 import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
-import { unsafeParse as unsafeParseURL } from "../src/URL"
+import {
+	setPathname as setPathnameURL,
+	toString as toStringURL,
+	unsafeParse as unsafeParseURL,
+} from "../src/URL"
 import {
 	Eq,
 	type URLPath,
@@ -133,6 +138,23 @@ describe("URLPath", () => {
 			// expect(e).toBeInstanceOf(TypeError)
 
 			expect(e.name).toBe("TypeError")
+		})
+
+		it("liftM2 toURL toString fromURL = toURL (toString x) (fromURL x) = pure", () => {
+			fc.assert(
+				fc.property(
+					// We need to build the URL using an unrelated `fc.webPath` due to
+					// `fc.webUrl` limitations:
+					//   https://github.com/dubzzz/fast-check/issues/4896
+					fc
+						.webUrl()
+						.map(unsafeParseURL)
+						.chain(base =>
+							fc.webPath({ size: "+1" }).map(flip(setPathnameURL)(base)),
+						),
+					x => expect(f(toStringURL(x))(fromURL(x))).toEqual(E.of(x)),
+				),
+			)
 		})
 	})
 
@@ -260,6 +282,17 @@ describe("URLPath", () => {
 				}),
 			)
 		})
+
+		it("setPathname y . fromPathname x = fromPathname y", () => {
+			fc.assert(
+				fc.property(fc.string(), fc.string(), (x, y) => {
+					const a = pipe(fromPathname(x), setPathname(y))
+					const b = fromPathname(y)
+
+					expect(a).toEqual(b)
+				}),
+			)
+		})
 	})
 
 	describe("getPathname", () => {
@@ -268,6 +301,14 @@ describe("URLPath", () => {
 		it("returns the path", () => {
 			const x = "/foo/bar.baz"
 			expect(pipe(x, fromPathname, f)).toBe(x)
+		})
+
+		it("setPathname =<< getPathname = setPathname (getPathname x) x = id", () => {
+			fc.assert(
+				fc.property(fc.string().map(fromPathname), x =>
+					expect(pipe(getPathname, Fn.chain(setPathname), apply(x))).toEqual(x),
+				),
+			)
 		})
 	})
 
