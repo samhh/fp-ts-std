@@ -3,7 +3,7 @@ import fc from "fast-check"
 import * as laws from "fp-ts-laws"
 import * as E from "fp-ts/Either"
 import * as O from "fp-ts/Option"
-import { apply, constant, flip, flow, identity, pipe } from "fp-ts/function"
+import { apply, flip, flow, identity, pipe } from "fp-ts/function"
 import {
 	unsafeUnwrapLeft,
 	unsafeUnwrap as unsafeUnwrapRight,
@@ -22,7 +22,6 @@ import {
 	clone,
 	fromPathname,
 	fromString,
-	fromStringO,
 	fromURL,
 	getHash,
 	getParams,
@@ -50,8 +49,7 @@ const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
 const validBase = "https://samhh.com"
 const invalidBase = "samhh.com"
 
-const validPath = "/f/g.h?i=j&k=l&i=m#n"
-const invalidPath = "//"
+const examplePath = "/f/g.h?i=j&k=l&i=m#n"
 
 describe("URLPath", () => {
 	describe("isURLPath", () => {
@@ -61,7 +59,7 @@ describe("URLPath", () => {
 			expect(f("foo")).toBe(false)
 			expect(f(new URL(validBase))).toBe(false)
 			expect(f(new URL(phonyBase))).toBe(true)
-			expect(f(new URL(phonyBase + validPath))).toBe(true)
+			expect(f(new URL(phonyBase + examplePath))).toBe(true)
 		})
 	})
 
@@ -69,14 +67,14 @@ describe("URLPath", () => {
 		const f = clone
 
 		it("clones to an identical URLPath", () => {
-			const x = fromPathname(validPath)
+			const x = fromPathname(examplePath)
 
 			expect(f(x)).toEqual(x)
 			expect(toString(f(x))).toBe(toString(x))
 		})
 
 		it("clones without references", () => {
-			const x = fromPathname(validPath)
+			const x = fromPathname(examplePath)
 			;(x as unknown as URL).pathname = "/foo"
 			;(x as unknown as URL).search = "?foo=food&bar=bard&foo=fool"
 			const y = f(x)
@@ -99,7 +97,7 @@ describe("URLPath", () => {
 		const f = fromURL
 
 		it("retains the path, params, and hash", () => {
-			const x = new URL(validBase + validPath)
+			const x = new URL(validBase + examplePath)
 			const y = pipe(x, f, unpack)
 
 			expect(y.pathname).toEqual(x.pathname)
@@ -179,57 +177,65 @@ describe("URLPath", () => {
 	})
 
 	describe("fromString", () => {
-		const f = fromString(constant("e"))
+		const f = fromString
+		const g = flow(f, u => (u as unknown as URL).href)
 
-		it("succeeds for valid paths", () => {
-			expect(f("")).toEqual(E.right(new URL("", phonyBase)))
-			expect(f(validPath)).toEqual(E.right(new URL(validPath, phonyBase)))
+		it("parses all parts", () => {
+			const [x, y, z] = Fn.fork([getPathname, getParams, getHash])(
+				f("/foo?bar=yes#baz"),
+			)
+
+			expect(x).toBe("/foo")
+			expect(y).toEqual(new URLSearchParams({ bar: "yes" }))
+			expect(z).toBe("#baz")
 		})
 
-		it("passes a TypeError to the callback on failure", () => {
-			const e = pipe(invalidPath, fromString(identity), unsafeUnwrapLeft)
-
-			// This doesn't work. I suspect a tooling bug. Sanity check in the REPL.
-			// expect(e).toBeInstanceOf(TypeError)
-
-			expect(e.name).toBe("TypeError")
+		it("parses typical paths", () => {
+			expect(g("/")).toBe(`${phonyBase}/`)
+			expect(g("/foo.bar")).toBe(`${phonyBase}/foo.bar`)
+			expect(g(examplePath)).toBe(`${phonyBase}${examplePath}`)
 		})
 
-		it("accepts all valid paths", () => {
+		it("parses atypical paths", () => {
+			expect(g("")).toBe(`${phonyBase}/`)
+			expect(g("//")).toBe(`${phonyBase}//`)
+			expect(g("//x")).toBe(`${phonyBase}//x`)
+			expect(g("///")).toBe(`${phonyBase}///`)
+			expect(g(":123")).toBe(`${phonyBase}/:123`)
+			expect(g(".net")).toBe(`${phonyBase}/.net`)
+			expect(g("a:")).toBe(`${phonyBase}/a:`)
+			expect(g("//samhh.com/foo/bar")).toBe(`${phonyBase}//samhh.com/foo/bar`)
+			expect(g("/.")).toBe(`${phonyBase}/`)
+			expect(g("/.a/.")).toBe(`${phonyBase}/.a/`)
+		})
+
+		// These are documented edge cases that either behave differently in
+		// different environments or straight up don't work.
+		it.skip("edge cases", () => {
+			// Why oh why would someone be using this URL? 🤔
+			expect(g("//urlpath.fp-ts-std.samhh.com/foo")).toBe("/foo")
+
+			// Produce different results across different engines e.g. Node.js and
+			// Bun.
+			expect(g("//.a/.")).toBe(`${phonyBase}//.a/.`)
+			expect(g("//.a/..")).toBe(`${phonyBase}//.a/..`)
+		})
+
+		it("is infallible", () => {
 			fc.assert(
-				fc.property(fc.webPath(), x =>
-					expect(f(x)).toEqual(E.right(new URL(x, phonyBase))),
-				),
+				fc.property(fc.oneof(fc.string(), fc.webPath()), x => {
+					f(x)
+				}),
 			)
 		})
 
-		it("parses but does not retain origins", () => {
-			const g = flow(
-				fromString(identity),
-				E.map(x => (x as unknown as URL).href),
-			)
-
-			expect(g("//x")).toEqual(E.right(`${phonyBase}/`))
-			expect(g("https://samhh.com/foo")).toEqual(E.right(`${phonyBase}/foo`))
-
+		it("always keeps phony base", () => {
 			fc.assert(
-				fc.property(fc.string().map(f).filter(E.isRight), ({ right: x }) =>
-					expect((x as unknown as URL).origin).toBe(phonyBase),
+				fc.property(fc.oneof(fc.string(), fc.webPath()), x =>
+					expect((f(x) as unknown as URL).origin).toBe(phonyBase),
 				),
+				{ numRuns: 10000 },
 			)
-		})
-	})
-
-	describe("fromStringO", () => {
-		const f = fromStringO
-
-		it("succeeds for valid paths", () => {
-			expect(f("")).toEqual(O.some(new URL("", phonyBase)))
-			expect(f(validPath)).toEqual(O.some(new URL(validPath, phonyBase)))
-		})
-
-		it("fails for invalid paths", () => {
-			expect(f(invalidPath)).toEqual(O.none)
 		})
 	})
 
@@ -420,7 +426,7 @@ describe("URLPath", () => {
 
 	describe("Eq", () => {
 		const f = Eq.equals
-		const g = flow(fromStringO, unsafeUnwrapO)
+		const g = fromString
 
 		it("works", () => {
 			const x = "/foo.bar#baz"

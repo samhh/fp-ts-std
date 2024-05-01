@@ -14,6 +14,7 @@ import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
 import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
+import type { Predicate } from "fp-ts/Predicate"
 import type { Refinement } from "fp-ts/Refinement"
 import { flow, identity, pipe } from "fp-ts/function"
 import type { Newtype } from "newtype-ts"
@@ -39,13 +40,20 @@ export type URLPath = Newtype<URLPathSymbol, URL>
 
 const phonyBase = new globalThis.URL("https://urlpath.fp-ts-std.samhh.com")
 
-const ensureBase: Endomorphism<URL> = x =>
+const ensurePhonyBase: Endomorphism<URL> = x =>
 	pipe(phonyBase, URL.clone, b => {
 		b.pathname = x.pathname
 		b.search = Params.toString(x.searchParams)
 		b.hash = x.hash
 		return b
 	})
+
+const hasPhonyBase: Predicate<URL> = x => x.origin === phonyBase.origin
+
+const assertPhonyBase: Endomorphism<URL> = x => {
+	if (!hasPhonyBase(x)) throw new Error("Invalid phony base")
+	return x
+}
 
 /**
  * Check if a foreign value is a `URLPath`.
@@ -101,7 +109,7 @@ export const clone: Endomorphism<URLPath> = over(URL.clone)
  * @since 0.17.0
  */
 export const fromURL = (x: URL): URLPath =>
-	pipe(new globalThis.URL(x.href, phonyBase), ensureBase, pack<URLPath>)
+	pipe(new globalThis.URL(x.href, phonyBase), ensurePhonyBase, pack<URLPath>)
 
 /**
  * Convert a `URLPath` to a `URL` with the provided `baseUrl`.
@@ -168,57 +176,31 @@ export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
 	flow(toURL(identity)(baseUrl), O.fromEither)
 
 /**
- * Build a `URLPath` from a string containing any parts. For an infallible
- * alternative taking only a pathname, consider `fromPathname`.
+ * Build a `URLPath` from a relative or absolute string containing any parts.
+ * Consider also `fromPathname` where only a pathname needs to be parsed.
  *
  * @example
  * import { pipe, constant } from 'fp-ts/function';
  * import * as E from 'fp-ts/Either';
  * import { fromString, fromPathname, setHash } from 'fp-ts-std/URLPath'
  *
- * const f = fromString(constant('oops'))
- *
  * const expected = pipe('/foo', fromPathname, setHash('bar'))
  *
- * assert.deepStrictEqual(f('/foo#bar'), E.right(expected))
- * assert.deepStrictEqual(f('//'), E.left('oops'))
+ * assert.deepStrictEqual(fromString('/foo#bar'), expected)
+ * assert.deepStrictEqual(fromString('https://samhh.com/foo#bar'), expected)
  *
  * @category 3 Functions
  * @since 0.17.0
  */
-export const fromString =
-	<E>(f: (e: TypeError) => E) =>
-	(x: string): Either<E, URLPath> =>
-		pipe(
-			// It should only throw some sort of `TypeError`:
-			// https://developer.mozilla.org/en-US/docs/Web/API/URL/URL
-			E.tryCatch(
-				() => ensureBase(new globalThis.URL(x, phonyBase)),
-				e => f(e as TypeError),
-			),
-			E.map(pack<URLPath>),
-		)
-
-/**
- * Build a `URLPath` from a string containing any parts, forgoing the error.
- *
- * @example
- * import { pipe } from 'fp-ts/function';
- * import * as O from 'fp-ts/Option';
- * import { fromStringO, fromPathname, setHash } from 'fp-ts-std/URLPath'
- *
- * const expected = pipe('/foo', fromPathname, setHash('bar'))
- *
- * assert.deepStrictEqual(fromStringO('/foo#bar'), O.some(expected))
- * assert.deepStrictEqual(fromStringO('//'), O.none)
- *
- * @category 3 Functions
- * @since 0.17.0
- */
-export const fromStringO: (x: string) => Option<URLPath> = flow(
-	fromString(identity),
-	O.fromEither,
-)
+export const fromString = (x: string): URLPath =>
+	pipe(
+		E.tryCatch(
+			() => assertPhonyBase(new globalThis.URL(`${phonyBase.origin}${x}`)),
+			identity,
+		),
+		E.getOrElse(() => new globalThis.URL(`${phonyBase.origin}/${x}`)),
+		pack<URLPath>,
+	)
 
 /**
  * Build a `URLPath` from a path. Characters such as `?` will be encoded.

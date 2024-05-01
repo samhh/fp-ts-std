@@ -26,7 +26,6 @@ Added in v0.17.0
   - [clone](#clone)
   - [fromPathname](#frompathname)
   - [fromString](#fromstring)
-  - [fromStringO](#fromstringo)
   - [fromURL](#fromurl)
   - [getHash](#gethash)
   - [getParams](#getparams)
@@ -158,17 +157,17 @@ Added in v0.17.0
 
 ## fromString
 
-Build a `URLPath` from a string containing any parts. For an infallible
-alternative taking only a pathname, consider `fromPathname`.
+Build a `URLPath` from a relative or absolute string containing any parts.
+Consider also `fromPathname` where only a pathname needs to be parsed.
 
 **Signature**
 
 ```ts
-export declare const fromString: <E>(f: (e: TypeError) => E) => (x: string) => Either<E, URLPath>
+export declare const fromString: (x: string) => URLPath
 ```
 
 ```hs
-fromString :: (TypeError -> e) -> string -> Either e URLPath
+fromString :: string -> URLPath
 ```
 
 **Example**
@@ -178,41 +177,10 @@ import { pipe, constant } from 'fp-ts/function'
 import * as E from 'fp-ts/Either'
 import { fromString, fromPathname, setHash } from 'fp-ts-std/URLPath'
 
-const f = fromString(constant('oops'))
-
 const expected = pipe('/foo', fromPathname, setHash('bar'))
 
-assert.deepStrictEqual(f('/foo#bar'), E.right(expected))
-assert.deepStrictEqual(f('//'), E.left('oops'))
-```
-
-Added in v0.17.0
-
-## fromStringO
-
-Build a `URLPath` from a string containing any parts, forgoing the error.
-
-**Signature**
-
-```ts
-export declare const fromStringO: (x: string) => Option<URLPath>
-```
-
-```hs
-fromStringO :: string -> Option URLPath
-```
-
-**Example**
-
-```ts
-import { pipe } from 'fp-ts/function'
-import * as O from 'fp-ts/Option'
-import { fromStringO, fromPathname, setHash } from 'fp-ts-std/URLPath'
-
-const expected = pipe('/foo', fromPathname, setHash('bar'))
-
-assert.deepStrictEqual(fromStringO('/foo#bar'), O.some(expected))
-assert.deepStrictEqual(fromStringO('//'), O.none)
+assert.deepStrictEqual(fromString('/foo#bar'), expected)
+assert.deepStrictEqual(fromString('https://samhh.com/foo#bar'), expected)
 ```
 
 Added in v0.17.0
