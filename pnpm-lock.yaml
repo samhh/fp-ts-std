@@ -30,14 +30,14 @@ devDependencies:
     specifier: ^0.8.0
     version: 0.8.0(prettier@2.8.8)(typescript@5.2.2)
   fast-check:
-    specifier: ^3.1.2
-    version: 3.13.2
+    specifier: ^3.18.0
+    version: 3.18.0
   fp-ts:
     specifier: ^2.16.0
     version: 2.16.1
   fp-ts-laws:
     specifier: ^0.3.0
-    version: 0.3.0(fast-check@3.13.2)(fp-ts@2.16.1)
+    version: 0.3.0(fast-check@3.18.0)(fp-ts@2.16.1)
   jest:
     specifier: ^30.0.0-alpha.3
     version: 30.0.0-alpha.3(@types/node@20.12.5)(ts-node@8.10.2)
@@ -1625,8 +1625,8 @@ packages:
       is-extendable: 0.1.1
     dev: true
 
-  /fast-check@3.13.2:
-    resolution: {integrity: sha512-ouTiFyeMoqmNg253xqy4NSacr5sHxH6pZpLOaHgaAdgZxFWdtsfxExwolpveoAE9CJdV+WYjqErNGef6SqA5Mg==}
+  /fast-check@3.18.0:
+    resolution: {integrity: sha512-/951xaT0kA40w0GXRsZXEwSTE7LugjZtSA/8vPgFkiPQ8wNp8tRvqWuNDHBgLxJYXtsK11e/7Q4ObkKW5BdTFQ==}
     engines: {node: '>=8.0.0'}
     dependencies:
       pure-rand: 6.1.0
@@ -1713,13 +1713,13 @@ packages:
       mime-types: 2.1.35
     dev: true
 
-  /fp-ts-laws@0.3.0(fast-check@3.13.2)(fp-ts@2.16.1):
+  /fp-ts-laws@0.3.0(fast-check@3.18.0)(fp-ts@2.16.1):
     resolution: {integrity: sha512-uCLBnZq429UDYIx7TDsKmIOXQvgVfEFJMDBbJ2OljpW19cCEF+UgwoGnTfq6AYkHofFlkd6t0p3a9HB1OXTiaA==}
     peerDependencies:
       fast-check: ^2.6.0
       fp-ts: ^2.0.0
     dependencies:
-      fast-check: 3.13.2
+      fast-check: 3.18.0
       fp-ts: 2.16.1
     dev: true
 
