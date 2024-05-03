@@ -216,7 +216,8 @@ describe("URLPath", () => {
 			expect(g("//urlpath.fp-ts-std.samhh.com/foo")).toBe("/foo")
 
 			// Produce different results across different engines e.g. Node.js and
-			// Bun.
+			// Bun. Looks related to:
+			//   https://datatracker.ietf.org/doc/html/rfc3986#section-6.2.2.3
 			expect(g("//.a/.")).toBe(`${phonyBase}//.a/.`)
 			expect(g("//.a/..")).toBe(`${phonyBase}//.a/..`)
 		})
