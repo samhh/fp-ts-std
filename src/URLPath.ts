@@ -139,7 +139,10 @@ export const toURL =
 		)
 
 /**
- * Build a `URLPath` from a relative or absolute string containing any parts.
+ * Build a `URLPath` from a string containing any parts.
+ *
+ * Absolute URL strings will be parsed as if they were relative URL strings.
+ *
  * Consider also `fromPathname` where only a pathname needs to be parsed.
  *
  * @example
@@ -147,10 +150,10 @@ export const toURL =
  * import * as E from 'fp-ts/Either';
  * import { fromString, fromPathname, setHash } from 'fp-ts-std/URLPath'
  *
- * const expected = pipe('/foo', fromPathname, setHash('bar'))
- *
- * assert.deepStrictEqual(fromString('/foo#bar'), expected)
- * assert.deepStrictEqual(fromString('https://samhh.com/foo#bar'), expected)
+ * assert.deepStrictEqual(
+ *   fromString('/foo#bar'),
+ *   pipe('/foo', fromPathname, setHash('bar')),
+ * )
  *
  * @category 3 Functions
  * @since 0.17.0

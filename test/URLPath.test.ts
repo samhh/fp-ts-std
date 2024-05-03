@@ -156,6 +156,9 @@ describe("URLPath", () => {
 			expect(g(":123")).toBe(`${phonyBase}/:123`)
 			expect(g(".net")).toBe(`${phonyBase}/.net`)
 			expect(g("a:")).toBe(`${phonyBase}/a:`)
+			expect(g("https://samhh.com/foo/bar")).toBe(
+				`${phonyBase}/https://samhh.com/foo/bar`,
+			)
 			expect(g("//samhh.com/foo/bar")).toBe(`${phonyBase}//samhh.com/foo/bar`)
 			expect(g("/.")).toBe(`${phonyBase}/`)
 			expect(g("/.a/.")).toBe(`${phonyBase}/.a/`)
