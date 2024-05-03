@@ -50,11 +50,6 @@ const ensurePhonyBase: Endomorphism<URL> = x =>
 
 const hasPhonyBase: Predicate<URL> = x => x.origin === phonyBase.origin
 
-const assertPhonyBase: Endomorphism<URL> = x => {
-	if (!hasPhonyBase(x)) throw new Error("Invalid phony base")
-	return x
-}
-
 /**
  * Check if a foreign value is a `URLPath`.
  *
@@ -194,11 +189,9 @@ export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
  */
 export const fromString = (x: string): URLPath =>
 	pipe(
-		E.tryCatch(
-			() => assertPhonyBase(new globalThis.URL(`${phonyBase.origin}${x}`)),
-			identity,
-		),
-		E.getOrElse(() => new globalThis.URL(`${phonyBase.origin}/${x}`)),
+		O.tryCatch(() => new globalThis.URL(`${phonyBase.origin}${x}`)),
+		O.filter(hasPhonyBase),
+		O.getOrElse(() => new globalThis.URL(`${phonyBase.origin}/${x}`)),
 		pack<URLPath>,
 	)
 
