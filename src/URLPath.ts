@@ -8,15 +8,12 @@
  * @since 0.17.0
  */
 
-import type { Either } from "fp-ts/Either"
-import * as E from "fp-ts/Either"
 import type { Endomorphism } from "fp-ts/Endomorphism"
 import * as Eq_ from "fp-ts/Eq"
-import type { Option } from "fp-ts/Option"
 import * as O from "fp-ts/Option"
 import type { Predicate } from "fp-ts/Predicate"
 import type { Refinement } from "fp-ts/Refinement"
-import { flow, identity, pipe } from "fp-ts/function"
+import { flow, pipe } from "fp-ts/function"
 import type { Newtype } from "newtype-ts"
 import { over, pack, unpack } from "./Newtype"
 import * as URL from "./URL"
@@ -107,68 +104,39 @@ export const fromURL = (x: URL): URLPath =>
 	pipe(new globalThis.URL(x.href, phonyBase), ensurePhonyBase, pack<URLPath>)
 
 /**
- * Convert a `URLPath` to a `URL` with the provided `baseUrl`.
+ * Convert a `URLPath` to a `URL` with the provided `origin`. Any other parts of
+ * `origin` will be lost.
  *
  * @example
  * import { constant } from 'fp-ts/function';
  * import * as E from 'fp-ts/Either';
  * import { toURL, fromPathname } from 'fp-ts-std/URLPath'
  *
+ * const f = toURL
  * const x = fromPathname('/foo')
- * const f = toURL(constant('oops'))
  *
  * assert.deepStrictEqual(
- *   f('https://samhh.com')(x),
- *   E.right(new URL('https://samhh.com/foo')),
+ *   f(new URL('https://samhh.com'))(x),
+ *   new URL('https://samhh.com/foo'),
  * )
+ *
  * assert.deepStrictEqual(
- *   f('bad base')(x),
- *   E.left('oops'),
+ *   f(new URL('https://samhh.com/bar'))(x),
+ *   new URL('https://samhh.com/foo'),
  * )
  *
  * @category 3 Functions
  * @since 0.17.0
  */
 export const toURL =
-	<E>(f: (e: TypeError) => E) =>
-	(baseUrl: string) =>
-	(x: URLPath): Either<E, URL> =>
+	(origin: URL) =>
+	(path: URLPath): URL =>
 		pipe(
-			baseUrl,
-			URL.parse(f),
-			E.map(
-				flow(
-					URL.setPathname(getPathname(x)),
-					URL.setParams(getParams(x)),
-					URL.setHash(getHash(x)),
-				),
-			),
+			origin,
+			URL.setPathname(getPathname(path)),
+			URL.setParams(getParams(path)),
+			URL.setHash(getHash(path)),
 		)
-
-/**
- * Convert a `URLPath` to a `URL` with the provided `baseUrl`, forgoing the
- * error.
- *
- * @example
- * import * as O from 'fp-ts/Option';
- * import { toURLO, fromPathname } from 'fp-ts-std/URLPath'
- *
- * const x = fromPathname('/foo')
- *
- * assert.deepStrictEqual(
- *   toURLO('https://samhh.com')(x),
- *   O.some(new URL('https://samhh.com/foo')),
- * )
- * assert.deepStrictEqual(
- *   toURLO('bad base')(x),
- *   O.none,
- * )
- *
- * @category 3 Functions
- * @since 0.17.0
- */
-export const toURLO = (baseUrl: string): ((x: URLPath) => Option<URL>) =>
-	flow(toURL(identity)(baseUrl), O.fromEither)
 
 /**
  * Build a `URLPath` from a relative or absolute string containing any parts.

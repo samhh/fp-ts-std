@@ -1,21 +1,10 @@
 import { describe, expect, it } from "@jest/globals"
 import fc from "fast-check"
 import * as laws from "fp-ts-laws"
-import * as E from "fp-ts/Either"
-import * as O from "fp-ts/Option"
-import { apply, flip, flow, identity, pipe } from "fp-ts/function"
-import {
-	unsafeUnwrapLeft,
-	unsafeUnwrap as unsafeUnwrapRight,
-} from "../src/Either"
+import { apply, flow, pipe } from "fp-ts/function"
 import * as Fn from "../src/Function"
 import { unpack } from "../src/Newtype"
-import { unsafeUnwrap as unsafeUnwrapO } from "../src/Option"
-import {
-	setPathname as setPathnameURL,
-	toString as toStringURL,
-	unsafeParse as unsafeParseURL,
-} from "../src/URL"
+import { unsafeParse as unsafeParseURL } from "../src/URL"
 import {
 	Eq,
 	type URLPath,
@@ -35,7 +24,6 @@ import {
 	setPathname,
 	toString,
 	toURL,
-	toURLO,
 } from "../src/URLPath"
 import * as Params from "../src/URLSearchParams"
 
@@ -46,8 +34,7 @@ const arb: fc.Arbitrary<URLPath> = fc
 // Prefer not to export this.
 const phonyBase = "https://urlpath.fp-ts-std.samhh.com"
 
-const validBase = "https://samhh.com"
-const invalidBase = "samhh.com"
+const exampleOrigin = new URL("https://samhh.com")
 
 const examplePath = "/f/g.h?i=j&k=l&i=m#n"
 
@@ -57,7 +44,7 @@ describe("URLPath", () => {
 
 		it("succeeds only for URLs with phony base", () => {
 			expect(f("foo")).toBe(false)
-			expect(f(new URL(validBase))).toBe(false)
+			expect(f(exampleOrigin)).toBe(false)
 			expect(f(new URL(phonyBase))).toBe(true)
 			expect(f(new URL(phonyBase + examplePath))).toBe(true)
 		})
@@ -97,7 +84,7 @@ describe("URLPath", () => {
 		const f = fromURL
 
 		it("retains the path, params, and hash", () => {
-			const x = new URL(validBase + examplePath)
+			const x = new URL(exampleOrigin.origin + examplePath)
 			const y = pipe(x, f, unpack)
 
 			expect(y.pathname).toEqual(x.pathname)
@@ -112,67 +99,32 @@ describe("URLPath", () => {
 	})
 
 	describe("toURL", () => {
-		const f = toURL(identity)
+		const f = toURL
 
-		it("succeeds for valid base URLs", () => {
-			const g = flow(fromPathname, f(validBase), unsafeUnwrapRight)
+		it("retains only origin from URL", () => {
+			const x = new URL(`https://samhh.com${examplePath}`)
+			const y = fromPathname("/foo")
 
-			expect(g("/foo").href).toBe(`${validBase}/foo`)
-			expect(g("/foo/bar.baz").href).toBe(`${validBase}/foo/bar.baz`)
-
-			// This one can mess with naive `URL(path, base)` construction.
-			expect(g("//").href).toBe(`${validBase}//`)
+			expect(f(x)(y)).toEqual(new URL("https://samhh.com/foo"))
 		})
 
-		it("passes a TypeError to the callback on failure", () => {
-			const e = pipe(
-				"foo",
-				fromPathname,
-				toURL(identity)(invalidBase),
-				unsafeUnwrapLeft,
-			)
+		it("retains all URLPath parts", () => {
+			const x = new URL("https://samhh.com")
+			const y = fromString(examplePath)
 
-			// This doesn't work. I suspect a tooling bug. Sanity check in the REPL.
-			// expect(e).toBeInstanceOf(TypeError)
-
-			expect(e.name).toBe("TypeError")
+			expect(f(x)(y)).toEqual(new URL(`https://samhh.com${examplePath}`))
 		})
 
-		it("liftM2 toURL toString fromURL = toURL (toString x) (fromURL x) = pure", () => {
+		it("is infallible", () => {
 			fc.assert(
 				fc.property(
-					// We need to build the URL using an unrelated `fc.webPath` due to
-					// `fc.webUrl` limitations:
-					//   https://github.com/dubzzz/fast-check/issues/4896
-					fc
-						.webUrl()
-						.map(unsafeParseURL)
-						.chain(base =>
-							fc.webPath({ size: "+1" }).map(flip(setPathnameURL)(base)),
-						),
-					x => expect(f(toStringURL(x))(fromURL(x))).toEqual(E.of(x)),
+					fc.webUrl().map(unsafeParseURL),
+					fc.webPath().map(fromString),
+					(origin, path) => {
+						f(origin)(path)
+					},
 				),
 			)
-		})
-	})
-
-	describe("toURLO", () => {
-		const f = toURLO
-
-		it("succeeds for valid base URLs", () => {
-			const g = flow(fromPathname, f(validBase), unsafeUnwrapO)
-
-			expect(g("/foo").href).toBe(`${validBase}/foo`)
-			expect(g("/foo/bar.baz").href).toBe(`${validBase}/foo/bar.baz`)
-
-			// This one can mess with naive `URL(path, base)` construction.
-			expect(g("//").href).toBe(`${validBase}//`)
-		})
-
-		it("fails for invalid base URLs", () => {
-			const x = pipe("foo", fromPathname, f(invalidBase))
-
-			expect(x).toEqual(O.none)
 		})
 	})
 
@@ -245,7 +197,7 @@ describe("URLPath", () => {
 
 		it("returns all concatenated parts", () => {
 			const x = "/a/b.c?d=e&f=g&d=h#i"
-			const y: URLPath = fromURL(new URL(validBase + x))
+			const y: URLPath = fromURL(new URL(exampleOrigin.origin + x))
 
 			expect(f(y)).toBe(x)
 		})
@@ -257,23 +209,13 @@ describe("URLPath", () => {
 		// Putting aside the prefixed `/`, the pathname setter doesn't seem to
 		// encode to the rules of either `encodeURI` or `encodeURIComponent`.
 		it("sets encoded path", () => {
-			const u = pipe(
-				"foo bar?",
-				f,
-				toURL(identity)(validBase),
-				unsafeUnwrapRight,
-			)
+			const u = pipe("foo bar?", f, toURL(exampleOrigin))
 
 			expect(u.pathname).toBe("/foo%20bar%3F")
 		})
 
 		it("trims relative paths beyond root", () => {
-			const g = flow(
-				f,
-				toURL(identity)(validBase),
-				unsafeUnwrapRight,
-				x => x.pathname,
-			)
+			const g = flow(f, toURL(exampleOrigin), x => x.pathname)
 
 			expect(g("/foo/bar/../baz")).toBe("/foo/baz")
 			expect(g("/foo/bar/../../baz")).toBe("/baz")
@@ -348,7 +290,7 @@ describe("URLPath", () => {
 
 		it("returns the search params", () => {
 			const s = "?a=b&c=d&a=e"
-			const r = fromURL(new URL(validBase + s))
+			const r = fromURL(new URL(exampleOrigin.origin + s))
 			const p = new URLSearchParams(s)
 
 			expect(f(r)).toEqual(p)
@@ -361,7 +303,7 @@ describe("URLPath", () => {
 		it("sets the search params without mutating input", () => {
 			const s = "?a=b"
 			const p = new URLSearchParams(s)
-			const u = new URL(validBase + s)
+			const u = new URL(exampleOrigin.origin + s)
 
 			const ss = "?c=d"
 			const pp = new URLSearchParams(ss)
@@ -378,7 +320,7 @@ describe("URLPath", () => {
 		it("modifies the search params without mutating input", () => {
 			const s = "?a=b&c=d"
 			const p = new URLSearchParams(s)
-			const u = new URL(validBase + s)
+			const u = new URL(exampleOrigin.origin + s)
 
 			const pp = new URLSearchParams("?a=e&c=d")
 			const r = pipe(u, fromURL, f(Params.upsertAt("a")("e")))
@@ -393,7 +335,7 @@ describe("URLPath", () => {
 
 		it("returns the hash", () => {
 			const h = "#foo"
-			const r = fromURL(new URL(validBase + h))
+			const r = fromURL(new URL(exampleOrigin.origin + h))
 
 			expect(f(r)).toBe(h)
 		})
@@ -404,7 +346,7 @@ describe("URLPath", () => {
 
 		it("sets the hash without mutating input", () => {
 			const h = "#foo"
-			const x = fromURL(new URL(validBase + h))
+			const x = fromURL(new URL(exampleOrigin.origin + h))
 			const y = f("bar")(x)
 
 			expect(getHash(x)).toBe("#foo")
@@ -417,7 +359,7 @@ describe("URLPath", () => {
 
 		it("modifies the hash with the provided function without mutating input", () => {
 			const h = "#foo"
-			const x = fromURL(new URL(validBase + h))
+			const x = fromURL(new URL(exampleOrigin.origin + h))
 			const y = f(s => `${s}bar`)(x)
 
 			expect(getHash(x)).toBe("#foo")

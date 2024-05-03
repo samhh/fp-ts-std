@@ -39,7 +39,6 @@ Added in v0.17.0
   - [setPathname](#setpathname)
   - [toString](#tostring)
   - [toURL](#tourl)
-  - [toURLO](#tourlo)
 
 ---
 
@@ -521,16 +520,17 @@ Added in v0.17.0
 
 ## toURL
 
-Convert a `URLPath` to a `URL` with the provided `baseUrl`.
+Convert a `URLPath` to a `URL` with the provided `origin`. Any other parts of
+`origin` will be lost.
 
 **Signature**
 
 ```ts
-export declare const toURL: <E>(f: (e: TypeError) => E) => (baseUrl: string) => (x: URLPath) => Either<E, URL>
+export declare const toURL: (origin: URL) => (path: URLPath) => URL
 ```
 
 ```hs
-toURL :: (TypeError -> e) -> string -> URLPath -> Either e URL
+toURL :: URL -> URLPath -> URL
 ```
 
 **Example**
@@ -540,40 +540,12 @@ import { constant } from 'fp-ts/function'
 import * as E from 'fp-ts/Either'
 import { toURL, fromPathname } from 'fp-ts-std/URLPath'
 
-const x = fromPathname('/foo')
-const f = toURL(constant('oops'))
-
-assert.deepStrictEqual(f('https://samhh.com')(x), E.right(new URL('https://samhh.com/foo')))
-assert.deepStrictEqual(f('bad base')(x), E.left('oops'))
-```
-
-Added in v0.17.0
-
-## toURLO
-
-Convert a `URLPath` to a `URL` with the provided `baseUrl`, forgoing the
-error.
-
-**Signature**
-
-```ts
-export declare const toURLO: (baseUrl: string) => (x: URLPath) => Option<URL>
-```
-
-```hs
-toURLO :: string -> URLPath -> Option URL
-```
-
-**Example**
-
-```ts
-import * as O from 'fp-ts/Option'
-import { toURLO, fromPathname } from 'fp-ts-std/URLPath'
-
+const f = toURL
 const x = fromPathname('/foo')
 
-assert.deepStrictEqual(toURLO('https://samhh.com')(x), O.some(new URL('https://samhh.com/foo')))
-assert.deepStrictEqual(toURLO('bad base')(x), O.none)
+assert.deepStrictEqual(f(new URL('https://samhh.com'))(x), new URL('https://samhh.com/foo'))
+
+assert.deepStrictEqual(f(new URL('https://samhh.com/bar'))(x), new URL('https://samhh.com/foo'))
 ```
 
 Added in v0.17.0

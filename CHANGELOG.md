@@ -5,8 +5,8 @@ This project adheres to semantic versioning.
 ## _Unreleased_
 
 - Improve `fromString` in `URLPath` to infallibly parse all strings.
-- Remove `fromStringO` from `URLPath`.
-- Fix `toURL`/`toURLO` in `URLPath` failing to prioritise the retention of the provided base URL.
+- Take a `URL` origin in `toURL` in `URLPath`, fixing origin retention.
+- Remove `fromStringO` and `toURLO` from `URLPath`.
 
 ## 0.19.1 (2024-04-08)
 
