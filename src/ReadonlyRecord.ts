@@ -166,6 +166,6 @@ export const pick = (
  * @since 0.16.0
  */
 export const omit = (
-	ks: Array<string>,
+	ks: ReadonlyArray<string>,
 ): (<A>(y: Record<string, A>) => Record<string, A>) =>
 	RR.filterWithIndex(not(elemV(Str.Eq)(ks)))
