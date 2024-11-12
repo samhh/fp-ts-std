@@ -116,11 +116,11 @@ the `ReadonlyStruct` module.
 **Signature**
 
 ```ts
-export declare const omit: (ks: Array<string>) => <A>(y: Record<string, A>) => Record<string, A>
+export declare const omit: (ks: ReadonlyArray<string>) => <A>(y: Record<string, A>) => Record<string, A>
 ```
 
 ```hs
-omit :: Array string -> Record string a -> Record string a
+omit :: ReadonlyArray string -> Record string a -> Record string a
 ```
 
 **Example**
