@@ -4,13 +4,16 @@ The missing pseudo-standard library for [fp-ts](https://gcanti.github.io/fp-ts/)
 
 Documentation: [samhh.github.io/fp-ts-std](https://samhh.github.io/fp-ts-std/)
 
+> [!NOTE]
+> fp-ts-std is no longer actively developed as the fp-ts ecosystem is broadly migrating to [Effect](https://effect.website). It is still maintained with respect to bug fixes and accepting contributions.
+
 ## Installation
 
 The library is available on the npm registry under the same package name: [fp-ts-std](https://www.npmjs.com/package/fp-ts-std)
 
-fp-ts, [newtype-ts](https://gcanti.github.io/newtype-ts/), and [monocle-ts](https://gcanti.github.io/monocle-ts/) are listed as peer dependencies.
+fp-ts, [newtype-ts](https://gcanti.github.io/newtype-ts/), and [monocle-ts](https://gcanti.github.io/monocle-ts/) are peer dependencies.
 
-fp-ts-std is published with both ES2015 and CJS modules, the former of which should tree shake well. Modern ES modules are not yet supported.
+fp-ts-std is published with both ES2015 and CJS modules, the former of which should tree shake well. Modern ES modules are not supported as per fp-ts.
 
 Node LTS, Bun, and recent evergreen browsers are supported.
 

@@ -2,7 +2,7 @@
 
 This project adheres to semantic versioning.
 
-## _Unreleased_
+## 1.0.0 (2024-11-12)
 
 - Improve `fromString` in `URLPath` to infallibly parse all strings.
 - Take a `URL` origin in `toURL` in `URLPath`, fixing origin retention.
